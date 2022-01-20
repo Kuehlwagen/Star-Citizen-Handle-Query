@@ -60,7 +60,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           MessageBox.Show($"Das Speichern der Einstellungen ist fehlgeschlagen:{Environment.NewLine}Fehlermeldung: {ex.Message}");
         }
       } else {
-        MessageBox.Show("Es muss ein 32-stelliger API-Key angegeben werden.", Text);
+        MessageBox.Show("Es muss ein 32-stelliger API-Key angegeben werden.", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
       }
     }
 
