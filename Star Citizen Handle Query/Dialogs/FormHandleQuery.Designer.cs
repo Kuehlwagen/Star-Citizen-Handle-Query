@@ -104,46 +104,46 @@
             this.NeustartenToolStripMenuItem,
             this.BeendenToolStripMenuItem});
       this.ContextMenuStripNotifyIcon.Name = "ContextMenuStripNotifyIcon";
-      this.ContextMenuStripNotifyIcon.Size = new System.Drawing.Size(201, 120);
+      this.ContextMenuStripNotifyIcon.Size = new System.Drawing.Size(187, 142);
       // 
       // AnzeigenVersteckenToolStripMenuItem
       // 
       this.AnzeigenVersteckenToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
       this.AnzeigenVersteckenToolStripMenuItem.Name = "AnzeigenVersteckenToolStripMenuItem";
-      this.AnzeigenVersteckenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
-      this.AnzeigenVersteckenToolStripMenuItem.Text = "&Anzeigen / Verstecken";
+      this.AnzeigenVersteckenToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+      this.AnzeigenVersteckenToolStripMenuItem.Text = "&Anzeigen";
       this.AnzeigenVersteckenToolStripMenuItem.Click += new System.EventHandler(this.AnzeigenVersteckenToolStripMenuItem_Click);
       // 
       // EinstellungenToolStripMenuItem
       // 
       this.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem";
-      this.EinstellungenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+      this.EinstellungenToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
       this.EinstellungenToolStripMenuItem.Text = "&Einstellungen";
       this.EinstellungenToolStripMenuItem.Click += new System.EventHandler(this.EinstellungenToolStripMenuItem_Click);
       // 
       // LokalenCacheLeerenToolStripMenuItem
       // 
       this.LokalenCacheLeerenToolStripMenuItem.Name = "LokalenCacheLeerenToolStripMenuItem";
-      this.LokalenCacheLeerenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+      this.LokalenCacheLeerenToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
       this.LokalenCacheLeerenToolStripMenuItem.Text = "&Lokalen Cache leeren";
       this.LokalenCacheLeerenToolStripMenuItem.Click += new System.EventHandler(this.LokalenCacheLeerenToolStripMenuItem_Click);
       // 
       // toolStripSeparator1
       // 
       this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(197, 6);
+      this.toolStripSeparator1.Size = new System.Drawing.Size(183, 6);
       // 
       // NeustartenToolStripMenuItem
       // 
       this.NeustartenToolStripMenuItem.Name = "NeustartenToolStripMenuItem";
-      this.NeustartenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+      this.NeustartenToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
       this.NeustartenToolStripMenuItem.Text = "&Neustarten";
       this.NeustartenToolStripMenuItem.Click += new System.EventHandler(this.NeustartenToolStripMenuItem_Click);
       // 
       // BeendenToolStripMenuItem
       // 
       this.BeendenToolStripMenuItem.Name = "BeendenToolStripMenuItem";
-      this.BeendenToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
+      this.BeendenToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
       this.BeendenToolStripMenuItem.Text = "&Beenden";
       this.BeendenToolStripMenuItem.Click += new System.EventHandler(this.BeendenToolStripMenuItem_Click);
       // 
