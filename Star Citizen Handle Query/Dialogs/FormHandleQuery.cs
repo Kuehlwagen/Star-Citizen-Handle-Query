@@ -83,14 +83,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void ShowHideWindow() {
-      // Fenster ein-/ausblenden
-      Visible = !Visible;
-      if (Visible) {
-        if (!User32Wrappers.SetForegroundWindow(Handle))
-          ShowHideWindow();
-        TextBoxHandle.SelectAll();
-        TextBoxHandle.Focus();
-      }
+      // Fenster einblenden
+      Visible = true;
+      if (!User32Wrappers.SetForegroundWindow(Handle))
+        ShowHideWindow();
+      TextBoxHandle.SelectAll();
+      TextBoxHandle.Focus();
     }
 
     private void FormHandleQuery_Shown(object sender, EventArgs e) {
@@ -121,7 +119,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (ProgramSettings.GlobalHotkeyModifierCtrl == e.Control &&
         ProgramSettings.GlobalHotkeyModifierAlt == e.Alt &&
         ProgramSettings.GlobalHotkeyModifierShift == e.Shift) {
-        // Fenster ein-/ausblenden
+        // Fenster einblenden
         ShowHideWindow();
       }
     }
@@ -178,10 +176,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         case Keys.Enter:
           e.SuppressKeyPress = true;
           if (!string.IsNullOrWhiteSpace(TextBoxHandle.Text)) {
-            // Abfrage starten
-            TextBoxHandle.SelectAll();
             // Ggf. existierendes UserControl entfernen
             RemoveUserControl();
+            // Textbox bis zum Ergebnis deaktivieren
+            TextBoxHandle.Enabled = false;
             // Handle-Informationen auslesen
             HandleInfo handleInfo = await GetHandleInfo();
             // UserControl mit Handle-Informationen hinzufügen
@@ -189,6 +187,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             Size = new Size(Size.Width, 211);
             // Autovervollständigung aktualisieren
             UpdateAutoComplete();
+            // Textbox wieder aktivieren und Text markieren
+            TextBoxHandle.Enabled = true;
+            TextBoxHandle.SelectAll();
+            TextBoxHandle.Focus();
           }
           break;
         case Keys.Escape:
