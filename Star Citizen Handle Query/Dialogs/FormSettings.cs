@@ -82,6 +82,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void TextBoxApiKey_TextChanged(object sender, EventArgs e) {
       ProgramSettings.ApiKey = (sender as TextBox).Text;
+      LabelApiTestStatus.Text = string.Empty;
+      ButtonApiTest.Enabled = ProgramSettings.ApiKey.Length == 32;
     }
 
     private void ComboBoxApiModus_SelectedIndexChanged(object sender, EventArgs e) {
@@ -126,6 +128,31 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void ButtonStandard_Click(object sender, EventArgs e) {
       ProgramSettings = new() { ApiKey = ProgramSettings.ApiKey };
       SetDialogValues();
+    }
+
+    private async void ButtonApiTest_Click(object sender, EventArgs e) {
+      ApiKeyState state = await GetApiTestJson();
+      if (state?.success == 1 && state.data != null) {
+        LabelApiTestStatus.Text = $"{state?.message?.ToUpper()}, {state?.data?.value} Live-Abfragen übrig";
+      } else {
+        LabelApiTestStatus.Text = state?.message;
+      }
+    }
+
+    private async Task<ApiKeyState> GetApiTestJson() {
+      ApiKeyState rtnVal = null;
+
+      using HttpClient client = new();
+      string jsonText = await client.GetStringAsync($"https://api.starcitizen-api.com/{ProgramSettings.ApiKey}/v1/me");
+      if (!string.IsNullOrWhiteSpace(jsonText)) {
+        rtnVal = JsonSerializer.Deserialize<ApiKeyState>(jsonText);
+      }
+
+      if (rtnVal == null) {
+        rtnVal = new() { message = "Fehler bei der Abfrage der API" };
+      }
+
+      return rtnVal;
     }
   }
 
