@@ -40,7 +40,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void UpdateAutoComplete() {
       string handleCachePath = GetCachePath(CacheDirectoryType.Handle);
       if (Directory.Exists(handleCachePath)) {
-        List<string> autoCompleteSource = new List<string>();
+        List<string> autoCompleteSource = new();
         foreach (string filePath in Directory.GetFiles(handleCachePath, "*.json")) {
           autoCompleteSource.Add(Path.GetFileNameWithoutExtension(filePath));
         }
@@ -225,8 +225,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       if (rtnVal != null && mitProgramSettings) {
-        // Programm muss neugestartet werden, damit alle Änderungen aktiv werden
-        Application.Restart();
+        RestartProgram();
       }
 
       return rtnVal;
@@ -244,7 +243,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       DeleteDirectoryFiles(CacheDirectoryType.HandleAvatar);
       DeleteDirectoryFiles(CacheDirectoryType.HandleDisplayTitle);
       DeleteDirectoryFiles(CacheDirectoryType.OrganizationAvatar);
-      MessageBox.Show("Der lokale Cache wurde geleert", Text);
+      MessageBox.Show("Der lokale Cache wurde geleert", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 
     private static void DeleteDirectoryFiles(CacheDirectoryType type) {
@@ -290,8 +289,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void NeustartenToolStripMenuItem_Click(object sender, EventArgs e) {
+      RestartProgram();
+    }
+
+    private void RestartProgram() {
+      RemoveUserControl();
       Application.Restart();
     }
+
   }
 
 }
