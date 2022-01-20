@@ -91,6 +91,7 @@
       // NotifyIconHandleQuery
       // 
       this.NotifyIconHandleQuery.ContextMenuStrip = this.ContextMenuStripNotifyIcon;
+      this.NotifyIconHandleQuery.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIconHandleQuery.Icon")));
       this.NotifyIconHandleQuery.Text = "Star Citizen Handle Query";
       this.NotifyIconHandleQuery.Visible = true;
       this.NotifyIconHandleQuery.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIconHandleQuery_MouseClick);
