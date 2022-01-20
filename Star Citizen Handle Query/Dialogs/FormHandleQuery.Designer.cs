@@ -163,6 +163,7 @@
       this.Text = "Star Citizen Handle Query";
       this.TopMost = true;
       this.TransparencyKey = System.Drawing.Color.Lime;
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormHandleQuery_FormClosing);
       this.Shown += new System.EventHandler(this.FormHandleQuery_Shown);
       this.PanelHandleQuery.ResumeLayout(false);
       this.PanelHandleQuery.PerformLayout();

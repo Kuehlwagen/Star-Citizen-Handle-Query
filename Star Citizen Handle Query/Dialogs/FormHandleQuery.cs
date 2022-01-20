@@ -1,9 +1,9 @@
 using Star_Citizen_Handle_Query.ExternClasses;
+using Star_Citizen_Handle_Query.ExternClasses.Star_Citizen_Handle_Query.ExternClasses;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Text;
 using System.Text.Json;
-using static Star_Citizen_Handle_Query.ExternClasses.GlobalHotKey;
 
 namespace Star_Citizen_Handle_Query.Dialogs {
 
@@ -11,6 +11,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private readonly int InitialWindowStyle = 0;
     private readonly Settings ProgramSettings;
+    private GlobalHotKey HotKey;
 
     public FormHandleQuery() {
       InitializeComponent();
@@ -107,8 +108,21 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
         // Ggf. Globale Tastenabfrage erstellen
         if (ProgramSettings.GlobalHotkey != FKeys.Keine) {
-          GlobalHotKey hotKey = new(GetKeyByFKey(), GetKeyModifiersBySettings(), new EventHandler(ShowHideWindow_Event));
+          HotKey = new();
+          HotKey.KeyDown += HotKey_KeyDown;
+          HotKey.HookedKeys.Add(GetKeyByFKey());
+          HotKey.Hook();
         }
+      }
+    }
+
+    private void HotKey_KeyDown(object sender, KeyEventArgs e) {
+      // Prüfen, ob die Modifizierer exakt übereinstimmen
+      if (ProgramSettings.GlobalHotkeyModifierCtrl == e.Control &&
+        ProgramSettings.GlobalHotkeyModifierAlt == e.Alt &&
+        ProgramSettings.GlobalHotkeyModifierShift == e.Shift) {
+        // Fenster ein-/ausblenden
+        ShowHideWindow();
       }
     }
 
@@ -156,29 +170,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       return rtnVal;
-    }
-
-    private KeyModifiers GetKeyModifiersBySettings() {
-      KeyModifiers rtnVal = KeyModifiers.None;
-
-      // Modifizierer anhand der Programm-Einstellungen ermitteln
-      if (ProgramSettings.GlobalHotkeyModifierCtrl) {
-        rtnVal |= KeyModifiers.Control;
-      }
-
-      if (ProgramSettings.GlobalHotkeyModifierAlt) {
-        rtnVal |= KeyModifiers.Alt;
-      }
-
-      if (ProgramSettings.GlobalHotkeyModifierShift) {
-        rtnVal |= KeyModifiers.Shift;
-      }
-
-      return rtnVal;
-    }
-
-    private void ShowHideWindow_Event(object sender, EventArgs e) {
-      ShowHideWindow();
     }
 
     private async void TextBoxHandle_KeyDown(object sender, KeyEventArgs e) {
@@ -355,6 +346,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Application.Restart();
     }
 
+    private void FormHandleQuery_FormClosing(object sender, FormClosingEventArgs e) {
+      if (HotKey?.HookedKeys?.Count > 0) {
+        HotKey.Unhook();
+        HotKey = null;
+      }
+    }
   }
 
 }

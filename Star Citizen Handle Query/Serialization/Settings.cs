@@ -1,6 +1,4 @@
-﻿using static Star_Citizen_Handle_Query.ExternClasses.GlobalHotKey;
-
-namespace Star_Citizen_Handle_Query.Serialization {
+﻿namespace Star_Citizen_Handle_Query.Serialization {
 
   [Serializable()]
   public class Settings {
@@ -50,13 +48,13 @@ namespace Star_Citizen_Handle_Query.Serialization {
     public FKeys GlobalHotkey { get; set; } = FKeys.F3;
 
     /// <summary>Strg-Modifizierer für globalen Hotkey</summary>
-    public bool GlobalHotkeyModifierCtrl { get; set; } = true;
+    public bool GlobalHotkeyModifierCtrl { get; set; } = false;
 
     /// <summary>Alt-Modifizierer für globalen Hotkey</summary>
     public bool GlobalHotkeyModifierAlt { get; set; } = false;
 
     /// <summary>Umschalt-Modifizierer für globalen Hotkey</summary>
-    public bool GlobalHotkeyModifierShift { get; set; } = false;
+    public bool GlobalHotkeyModifierShift { get; set; } = true;
 
   }
 
