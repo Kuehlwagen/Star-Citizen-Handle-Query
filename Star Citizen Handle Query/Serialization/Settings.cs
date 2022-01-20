@@ -44,25 +44,49 @@ namespace Star_Citizen_Handle_Query.Serialization {
     public string ApiKey { get; set; } = string.Empty;
 
     /// <summary>API-Modus für starcitizen-api.com</summary>
-    public ApiMode ApiMode { get; set; } = ApiMode.auto;
+    public ApiMode ApiMode { get; set; } = ApiMode.Auto;
 
     /// <summary>Globaler Hotkey</summary>
-    public Keys GlobalHotkey { get; set; } = Keys.F3;
+    public FKeys GlobalHotkey { get; set; } = FKeys.F3;
 
-    /// <summary>Modifizierer für den globalen Hotkey</summary>
-    public KeyModifiers GlobalHotkeyModifiers { get; set; } = KeyModifiers.Control;
+    /// <summary>Strg-Modifizierer für globalen Hotkey</summary>
+    public bool GlobalHotkeyModifierCtrl { get; set; } = true;
+
+    /// <summary>Alt-Modifizierer für globalen Hotkey</summary>
+    public bool GlobalHotkeyModifierAlt { get; set; } = false;
+
+    /// <summary>Umschalt-Modifizierer für globalen Hotkey</summary>
+    public bool GlobalHotkeyModifierShift { get; set; } = false;
 
   }
 
+  /// <summary>API-Modus</summary>
   public enum ApiMode {
     /// <summary>Immer aktuelle Daten</summary>
-    live,
+    Live,
     /// <summary>Auf dem Server gecachte Daten</summary>
-    cache,
+    Cache,
     /// <summary>Wenn möglich, auf dem Server gecachte, ansonsten aktuelle Daten</summary>
-    auto,
+    Auto,
     /// <summary>Wenn möglich, aktuelle Daten, ansonsten gecachte Daten</summary>
-    eager
+    Eager
+  }
+
+  /// <summary>F-Tasten für die Tastenbelegung</summary>
+  public enum FKeys {
+    Keine,
+    F1,
+    F2,
+    F3,
+    F4,
+    F5,
+    F6,
+    F7,
+    F8,
+    F9,
+    F10,
+    F11,
+    F12
   }
 
 }

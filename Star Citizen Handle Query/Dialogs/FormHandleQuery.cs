@@ -3,6 +3,7 @@ using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Text;
 using System.Text.Json;
+using static Star_Citizen_Handle_Query.ExternClasses.GlobalHotKey;
 
 namespace Star_Citizen_Handle_Query.Dialogs {
 
@@ -105,11 +106,76 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         UpdateAutoComplete();
 
         // Ggf. Globale Tastenabfrage erstellen
-        if (ProgramSettings.GlobalHotkey != Keys.None) {
-          GlobalHotKey hotKey = new(ProgramSettings.GlobalHotkey, ProgramSettings.GlobalHotkeyModifiers, new EventHandler(ShowHideWindow_Event));
+        if (ProgramSettings.GlobalHotkey != FKeys.Keine) {
+          GlobalHotKey hotKey = new(GetKeyByFKey(), GetKeyModifiersBySettings(), new EventHandler(ShowHideWindow_Event));
         }
       }
     }
+
+    private Keys GetKeyByFKey() {
+      Keys rtnVal = Keys.None;
+
+      // Keys-Wert über FKeys-Wert ermitteln
+      switch (ProgramSettings.GlobalHotkey) {
+        case FKeys.F1:
+          rtnVal = Keys.F1;
+          break;
+        case FKeys.F2:
+          rtnVal = Keys.F2;
+          break;
+        case FKeys.F3:
+          rtnVal = Keys.F3;
+          break;
+        case FKeys.F4:
+          rtnVal = Keys.F4;
+          break;
+        case FKeys.F5:
+          rtnVal = Keys.F5;
+          break;
+        case FKeys.F6:
+          rtnVal = Keys.F6;
+          break;
+        case FKeys.F7:
+          rtnVal = Keys.F7;
+          break;
+        case FKeys.F8:
+          rtnVal = Keys.F8;
+          break;
+        case FKeys.F9:
+          rtnVal = Keys.F9;
+          break;
+        case FKeys.F10:
+          rtnVal = Keys.F10;
+          break;
+        case FKeys.F11:
+          rtnVal = Keys.F11;
+          break;
+        case FKeys.F12:
+          rtnVal = Keys.F12;
+          break;
+      }
+
+      return rtnVal;
+    }
+
+    private KeyModifiers GetKeyModifiersBySettings() {
+      KeyModifiers rtnVal = KeyModifiers.None;
+
+      // Modifizierer anhand der Programm-Einstellungen ermitteln
+      if (ProgramSettings.GlobalHotkeyModifierCtrl) {
+        rtnVal |= KeyModifiers.Control;
+      }
+
+      if (ProgramSettings.GlobalHotkeyModifierAlt) {
+        rtnVal |= KeyModifiers.Alt;
+      }
+
+      if (ProgramSettings.GlobalHotkeyModifierShift) {
+        rtnVal |= KeyModifiers.Shift;
+      }
+
+      return rtnVal;
+    } 
 
     private void ShowHideWindow_Event(object sender, EventArgs e) {
       ShowHideWindow();
@@ -182,7 +248,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private async Task<string> GetApiHandleJson(string apiKey, string handle) {
       // JSON via API herunterladen
       using HttpClient client = new();
-      return await client.GetStringAsync($"https://api.starcitizen-api.com/{apiKey}/v1/{ProgramSettings.ApiMode}/user/{handle}");
+      return await client.GetStringAsync($"https://api.starcitizen-api.com/{apiKey}/v1/{ProgramSettings.ApiMode.ToString().ToLower()}/user/{handle}");
     }
 
     private void BeendenToolStripMenuItem_Click(object sender, EventArgs e) {

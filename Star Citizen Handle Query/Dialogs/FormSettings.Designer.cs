@@ -34,24 +34,39 @@
       this.ButtonSchliessen = new System.Windows.Forms.Button();
       this.LabelFensterDeckkraftProzent = new System.Windows.Forms.Label();
       this.LabelLokalerCacheAlterTage = new System.Windows.Forms.Label();
+      this.GroupBoxFenster = new System.Windows.Forms.GroupBox();
+      this.CheckBoxUmschalt = new System.Windows.Forms.CheckBox();
+      this.CheckBoxAlt = new System.Windows.Forms.CheckBox();
+      this.CheckBoxStrg = new System.Windows.Forms.CheckBox();
+      this.ComboBoxTaste = new System.Windows.Forms.ComboBox();
+      this.LabelTastenkombination = new System.Windows.Forms.Label();
+      this.GroupBoxAPI = new System.Windows.Forms.GroupBox();
+      this.LabelModusBeschreibung = new System.Windows.Forms.Label();
+      this.ComboBoxApiModus = new System.Windows.Forms.ComboBox();
+      this.LabelApiMode = new System.Windows.Forms.Label();
+      this.GroupBoxLokalerCache = new System.Windows.Forms.GroupBox();
+      this.ButtonStandard = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownFensterDeckkraft)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownLokalerCacheAlter)).BeginInit();
+      this.GroupBoxFenster.SuspendLayout();
+      this.GroupBoxAPI.SuspendLayout();
+      this.GroupBoxLokalerCache.SuspendLayout();
       this.SuspendLayout();
       // 
       // LabelFensterDeckkraft
       // 
       this.LabelFensterDeckkraft.AutoSize = true;
-      this.LabelFensterDeckkraft.Location = new System.Drawing.Point(122, 14);
+      this.LabelFensterDeckkraft.Location = new System.Drawing.Point(15, 24);
       this.LabelFensterDeckkraft.Name = "LabelFensterDeckkraft";
-      this.LabelFensterDeckkraft.Size = new System.Drawing.Size(103, 15);
+      this.LabelFensterDeckkraft.Size = new System.Drawing.Size(60, 15);
       this.LabelFensterDeckkraft.TabIndex = 0;
-      this.LabelFensterDeckkraft.Text = "Fenster-Deckkraft:";
+      this.LabelFensterDeckkraft.Text = "Deckkraft:";
       // 
       // NumericUpDownFensterDeckkraft
       // 
       this.NumericUpDownFensterDeckkraft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.NumericUpDownFensterDeckkraft.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.NumericUpDownFensterDeckkraft.Location = new System.Drawing.Point(231, 12);
+      this.NumericUpDownFensterDeckkraft.Location = new System.Drawing.Point(116, 22);
       this.NumericUpDownFensterDeckkraft.Minimum = new decimal(new int[] {
             50,
             0,
@@ -70,28 +85,28 @@
       // CheckBoxFensterMauseingabenIgnorieren
       // 
       this.CheckBoxFensterMauseingabenIgnorieren.AutoSize = true;
-      this.CheckBoxFensterMauseingabenIgnorieren.Location = new System.Drawing.Point(231, 41);
+      this.CheckBoxFensterMauseingabenIgnorieren.Location = new System.Drawing.Point(15, 105);
       this.CheckBoxFensterMauseingabenIgnorieren.Name = "CheckBoxFensterMauseingabenIgnorieren";
-      this.CheckBoxFensterMauseingabenIgnorieren.Size = new System.Drawing.Size(204, 19);
-      this.CheckBoxFensterMauseingabenIgnorieren.TabIndex = 3;
-      this.CheckBoxFensterMauseingabenIgnorieren.Text = "Fenster-Mauseingaben ignorieren";
+      this.CheckBoxFensterMauseingabenIgnorieren.Size = new System.Drawing.Size(161, 19);
+      this.CheckBoxFensterMauseingabenIgnorieren.TabIndex = 8;
+      this.CheckBoxFensterMauseingabenIgnorieren.Text = "Mauseingaben ignorieren";
       this.CheckBoxFensterMauseingabenIgnorieren.UseVisualStyleBackColor = true;
       this.CheckBoxFensterMauseingabenIgnorieren.CheckedChanged += new System.EventHandler(this.CheckBoxFensterMauseingabenIgnorieren_CheckedChanged);
       // 
       // LabelLokalerCacheAlter
       // 
       this.LabelLokalerCacheAlter.AutoSize = true;
-      this.LabelLokalerCacheAlter.Location = new System.Drawing.Point(12, 68);
+      this.LabelLokalerCacheAlter.Location = new System.Drawing.Point(15, 24);
       this.LabelLokalerCacheAlter.Name = "LabelLokalerCacheAlter";
-      this.LabelLokalerCacheAlter.Size = new System.Drawing.Size(213, 15);
-      this.LabelLokalerCacheAlter.TabIndex = 4;
-      this.LabelLokalerCacheAlter.Text = "Maximales Alter für den lokalen Cache:";
+      this.LabelLokalerCacheAlter.Size = new System.Drawing.Size(95, 15);
+      this.LabelLokalerCacheAlter.TabIndex = 0;
+      this.LabelLokalerCacheAlter.Text = "Maximales Alter:";
       // 
       // NumericUpDownLokalerCacheAlter
       // 
       this.NumericUpDownLokalerCacheAlter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.NumericUpDownLokalerCacheAlter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.NumericUpDownLokalerCacheAlter.Location = new System.Drawing.Point(231, 66);
+      this.NumericUpDownLokalerCacheAlter.Location = new System.Drawing.Point(116, 22);
       this.NumericUpDownLokalerCacheAlter.Maximum = new decimal(new int[] {
             30,
             0,
@@ -99,7 +114,7 @@
             0});
       this.NumericUpDownLokalerCacheAlter.Name = "NumericUpDownLokalerCacheAlter";
       this.NumericUpDownLokalerCacheAlter.Size = new System.Drawing.Size(44, 23);
-      this.NumericUpDownLokalerCacheAlter.TabIndex = 5;
+      this.NumericUpDownLokalerCacheAlter.TabIndex = 1;
       this.NumericUpDownLokalerCacheAlter.Value = new decimal(new int[] {
             3,
             0,
@@ -110,31 +125,31 @@
       // LabelApiKey
       // 
       this.LabelApiKey.AutoSize = true;
-      this.LabelApiKey.Location = new System.Drawing.Point(173, 98);
+      this.LabelApiKey.Location = new System.Drawing.Point(15, 25);
       this.LabelApiKey.Name = "LabelApiKey";
-      this.LabelApiKey.Size = new System.Drawing.Size(52, 15);
-      this.LabelApiKey.TabIndex = 7;
-      this.LabelApiKey.Text = "API-Key:";
+      this.LabelApiKey.Size = new System.Drawing.Size(58, 15);
+      this.LabelApiKey.TabIndex = 0;
+      this.LabelApiKey.Text = "Schlüssel:";
       // 
       // TextBoxApiKey
       // 
       this.TextBoxApiKey.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.TextBoxApiKey.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.TextBoxApiKey.Location = new System.Drawing.Point(231, 95);
+      this.TextBoxApiKey.Location = new System.Drawing.Point(105, 22);
       this.TextBoxApiKey.MaxLength = 32;
       this.TextBoxApiKey.Name = "TextBoxApiKey";
-      this.TextBoxApiKey.PlaceholderText = "32-stelligen API-Code eingeben...";
-      this.TextBoxApiKey.Size = new System.Drawing.Size(227, 23);
-      this.TextBoxApiKey.TabIndex = 8;
+      this.TextBoxApiKey.PlaceholderText = "32-stelligen API-Key eingeben...";
+      this.TextBoxApiKey.Size = new System.Drawing.Size(253, 23);
+      this.TextBoxApiKey.TabIndex = 1;
       this.TextBoxApiKey.TextChanged += new System.EventHandler(this.TextBoxApiKey_TextChanged);
       // 
       // ButtonSpeichern
       // 
       this.ButtonSpeichern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSpeichern.Location = new System.Drawing.Point(231, 124);
+      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 318);
       this.ButtonSpeichern.Name = "ButtonSpeichern";
       this.ButtonSpeichern.Size = new System.Drawing.Size(75, 28);
-      this.ButtonSpeichern.TabIndex = 9;
+      this.ButtonSpeichern.TabIndex = 3;
       this.ButtonSpeichern.Text = "Speichern";
       this.ButtonSpeichern.UseVisualStyleBackColor = true;
       this.ButtonSpeichern.Click += new System.EventHandler(this.ButtonSpeichern_Click);
@@ -142,10 +157,10 @@
       // ButtonSchliessen
       // 
       this.ButtonSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSchliessen.Location = new System.Drawing.Point(312, 124);
+      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 318);
       this.ButtonSchliessen.Name = "ButtonSchliessen";
       this.ButtonSchliessen.Size = new System.Drawing.Size(75, 28);
-      this.ButtonSchliessen.TabIndex = 10;
+      this.ButtonSchliessen.TabIndex = 4;
       this.ButtonSchliessen.Text = "Schließen";
       this.ButtonSchliessen.UseVisualStyleBackColor = true;
       this.ButtonSchliessen.Click += new System.EventHandler(this.ButtonSchliessen_Click);
@@ -153,7 +168,7 @@
       // LabelFensterDeckkraftProzent
       // 
       this.LabelFensterDeckkraftProzent.AutoSize = true;
-      this.LabelFensterDeckkraftProzent.Location = new System.Drawing.Point(281, 14);
+      this.LabelFensterDeckkraftProzent.Location = new System.Drawing.Point(166, 24);
       this.LabelFensterDeckkraftProzent.Name = "LabelFensterDeckkraftProzent";
       this.LabelFensterDeckkraftProzent.Size = new System.Drawing.Size(17, 15);
       this.LabelFensterDeckkraftProzent.TabIndex = 2;
@@ -162,11 +177,159 @@
       // LabelLokalerCacheAlterTage
       // 
       this.LabelLokalerCacheAlterTage.AutoSize = true;
-      this.LabelLokalerCacheAlterTage.Location = new System.Drawing.Point(281, 68);
+      this.LabelLokalerCacheAlterTage.Location = new System.Drawing.Point(166, 24);
       this.LabelLokalerCacheAlterTage.Name = "LabelLokalerCacheAlterTage";
       this.LabelLokalerCacheAlterTage.Size = new System.Drawing.Size(39, 15);
-      this.LabelLokalerCacheAlterTage.TabIndex = 6;
+      this.LabelLokalerCacheAlterTage.TabIndex = 2;
       this.LabelLokalerCacheAlterTage.Text = "Tag(e)";
+      // 
+      // GroupBoxFenster
+      // 
+      this.GroupBoxFenster.Controls.Add(this.CheckBoxUmschalt);
+      this.GroupBoxFenster.Controls.Add(this.CheckBoxAlt);
+      this.GroupBoxFenster.Controls.Add(this.CheckBoxStrg);
+      this.GroupBoxFenster.Controls.Add(this.ComboBoxTaste);
+      this.GroupBoxFenster.Controls.Add(this.LabelTastenkombination);
+      this.GroupBoxFenster.Controls.Add(this.NumericUpDownFensterDeckkraft);
+      this.GroupBoxFenster.Controls.Add(this.LabelFensterDeckkraft);
+      this.GroupBoxFenster.Controls.Add(this.CheckBoxFensterMauseingabenIgnorieren);
+      this.GroupBoxFenster.Controls.Add(this.LabelFensterDeckkraftProzent);
+      this.GroupBoxFenster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.GroupBoxFenster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      this.GroupBoxFenster.Location = new System.Drawing.Point(12, 108);
+      this.GroupBoxFenster.Name = "GroupBoxFenster";
+      this.GroupBoxFenster.Size = new System.Drawing.Size(377, 137);
+      this.GroupBoxFenster.TabIndex = 1;
+      this.GroupBoxFenster.TabStop = false;
+      this.GroupBoxFenster.Text = "Fenster";
+      // 
+      // CheckBoxUmschalt
+      // 
+      this.CheckBoxUmschalt.AutoSize = true;
+      this.CheckBoxUmschalt.Location = new System.Drawing.Point(216, 80);
+      this.CheckBoxUmschalt.Name = "CheckBoxUmschalt";
+      this.CheckBoxUmschalt.Size = new System.Drawing.Size(76, 19);
+      this.CheckBoxUmschalt.TabIndex = 7;
+      this.CheckBoxUmschalt.Text = "Umschalt";
+      this.CheckBoxUmschalt.UseVisualStyleBackColor = true;
+      this.CheckBoxUmschalt.CheckedChanged += new System.EventHandler(this.CheckBoxUmschalt_CheckedChanged);
+      // 
+      // CheckBoxAlt
+      // 
+      this.CheckBoxAlt.AutoSize = true;
+      this.CheckBoxAlt.Location = new System.Drawing.Point(169, 80);
+      this.CheckBoxAlt.Name = "CheckBoxAlt";
+      this.CheckBoxAlt.Size = new System.Drawing.Size(41, 19);
+      this.CheckBoxAlt.TabIndex = 6;
+      this.CheckBoxAlt.Text = "Alt";
+      this.CheckBoxAlt.UseVisualStyleBackColor = true;
+      this.CheckBoxAlt.CheckedChanged += new System.EventHandler(this.CheckBoxAlt_CheckedChanged);
+      // 
+      // CheckBoxStrg
+      // 
+      this.CheckBoxStrg.AutoSize = true;
+      this.CheckBoxStrg.Location = new System.Drawing.Point(116, 80);
+      this.CheckBoxStrg.Name = "CheckBoxStrg";
+      this.CheckBoxStrg.Size = new System.Drawing.Size(47, 19);
+      this.CheckBoxStrg.TabIndex = 5;
+      this.CheckBoxStrg.Text = "Strg";
+      this.CheckBoxStrg.UseVisualStyleBackColor = true;
+      this.CheckBoxStrg.CheckedChanged += new System.EventHandler(this.CheckBoxStrg_CheckedChanged);
+      // 
+      // ComboBoxTaste
+      // 
+      this.ComboBoxTaste.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.ComboBoxTaste.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.ComboBoxTaste.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.ComboBoxTaste.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      this.ComboBoxTaste.FormattingEnabled = true;
+      this.ComboBoxTaste.Location = new System.Drawing.Point(116, 51);
+      this.ComboBoxTaste.MaxDropDownItems = 4;
+      this.ComboBoxTaste.Name = "ComboBoxTaste";
+      this.ComboBoxTaste.Size = new System.Drawing.Size(89, 23);
+      this.ComboBoxTaste.TabIndex = 10;
+      this.ComboBoxTaste.SelectedIndexChanged += new System.EventHandler(this.ComboBoxTaste_SelectedIndexChanged);
+      // 
+      // LabelTastenkombination
+      // 
+      this.LabelTastenkombination.AutoSize = true;
+      this.LabelTastenkombination.Location = new System.Drawing.Point(15, 54);
+      this.LabelTastenkombination.Name = "LabelTastenkombination";
+      this.LabelTastenkombination.Size = new System.Drawing.Size(79, 15);
+      this.LabelTastenkombination.TabIndex = 3;
+      this.LabelTastenkombination.Text = "Globale Taste:";
+      // 
+      // GroupBoxAPI
+      // 
+      this.GroupBoxAPI.Controls.Add(this.LabelModusBeschreibung);
+      this.GroupBoxAPI.Controls.Add(this.ComboBoxApiModus);
+      this.GroupBoxAPI.Controls.Add(this.LabelApiMode);
+      this.GroupBoxAPI.Controls.Add(this.TextBoxApiKey);
+      this.GroupBoxAPI.Controls.Add(this.LabelApiKey);
+      this.GroupBoxAPI.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      this.GroupBoxAPI.Location = new System.Drawing.Point(12, 12);
+      this.GroupBoxAPI.Name = "GroupBoxAPI";
+      this.GroupBoxAPI.Size = new System.Drawing.Size(377, 90);
+      this.GroupBoxAPI.TabIndex = 0;
+      this.GroupBoxAPI.TabStop = false;
+      this.GroupBoxAPI.Text = "API (starcitizen-api.com)";
+      // 
+      // LabelModusBeschreibung
+      // 
+      this.LabelModusBeschreibung.AutoSize = true;
+      this.LabelModusBeschreibung.ForeColor = System.Drawing.SystemColors.GrayText;
+      this.LabelModusBeschreibung.Location = new System.Drawing.Point(200, 54);
+      this.LabelModusBeschreibung.Name = "LabelModusBeschreibung";
+      this.LabelModusBeschreibung.Size = new System.Drawing.Size(0, 15);
+      this.LabelModusBeschreibung.TabIndex = 11;
+      // 
+      // ComboBoxApiModus
+      // 
+      this.ComboBoxApiModus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.ComboBoxApiModus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.ComboBoxApiModus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.ComboBoxApiModus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      this.ComboBoxApiModus.FormattingEnabled = true;
+      this.ComboBoxApiModus.Location = new System.Drawing.Point(105, 51);
+      this.ComboBoxApiModus.MaxDropDownItems = 3;
+      this.ComboBoxApiModus.Name = "ComboBoxApiModus";
+      this.ComboBoxApiModus.Size = new System.Drawing.Size(89, 23);
+      this.ComboBoxApiModus.TabIndex = 10;
+      this.ComboBoxApiModus.SelectedIndexChanged += new System.EventHandler(this.ComboBoxApiModus_SelectedIndexChanged);
+      // 
+      // LabelApiMode
+      // 
+      this.LabelApiMode.AutoSize = true;
+      this.LabelApiMode.Location = new System.Drawing.Point(15, 54);
+      this.LabelApiMode.Name = "LabelApiMode";
+      this.LabelApiMode.Size = new System.Drawing.Size(47, 15);
+      this.LabelApiMode.TabIndex = 2;
+      this.LabelApiMode.Text = "Modus:";
+      // 
+      // GroupBoxLokalerCache
+      // 
+      this.GroupBoxLokalerCache.Controls.Add(this.LabelLokalerCacheAlterTage);
+      this.GroupBoxLokalerCache.Controls.Add(this.NumericUpDownLokalerCacheAlter);
+      this.GroupBoxLokalerCache.Controls.Add(this.LabelLokalerCacheAlter);
+      this.GroupBoxLokalerCache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.GroupBoxLokalerCache.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 251);
+      this.GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
+      this.GroupBoxLokalerCache.Size = new System.Drawing.Size(377, 61);
+      this.GroupBoxLokalerCache.TabIndex = 2;
+      this.GroupBoxLokalerCache.TabStop = false;
+      this.GroupBoxLokalerCache.Text = "Lokaler Cache";
+      // 
+      // ButtonStandard
+      // 
+      this.ButtonStandard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.ButtonStandard.Location = new System.Drawing.Point(314, 318);
+      this.ButtonStandard.Name = "ButtonStandard";
+      this.ButtonStandard.Size = new System.Drawing.Size(75, 28);
+      this.ButtonStandard.TabIndex = 4;
+      this.ButtonStandard.Text = "Standard";
+      this.ButtonStandard.UseVisualStyleBackColor = true;
+      this.ButtonStandard.Click += new System.EventHandler(this.ButtonStandard_Click);
       // 
       // FormSettings
       // 
@@ -175,27 +338,27 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.CancelButton = this.ButtonSchliessen;
-      this.ClientSize = new System.Drawing.Size(470, 165);
+      this.ClientSize = new System.Drawing.Size(401, 360);
+      this.Controls.Add(this.GroupBoxAPI);
+      this.Controls.Add(this.GroupBoxLokalerCache);
+      this.Controls.Add(this.GroupBoxFenster);
+      this.Controls.Add(this.ButtonStandard);
       this.Controls.Add(this.ButtonSchliessen);
       this.Controls.Add(this.ButtonSpeichern);
-      this.Controls.Add(this.TextBoxApiKey);
-      this.Controls.Add(this.LabelApiKey);
-      this.Controls.Add(this.LabelLokalerCacheAlterTage);
-      this.Controls.Add(this.LabelLokalerCacheAlter);
-      this.Controls.Add(this.CheckBoxFensterMauseingabenIgnorieren);
-      this.Controls.Add(this.NumericUpDownLokalerCacheAlter);
-      this.Controls.Add(this.NumericUpDownFensterDeckkraft);
-      this.Controls.Add(this.LabelFensterDeckkraftProzent);
-      this.Controls.Add(this.LabelFensterDeckkraft);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.MinimumSize = new System.Drawing.Size(486, 204);
+      this.MinimumSize = new System.Drawing.Size(417, 399);
       this.Name = "FormSettings";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Star Citizen Handle Query Einstellungen";
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownFensterDeckkraft)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownLokalerCacheAlter)).EndInit();
+      this.GroupBoxFenster.ResumeLayout(false);
+      this.GroupBoxFenster.PerformLayout();
+      this.GroupBoxAPI.ResumeLayout(false);
+      this.GroupBoxAPI.PerformLayout();
+      this.GroupBoxLokalerCache.ResumeLayout(false);
+      this.GroupBoxLokalerCache.PerformLayout();
       this.ResumeLayout(false);
-      this.PerformLayout();
 
     }
 
@@ -212,5 +375,17 @@
     private Button ButtonSchliessen;
     private Label LabelFensterDeckkraftProzent;
     private Label LabelLokalerCacheAlterTage;
+    private GroupBox GroupBoxFenster;
+    private GroupBox GroupBoxAPI;
+    private Label LabelApiMode;
+    private ComboBox ComboBoxApiModus;
+    private ComboBox ComboBoxTaste;
+    private Label LabelTastenkombination;
+    private CheckBox CheckBoxUmschalt;
+    private CheckBox CheckBoxAlt;
+    private CheckBox CheckBoxStrg;
+    private GroupBox GroupBoxLokalerCache;
+    private Label LabelModusBeschreibung;
+    private Button ButtonStandard;
   }
 }
