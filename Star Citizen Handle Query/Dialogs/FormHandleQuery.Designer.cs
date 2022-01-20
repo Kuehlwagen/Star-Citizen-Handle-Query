@@ -24,6 +24,7 @@
     /// </summary>
     private void InitializeComponent() {
       this.components = new System.ComponentModel.Container();
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormHandleQuery));
       this.PanelHandleQuery = new System.Windows.Forms.Panel();
       this.TextBoxHandle = new System.Windows.Forms.TextBox();
       this.LabelHandle = new System.Windows.Forms.Label();
@@ -104,7 +105,7 @@
             this.NeustartenToolStripMenuItem,
             this.BeendenToolStripMenuItem});
       this.ContextMenuStripNotifyIcon.Name = "ContextMenuStripNotifyIcon";
-      this.ContextMenuStripNotifyIcon.Size = new System.Drawing.Size(187, 142);
+      this.ContextMenuStripNotifyIcon.Size = new System.Drawing.Size(187, 120);
       // 
       // AnzeigenVersteckenToolStripMenuItem
       // 
@@ -157,6 +158,7 @@
       this.Controls.Add(this.PanelHandleQuery);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.Name = "FormHandleQuery";
       this.ShowIcon = false;
       this.ShowInTaskbar = false;

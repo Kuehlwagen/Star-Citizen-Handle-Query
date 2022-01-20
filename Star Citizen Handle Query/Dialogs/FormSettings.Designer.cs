@@ -23,6 +23,7 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
       this.LabelFensterDeckkraft = new System.Windows.Forms.Label();
       this.NumericUpDownFensterDeckkraft = new System.Windows.Forms.NumericUpDown();
       this.CheckBoxFensterMauseingabenIgnorieren = new System.Windows.Forms.CheckBox();
@@ -41,13 +42,13 @@
       this.ComboBoxTaste = new System.Windows.Forms.ComboBox();
       this.LabelTastenkombination = new System.Windows.Forms.Label();
       this.GroupBoxAPI = new System.Windows.Forms.GroupBox();
+      this.LabelApiTestStatus = new System.Windows.Forms.Label();
       this.LabelModusBeschreibung = new System.Windows.Forms.Label();
       this.ComboBoxApiModus = new System.Windows.Forms.ComboBox();
       this.LabelApiMode = new System.Windows.Forms.Label();
       this.ButtonApiTest = new System.Windows.Forms.Button();
       this.GroupBoxLokalerCache = new System.Windows.Forms.GroupBox();
       this.ButtonStandard = new System.Windows.Forms.Button();
-      this.LabelApiTestStatus = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownFensterDeckkraft)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownLokalerCacheAlter)).BeginInit();
       this.GroupBoxFenster.SuspendLayout();
@@ -278,6 +279,14 @@
       this.GroupBoxAPI.TabStop = false;
       this.GroupBoxAPI.Text = "API (starcitizen-api.com)";
       // 
+      // LabelApiTestStatus
+      // 
+      this.LabelApiTestStatus.AutoSize = true;
+      this.LabelApiTestStatus.Location = new System.Drawing.Point(186, 87);
+      this.LabelApiTestStatus.Name = "LabelApiTestStatus";
+      this.LabelApiTestStatus.Size = new System.Drawing.Size(0, 15);
+      this.LabelApiTestStatus.TabIndex = 12;
+      // 
       // LabelModusBeschreibung
       // 
       this.LabelModusBeschreibung.AutoSize = true;
@@ -347,14 +356,6 @@
       this.ButtonStandard.UseVisualStyleBackColor = true;
       this.ButtonStandard.Click += new System.EventHandler(this.ButtonStandard_Click);
       // 
-      // LabelApiTestStatus
-      // 
-      this.LabelApiTestStatus.AutoSize = true;
-      this.LabelApiTestStatus.Location = new System.Drawing.Point(186, 87);
-      this.LabelApiTestStatus.Name = "LabelApiTestStatus";
-      this.LabelApiTestStatus.Size = new System.Drawing.Size(0, 15);
-      this.LabelApiTestStatus.TabIndex = 12;
-      // 
       // FormSettings
       // 
       this.AcceptButton = this.ButtonSpeichern;
@@ -370,6 +371,7 @@
       this.Controls.Add(this.ButtonSchliessen);
       this.Controls.Add(this.ButtonSpeichern);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
       this.MinimumSize = new System.Drawing.Size(417, 431);
       this.Name = "FormSettings";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
