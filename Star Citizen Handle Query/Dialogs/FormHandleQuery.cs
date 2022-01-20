@@ -9,7 +9,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
   public partial class FormHandleQuery : Form {
 
     private readonly int InitialWindowStyle = 0;
-    private GlobalKeyboardHook GHook;
     private readonly Settings ProgramSettings;
 
     public FormHandleQuery() {
@@ -81,20 +80,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private void GHook_KeyDown(object sender, KeyEventArgs e) {
-      // Globale Tastenabfrage verarbeiten
-      if (e.KeyCode == ProgramSettings.GlobalHotkey) {
-        // Fenster ein-/ausblenden
-        ShowWindow();
-      }
-    }
-
-    private void ShowWindow() {
+    private void ShowHideWindow() {
       // Fenster ein-/ausblenden
       Visible = !Visible;
       if (Visible) {
         if (!User32Wrappers.SetForegroundWindow(Handle))
-          ShowWindow();
+          ShowHideWindow();
         TextBoxHandle.SelectAll();
         TextBoxHandle.Focus();
       }
@@ -115,12 +106,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
         // Ggf. Globale Tastenabfrage erstellen
         if (ProgramSettings.GlobalHotkey != Keys.None) {
-          GHook = new GlobalKeyboardHook();
-          GHook.KeyDown += new KeyEventHandler(GHook_KeyDown);
-          GHook.HookedKeys.Add(ProgramSettings.GlobalHotkey);
-          GHook.Hook();
+          GlobalHotKey hotKey = new(ProgramSettings.GlobalHotkey, ProgramSettings.GlobalHotkeyModifiers, new EventHandler(ShowHideWindow_Event));
         }
       }
+    }
+
+    private void ShowHideWindow_Event(object sender, EventArgs e) {
+      ShowHideWindow();
     }
 
     private async void TextBoxHandle_KeyDown(object sender, KeyEventArgs e) {
@@ -201,13 +193,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void NotifyIconHandleQuery_MouseClick(object sender, MouseEventArgs e) {
       // Fenster einblenden, in den Vordergrund holen und Textbox fokussieren
       if (e.Button == MouseButtons.Left) {
-        ShowWindow();
+        ShowHideWindow();
       }
     }
 
     private void AnzeigenVersteckenToolStripMenuItem_Click(object sender, EventArgs e) {
       // Fenster einblenden, in den Vordergrund holen und Textbox fokussieren
-      ShowWindow();
+      ShowHideWindow();
     }
 
     private void EinstellungenToolStripMenuItem_Click(object sender, EventArgs e) {

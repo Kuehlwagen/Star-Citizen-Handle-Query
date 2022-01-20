@@ -1,4 +1,6 @@
-﻿namespace Star_Citizen_Handle_Query.Serialization {
+﻿using static Star_Citizen_Handle_Query.ExternClasses.GlobalHotKey;
+
+namespace Star_Citizen_Handle_Query.Serialization {
 
   [Serializable()]
   public class Settings {
@@ -46,6 +48,9 @@
 
     /// <summary>Globaler Hotkey</summary>
     public Keys GlobalHotkey { get; set; } = Keys.F3;
+
+    /// <summary>Modifizierer für den globalen Hotkey</summary>
+    public KeyModifiers GlobalHotkeyModifiers { get; set; } = KeyModifiers.Control;
 
   }
 
