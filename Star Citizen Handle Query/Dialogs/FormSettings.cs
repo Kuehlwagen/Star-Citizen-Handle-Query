@@ -27,7 +27,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           ProgramSettings = JsonSerializer.Deserialize<Settings>(jsonSettings);
         }
       }
-      
+
       // Fallback auf leeres Settings-Objekt
       if (ProgramSettings == null) {
         ProgramSettings = new Settings();

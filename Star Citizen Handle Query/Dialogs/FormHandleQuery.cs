@@ -175,7 +175,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       return rtnVal;
-    } 
+    }
 
     private void ShowHideWindow_Event(object sender, EventArgs e) {
       ShowHideWindow();
@@ -183,7 +183,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private async void TextBoxHandle_KeyDown(object sender, KeyEventArgs e) {
       // Handle-Textbox Tastendrücke verarbeiten
-      switch(e.KeyCode) {
+      switch (e.KeyCode) {
         case Keys.Enter:
           e.SuppressKeyPress = true;
           if (!string.IsNullOrWhiteSpace(TextBoxHandle.Text)) {

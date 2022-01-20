@@ -87,7 +87,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private static string GetImagePath(CacheDirectoryType imageType, string url, string name) {
       string rtnVal = string.Empty;
 
-      switch(imageType) {
+      switch (imageType) {
         case CacheDirectoryType.HandleAvatar:
         case CacheDirectoryType.OrganizationAvatar:
           rtnVal = Path.Combine(GetCachePath(imageType), GetCorrectFileName($"{name}_{url[(url.LastIndexOf("/") + 1)..]}"));
