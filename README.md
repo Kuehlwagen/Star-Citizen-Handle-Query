@@ -2,13 +2,17 @@
 
 Mit Hilfe dieses Tools kann man via globaler Tastenkombination schnell Informationen zum Handle eines Star Citizen Spielers einsehen.
 
+![Handle Query](https://drive.google.com/uc?id=1H7g6gxJ88Pzzt-Wm4kRyQep27PwTgIaS "Handle Query")
+
 Um an diese Informationen zu gelangen, wird die inoffizielle Star Citizen API (https://starcitizen-api.com/) verwendet, weshalb ein API-Schlüssel (API-Key) benötigt wird. Ein API-Schlüssel ermöglicht den Abruf von 1.000 Live-Abfragen pro Tag. Wenn Daten aus dem Server-Cache der API-geladen werden, wird kein Abruf abgezogen. Außerdem verwendet dieses Tool einen lokalen Cache, um Handle-Informationen und Bilder für einen definierten Zeitraum lokal vorzuhalten.
 
 Es gibt zwei Wege, um an einen API-Schlüssel zu kommen:
 1. Dem Discord-Server der Webseite beitreten (https://discord.gg/8ekwNv4) und im Channel "keys" das Kommando "!api register" verwenden. Der API-Schlüssel wird anschließend direkt von einem Bot via persönlicher Nachricht zugestelle.
 2. Auf der Webseite oben via Google oder Discord einloggen. Der API-Schlüssel wird anschließend oben auf der Webseite dargestellt.
 
-Einstellungen:
+__Einstellungen__
+
+![Settings](https://drive.google.com/uc?id=1JM-F0KNxB-XRd3wVZUu8wbtzEy4zhkwJ "Settings")
 - Gruppe: API (starcitizen-api.com)
   - Schlüssel: Hier muss der 32-stellige API-Schlüssel eingetragen werden, den man zugeteilt bekommen hat
   - Modus: Hier kann der Modus der API-Anfragen eingestellt werden, wie die Informationen von der API bereitgestellt werden sollen:
@@ -34,7 +38,7 @@ Kontextmenü via Benachrichtigungssymbol in der Taskleiste:
 - Neustarten: Startet das Tool neu
 - Beenden: Beendet das Tool
 
-Hauptfenster:
+__Hauptfenster__
 - Hier kann der Handle eines Star Citizen Spielers in die Handle-Eingabebox eingegeben werden. Durch die Betätigung der Enter-Taste wird die Abfrage ausgelöst und kurze Zeit später das Ergebnis der Abfrage darunter dargestellt.
 - Durch die Betätigung der Esc-Taste wird das Fenster ausgeblendet.
 - Wurde eine globale Taste(nkobination) in den Einstellungen angegeben, kann das Fenster jederzeit mit dieser Taste(nkombination) wieder angezeigt werden.
