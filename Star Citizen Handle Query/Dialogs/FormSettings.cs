@@ -51,6 +51,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void ButtonSpeichern_Click(object sender, EventArgs e) {
+      ButtonSpeichern.Focus();
       if (ProgramSettings.ApiKey.Length == 32) {
         string settingsFilePath = FormHandleQuery.GetSettingsPath();
         try {
