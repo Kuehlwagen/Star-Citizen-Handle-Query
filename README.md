@@ -9,7 +9,7 @@ Mit Hilfe dieses Tools kann man via globaler Tastenkombination schnell Informati
 Um an die Handle-Informationen zu gelangen, wird die inoffizielle Star Citizen API (https://starcitizen-api.com/) verwendet, weshalb ein API-Schlüssel (API-Key) benötigt wird. Ein API-Schlüssel ermöglicht den Abruf von 1.000 Live-Abfragen pro Tag. Wenn Daten aus dem Server-Cache der API-geladen werden, wird kein Abruf abgezogen. Außerdem verwendet dieses Tool einen lokalen Cache, um Handle-Informationen und Bilder für einen definierten Zeitraum lokal vorzuhalten.
 
 Es gibt zwei Wege, um an einen API-Schlüssel zu kommen:
-1. Dem Discord-Server der Webseite beitreten (https://discord.gg/8ekwNv4) und im Channel "keys" das Kommando "!api register" verwenden. Der API-Schlüssel wird anschließend direkt von einem Bot via persönlicher Nachricht zugestelle.
+1. Dem Discord-Server der Webseite beitreten (https://discord.gg/8ekwNv4) und im Channel "keys" das Kommando "!api register" verwenden. Der API-Schlüssel wird anschließend direkt von einem Bot via persönlicher Nachricht zugestellt.
 2. Auf der Webseite oben via Google oder Discord einloggen. Der API-Schlüssel wird anschließend oben auf der Webseite dargestellt.
 
 ## Einstellungen
@@ -22,7 +22,7 @@ Es gibt zwei Wege, um an einen API-Schlüssel zu kommen:
     - Cache: Die Daten werden immer aus dem Servercache der API abgerufen. Liegen die Informationen zu einem Handle nicht im Servercache, werden diese auch nicht empfangen.
     - Auto: Es wird immer erst versucht, die Daten aus dem Servercache zu erhalten. Liegen die Informationen nicht vor, werden sie von der Star Citizen Webseite abgerufen.
     - Eager: Es wird immer erst versucht, die Daten von der Star Citizen Webseite abzurufen. Ist die Star Citizen Webseite gerade nicht erreichbar, werden die Informationen aus dem Servercache der API abgerufen, sofern diese dort vorliegen.
-  - API-Test: Diese Schaltfläche wird aktiviert, wenn ein 32-stelliger API-Schlüssel eigegeben wurde. Bei Betätigung der Schaltfläche wird getestet, ob die API mit dem angegebenen API-Schlüssel funkioniert. Falls der API-Schlüssel valide ist, wird angezeigt, wie viele Live-Abfragen für den aktuellen Tag noch übrig sind. Ist der API-Schlüssel nicht valide, wird dies ebenfalls dargestellt.
+  - API-Test: Diese Schaltfläche wird aktiviert, wenn ein 32-stelliger API-Schlüssel eigegeben wurde. Bei Betätigung der Schaltfläche wird getestet, ob die API mit dem angegebenen API-Schlüssel funktioniert. Falls der API-Schlüssel valide ist, wird angezeigt, wie viele Live-Abfragen für den aktuellen Tag noch übrig sind. Ist der API-Schlüssel nicht valide, wird dies ebenfalls dargestellt.
 - Gruppe: Fenster
   - Deckkraft: Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
   - Globale Taste: Hier kann die Taste (Keine oder F1-F12) angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifizierer (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
