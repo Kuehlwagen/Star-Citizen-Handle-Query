@@ -10,7 +10,7 @@ Es gibt zwei Wege, um an einen API-Schlüssel zu kommen:
 1. Dem Discord-Server der Webseite beitreten (https://discord.gg/8ekwNv4) und im Channel "keys" das Kommando "!api register" verwenden. Der API-Schlüssel wird anschließend direkt von einem Bot via persönlicher Nachricht zugestelle.
 2. Auf der Webseite oben via Google oder Discord einloggen. Der API-Schlüssel wird anschließend oben auf der Webseite dargestellt.
 
-__Einstellungen__
+## Einstellungen
 
 ![Settings](https://drive.google.com/uc?id=1JM-F0KNxB-XRd3wVZUu8wbtzEy4zhkwJ "Settings")
 - Gruppe: API (starcitizen-api.com)
@@ -31,14 +31,14 @@ __Einstellungen__
 - Schließen: Schließt das Einstellungen-Fenster, ohne die vorgenommenen Einstellungen zu speichern
 - Standard: Stellt die Standard-Einstellungen wieder her, mit Ausnahme des API-Schlüssels
 
-Kontextmenü via Benachrichtigungssymbol in der Taskleiste:
+## Kontextmenü via Benachrichtigungssymbol in der Taskleiste
 - Anzeigen: Falls das Fenster nicht sichtbar ist, wird es angezeigt und die Handle-Eingabebox erhält den Eingabefokus
 - Einstellungen: Öffnet das Einstellungen-Fenster
 - Lokalen Cache leeren: Löscht sämtliche Dateien im lokalen Cache
 - Neustarten: Startet das Tool neu
 - Beenden: Beendet das Tool
 
-__Hauptfenster__
+## Hauptfenster
 - Hier kann der Handle eines Star Citizen Spielers in die Handle-Eingabebox eingegeben werden. Durch die Betätigung der Enter-Taste wird die Abfrage ausgelöst und kurze Zeit später das Ergebnis der Abfrage darunter dargestellt.
 - Durch die Betätigung der Esc-Taste wird das Fenster ausgeblendet.
 - Wurde eine globale Taste(nkobination) in den Einstellungen angegeben, kann das Fenster jederzeit mit dieser Taste(nkombination) wieder angezeigt werden.
