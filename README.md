@@ -9,7 +9,7 @@ Mit Hilfe dieses Tools kann man mit einer globalen Tastenkombination schnell Inf
 Um an die Handle-Informationen zu gelangen, wird die inoffizielle Star Citizen API (https://starcitizen-api.com/) verwendet, weshalb ein API-Schlüssel (API-Key) benötigt wird. Ein API-Schlüssel ermöglicht den Abruf von 1.000 Live-Abfragen pro Tag. Wenn Daten aus dem Server-Cache der API-geladen werden, wird kein Abruf abgezogen. Außerdem verwendet dieses Tool einen lokalen Cache, um Handle-Informationen und Bilder für einen definierten Zeitraum lokal vorzuhalten.
 
 Es gibt zwei Wege, um an einen API-Schlüssel zu kommen:
-1. Dem Discord-Server der Webseite beitreten (https://discord.gg/8ekwNv4) und im Channel "keys" das Kommando "!api register" verwenden. Der API-Schlüssel wird anschließend direkt von einem Bot in Form einer persönlichen Nachricht zugestellt.
+1. Dem Discord-Server der Webseite beitreten (https://discord.gg/8ekwNv4) und im Channel "keys" das Kommando `!api register` verwenden. Der API-Schlüssel wird anschließend direkt von einem Bot in Form einer persönlichen Nachricht zugestellt.
 2. Auf der Webseite oben via Google oder Discord einloggen. Der API-Schlüssel wird anschließend oben auf der Webseite dargestellt.
 
 ## Einstellungen
