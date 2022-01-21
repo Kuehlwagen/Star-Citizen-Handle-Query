@@ -7,6 +7,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
   public partial class FormSettings : Form {
 
     public Settings ProgramSettings;
+    private readonly List<Keys> KeyCollection = new () {
+      Keys.None, Keys.A, Keys.B, Keys.C, Keys.D, Keys.D0, Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.D6, Keys.D7, Keys.D8, Keys.D9,
+      Keys.Delete, Keys.E, Keys.End, Keys.F, Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10,
+      Keys.F11, Keys.F12, Keys.G, Keys.H, Keys.Home, Keys.I, Keys.Insert, Keys.J, Keys.K, Keys.L, Keys.M, Keys.N, Keys.O, Keys.P, Keys.Q,
+      Keys.R, Keys.S, Keys.T, Keys.U, Keys.V, Keys.W, Keys.X, Keys.Y, Keys.Z
+    };
 
     public FormSettings(Settings settings = null) {
       InitializeComponent();
@@ -15,7 +21,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ComboBoxApiModus.Items.AddRange(Enum.GetNames(typeof(ApiMode)));
 
       // Taste Werte hinzufügen
-      ComboBoxTaste.Items.AddRange(Enum.GetNames(typeof(FKeys)));
+      ComboBoxTaste.Items.AddRange(KeyCollection.ConvertAll(x => x.ToString()).ToArray());
 
       ProgramSettings = settings;
 
@@ -44,7 +50,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       NumericUpDownLokalerCacheAlter.Value = ProgramSettings.LocalCacheMaxAge;
       TextBoxApiKey.Text = ProgramSettings.ApiKey;
       ComboBoxApiModus.SelectedIndex = (int)ProgramSettings.ApiMode;
-      ComboBoxTaste.SelectedIndex = (int)ProgramSettings.GlobalHotkey;
+      ComboBoxTaste.SelectedIndex = KeyCollection.IndexOf(ProgramSettings.GlobalHotkey);
       CheckBoxStrg.Checked = ProgramSettings.GlobalHotkeyModifierCtrl;
       CheckBoxAlt.Checked = ProgramSettings.GlobalHotkeyModifierAlt;
       CheckBoxUmschalt.Checked = ProgramSettings.GlobalHotkeyModifierShift;
@@ -120,8 +126,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void ComboBoxTaste_SelectedIndexChanged(object sender, EventArgs e) {
-      ProgramSettings.GlobalHotkey = (FKeys)(sender as ComboBox).SelectedIndex;
-      CheckBoxStrg.Enabled = ProgramSettings.GlobalHotkey != FKeys.Keine;
+      ProgramSettings.GlobalHotkey = (Keys)Enum.Parse(typeof(Keys), $"{(sender as ComboBox).SelectedItem}");
+      CheckBoxStrg.Enabled = ProgramSettings.GlobalHotkey != Keys.None;
       CheckBoxAlt.Enabled = CheckBoxStrg.Enabled;
       CheckBoxUmschalt.Enabled = CheckBoxStrg.Enabled;
     }

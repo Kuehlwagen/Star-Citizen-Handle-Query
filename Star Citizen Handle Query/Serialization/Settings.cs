@@ -45,7 +45,7 @@
     public ApiMode ApiMode { get; set; } = ApiMode.Auto;
 
     /// <summary>Globaler Hotkey</summary>
-    public FKeys GlobalHotkey { get; set; } = FKeys.F3;
+    public Keys GlobalHotkey { get; set; } = Keys.F3;
 
     /// <summary>Strg-Modifizierer für globalen Hotkey</summary>
     public bool GlobalHotkeyModifierCtrl { get; set; } = false;
@@ -68,23 +68,6 @@
     Auto,
     /// <summary>Wenn möglich, aktuelle Daten, ansonsten gecachte Daten</summary>
     Eager
-  }
-
-  /// <summary>F-Tasten für die Tastenbelegung</summary>
-  public enum FKeys {
-    Keine,
-    F1,
-    F2,
-    F3,
-    F4,
-    F5,
-    F6,
-    F7,
-    F8,
-    F9,
-    F10,
-    F11,
-    F12
   }
 
 }

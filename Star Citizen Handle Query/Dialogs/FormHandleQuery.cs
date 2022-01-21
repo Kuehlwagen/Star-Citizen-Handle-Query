@@ -104,10 +104,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         UpdateAutoComplete();
 
         // Ggf. Globale Tastenabfrage erstellen
-        if (ProgramSettings.GlobalHotkey != FKeys.Keine) {
+        if (ProgramSettings.GlobalHotkey != Keys.None) {
           HotKey = new();
           HotKey.KeyDown += HotKey_KeyDown;
-          HotKey.HookedKeys.Add(GetKeyByFKey());
+          HotKey.HookedKeys.Add(ProgramSettings.GlobalHotkey);
           HotKey.Hook();
         }
       }
@@ -118,20 +118,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (ProgramSettings.GlobalHotkeyModifierCtrl == e.Control &&
         ProgramSettings.GlobalHotkeyModifierAlt == e.Alt &&
         ProgramSettings.GlobalHotkeyModifierShift == e.Shift) {
+        e.SuppressKeyPress = true;
         // Fenster einblenden
         ShowWindow();
       }
-    }
-
-    private Keys GetKeyByFKey() {
-      Keys rtnVal = Keys.None;
-
-      if (ProgramSettings.GlobalHotkey != FKeys.Keine) {
-        // Keys-Wert über FKeys-Wert ermitteln
-        rtnVal = (Keys)Enum.Parse(typeof(Keys), $"{ProgramSettings.GlobalHotkey}");
-      }
-
-      return rtnVal;
     }
 
     private async void TextBoxHandle_KeyDown(object sender, KeyEventArgs e) {
