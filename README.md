@@ -31,7 +31,7 @@ Es gibt zwei Wege, um an einen API-Schlüssel zu kommen:
 - Schließen: Schließt das Einstellungen-Fenster, ohne die vorgenommenen Einstellungen zu speichern
 - Standard: Stellt die Standard-Einstellungen wieder her, mit Ausnahme des API-Schlüssels
 
-## Kontextmenü via Benachrichtigungssymbol in der Taskleiste
+## Kontextmenü Benachrichtigungssymbol Taskleiste
 - Anzeigen: Falls das Fenster nicht sichtbar ist, wird es angezeigt und die Handle-Eingabebox erhält den Eingabefokus
 - Einstellungen: Öffnet das Einstellungen-Fenster
 - Lokalen Cache leeren: Löscht sämtliche Dateien im lokalen Cache
