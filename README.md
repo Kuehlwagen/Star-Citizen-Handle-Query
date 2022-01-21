@@ -19,11 +19,11 @@ Einstellungen:
   - API-Test: Diese Schaltfläche wird aktiviert, wenn ein 32-stelliger API-Schlüssel eigegeben wurde. Bei Betätigung der Schaltfläche wird getestet, ob die API mit dem angegebenen API-Schlüssel funkioniert. Falls der API-Schlüssel valide ist, wird angezeigt, wie viele Live-Abfragen für den aktuellen Tag noch übrig sind. Ist der API-Schlüssel nicht valide, wird dies ebenfalls dargestellt.
 - Gruppe: Fenster
   - Deckkraft: Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
-  - Globale Taste: Hier kann die Taste (Keine oder F1-F12) angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich könnten Modifizierer (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
-  - Mauseingaben ignorieren: Wird diese Einstellung aktiviert, kann gehen sämtliche Mausklicks durch das Fenster durch in das dahinter liegende Programm.
-- Lokaler Cache:
+  - Globale Taste: Hier kann die Taste (Keine oder F1-F12) angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifizierer (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
+  - Mauseingaben ignorieren: Wird diese Einstellung aktiviert, gehen sämtliche Mausklicks durch das Fenster durch in das dahinter liegende Programm.
+- Gruppe: Lokaler Cache
   - Maximales Alter: Hier kann für den lokalen Cache das maximale Alter in Tagen angegeben werden, wann die Information eines Handles wieder via API abgefragt werden soll. Es können Werte zwischen 0 und 30 Tagen angegeben werden. Die Angabe von 0 Tagen wird die Handle-Informationen immer via API abfragen.
-- Speichern: Speichert die vorgenommenen Einstellungen
+- Speichern: Speichert die vorgenommenen Einstellungen und schließt das Einstellungen-Fenster
 - Schließen: Schließt das Einstellungen-Fenster, ohne die vorgenommenen Einstellungen zu speichern
 - Standard: Stellt die Standard-Einstellungen wieder her, mit Ausnahme des API-Schlüssels
 
