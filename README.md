@@ -2,7 +2,7 @@
 
 Mit Hilfe dieses Tools kann man mit einer globalen Tastenkombination schnell Informationen zum Handle eines Star Citizen Spielers einsehen.
 
-![Handle Query](https://drive.google.com/uc?id=1H7g6gxJ88Pzzt-Wm4kRyQep27PwTgIaS "Handle Query")
+![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/MainWindow.png?raw=true "Handle Query")
 
 ## API-Schlüssel
 
@@ -14,7 +14,7 @@ Es gibt zwei Wege, um an einen API-Schlüssel zu kommen:
 
 ## Einstellungen
 
-![Settings](https://drive.google.com/uc?id=1JM-F0KNxB-XRd3wVZUu8wbtzEy4zhkwJ "Settings")
+![Settings](/Star%20Citizen%20Handle%20Query/Screenshots/Settings.png?raw=true "Settings")
 ### API (starcitizen-api.com)
 - Schlüssel: Hier muss der 32-stellige API-Schlüssel eingetragen werden, den man zugeteilt bekommen hat
 - Modus: Hier kann der Modus der API-Anfragen eingestellt werden, wie die Informationen von der API bereitgestellt werden sollen:
