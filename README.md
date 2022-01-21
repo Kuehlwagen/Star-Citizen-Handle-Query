@@ -16,30 +16,30 @@ Es gibt zwei Wege, um an einen API-Schlüssel zu kommen:
 
 ![Settings](/Star%20Citizen%20Handle%20Query/Screenshots/Settings.png?raw=true "Settings")
 ### API (starcitizen-api.com)
-- Schlüssel: Hier muss der 32-stellige API-Schlüssel eingetragen werden, den man zugeteilt bekommen hat
-- Modus: Hier kann der Modus der API-Anfragen eingestellt werden, wie die Informationen von der API bereitgestellt werden sollen:
-  - Live: Die Daten werden immer direkt von der Star Citizen Webseite abgerufen
-  - Cache: Die Daten werden immer aus dem Servercache der API abgerufen. Liegen die Informationen zu einem Handle nicht im Servercache, werden diese auch nicht empfangen.
-  - Auto: Es wird immer erst versucht, die Daten aus dem Servercache zu erhalten. Liegen die Informationen nicht vor, werden sie von der Star Citizen Webseite abgerufen.
-  - Eager: Es wird immer erst versucht, die Daten von der Star Citizen Webseite abzurufen. Ist die Star Citizen Webseite gerade nicht erreichbar, werden die Informationen aus dem Servercache der API abgerufen, sofern diese dort vorliegen.
-- API-Test: Diese Schaltfläche wird aktiviert, wenn ein 32-stelliger API-Schlüssel eigegeben wurde. Bei Betätigung der Schaltfläche wird getestet, ob die API mit dem angegebenen API-Schlüssel funktioniert. Falls der API-Schlüssel valide ist, wird angezeigt, wie viele Live-Abfragen für den aktuellen Tag noch übrig sind. Ist der API-Schlüssel nicht valide, wird dies ebenfalls dargestellt.
+- __Schlüssel:__ Hier muss der 32-stellige API-Schlüssel eingetragen werden, den man zugeteilt bekommen hat
+- __Modus:__ Hier kann der Modus der API-Anfragen eingestellt werden, wie die Informationen von der API bereitgestellt werden sollen:
+  - __Live:__ Die Daten werden immer direkt von der Star Citizen Webseite abgerufen
+  - __Cache:__ Die Daten werden immer aus dem Servercache der API abgerufen. Liegen die Informationen zu einem Handle nicht im Servercache, werden diese auch nicht empfangen.
+  - __Auto:__ Es wird immer erst versucht, die Daten aus dem Servercache zu erhalten. Liegen die Informationen nicht vor, werden sie von der Star Citizen Webseite abgerufen.
+  - __Eager:__ Es wird immer erst versucht, die Daten von der Star Citizen Webseite abzurufen. Ist die Star Citizen Webseite gerade nicht erreichbar, werden die Informationen aus dem Servercache der API abgerufen, sofern diese dort vorliegen.
+- __API-Test:__ Diese Schaltfläche wird aktiviert, wenn ein 32-stelliger API-Schlüssel eigegeben wurde. Bei Betätigung der Schaltfläche wird getestet, ob die API mit dem angegebenen API-Schlüssel funktioniert. Falls der API-Schlüssel valide ist, wird angezeigt, wie viele Live-Abfragen für den aktuellen Tag noch übrig sind. Ist der API-Schlüssel nicht valide, wird dies ebenfalls dargestellt.
 ### Fenster
-- Deckkraft: Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
-- Globale Taste: Hier kann die Taste angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifikatoren (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
-- Mauseingaben ignorieren: Wird diese Einstellung aktiviert, gehen sämtliche Mausklicks durch das Fenster durch in das dahinter liegende Programm.
+- __Deckkraft:__ Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
+- __Globale Taste:__ Hier kann die Taste angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifikatoren (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
+- __Mauseingaben ignorieren:__ Wird diese Einstellung aktiviert, gehen sämtliche Mausklicks durch das Fenster durch in das dahinter liegende Programm.
 ### Lokaler Cache
-- Maximales Alter: Hier kann für den lokalen Cache das maximale Alter in Tagen angegeben werden, wann die Information eines Handles wieder via API abgefragt werden soll. Es können Werte zwischen 0 und 30 Tagen angegeben werden. Die Angabe von 0 Tagen wird die Handle-Informationen immer via API abfragen.
+- __Maximales Alter:__ Hier kann für den lokalen Cache das maximale Alter in Tagen angegeben werden, wann die Information eines Handles wieder via API abgefragt werden soll. Es können Werte zwischen 0 und 30 Tagen angegeben werden. Die Angabe von 0 Tagen wird die Handle-Informationen immer via API abfragen.
 ### Schaltflächen
-- Speichern: Speichert die vorgenommenen Einstellungen und schließt das Einstellungen-Fenster
-- Schließen: Schließt das Einstellungen-Fenster, ohne die vorgenommenen Einstellungen zu speichern
-- Standard: Stellt die Standard-Einstellungen wieder her, mit Ausnahme des API-Schlüssels
+- __Speichern:__ Speichert die vorgenommenen Einstellungen und schließt das Einstellungen-Fenster
+- __Schließen:__ Schließt das Einstellungen-Fenster, ohne die vorgenommenen Einstellungen zu speichern
+- __Standard:__ Stellt die Standard-Einstellungen wieder her, mit Ausnahme des API-Schlüssels
 
 ## Kontextmenü Taskleiste
-- Anzeigen: Falls das Fenster nicht sichtbar ist, wird es angezeigt und die Handle-Eingabebox erhält den Eingabefokus
-- Einstellungen: Öffnet das Einstellungen-Fenster
-- Lokalen Cache leeren: Löscht sämtliche Dateien im lokalen Cache
-- Neustarten: Startet das Tool neu
-- Beenden: Beendet das Tool
+- __Anzeigen:__ Falls das Fenster nicht sichtbar ist, wird es angezeigt und die Handle-Eingabebox erhält den Eingabefokus
+- __Einstellungen:__ Öffnet das Einstellungen-Fenster
+- __Lokalen Cache leeren:__ Löscht sämtliche Dateien im lokalen Cache
+- __Neustarten:__ Startet das Tool neu
+- __Beenden:__ Beendet das Tool
 
 ## Hauptfenster
 - Hier kann der eindeutige Name eines Star Citizen Spielers in die Handle-Eingabebox eingegeben werden. Durch die Betätigung der Enter-Taste wird die Abfrage ausgelöst und kurze Zeit später das Ergebnis der Abfrage darunter dargestellt.
