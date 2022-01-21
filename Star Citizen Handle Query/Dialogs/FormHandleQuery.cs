@@ -79,11 +79,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private void ShowHideWindow() {
+    private void ShowWindow() {
       // Fenster einblenden
       Visible = true;
-      if (!User32Wrappers.SetForegroundWindow(Handle))
-        ShowHideWindow();
+      if (!User32Wrappers.SetForegroundWindow(Handle)) {
+        Activate();
+        BringToFront();
+      }
       TextBoxHandle.SelectAll();
       TextBoxHandle.Focus();
     }
@@ -117,7 +119,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         ProgramSettings.GlobalHotkeyModifierAlt == e.Alt &&
         ProgramSettings.GlobalHotkeyModifierShift == e.Shift) {
         // Fenster einblenden
-        ShowHideWindow();
+        ShowWindow();
       }
     }
 
@@ -249,13 +251,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void NotifyIconHandleQuery_MouseClick(object sender, MouseEventArgs e) {
       // Fenster einblenden, in den Vordergrund holen und Textbox fokussieren
       if (e.Button == MouseButtons.Left) {
-        ShowHideWindow();
+        ShowWindow();
       }
     }
 
     private void AnzeigenVersteckenToolStripMenuItem_Click(object sender, EventArgs e) {
       // Fenster einblenden, in den Vordergrund holen und Textbox fokussieren
-      ShowHideWindow();
+      ShowWindow();
     }
 
     private void EinstellungenToolStripMenuItem_Click(object sender, EventArgs e) {
