@@ -4,6 +4,8 @@ Mit Hilfe dieses Tools kann man via globaler Tastenkombination schnell Informati
 
 ![Handle Query](https://drive.google.com/uc?id=1H7g6gxJ88Pzzt-Wm4kRyQep27PwTgIaS "Handle Query")
 
+## API-Schlüssel
+
 Um an diese Informationen zu gelangen, wird die inoffizielle Star Citizen API (https://starcitizen-api.com/) verwendet, weshalb ein API-Schlüssel (API-Key) benötigt wird. Ein API-Schlüssel ermöglicht den Abruf von 1.000 Live-Abfragen pro Tag. Wenn Daten aus dem Server-Cache der API-geladen werden, wird kein Abruf abgezogen. Außerdem verwendet dieses Tool einen lokalen Cache, um Handle-Informationen und Bilder für einen definierten Zeitraum lokal vorzuhalten.
 
 Es gibt zwei Wege, um an einen API-Schlüssel zu kommen:
