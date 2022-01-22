@@ -9,7 +9,7 @@ Mit Hilfe dieses Tools kann man mit einer globalen Tastenkombination schnell Inf
 Um an die Handle-Informationen zu gelangen, wird die inoffizielle Star Citizen API (https://starcitizen-api.com/) verwendet, weshalb ein API-Schlüssel (API-Key) benötigt wird. Ein API-Schlüssel ermöglicht den Abruf von 1.000 Live-Abfragen pro Tag. Wenn Daten aus dem Server-Cache der API-geladen werden, wird kein Abruf abgezogen. Außerdem verwendet dieses Tool einen lokalen Cache, um Handle-Informationen und Bilder für einen definierten Zeitraum lokal vorzuhalten.
 
 Es gibt zwei Wege, um an einen API-Schlüssel zu kommen:
-1. Dem Discord-Server der Webseite beitreten (https://discord.gg/8ekwNv4) und im Channel "keys" das Kommando `!api register` verwenden. Der API-Schlüssel wird anschließend direkt von einem Bot in Form einer persönlichen Nachricht zugestellt.
+1. Dem Discord-Server der Webseite beitreten (https://discord.gg/8ekwNv4) und im Channel "#🔑keys" das Kommando `!api register` verwenden. Der API-Schlüssel wird anschließend direkt von einem Bot in Form einer persönlichen Nachricht zugestellt.
 2. Auf der Webseite oben via Google oder Discord einloggen. Der API-Schlüssel wird anschließend oben auf der Webseite dargestellt.
 
 ## Einstellungen
@@ -28,7 +28,7 @@ Es gibt zwei Wege, um an einen API-Schlüssel zu kommen:
 - __Globale Taste:__ Hier kann die Taste angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifikatoren (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
 - __Mauseingaben ignorieren:__ Wird diese Einstellung aktiviert, gehen sämtliche Mausklicks durch das Fenster durch in das dahinter liegende Programm.
 ### Lokaler Cache
-- __Maximales Alter:__ Hier kann für den lokalen Cache das maximale Alter in Tagen angegeben werden, wann die Information eines Handles wieder via API abgefragt werden soll. Es können Werte zwischen 0 und 30 Tagen angegeben werden. Die Angabe von 0 Tagen wird die Handle-Informationen immer via API abfragen.
+- __Maximales Alter:__ Hier kann für den lokalen Cache das maximale Alter in Tagen angegeben werden, wann die Informationen eines bereits zuvor abgefragten Handles erneut via API abgefragt werden sollen. Es können Werte zwischen 0 und 30 Tagen angegeben werden. Die Angabe von 0 Tagen wird die Handle-Informationen immer via API abfragen.
 ### Schaltflächen
 - __Speichern:__ Speichert die vorgenommenen Einstellungen und schließt das Einstellungen-Fenster
 - __Schließen:__ Schließt das Einstellungen-Fenster, ohne die vorgenommenen Einstellungen zu speichern
