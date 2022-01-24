@@ -54,6 +54,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxStrg.Checked = ProgramSettings.GlobalHotkeyModifierCtrl;
       CheckBoxAlt.Checked = ProgramSettings.GlobalHotkeyModifierAlt;
       CheckBoxUmschalt.Checked = ProgramSettings.GlobalHotkeyModifierShift;
+      CheckBoxAltTabEnabled.Checked = ProgramSettings.AltTabEnabled;
     }
 
     private void ButtonSpeichern_Click(object sender, EventArgs e) {
@@ -132,6 +133,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxUmschalt.Enabled = CheckBoxStrg.Enabled;
     }
 
+    private void CheckBoxAltTabEnabled_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.AltTabEnabled = (sender as CheckBox).Checked;
+    }
+
     private void ButtonStandard_Click(object sender, EventArgs e) {
       ProgramSettings = new() { ApiKey = ProgramSettings.ApiKey };
       SetDialogValues();
@@ -161,6 +166,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       return rtnVal;
     }
+
   }
 
 }

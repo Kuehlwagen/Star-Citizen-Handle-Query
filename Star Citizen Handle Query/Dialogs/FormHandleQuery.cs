@@ -27,6 +27,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         // Fenster-Deckkraft setzen
         Opacity = (double)ProgramSettings.WindowOpacity / 100.0;
 
+        // Ggf. Alt + Tab ermöglichen und Fenster in der Taskbar anzeigen
+        if (ProgramSettings.AltTabEnabled) {
+          ShowInTaskbar = true;
+        }
+
+
         if (ProgramSettings.WindowIgnoreMouseInput) {
           // Durch das Fenster klicken lassen
           InitialWindowStyle = User32Wrappers.GetWindowLong(Handle, User32Wrappers.GWL.ExStyle);
@@ -73,8 +79,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Fenster von Alt + Tab verbergen
       get {
         CreateParams cp = base.CreateParams;
-        // turn on WS_EX_TOOLWINDOW style bit
-        cp.ExStyle |= 0x80;
+        if (ProgramSettings != null && !ProgramSettings.AltTabEnabled) {
+          // turn on WS_EX_TOOLWINDOW style bit
+          cp.ExStyle |= 0x80;
+        }
         return cp;
       }
     }

@@ -56,6 +56,9 @@
     /// <summary>Umschalt-Modifizierer für globalen Hotkey</summary>
     public bool GlobalHotkeyModifierShift { get; set; } = true;
 
+    /// <summary>Gibt an, ob das Hauptfenster via Alt + Tab erreichbar sein soll</summary>
+    public bool AltTabEnabled { get; set; } = false;
+
   }
 
   /// <summary>API-Modus</summary>

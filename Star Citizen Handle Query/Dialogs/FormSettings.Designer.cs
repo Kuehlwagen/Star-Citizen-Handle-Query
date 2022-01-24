@@ -49,6 +49,7 @@
       this.ButtonApiTest = new System.Windows.Forms.Button();
       this.GroupBoxLokalerCache = new System.Windows.Forms.GroupBox();
       this.ButtonStandard = new System.Windows.Forms.Button();
+      this.CheckBoxAltTabEnabled = new System.Windows.Forms.CheckBox();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownFensterDeckkraft)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownLokalerCacheAlter)).BeginInit();
       this.GroupBoxFenster.SuspendLayout();
@@ -149,7 +150,7 @@
       // ButtonSpeichern
       // 
       this.ButtonSpeichern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 349);
+      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 369);
       this.ButtonSpeichern.Name = "ButtonSpeichern";
       this.ButtonSpeichern.Size = new System.Drawing.Size(75, 28);
       this.ButtonSpeichern.TabIndex = 3;
@@ -160,7 +161,7 @@
       // ButtonSchliessen
       // 
       this.ButtonSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 349);
+      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 369);
       this.ButtonSchliessen.Name = "ButtonSchliessen";
       this.ButtonSchliessen.Size = new System.Drawing.Size(75, 28);
       this.ButtonSchliessen.TabIndex = 4;
@@ -188,6 +189,7 @@
       // 
       // GroupBoxFenster
       // 
+      this.GroupBoxFenster.Controls.Add(this.CheckBoxAltTabEnabled);
       this.GroupBoxFenster.Controls.Add(this.CheckBoxUmschalt);
       this.GroupBoxFenster.Controls.Add(this.CheckBoxAlt);
       this.GroupBoxFenster.Controls.Add(this.CheckBoxStrg);
@@ -201,7 +203,7 @@
       this.GroupBoxFenster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.GroupBoxFenster.Location = new System.Drawing.Point(12, 139);
       this.GroupBoxFenster.Name = "GroupBoxFenster";
-      this.GroupBoxFenster.Size = new System.Drawing.Size(377, 137);
+      this.GroupBoxFenster.Size = new System.Drawing.Size(377, 157);
       this.GroupBoxFenster.TabIndex = 1;
       this.GroupBoxFenster.TabStop = false;
       this.GroupBoxFenster.Text = "Fenster";
@@ -338,7 +340,7 @@
       this.GroupBoxLokalerCache.Controls.Add(this.LabelLokalerCacheAlter);
       this.GroupBoxLokalerCache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.GroupBoxLokalerCache.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 282);
+      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 302);
       this.GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
       this.GroupBoxLokalerCache.Size = new System.Drawing.Size(377, 61);
       this.GroupBoxLokalerCache.TabIndex = 2;
@@ -348,13 +350,24 @@
       // ButtonStandard
       // 
       this.ButtonStandard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonStandard.Location = new System.Drawing.Point(314, 349);
+      this.ButtonStandard.Location = new System.Drawing.Point(314, 369);
       this.ButtonStandard.Name = "ButtonStandard";
       this.ButtonStandard.Size = new System.Drawing.Size(75, 28);
       this.ButtonStandard.TabIndex = 5;
       this.ButtonStandard.Text = "Standard";
       this.ButtonStandard.UseVisualStyleBackColor = true;
       this.ButtonStandard.Click += new System.EventHandler(this.ButtonStandard_Click);
+      // 
+      // CheckBoxAltTabEnabled
+      // 
+      this.CheckBoxAltTabEnabled.AutoSize = true;
+      this.CheckBoxAltTabEnabled.Location = new System.Drawing.Point(15, 130);
+      this.CheckBoxAltTabEnabled.Name = "CheckBoxAltTabEnabled";
+      this.CheckBoxAltTabEnabled.Size = new System.Drawing.Size(166, 19);
+      this.CheckBoxAltTabEnabled.TabIndex = 9;
+      this.CheckBoxAltTabEnabled.Text = "Erreichbarkeit via Alt + Tab";
+      this.CheckBoxAltTabEnabled.UseVisualStyleBackColor = true;
+      this.CheckBoxAltTabEnabled.CheckedChanged += new System.EventHandler(this.CheckBoxAltTabEnabled_CheckedChanged);
       // 
       // FormSettings
       // 
@@ -363,7 +376,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.CancelButton = this.ButtonSchliessen;
-      this.ClientSize = new System.Drawing.Size(401, 392);
+      this.ClientSize = new System.Drawing.Size(401, 412);
       this.Controls.Add(this.GroupBoxAPI);
       this.Controls.Add(this.GroupBoxLokalerCache);
       this.Controls.Add(this.GroupBoxFenster);
@@ -372,7 +385,7 @@
       this.Controls.Add(this.ButtonSpeichern);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.MinimumSize = new System.Drawing.Size(417, 431);
+      this.MinimumSize = new System.Drawing.Size(417, 451);
       this.Name = "FormSettings";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Star Citizen Handle Query Einstellungen";
@@ -415,5 +428,6 @@
     private Button ButtonStandard;
     private Button ButtonApiTest;
     private Label LabelApiTestStatus;
+    private CheckBox CheckBoxAltTabEnabled;
   }
 }
