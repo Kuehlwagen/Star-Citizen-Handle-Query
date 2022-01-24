@@ -39,6 +39,8 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelCommunityMoniker.Text = GetString(HandleInfo?.data?.profile?.display, "CM: ");
         LabelDisplayTitle.Text = GetString(HandleInfo?.data?.profile?.badge);
         LabelFluency.Text = HandleInfo?.data?.profile?.fluency?.Length > 0 ? $"Fluency: {string.Join(", ", HandleInfo.data.profile.fluency)}" : string.Empty;
+        LabelUEECitizenRecord.Text = GetString(HandleInfo?.data?.profile?.id);
+        LabelEnlistedDate.Text = HandleInfo?.data?.profile?.enlisted.ToString("MMM dd, yyyy", System.Globalization.CultureInfo.InvariantCulture);
       } else {
         LabelHandle.Text = HandleInfo?.success == 0 && !string.IsNullOrWhiteSpace(HandleInfo?.message) ? HandleInfo.message : ProgramTranslation.Window.Handle_Not_Found;
         LabelHandle.Location = new Point(3, LabelHandle.Location.Y);

@@ -29,6 +29,8 @@
       this.PictureBoxDisplayTitle = new System.Windows.Forms.PictureBox();
       this.LabelDisplayTitle = new System.Windows.Forms.Label();
       this.LabelFluency = new System.Windows.Forms.Label();
+      this.LabelUEECitizenRecord = new System.Windows.Forms.Label();
+      this.LabelEnlistedDate = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxHandleAvatar)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxDisplayTitle)).BeginInit();
       this.SuspendLayout();
@@ -37,7 +39,7 @@
       // 
       this.LabelHandle.AutoSize = true;
       this.LabelHandle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelHandle.Location = new System.Drawing.Point(79, 1);
+      this.LabelHandle.Location = new System.Drawing.Point(75, 1);
       this.LabelHandle.Name = "LabelHandle";
       this.LabelHandle.Size = new System.Drawing.Size(0, 21);
       this.LabelHandle.TabIndex = 0;
@@ -46,7 +48,7 @@
       // 
       this.LabelCommunityMoniker.AutoSize = true;
       this.LabelCommunityMoniker.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelCommunityMoniker.Location = new System.Drawing.Point(80, 22);
+      this.LabelCommunityMoniker.Location = new System.Drawing.Point(76, 22);
       this.LabelCommunityMoniker.Name = "LabelCommunityMoniker";
       this.LabelCommunityMoniker.Size = new System.Drawing.Size(0, 15);
       this.LabelCommunityMoniker.TabIndex = 1;
@@ -64,7 +66,7 @@
       // 
       // PictureBoxDisplayTitle
       // 
-      this.PictureBoxDisplayTitle.Location = new System.Drawing.Point(83, 40);
+      this.PictureBoxDisplayTitle.Location = new System.Drawing.Point(79, 40);
       this.PictureBoxDisplayTitle.Name = "PictureBoxDisplayTitle";
       this.PictureBoxDisplayTitle.Size = new System.Drawing.Size(16, 16);
       this.PictureBoxDisplayTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -75,7 +77,7 @@
       // LabelDisplayTitle
       // 
       this.LabelDisplayTitle.AutoSize = true;
-      this.LabelDisplayTitle.Location = new System.Drawing.Point(101, 40);
+      this.LabelDisplayTitle.Location = new System.Drawing.Point(97, 40);
       this.LabelDisplayTitle.Name = "LabelDisplayTitle";
       this.LabelDisplayTitle.Size = new System.Drawing.Size(0, 15);
       this.LabelDisplayTitle.TabIndex = 4;
@@ -83,20 +85,41 @@
       // LabelFluency
       // 
       this.LabelFluency.AutoSize = true;
-      this.LabelFluency.Location = new System.Drawing.Point(81, 59);
+      this.LabelFluency.Location = new System.Drawing.Point(77, 59);
       this.LabelFluency.Name = "LabelFluency";
       this.LabelFluency.Size = new System.Drawing.Size(0, 15);
       this.LabelFluency.TabIndex = 9;
+      // 
+      // LabelUEECitizenRecord
+      // 
+      this.LabelUEECitizenRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.LabelUEECitizenRecord.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+      this.LabelUEECitizenRecord.Location = new System.Drawing.Point(281, 1);
+      this.LabelUEECitizenRecord.Name = "LabelUEECitizenRecord";
+      this.LabelUEECitizenRecord.Size = new System.Drawing.Size(91, 19);
+      this.LabelUEECitizenRecord.TabIndex = 10;
+      this.LabelUEECitizenRecord.TextAlign = System.Drawing.ContentAlignment.TopRight;
+      // 
+      // LabelEnlistedDate
+      // 
+      this.LabelEnlistedDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+      this.LabelEnlistedDate.Location = new System.Drawing.Point(281, 22);
+      this.LabelEnlistedDate.Name = "LabelEnlistedDate";
+      this.LabelEnlistedDate.Size = new System.Drawing.Size(91, 19);
+      this.LabelEnlistedDate.TabIndex = 1;
+      this.LabelEnlistedDate.TextAlign = System.Drawing.ContentAlignment.TopRight;
       // 
       // UserControlHandle
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.Controls.Add(this.LabelUEECitizenRecord);
       this.Controls.Add(this.LabelFluency);
       this.Controls.Add(this.LabelDisplayTitle);
       this.Controls.Add(this.PictureBoxDisplayTitle);
       this.Controls.Add(this.PictureBoxHandleAvatar);
+      this.Controls.Add(this.LabelEnlistedDate);
       this.Controls.Add(this.LabelCommunityMoniker);
       this.Controls.Add(this.LabelHandle);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
@@ -119,5 +142,7 @@
     private Label LabelFluency;
     internal PictureBox PictureBoxHandleAvatar;
     internal PictureBox PictureBoxDisplayTitle;
+    private Label LabelUEECitizenRecord;
+    private Label LabelEnlistedDate;
   }
 }

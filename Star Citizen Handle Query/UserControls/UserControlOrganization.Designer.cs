@@ -36,7 +36,7 @@
       // 
       this.LabelOrganizationName.AutoSize = true;
       this.LabelOrganizationName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelOrganizationName.Location = new System.Drawing.Point(80, 1);
+      this.LabelOrganizationName.Location = new System.Drawing.Point(76, 1);
       this.LabelOrganizationName.Name = "LabelOrganizationName";
       this.LabelOrganizationName.Size = new System.Drawing.Size(0, 21);
       this.LabelOrganizationName.TabIndex = 5;
@@ -56,7 +56,7 @@
       // 
       this.LabelOrganizationSID.AutoSize = true;
       this.LabelOrganizationSID.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelOrganizationSID.Location = new System.Drawing.Point(81, 22);
+      this.LabelOrganizationSID.Location = new System.Drawing.Point(77, 22);
       this.LabelOrganizationSID.Name = "LabelOrganizationSID";
       this.LabelOrganizationSID.Size = new System.Drawing.Size(0, 15);
       this.LabelOrganizationSID.TabIndex = 7;
@@ -64,14 +64,14 @@
       // LabelOrganizationRank
       // 
       this.LabelOrganizationRank.AutoSize = true;
-      this.LabelOrganizationRank.Location = new System.Drawing.Point(81, 37);
+      this.LabelOrganizationRank.Location = new System.Drawing.Point(77, 37);
       this.LabelOrganizationRank.Name = "LabelOrganizationRank";
       this.LabelOrganizationRank.Size = new System.Drawing.Size(0, 15);
       this.LabelOrganizationRank.TabIndex = 8;
       // 
       // PictureBoxOrganizationRank
       // 
-      this.PictureBoxOrganizationRank.Location = new System.Drawing.Point(85, 53);
+      this.PictureBoxOrganizationRank.Location = new System.Drawing.Point(81, 53);
       this.PictureBoxOrganizationRank.Name = "PictureBoxOrganizationRank";
       this.PictureBoxOrganizationRank.Size = new System.Drawing.Size(104, 20);
       this.PictureBoxOrganizationRank.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
