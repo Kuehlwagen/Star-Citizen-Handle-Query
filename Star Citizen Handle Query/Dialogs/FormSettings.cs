@@ -215,7 +215,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void UpdateLocalization() {
       PerformLayout();
 
-      Text = CurrentLocalization.Settings.Title;
+      Text = $"Star Citizen Handle Query {CurrentLocalization.Settings.Title}";
 
       GroupBoxAPI.Text = CurrentLocalization.Settings.API.Group_Title;
       LabelApiKey.Text = CurrentLocalization.Settings.API.Key;
