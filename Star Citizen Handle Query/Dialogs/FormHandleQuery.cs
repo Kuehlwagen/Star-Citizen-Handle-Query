@@ -2,6 +2,7 @@ using Star_Citizen_Handle_Query.ExternClasses;
 using Star_Citizen_Handle_Query.ExternClasses.Star_Citizen_Handle_Query.ExternClasses;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 
@@ -207,7 +208,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             // Handle-Informationen auslesen
             HandleInfo handleInfo = await GetHandleInfo();
             // UserControl mit Handle-Informationen hinzufügen
-            PanelHandleInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings));
+            PanelHandleInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation));
             Size = new Size(Size.Width, 211);
             // Autovervollständigung aktualisieren
             UpdateAutoComplete();
@@ -251,6 +252,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (rtnVal == null) {
         string json = await GetApiHandleJson(ProgramSettings.ApiKey, TextBoxHandle.Text);
         HandleInfo apiHandleInfo = JsonSerializer.Deserialize<HandleInfo>(json);
+        if (apiHandleInfo == null) {
+          apiHandleInfo = new HandleInfo() { message = json };
+        }
         rtnVal = apiHandleInfo;
       }
 
@@ -263,9 +267,36 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private async Task<string> GetApiHandleJson(string apiKey, string handle) {
-      // JSON via API herunterladen
       using HttpClient client = new();
-      return await client.GetStringAsync($"https://api.starcitizen-api.com/{apiKey}/v1/{ProgramSettings.ApiMode.ToString().ToLower()}/user/{handle}");
+      // JSON via API herunterladen
+      string rtnVal;
+      try {
+        rtnVal = await client.GetStringAsync($"https://api.starcitizen-api.com/{apiKey}/v1/{ProgramSettings.ApiMode.ToString().ToLower()}/user/{handle}");
+      } catch (HttpRequestException reqEx) {
+        rtnVal = GetHttpClientError(reqEx.StatusCode);
+      } catch (Exception ex) {
+        rtnVal = ex.Message;
+      }
+
+      return rtnVal; ;
+    }
+
+    public static string GetHttpClientError(HttpStatusCode? code) {
+      string rtnVal;
+
+      // Fehlermeldung generieren
+      if (code != null) {
+        rtnVal = code switch {
+          HttpStatusCode.NotFound => "API down", // This error is also triggered when the API is down.
+          HttpStatusCode.InternalServerError => "Server error", // If the server encounters an unexpected error, and cannot process the request.
+          HttpStatusCode.ServiceUnavailable => "API unavailable", // Triggered when the API is unavailable.
+          _ => "Unknown error",
+        };
+      } else {
+        rtnVal = "Code null";
+      }
+
+      return rtnVal;
     }
 
     private void BeendenToolStripMenuItem_Click(object sender, EventArgs e) {

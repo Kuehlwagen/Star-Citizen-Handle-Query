@@ -192,7 +192,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ApiKeyState rtnVal = null;
 
       using HttpClient client = new();
-      string jsonText = await client.GetStringAsync($"https://api.starcitizen-api.com/{ProgramSettings.ApiKey}/v1/me");
+      string jsonText = null;
+      try {
+        jsonText = await client.GetStringAsync($"https://api.starcitizen-api.com/{ProgramSettings.ApiKey}/v1/me");
+      } catch (HttpRequestException reqEx) {
+        rtnVal = new ApiKeyState() { message = FormHandleQuery.GetHttpClientError(reqEx.StatusCode) };
+      } catch (Exception ex) {
+        rtnVal = new ApiKeyState() { message = ex.Message };
+      }
+
       if (!string.IsNullOrWhiteSpace(jsonText)) {
         rtnVal = JsonSerializer.Deserialize<ApiKeyState>(jsonText);
       }

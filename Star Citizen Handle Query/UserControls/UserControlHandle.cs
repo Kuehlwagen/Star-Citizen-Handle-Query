@@ -10,11 +10,13 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     private readonly HandleInfo HandleInfo;
     private readonly Settings ProgramSettings;
+    private readonly Translation ProgramTranslation;
 
-    public UserControlHandle(HandleInfo handleInfo, Settings programSettings) {
+    public UserControlHandle(HandleInfo handleInfo, Settings programSettings, Translation programTranslation) {
       InitializeComponent();
       HandleInfo = handleInfo;
       ProgramSettings = programSettings;
+      ProgramTranslation = programTranslation;
     }
 
     private async void UserControlHandle_Load(object sender, EventArgs e) {
@@ -53,7 +55,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           Size = new Size(Size.Width, 76);
         }
       } else {
-        LabelHandle.Text = HandleInfo?.success == 0 && !string.IsNullOrWhiteSpace(HandleInfo?.message) ? HandleInfo.message : "Handle nicht gefunden...";
+        LabelHandle.Text = HandleInfo?.success == 0 && !string.IsNullOrWhiteSpace(HandleInfo?.message) ? HandleInfo.message : ProgramTranslation.Window.Handle_Not_Found;
         LabelHandle.Location = new Point(3, LabelHandle.Location.Y);
         LabelHandle.BringToFront();
         Size = new Size(Size.Width, 25);
@@ -75,13 +77,21 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private async Task<Image> GetImage(CacheDirectoryType imageType, string url, string name) {
+      Image rtnVal = null;
+
       string filePath = GetImagePath(imageType, url, name);
       if (!File.Exists(filePath) || new FileInfo(filePath).LastWriteTime < DateTime.Now.AddDays(ProgramSettings.LocalCacheMaxAge * -1)) {
         using Stream urlStream = await GetImageFromUrl(url);
-        using FileStream fileStream = new(filePath, FileMode.OpenOrCreate);
-        urlStream.CopyTo(fileStream);
+        if (urlStream != null) {
+          using FileStream fileStream = new(filePath, FileMode.OpenOrCreate);
+          urlStream.CopyTo(fileStream);
+        }
       }
-      return Image.FromFile(filePath);
+      if (File.Exists(filePath)) {
+        rtnVal = Image.FromFile(filePath);
+      }
+
+      return rtnVal;
     }
 
     private static string GetImagePath(CacheDirectoryType imageType, string url, string name) {
@@ -109,8 +119,14 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private static async Task<Stream> GetImageFromUrl(string url) {
+      Stream rtnVal = null;
+
       using HttpClient client = new();
-      return await client.GetStreamAsync(url);
+      try {
+        rtnVal = await client.GetStreamAsync(url);
+      } catch { }
+
+      return rtnVal;
     }
 
     private static void CreateDirectory(CacheDirectoryType imageType) {
