@@ -251,7 +251,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Handle-Informationen via API auslesen, wenn die Datei nicht gelesen werden konnte
       if (rtnVal == null) {
         string json = await GetApiHandleJson(ProgramSettings.ApiKey, TextBoxHandle.Text);
-        HandleInfo apiHandleInfo = JsonSerializer.Deserialize<HandleInfo>(json);
+        HandleInfo apiHandleInfo = null;
+        try {
+          apiHandleInfo = JsonSerializer.Deserialize<HandleInfo>(json);
+        } catch { }
         if (apiHandleInfo == null) {
           apiHandleInfo = new HandleInfo() { message = json };
         }
@@ -293,7 +296,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           _ => "Unknown error",
         };
       } else {
-        rtnVal = "Code null";
+        rtnVal = "No Internet";
       }
 
       return rtnVal;
