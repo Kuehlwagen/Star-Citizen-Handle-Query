@@ -65,7 +65,7 @@
       this.LabelFensterDeckkraft.Location = new System.Drawing.Point(15, 53);
       this.LabelFensterDeckkraft.Name = "LabelFensterDeckkraft";
       this.LabelFensterDeckkraft.Size = new System.Drawing.Size(60, 15);
-      this.LabelFensterDeckkraft.TabIndex = 0;
+      this.LabelFensterDeckkraft.TabIndex = 2;
       this.LabelFensterDeckkraft.Text = "Deckkraft:";
       // 
       // NumericUpDownFensterDeckkraft
@@ -80,7 +80,7 @@
             0});
       this.NumericUpDownFensterDeckkraft.Name = "NumericUpDownFensterDeckkraft";
       this.NumericUpDownFensterDeckkraft.Size = new System.Drawing.Size(44, 23);
-      this.NumericUpDownFensterDeckkraft.TabIndex = 1;
+      this.NumericUpDownFensterDeckkraft.TabIndex = 3;
       this.NumericUpDownFensterDeckkraft.Value = new decimal(new int[] {
             85,
             0,
@@ -94,7 +94,7 @@
       this.CheckBoxFensterMauseingabenIgnorieren.Location = new System.Drawing.Point(15, 134);
       this.CheckBoxFensterMauseingabenIgnorieren.Name = "CheckBoxFensterMauseingabenIgnorieren";
       this.CheckBoxFensterMauseingabenIgnorieren.Size = new System.Drawing.Size(161, 19);
-      this.CheckBoxFensterMauseingabenIgnorieren.TabIndex = 8;
+      this.CheckBoxFensterMauseingabenIgnorieren.TabIndex = 10;
       this.CheckBoxFensterMauseingabenIgnorieren.Text = "Mauseingaben ignorieren";
       this.CheckBoxFensterMauseingabenIgnorieren.UseVisualStyleBackColor = true;
       this.CheckBoxFensterMauseingabenIgnorieren.CheckedChanged += new System.EventHandler(this.CheckBoxFensterMauseingabenIgnorieren_CheckedChanged);
@@ -177,7 +177,7 @@
       this.LabelFensterDeckkraftProzent.Location = new System.Drawing.Point(166, 53);
       this.LabelFensterDeckkraftProzent.Name = "LabelFensterDeckkraftProzent";
       this.LabelFensterDeckkraftProzent.Size = new System.Drawing.Size(17, 15);
-      this.LabelFensterDeckkraftProzent.TabIndex = 2;
+      this.LabelFensterDeckkraftProzent.TabIndex = 4;
       this.LabelFensterDeckkraftProzent.Text = "%";
       // 
       // LabelLokalerCacheAlterTage
@@ -218,7 +218,7 @@
       this.LabelSprache.Location = new System.Drawing.Point(15, 25);
       this.LabelSprache.Name = "LabelSprache";
       this.LabelSprache.Size = new System.Drawing.Size(52, 15);
-      this.LabelSprache.TabIndex = 10;
+      this.LabelSprache.TabIndex = 0;
       this.LabelSprache.Text = "Sprache:";
       // 
       // CheckBoxAltTabEnabled
@@ -227,7 +227,7 @@
       this.CheckBoxAltTabEnabled.Location = new System.Drawing.Point(15, 159);
       this.CheckBoxAltTabEnabled.Name = "CheckBoxAltTabEnabled";
       this.CheckBoxAltTabEnabled.Size = new System.Drawing.Size(166, 19);
-      this.CheckBoxAltTabEnabled.TabIndex = 9;
+      this.CheckBoxAltTabEnabled.TabIndex = 11;
       this.CheckBoxAltTabEnabled.Text = "Erreichbarkeit via Alt + Tab";
       this.CheckBoxAltTabEnabled.UseVisualStyleBackColor = true;
       this.CheckBoxAltTabEnabled.CheckedChanged += new System.EventHandler(this.CheckBoxAltTabEnabled_CheckedChanged);
@@ -238,7 +238,7 @@
       this.CheckBoxUmschalt.Location = new System.Drawing.Point(216, 109);
       this.CheckBoxUmschalt.Name = "CheckBoxUmschalt";
       this.CheckBoxUmschalt.Size = new System.Drawing.Size(76, 19);
-      this.CheckBoxUmschalt.TabIndex = 7;
+      this.CheckBoxUmschalt.TabIndex = 9;
       this.CheckBoxUmschalt.Text = "Umschalt";
       this.CheckBoxUmschalt.UseVisualStyleBackColor = true;
       this.CheckBoxUmschalt.CheckedChanged += new System.EventHandler(this.CheckBoxUmschalt_CheckedChanged);
@@ -249,7 +249,7 @@
       this.CheckBoxAlt.Location = new System.Drawing.Point(169, 109);
       this.CheckBoxAlt.Name = "CheckBoxAlt";
       this.CheckBoxAlt.Size = new System.Drawing.Size(41, 19);
-      this.CheckBoxAlt.TabIndex = 6;
+      this.CheckBoxAlt.TabIndex = 8;
       this.CheckBoxAlt.Text = "Alt";
       this.CheckBoxAlt.UseVisualStyleBackColor = true;
       this.CheckBoxAlt.CheckedChanged += new System.EventHandler(this.CheckBoxAlt_CheckedChanged);
@@ -260,7 +260,7 @@
       this.CheckBoxStrg.Location = new System.Drawing.Point(116, 109);
       this.CheckBoxStrg.Name = "CheckBoxStrg";
       this.CheckBoxStrg.Size = new System.Drawing.Size(47, 19);
-      this.CheckBoxStrg.TabIndex = 5;
+      this.CheckBoxStrg.TabIndex = 7;
       this.CheckBoxStrg.Text = "Strg";
       this.CheckBoxStrg.UseVisualStyleBackColor = true;
       this.CheckBoxStrg.CheckedChanged += new System.EventHandler(this.CheckBoxStrg_CheckedChanged);
@@ -276,7 +276,7 @@
       this.ComboBoxSprache.MaxDropDownItems = 5;
       this.ComboBoxSprache.Name = "ComboBoxSprache";
       this.ComboBoxSprache.Size = new System.Drawing.Size(147, 23);
-      this.ComboBoxSprache.TabIndex = 4;
+      this.ComboBoxSprache.TabIndex = 1;
       this.ComboBoxSprache.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSprache_SelectedIndexChanged);
       // 
       // ComboBoxTaste
@@ -290,7 +290,7 @@
       this.ComboBoxTaste.MaxDropDownItems = 5;
       this.ComboBoxTaste.Name = "ComboBoxTaste";
       this.ComboBoxTaste.Size = new System.Drawing.Size(78, 23);
-      this.ComboBoxTaste.TabIndex = 4;
+      this.ComboBoxTaste.TabIndex = 6;
       this.ComboBoxTaste.SelectedIndexChanged += new System.EventHandler(this.ComboBoxTaste_SelectedIndexChanged);
       // 
       // LabelTastenkombination
@@ -299,7 +299,7 @@
       this.LabelTastenkombination.Location = new System.Drawing.Point(15, 83);
       this.LabelTastenkombination.Name = "LabelTastenkombination";
       this.LabelTastenkombination.Size = new System.Drawing.Size(79, 15);
-      this.LabelTastenkombination.TabIndex = 3;
+      this.LabelTastenkombination.TabIndex = 5;
       this.LabelTastenkombination.Text = "Globale Taste:";
       // 
       // GroupBoxAPI
