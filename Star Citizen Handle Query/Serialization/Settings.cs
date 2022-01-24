@@ -3,6 +3,9 @@
   [Serializable()]
   public class Settings {
 
+    /// <summary>Sprache für die Oberfläche des Tools</summary>
+    public string Language { get; set; } = "Deutsch";
+
     private int _WindowOpacity = 85;
     /// <summary>Fenster-Deckkraft in Prozent (Standard 85%, Minimum 50%, Maximum 100%)</summary>
     public int WindowOpacity {

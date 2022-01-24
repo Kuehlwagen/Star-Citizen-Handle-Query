@@ -121,9 +121,8 @@
       this.LabelOrganizationRank.AutoSize = true;
       this.LabelOrganizationRank.Location = new System.Drawing.Point(81, 117);
       this.LabelOrganizationRank.Name = "LabelOrganizationRank";
-      this.LabelOrganizationRank.Size = new System.Drawing.Size(104, 15);
+      this.LabelOrganizationRank.Size = new System.Drawing.Size(0, 15);
       this.LabelOrganizationRank.TabIndex = 8;
-      this.LabelOrganizationRank.Text = "Organization Rank";
       // 
       // LabelFluency
       // 

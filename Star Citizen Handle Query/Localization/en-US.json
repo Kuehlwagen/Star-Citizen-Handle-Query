@@ -1,0 +1,59 @@
+{
+  "Language": "English",
+  "Window": {
+    "Handle": "Handle:",
+    "Handle_Placeholder": "Insert Handle...",
+    "Handle_Not_Found": "Handle not found...",
+    "Context_Menu_Show": "Show",
+    "Context_Menu_Settings": "Settings",
+    "Context_Menu_Clear_Local_Cache": "Clear Local Cache",
+    "Context_Menu_Restart": "Restart",
+    "Context_Menu_Close": "Close",
+    "MessageBoxes": {
+      "API_Key_Missing": "A 32-digit API key must be specified.\r\nProgram is being closed.",
+      "Local_Cache_Emptied": "Local Cache was emptied"
+    }
+  },
+  "Settings": {
+    "Title": "Settings",
+    "API": {
+      "Group_Title": "API",
+      "Key": "Key:",
+      "Key_Placeholder": "Insert 32-digit API Key",
+      "Mode": "Mode:",
+      "Mode_Description_Live": "(always Live Data)",
+      "Mode_Description_Cache": "(always Server Cache)",
+      "Mode_Description_Auto": "(Server Cache / Live Data)",
+      "Mode_Description_Eager": "(Live Data / Server Cache)",
+      "Test": "API-Test",
+      "Test_Error": "Error requesting API information",
+      "Test_Information": "Live Requests left"
+    },
+    "Window": {
+      "Group_Title": "Window",
+      "Language": "Language:",
+      "Opacity": "Opacity:",
+      "Opacity_Percent": "%",
+      "Global_Hotkey": "Global Hotkey:",
+      "Global_Hotkey_Ctrl": "Ctrl",
+      "Global_Hotkey_Alt": "Alt",
+      "Global_Hotkey_Shift": "Shift",
+      "Ignore_Mouseinput": "Ignore Mouse Input",
+      "Enable_Alt_Tab": "Enable Alt + Tab"
+    },
+    "Local_Cache": {
+      "Group_Title": "Local Cache",
+      "Max_Age": "Max Age:",
+      "Max_Age_Days": "Day(s)"
+    },
+    "Buttons": {
+      "Save": "Save",
+      "Close": "Close",
+      "Standard": "Default"
+    },
+    "MessageBoxes": {
+      "Save_Fail": "Saving Settings failed:\r\nError Message:",
+      "API_Key_Missing": "A 32-digit API key must be specified."
+    }
+  }
+}

@@ -10,6 +10,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
   public partial class FormHandleQuery : Form {
 
     private readonly int InitialWindowStyle = 0;
+    private readonly Translation ProgramTranslation;
     private readonly Settings ProgramSettings;
     private GlobalHotKey HotKey;
 
@@ -18,6 +19,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       // Größe des Fensters verkleinern, da ggf. Mauseingaben getätigt werden könnten
       Size = new Size(Width, 49);
+
+      // Standard-Sprachen erstellen
+      CreateDefaultLocalizations();
 
       // Programm-Einstellungen auslesen
       ProgramSettings = GetProgramSettings();
@@ -32,13 +36,19 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           ShowInTaskbar = true;
         }
 
-
         if (ProgramSettings.WindowIgnoreMouseInput) {
           // Durch das Fenster klicken lassen
           InitialWindowStyle = User32Wrappers.GetWindowLong(Handle, User32Wrappers.GWL.ExStyle);
           _ = User32Wrappers.SetWindowLong(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered | (int)User32Wrappers.WS_EX.Transparent);
         }
+
+        // Programm-Sprache auslesen
+        ProgramTranslation = GetProgramLocalization();
+
+        // Sprache für Controls setzen
+        SetProgramLocalization();
       }
+
     }
 
     private void UpdateAutoComplete() {
@@ -54,10 +64,62 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
+    private static void CreateDefaultLocalizations() {
+      // Falls noch nicht vorhanden, Localization-Verzeichnis erstellen
+      string localizationPath = FormSettings.GetLocalizationPath();
+      if (!Directory.Exists(localizationPath)) {
+        Directory.CreateDirectory(localizationPath);
+      }
+
+      // Falls noch nicht vorhanden, Datei für die Sprache "Deutsch" erstellen
+      string deutschPath = Path.Combine(localizationPath, "de-DE.json");
+      if (!File.Exists(deutschPath)) {
+        File.WriteAllText(deutschPath, Encoding.UTF8.GetString(Properties.Resources.de_DE), Encoding.Default);
+      }
+
+      // Falls noch nicht vorhanden, Datei für die Sprache "English" erstellen
+      string englishPath = Path.Combine(localizationPath, "en-US.json");
+      if (!File.Exists(englishPath)) {
+        File.WriteAllText(englishPath, Encoding.UTF8.GetString(Properties.Resources.en_US), Encoding.Default);
+      }
+    }
+
+    internal Translation GetProgramLocalization() {
+      Translation rtnVal = null;
+
+      // Aktuell konfigurierte Sprache ermitteln
+      string localizationPath = FormSettings.GetLocalizationPath();
+      foreach (string languagePath in Directory.GetFiles(localizationPath, "*.json")) {
+        Translation translation = JsonSerializer.Deserialize<Translation>(File.ReadAllText(languagePath, Encoding.UTF8));
+        if (translation?.Language == ProgramSettings.Language) {
+          rtnVal = translation;
+          break;
+        }
+      }
+
+      // Fallback auf Standard-Sprache
+      if (rtnVal == null) {
+        rtnVal = new();
+      }
+
+      return rtnVal;
+    }
+
+    private void SetProgramLocalization() {
+      // Sprache für Controls setzen
+      LabelHandle.Text = ProgramTranslation.Window.Handle;
+      TextBoxHandle.PlaceholderText = ProgramTranslation.Window.Handle_Placeholder;
+      AnzeigenVersteckenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu_Show;
+      EinstellungenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu_Settings;
+      LokalenCacheLeerenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu_Clear_Local_Cache;
+      NeustartenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu_Restart;
+      BeendenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu_Close;
+    }
+
     internal Settings GetProgramSettings() {
       Settings rtnVal = null;
 
-      // Einsetellungen aus Datei lesen
+      // Einstellungen aus Datei lesen
       string settingsFilePath = GetSettingsPath();
       if (File.Exists(settingsFilePath)) {
         rtnVal = JsonSerializer.Deserialize<Settings>(File.ReadAllText(settingsFilePath));
