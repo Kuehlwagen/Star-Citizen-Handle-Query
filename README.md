@@ -30,9 +30,11 @@ Zusätzlich zum Server-Cache der API verwendet dieses Tool einen lokalen Cache, 
   - __Eager:__ Es wird immer erst versucht, die Daten von der Star Citizen Webseite abzurufen. Ist die Star Citizen Webseite gerade nicht erreichbar, werden die Informationen aus dem Servercache der API abgerufen, sofern diese dort vorliegen.
 - __API-Test:__ Diese Schaltfläche wird aktiviert, wenn ein 32-stelliger API-Schlüssel eingegeben wurde. Bei Betätigung der Schaltfläche wird getestet, ob die API mit dem angegebenen API-Schlüssel funktioniert. Falls der API-Schlüssel valide ist, wird angezeigt, wie viele Live-Abfragen für den aktuellen Tag noch übrig sind. Ist der API-Schlüssel nicht valide, wird dies ebenfalls dargestellt.
 ### Fenster
+- __Sprache:__ Hier kann die Sprache für das Tool eingestellt werden. Zur Verfügung stehen "Deutsch" und "English".
 - __Deckkraft:__ Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
 - __Globale Taste:__ Hier kann die Taste angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifikatoren (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
 - __Mauseingaben ignorieren:__ Wird diese Einstellung aktiviert, gehen sämtliche Mausklicks durch das Fenster durch in das dahinter liegende Programm.
+- __Erreichbariekt via Alt + Tab:__ Wird diese Einstellunge aktiviert, kann das Fenster via Tastenkobination Alt-Tab erreicht werden.
 ### Lokaler Cache
 - __Maximales Alter:__ Hier kann für den lokalen Cache das maximale Alter in Tagen angegeben werden, wann die Informationen eines bereits zuvor abgefragten Handles erneut via API abgefragt werden sollen. Es können Werte zwischen 0 und 30 Tagen angegeben werden. Die Angabe von 0 Tagen wird die Handle-Informationen immer via API abfragen.
 ### Schaltflächen
