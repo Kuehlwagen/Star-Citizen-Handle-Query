@@ -213,7 +213,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             Size = new Size(Size.Width, Size.Height + 78);
 
             // Ggf. UserControl mit Organisation-Informationen hinzufügen
-            if (handleInfo?.success == 1 && !string.IsNullOrWhiteSpace(handleInfo?.data?.organization?.sid)) {
+            if (handleInfo?.success == 1 && handleInfo?.data?.organization?.name != null) {
               PanelInfo.Controls.Add(new UserControlOrganization(handleInfo, ProgramSettings, -1));
               Size = new Size(Size.Width, Size.Height + 78);
             }

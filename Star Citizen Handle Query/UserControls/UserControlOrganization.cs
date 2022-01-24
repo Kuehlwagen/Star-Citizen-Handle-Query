@@ -30,7 +30,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
       }
 
       string organizationSid = GetString(org?.sid);
-      if (!string.IsNullOrWhiteSpace(organizationSid)) {
+      if ((OrganizationIndex == -1 &&  org?.name != string.Empty) || (OrganizationIndex > -1 && !string.IsNullOrWhiteSpace(organizationSid))) {
         LabelOrganizationName.Text = GetString(org?.name);
         LabelOrganizationSID.Text = GetString(organizationSid, "SID: ");
         LabelOrganizationRank.Text = GetString(org?.rank);
