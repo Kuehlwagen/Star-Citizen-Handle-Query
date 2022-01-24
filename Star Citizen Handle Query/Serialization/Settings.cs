@@ -1,7 +1,7 @@
 ﻿namespace Star_Citizen_Handle_Query.Serialization {
 
   [Serializable()]
-  public class Settings {
+  public class Settings : ICloneable {
 
     /// <summary>Sprache für die Oberfläche des Tools</summary>
     public string Language { get; set; } = "Deutsch";
@@ -62,6 +62,9 @@
     /// <summary>Gibt an, ob das Hauptfenster via Alt + Tab erreichbar sein soll</summary>
     public bool AltTabEnabled { get; set; } = false;
 
+    public object Clone() {
+      return MemberwiseClone();
+    }
   }
 
   /// <summary>API-Modus</summary>
