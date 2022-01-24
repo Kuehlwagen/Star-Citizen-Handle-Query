@@ -9,10 +9,20 @@
   }
 
   public class HandleInfoData {
-    public object[] affiliation { get; set; }
+    public HandleInfoDataAffiliation[] affiliation { get; set; }
     public HandleInfoDataOrganization organization { get; set; }
     public HandleInfoDataProfile profile { get; set; }
   }
+
+
+  public class HandleInfoDataAffiliation {
+    public string image { get; set; }
+    public string name { get; set; }
+    public string rank { get; set; }
+    public string sid { get; set; }
+    public int stars { get; set; }
+  }
+
 
   public class HandleInfoDataOrganization {
     public string image { get; set; }
