@@ -92,7 +92,7 @@
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
       this.Name = "UserControlOrganization";
-      this.Size = new System.Drawing.Size(370, 76);
+      this.Size = new System.Drawing.Size(375, 76);
       this.Load += new System.EventHandler(this.UserControlHandle_Load);
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxOrganization)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxOrganizationRank)).EndInit();
