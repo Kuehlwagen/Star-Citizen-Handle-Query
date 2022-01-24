@@ -207,9 +207,25 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             TextBoxHandle.Enabled = false;
             // Handle-Informationen auslesen
             HandleInfo handleInfo = await GetHandleInfo();
+
             // UserControl mit Handle-Informationen hinzufügen
-            PanelHandleInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation));
-            Size = new Size(Size.Width, 211);
+            PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation));
+            Size = new Size(Size.Width, Size.Height + 78);
+
+            // Ggf. UserControl mit Organisation-Informationen hinzufügen
+            if (handleInfo?.success == 1 && !string.IsNullOrWhiteSpace(handleInfo?.data?.organization?.sid)) {
+              PanelInfo.Controls.Add(new UserControlOrganization(handleInfo, ProgramSettings, -1));
+              Size = new Size(Size.Width, Size.Height + 78);
+            }
+
+            // Ggf. UserControls mit Affiliate-Informationen hinzufügen
+            if (handleInfo?.data != null && handleInfo.data.affiliation != null && handleInfo.data.affiliation.Length > 0) {
+              for (int i = 0; i < handleInfo.data.affiliation.Length; i++) {
+                PanelInfo.Controls.Add(new UserControlOrganization(handleInfo, ProgramSettings, i));
+                Size = new Size(Size.Width, Size.Height + 78);
+              }
+            }
+
             // Autovervollständigung aktualisieren
             UpdateAutoComplete();
             // Textbox wieder aktivieren und Text markieren
@@ -228,14 +244,18 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void RemoveUserControl() {
       // Ggf. UserControl entfernen
-      if (PanelHandleInfo.Controls.Count > 0) {
-        UserControlHandle control = PanelHandleInfo.Controls[0] as UserControlHandle;
-        control.PictureBoxHandleAvatar.Image?.Dispose();
-        control.PictureBoxDisplayTitle.Image?.Dispose();
-        control.PictureBoxOrganization.Image?.Dispose();
-        control.PictureBoxOrganizationRank.Image?.Dispose();
-        control.Dispose();
-        PanelHandleInfo.Controls.Clear();
+      if (PanelInfo.Controls.Count > 0) {
+        foreach (UserControl control in PanelInfo.Controls) {
+          if (control is UserControlHandle ctrlHandle) {
+            ctrlHandle.PictureBoxHandleAvatar.Image?.Dispose();
+            ctrlHandle.PictureBoxDisplayTitle.Image?.Dispose();
+          } else if (control is UserControlOrganization ctrlOrganization) {
+            ctrlOrganization.PictureBoxOrganization.Image?.Dispose();
+            ctrlOrganization.PictureBoxOrganizationRank.Image?.Dispose();
+          }
+          control.Dispose();
+        }
+        PanelInfo.Controls.Clear();
       }
     }
 

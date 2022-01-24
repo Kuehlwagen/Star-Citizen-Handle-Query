@@ -28,7 +28,7 @@
       this.PanelHandleQuery = new System.Windows.Forms.Panel();
       this.TextBoxHandle = new System.Windows.Forms.TextBox();
       this.LabelHandle = new System.Windows.Forms.Label();
-      this.PanelHandleInfo = new System.Windows.Forms.Panel();
+      this.PanelInfo = new System.Windows.Forms.FlowLayoutPanel();
       this.NotifyIconHandleQuery = new System.Windows.Forms.NotifyIcon(this.components);
       this.ContextMenuStripNotifyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
       this.AnzeigenVersteckenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,7 +50,7 @@
       this.PanelHandleQuery.Controls.Add(this.LabelHandle);
       this.PanelHandleQuery.Location = new System.Drawing.Point(1, 1);
       this.PanelHandleQuery.Name = "PanelHandleQuery";
-      this.PanelHandleQuery.Size = new System.Drawing.Size(267, 46);
+      this.PanelHandleQuery.Size = new System.Drawing.Size(368, 46);
       this.PanelHandleQuery.TabIndex = 0;
       // 
       // TextBoxHandle
@@ -64,7 +64,7 @@
       this.TextBoxHandle.MaxLength = 20;
       this.TextBoxHandle.Name = "TextBoxHandle";
       this.TextBoxHandle.PlaceholderText = "Handle eingeben...";
-      this.TextBoxHandle.Size = new System.Drawing.Size(190, 23);
+      this.TextBoxHandle.Size = new System.Drawing.Size(291, 23);
       this.TextBoxHandle.TabIndex = 1;
       this.TextBoxHandle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxHandle_KeyDown);
       // 
@@ -78,15 +78,18 @@
       this.LabelHandle.TabIndex = 0;
       this.LabelHandle.Text = "Handle:";
       // 
-      // PanelHandleInfo
+      // PanelInfo
       // 
-      this.PanelHandleInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      this.PanelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.PanelHandleInfo.BackColor = System.Drawing.Color.Lime;
-      this.PanelHandleInfo.Location = new System.Drawing.Point(1, 49);
-      this.PanelHandleInfo.Name = "PanelHandleInfo";
-      this.PanelHandleInfo.Size = new System.Drawing.Size(267, 160);
-      this.PanelHandleInfo.TabIndex = 1;
+      this.PanelInfo.BackColor = System.Drawing.Color.Lime;
+      this.PanelInfo.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+      this.PanelInfo.Location = new System.Drawing.Point(1, 46);
+      this.PanelInfo.Margin = new System.Windows.Forms.Padding(0);
+      this.PanelInfo.Name = "PanelInfo";
+      this.PanelInfo.Size = new System.Drawing.Size(368, 85);
+      this.PanelInfo.TabIndex = 1;
       // 
       // NotifyIconHandleQuery
       // 
@@ -154,8 +157,8 @@
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.Lime;
-      this.ClientSize = new System.Drawing.Size(269, 211);
-      this.Controls.Add(this.PanelHandleInfo);
+      this.ClientSize = new System.Drawing.Size(370, 132);
+      this.Controls.Add(this.PanelInfo);
       this.Controls.Add(this.PanelHandleQuery);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -180,7 +183,7 @@
     private Panel PanelHandleQuery;
     private TextBox TextBoxHandle;
     private Label LabelHandle;
-    private Panel PanelHandleInfo;
+    private FlowLayoutPanel PanelInfo;
     private NotifyIcon NotifyIconHandleQuery;
     private ContextMenuStrip ContextMenuStripNotifyIcon;
     private ToolStripMenuItem BeendenToolStripMenuItem;

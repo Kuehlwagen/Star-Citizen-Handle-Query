@@ -28,16 +28,9 @@
       this.PictureBoxHandleAvatar = new System.Windows.Forms.PictureBox();
       this.PictureBoxDisplayTitle = new System.Windows.Forms.PictureBox();
       this.LabelDisplayTitle = new System.Windows.Forms.Label();
-      this.LabelOrganizationName = new System.Windows.Forms.Label();
-      this.PictureBoxOrganization = new System.Windows.Forms.PictureBox();
-      this.LabelOrganizationSID = new System.Windows.Forms.Label();
-      this.LabelOrganizationRank = new System.Windows.Forms.Label();
       this.LabelFluency = new System.Windows.Forms.Label();
-      this.PictureBoxOrganizationRank = new System.Windows.Forms.PictureBox();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxHandleAvatar)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxDisplayTitle)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxOrganization)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxOrganizationRank)).BeginInit();
       this.SuspendLayout();
       // 
       // LabelHandle
@@ -87,43 +80,6 @@
       this.LabelDisplayTitle.Size = new System.Drawing.Size(0, 15);
       this.LabelDisplayTitle.TabIndex = 4;
       // 
-      // LabelOrganizationName
-      // 
-      this.LabelOrganizationName.AutoSize = true;
-      this.LabelOrganizationName.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelOrganizationName.Location = new System.Drawing.Point(80, 81);
-      this.LabelOrganizationName.Name = "LabelOrganizationName";
-      this.LabelOrganizationName.Size = new System.Drawing.Size(0, 21);
-      this.LabelOrganizationName.TabIndex = 5;
-      // 
-      // PictureBoxOrganization
-      // 
-      this.PictureBoxOrganization.Location = new System.Drawing.Point(3, 83);
-      this.PictureBoxOrganization.Name = "PictureBoxOrganization";
-      this.PictureBoxOrganization.Size = new System.Drawing.Size(70, 70);
-      this.PictureBoxOrganization.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-      this.PictureBoxOrganization.TabIndex = 6;
-      this.PictureBoxOrganization.TabStop = false;
-      this.PictureBoxOrganization.WaitOnLoad = true;
-      this.PictureBoxOrganization.Click += new System.EventHandler(this.PictureBoxOrganization_Click);
-      // 
-      // LabelOrganizationSID
-      // 
-      this.LabelOrganizationSID.AutoSize = true;
-      this.LabelOrganizationSID.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelOrganizationSID.Location = new System.Drawing.Point(81, 102);
-      this.LabelOrganizationSID.Name = "LabelOrganizationSID";
-      this.LabelOrganizationSID.Size = new System.Drawing.Size(0, 15);
-      this.LabelOrganizationSID.TabIndex = 7;
-      // 
-      // LabelOrganizationRank
-      // 
-      this.LabelOrganizationRank.AutoSize = true;
-      this.LabelOrganizationRank.Location = new System.Drawing.Point(81, 117);
-      this.LabelOrganizationRank.Name = "LabelOrganizationRank";
-      this.LabelOrganizationRank.Size = new System.Drawing.Size(0, 15);
-      this.LabelOrganizationRank.TabIndex = 8;
-      // 
       // LabelFluency
       // 
       this.LabelFluency.AutoSize = true;
@@ -132,40 +88,24 @@
       this.LabelFluency.Size = new System.Drawing.Size(0, 15);
       this.LabelFluency.TabIndex = 9;
       // 
-      // PictureBoxOrganizationRank
-      // 
-      this.PictureBoxOrganizationRank.Location = new System.Drawing.Point(85, 133);
-      this.PictureBoxOrganizationRank.Name = "PictureBoxOrganizationRank";
-      this.PictureBoxOrganizationRank.Size = new System.Drawing.Size(104, 20);
-      this.PictureBoxOrganizationRank.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-      this.PictureBoxOrganizationRank.TabIndex = 3;
-      this.PictureBoxOrganizationRank.TabStop = false;
-      this.PictureBoxOrganizationRank.WaitOnLoad = true;
-      // 
       // UserControlHandle
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.Controls.Add(this.LabelFluency);
-      this.Controls.Add(this.LabelOrganizationRank);
-      this.Controls.Add(this.LabelOrganizationSID);
-      this.Controls.Add(this.PictureBoxOrganization);
-      this.Controls.Add(this.LabelOrganizationName);
       this.Controls.Add(this.LabelDisplayTitle);
-      this.Controls.Add(this.PictureBoxOrganizationRank);
       this.Controls.Add(this.PictureBoxDisplayTitle);
       this.Controls.Add(this.PictureBoxHandleAvatar);
       this.Controls.Add(this.LabelCommunityMoniker);
       this.Controls.Add(this.LabelHandle);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      this.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
       this.Name = "UserControlHandle";
-      this.Size = new System.Drawing.Size(267, 160);
+      this.Size = new System.Drawing.Size(370, 76);
       this.Load += new System.EventHandler(this.UserControlHandle_Load);
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxHandleAvatar)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxDisplayTitle)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxOrganization)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxOrganizationRank)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -176,13 +116,8 @@
     private Label LabelHandle;
     private Label LabelCommunityMoniker;
     private Label LabelDisplayTitle;
-    private Label LabelOrganizationName;
-    private Label LabelOrganizationSID;
-    private Label LabelOrganizationRank;
     private Label LabelFluency;
     internal PictureBox PictureBoxHandleAvatar;
-    internal PictureBox PictureBoxOrganization;
-    internal PictureBox PictureBoxOrganizationRank;
     internal PictureBox PictureBoxDisplayTitle;
   }
 }

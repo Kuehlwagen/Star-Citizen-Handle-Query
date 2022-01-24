@@ -28,7 +28,6 @@ namespace Star_Citizen_Handle_Query.UserControls {
       if (HandleInfo?.success == 1 && HandleInfo?.data?.profile != null) {
         string handle = GetString(HandleInfo?.data?.profile?.handle);
         CreateHandleJSON(handle);
-        string organizationSid = GetString(HandleInfo?.data?.organization?.sid);
         if (!string.IsNullOrWhiteSpace(HandleInfo?.data?.profile?.image)) {
           PictureBoxHandleAvatar.Image = await GetImage(CacheDirectoryType.HandleAvatar, HandleInfo.data.profile.image, handle);
           PictureBoxHandleAvatar.Cursor = Cursors.Hand;
@@ -36,24 +35,10 @@ namespace Star_Citizen_Handle_Query.UserControls {
         if (!string.IsNullOrWhiteSpace(HandleInfo?.data?.profile?.badge_image)) {
           PictureBoxDisplayTitle.Image = await GetImage(CacheDirectoryType.HandleDisplayTitle, HandleInfo.data.profile.badge_image, HandleInfo?.data?.profile?.badge);
         }
-        if (!string.IsNullOrWhiteSpace(HandleInfo.data?.organization?.image)) {
-          PictureBoxOrganization.Image = await GetImage(CacheDirectoryType.OrganizationAvatar, HandleInfo.data.organization.image, organizationSid);
-          PictureBoxOrganization.Cursor = Cursors.Hand;
-        }
         LabelHandle.Text = handle;
         LabelCommunityMoniker.Text = GetString(HandleInfo?.data?.profile?.display, "CM: ");
         LabelDisplayTitle.Text = GetString(HandleInfo?.data?.profile?.badge);
         LabelFluency.Text = HandleInfo?.data?.profile?.fluency?.Length > 0 ? $"Fluency: {string.Join(", ", HandleInfo.data.profile.fluency)}" : string.Empty;
-        if (organizationSid.Length > 0) {
-          LabelOrganizationName.Text = GetString(HandleInfo?.data?.organization?.name);
-          LabelOrganizationSID.Text = GetString(organizationSid, "SID: ");
-          LabelOrganizationRank.Text = GetString(HandleInfo?.data?.organization?.rank);
-          if (HandleInfo?.data?.organization.sid != null && HandleInfo?.data?.organization?.stars >= 0 && HandleInfo.data.organization.stars <= 5) {
-            PictureBoxOrganizationRank.Image = Properties.Resources.ResourceManager.GetObject($"OrganizationRank{HandleInfo.data.organization.stars}") as Image;
-          }
-        } else {
-          Size = new Size(Size.Width, 76);
-        }
       } else {
         LabelHandle.Text = HandleInfo?.success == 0 && !string.IsNullOrWhiteSpace(HandleInfo?.message) ? HandleInfo.message : ProgramTranslation.Window.Handle_Not_Found;
         LabelHandle.Location = new Point(3, LabelHandle.Location.Y);
