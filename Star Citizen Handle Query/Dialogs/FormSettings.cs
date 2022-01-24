@@ -29,7 +29,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ComboBoxTaste.Items.AddRange(KeyCollection.ConvertAll(x => x.ToString()).ToArray());
 
       // Kopie der Einstellungen erstellen
-      ProgramSettings = (Settings)settings.Clone();
+      ProgramSettings = settings != null ? (Settings)settings.Clone() : null;
 
       if (ProgramSettings == null) {
         // Versuchen die Einstellungen aus der Einstellungen-Datei zu laden
