@@ -78,7 +78,7 @@
     }
 
     /// <summary>Angabe, ob unkenntliche Affiliationen ausgeblendet werden sollen</summary>
-    public bool HideRedactedAffiliations { get; set; } = true;
+    public bool HideRedactedAffiliations { get; set; } = false;
 
     public object Clone() {
       return MemberwiseClone();

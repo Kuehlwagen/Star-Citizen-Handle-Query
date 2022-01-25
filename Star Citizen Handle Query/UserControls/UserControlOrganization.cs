@@ -29,6 +29,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
         SID = HandleInfo?.data?.organization?.sid;
       }
 
+      LabelMainOrganizationAffiliate.Text = OrganizationIndex == -1 ? "Main Organization" : "Affiliation";
       string organizationSid = GetString(org?.sid);
       if ((OrganizationIndex == -1 &&  org?.name != string.Empty) || (OrganizationIndex > -1 && !string.IsNullOrWhiteSpace(organizationSid))) {
         LabelOrganizationName.Text = GetString(org?.name);
@@ -43,10 +44,13 @@ namespace Star_Citizen_Handle_Query.UserControls {
         }
       } else {
         BackColor = Color.FromArgb(33, 26, 19);
-        PictureBoxOrganization.Image = Properties.Resources.Redacted;
+        PictureBoxOrganization.Size = new Size(PictureBoxOrganization.Width, 19);
+        PictureBoxOrganization.Image = Properties.Resources.Redacted_Small;
         LabelOrganizationName.ForeColor = Color.FromArgb(255, 57, 57);
         LabelOrganizationName.Text = "REDACTED";
+        LabelMainOrganizationAffiliate.ForeColor = Color.FromArgb(173, 39, 39);
         PictureBoxOrganization.Click -= PictureBoxOrganization_Click;
+        Size = new Size(Size.Width, 25);
       }
     }
 

@@ -28,6 +28,7 @@
       this.LabelOrganizationSID = new System.Windows.Forms.Label();
       this.LabelOrganizationRank = new System.Windows.Forms.Label();
       this.PictureBoxOrganizationRank = new System.Windows.Forms.PictureBox();
+      this.LabelMainOrganizationAffiliate = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxOrganization)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxOrganizationRank)).BeginInit();
       this.SuspendLayout();
@@ -79,11 +80,22 @@
       this.PictureBoxOrganizationRank.TabStop = false;
       this.PictureBoxOrganizationRank.WaitOnLoad = true;
       // 
+      // LabelMainOrganizationAffiliate
+      // 
+      this.LabelMainOrganizationAffiliate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+      this.LabelMainOrganizationAffiliate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(157)))), ((int)(((byte)(158)))));
+      this.LabelMainOrganizationAffiliate.Location = new System.Drawing.Point(254, 53);
+      this.LabelMainOrganizationAffiliate.Name = "LabelMainOrganizationAffiliate";
+      this.LabelMainOrganizationAffiliate.Size = new System.Drawing.Size(121, 20);
+      this.LabelMainOrganizationAffiliate.TabIndex = 8;
+      this.LabelMainOrganizationAffiliate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+      // 
       // UserControlOrganization
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.Controls.Add(this.LabelMainOrganizationAffiliate);
       this.Controls.Add(this.LabelOrganizationRank);
       this.Controls.Add(this.LabelOrganizationSID);
       this.Controls.Add(this.PictureBoxOrganization);
@@ -107,5 +119,6 @@
     private Label LabelOrganizationRank;
     internal PictureBox PictureBoxOrganization;
     internal PictureBox PictureBoxOrganizationRank;
+    private Label LabelMainOrganizationAffiliate;
   }
 }
