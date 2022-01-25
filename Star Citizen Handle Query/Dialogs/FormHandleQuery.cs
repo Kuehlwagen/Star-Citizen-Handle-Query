@@ -206,7 +206,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             // Textbox bis zum Ergebnis deaktivieren
             TextBoxHandle.Enabled = false;
             // Handle-Informationen auslesen
-            HandleInfo handleInfo = await GetHandleInfo(e.Control ? true : false);
+            HandleInfo handleInfo = await GetHandleInfo(e.Control);
 
             // UserControl mit Handle-Informationen hinzufügen
             PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation));

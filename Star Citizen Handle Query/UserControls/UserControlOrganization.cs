@@ -30,13 +30,13 @@ namespace Star_Citizen_Handle_Query.UserControls {
       }
 
       LabelMainOrganizationAffiliate.Text = OrganizationIndex == -1 ? "Main Organization" : "Affiliation";
-      string organizationSid = GetString(org?.sid);
+      string organizationSid = UserControlHandle.GetString(org?.sid);
       if ((OrganizationIndex == -1 &&  org?.name != string.Empty) || (OrganizationIndex > -1 && !string.IsNullOrWhiteSpace(organizationSid))) {
-        LabelOrganizationName.Text = GetString(org?.name);
-        LabelOrganizationSID.Text = GetString(organizationSid, "SID: ");
-        LabelOrganizationRank.Text = GetString(org?.rank);
+        LabelOrganizationName.Text = UserControlHandle.GetString(org?.name);
+        LabelOrganizationSID.Text = UserControlHandle.GetString(organizationSid, "SID: ");
+        LabelOrganizationRank.Text = UserControlHandle.GetString(org?.rank);
         if (!string.IsNullOrWhiteSpace(org?.image)) {
-          PictureBoxOrganization.Image = await GetImage(CacheDirectoryType.OrganizationAvatar, org.image, organizationSid);
+          PictureBoxOrganization.Image = await UserControlHandle.GetImage(CacheDirectoryType.OrganizationAvatar, org.image, organizationSid, ProgramSettings.LocalCacheMaxAge);
           PictureBoxOrganization.Cursor = Cursors.Hand;
         }
         if (org?.sid != null && org?.stars >= 0 && org.stars <= 5) {
@@ -52,63 +52,6 @@ namespace Star_Citizen_Handle_Query.UserControls {
         PictureBoxOrganization.Click -= PictureBoxOrganization_Click;
         Size = new Size(Size.Width, 25);
       }
-    }
-
-    private static string GetString(string value, string preValue = "") {
-      return !string.IsNullOrWhiteSpace(value) ? $"{(!string.IsNullOrWhiteSpace(preValue) ? preValue : string.Empty)}{value}" : string.Empty;
-    }
-
-    private async Task<Image> GetImage(CacheDirectoryType imageType, string url, string name) {
-      Image rtnVal = null;
-
-      string filePath = GetImagePath(imageType, url, name);
-      if (!File.Exists(filePath) || new FileInfo(filePath).LastWriteTime < DateTime.Now.AddDays(ProgramSettings.LocalCacheMaxAge * -1)) {
-        using Stream urlStream = await GetImageFromUrl(url);
-        if (urlStream != null) {
-          using FileStream fileStream = new(filePath, FileMode.OpenOrCreate);
-          urlStream.CopyTo(fileStream);
-        }
-      }
-      if (File.Exists(filePath)) {
-        rtnVal = Image.FromFile(filePath);
-      }
-
-      return rtnVal;
-    }
-
-    private static string GetImagePath(CacheDirectoryType imageType, string url, string name) {
-      string rtnVal = string.Empty;
-
-      switch (imageType) {
-        case CacheDirectoryType.HandleAvatar:
-        case CacheDirectoryType.OrganizationAvatar:
-          rtnVal = Path.Combine(GetCachePath(imageType), GetCorrectFileName($"{name}_{url[(url.LastIndexOf("/") + 1)..]}"));
-          break;
-        case CacheDirectoryType.HandleDisplayTitle:
-          rtnVal = Path.Combine(GetCachePath(imageType), GetCorrectFileName($"{name}{url[url.LastIndexOf(".")..]}"));
-          break;
-      }
-
-      return rtnVal;
-    }
-
-    private static string GetCorrectFileName(string name) {
-      string rtnVal = name;
-      foreach (Char c in Path.GetInvalidFileNameChars()) {
-        rtnVal = rtnVal.Replace(c, '-');
-      }
-      return rtnVal;
-    }
-
-    private static async Task<Stream> GetImageFromUrl(string url) {
-      Stream rtnVal = null;
-
-      using HttpClient client = new();
-      try {
-        rtnVal = await client.GetStreamAsync(url);
-      } catch { }
-
-      return rtnVal;
     }
 
     private void PictureBoxOrganization_Click(object sender, EventArgs e) {
