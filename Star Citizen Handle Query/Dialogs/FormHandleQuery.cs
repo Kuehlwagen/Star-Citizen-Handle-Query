@@ -220,9 +220,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
             // Ggf. UserControls mit Affiliate-Informationen hinzufügen
             if (handleInfo?.data != null && handleInfo.data.affiliation != null && handleInfo.data.affiliation.Length > 0) {
-              for (int i = 0; i < handleInfo.data.affiliation.Length; i++) {
-                PanelInfo.Controls.Add(new UserControlOrganization(handleInfo, ProgramSettings, i));
-                Size = new Size(Size.Width, Size.Height + 78);
+              int affiliatesAdded = 0;
+              for (int i = 0; i < handleInfo.data.affiliation.Length && affiliatesAdded < ProgramSettings.AffiliationsMax; i++) {
+                // Prüfen, ob ausgeblendete Affiliationen dargestellt werden sollen
+                if (!string.IsNullOrWhiteSpace(handleInfo.data.affiliation[i].name) || !ProgramSettings.HideRedactedAffiliations) {
+                  PanelInfo.Controls.Add(new UserControlOrganization(handleInfo, ProgramSettings, i));
+                  Size = new Size(Size.Width, Size.Height + 78);
+                  affiliatesAdded++;
+                }
               }
             }
 
