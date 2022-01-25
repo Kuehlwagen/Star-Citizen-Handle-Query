@@ -29,9 +29,13 @@
       "Test_Error": "Fehler bei der Abfrage der API",
       "Test_Information": "Live-Abfragen \u00FCbrig"
     },
+    "Display": {
+      "Language": "Sprache:",
+      "AffiliationsMax": "Affiliationen Maximum:",
+      "HideRedactedAffiliations": "Unkenntliche Affiliationen ausblenden"
+    },
     "Window": {
       "Group_Title": "Fenster",
-      "Language": "Sprache:",
       "Opacity": "Deckkraft:",
       "Opacity_Percent": "%",
       "Global_Hotkey": "Globale Taste:",

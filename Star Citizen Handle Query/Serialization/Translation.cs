@@ -75,6 +75,8 @@
 
     public Translation_Settings_API API { get; set; } = new ();
 
+    public Translation_Settings_Display Display { get; set; } = new();
+
     public Translation_Settings_Window Window { get; set; } = new();
 
     public Translation_Settings_Local_Cache Local_Cache { get; set; } = new();
@@ -113,11 +115,20 @@
   }
 
   [Serializable()]
+  public class Translation_Settings_Display {
+
+    public string Language { get; set; } = "Sprache:";
+
+    public string AffiliationsMax { get; set; } = "Max. Affiliationen:";
+
+    public string HideRedactedAffiliations { get; set; } = "Unkenntliche Affiliationen ausblenden";
+
+  }
+
+  [Serializable()]
   public class Translation_Settings_Window {
 
     public string Group_Title { get; set; } = "Fenster";
-
-    public string Language { get; set; } = "Sprache:";
 
     public string Opacity { get; set; } = "Deckkraft:";
 

@@ -29,9 +29,13 @@
       "Test_Error": "Error requesting API information",
       "Test_Information": "Live Requests left"
     },
+    "Display": {
+      "Language": "Language:",
+      "AffiliationsMax": "Maximum Affiliations:",
+      "HideRedactedAffiliations": "Hide Redacted Affiliations"
+    },
     "Window": {
       "Group_Title": "Window",
-      "Language": "Language:",
       "Opacity": "Opacity:",
       "Opacity_Percent": "%",
       "Global_Hotkey": "Global Hotkey:",

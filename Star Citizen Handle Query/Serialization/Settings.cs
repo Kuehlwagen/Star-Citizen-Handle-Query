@@ -62,6 +62,24 @@
     /// <summary>Gibt an, ob das Hauptfenster via Alt + Tab erreichbar sein soll</summary>
     public bool AltTabEnabled { get; set; } = false;
 
+    /// <summary>Maximal darzustellende Affiliationen</summary>
+    private int _AffiliationsMax = 3;
+    public int AffiliationsMax {
+      get {
+        return _AffiliationsMax;
+      } set {
+        if (value < 0) {
+          value = 0;
+        } else if (_AffiliationsMax > 9) {
+          value = 9;
+        }
+        _AffiliationsMax = value;
+      }
+    }
+
+    /// <summary>Angabe, ob unkenntliche Affiliationen ausgeblendet werden sollen</summary>
+    public bool HideRedactedAffiliations { get; set; } = true;
+
     public object Clone() {
       return MemberwiseClone();
     }

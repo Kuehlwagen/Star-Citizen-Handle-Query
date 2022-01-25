@@ -66,6 +66,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxAlt.Checked = ProgramSettings.GlobalHotkeyModifierAlt;
       CheckBoxUmschalt.Checked = ProgramSettings.GlobalHotkeyModifierShift;
       CheckBoxAltTabEnabled.Checked = ProgramSettings.AltTabEnabled;
+      NumericUpDownAffiliationenMaximum.Value = ProgramSettings.AffiliationsMax;
+      CheckBoxUnkenntlicheAffiliationenAusblenden.Checked = ProgramSettings.HideRedactedAffiliations;
     }
 
     private string[] GetLocalizations() {
@@ -175,6 +177,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       UpdateLocalization();
     }
 
+    private void NumericUpDownAffiliationenMaximum_ValueChanged(object sender, EventArgs e) {
+      ProgramSettings.AffiliationsMax = Convert.ToInt32((sender as NumericUpDown).Value);
+    }
+
+    private void CheckBoxUnkenntlicheAffiliationenAusblenden_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.HideRedactedAffiliations = (sender as CheckBox).Checked;
+    }
+
     private void ButtonStandard_Click(object sender, EventArgs e) {
       ProgramSettings = new() { ApiKey = ProgramSettings.ApiKey, Language = ProgramSettings.Language };
       SetDialogValues();
@@ -225,8 +235,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LabelModusBeschreibung.Text = GetApiModusBeschreibung(ComboBoxApiModus.SelectedIndex);
       ButtonApiTest.Text = CurrentLocalization.Settings.API.Test;
 
+      LabelSprache.Text = CurrentLocalization.Settings.Display.Language;
+      LabelMaxAffiliationen.Text = CurrentLocalization.Settings.Display.AffiliationsMax;
+      CheckBoxUnkenntlicheAffiliationenAusblenden.Text = CurrentLocalization.Settings.Display.HideRedactedAffiliations;
+
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;
-      LabelSprache.Text = CurrentLocalization.Settings.Window.Language;
       LabelFensterDeckkraft.Text = CurrentLocalization.Settings.Window.Opacity;
       LabelFensterDeckkraftProzent.Text = CurrentLocalization.Settings.Window.Opacity_Percent;
       LabelTastenkombination.Text = CurrentLocalization.Settings.Window.Global_Hotkey;
