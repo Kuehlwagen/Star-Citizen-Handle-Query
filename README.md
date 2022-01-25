@@ -44,7 +44,7 @@ Zusätzlich zum Server-Cache der API verwendet dieses Tool einen lokalen Cache, 
 ### Schaltflächen
 - __Speichern:__ Speichert die vorgenommenen Einstellungen und schließt das Einstellungen-Fenster
 - __Schließen:__ Schließt das Einstellungen-Fenster, ohne die vorgenommenen Einstellungen zu speichern
-- __Standard:__ Stellt die Standard-Einstellungen wieder her, mit Ausnahme des API-Schlüssels
+- __Standard:__ Stellt die Standard-Einstellungen wieder her, mit Ausnahme des API-Schlüssels und der Sprache
 
 ## Kontextmenü Taskleiste
 - __Anzeigen:__ Falls das Fenster nicht sichtbar ist, wird es angezeigt und die Handle-Eingabebox erhält den Eingabefokus
