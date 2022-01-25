@@ -42,9 +42,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelUEECitizenRecord.Text = GetString(HandleInfo?.data?.profile?.id);
         LabelEnlistedDate.Text = HandleInfo?.data?.profile?.enlisted.ToString("MMM dd, yyyy", System.Globalization.CultureInfo.InvariantCulture);
       } else {
-        LabelHandle.Text = HandleInfo?.success == 0 && !string.IsNullOrWhiteSpace(HandleInfo?.message) ? HandleInfo.message : ProgramTranslation.Window.Handle_Not_Found;
-        LabelHandle.Location = new Point(3, LabelHandle.Location.Y);
-        LabelHandle.BringToFront();
+        LabelCommunityMoniker.Text = HandleInfo?.success == 0 && !string.IsNullOrWhiteSpace(HandleInfo?.message) ? HandleInfo.message : ProgramTranslation.Window.Handle_Not_Found;
+        LabelCommunityMoniker.Location = new Point(3, LabelHandle.Location.Y + 4);
+        LabelCommunityMoniker.BringToFront();
         Size = new Size(Size.Width, 25);
       }
     }
