@@ -24,7 +24,7 @@ Zusätzlich zum Server-Cache der API verwendet dieses Tool einen lokalen Cache, 
 ### API (starcitizen-api.com)
 - __Schlüssel:__ Hier muss der 32-stellige API-Schlüssel eingetragen werden, den man zugeteilt bekommen hat
 - __Modus:__ Hier kann der Modus der API-Anfragen eingestellt werden, wie die Informationen von der API bereitgestellt werden sollen:
-  - __Live:__ Die Daten werden immer direkt von der Star Citizen Webseite abgerufen
+  - __Live:__ Die Daten werden von der API immer direkt von der Star Citizen Webseite abgerufen
   - __Cache:__ Die Daten werden immer aus dem Servercache der API abgerufen. Liegen die Informationen zu einem Handle nicht im Servercache, werden diese auch nicht empfangen.
   - __Auto:__ Es wird immer erst versucht, die Daten aus dem Servercache zu erhalten. Liegen die Informationen nicht vor, werden sie von der Star Citizen Webseite abgerufen.
   - __Eager:__ Es wird immer erst versucht, die Daten von der Star Citizen Webseite abzurufen. Ist die Star Citizen Webseite gerade nicht erreichbar, werden die Informationen aus dem Servercache der API abgerufen, sofern diese dort vorliegen.
