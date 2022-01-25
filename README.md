@@ -29,12 +29,16 @@ Zusätzlich zum Server-Cache der API verwendet dieses Tool einen lokalen Cache, 
   - __Auto:__ Es wird immer erst versucht, die Daten aus dem Servercache zu erhalten. Liegen die Informationen nicht vor, werden sie von der Star Citizen Webseite abgerufen.
   - __Eager:__ Es wird immer erst versucht, die Daten von der Star Citizen Webseite abzurufen. Ist die Star Citizen Webseite gerade nicht erreichbar, werden die Informationen aus dem Servercache der API abgerufen, sofern diese dort vorliegen.
 - __API-Test:__ Diese Schaltfläche wird aktiviert, wenn ein 32-stelliger API-Schlüssel eingegeben wurde. Bei Betätigung der Schaltfläche wird getestet, ob die API mit dem angegebenen API-Schlüssel funktioniert. Falls der API-Schlüssel valide ist, wird angezeigt, wie viele Live-Abfragen für den aktuellen Tag noch übrig sind. Ist der API-Schlüssel nicht valide, wird dies ebenfalls dargestellt.
-### Fenster
+### Anzeige
 - __Sprache:__ Hier kann die Sprache für das Tool eingestellt werden. Zur Verfügung stehen "Deutsch" und "English".
+- __Affiliationen Maximum:__ Hier kann angegeben werden, wie viele Affiliationen maximal dargestellt werden sollen.
+- __Unkenttliche Affiliationen ausblenden__ Hier kann angegeben werden, ob unkenntlich gemachte Affiliationen ausgeblendet werden sollen
+### Fenster
 - __Deckkraft:__ Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
 - __Globale Taste:__ Hier kann die Taste angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifikatoren (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
 - __Mauseingaben ignorieren:__ Wird diese Einstellung aktiviert, gehen sämtliche Mausklicks durch das Fenster durch in das dahinter liegende Programm.
-- __Erreichbariekt via Alt + Tab:__ Wird diese Einstellunge aktiviert, kann das Fenster via Tastenkobination Alt-Tab erreicht werden.
+- __Erreichbariekt via Alt + Tab:__ Wird diese Einstellung aktiviert, kann das Fenster via Tastenkobination Alt-Tab erreicht werden.
+- __Verwendeten Cache-Typ anzeigen__ Wird diese Einstellung aktiviert, wird neben der Handle-Eingabebox ein Hinweis angezeigt, mit welchem Cache-Typ die Daten geladen wurden (LIVE = Live-Daten vom API-Server, CACHE = Cache, LOCAL = Lokaler Cache)
 ### Lokaler Cache
 - __Maximales Alter:__ Hier kann für den lokalen Cache das maximale Alter in Tagen angegeben werden, wann die Informationen eines bereits zuvor abgefragten Handles erneut via API abgefragt werden sollen. Es können Werte zwischen 0 und 30 Tagen angegeben werden. Die Angabe von 0 Tagen wird die Handle-Informationen immer via API abfragen.
 ### Schaltflächen
@@ -45,12 +49,14 @@ Zusätzlich zum Server-Cache der API verwendet dieses Tool einen lokalen Cache, 
 ## Kontextmenü Taskleiste
 - __Anzeigen:__ Falls das Fenster nicht sichtbar ist, wird es angezeigt und die Handle-Eingabebox erhält den Eingabefokus
 - __Einstellungen:__ Öffnet das Einstellungen-Fenster
+- __Über:__ Öffnet ein Hinweisfenster mit Informationen zur Version des Tools
 - __Lokalen Cache leeren:__ Löscht sämtliche Dateien im lokalen Cache
 - __Neustarten:__ Startet das Tool neu
 - __Beenden:__ Beendet das Tool
 
 ## Hauptfenster
 - Hier kann der eindeutige Name eines Star Citizen Spielers in die Handle-Eingabebox eingegeben werden. Durch die Betätigung der Enter-Taste wird die Abfrage ausgelöst und kurze Zeit später das Ergebnis der Abfrage darunter dargestellt.
+  - Wird währenddessen die Strg-Taste gedrückt gehalten, wird das Auslesen der Handle-Informationen via Live-Modus der API erzwungen.
 - Durch die Betätigung der Esc-Taste wird das Fenster ausgeblendet.
 - Wurde eine globale Taste(nkobination) in den Einstellungen angegeben, kann das Fenster jederzeit mit dieser Taste(nkombination) wieder angezeigt werden.
 - Folgende Funktionen sind nur aktiv, wenn in den Einstellungen in der Gruppe "Fenster" das Kontrollkästchen "Mauseingaben ignorieren" nicht gesetzt ist:
