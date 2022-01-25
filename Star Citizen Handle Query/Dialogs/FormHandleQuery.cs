@@ -3,6 +3,7 @@ using Star_Citizen_Handle_Query.ExternClasses.Star_Citizen_Handle_Query.ExternCl
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 
@@ -79,17 +80,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         Directory.CreateDirectory(localizationPath);
       }
 
-      // Falls noch nicht vorhanden, Datei für die Sprache "Deutsch" erstellen
-      string deutschPath = Path.Combine(localizationPath, "de-DE.json");
-      if (!File.Exists(deutschPath)) {
-        File.WriteAllText(deutschPath, Encoding.UTF8.GetString(Properties.Resources.de_DE), Encoding.Default);
-      }
+      // Datei für die Sprache "Deutsch" erstellen
+      File.WriteAllText(Path.Combine(localizationPath, "de-DE.json"), Encoding.UTF8.GetString(Properties.Resources.de_DE), Encoding.Default);
 
       // Falls noch nicht vorhanden, Datei für die Sprache "English" erstellen
-      string englishPath = Path.Combine(localizationPath, "en-US.json");
-      if (!File.Exists(englishPath)) {
-        File.WriteAllText(englishPath, Encoding.UTF8.GetString(Properties.Resources.en_US), Encoding.Default);
-      }
+      File.WriteAllText(Path.Combine(localizationPath, "en-US.json"), Encoding.UTF8.GetString(Properties.Resources.en_US), Encoding.Default);
     }
 
     internal Translation GetProgramLocalization() {
@@ -117,11 +112,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Sprache für Controls setzen
       LabelHandle.Text = ProgramTranslation.Window.Handle;
       TextBoxHandle.PlaceholderText = ProgramTranslation.Window.Handle_Placeholder;
-      AnzeigenVersteckenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu_Show;
-      EinstellungenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu_Settings;
-      LokalenCacheLeerenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu_Clear_Local_Cache;
-      NeustartenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu_Restart;
-      BeendenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu_Close;
+      AnzeigenVersteckenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Show;
+      EinstellungenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Settings;
+      LokalenCacheLeerenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Clear_Local_Cache;
+      NeustartenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Restart;
+      BeendenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Close;
+      UeberToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.About;
     }
 
     internal Settings GetProgramSettings() {
@@ -440,6 +436,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
+    private void UeberToolStripMenuItem_Click(object sender, EventArgs e) {
+      Version version = Assembly.GetExecutingAssembly().GetName().Version;
+      MessageBox.Show($"{Text} v{version.Major}.{ version.Minor}.{ version.Build} by Kuehlwagen", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
+
     internal static string GetCachePath(CacheDirectoryType type, string handle = "") {
       string rtnVal = string.Empty;
 
@@ -484,6 +485,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         HotKey = null;
       }
     }
+
   }
 
 }

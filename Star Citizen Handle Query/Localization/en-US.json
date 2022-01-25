@@ -4,11 +4,14 @@
     "Handle": "Handle:",
     "Handle_Placeholder": "Insert Handle...",
     "Handle_Not_Found": "Handle not found...",
-    "Context_Menu_Show": "Show",
-    "Context_Menu_Settings": "Settings",
-    "Context_Menu_Clear_Local_Cache": "Clear Local Cache",
-    "Context_Menu_Restart": "Restart",
-    "Context_Menu_Close": "Close",
+    "Context_Menu": {
+      "Show": "Show",
+      "Settings": "Settings",
+      "Clear_Local_Cache": "Clear Local Cache",
+      "Restart": "Restart",
+      "Close": "Close",
+      "About": "About"
+    },
     "MessageBoxes": {
       "API_Key_Missing": "A 32-digit API key must be specified.\r\nProgram is being closed.",
       "Clear_Local_Cache_Question": "Complete Local Cache will be cleared. Continue?",

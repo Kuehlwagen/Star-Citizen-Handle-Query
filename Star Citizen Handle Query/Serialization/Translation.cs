@@ -45,18 +45,25 @@
 
     public string Handle_Not_Found { get; set; } = "Handle nicht gefunden...";
 
-    public string Context_Menu_Show { get; set; } = "Anzeigen";
-
-    public string Context_Menu_Settings { get; set; } = "Einstellungen";
-
-    public string Context_Menu_Clear_Local_Cache { get; set; } = "Lokalen Cache leeren";
-
-    public string Context_Menu_Restart { get; set; } = "Neustarten";
-
-    public string Context_Menu_Close { get; set; } = "Beenden";
+    public Translation_Window_Context_Menu Context_Menu { get; set; } = new();
 
     public Translation_Window_MessageBoxes MessageBoxes { get; set; } = new();
 
+  }
+
+  [Serializable()]
+  public class Translation_Window_Context_Menu {
+    public string Show { get; set; } = "Anzeigen";
+
+    public string Settings { get; set; } = "Einstellungen";
+
+    public string Clear_Local_Cache { get; set; } = "Lokalen Cache leeren";
+
+    public string Restart { get; set; } = "Neustarten";
+
+    public string Close { get; set; } = "Beenden";
+
+    public string About { get; set; } = "Über";
   }
 
   [Serializable()]

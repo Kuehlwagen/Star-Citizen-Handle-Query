@@ -4,11 +4,14 @@
     "Handle": "Handle:",
     "Handle_Placeholder": "Handle eingeben...",
     "Handle_Not_Found": "Handle nicht gefunden...",
-    "Context_Menu_Show": "Anzeigen",
-    "Context_Menu_Settings": "Einstellungen",
-    "Context_Menu_Clear_Local_Cache": "Lokalen Cache leeren",
-    "Context_Menu_Restart": "Neustarten",
-    "Context_Menu_Close":  "Beenden",
+    "Context_Menu": {
+      "Show": "Anzeigen",
+      "Settings": "Einstellungen",
+      "Clear_Local_Cache": "Lokalen Cache leeren",
+      "Restart": "Neustarten",
+      "Close": "Beenden",
+      "About": "\u00DCber"
+    },
     "MessageBoxes": {
       "API_Key_Missing": "Es muss ein 32-stelliger API-Key angegeben werden.\r\nDas Programm wird beendet.",
       "Clear_Local_Cache_Question": "Der lokale Cache wird komplett geleert. Fortfahren?",
