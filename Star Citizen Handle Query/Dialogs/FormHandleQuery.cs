@@ -206,7 +206,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             // Textbox bis zum Ergebnis deaktivieren
             TextBoxHandle.Enabled = false;
             // Handle-Informationen auslesen
-            HandleInfo handleInfo = await GetHandleInfo();
+            HandleInfo handleInfo = await GetHandleInfo(e.Control ? true : false);
 
             // UserControl mit Handle-Informationen hinzufügen
             PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation));
@@ -264,7 +264,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private async Task<HandleInfo> GetHandleInfo() {
+    private async Task<HandleInfo> GetHandleInfo(bool forceLive) {
       HandleInfo rtnVal = null;
 
       // Handle-Informationen aus Datei auslesen
@@ -274,8 +274,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       // Handle-Informationen via API auslesen, wenn die Datei nicht gelesen werden konnte
-      if (rtnVal == null) {
-        string json = await GetApiHandleJson(ProgramSettings.ApiKey, TextBoxHandle.Text);
+      if (rtnVal == null || forceLive) {
+        string json = await GetApiHandleJson(ProgramSettings.ApiKey, TextBoxHandle.Text, forceLive);
         HandleInfo apiHandleInfo = null;
         try {
           apiHandleInfo = JsonSerializer.Deserialize<HandleInfo>(json);
@@ -294,12 +294,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return rtnVal;
     }
 
-    private async Task<string> GetApiHandleJson(string apiKey, string handle) {
+    private async Task<string> GetApiHandleJson(string apiKey, string handle, bool forceLive) {
       using HttpClient client = new();
       // JSON via API herunterladen
       string rtnVal;
       try {
-        rtnVal = await client.GetStringAsync($"https://api.starcitizen-api.com/{apiKey}/v1/{ProgramSettings.ApiMode.ToString().ToLower()}/user/{handle}");
+        ApiMode mode = forceLive ? ApiMode.Live : ProgramSettings.ApiMode;
+        rtnVal = await client.GetStringAsync($"https://api.starcitizen-api.com/{apiKey}/v1/{mode.ToString().ToLower()}/user/{handle}");
       } catch (HttpRequestException reqEx) {
         rtnVal = GetHttpClientError(reqEx.StatusCode);
       } catch (Exception ex) {
