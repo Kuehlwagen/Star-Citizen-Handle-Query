@@ -32,8 +32,9 @@
     },
     "Display": {
       "Language": "Language:",
-      "AffiliationsMax": "Maximum Affiliations:",
-      "HideRedactedAffiliations": "Hide Redacted Affiliations"
+      "Show_Cache_Type": "Show Cache Type",
+      "Affiliations_Max": "Maximum Affiliations:",
+      "Hide_Redacted_Affiliations": "Hide Redacted Affiliations"
     },
     "Window": {
       "Group_Title": "Window",

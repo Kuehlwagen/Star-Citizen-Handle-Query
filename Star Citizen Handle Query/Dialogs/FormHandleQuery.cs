@@ -18,9 +18,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public FormHandleQuery() {
       InitializeComponent();
 
-      // Größe des Fensters verkleinern, da ggf. Mauseingaben getätigt werden könnten
-      Size = new Size(Width, 49);
-
       // Standard-Sprachen erstellen
       CreateDefaultLocalizations();
 
@@ -43,6 +40,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           _ = User32Wrappers.SetWindowLong(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered | (int)User32Wrappers.WS_EX.Transparent);
         }
 
+        if (ProgramSettings.ShowCacheType) {
+          // Cache-Typ anzeigen
+          TextBoxHandle.Size = new Size(251, TextBoxHandle.Height);
+          LabelCacheType.Visible = true;
+        }
+
         // Programm-Sprache auslesen
         ProgramTranslation = GetProgramLocalization();
 
@@ -56,6 +59,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void UpdateAutoComplete() {
+      // Autovervollständigung aktualisieren
       string handleCachePath = GetCachePath(CacheDirectoryType.Handle);
       if (Directory.Exists(handleCachePath)) {
         List<string> autoCompleteSource = new();
@@ -165,6 +169,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void FormHandleQuery_Shown(object sender, EventArgs e) {
+      // Fenster-Größe initlal verkleinern
+      Size = new Size(Width, 31);
+
       // Fenster an die richtige Position bringen
       CenterToScreen();
       Location = new Point(Location.X, 0);
@@ -205,11 +212,29 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           e.SuppressKeyPress = true;
           if (!string.IsNullOrWhiteSpace(TextBoxHandle.Text)) {
             // Ggf. existierendes UserControl entfernen
-            RemoveUserControl();
+            RemoveUserControls();
+            // Cache-Typ leeren
+            LabelCacheType.Text = string.Empty;
             // Textbox bis zum Ergebnis deaktivieren
             TextBoxHandle.Enabled = false;
             // Handle-Informationen auslesen
             HandleInfo handleInfo = await GetHandleInfo(e.Control);
+
+            // Cache-Typ darstellen
+            if (ProgramSettings.ShowCacheType && !string.IsNullOrWhiteSpace(handleInfo?.source)) {
+              LabelCacheType.Text = handleInfo.source.ToUpper();
+              switch (LabelCacheType.Text) {
+                case "LIVE":
+                  LabelCacheType.ForeColor = Color.Green;
+                  break;
+                case "CACHE":
+                  LabelCacheType.ForeColor = Color.Orange;
+                  break;
+                case "LOCAL":
+                  LabelCacheType.ForeColor = Color.OrangeRed;
+                  break;
+              }
+            }
 
             // UserControl mit Handle-Informationen hinzufügen
             PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation));
@@ -218,7 +243,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             // Ggf. UserControl mit Organisation-Informationen hinzufügen
             if (handleInfo?.success == 1 && handleInfo?.data?.organization?.name != null) {
               PanelInfo.Controls.Add(new UserControlOrganization(handleInfo, ProgramSettings, -1));
-              Size = new Size(Size.Width, Size.Height + 78);
+              Size = new Size(Size.Width, Size.Height + (handleInfo.data.organization.name != string.Empty ? 78 : 25));
             }
 
             // Ggf. UserControls mit Affiliate-Informationen hinzufügen
@@ -228,7 +253,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                 // Prüfen, ob ausgeblendete Affiliationen dargestellt werden sollen
                 if (!string.IsNullOrWhiteSpace(handleInfo.data.affiliation[i].name) || !ProgramSettings.HideRedactedAffiliations) {
                   PanelInfo.Controls.Add(new UserControlOrganization(handleInfo, ProgramSettings, i));
-                  Size = new Size(Size.Width, Size.Height + 78);
+                  Size = new Size(Size.Width, Size.Height + (!string.IsNullOrWhiteSpace(handleInfo.data.affiliation[i].name) ? 78 : 25));
                   affiliatesAdded++;
                 }
               }
@@ -250,7 +275,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private void RemoveUserControl() {
+    private void RemoveUserControls() {
       // Ggf. UserControl entfernen
       if (PanelInfo.Controls.Count > 0) {
         foreach (UserControl control in PanelInfo.Controls) {
@@ -265,6 +290,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         }
         PanelInfo.Controls.Clear();
       }
+      Size = new Size(Width, 31);
     }
 
     private async Task<HandleInfo> GetHandleInfo(bool forceLive) {
@@ -274,6 +300,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       string handleJsonPath = GetCachePath(CacheDirectoryType.Handle, TextBoxHandle.Text);
       if (File.Exists(handleJsonPath) && new FileInfo(handleJsonPath).LastWriteTime > DateTime.Now.AddDays(ProgramSettings.LocalCacheMaxAge * -1)) {
         rtnVal = JsonSerializer.Deserialize<HandleInfo>(File.ReadAllText(handleJsonPath, Encoding.UTF8));
+        if (rtnVal != null) {
+          rtnVal.source = "local";
+        }
       }
 
       // Handle-Informationen via API auslesen, wenn die Datei nicht gelesen werden konnte
@@ -375,7 +404,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void ClearCache(bool onlyExpired) {
       // Ggf. UserControl entfernen
-      RemoveUserControl();
+      RemoveUserControls();
 
       bool weiter = true;
       if (!onlyExpired) {
@@ -445,7 +474,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void RestartProgram() {
-      RemoveUserControl();
+      RemoveUserControls();
       Application.Restart();
     }
 

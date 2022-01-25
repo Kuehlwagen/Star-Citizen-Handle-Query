@@ -26,6 +26,7 @@
       this.components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormHandleQuery));
       this.PanelHandleQuery = new System.Windows.Forms.Panel();
+      this.LabelCacheType = new System.Windows.Forms.Label();
       this.TextBoxHandle = new System.Windows.Forms.TextBox();
       this.LabelHandle = new System.Windows.Forms.Label();
       this.PanelInfo = new System.Windows.Forms.FlowLayoutPanel();
@@ -46,12 +47,24 @@
       this.PanelHandleQuery.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.PanelHandleQuery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.PanelHandleQuery.Controls.Add(this.LabelCacheType);
       this.PanelHandleQuery.Controls.Add(this.TextBoxHandle);
       this.PanelHandleQuery.Controls.Add(this.LabelHandle);
       this.PanelHandleQuery.Location = new System.Drawing.Point(1, 1);
       this.PanelHandleQuery.Name = "PanelHandleQuery";
-      this.PanelHandleQuery.Size = new System.Drawing.Size(373, 46);
+      this.PanelHandleQuery.Size = new System.Drawing.Size(373, 29);
       this.PanelHandleQuery.TabIndex = 0;
+      // 
+      // LabelCacheType
+      // 
+      this.LabelCacheType.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+      this.LabelCacheType.Image = global::Star_Citizen_Handle_Query.Properties.Resources.Info_Background;
+      this.LabelCacheType.Location = new System.Drawing.Point(310, 4);
+      this.LabelCacheType.Name = "LabelCacheType";
+      this.LabelCacheType.Size = new System.Drawing.Size(60, 21);
+      this.LabelCacheType.TabIndex = 3;
+      this.LabelCacheType.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+      this.LabelCacheType.Visible = false;
       // 
       // TextBoxHandle
       // 
@@ -60,11 +73,11 @@
       this.TextBoxHandle.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
       this.TextBoxHandle.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
       this.TextBoxHandle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.TextBoxHandle.Location = new System.Drawing.Point(64, 11);
+      this.TextBoxHandle.Location = new System.Drawing.Point(55, 3);
       this.TextBoxHandle.MaxLength = 20;
       this.TextBoxHandle.Name = "TextBoxHandle";
       this.TextBoxHandle.PlaceholderText = "Handle eingeben...";
-      this.TextBoxHandle.Size = new System.Drawing.Size(296, 23);
+      this.TextBoxHandle.Size = new System.Drawing.Size(315, 23);
       this.TextBoxHandle.TabIndex = 1;
       this.TextBoxHandle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxHandle_KeyDown);
       // 
@@ -72,7 +85,7 @@
       // 
       this.LabelHandle.AutoSize = true;
       this.LabelHandle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelHandle.Location = new System.Drawing.Point(9, 14);
+      this.LabelHandle.Location = new System.Drawing.Point(0, 6);
       this.LabelHandle.Name = "LabelHandle";
       this.LabelHandle.Size = new System.Drawing.Size(49, 15);
       this.LabelHandle.TabIndex = 0;
@@ -85,7 +98,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.PanelInfo.BackColor = System.Drawing.Color.Lime;
       this.PanelInfo.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.PanelInfo.Location = new System.Drawing.Point(1, 46);
+      this.PanelInfo.Location = new System.Drawing.Point(1, 31);
       this.PanelInfo.Margin = new System.Windows.Forms.Padding(0);
       this.PanelInfo.Name = "PanelInfo";
       this.PanelInfo.Size = new System.Drawing.Size(373, 85);
@@ -157,7 +170,7 @@
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.Lime;
-      this.ClientSize = new System.Drawing.Size(375, 132);
+      this.ClientSize = new System.Drawing.Size(375, 117);
       this.Controls.Add(this.PanelInfo);
       this.Controls.Add(this.PanelHandleQuery);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
@@ -192,5 +205,6 @@
     private ToolStripMenuItem EinstellungenToolStripMenuItem;
     private ToolStripMenuItem LokalenCacheLeerenToolStripMenuItem;
     private ToolStripMenuItem NeustartenToolStripMenuItem;
+    private Label LabelCacheType;
   }
 }
