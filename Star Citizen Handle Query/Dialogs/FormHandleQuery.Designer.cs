@@ -99,7 +99,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.PanelInfo.BackColor = System.Drawing.Color.Lime;
       this.PanelInfo.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.PanelInfo.Location = new System.Drawing.Point(1, 31);
+      this.PanelInfo.Location = new System.Drawing.Point(1, 30);
       this.PanelInfo.Margin = new System.Windows.Forms.Padding(0);
       this.PanelInfo.Name = "PanelInfo";
       this.PanelInfo.Size = new System.Drawing.Size(373, 85);
@@ -179,7 +179,7 @@
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.Lime;
-      this.ClientSize = new System.Drawing.Size(375, 117);
+      this.ClientSize = new System.Drawing.Size(375, 116);
       this.Controls.Add(this.PanelInfo);
       this.Controls.Add(this.PanelHandleQuery);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
