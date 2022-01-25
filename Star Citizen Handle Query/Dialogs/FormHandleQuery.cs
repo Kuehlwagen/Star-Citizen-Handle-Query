@@ -48,6 +48,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
         // Sprache für Controls setzen
         SetProgramLocalization();
+
+        // Veraltete Cache-Dateien löschen
+        ClearCache(true);
       }
 
     }
@@ -367,28 +370,42 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void LokalenCacheLeerenToolStripMenuItem_Click(object sender, EventArgs e) {
-      DeleteCache();
+      ClearCache(false);
     }
 
-    private void DeleteCache() {
+    private void ClearCache(bool onlyExpired) {
       // Ggf. UserControl entfernen
       RemoveUserControl();
-      // Cache leeren
-      DeleteDirectoryFiles(CacheDirectoryType.Handle);
-      DeleteDirectoryFiles(CacheDirectoryType.HandleAvatar);
-      DeleteDirectoryFiles(CacheDirectoryType.HandleDisplayTitle);
-      DeleteDirectoryFiles(CacheDirectoryType.OrganizationAvatar);
-      MessageBox.Show("Der lokale Cache wurde geleert", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+      bool weiter = true;
+      if (!onlyExpired) {
+        weiter = MessageBox.Show(ProgramTranslation.Window.MessageBoxes.Clear_Local_Cache_Question,
+          Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes;
+      }
+
+      if (weiter) {
+        // Cache leeren
+        DeleteDirectoryFiles(CacheDirectoryType.Handle, onlyExpired);
+        DeleteDirectoryFiles(CacheDirectoryType.HandleAvatar, onlyExpired);
+        DeleteDirectoryFiles(CacheDirectoryType.HandleDisplayTitle, onlyExpired);
+        DeleteDirectoryFiles(CacheDirectoryType.OrganizationAvatar, onlyExpired);
+
+        if (!onlyExpired) {
+          MessageBox.Show(ProgramTranslation.Window.MessageBoxes.Local_Cache_Cleared, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+      }
     }
 
-    private static void DeleteDirectoryFiles(CacheDirectoryType type) {
+    private void DeleteDirectoryFiles(CacheDirectoryType type, bool onlyExpired) {
       // Dateien aus dem Verzeichnis löschen
       string cachePath = GetCachePath(type);
       if (Directory.Exists(cachePath)) {
         foreach (string filePath in Directory.GetFiles(cachePath)) {
           try {
-            File.SetAttributes(filePath, FileAttributes.Normal);
-            File.Delete(filePath);
+            if (!onlyExpired || new FileInfo(filePath).LastWriteTime < DateTime.Now.AddDays(ProgramSettings.LocalCacheMaxAge * -1)) {
+              File.SetAttributes(filePath, FileAttributes.Normal);
+              File.Delete(filePath);
+            }
           } catch { }
         }
       }

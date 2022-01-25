@@ -11,7 +11,8 @@
     "Context_Menu_Close": "Close",
     "MessageBoxes": {
       "API_Key_Missing": "A 32-digit API key must be specified.\r\nProgram is being closed.",
-      "Local_Cache_Emptied": "Local Cache was emptied"
+      "Clear_Local_Cache_Question": "Complete Local Cache will be cleared. Continue?",
+      "Local_Cache_Cleared": "Local Cache was cleared"
     }
   },
   "Settings": {

@@ -11,7 +11,8 @@
     "Context_Menu_Close":  "Beenden",
     "MessageBoxes": {
       "API_Key_Missing": "Es muss ein 32-stelliger API-Key angegeben werden.\r\nDas Programm wird beendet.",
-      "Local_Cache_Emptied": "Der lokale Cache wurde geleert"
+      "Clear_Local_Cache_Question": "Der lokale Cache wird komplett geleert. Fortfahren?",
+      "Local_Cache_Cleared": "Der lokale Cache wurde geleert"
     }
   },
   "Settings": {

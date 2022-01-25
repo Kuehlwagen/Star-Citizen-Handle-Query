@@ -64,7 +64,9 @@
 
     public string API_Key_Missing { get; set; } = "Es muss ein 32-stelliger API-Key angegeben werden.\r\nDas Programm wird beendet.";
 
-    public string Local_Cache_Emptied { get; set; } = "Der lokale Cache wurde geleert";
+    public string Clear_Local_Cache_Question { get; set; } = "Der komplette lokale Cache wird geleert. Fortfahren?";
+
+    public string Local_Cache_Cleared { get; set; } = "Der lokale Cache wurde geleert";
 
   }
 
