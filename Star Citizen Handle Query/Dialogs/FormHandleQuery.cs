@@ -388,7 +388,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void EinstellungenToolStripMenuItem_Click(object sender, EventArgs e) {
       // Einstellungen anzeigen
+      EinstellungenToolStripMenuItem.Enabled = false;
       ShowProperties(true);
+      EinstellungenToolStripMenuItem.Enabled = true;
     }
 
     private Settings ShowProperties(bool mitProgramSettings = false) {
@@ -408,7 +410,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void LokalenCacheLeerenToolStripMenuItem_Click(object sender, EventArgs e) {
+      // Lokalen Cache leeren
+      LokalenCacheLeerenToolStripMenuItem.Enabled = false;
       ClearCache(false);
+      LokalenCacheLeerenToolStripMenuItem.Enabled = true;
     }
 
     private void ClearCache(bool onlyExpired) {
@@ -450,8 +455,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void UeberToolStripMenuItem_Click(object sender, EventArgs e) {
+      // Über-Hinweismeldung anzeigen
+      UeberToolStripMenuItem.Enabled = false;
       Version version = Assembly.GetExecutingAssembly().GetName().Version;
       MessageBox.Show($"{Text} v{version.Major}.{ version.Minor}.{ version.Build} by Kuehlwagen", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+      UeberToolStripMenuItem.Enabled = true;
     }
 
     internal static string GetCachePath(CacheDirectoryType type, string handle = "") {
