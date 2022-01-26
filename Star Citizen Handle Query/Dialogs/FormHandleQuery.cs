@@ -514,9 +514,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             try {
               using FileStream fileStream = new(filePath, FileMode.OpenOrCreate);
               urlStream.CopyTo(fileStream);
-            } catch (Exception ex) {
-              MessageBox.Show(ex.Message);
-            }
+            } catch { }
           }
         }
         if (File.Exists(filePath)) {
