@@ -50,7 +50,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     private void CreateHandleJSON(string handle) {
       string jsonPath = GetCachePath(CacheDirectoryType.Handle, handle);
-      if (!File.Exists(jsonPath) || new FileInfo(jsonPath).LastWriteTime < DateTime.Now.AddDays(ProgramSettings.LocalCacheMaxAge * -1)) {
+      if (ForceLive || !File.Exists(jsonPath) || new FileInfo(jsonPath).LastWriteTime < DateTime.Now.AddDays(ProgramSettings.LocalCacheMaxAge * -1)) {
         string handleJson = JsonSerializer.Serialize(HandleInfo, new JsonSerializerOptions() { WriteIndented = true });
         if (!string.IsNullOrWhiteSpace(handleJson)) {
           File.WriteAllText(jsonPath, handleJson, Encoding.UTF8);
