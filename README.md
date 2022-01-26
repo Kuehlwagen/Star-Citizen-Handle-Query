@@ -24,7 +24,7 @@ Zusätzlich zum Server-Cache der API verwendet dieses Tool einen lokalen Cache, 
 ### API (starcitizen-api.com)
 - __Schlüssel:__ Hier muss der 32-stellige API-Schlüssel eingetragen werden, den man zugeteilt bekommen hat
 - __Modus:__ Hier kann der Modus der API-Anfragen eingestellt werden, wie die Informationen von der API bereitgestellt werden sollen:
-  - __Live:__ Die Daten werden immer direkt von der Star Citizen Webseite abgerufen
+  - __Live:__ Die Daten werden von der API immer direkt von der Star Citizen Webseite abgerufen
   - __Cache:__ Die Daten werden immer aus dem Servercache der API abgerufen. Liegen die Informationen zu einem Handle nicht im Servercache, werden diese auch nicht empfangen.
   - __Auto:__ Es wird immer erst versucht, die Daten aus dem Servercache zu erhalten. Liegen die Informationen nicht vor, werden sie von der Star Citizen Webseite abgerufen.
   - __Eager:__ Es wird immer erst versucht, die Daten von der Star Citizen Webseite abzurufen. Ist die Star Citizen Webseite gerade nicht erreichbar, werden die Informationen aus dem Servercache der API abgerufen, sofern diese dort vorliegen.
@@ -32,19 +32,19 @@ Zusätzlich zum Server-Cache der API verwendet dieses Tool einen lokalen Cache, 
 ### Anzeige
 - __Sprache:__ Hier kann die Sprache für das Tool eingestellt werden. Zur Verfügung stehen "Deutsch" und "English".
 - __Affiliationen Maximum:__ Hier kann angegeben werden, wie viele Affiliationen maximal dargestellt werden sollen.
-- __Unkenttliche Affiliationen ausblenden__ Hier kann angegeben werden, ob unkenntlich gemachte Affiliationen ausgeblendet werden sollen
+- __Unkenntliche Affiliationen ausblenden:__ Hier kann angegeben werden, ob unkenntlich gemachte Affiliationen ausgeblendet werden sollen
 ### Fenster
 - __Deckkraft:__ Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
 - __Globale Taste:__ Hier kann die Taste angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifikatoren (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
 - __Mauseingaben ignorieren:__ Wird diese Einstellung aktiviert, gehen sämtliche Mausklicks durch das Fenster durch in das dahinter liegende Programm.
 - __Erreichbariekt via Alt + Tab:__ Wird diese Einstellung aktiviert, kann das Fenster via Tastenkobination Alt-Tab erreicht werden.
-- __Verwendeten Cache-Typ anzeigen__ Wird diese Einstellung aktiviert, wird neben der Handle-Eingabebox ein Hinweis angezeigt, mit welchem Cache-Typ die Daten geladen wurden (LIVE = Live-Daten vom API-Server, CACHE = Cache, LOCAL = Lokaler Cache)
+- __Verwendeten Cache-Typ anzeigen:__ Wird diese Einstellung aktiviert, wird neben der Handle-Eingabebox ein Hinweis angezeigt, mit welchem Cache-Typ die Daten geladen wurden (LIVE = Live-Daten vom API-Server, CACHE = API Server-Cache, LOCAL = Lokaler Cache)
 ### Lokaler Cache
 - __Maximales Alter:__ Hier kann für den lokalen Cache das maximale Alter in Tagen angegeben werden, wann die Informationen eines bereits zuvor abgefragten Handles erneut via API abgefragt werden sollen. Es können Werte zwischen 0 und 30 Tagen angegeben werden. Die Angabe von 0 Tagen wird die Handle-Informationen immer via API abfragen.
 ### Schaltflächen
 - __Speichern:__ Speichert die vorgenommenen Einstellungen und schließt das Einstellungen-Fenster
 - __Schließen:__ Schließt das Einstellungen-Fenster, ohne die vorgenommenen Einstellungen zu speichern
-- __Standard:__ Stellt die Standard-Einstellungen wieder her, mit Ausnahme des API-Schlüssels
+- __Standard:__ Stellt die Standard-Einstellungen wieder her, mit Ausnahme des API-Schlüssels und der Sprache
 
 ## Kontextmenü Taskleiste
 - __Anzeigen:__ Falls das Fenster nicht sichtbar ist, wird es angezeigt und die Handle-Eingabebox erhält den Eingabefokus
