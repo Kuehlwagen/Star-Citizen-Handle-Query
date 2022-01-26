@@ -56,7 +56,7 @@ Zusätzlich zum Server-Cache der API verwendet dieses Tool einen lokalen Cache, 
 
 ## Hauptfenster
 - Hier kann der eindeutige Name eines Star Citizen Spielers in die Handle-Eingabebox eingegeben werden. Durch die Betätigung der Enter-Taste wird die Abfrage ausgelöst und kurze Zeit später das Ergebnis der Abfrage darunter dargestellt.
-  - Wird währenddessen die Strg-Taste gedrückt gehalten, wird das Auslesen der Handle-Informationen via Live-Modus der API erzwungen.
+  - Wird währenddessen die Strg-Taste gedrückt gehalten, wird das Auslesen der Handle-Informationen inklusive Avatare (Handle, Organisation und Affiliationen) via Live-Modus der API erzwungen.
 - Durch die Betätigung der Esc-Taste wird das Fenster ausgeblendet.
 - Wurde eine globale Taste(nkobination) in den Einstellungen angegeben, kann das Fenster jederzeit mit dieser Taste(nkombination) wieder angezeigt werden.
 - Folgende Funktionen sind nur aktiv, wenn in den Einstellungen in der Gruppe "Fenster" das Kontrollkästchen "Mauseingaben ignorieren" nicht gesetzt ist:
