@@ -30,9 +30,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelOrganizationRank.Text = GetString(OrganizationInfo?.rank);
         if (!string.IsNullOrWhiteSpace(OrganizationInfo?.image)) {
           PictureBoxOrganization.Image = await GetImage(CacheDirectoryType.OrganizationAvatar, OrganizationInfo.image, organizationSid, ProgramSettings.LocalCacheMaxAge, ForceLive);
-          if (PictureBoxOrganization.Image != null) {
-            PictureBoxOrganization.Cursor = Cursors.Hand;
-          }
+          PictureBoxOrganization.Cursor = Cursors.Hand;
         }
         if (OrganizationInfo?.sid != null && OrganizationInfo?.stars >= 0 && OrganizationInfo.stars <= 5) {
           PictureBoxOrganizationRank.Image = Properties.Resources.ResourceManager.GetObject($"OrganizationRank{OrganizationInfo.stars}") as Image;

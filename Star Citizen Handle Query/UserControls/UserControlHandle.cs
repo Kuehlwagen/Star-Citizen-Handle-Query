@@ -27,9 +27,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
         CreateHandleJSON(handle);
         if (!string.IsNullOrWhiteSpace(HandleInfo?.data?.profile?.image)) {
           PictureBoxHandleAvatar.Image = await GetImage(CacheDirectoryType.HandleAvatar, HandleInfo.data.profile.image, handle, ProgramSettings.LocalCacheMaxAge, ForceLive);
-          if (PictureBoxHandleAvatar.Image != null) {
-            PictureBoxHandleAvatar.Cursor = Cursors.Hand;
-          }
+          PictureBoxHandleAvatar.Cursor = Cursors.Hand;
         }
         if (!string.IsNullOrWhiteSpace(HandleInfo?.data?.profile?.badge_image)) {
           PictureBoxDisplayTitle.Image = await GetImage(CacheDirectoryType.HandleDisplayTitle, HandleInfo.data.profile.badge_image, HandleInfo?.data?.profile?.badge, ProgramSettings.LocalCacheMaxAge);
