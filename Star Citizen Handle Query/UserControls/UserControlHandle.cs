@@ -11,26 +11,25 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private readonly HandleInfo HandleInfo;
     private readonly Settings ProgramSettings;
     private readonly Translation ProgramTranslation;
+    private readonly bool ForceLive;
 
-    public UserControlHandle(HandleInfo handleInfo, Settings programSettings, Translation programTranslation) {
+    public UserControlHandle(HandleInfo handleInfo, Settings programSettings, Translation programTranslation, bool forceLive) {
       InitializeComponent();
       HandleInfo = handleInfo;
       ProgramSettings = programSettings;
       ProgramTranslation = programTranslation;
+      ForceLive = forceLive;
     }
 
     private async void UserControlHandle_Load(object sender, EventArgs e) {
-      CreateDirectory(CacheDirectoryType.Handle);
-      CreateDirectory(CacheDirectoryType.HandleAvatar);
-      CreateDirectory(CacheDirectoryType.HandleDisplayTitle);
-      CreateDirectory(CacheDirectoryType.OrganizationAvatar);
-
       if (HandleInfo?.success == 1 && HandleInfo?.data?.profile != null) {
         string handle = GetString(HandleInfo?.data?.profile?.handle);
         CreateHandleJSON(handle);
         if (!string.IsNullOrWhiteSpace(HandleInfo?.data?.profile?.image)) {
-          PictureBoxHandleAvatar.Image = await GetImage(CacheDirectoryType.HandleAvatar, HandleInfo.data.profile.image, handle, ProgramSettings.LocalCacheMaxAge);
-          PictureBoxHandleAvatar.Cursor = Cursors.Hand;
+          PictureBoxHandleAvatar.Image = await GetImage(CacheDirectoryType.HandleAvatar, HandleInfo.data.profile.image, handle, ProgramSettings.LocalCacheMaxAge, ForceLive);
+          if (PictureBoxHandleAvatar.Image != null) {
+            PictureBoxHandleAvatar.Cursor = Cursors.Hand;
+          }
         }
         if (!string.IsNullOrWhiteSpace(HandleInfo?.data?.profile?.badge_image)) {
           PictureBoxDisplayTitle.Image = await GetImage(CacheDirectoryType.HandleDisplayTitle, HandleInfo.data.profile.badge_image, HandleInfo?.data?.profile?.badge, ProgramSettings.LocalCacheMaxAge);
@@ -56,72 +55,6 @@ namespace Star_Citizen_Handle_Query.UserControls {
         if (!string.IsNullOrWhiteSpace(handleJson)) {
           File.WriteAllText(jsonPath, handleJson, Encoding.UTF8);
         }
-      }
-    }
-
-    public static string GetString(string value, string preValue = "") {
-      return !string.IsNullOrWhiteSpace(value) ? $"{(!string.IsNullOrWhiteSpace(preValue) ? preValue : string.Empty)}{value}" : string.Empty;
-    }
-
-    public static async Task<Image> GetImage(CacheDirectoryType imageType, string url, string name, int localCacheMaxAge) {
-      Image rtnVal = null;
-
-      if (url.Count(x => x == '/') > 2) {
-        string filePath = GetImagePath(imageType, url, name);
-        if (!File.Exists(filePath) || new FileInfo(filePath).LastWriteTime < DateTime.Now.AddDays(localCacheMaxAge * -1)) {
-          using Stream urlStream = await GetImageFromUrl(url);
-          if (urlStream != null) {
-            using FileStream fileStream = new(filePath, FileMode.OpenOrCreate);
-            urlStream.CopyTo(fileStream);
-          }
-        }
-        if (File.Exists(filePath)) {
-          rtnVal = Image.FromFile(filePath);
-        }
-      }
-
-      return rtnVal;
-    }
-
-    public static string GetImagePath(CacheDirectoryType imageType, string url, string name) {
-      string rtnVal = string.Empty;
-
-      switch (imageType) {
-        case CacheDirectoryType.HandleAvatar:
-        case CacheDirectoryType.OrganizationAvatar:
-          rtnVal = Path.Combine(GetCachePath(imageType), GetCorrectFileName($"{name}_{url[(url.LastIndexOf("/") + 1)..]}"));
-          break;
-        case CacheDirectoryType.HandleDisplayTitle:
-          rtnVal = Path.Combine(GetCachePath(imageType), GetCorrectFileName($"{name}{url[url.LastIndexOf(".")..]}"));
-          break;
-      }
-
-      return rtnVal;
-    }
-
-    public static string GetCorrectFileName(string name) {
-      string rtnVal = name;
-      foreach (Char c in Path.GetInvalidFileNameChars()) {
-        rtnVal = rtnVal.Replace(c, '-');
-      }
-      return rtnVal;
-    }
-
-    public static async Task<Stream> GetImageFromUrl(string url) {
-      Stream rtnVal = null;
-
-      using HttpClient client = new();
-      try {
-        rtnVal = await client.GetStreamAsync(url);
-      } catch { }
-
-      return rtnVal;
-    }
-
-    public static void CreateDirectory(CacheDirectoryType imageType) {
-      string directoryPath = Path.Combine(Application.StartupPath, GetCachePath(imageType));
-      if (!Directory.Exists(directoryPath)) {
-        Directory.CreateDirectory(Path.Combine(Application.StartupPath, directoryPath));
       }
     }
 

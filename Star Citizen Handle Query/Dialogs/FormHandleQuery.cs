@@ -206,6 +206,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       switch (e.KeyCode) {
         case Keys.Enter:
           e.SuppressKeyPress = true;
+          bool forceLive = e.Control;
           if (!string.IsNullOrWhiteSpace(TextBoxHandle.Text)) {
             // Ggf. existierendes UserControl entfernen
             RemoveUserControls();
@@ -214,7 +215,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             // Textbox bis zum Ergebnis deaktivieren
             TextBoxHandle.Enabled = false;
             // Handle-Informationen auslesen
-            HandleInfo handleInfo = await GetHandleInfo(e.Control);
+            HandleInfo handleInfo = await GetHandleInfo(forceLive);
 
             // Cache-Typ darstellen
             if (ProgramSettings.ShowCacheType && !string.IsNullOrWhiteSpace(handleInfo?.source)) {
@@ -232,13 +233,19 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               }
             }
 
+            // Ggf. Cache-Verzeichnisse erstellen
+            CreateDirectory(CacheDirectoryType.Handle);
+            CreateDirectory(CacheDirectoryType.HandleAvatar);
+            CreateDirectory(CacheDirectoryType.HandleDisplayTitle);
+            CreateDirectory(CacheDirectoryType.OrganizationAvatar);
+
             // UserControl mit Handle-Informationen hinzufügen
-            PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation));
+            PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation, forceLive));
             Size = new Size(Size.Width, Size.Height + 78);
 
             // Ggf. UserControl mit Organisation-Informationen hinzufügen
             if (handleInfo?.success == 1 && handleInfo?.data?.organization?.name != null) {
-              PanelInfo.Controls.Add(new UserControlOrganization(handleInfo, ProgramSettings, -1));
+              PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.data.organization, ProgramSettings, true, forceLive));
               Size = new Size(Size.Width, Size.Height + (handleInfo.data.organization.name != string.Empty ? 78 : 25));
             }
 
@@ -248,7 +255,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               for (int i = 0; i < handleInfo.data.affiliation.Length && affiliatesAdded < ProgramSettings.AffiliationsMax; i++) {
                 // Prüfen, ob ausgeblendete Affiliationen dargestellt werden sollen
                 if (!string.IsNullOrWhiteSpace(handleInfo.data.affiliation[i].name) || !ProgramSettings.HideRedactedAffiliations) {
-                  PanelInfo.Controls.Add(new UserControlOrganization(handleInfo, ProgramSettings, i));
+                  PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.data.affiliation[i], ProgramSettings, false, forceLive));
                   Size = new Size(Size.Width, Size.Height + (!string.IsNullOrWhiteSpace(handleInfo.data.affiliation[i].name) ? 78 : 25));
                   affiliatesAdded++;
                 }
@@ -274,15 +281,21 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void RemoveUserControls() {
       // Ggf. UserControl entfernen
       if (PanelInfo.Controls.Count > 0) {
-        foreach (UserControl control in PanelInfo.Controls) {
+        for (int i = PanelInfo.Controls.Count - 1; i >= 0; i--) {
+          Control control = PanelInfo.Controls[i];
           if (control is UserControlHandle ctrlHandle) {
             ctrlHandle.PictureBoxHandleAvatar.Image?.Dispose();
+            ctrlHandle.PictureBoxHandleAvatar.Image = null;
             ctrlHandle.PictureBoxDisplayTitle.Image?.Dispose();
+            ctrlHandle.PictureBoxDisplayTitle.Image = null;
+            ctrlHandle.Dispose();
           } else if (control is UserControlOrganization ctrlOrganization) {
             ctrlOrganization.PictureBoxOrganization.Image?.Dispose();
+            ctrlOrganization.PictureBoxOrganization.Image = null;
             ctrlOrganization.PictureBoxOrganizationRank.Image?.Dispose();
+            ctrlOrganization.PictureBoxOrganizationRank.Image = null;
+            ctrlOrganization.Dispose();
           }
-          control.Dispose();
         }
         PanelInfo.Controls.Clear();
       }
@@ -483,6 +496,74 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (HotKey?.HookedKeys?.Count > 0) {
         HotKey.Unhook();
         HotKey = null;
+      }
+    }
+
+    public static string GetString(string value, string preValue = "") {
+      return !string.IsNullOrWhiteSpace(value) ? $"{(!string.IsNullOrWhiteSpace(preValue) ? preValue : string.Empty)}{value}" : string.Empty;
+    }
+
+    public static async Task<Image> GetImage(CacheDirectoryType imageType, string url, string name, int localCacheMaxAge, bool forceLive = false) {
+      Image rtnVal = null;
+
+      if (url.Count(x => x == '/') > 2) {
+        string filePath = GetImagePath(imageType, url, name);
+        if (forceLive || !File.Exists(filePath) || new FileInfo(filePath).LastWriteTime < DateTime.Now.AddDays(localCacheMaxAge * -1)) {
+          using Stream urlStream = await GetImageFromUrl(url);
+          if (urlStream != null) {
+            try {
+              using FileStream fileStream = new(filePath, FileMode.OpenOrCreate);
+              urlStream.CopyTo(fileStream);
+            } catch (Exception ex) {
+              MessageBox.Show(ex.Message);
+            }
+          }
+        }
+        if (File.Exists(filePath)) {
+          rtnVal = Image.FromFile(filePath);
+        }
+      }
+
+      return rtnVal;
+    }
+
+    public static string GetImagePath(CacheDirectoryType imageType, string url, string name) {
+      string rtnVal = string.Empty;
+
+      switch (imageType) {
+        case CacheDirectoryType.HandleAvatar:
+        case CacheDirectoryType.OrganizationAvatar:
+        case CacheDirectoryType.HandleDisplayTitle:
+          rtnVal = Path.Combine(GetCachePath(imageType), GetCorrectFileName($"{name}{url[url.LastIndexOf(".")..]}"));
+          break;
+      }
+
+      return rtnVal;
+    }
+
+    public static string GetCorrectFileName(string name) {
+      string rtnVal = name;
+      foreach (Char c in Path.GetInvalidFileNameChars()) {
+        rtnVal = rtnVal.Replace(c, '-');
+      }
+      return rtnVal;
+    }
+
+    public static async Task<Stream> GetImageFromUrl(string url) {
+      Stream rtnVal = null;
+
+      using HttpClient client = new();
+      try {
+        rtnVal = await client.GetStreamAsync(url);
+      } catch { }
+
+      return rtnVal;
+    }
+
+    public static void CreateDirectory(CacheDirectoryType imageType) {
+      string directoryPath = Path.Combine(Application.StartupPath, GetCachePath(imageType));
+      if (!Directory.Exists(directoryPath)) {
+        Directory.CreateDirectory(Path.Combine(Application.StartupPath, directoryPath));
       }
     }
 
