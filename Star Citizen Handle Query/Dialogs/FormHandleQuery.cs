@@ -417,9 +417,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void ClearCache(bool onlyExpired) {
-      // Ggf. UserControl entfernen
-      RemoveUserControls();
-
       bool weiter = true;
       if (!onlyExpired) {
         weiter = MessageBox.Show(ProgramTranslation.Window.MessageBoxes.Clear_Local_Cache_Question,
@@ -427,6 +424,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       if (weiter) {
+        // Ggf. UserControl entfernen
+        RemoveUserControls();
+
         // Cache leeren
         DeleteDirectoryFiles(CacheDirectoryType.Handle, onlyExpired);
         DeleteDirectoryFiles(CacheDirectoryType.HandleAvatar, onlyExpired);
