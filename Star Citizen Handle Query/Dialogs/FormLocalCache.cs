@@ -54,6 +54,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             handleInfo.data.profile.id,
             org?.name,
             org?.stars,
+            handleInfo?.data?.affiliation?.Length,
             handleAdditionalInfo?.Comment ?? string.Empty
           };
           row.Tag = handleInfo;
@@ -82,7 +83,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void DataGridViewExport_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
       if (e.RowIndex > -1 && e.ColumnIndex > -1) {
         switch (e.ColumnIndex) {
-          case 7: // Kommentar
+          case 8: // Kommentar
             DataGridViewRow dgvr = (sender as DataGridView).Rows[e.RowIndex];
             WriteHandleAdditionalInformation((dgvr.Tag as HandleInfo).data.profile.handle, $"{dgvr.Cells[e.ColumnIndex].Value}");
             break;
