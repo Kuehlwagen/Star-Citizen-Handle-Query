@@ -27,6 +27,10 @@
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLocalCache));
       this.DataGridViewLokalerCache = new System.Windows.Forms.DataGridView();
+      this.ButtonCacheLeeren = new System.Windows.Forms.Button();
+      this.ButtonSchliessen = new System.Windows.Forms.Button();
+      this.ButtonOrdnerOeffnen = new System.Windows.Forms.Button();
+      this.PanelInfo = new System.Windows.Forms.FlowLayoutPanel();
       this.ColumnCacheDatum = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnHandle = new System.Windows.Forms.DataGridViewLinkColumn();
       this.ColumnCommunityMoniker = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -36,10 +40,6 @@
       this.ColumnOrganisationRang = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnAnzahlAffiliationen = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnKommentar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ButtonCacheLeeren = new System.Windows.Forms.Button();
-      this.ButtonSchliessen = new System.Windows.Forms.Button();
-      this.ButtonOrdnerOeffnen = new System.Windows.Forms.Button();
-      this.PanelInfo = new System.Windows.Forms.FlowLayoutPanel();
       ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLokalerCache)).BeginInit();
       this.SuspendLayout();
       // 
@@ -98,80 +98,6 @@
       this.DataGridViewLokalerCache.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewExport_CellContentClick);
       this.DataGridViewLokalerCache.SelectionChanged += new System.EventHandler(this.DataGridViewExport_SelectionChanged);
       // 
-      // ColumnCacheDatum
-      // 
-      this.ColumnCacheDatum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnCacheDatum.Frozen = true;
-      this.ColumnCacheDatum.HeaderText = "Cache Datum";
-      this.ColumnCacheDatum.MinimumWidth = 74;
-      this.ColumnCacheDatum.Name = "ColumnCacheDatum";
-      this.ColumnCacheDatum.ReadOnly = true;
-      this.ColumnCacheDatum.Width = 105;
-      // 
-      // ColumnHandle
-      // 
-      this.ColumnHandle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnHandle.Frozen = true;
-      this.ColumnHandle.HeaderText = "Handle";
-      this.ColumnHandle.LinkColor = System.Drawing.Color.SteelBlue;
-      this.ColumnHandle.MinimumWidth = 74;
-      this.ColumnHandle.Name = "ColumnHandle";
-      this.ColumnHandle.ReadOnly = true;
-      this.ColumnHandle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-      this.ColumnHandle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-      this.ColumnHandle.TrackVisitedState = false;
-      this.ColumnHandle.Width = 74;
-      // 
-      // ColumnCommunityMoniker
-      // 
-      this.ColumnCommunityMoniker.HeaderText = "CM";
-      this.ColumnCommunityMoniker.Name = "ColumnCommunityMoniker";
-      this.ColumnCommunityMoniker.Width = 49;
-      // 
-      // ColumnEnlisted
-      // 
-      this.ColumnEnlisted.HeaderText = "Angeworben";
-      this.ColumnEnlisted.Name = "ColumnEnlisted";
-      this.ColumnEnlisted.Width = 103;
-      // 
-      // ColumnUEECitizenRecord
-      // 
-      this.ColumnUEECitizenRecord.HeaderText = "UEE CR";
-      this.ColumnUEECitizenRecord.Name = "ColumnUEECitizenRecord";
-      this.ColumnUEECitizenRecord.Width = 70;
-      // 
-      // ColumnOrganisation
-      // 
-      this.ColumnOrganisation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnOrganisation.HeaderText = "Organisation";
-      this.ColumnOrganisation.LinkColor = System.Drawing.Color.SteelBlue;
-      this.ColumnOrganisation.MinimumWidth = 99;
-      this.ColumnOrganisation.Name = "ColumnOrganisation";
-      this.ColumnOrganisation.ReadOnly = true;
-      this.ColumnOrganisation.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-      this.ColumnOrganisation.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-      this.ColumnOrganisation.TrackVisitedState = false;
-      this.ColumnOrganisation.Width = 101;
-      // 
-      // ColumnOrganisationRang
-      // 
-      this.ColumnOrganisationRang.HeaderText = "Org. Rang";
-      this.ColumnOrganisationRang.Name = "ColumnOrganisationRang";
-      this.ColumnOrganisationRang.Width = 86;
-      // 
-      // ColumnAnzahlAffiliationen
-      // 
-      this.ColumnAnzahlAffiliationen.HeaderText = "Anz. Aff.";
-      this.ColumnAnzahlAffiliationen.Name = "ColumnAnzahlAffiliationen";
-      this.ColumnAnzahlAffiliationen.Width = 78;
-      // 
-      // ColumnKommentar
-      // 
-      this.ColumnKommentar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.ColumnKommentar.HeaderText = "Kommentar";
-      this.ColumnKommentar.MaxInputLength = 15;
-      this.ColumnKommentar.Name = "ColumnKommentar";
-      // 
       // ButtonCacheLeeren
       // 
       this.ButtonCacheLeeren.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -221,6 +147,90 @@
       this.PanelInfo.Name = "PanelInfo";
       this.PanelInfo.Size = new System.Drawing.Size(905, 85);
       this.PanelInfo.TabIndex = 4;
+      // 
+      // ColumnCacheDatum
+      // 
+      this.ColumnCacheDatum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+      this.ColumnCacheDatum.Frozen = true;
+      this.ColumnCacheDatum.HeaderText = "Cache Datum";
+      this.ColumnCacheDatum.MinimumWidth = 74;
+      this.ColumnCacheDatum.Name = "ColumnCacheDatum";
+      this.ColumnCacheDatum.ReadOnly = true;
+      this.ColumnCacheDatum.Width = 105;
+      // 
+      // ColumnHandle
+      // 
+      this.ColumnHandle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+      this.ColumnHandle.Frozen = true;
+      this.ColumnHandle.HeaderText = "Handle";
+      this.ColumnHandle.LinkColor = System.Drawing.Color.SteelBlue;
+      this.ColumnHandle.MinimumWidth = 74;
+      this.ColumnHandle.Name = "ColumnHandle";
+      this.ColumnHandle.ReadOnly = true;
+      this.ColumnHandle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+      this.ColumnHandle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+      this.ColumnHandle.TrackVisitedState = false;
+      this.ColumnHandle.Width = 74;
+      // 
+      // ColumnCommunityMoniker
+      // 
+      this.ColumnCommunityMoniker.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+      this.ColumnCommunityMoniker.HeaderText = "CM";
+      this.ColumnCommunityMoniker.Name = "ColumnCommunityMoniker";
+      this.ColumnCommunityMoniker.ReadOnly = true;
+      this.ColumnCommunityMoniker.Width = 49;
+      // 
+      // ColumnEnlisted
+      // 
+      this.ColumnEnlisted.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+      this.ColumnEnlisted.HeaderText = "Angeworben";
+      this.ColumnEnlisted.Name = "ColumnEnlisted";
+      this.ColumnEnlisted.ReadOnly = true;
+      this.ColumnEnlisted.Width = 103;
+      // 
+      // ColumnUEECitizenRecord
+      // 
+      this.ColumnUEECitizenRecord.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+      this.ColumnUEECitizenRecord.HeaderText = "UEE CR";
+      this.ColumnUEECitizenRecord.Name = "ColumnUEECitizenRecord";
+      this.ColumnUEECitizenRecord.ReadOnly = true;
+      this.ColumnUEECitizenRecord.Width = 70;
+      // 
+      // ColumnOrganisation
+      // 
+      this.ColumnOrganisation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+      this.ColumnOrganisation.HeaderText = "Organisation";
+      this.ColumnOrganisation.LinkColor = System.Drawing.Color.SteelBlue;
+      this.ColumnOrganisation.MinimumWidth = 99;
+      this.ColumnOrganisation.Name = "ColumnOrganisation";
+      this.ColumnOrganisation.ReadOnly = true;
+      this.ColumnOrganisation.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+      this.ColumnOrganisation.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+      this.ColumnOrganisation.TrackVisitedState = false;
+      this.ColumnOrganisation.Width = 101;
+      // 
+      // ColumnOrganisationRang
+      // 
+      this.ColumnOrganisationRang.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+      this.ColumnOrganisationRang.HeaderText = "Org. Rang";
+      this.ColumnOrganisationRang.Name = "ColumnOrganisationRang";
+      this.ColumnOrganisationRang.ReadOnly = true;
+      this.ColumnOrganisationRang.Width = 86;
+      // 
+      // ColumnAnzahlAffiliationen
+      // 
+      this.ColumnAnzahlAffiliationen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+      this.ColumnAnzahlAffiliationen.HeaderText = "Anz. Aff.";
+      this.ColumnAnzahlAffiliationen.Name = "ColumnAnzahlAffiliationen";
+      this.ColumnAnzahlAffiliationen.ReadOnly = true;
+      this.ColumnAnzahlAffiliationen.Width = 78;
+      // 
+      // ColumnKommentar
+      // 
+      this.ColumnKommentar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.ColumnKommentar.HeaderText = "Kommentar";
+      this.ColumnKommentar.MaxInputLength = 15;
+      this.ColumnKommentar.Name = "ColumnKommentar";
       // 
       // FormLocalCache
       // 
