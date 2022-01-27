@@ -106,12 +106,17 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private void LabelAdditionalInformation_Click(object sender, EventArgs e) {
+      ActivateComment();
+    }
+
+    public void ActivateComment() {
       if (!DisplayOnly) {
         TextBoxAdditionalInformation.Visible = true;
         TextBoxAdditionalInformation.SelectAll();
         TextBoxAdditionalInformation.Focus();
       }
     }
+
   }
 
 }

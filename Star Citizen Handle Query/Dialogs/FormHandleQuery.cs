@@ -207,6 +207,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private async void TextBoxHandle_KeyDown(object sender, KeyEventArgs e) {
       // Handle-Textbox Tastendrücke verarbeiten
       switch (e.KeyCode) {
+        case Keys.Oemplus:
+          // Ggf. Handle-Kommentar aktivieren
+          e.SuppressKeyPress = true;
+          if (PanelInfo.Controls.Count > 0) {
+            (PanelInfo.Controls[0] as UserControlHandle).ActivateComment();
+          }
+          break;
         case Keys.Enter:
           e.SuppressKeyPress = true;
           TextBoxHandle.Text = TextBoxHandle.Text.Trim();
