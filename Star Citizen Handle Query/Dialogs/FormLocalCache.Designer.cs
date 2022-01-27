@@ -23,18 +23,18 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLocalCache));
       this.DataGridViewLokalerCache = new System.Windows.Forms.DataGridView();
-      this.ColumnCacheDatum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnHandle = new System.Windows.Forms.DataGridViewLinkColumn();
-      this.ColumnOrganisation = new System.Windows.Forms.DataGridViewLinkColumn();
-      this.ColumnKommentar = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ButtonCacheLeeren = new System.Windows.Forms.Button();
       this.ButtonSchliessen = new System.Windows.Forms.Button();
       this.ButtonOrdnerOeffnen = new System.Windows.Forms.Button();
       this.PanelInfo = new System.Windows.Forms.FlowLayoutPanel();
+      this.ColumnCacheDatum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnHandle = new System.Windows.Forms.DataGridViewLinkColumn();
+      this.ColumnOrganisation = new System.Windows.Forms.DataGridViewLinkColumn();
+      this.ColumnKommentar = new System.Windows.Forms.DataGridViewTextBoxColumn();
       ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLokalerCache)).BeginInit();
       this.SuspendLayout();
       // 
@@ -52,28 +52,28 @@
       this.DataGridViewLokalerCache.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.DataGridViewLokalerCache.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
       this.DataGridViewLokalerCache.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-      dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.DataGridViewLokalerCache.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+      dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.DataGridViewLokalerCache.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
       this.DataGridViewLokalerCache.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
       this.DataGridViewLokalerCache.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnCacheDatum,
             this.ColumnHandle,
             this.ColumnOrganisation,
             this.ColumnKommentar});
-      dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-      dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.DataGridViewLokalerCache.DefaultCellStyle = dataGridViewCellStyle4;
+      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+      dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+      this.DataGridViewLokalerCache.DefaultCellStyle = dataGridViewCellStyle2;
       this.DataGridViewLokalerCache.EnableHeadersVisualStyles = false;
       this.DataGridViewLokalerCache.Location = new System.Drawing.Point(12, 12);
       this.DataGridViewLokalerCache.Name = "DataGridViewLokalerCache";
@@ -87,49 +87,6 @@
       this.DataGridViewLokalerCache.TabIndex = 0;
       this.DataGridViewLokalerCache.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewExport_CellContentClick);
       this.DataGridViewLokalerCache.SelectionChanged += new System.EventHandler(this.DataGridViewExport_SelectionChanged);
-      // 
-      // ColumnCacheDatum
-      // 
-      this.ColumnCacheDatum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnCacheDatum.Frozen = true;
-      this.ColumnCacheDatum.HeaderText = "Cache Datum";
-      this.ColumnCacheDatum.MinimumWidth = 74;
-      this.ColumnCacheDatum.Name = "ColumnCacheDatum";
-      this.ColumnCacheDatum.ReadOnly = true;
-      this.ColumnCacheDatum.Width = 105;
-      // 
-      // ColumnHandle
-      // 
-      this.ColumnHandle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnHandle.Frozen = true;
-      this.ColumnHandle.HeaderText = "Handle";
-      this.ColumnHandle.LinkColor = System.Drawing.Color.SteelBlue;
-      this.ColumnHandle.MinimumWidth = 74;
-      this.ColumnHandle.Name = "ColumnHandle";
-      this.ColumnHandle.ReadOnly = true;
-      this.ColumnHandle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-      this.ColumnHandle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-      this.ColumnHandle.TrackVisitedState = false;
-      this.ColumnHandle.Width = 74;
-      // 
-      // ColumnOrganisation
-      // 
-      this.ColumnOrganisation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnOrganisation.HeaderText = "Organisation";
-      this.ColumnOrganisation.LinkColor = System.Drawing.Color.SteelBlue;
-      this.ColumnOrganisation.MinimumWidth = 99;
-      this.ColumnOrganisation.Name = "ColumnOrganisation";
-      this.ColumnOrganisation.ReadOnly = true;
-      this.ColumnOrganisation.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-      this.ColumnOrganisation.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-      this.ColumnOrganisation.TrackVisitedState = false;
-      this.ColumnOrganisation.Width = 101;
-      // 
-      // ColumnKommentar
-      // 
-      this.ColumnKommentar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.ColumnKommentar.HeaderText = "Kommentar";
-      this.ColumnKommentar.Name = "ColumnKommentar";
       // 
       // ButtonCacheLeeren
       // 
@@ -179,6 +136,50 @@
       this.PanelInfo.Name = "PanelInfo";
       this.PanelInfo.Size = new System.Drawing.Size(373, 85);
       this.PanelInfo.TabIndex = 4;
+      // 
+      // ColumnCacheDatum
+      // 
+      this.ColumnCacheDatum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+      this.ColumnCacheDatum.Frozen = true;
+      this.ColumnCacheDatum.HeaderText = "Cache Datum";
+      this.ColumnCacheDatum.MinimumWidth = 74;
+      this.ColumnCacheDatum.Name = "ColumnCacheDatum";
+      this.ColumnCacheDatum.ReadOnly = true;
+      this.ColumnCacheDatum.Width = 105;
+      // 
+      // ColumnHandle
+      // 
+      this.ColumnHandle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+      this.ColumnHandle.Frozen = true;
+      this.ColumnHandle.HeaderText = "Handle";
+      this.ColumnHandle.LinkColor = System.Drawing.Color.SteelBlue;
+      this.ColumnHandle.MinimumWidth = 74;
+      this.ColumnHandle.Name = "ColumnHandle";
+      this.ColumnHandle.ReadOnly = true;
+      this.ColumnHandle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+      this.ColumnHandle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+      this.ColumnHandle.TrackVisitedState = false;
+      this.ColumnHandle.Width = 74;
+      // 
+      // ColumnOrganisation
+      // 
+      this.ColumnOrganisation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+      this.ColumnOrganisation.HeaderText = "Organisation";
+      this.ColumnOrganisation.LinkColor = System.Drawing.Color.SteelBlue;
+      this.ColumnOrganisation.MinimumWidth = 99;
+      this.ColumnOrganisation.Name = "ColumnOrganisation";
+      this.ColumnOrganisation.ReadOnly = true;
+      this.ColumnOrganisation.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+      this.ColumnOrganisation.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+      this.ColumnOrganisation.TrackVisitedState = false;
+      this.ColumnOrganisation.Width = 101;
+      // 
+      // ColumnKommentar
+      // 
+      this.ColumnKommentar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.ColumnKommentar.HeaderText = "Kommentar";
+      this.ColumnKommentar.MaxInputLength = 25;
+      this.ColumnKommentar.Name = "ColumnKommentar";
       // 
       // FormLocalCache
       // 

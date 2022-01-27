@@ -31,6 +31,8 @@
       this.LabelFluency = new System.Windows.Forms.Label();
       this.LabelUEECitizenRecord = new System.Windows.Forms.Label();
       this.LabelEnlistedDate = new System.Windows.Forms.Label();
+      this.TextBoxAdditionalInformation = new System.Windows.Forms.TextBox();
+      this.LabelAdditionalInformation = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxHandleAvatar)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxDisplayTitle)).BeginInit();
       this.SuspendLayout();
@@ -109,16 +111,44 @@
       this.LabelEnlistedDate.TabIndex = 1;
       this.LabelEnlistedDate.TextAlign = System.Drawing.ContentAlignment.TopRight;
       // 
+      // TextBoxAdditionalInformation
+      // 
+      this.TextBoxAdditionalInformation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.TextBoxAdditionalInformation.BorderStyle = System.Windows.Forms.BorderStyle.None;
+      this.TextBoxAdditionalInformation.ForeColor = System.Drawing.Color.Khaki;
+      this.TextBoxAdditionalInformation.Location = new System.Drawing.Point(191, 40);
+      this.TextBoxAdditionalInformation.MaxLength = 25;
+      this.TextBoxAdditionalInformation.Name = "TextBoxAdditionalInformation";
+      this.TextBoxAdditionalInformation.Size = new System.Drawing.Size(177, 16);
+      this.TextBoxAdditionalInformation.TabIndex = 12;
+      this.TextBoxAdditionalInformation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+      this.TextBoxAdditionalInformation.Visible = false;
+      this.TextBoxAdditionalInformation.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxAdditionalInformation_KeyDown);
+      this.TextBoxAdditionalInformation.Leave += new System.EventHandler(this.TextBoxAdditionalInformation_Leave);
+      // 
+      // LabelAdditionalInformation
+      // 
+      this.LabelAdditionalInformation.Cursor = System.Windows.Forms.Cursors.IBeam;
+      this.LabelAdditionalInformation.ForeColor = System.Drawing.Color.Khaki;
+      this.LabelAdditionalInformation.Location = new System.Drawing.Point(190, 40);
+      this.LabelAdditionalInformation.Name = "LabelAdditionalInformation";
+      this.LabelAdditionalInformation.Size = new System.Drawing.Size(182, 19);
+      this.LabelAdditionalInformation.TabIndex = 1;
+      this.LabelAdditionalInformation.TextAlign = System.Drawing.ContentAlignment.TopRight;
+      this.LabelAdditionalInformation.Click += new System.EventHandler(this.LabelAdditionalInformation_Click);
+      // 
       // UserControlHandle
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.Controls.Add(this.TextBoxAdditionalInformation);
       this.Controls.Add(this.LabelUEECitizenRecord);
       this.Controls.Add(this.LabelFluency);
       this.Controls.Add(this.LabelDisplayTitle);
       this.Controls.Add(this.PictureBoxDisplayTitle);
       this.Controls.Add(this.PictureBoxHandleAvatar);
+      this.Controls.Add(this.LabelAdditionalInformation);
       this.Controls.Add(this.LabelEnlistedDate);
       this.Controls.Add(this.LabelCommunityMoniker);
       this.Controls.Add(this.LabelHandle);
@@ -144,5 +174,7 @@
     internal PictureBox PictureBoxDisplayTitle;
     private Label LabelUEECitizenRecord;
     private Label LabelEnlistedDate;
+    private TextBox TextBoxAdditionalInformation;
+    private Label LabelAdditionalInformation;
   }
 }

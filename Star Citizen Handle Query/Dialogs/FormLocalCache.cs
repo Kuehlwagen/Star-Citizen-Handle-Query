@@ -79,13 +79,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         switch (e.ColumnIndex) {
           case 3: // Kommentar
             DataGridViewRow dgvr = (sender as DataGridView).Rows[e.RowIndex];
-            HandleInfo handleInfo = dgvr.Tag as HandleInfo;
-            string additionalPath = FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.HandleAdditional, handleInfo.data.profile.handle);
-            File.WriteAllText(additionalPath, JsonSerializer.Serialize(new HandleAdditionalInfo() { Comment = $"{dgvr.Cells[e.ColumnIndex].Value}" },
-              new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
+            WriteHandleAdditionalInformation((dgvr.Tag as HandleInfo).data.profile.handle, $"{dgvr.Cells[e.ColumnIndex].Value}");
             break;
         }
       }
+    }
+
+    public static void WriteHandleAdditionalInformation(string handle, string additionalInfo) {
+      string additionalPath = FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.HandleAdditional, handle);
+      File.WriteAllText(additionalPath, JsonSerializer.Serialize(new HandleAdditionalInfo() { Comment = $"{additionalInfo}" },
+        new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
     }
 
     private void DataGridViewExport_CellContentClick(object sender, DataGridViewCellEventArgs e) {
@@ -139,7 +142,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       DisposeUserControlHandle();
       if (dgv.SelectedRows.Count > 0) {
         if (dgv.SelectedRows[0].Tag is HandleInfo handleInfo) {
-          PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation, false));
+          PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation, false, true));
         }
       }
     }
