@@ -74,6 +74,7 @@
       "UEE_Citizen_Record": "UEE CR",
       "Organization": "Organisation",
       "Organization_Rank": "Org. Rang",
+      "Affiliation_Count": "Anz. Aff.",
       "Comment": "Kommentar"
     },
     "Buttons": {

@@ -130,6 +130,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ColumnUEECitizenRecord.HeaderText = ProgramTranslation.Local_Cache.Columns.UEE_Citizen_Record;
       ColumnOrganisation.HeaderText = ProgramTranslation.Local_Cache.Columns.Organization;
       ColumnOrganisationRang.HeaderText = ProgramTranslation.Local_Cache.Columns.Organization_Rank;
+      ColumnAnzahlAffiliationen.HeaderText = ProgramTranslation.Local_Cache.Columns.Affiliation_Count;
       ColumnKommentar.HeaderText = ProgramTranslation.Local_Cache.Columns.Comment;
 
       ButtonCacheLeeren.Text = ProgramTranslation.Local_Cache.Buttons.Clear_Cache;

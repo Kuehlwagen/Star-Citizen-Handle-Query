@@ -218,6 +218,8 @@
 
     public string Organization_Rank { get; set; } = "Org. Rang";
 
+    public string Affiliation_Count { get; set; } = "Anz. Aff.";
+
     public string Comment { get; set; } = "Kommentar";
 
   }
