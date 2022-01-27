@@ -27,14 +27,18 @@
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLocalCache));
       this.DataGridViewLokalerCache = new System.Windows.Forms.DataGridView();
+      this.ColumnCacheDatum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnHandle = new System.Windows.Forms.DataGridViewLinkColumn();
+      this.ColumnCommunityMoniker = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnEnlisted = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnUEECitizenRecord = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnOrganisation = new System.Windows.Forms.DataGridViewLinkColumn();
+      this.ColumnOrganisationRang = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnKommentar = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ButtonCacheLeeren = new System.Windows.Forms.Button();
       this.ButtonSchliessen = new System.Windows.Forms.Button();
       this.ButtonOrdnerOeffnen = new System.Windows.Forms.Button();
       this.PanelInfo = new System.Windows.Forms.FlowLayoutPanel();
-      this.ColumnCacheDatum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnHandle = new System.Windows.Forms.DataGridViewLinkColumn();
-      this.ColumnOrganisation = new System.Windows.Forms.DataGridViewLinkColumn();
-      this.ColumnKommentar = new System.Windows.Forms.DataGridViewTextBoxColumn();
       ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLokalerCache)).BeginInit();
       this.SuspendLayout();
       // 
@@ -64,7 +68,11 @@
       this.DataGridViewLokalerCache.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnCacheDatum,
             this.ColumnHandle,
+            this.ColumnCommunityMoniker,
+            this.ColumnEnlisted,
+            this.ColumnUEECitizenRecord,
             this.ColumnOrganisation,
+            this.ColumnOrganisationRang,
             this.ColumnKommentar});
       dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
       dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
@@ -83,59 +91,10 @@
       this.DataGridViewLokalerCache.RowTemplate.Height = 25;
       this.DataGridViewLokalerCache.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.DataGridViewLokalerCache.ShowEditingIcon = false;
-      this.DataGridViewLokalerCache.Size = new System.Drawing.Size(590, 258);
+      this.DataGridViewLokalerCache.Size = new System.Drawing.Size(905, 293);
       this.DataGridViewLokalerCache.TabIndex = 0;
       this.DataGridViewLokalerCache.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewExport_CellContentClick);
       this.DataGridViewLokalerCache.SelectionChanged += new System.EventHandler(this.DataGridViewExport_SelectionChanged);
-      // 
-      // ButtonCacheLeeren
-      // 
-      this.ButtonCacheLeeren.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.ButtonCacheLeeren.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.ButtonCacheLeeren.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonCacheLeeren.Location = new System.Drawing.Point(12, 362);
-      this.ButtonCacheLeeren.Name = "ButtonCacheLeeren";
-      this.ButtonCacheLeeren.Size = new System.Drawing.Size(91, 28);
-      this.ButtonCacheLeeren.TabIndex = 1;
-      this.ButtonCacheLeeren.Text = "Cache leeren";
-      this.ButtonCacheLeeren.UseVisualStyleBackColor = false;
-      this.ButtonCacheLeeren.Click += new System.EventHandler(this.ButtonCacheLeeren_Click);
-      // 
-      // ButtonSchliessen
-      // 
-      this.ButtonSchliessen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.ButtonSchliessen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.ButtonSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSchliessen.Location = new System.Drawing.Point(216, 362);
-      this.ButtonSchliessen.Name = "ButtonSchliessen";
-      this.ButtonSchliessen.Size = new System.Drawing.Size(74, 28);
-      this.ButtonSchliessen.TabIndex = 3;
-      this.ButtonSchliessen.Text = "Schließen";
-      this.ButtonSchliessen.UseVisualStyleBackColor = false;
-      this.ButtonSchliessen.Click += new System.EventHandler(this.ButtonSchliessen_Click);
-      // 
-      // ButtonOrdnerOeffnen
-      // 
-      this.ButtonOrdnerOeffnen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.ButtonOrdnerOeffnen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.ButtonOrdnerOeffnen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonOrdnerOeffnen.Location = new System.Drawing.Point(109, 362);
-      this.ButtonOrdnerOeffnen.Name = "ButtonOrdnerOeffnen";
-      this.ButtonOrdnerOeffnen.Size = new System.Drawing.Size(101, 28);
-      this.ButtonOrdnerOeffnen.TabIndex = 2;
-      this.ButtonOrdnerOeffnen.Text = "Ordner öffnen";
-      this.ButtonOrdnerOeffnen.UseVisualStyleBackColor = false;
-      this.ButtonOrdnerOeffnen.Click += new System.EventHandler(this.ButtonOrdnerOeffnen_Click);
-      // 
-      // PanelInfo
-      // 
-      this.PanelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.PanelInfo.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.PanelInfo.Location = new System.Drawing.Point(12, 273);
-      this.PanelInfo.Margin = new System.Windows.Forms.Padding(0);
-      this.PanelInfo.Name = "PanelInfo";
-      this.PanelInfo.Size = new System.Drawing.Size(373, 85);
-      this.PanelInfo.TabIndex = 4;
       // 
       // ColumnCacheDatum
       // 
@@ -161,6 +120,24 @@
       this.ColumnHandle.TrackVisitedState = false;
       this.ColumnHandle.Width = 74;
       // 
+      // ColumnCommunityMoniker
+      // 
+      this.ColumnCommunityMoniker.HeaderText = "CM";
+      this.ColumnCommunityMoniker.Name = "ColumnCommunityMoniker";
+      this.ColumnCommunityMoniker.Width = 49;
+      // 
+      // ColumnEnlisted
+      // 
+      this.ColumnEnlisted.HeaderText = "Angeworben";
+      this.ColumnEnlisted.Name = "ColumnEnlisted";
+      this.ColumnEnlisted.Width = 103;
+      // 
+      // ColumnUEECitizenRecord
+      // 
+      this.ColumnUEECitizenRecord.HeaderText = "UEE CR";
+      this.ColumnUEECitizenRecord.Name = "ColumnUEECitizenRecord";
+      this.ColumnUEECitizenRecord.Width = 70;
+      // 
       // ColumnOrganisation
       // 
       this.ColumnOrganisation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -174,6 +151,12 @@
       this.ColumnOrganisation.TrackVisitedState = false;
       this.ColumnOrganisation.Width = 101;
       // 
+      // ColumnOrganisationRang
+      // 
+      this.ColumnOrganisationRang.HeaderText = "Org. Rang";
+      this.ColumnOrganisationRang.Name = "ColumnOrganisationRang";
+      this.ColumnOrganisationRang.Width = 86;
+      // 
       // ColumnKommentar
       // 
       this.ColumnKommentar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -181,13 +164,62 @@
       this.ColumnKommentar.MaxInputLength = 15;
       this.ColumnKommentar.Name = "ColumnKommentar";
       // 
+      // ButtonCacheLeeren
+      // 
+      this.ButtonCacheLeeren.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ButtonCacheLeeren.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.ButtonCacheLeeren.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.ButtonCacheLeeren.Location = new System.Drawing.Point(12, 397);
+      this.ButtonCacheLeeren.Name = "ButtonCacheLeeren";
+      this.ButtonCacheLeeren.Size = new System.Drawing.Size(91, 28);
+      this.ButtonCacheLeeren.TabIndex = 1;
+      this.ButtonCacheLeeren.Text = "Cache leeren";
+      this.ButtonCacheLeeren.UseVisualStyleBackColor = false;
+      this.ButtonCacheLeeren.Click += new System.EventHandler(this.ButtonCacheLeeren_Click);
+      // 
+      // ButtonSchliessen
+      // 
+      this.ButtonSchliessen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ButtonSchliessen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.ButtonSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.ButtonSchliessen.Location = new System.Drawing.Point(216, 397);
+      this.ButtonSchliessen.Name = "ButtonSchliessen";
+      this.ButtonSchliessen.Size = new System.Drawing.Size(74, 28);
+      this.ButtonSchliessen.TabIndex = 3;
+      this.ButtonSchliessen.Text = "Schließen";
+      this.ButtonSchliessen.UseVisualStyleBackColor = false;
+      this.ButtonSchliessen.Click += new System.EventHandler(this.ButtonSchliessen_Click);
+      // 
+      // ButtonOrdnerOeffnen
+      // 
+      this.ButtonOrdnerOeffnen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ButtonOrdnerOeffnen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.ButtonOrdnerOeffnen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.ButtonOrdnerOeffnen.Location = new System.Drawing.Point(109, 397);
+      this.ButtonOrdnerOeffnen.Name = "ButtonOrdnerOeffnen";
+      this.ButtonOrdnerOeffnen.Size = new System.Drawing.Size(101, 28);
+      this.ButtonOrdnerOeffnen.TabIndex = 2;
+      this.ButtonOrdnerOeffnen.Text = "Ordner öffnen";
+      this.ButtonOrdnerOeffnen.UseVisualStyleBackColor = false;
+      this.ButtonOrdnerOeffnen.Click += new System.EventHandler(this.ButtonOrdnerOeffnen_Click);
+      // 
+      // PanelInfo
+      // 
+      this.PanelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.PanelInfo.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+      this.PanelInfo.Location = new System.Drawing.Point(12, 308);
+      this.PanelInfo.Margin = new System.Windows.Forms.Padding(0);
+      this.PanelInfo.Name = "PanelInfo";
+      this.PanelInfo.Size = new System.Drawing.Size(373, 85);
+      this.PanelInfo.TabIndex = 4;
+      // 
       // FormLocalCache
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.CancelButton = this.ButtonSchliessen;
-      this.ClientSize = new System.Drawing.Size(614, 401);
+      this.ClientSize = new System.Drawing.Size(929, 436);
       this.Controls.Add(this.PanelInfo);
       this.Controls.Add(this.ButtonOrdnerOeffnen);
       this.Controls.Add(this.ButtonSchliessen);
@@ -195,7 +227,7 @@
       this.Controls.Add(this.DataGridViewLokalerCache);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.MinimumSize = new System.Drawing.Size(630, 440);
+      this.MinimumSize = new System.Drawing.Size(945, 475);
       this.Name = "FormLocalCache";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Star Citizen Handle Query - Lokaler Cache";
@@ -215,7 +247,11 @@
     private FlowLayoutPanel PanelInfo;
     private DataGridViewTextBoxColumn ColumnCacheDatum;
     private DataGridViewLinkColumn ColumnHandle;
+    private DataGridViewTextBoxColumn ColumnCommunityMoniker;
+    private DataGridViewTextBoxColumn ColumnEnlisted;
+    private DataGridViewTextBoxColumn ColumnUEECitizenRecord;
     private DataGridViewLinkColumn ColumnOrganisation;
+    private DataGridViewTextBoxColumn ColumnOrganisationRang;
     private DataGridViewTextBoxColumn ColumnKommentar;
   }
 }

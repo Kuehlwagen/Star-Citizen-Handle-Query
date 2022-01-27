@@ -69,8 +69,12 @@
     "Columns": {
       "Cache_Date": "Cache Date",
       "Handle": "Handle",
+      "Community_Moniker": "CM",
+      "Enlisted": "Enlisted",
+      "UEE_Citizen_Record": "UEE CR",
       "Organization": "Organization",
-      "Comment":  "Comment"
+      "Organization_Rank": "Org. Rank",
+      "Comment": "Comment"
     },
     "Buttons": {
       "Clear_Cache": "Clear Cache",

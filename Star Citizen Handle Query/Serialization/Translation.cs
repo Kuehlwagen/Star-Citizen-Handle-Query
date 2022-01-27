@@ -208,7 +208,15 @@
 
     public string Handle { get; set; } = "Handle";
 
+    public string Community_Moniker { get; set; } = "CM";
+
+    public string Enlisted { get; set; } = "Angeworben";
+
+    public string UEE_Citizen_Record { get; set; } = "UEE CR";
+
     public string Organization { get; set; } = "Organisation";
+
+    public string Organization_Rank { get; set; } = "Org. Rang";
 
     public string Comment { get; set; } = "Kommentar";
 

@@ -30,6 +30,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         DataGridViewLokalerCache,
         new object[] { true });
       ColumnCacheDatum.DefaultCellStyle.Format = "G";
+      ColumnEnlisted.DefaultCellStyle.Format = "d";
 
       DataGridViewLokalerCache.PerformLayout();
       List<DataGridViewRow> rows = new();
@@ -48,18 +49,22 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           List<object> info = new() {
             new FileInfo(handleJsonPath).LastWriteTime,
             handleInfo.data.profile.handle,
+            handleInfo.data.profile.display,
+            handleInfo.data.profile.enlisted,
+            handleInfo.data.profile.id,
             org?.name,
+            org?.stars,
             handleAdditionalInfo?.Comment ?? string.Empty
           };
           row.Tag = handleInfo;
           row.CreateCells(DataGridViewLokalerCache, info.ToArray());
-          if (info[2]?.ToString() == string.Empty) {
+          if (info[5]?.ToString() == string.Empty) {
 #pragma warning disable IDE0017 // Initialisierung von Objekten vereinfachen
-            row.Cells[2] = new DataGridViewTextBoxCell();
+            row.Cells[5] = new DataGridViewTextBoxCell();
 #pragma warning restore IDE0017 // Initialisierung von Objekten vereinfachen
-            row.Cells[2].Value = "REDACTED";
-            row.Cells[2].Style.ForeColor = Color.FromArgb(255, 57, 57);
-            row.Cells[2].Style.SelectionForeColor = Color.FromArgb(255, 57, 57);
+            row.Cells[5].Value = "REDACTED";
+            row.Cells[5].Style.ForeColor = Color.FromArgb(255, 57, 57);
+            row.Cells[5].Style.SelectionForeColor = Color.FromArgb(255, 57, 57);
           }
           rows.Add(row);
         }
@@ -77,7 +82,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void DataGridViewExport_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
       if (e.RowIndex > -1 && e.ColumnIndex > -1) {
         switch (e.ColumnIndex) {
-          case 3: // Kommentar
+          case 7: // Kommentar
             DataGridViewRow dgvr = (sender as DataGridView).Rows[e.RowIndex];
             WriteHandleAdditionalInformation((dgvr.Tag as HandleInfo).data.profile.handle, $"{dgvr.Cells[e.ColumnIndex].Value}");
             break;
@@ -119,7 +124,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       ColumnCacheDatum.HeaderText = ProgramTranslation.Local_Cache.Columns.Cache_Date;
       ColumnHandle.HeaderText = ProgramTranslation.Local_Cache.Columns.Handle;
+      ColumnCommunityMoniker.HeaderText = ProgramTranslation.Local_Cache.Columns.Community_Moniker;
+      ColumnEnlisted.HeaderText = ProgramTranslation.Local_Cache.Columns.Enlisted;
+      ColumnUEECitizenRecord.HeaderText = ProgramTranslation.Local_Cache.Columns.UEE_Citizen_Record;
       ColumnOrganisation.HeaderText = ProgramTranslation.Local_Cache.Columns.Organization;
+      ColumnOrganisationRang.HeaderText = ProgramTranslation.Local_Cache.Columns.Organization_Rank;
       ColumnKommentar.HeaderText = ProgramTranslation.Local_Cache.Columns.Comment;
 
       ButtonCacheLeeren.Text = ProgramTranslation.Local_Cache.Buttons.Clear_Cache;
