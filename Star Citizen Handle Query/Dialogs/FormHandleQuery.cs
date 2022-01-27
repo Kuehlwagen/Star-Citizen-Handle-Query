@@ -457,7 +457,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
         // Cache leeren
         DeleteDirectoryFiles(CacheDirectoryType.Handle, onlyExpired);
-        DeleteDirectoryFiles(CacheDirectoryType.HandleAdditional, onlyExpired);
+        if (!onlyExpired) {
+          DeleteDirectoryFiles(CacheDirectoryType.HandleAdditional, onlyExpired);
+        }
         DeleteDirectoryFiles(CacheDirectoryType.HandleAvatar, onlyExpired);
         DeleteDirectoryFiles(CacheDirectoryType.HandleDisplayTitle, onlyExpired);
         DeleteDirectoryFiles(CacheDirectoryType.OrganizationAvatar, onlyExpired);
