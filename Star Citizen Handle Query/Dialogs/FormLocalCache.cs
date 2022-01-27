@@ -160,7 +160,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation, false, true));
           PanelInfo.Controls[0].Margin = new Padding(0, 0, 50, 0);
           if (handleInfo?.data?.organization?.name != null) {
-            PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.data.organization, ProgramSettings, true, false));
+            PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.data.organization, ProgramSettings, true, false, true));
           }
         }
       }

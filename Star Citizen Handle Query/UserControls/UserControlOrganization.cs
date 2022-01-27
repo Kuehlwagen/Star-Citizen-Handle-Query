@@ -11,13 +11,15 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private readonly bool IsMainOrg;
     private string SID;
     private readonly bool ForceLive;
+    private readonly bool DisplayOnly;
 
-    public UserControlOrganization(HandleInfoDataOrganization organizationInfo, Settings programSettings, bool isMainOrg, bool forceLive) {
+    public UserControlOrganization(HandleInfoDataOrganization organizationInfo, Settings programSettings, bool isMainOrg, bool forceLive, bool displayOnly = false) {
       InitializeComponent();
       OrganizationInfo = organizationInfo;
       ProgramSettings = programSettings;
       IsMainOrg = isMainOrg;
       ForceLive = forceLive;
+      DisplayOnly = displayOnly;
     }
 
     private async void UserControlHandle_Load(object sender, EventArgs e) {
@@ -30,7 +32,11 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelOrganizationRank.Text = GetString(OrganizationInfo?.rank);
         if (!string.IsNullOrWhiteSpace(OrganizationInfo?.image)) {
           PictureBoxOrganization.Image = await GetImage(CacheDirectoryType.OrganizationAvatar, OrganizationInfo.image, organizationSid, ProgramSettings.LocalCacheMaxAge, ForceLive);
-          PictureBoxOrganization.Cursor = Cursors.Hand;
+          if (!DisplayOnly) {
+            PictureBoxOrganization.Cursor = Cursors.Hand;
+          } else {
+            PictureBoxOrganization.Click -= PictureBoxOrganization_Click;
+          }
         }
         if (OrganizationInfo?.sid != null && OrganizationInfo?.stars >= 0 && OrganizationInfo.stars <= 5) {
           PictureBoxOrganizationRank.Image = Properties.Resources.ResourceManager.GetObject($"OrganizationRank{OrganizationInfo.stars}") as Image;
