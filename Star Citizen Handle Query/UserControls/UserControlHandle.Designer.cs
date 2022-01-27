@@ -116,10 +116,10 @@
       this.TextBoxAdditionalInformation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.TextBoxAdditionalInformation.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.TextBoxAdditionalInformation.ForeColor = System.Drawing.Color.Khaki;
-      this.TextBoxAdditionalInformation.Location = new System.Drawing.Point(191, 40);
+      this.TextBoxAdditionalInformation.Location = new System.Drawing.Point(230, 40);
       this.TextBoxAdditionalInformation.MaxLength = 15;
       this.TextBoxAdditionalInformation.Name = "TextBoxAdditionalInformation";
-      this.TextBoxAdditionalInformation.Size = new System.Drawing.Size(177, 16);
+      this.TextBoxAdditionalInformation.Size = new System.Drawing.Size(138, 16);
       this.TextBoxAdditionalInformation.TabIndex = 12;
       this.TextBoxAdditionalInformation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
       this.TextBoxAdditionalInformation.Visible = false;
