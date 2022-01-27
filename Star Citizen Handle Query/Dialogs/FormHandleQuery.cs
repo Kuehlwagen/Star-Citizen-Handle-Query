@@ -208,8 +208,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Handle-Textbox Tastendrücke verarbeiten
       switch (e.KeyCode) {
         case Keys.Enter:
-          TextBoxHandle.Text = TextBoxHandle.Text.Trim();
           e.SuppressKeyPress = true;
+          TextBoxHandle.Text = TextBoxHandle.Text.Trim();
           bool forceLive = e.Control;
           if (!string.IsNullOrWhiteSpace(TextBoxHandle.Text)) {
             // Ggf. existierendes UserControl entfernen
