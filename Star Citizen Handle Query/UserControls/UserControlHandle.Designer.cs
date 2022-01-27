@@ -117,7 +117,7 @@
       this.TextBoxAdditionalInformation.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.TextBoxAdditionalInformation.ForeColor = System.Drawing.Color.Khaki;
       this.TextBoxAdditionalInformation.Location = new System.Drawing.Point(191, 40);
-      this.TextBoxAdditionalInformation.MaxLength = 25;
+      this.TextBoxAdditionalInformation.MaxLength = 15;
       this.TextBoxAdditionalInformation.Name = "TextBoxAdditionalInformation";
       this.TextBoxAdditionalInformation.Size = new System.Drawing.Size(177, 16);
       this.TextBoxAdditionalInformation.TabIndex = 12;
@@ -130,9 +130,9 @@
       // 
       this.LabelAdditionalInformation.Cursor = System.Windows.Forms.Cursors.IBeam;
       this.LabelAdditionalInformation.ForeColor = System.Drawing.Color.Khaki;
-      this.LabelAdditionalInformation.Location = new System.Drawing.Point(190, 40);
+      this.LabelAdditionalInformation.Location = new System.Drawing.Point(230, 40);
       this.LabelAdditionalInformation.Name = "LabelAdditionalInformation";
-      this.LabelAdditionalInformation.Size = new System.Drawing.Size(182, 19);
+      this.LabelAdditionalInformation.Size = new System.Drawing.Size(142, 19);
       this.LabelAdditionalInformation.TabIndex = 1;
       this.LabelAdditionalInformation.TextAlign = System.Drawing.ContentAlignment.TopRight;
       this.LabelAdditionalInformation.Click += new System.EventHandler(this.LabelAdditionalInformation_Click);
