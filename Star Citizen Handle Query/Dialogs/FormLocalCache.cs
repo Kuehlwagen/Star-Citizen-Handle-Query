@@ -87,8 +87,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public static void WriteHandleAdditionalInformation(string handle, string additionalInfo) {
       string additionalPath = FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.HandleAdditional, handle);
-      File.WriteAllText(additionalPath, JsonSerializer.Serialize(new HandleAdditionalInfo() { Comment = $"{additionalInfo}" },
-        new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
+      if (!string.IsNullOrWhiteSpace(additionalInfo)) {
+        File.WriteAllText(additionalPath, JsonSerializer.Serialize(new HandleAdditionalInfo() { Comment = $"{additionalInfo}" },
+          new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
+      } else if (File.Exists(additionalPath)) {
+        File.Delete(additionalPath);
+      }
     }
 
     private void DataGridViewExport_CellContentClick(object sender, DataGridViewCellEventArgs e) {
