@@ -110,7 +110,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           case 1: // Handle
             Process.Start("explorer", $"https://robertsspaceindustries.com/citizens/{dgvc.Value}");
             break;
-          case 2: // Org Name
+          case 5: // Org Name
             if (dgvc is DataGridViewLinkCell) {
               Process.Start("explorer", $"https://robertsspaceindustries.com/orgs/{(dgvr.Tag as HandleInfo).data.organization.sid}");
             }
