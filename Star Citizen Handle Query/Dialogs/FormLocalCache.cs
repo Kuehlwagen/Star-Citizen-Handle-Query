@@ -154,7 +154,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void DataGridViewExport_SelectionChanged(object sender, EventArgs e) {
       DataGridView dgv = sender as DataGridView;
-      DisposeUserControlHandle();
+      DisposeUserControls();
       if (dgv.SelectedRows.Count > 0) {
         if (dgv.SelectedRows[0].Tag is HandleInfo handleInfo) {
           PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation, false, true));
@@ -166,21 +166,30 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private void DisposeUserControlHandle() {
+    private void DisposeUserControls() {
       if (PanelInfo.Controls.Count > 0) {
-        if (PanelInfo.Controls[0] is UserControlHandle userControlHandle) {
-          userControlHandle.PictureBoxHandleAvatar.Image?.Dispose();
-          userControlHandle.PictureBoxHandleAvatar.Image = null;
-          userControlHandle.PictureBoxDisplayTitle.Image?.Dispose();
-          userControlHandle.PictureBoxDisplayTitle.Image = null;
-          userControlHandle.Dispose();
+        for (int i = PanelInfo.Controls.Count - 1; i >= 0; i--) {
+          Control control = PanelInfo.Controls[i];
+          if (control is UserControlHandle ctrlHandle) {
+            ctrlHandle.PictureBoxHandleAvatar.Image?.Dispose();
+            ctrlHandle.PictureBoxHandleAvatar.Image = null;
+            ctrlHandle.PictureBoxDisplayTitle.Image?.Dispose();
+            ctrlHandle.PictureBoxDisplayTitle.Image = null;
+            ctrlHandle.Dispose();
+          } else if (control is UserControlOrganization ctrlOrganization) {
+            ctrlOrganization.PictureBoxOrganization.Image?.Dispose();
+            ctrlOrganization.PictureBoxOrganization.Image = null;
+            ctrlOrganization.PictureBoxOrganizationRank.Image?.Dispose();
+            ctrlOrganization.PictureBoxOrganizationRank.Image = null;
+            ctrlOrganization.Dispose();
+          }
         }
         PanelInfo.Controls.Clear();
       }
     }
 
     private void FormLocalCache_FormClosing(object sender, FormClosingEventArgs e) {
-      DisposeUserControlHandle();
+      DisposeUserControls();
     }
 
   }
