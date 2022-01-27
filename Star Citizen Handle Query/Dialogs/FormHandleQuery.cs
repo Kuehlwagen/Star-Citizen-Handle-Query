@@ -208,6 +208,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Handle-Textbox Tastendrücke verarbeiten
       switch (e.KeyCode) {
         case Keys.Oemplus:
+        case Keys.Add:
           // Ggf. Handle-Kommentar aktivieren
           e.SuppressKeyPress = true;
           if (PanelInfo.Controls.Count > 0) {
