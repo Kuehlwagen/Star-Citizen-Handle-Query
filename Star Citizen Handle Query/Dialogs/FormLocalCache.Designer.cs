@@ -178,7 +178,7 @@
       // 
       this.ColumnKommentar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
       this.ColumnKommentar.HeaderText = "Kommentar";
-      this.ColumnKommentar.MaxInputLength = 25;
+      this.ColumnKommentar.MaxInputLength = 15;
       this.ColumnKommentar.Name = "ColumnKommentar";
       // 
       // FormLocalCache
