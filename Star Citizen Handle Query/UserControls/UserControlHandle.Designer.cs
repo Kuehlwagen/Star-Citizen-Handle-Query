@@ -142,8 +142,8 @@
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.Controls.Add(this.LabelAdditionalInformation);
       this.Controls.Add(this.TextBoxAdditionalInformation);
+      this.Controls.Add(this.LabelAdditionalInformation);
       this.Controls.Add(this.LabelUEECitizenRecord);
       this.Controls.Add(this.LabelFluency);
       this.Controls.Add(this.LabelDisplayTitle);
