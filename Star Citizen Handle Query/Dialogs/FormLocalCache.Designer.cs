@@ -82,7 +82,7 @@
       this.DataGridViewExport.RowTemplate.Height = 25;
       this.DataGridViewExport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
       this.DataGridViewExport.ShowEditingIcon = false;
-      this.DataGridViewExport.Size = new System.Drawing.Size(374, 260);
+      this.DataGridViewExport.Size = new System.Drawing.Size(374, 259);
       this.DataGridViewExport.TabIndex = 0;
       this.DataGridViewExport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewExport_CellContentClick);
       this.DataGridViewExport.SelectionChanged += new System.EventHandler(this.DataGridViewExport_SelectionChanged);
@@ -128,7 +128,7 @@
       this.ButtonCacheLeeren.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ButtonCacheLeeren.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.ButtonCacheLeeren.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonCacheLeeren.Location = new System.Drawing.Point(12, 364);
+      this.ButtonCacheLeeren.Location = new System.Drawing.Point(12, 363);
       this.ButtonCacheLeeren.Name = "ButtonCacheLeeren";
       this.ButtonCacheLeeren.Size = new System.Drawing.Size(91, 28);
       this.ButtonCacheLeeren.TabIndex = 1;
@@ -141,7 +141,7 @@
       this.ButtonSchliessen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ButtonSchliessen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.ButtonSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSchliessen.Location = new System.Drawing.Point(216, 364);
+      this.ButtonSchliessen.Location = new System.Drawing.Point(216, 363);
       this.ButtonSchliessen.Name = "ButtonSchliessen";
       this.ButtonSchliessen.Size = new System.Drawing.Size(74, 28);
       this.ButtonSchliessen.TabIndex = 3;
@@ -154,7 +154,7 @@
       this.ButtonOrdnerOeffnen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ButtonOrdnerOeffnen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.ButtonOrdnerOeffnen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonOrdnerOeffnen.Location = new System.Drawing.Point(109, 364);
+      this.ButtonOrdnerOeffnen.Location = new System.Drawing.Point(109, 363);
       this.ButtonOrdnerOeffnen.Name = "ButtonOrdnerOeffnen";
       this.ButtonOrdnerOeffnen.Size = new System.Drawing.Size(101, 28);
       this.ButtonOrdnerOeffnen.TabIndex = 2;
@@ -164,8 +164,9 @@
       // 
       // PanelInfo
       // 
+      this.PanelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.PanelInfo.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.PanelInfo.Location = new System.Drawing.Point(12, 275);
+      this.PanelInfo.Location = new System.Drawing.Point(12, 274);
       this.PanelInfo.Margin = new System.Windows.Forms.Padding(0);
       this.PanelInfo.Name = "PanelInfo";
       this.PanelInfo.Size = new System.Drawing.Size(373, 85);
@@ -177,7 +178,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.CancelButton = this.ButtonSchliessen;
-      this.ClientSize = new System.Drawing.Size(398, 403);
+      this.ClientSize = new System.Drawing.Size(398, 402);
       this.Controls.Add(this.PanelInfo);
       this.Controls.Add(this.ButtonOrdnerOeffnen);
       this.Controls.Add(this.ButtonSchliessen);
