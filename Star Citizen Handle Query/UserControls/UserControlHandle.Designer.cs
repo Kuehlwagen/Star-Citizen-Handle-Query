@@ -142,13 +142,13 @@
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.Controls.Add(this.LabelAdditionalInformation);
       this.Controls.Add(this.TextBoxAdditionalInformation);
       this.Controls.Add(this.LabelUEECitizenRecord);
       this.Controls.Add(this.LabelFluency);
       this.Controls.Add(this.LabelDisplayTitle);
       this.Controls.Add(this.PictureBoxDisplayTitle);
       this.Controls.Add(this.PictureBoxHandleAvatar);
-      this.Controls.Add(this.LabelAdditionalInformation);
       this.Controls.Add(this.LabelEnlistedDate);
       this.Controls.Add(this.LabelCommunityMoniker);
       this.Controls.Add(this.LabelHandle);
