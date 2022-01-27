@@ -46,6 +46,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           };
           row.Tag = handleInfo;
           row.CreateCells(DataGridViewExport, info.ToArray());
+          if (info[2]?.ToString() == String.Empty) {
+            row.Cells[2] = new DataGridViewTextBoxCell();
+            row.Cells[2].Value = "REDACTED";
+            row.Cells[2].Style.ForeColor = Color.FromArgb(255, 57, 57);
+            row.Cells[2].Style.SelectionForeColor = Color.FromArgb(255, 57, 57);
+          }
           rows.Add(row);
         }
       }
@@ -68,7 +74,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             Process.Start("explorer", $"https://robertsspaceindustries.com/citizens/{dgvc.Value}");
             break;
           case 2: // Org Name
-            Process.Start("explorer", $"https://robertsspaceindustries.com/orgs/{(dgvr.Tag as HandleInfo).data.organization.sid}");
+            if (dgvc is DataGridViewLinkCell) {
+              Process.Start("explorer", $"https://robertsspaceindustries.com/orgs/{(dgvr.Tag as HandleInfo).data.organization.sid}");
+            }
             break;
         }
       }

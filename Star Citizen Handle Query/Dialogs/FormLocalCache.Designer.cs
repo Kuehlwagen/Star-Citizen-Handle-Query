@@ -27,13 +27,13 @@
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLocalCache));
       this.DataGridViewExport = new System.Windows.Forms.DataGridView();
-      this.ColumnCacheDatum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnHandle = new System.Windows.Forms.DataGridViewLinkColumn();
-      this.ColumnOrganisation = new System.Windows.Forms.DataGridViewLinkColumn();
       this.ButtonCacheLeeren = new System.Windows.Forms.Button();
       this.ButtonSchliessen = new System.Windows.Forms.Button();
       this.ButtonOrdnerOeffnen = new System.Windows.Forms.Button();
       this.PanelInfo = new System.Windows.Forms.FlowLayoutPanel();
+      this.ColumnCacheDatum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ColumnHandle = new System.Windows.Forms.DataGridViewLinkColumn();
+      this.ColumnOrganisation = new System.Windows.Forms.DataGridViewLinkColumn();
       ((System.ComponentModel.ISupportInitialize)(this.DataGridViewExport)).BeginInit();
       this.SuspendLayout();
       // 
@@ -87,42 +87,6 @@
       this.DataGridViewExport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewExport_CellContentClick);
       this.DataGridViewExport.SelectionChanged += new System.EventHandler(this.DataGridViewExport_SelectionChanged);
       // 
-      // ColumnCacheDatum
-      // 
-      this.ColumnCacheDatum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnCacheDatum.Frozen = true;
-      this.ColumnCacheDatum.HeaderText = "Cache Datum";
-      this.ColumnCacheDatum.MinimumWidth = 74;
-      this.ColumnCacheDatum.Name = "ColumnCacheDatum";
-      this.ColumnCacheDatum.ReadOnly = true;
-      this.ColumnCacheDatum.Width = 105;
-      // 
-      // ColumnHandle
-      // 
-      this.ColumnHandle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnHandle.Frozen = true;
-      this.ColumnHandle.HeaderText = "Handle";
-      this.ColumnHandle.LinkColor = System.Drawing.Color.SteelBlue;
-      this.ColumnHandle.MinimumWidth = 74;
-      this.ColumnHandle.Name = "ColumnHandle";
-      this.ColumnHandle.ReadOnly = true;
-      this.ColumnHandle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-      this.ColumnHandle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-      this.ColumnHandle.TrackVisitedState = false;
-      this.ColumnHandle.Width = 74;
-      // 
-      // ColumnOrganisation
-      // 
-      this.ColumnOrganisation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.ColumnOrganisation.HeaderText = "Organisation";
-      this.ColumnOrganisation.LinkColor = System.Drawing.Color.SteelBlue;
-      this.ColumnOrganisation.MinimumWidth = 99;
-      this.ColumnOrganisation.Name = "ColumnOrganisation";
-      this.ColumnOrganisation.ReadOnly = true;
-      this.ColumnOrganisation.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-      this.ColumnOrganisation.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-      this.ColumnOrganisation.TrackVisitedState = false;
-      // 
       // ButtonCacheLeeren
       // 
       this.ButtonCacheLeeren.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -172,6 +136,42 @@
       this.PanelInfo.Size = new System.Drawing.Size(373, 85);
       this.PanelInfo.TabIndex = 4;
       // 
+      // ColumnCacheDatum
+      // 
+      this.ColumnCacheDatum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+      this.ColumnCacheDatum.Frozen = true;
+      this.ColumnCacheDatum.HeaderText = "Cache Datum";
+      this.ColumnCacheDatum.MinimumWidth = 74;
+      this.ColumnCacheDatum.Name = "ColumnCacheDatum";
+      this.ColumnCacheDatum.ReadOnly = true;
+      this.ColumnCacheDatum.Width = 105;
+      // 
+      // ColumnHandle
+      // 
+      this.ColumnHandle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+      this.ColumnHandle.Frozen = true;
+      this.ColumnHandle.HeaderText = "Handle";
+      this.ColumnHandle.LinkColor = System.Drawing.Color.SteelBlue;
+      this.ColumnHandle.MinimumWidth = 74;
+      this.ColumnHandle.Name = "ColumnHandle";
+      this.ColumnHandle.ReadOnly = true;
+      this.ColumnHandle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+      this.ColumnHandle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+      this.ColumnHandle.TrackVisitedState = false;
+      this.ColumnHandle.Width = 74;
+      // 
+      // ColumnOrganisation
+      // 
+      this.ColumnOrganisation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+      this.ColumnOrganisation.HeaderText = "Organisation";
+      this.ColumnOrganisation.LinkColor = System.Drawing.Color.SteelBlue;
+      this.ColumnOrganisation.MinimumWidth = 99;
+      this.ColumnOrganisation.Name = "ColumnOrganisation";
+      this.ColumnOrganisation.ReadOnly = true;
+      this.ColumnOrganisation.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+      this.ColumnOrganisation.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+      this.ColumnOrganisation.TrackVisitedState = false;
+      // 
       // FormLocalCache
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -201,11 +201,11 @@
 
     private DataGridView DataGridViewExport;
     private Button ButtonCacheLeeren;
-    private DataGridViewTextBoxColumn ColumnCacheDatum;
-    private DataGridViewLinkColumn ColumnHandle;
-    private DataGridViewLinkColumn ColumnOrganisation;
     private Button ButtonSchliessen;
     private Button ButtonOrdnerOeffnen;
     private FlowLayoutPanel PanelInfo;
+    private DataGridViewTextBoxColumn ColumnCacheDatum;
+    private DataGridViewLinkColumn ColumnHandle;
+    private DataGridViewLinkColumn ColumnOrganisation;
   }
 }

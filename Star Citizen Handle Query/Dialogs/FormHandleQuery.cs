@@ -413,9 +413,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return rtnVal;
     }
 
+    private void ResetHandle() {
+      TextBoxHandle.Text = string.Empty;
+      LabelCacheType.Text = string.Empty;
+    }
+
     private void LokalerCacheToolStripMenuItem_Click(object sender, EventArgs e) {
       // Lokalen Cache leeren
       EnableContextMenu(false);
+      RemoveUserControls();
+      ResetHandle();
       using FormLocalCache frm = new(ProgramSettings, ProgramTranslation);
       switch (frm.ShowDialog()) {
         case DialogResult.Yes:
@@ -436,7 +443,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         // Ggf. UserControl entfernen
         RemoveUserControls();
 
-        TextBoxHandle.Text = string.Empty;
+        ResetHandle();
 
         // Cache leeren
         DeleteDirectoryFiles(CacheDirectoryType.Handle, onlyExpired);
