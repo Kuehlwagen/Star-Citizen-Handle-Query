@@ -158,6 +158,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (dgv.SelectedRows.Count > 0) {
         if (dgv.SelectedRows[0].Tag is HandleInfo handleInfo) {
           PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation, false, true));
+          PanelInfo.Controls[0].Margin = new Padding(0, 0, 50, 0);
+          if (handleInfo?.data?.organization?.name != null) {
+            PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.data.organization, ProgramSettings, true, false));
+          }
         }
       }
     }

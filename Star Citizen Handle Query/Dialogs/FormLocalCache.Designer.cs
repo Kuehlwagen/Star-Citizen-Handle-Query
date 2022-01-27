@@ -27,10 +27,6 @@
       System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLocalCache));
       this.DataGridViewLokalerCache = new System.Windows.Forms.DataGridView();
-      this.ButtonCacheLeeren = new System.Windows.Forms.Button();
-      this.ButtonSchliessen = new System.Windows.Forms.Button();
-      this.ButtonOrdnerOeffnen = new System.Windows.Forms.Button();
-      this.PanelInfo = new System.Windows.Forms.FlowLayoutPanel();
       this.ColumnCacheDatum = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnHandle = new System.Windows.Forms.DataGridViewLinkColumn();
       this.ColumnCommunityMoniker = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -40,6 +36,10 @@
       this.ColumnOrganisationRang = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnAnzahlAffiliationen = new System.Windows.Forms.DataGridViewTextBoxColumn();
       this.ColumnKommentar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+      this.ButtonCacheLeeren = new System.Windows.Forms.Button();
+      this.ButtonSchliessen = new System.Windows.Forms.Button();
+      this.ButtonOrdnerOeffnen = new System.Windows.Forms.Button();
+      this.PanelInfo = new System.Windows.Forms.FlowLayoutPanel();
       ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLokalerCache)).BeginInit();
       this.SuspendLayout();
       // 
@@ -97,55 +97,6 @@
       this.DataGridViewLokalerCache.TabIndex = 0;
       this.DataGridViewLokalerCache.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewExport_CellContentClick);
       this.DataGridViewLokalerCache.SelectionChanged += new System.EventHandler(this.DataGridViewExport_SelectionChanged);
-      // 
-      // ButtonCacheLeeren
-      // 
-      this.ButtonCacheLeeren.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.ButtonCacheLeeren.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.ButtonCacheLeeren.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonCacheLeeren.Location = new System.Drawing.Point(12, 397);
-      this.ButtonCacheLeeren.Name = "ButtonCacheLeeren";
-      this.ButtonCacheLeeren.Size = new System.Drawing.Size(91, 28);
-      this.ButtonCacheLeeren.TabIndex = 1;
-      this.ButtonCacheLeeren.Text = "Cache leeren";
-      this.ButtonCacheLeeren.UseVisualStyleBackColor = false;
-      this.ButtonCacheLeeren.Click += new System.EventHandler(this.ButtonCacheLeeren_Click);
-      // 
-      // ButtonSchliessen
-      // 
-      this.ButtonSchliessen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.ButtonSchliessen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.ButtonSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSchliessen.Location = new System.Drawing.Point(216, 397);
-      this.ButtonSchliessen.Name = "ButtonSchliessen";
-      this.ButtonSchliessen.Size = new System.Drawing.Size(74, 28);
-      this.ButtonSchliessen.TabIndex = 3;
-      this.ButtonSchliessen.Text = "Schließen";
-      this.ButtonSchliessen.UseVisualStyleBackColor = false;
-      this.ButtonSchliessen.Click += new System.EventHandler(this.ButtonSchliessen_Click);
-      // 
-      // ButtonOrdnerOeffnen
-      // 
-      this.ButtonOrdnerOeffnen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.ButtonOrdnerOeffnen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.ButtonOrdnerOeffnen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonOrdnerOeffnen.Location = new System.Drawing.Point(109, 397);
-      this.ButtonOrdnerOeffnen.Name = "ButtonOrdnerOeffnen";
-      this.ButtonOrdnerOeffnen.Size = new System.Drawing.Size(101, 28);
-      this.ButtonOrdnerOeffnen.TabIndex = 2;
-      this.ButtonOrdnerOeffnen.Text = "Ordner öffnen";
-      this.ButtonOrdnerOeffnen.UseVisualStyleBackColor = false;
-      this.ButtonOrdnerOeffnen.Click += new System.EventHandler(this.ButtonOrdnerOeffnen_Click);
-      // 
-      // PanelInfo
-      // 
-      this.PanelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.PanelInfo.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.PanelInfo.Location = new System.Drawing.Point(12, 308);
-      this.PanelInfo.Margin = new System.Windows.Forms.Padding(0);
-      this.PanelInfo.Name = "PanelInfo";
-      this.PanelInfo.Size = new System.Drawing.Size(373, 85);
-      this.PanelInfo.TabIndex = 4;
       // 
       // ColumnCacheDatum
       // 
@@ -220,6 +171,56 @@
       this.ColumnKommentar.HeaderText = "Kommentar";
       this.ColumnKommentar.MaxInputLength = 15;
       this.ColumnKommentar.Name = "ColumnKommentar";
+      // 
+      // ButtonCacheLeeren
+      // 
+      this.ButtonCacheLeeren.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ButtonCacheLeeren.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.ButtonCacheLeeren.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.ButtonCacheLeeren.Location = new System.Drawing.Point(12, 397);
+      this.ButtonCacheLeeren.Name = "ButtonCacheLeeren";
+      this.ButtonCacheLeeren.Size = new System.Drawing.Size(91, 28);
+      this.ButtonCacheLeeren.TabIndex = 1;
+      this.ButtonCacheLeeren.Text = "Cache leeren";
+      this.ButtonCacheLeeren.UseVisualStyleBackColor = false;
+      this.ButtonCacheLeeren.Click += new System.EventHandler(this.ButtonCacheLeeren_Click);
+      // 
+      // ButtonSchliessen
+      // 
+      this.ButtonSchliessen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ButtonSchliessen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.ButtonSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.ButtonSchliessen.Location = new System.Drawing.Point(216, 397);
+      this.ButtonSchliessen.Name = "ButtonSchliessen";
+      this.ButtonSchliessen.Size = new System.Drawing.Size(74, 28);
+      this.ButtonSchliessen.TabIndex = 3;
+      this.ButtonSchliessen.Text = "Schließen";
+      this.ButtonSchliessen.UseVisualStyleBackColor = false;
+      this.ButtonSchliessen.Click += new System.EventHandler(this.ButtonSchliessen_Click);
+      // 
+      // ButtonOrdnerOeffnen
+      // 
+      this.ButtonOrdnerOeffnen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+      this.ButtonOrdnerOeffnen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.ButtonOrdnerOeffnen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.ButtonOrdnerOeffnen.Location = new System.Drawing.Point(109, 397);
+      this.ButtonOrdnerOeffnen.Name = "ButtonOrdnerOeffnen";
+      this.ButtonOrdnerOeffnen.Size = new System.Drawing.Size(101, 28);
+      this.ButtonOrdnerOeffnen.TabIndex = 2;
+      this.ButtonOrdnerOeffnen.Text = "Ordner öffnen";
+      this.ButtonOrdnerOeffnen.UseVisualStyleBackColor = false;
+      this.ButtonOrdnerOeffnen.Click += new System.EventHandler(this.ButtonOrdnerOeffnen_Click);
+      // 
+      // PanelInfo
+      // 
+      this.PanelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+      this.PanelInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.PanelInfo.Location = new System.Drawing.Point(12, 308);
+      this.PanelInfo.Margin = new System.Windows.Forms.Padding(0);
+      this.PanelInfo.Name = "PanelInfo";
+      this.PanelInfo.Size = new System.Drawing.Size(905, 85);
+      this.PanelInfo.TabIndex = 4;
       // 
       // FormLocalCache
       // 
