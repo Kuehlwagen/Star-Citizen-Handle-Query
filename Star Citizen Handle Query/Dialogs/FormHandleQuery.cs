@@ -1,5 +1,4 @@
 using Star_Citizen_Handle_Query.ExternClasses;
-using Star_Citizen_Handle_Query.ExternClasses.Star_Citizen_Handle_Query.ExternClasses;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Net;
@@ -15,6 +14,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly Translation ProgramTranslation;
     private readonly Settings ProgramSettings;
     private GlobalHotKey HotKey;
+    private AutoCompleteStringCollection AutoCompleteCollection;
 
     public FormHandleQuery() {
       InitializeComponent();
@@ -59,17 +59,21 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     }
 
-    private void UpdateAutoComplete() {
+    private void UpdateAutoComplete(string handle = null) {
       // Autovervollständigung aktualisieren
-      string handleCachePath = GetCachePath(CacheDirectoryType.Handle);
-      if (Directory.Exists(handleCachePath)) {
-        List<string> autoCompleteSource = new();
-        foreach (string filePath in Directory.GetFiles(handleCachePath, "*.json")) {
-          autoCompleteSource.Add(Path.GetFileNameWithoutExtension(filePath));
+      if (AutoCompleteCollection == null && handle == null) {
+        AutoCompleteCollection = new();
+        string handleCachePath = GetCachePath(CacheDirectoryType.Handle);
+        if (Directory.Exists(handleCachePath)) {
+          List<string> autoCompleteSource = new();
+          foreach (string filePath in Directory.GetFiles(handleCachePath, "*.json")) {
+            autoCompleteSource.Add(Path.GetFileNameWithoutExtension(filePath));
+          }
+          AutoCompleteCollection.AddRange(autoCompleteSource.ToArray());
         }
-        AutoCompleteStringCollection collection = new();
-        collection.AddRange(autoCompleteSource.ToArray());
-        TextBoxHandle.AutoCompleteCustomSource = collection;
+        TextBoxHandle.AutoCompleteCustomSource = AutoCompleteCollection;
+      } else if (handle != string.Empty && !AutoCompleteCollection.Contains(handle)) {
+        AutoCompleteCollection.Add(handle);
       }
     }
 
@@ -112,7 +116,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Sprache für Controls setzen
       LabelHandle.Text = ProgramTranslation.Window.Handle;
       TextBoxHandle.PlaceholderText = ProgramTranslation.Window.Handle_Placeholder;
-      AnzeigenVersteckenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Show;
+      AnzeigenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Show;
       EinstellungenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Settings;
       LokalenCacheLeerenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Clear_Local_Cache;
       NeustartenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Restart;
@@ -263,7 +267,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             }
 
             // Autovervollständigung aktualisieren
-            UpdateAutoComplete();
+            UpdateAutoComplete(handleInfo?.data?.profile?.handle != null ? handleInfo.data.profile.handle : String.Empty);
+
             // Textbox wieder aktivieren und Text markieren
             TextBoxHandle.Enabled = true;
             TextBoxHandle.SelectAll();
@@ -381,7 +386,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private void AnzeigenVersteckenToolStripMenuItem_Click(object sender, EventArgs e) {
+    private void AnzeigenToolStripMenuItem_Click(object sender, EventArgs e) {
       // Fenster einblenden, in den Vordergrund holen und Textbox fokussieren
       ShowWindow();
     }
@@ -567,9 +572,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     public static void CreateDirectory(CacheDirectoryType imageType) {
-      string directoryPath = Path.Combine(Application.StartupPath, GetCachePath(imageType));
+      string directoryPath = GetCachePath(imageType);
       if (!Directory.Exists(directoryPath)) {
-        Directory.CreateDirectory(Path.Combine(Application.StartupPath, directoryPath));
+        Directory.CreateDirectory(directoryPath);
       }
     }
 

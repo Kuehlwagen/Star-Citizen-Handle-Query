@@ -62,12 +62,6 @@ namespace Star_Citizen_Handle_Query.UserControls {
       }
     }
 
-    private void PictureBoxOrganization_Click(object sender, EventArgs e) {
-      if (HandleInfo?.data?.organization?.sid?.Length > 0) {
-        Process.Start("explorer", $"https://robertsspaceindustries.com/orgs/{HandleInfo.data.organization.sid}");
-      }
-    }
-
   }
 
 }

@@ -32,7 +32,7 @@
       this.PanelInfo = new System.Windows.Forms.FlowLayoutPanel();
       this.NotifyIconHandleQuery = new System.Windows.Forms.NotifyIcon(this.components);
       this.ContextMenuStripNotifyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
-      this.AnzeigenVersteckenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.AnzeigenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.EinstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.UeberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -116,7 +116,7 @@
       // ContextMenuStripNotifyIcon
       // 
       this.ContextMenuStripNotifyIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AnzeigenVersteckenToolStripMenuItem,
+            this.AnzeigenToolStripMenuItem,
             this.EinstellungenToolStripMenuItem,
             this.UeberToolStripMenuItem,
             this.toolStripSeparator1,
@@ -126,13 +126,13 @@
       this.ContextMenuStripNotifyIcon.Name = "ContextMenuStripNotifyIcon";
       this.ContextMenuStripNotifyIcon.Size = new System.Drawing.Size(187, 142);
       // 
-      // AnzeigenVersteckenToolStripMenuItem
+      // AnzeigenToolStripMenuItem
       // 
-      this.AnzeigenVersteckenToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.AnzeigenVersteckenToolStripMenuItem.Name = "AnzeigenVersteckenToolStripMenuItem";
-      this.AnzeigenVersteckenToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-      this.AnzeigenVersteckenToolStripMenuItem.Text = "&Anzeigen";
-      this.AnzeigenVersteckenToolStripMenuItem.Click += new System.EventHandler(this.AnzeigenVersteckenToolStripMenuItem_Click);
+      this.AnzeigenToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+      this.AnzeigenToolStripMenuItem.Name = "AnzeigenToolStripMenuItem";
+      this.AnzeigenToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+      this.AnzeigenToolStripMenuItem.Text = "&Anzeigen";
+      this.AnzeigenToolStripMenuItem.Click += new System.EventHandler(this.AnzeigenToolStripMenuItem_Click);
       // 
       // EinstellungenToolStripMenuItem
       // 
@@ -209,7 +209,7 @@
     private NotifyIcon NotifyIconHandleQuery;
     private ContextMenuStrip ContextMenuStripNotifyIcon;
     private ToolStripMenuItem BeendenToolStripMenuItem;
-    private ToolStripMenuItem AnzeigenVersteckenToolStripMenuItem;
+    private ToolStripMenuItem AnzeigenToolStripMenuItem;
     private ToolStripSeparator toolStripSeparator1;
     private ToolStripMenuItem EinstellungenToolStripMenuItem;
     private ToolStripMenuItem LokalenCacheLeerenToolStripMenuItem;
