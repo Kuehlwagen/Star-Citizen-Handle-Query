@@ -69,7 +69,8 @@
     "Columns": {
       "Cache_Date": "Cache Date",
       "Handle": "Handle",
-      "Organization": "Organization"
+      "Organization": "Organization",
+      "Comment":  "Comment"
     },
     "Buttons": {
       "Clear_Cache": "Clear Cache",

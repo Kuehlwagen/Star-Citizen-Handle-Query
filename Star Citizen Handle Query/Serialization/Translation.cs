@@ -210,6 +210,8 @@
 
     public string Organization { get; set; } = "Organisation";
 
+    public string Comment { get; set; } = "Kommentar";
+
   }
 
   [Serializable()]

@@ -27,27 +27,36 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         "DoubleBuffered",
         BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty,
         null,
-        DataGridViewExport,
+        DataGridViewLokalerCache,
         new object[] { true });
       ColumnCacheDatum.DefaultCellStyle.Format = "G";
 
-      DataGridViewExport.PerformLayout();
+      DataGridViewLokalerCache.PerformLayout();
       List<DataGridViewRow> rows = new();
       FormHandleQuery.CreateDirectory(FormHandleQuery.CacheDirectoryType.Handle);
+      FormHandleQuery.CreateDirectory(FormHandleQuery.CacheDirectoryType.HandleAdditional);
       foreach (string handleJsonPath in Directory.GetFiles(FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.Handle), "*.json").OrderByDescending(x => new FileInfo(x).LastWriteTime)) {
         HandleInfo handleInfo = JsonSerializer.Deserialize<HandleInfo>(File.ReadAllText(handleJsonPath, Encoding.UTF8));
-        if (handleInfo != null) {
+        if (handleInfo?.data != null) {
+          HandleAdditionalInfo handleAdditionalInfo = null;
+          string additionalInfoPath = FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.HandleAdditional, handleInfo.data.profile.handle);
+          if (File.Exists(additionalInfoPath)) {
+            handleAdditionalInfo = JsonSerializer.Deserialize<HandleAdditionalInfo>(File.ReadAllText(FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.HandleAdditional, handleInfo.data.profile.handle), Encoding.UTF8));
+          }
           DataGridViewRow row = new();
           HandleInfoDataOrganization org = handleInfo?.data?.organization;
           List<object> info = new() {
             new FileInfo(handleJsonPath).LastWriteTime,
             handleInfo.data.profile.handle,
-            org?.name
+            org?.name,
+            handleAdditionalInfo?.Comment ?? string.Empty
           };
           row.Tag = handleInfo;
-          row.CreateCells(DataGridViewExport, info.ToArray());
-          if (info[2]?.ToString() == String.Empty) {
+          row.CreateCells(DataGridViewLokalerCache, info.ToArray());
+          if (info[2]?.ToString() == string.Empty) {
+#pragma warning disable IDE0017 // Initialisierung von Objekten vereinfachen
             row.Cells[2] = new DataGridViewTextBoxCell();
+#pragma warning restore IDE0017 // Initialisierung von Objekten vereinfachen
             row.Cells[2].Value = "REDACTED";
             row.Cells[2].Style.ForeColor = Color.FromArgb(255, 57, 57);
             row.Cells[2].Style.SelectionForeColor = Color.FromArgb(255, 57, 57);
@@ -56,12 +65,27 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         }
       }
       if (rows.Count > 0) {
-        DataGridViewExport.Rows.AddRange(rows.ToArray());
-        DataGridViewExport.Sort(ColumnCacheDatum, ListSortDirection.Descending);
-        DataGridViewExport.ClearSelection();
-        DataGridViewExport.Rows[0].Selected = true;
+        DataGridViewLokalerCache.Rows.AddRange(rows.ToArray());
+        DataGridViewLokalerCache.Sort(ColumnCacheDatum, ListSortDirection.Descending);
+        DataGridViewLokalerCache.ClearSelection();
+        DataGridViewLokalerCache.Rows[0].Selected = true;
       }
-      DataGridViewExport.ResumeLayout();
+      DataGridViewLokalerCache.CellValueChanged += DataGridViewExport_CellValueChanged;
+      DataGridViewLokalerCache.ResumeLayout();
+    }
+
+    private void DataGridViewExport_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
+      if (e.RowIndex > -1 && e.ColumnIndex > -1) {
+        switch (e.ColumnIndex) {
+          case 3: // Kommentar
+            DataGridViewRow dgvr = (sender as DataGridView).Rows[e.RowIndex];
+            HandleInfo handleInfo = dgvr.Tag as HandleInfo;
+            string additionalPath = FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.HandleAdditional, handleInfo.data.profile.handle);
+            File.WriteAllText(additionalPath, JsonSerializer.Serialize(new HandleAdditionalInfo() { Comment = $"{dgvr.Cells[e.ColumnIndex].Value}" },
+              new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
+            break;
+        }
+      }
     }
 
     private void DataGridViewExport_CellContentClick(object sender, DataGridViewCellEventArgs e) {
@@ -89,6 +113,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ColumnCacheDatum.HeaderText = ProgramTranslation.Local_Cache.Columns.Cache_Date;
       ColumnHandle.HeaderText = ProgramTranslation.Local_Cache.Columns.Handle;
       ColumnOrganisation.HeaderText = ProgramTranslation.Local_Cache.Columns.Organization;
+      ColumnKommentar.HeaderText = ProgramTranslation.Local_Cache.Columns.Comment;
 
       ButtonCacheLeeren.Text = ProgramTranslation.Local_Cache.Buttons.Clear_Cache;
       ButtonOrdnerOeffnen.Text = ProgramTranslation.Local_Cache.Buttons.Open_Folder;
@@ -135,6 +160,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void FormLocalCache_FormClosing(object sender, FormClosingEventArgs e) {
       DisposeUserControlHandle();
     }
+
   }
 
 }
