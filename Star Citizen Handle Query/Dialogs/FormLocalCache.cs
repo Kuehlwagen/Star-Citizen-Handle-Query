@@ -1,4 +1,5 @@
 ﻿using Star_Citizen_Handle_Query.Serialization;
+using Star_Citizen_Handle_Query.UserControls;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
@@ -9,11 +10,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
   public partial class FormLocalCache : Form {
 
-    private readonly Translation Translation;
+    private readonly Settings ProgramSettings;
+    private readonly Translation ProgramTranslation;
 
-    public FormLocalCache(Translation translation) {
+    public FormLocalCache(Settings settings, Translation translation) {
       InitializeComponent();
-      Translation = translation;
+      ProgramSettings = settings;
+      ProgramTranslation = translation;
     }
 
     private void FormExport_Load(object sender, EventArgs e) {
@@ -73,15 +76,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void UpdateLocalization() {
 
-      Text = $"Star Citizen Handle Query - {Translation.Local_Cache.Title}";
+      Text = $"Star Citizen Handle Query - {ProgramTranslation.Local_Cache.Title}";
 
-      ColumnCacheDatum.HeaderText = Translation.Local_Cache.Columns.Cache_Date;
-      ColumnHandle.HeaderText = Translation.Local_Cache.Columns.Handle;
-      ColumnOrganisation.HeaderText = Translation.Local_Cache.Columns.Organization;
+      ColumnCacheDatum.HeaderText = ProgramTranslation.Local_Cache.Columns.Cache_Date;
+      ColumnHandle.HeaderText = ProgramTranslation.Local_Cache.Columns.Handle;
+      ColumnOrganisation.HeaderText = ProgramTranslation.Local_Cache.Columns.Organization;
 
-      ButtonCacheLeeren.Text = Translation.Local_Cache.Buttons.Clear_Cache;
-      ButtonOrdnerOeffnen.Text = Translation.Local_Cache.Buttons.Open_Folder;
-      ButtonSchliessen.Text = Translation.Local_Cache.Buttons.Close;
+      ButtonCacheLeeren.Text = ProgramTranslation.Local_Cache.Buttons.Clear_Cache;
+      ButtonOrdnerOeffnen.Text = ProgramTranslation.Local_Cache.Buttons.Open_Folder;
+      ButtonSchliessen.Text = ProgramTranslation.Local_Cache.Buttons.Close;
 
     }
 
@@ -98,6 +101,32 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Close();
     }
 
+    private void DataGridViewExport_SelectionChanged(object sender, EventArgs e) {
+      DataGridView dgv = sender as DataGridView;
+      DisposeUserControlHandle();
+      if (dgv.SelectedRows.Count > 0) {
+        if (dgv.SelectedRows[0].Tag is HandleInfo handleInfo) {
+          PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation, false));
+        }
+      }
+    }
+
+    private void DisposeUserControlHandle() {
+      if (PanelInfo.Controls.Count > 0) {
+        if (PanelInfo.Controls[0] is UserControlHandle userControlHandle) {
+          userControlHandle.PictureBoxHandleAvatar.Image?.Dispose();
+          userControlHandle.PictureBoxHandleAvatar.Image = null;
+          userControlHandle.PictureBoxDisplayTitle.Image?.Dispose();
+          userControlHandle.PictureBoxDisplayTitle.Image = null;
+          userControlHandle.Dispose();
+        }
+        PanelInfo.Controls.Clear();
+      }
+    }
+
+    private void FormLocalCache_FormClosing(object sender, FormClosingEventArgs e) {
+      DisposeUserControlHandle();
+    }
   }
 
 }

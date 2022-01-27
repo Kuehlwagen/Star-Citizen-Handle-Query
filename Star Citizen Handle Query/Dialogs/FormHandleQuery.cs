@@ -416,7 +416,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void LokalerCacheToolStripMenuItem_Click(object sender, EventArgs e) {
       // Lokalen Cache leeren
       EnableContextMenu(false);
-      using FormLocalCache frm = new(ProgramTranslation);
+      using FormLocalCache frm = new(ProgramSettings, ProgramTranslation);
       switch (frm.ShowDialog()) {
         case DialogResult.Yes:
           ClearCache(false);
