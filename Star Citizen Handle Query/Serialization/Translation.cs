@@ -13,6 +13,8 @@
 
     public Translation_Settings Settings { get; set; } = new();
 
+    public Translation_Local_Cache Local_Cache { get; set; } = new();
+
     /// <summary>Vergleich in Liste ermöglichen</summary>
     /// <param name="other">Anderes Translation-Objekt</param>
     /// <returns>true, wenn das Feld "Language" übereinstimmt, andernfalls false</returns>
@@ -57,9 +59,7 @@
 
     public string Settings { get; set; } = "Einstellungen";
 
-    public string Clear_Local_Cache { get; set; } = "Lokalen Cache leeren";
-
-    public string Restart { get; set; } = "Neustarten";
+    public string Local_Cache { get; set; } = "Lokalen Cache leeren";
 
     public string Close { get; set; } = "Beenden";
 
@@ -187,6 +187,39 @@
     public string Save_Fail { get; set; } = "Das Speichern der Einstellungen ist fehlgeschlagen:\r\nFehlermeldung:";
 
     public string API_Key_Missing { get; set; } = "Es muss ein 32-stelliger API-Key angegeben werden.";
+
+  }
+
+  [Serializable()]
+  public class Translation_Local_Cache {
+
+    public string Title { get; set; } = "Lokaler Cache";
+
+    public Translation_Local_Cache_Columns Columns { get; set; } = new();
+
+    public Translation_Local_Cache_Buttons Buttons { get; set; } = new();
+
+  }
+
+  [Serializable()]
+  public class Translation_Local_Cache_Columns {
+
+    public string Cache_Date { get; set; } = "Cache Datum";
+
+    public string Handle { get; set; } = "Handle";
+
+    public string Organization { get; set; } = "Organisation";
+
+  }
+
+  [Serializable()]
+  public class Translation_Local_Cache_Buttons {
+
+    public string Clear_Cache { get; set; } = "Cache leeren";
+
+    public string Open_Folder { get; set; } = "Ordner öffnen";
+
+    public string Close { get; set; } = "Schließen";
 
   }
 

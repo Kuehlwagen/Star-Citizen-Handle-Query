@@ -36,8 +36,7 @@
       this.EinstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.UeberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-      this.LokalenCacheLeerenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.NeustartenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.LokalerCacheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.BeendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.PanelHandleQuery.SuspendLayout();
       this.ContextMenuStripNotifyIcon.SuspendLayout();
@@ -118,59 +117,51 @@
       this.ContextMenuStripNotifyIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AnzeigenToolStripMenuItem,
             this.EinstellungenToolStripMenuItem,
+            this.LokalerCacheToolStripMenuItem,
             this.UeberToolStripMenuItem,
             this.toolStripSeparator1,
-            this.LokalenCacheLeerenToolStripMenuItem,
-            this.NeustartenToolStripMenuItem,
             this.BeendenToolStripMenuItem});
       this.ContextMenuStripNotifyIcon.Name = "ContextMenuStripNotifyIcon";
-      this.ContextMenuStripNotifyIcon.Size = new System.Drawing.Size(187, 142);
+      this.ContextMenuStripNotifyIcon.Size = new System.Drawing.Size(181, 142);
       // 
       // AnzeigenToolStripMenuItem
       // 
       this.AnzeigenToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
       this.AnzeigenToolStripMenuItem.Name = "AnzeigenToolStripMenuItem";
-      this.AnzeigenToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+      this.AnzeigenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
       this.AnzeigenToolStripMenuItem.Text = "&Anzeigen";
       this.AnzeigenToolStripMenuItem.Click += new System.EventHandler(this.AnzeigenToolStripMenuItem_Click);
       // 
       // EinstellungenToolStripMenuItem
       // 
       this.EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem";
-      this.EinstellungenToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+      this.EinstellungenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
       this.EinstellungenToolStripMenuItem.Text = "&Einstellungen";
       this.EinstellungenToolStripMenuItem.Click += new System.EventHandler(this.EinstellungenToolStripMenuItem_Click);
       // 
       // UeberToolStripMenuItem
       // 
       this.UeberToolStripMenuItem.Name = "UeberToolStripMenuItem";
-      this.UeberToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+      this.UeberToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
       this.UeberToolStripMenuItem.Text = "&Über";
       this.UeberToolStripMenuItem.Click += new System.EventHandler(this.UeberToolStripMenuItem_Click);
       // 
       // toolStripSeparator1
       // 
       this.toolStripSeparator1.Name = "toolStripSeparator1";
-      this.toolStripSeparator1.Size = new System.Drawing.Size(183, 6);
+      this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
       // 
-      // LokalenCacheLeerenToolStripMenuItem
+      // LokalerCacheToolStripMenuItem
       // 
-      this.LokalenCacheLeerenToolStripMenuItem.Name = "LokalenCacheLeerenToolStripMenuItem";
-      this.LokalenCacheLeerenToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-      this.LokalenCacheLeerenToolStripMenuItem.Text = "&Lokalen Cache leeren";
-      this.LokalenCacheLeerenToolStripMenuItem.Click += new System.EventHandler(this.LokalenCacheLeerenToolStripMenuItem_Click);
-      // 
-      // NeustartenToolStripMenuItem
-      // 
-      this.NeustartenToolStripMenuItem.Name = "NeustartenToolStripMenuItem";
-      this.NeustartenToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
-      this.NeustartenToolStripMenuItem.Text = "&Neustarten";
-      this.NeustartenToolStripMenuItem.Click += new System.EventHandler(this.NeustartenToolStripMenuItem_Click);
+      this.LokalerCacheToolStripMenuItem.Name = "LokalerCacheToolStripMenuItem";
+      this.LokalerCacheToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+      this.LokalerCacheToolStripMenuItem.Text = "&Lokaler Cache";
+      this.LokalerCacheToolStripMenuItem.Click += new System.EventHandler(this.LokalerCacheToolStripMenuItem_Click);
       // 
       // BeendenToolStripMenuItem
       // 
       this.BeendenToolStripMenuItem.Name = "BeendenToolStripMenuItem";
-      this.BeendenToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+      this.BeendenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
       this.BeendenToolStripMenuItem.Text = "&Beenden";
       this.BeendenToolStripMenuItem.Click += new System.EventHandler(this.BeendenToolStripMenuItem_Click);
       // 
@@ -212,8 +203,7 @@
     private ToolStripMenuItem AnzeigenToolStripMenuItem;
     private ToolStripSeparator toolStripSeparator1;
     private ToolStripMenuItem EinstellungenToolStripMenuItem;
-    private ToolStripMenuItem LokalenCacheLeerenToolStripMenuItem;
-    private ToolStripMenuItem NeustartenToolStripMenuItem;
+    private ToolStripMenuItem LokalerCacheToolStripMenuItem;
     private Label LabelCacheType;
     private ToolStripMenuItem UeberToolStripMenuItem;
   }

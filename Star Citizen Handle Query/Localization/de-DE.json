@@ -7,8 +7,7 @@
     "Context_Menu": {
       "Show": "Anzeigen",
       "Settings": "Einstellungen",
-      "Clear_Local_Cache": "Lokalen Cache leeren",
-      "Restart": "Neustarten",
+      "Local_Cache": "Lokaler Cache",
       "Close": "Beenden",
       "About": "\u00DCber"
     },
@@ -63,6 +62,19 @@
     "MessageBoxes": {
       "Save_Fail": "Das Speichern der Einstellungen ist fehlgeschlagen:\r\nFehlermeldung:",
       "API_Key_Missing": "Es muss ein 32-stelliger API-Key angegeben werden."
+    }
+  },
+  "Local_Cache": {
+    "Title": "Lokaler Cache",
+    "Columns": {
+      "Cache_Date": "Cache Datum",
+      "Handle": "Handle",
+      "Organization":  "Organisation"
+    },
+    "Buttons": {
+      "Clear_Cache": "Cache leeren",
+      "Open_Folder": "Ordner \u00F6ffnen",
+      "Close": "Schlie\u00DFen"
     }
   }
 }

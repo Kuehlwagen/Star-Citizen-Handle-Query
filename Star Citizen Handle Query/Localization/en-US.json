@@ -7,8 +7,7 @@
     "Context_Menu": {
       "Show": "Show",
       "Settings": "Settings",
-      "Clear_Local_Cache": "Clear Local Cache",
-      "Restart": "Restart",
+      "Local_Cache": "Local Cache",
       "Close": "Close",
       "About": "About"
     },
@@ -63,6 +62,19 @@
     "MessageBoxes": {
       "Save_Fail": "Saving Settings failed:\r\nError Message:",
       "API_Key_Missing": "A 32-digit API key must be specified."
+    }
+  },
+  "Local_Cache": {
+    "Title": "Local Cache",
+    "Columns": {
+      "Cache_Date": "Cache Date",
+      "Handle": "Handle",
+      "Organization": "Organization"
+    },
+    "Buttons": {
+      "Clear_Cache": "Clear Cache",
+      "Open_Folder": "Open Folder",
+      "Close": "Close"
     }
   }
 }

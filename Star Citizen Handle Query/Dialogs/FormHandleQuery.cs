@@ -118,8 +118,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       TextBoxHandle.PlaceholderText = ProgramTranslation.Window.Handle_Placeholder;
       AnzeigenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Show;
       EinstellungenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Settings;
-      LokalenCacheLeerenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Clear_Local_Cache;
-      NeustartenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Restart;
+      LokalerCacheToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Local_Cache;
       BeendenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Close;
       UeberToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.About;
     }
@@ -393,9 +392,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void EinstellungenToolStripMenuItem_Click(object sender, EventArgs e) {
       // Einstellungen anzeigen
-      EinstellungenToolStripMenuItem.Enabled = false;
+      EnableContextMenu(false);
       ShowProperties(true);
-      EinstellungenToolStripMenuItem.Enabled = true;
+      EnableContextMenu();
     }
 
     private Settings ShowProperties(bool mitProgramSettings = false) {
@@ -414,11 +413,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return rtnVal;
     }
 
-    private void LokalenCacheLeerenToolStripMenuItem_Click(object sender, EventArgs e) {
+    private void LokalerCacheToolStripMenuItem_Click(object sender, EventArgs e) {
       // Lokalen Cache leeren
-      LokalenCacheLeerenToolStripMenuItem.Enabled = false;
-      ClearCache(false);
-      LokalenCacheLeerenToolStripMenuItem.Enabled = true;
+      EnableContextMenu(false);
+      using FormLocalCache frm = new(ProgramTranslation);
+      switch (frm.ShowDialog()) {
+        case DialogResult.Yes:
+          ClearCache(false);
+          break;
+      }
+      EnableContextMenu();
     }
 
     private void ClearCache(bool onlyExpired) {
@@ -432,11 +436,20 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         // Ggf. UserControl entfernen
         RemoveUserControls();
 
+        TextBoxHandle.Text = string.Empty;
+
         // Cache leeren
         DeleteDirectoryFiles(CacheDirectoryType.Handle, onlyExpired);
         DeleteDirectoryFiles(CacheDirectoryType.HandleAvatar, onlyExpired);
         DeleteDirectoryFiles(CacheDirectoryType.HandleDisplayTitle, onlyExpired);
         DeleteDirectoryFiles(CacheDirectoryType.OrganizationAvatar, onlyExpired);
+
+        // Autovervollständigung neu einlesen
+        if (!onlyExpired) {
+          AutoCompleteCollection.Clear();
+          AutoCompleteCollection = null;
+          UpdateAutoComplete();
+        }
 
         if (!onlyExpired) {
           MessageBox.Show(ProgramTranslation.Window.MessageBoxes.Local_Cache_Cleared, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -461,10 +474,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void UeberToolStripMenuItem_Click(object sender, EventArgs e) {
       // Über-Hinweismeldung anzeigen
-      UeberToolStripMenuItem.Enabled = false;
+      EnableContextMenu(false);
       Version version = Assembly.GetExecutingAssembly().GetName().Version;
       MessageBox.Show($"{Text} v{version.Major}.{ version.Minor}.{ version.Build} by Kuehlwagen", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-      UeberToolStripMenuItem.Enabled = true;
+      EnableContextMenu();
     }
 
     internal static string GetCachePath(CacheDirectoryType type, string handle = "") {
@@ -472,6 +485,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       // Verzeichnis ermitteln
       switch (type) {
+        case CacheDirectoryType.Root:
+          rtnVal = Path.Combine(Application.StartupPath, @"Cache");
+          break;
         case CacheDirectoryType.Handle:
           rtnVal = Path.Combine(Application.StartupPath, $@"Cache\Handle\{(!string.IsNullOrWhiteSpace(handle) ? $"{handle}.json" : string.Empty)}");
           break;
@@ -490,14 +506,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     public enum CacheDirectoryType {
+      Root,
       Handle,
       HandleAvatar,
       HandleDisplayTitle,
       OrganizationAvatar
-    }
-
-    private void NeustartenToolStripMenuItem_Click(object sender, EventArgs e) {
-      RestartProgram();
     }
 
     private void RestartProgram() {
@@ -576,6 +589,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (!Directory.Exists(directoryPath)) {
         Directory.CreateDirectory(directoryPath);
       }
+    }
+
+    private void EnableContextMenu(bool enable = true) {
+      AnzeigenToolStripMenuItem.Enabled = enable;
+      EinstellungenToolStripMenuItem.Enabled = enable;
+      UeberToolStripMenuItem.Enabled = enable;
+      LokalerCacheToolStripMenuItem.Enabled = enable;
     }
 
   }
