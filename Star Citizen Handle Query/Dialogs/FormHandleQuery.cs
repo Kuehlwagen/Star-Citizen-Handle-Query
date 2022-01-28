@@ -1,7 +1,9 @@
 using Star_Citizen_Handle_Query.ExternClasses;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
+using System.Diagnostics;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
@@ -15,6 +17,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly Settings ProgramSettings;
     private GlobalHotKey HotKey;
     private AutoCompleteStringCollection AutoCompleteCollection;
+    private bool ShowInitialBalloonTip = false;
 
     public FormHandleQuery() {
       InitializeComponent();
@@ -52,6 +55,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
         // Sprache für Controls setzen
         SetProgramLocalization();
+
+        // Ggf. BalloonTip anzeigen
+        if (ShowInitialBalloonTip) {
+          NotifyIconHandleQuery.ShowBalloonTip(10000, Text, ProgramTranslation.Notification.Notify_Icon_Info, ToolTipIcon.Info);
+        }
 
         // Veraltete Cache-Dateien löschen
         ClearCache(true);
@@ -121,6 +129,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LokalerCacheToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Local_Cache;
       BeendenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Close;
       UeberToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.About;
+      AufUpdatePruefenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Check_For_Update;
     }
 
     internal Settings GetProgramSettings() {
@@ -190,6 +199,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           HotKey.HookedKeys.Add(ProgramSettings.GlobalHotkey);
           HotKey.Hook();
         }
+
+        // Prüfen, ob auf GitHub eine aktuellere Version des Tools veröffentlicht wurde
+        CheckForUpdate();
       }
     }
 
@@ -201,6 +213,50 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         e.SuppressKeyPress = true;
         // Fenster einblenden
         ShowWindow();
+      }
+    }
+
+    private async void CheckForUpdate(bool useMessageBox = false) {
+      // Prüfen, ob auf GitHub eine aktuellere Version des Tools veröffentlicht wurde
+      using HttpClient client = new();
+      client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+      client.DefaultRequestHeaders.UserAgent.TryParseAdd("request");
+      bool error = true;
+      try {
+        string jsonResult = await client.GetStringAsync("https://api.github.com/repos/Kuehlwagen/Star-Citizen-Handle-Query/releases/latest");
+        if (!string.IsNullOrWhiteSpace(jsonResult)) {
+          GitHubRelease gitHubRelease = JsonSerializer.Deserialize<GitHubRelease>(jsonResult);
+          if (gitHubRelease != null && !string.IsNullOrEmpty(gitHubRelease.tag_name) && gitHubRelease.tag_name.StartsWith("v")) {
+            if (GetProgramVersion() < new Version(gitHubRelease.tag_name[1..])) {
+              string updateInfo = $"{ProgramTranslation.Notification.Update_Info}: {gitHubRelease.tag_name}";
+              if (!useMessageBox) {
+                NotifyIconHandleQuery.BalloonTipClicked += NotifyIconHandleQuery_BalloonTipClicked;
+                NotifyIconHandleQuery.Tag = gitHubRelease;
+                NotifyIconHandleQuery.ShowBalloonTip(10000, Text, updateInfo, ToolTipIcon.Info);
+              } else {
+                if (MessageBox.Show($"{updateInfo}\r\n{ProgramTranslation.Window.MessageBoxes.Update_Question}", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) {
+                  OpenGitHubReleasePage(gitHubRelease);
+                }
+              }
+            }
+            error = false;
+          }
+        }
+      } catch { }
+      if (error && useMessageBox) {
+        MessageBox.Show("Aktuelle Version konnte nicht ermittelt werden", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+      }
+    }
+
+    private void OpenGitHubReleasePage(GitHubRelease gitHubRelease) {
+      Process.Start("explorer", gitHubRelease.html_url);
+    }
+
+    private void NotifyIconHandleQuery_BalloonTipClicked(object sender, EventArgs e) {
+      // GitHub-Seite mit Informationen zum Update öffnen
+      if ((sender as NotifyIcon).Tag is GitHubRelease gitHubRelease) {
+        OpenGitHubReleasePage(gitHubRelease);
+        NotifyIconHandleQuery.Click -= NotifyIconHandleQuery_BalloonTipClicked;
       }
     }
 
@@ -416,8 +472,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         rtnVal = frm.ProgramSettings;
       }
 
-      if (rtnVal != null && mitProgramSettings) {
-        RestartProgram();
+      if (rtnVal != null) {
+
+        if (mitProgramSettings) {
+          RestartProgram();
+        } else {
+          ShowInitialBalloonTip = true;
+        }
+
       }
 
       return rtnVal;
@@ -495,8 +557,29 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void UeberToolStripMenuItem_Click(object sender, EventArgs e) {
       // Über-Hinweismeldung anzeigen
       EnableContextMenu(false);
-      Version version = Assembly.GetExecutingAssembly().GetName().Version;
-      MessageBox.Show($"{Text} v{version.Major}.{ version.Minor}.{ version.Build} by Kuehlwagen", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+      MessageBox.Show($"{GetProgramVersionString()} by Kuehlwagen", Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+      EnableContextMenu();
+    }
+
+    private static Version GetProgramVersion() {
+      // Programmversion ermitteln
+      return Assembly.GetExecutingAssembly().GetName().Version;
+    }
+
+    private static string GetProgramVersionString() {
+      // Programmversion als String ermitteln
+      return GetVersionString(GetProgramVersion());
+    }
+
+    private static string GetVersionString(Version version) {
+      // Version als String ermitteln
+      return $"v{version.Major}.{ version.Minor}.{ version.Build}";
+    }
+
+    private void AufUpdatePruefenToolStripMenuItem_Click(object sender, EventArgs e) {
+      // Nach Programmaktualisierung suchen
+      EnableContextMenu(false);
+      CheckForUpdate(true);
       EnableContextMenu();
     }
 
@@ -620,6 +703,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       EinstellungenToolStripMenuItem.Enabled = enable;
       UeberToolStripMenuItem.Enabled = enable;
       LokalerCacheToolStripMenuItem.Enabled = enable;
+      AufUpdatePruefenToolStripMenuItem.Enabled = enable;
     }
 
   }

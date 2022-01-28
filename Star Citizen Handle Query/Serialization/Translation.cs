@@ -15,6 +15,8 @@
 
     public Translation_Local_Cache Local_Cache { get; set; } = new();
 
+    public Translation_Notification Notification { get; set; } = new();
+
     /// <summary>Vergleich in Liste ermöglichen</summary>
     /// <param name="other">Anderes Translation-Objekt</param>
     /// <returns>true, wenn das Feld "Language" übereinstimmt, andernfalls false</returns>
@@ -64,6 +66,8 @@
     public string Close { get; set; } = "Beenden";
 
     public string About { get; set; } = "Über";
+
+    public string Check_For_Update { get; set; } = "Nach Update suchen";
   }
 
   [Serializable()]
@@ -74,6 +78,8 @@
     public string Clear_Local_Cache_Question { get; set; } = "Der komplette lokale Cache wird geleert. Fortfahren?";
 
     public string Local_Cache_Cleared { get; set; } = "Der lokale Cache wurde geleert";
+
+    public string Update_Question { get; set; } = "Informationen zur Aktualisierung öffnen?";
 
   }
 
@@ -232,6 +238,15 @@
     public string Open_Folder { get; set; } = "Ordner öffnen";
 
     public string Close { get; set; } = "Schließen";
+
+  }
+
+  [Serializable()]
+  public class Translation_Notification {
+
+    public string Notify_Icon_Info { get; set; } = "Einstellungen und weitere Bereiche können via Mausrechtsklick auf das Symbol in der Taskleiste erreicht werden";
+
+    public string Update_Info { get; set; } = "Update verfügbar";
 
   }
 

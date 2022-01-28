@@ -9,12 +9,14 @@
       "Settings": "Einstellungen",
       "Local_Cache": "Lokaler Cache",
       "Close": "Beenden",
-      "About": "\u00DCber"
+      "About": "\u00DCber",
+      "Check_For_Update": "Nach Update suchen"
     },
     "MessageBoxes": {
       "API_Key_Missing": "Es muss ein 32-stelliger API-Key angegeben werden.\r\nDas Programm wird beendet.",
       "Clear_Local_Cache_Question": "Der lokale Cache wird komplett geleert. Fortfahren?",
-      "Local_Cache_Cleared": "Der lokale Cache wurde geleert"
+      "Local_Cache_Cleared": "Der lokale Cache wurde geleert",
+      "Update_Question": "Release-Notes \u00F6ffnen?"
     }
   },
   "Settings": {
@@ -82,5 +84,9 @@
       "Open_Folder": "Ordner \u00F6ffnen",
       "Close": "Schlie\u00DFen"
     }
+  },
+  "Notification": {
+    "Notify_Icon_Info": "Einstellungen und weitere Funktionalit\u00E4ten k\u00F6nnen via Mausrechtsklick auf das Symbol in der Taskleiste erreicht werden",
+    "Update_Info": "Update verf\u00FCgbar"
   }
 }
