@@ -15,8 +15,7 @@
     "MessageBoxes": {
       "API_Key_Missing": "A 32-digit API key must be specified.\r\nProgram is being closed.",
       "Clear_Local_Cache_Question": "Complete Local Cache will be cleared. Continue?",
-      "Local_Cache_Cleared": "Local Cache was cleared",
-      "Update_Question": "Show release notes?"
+      "Local_Cache_Cleared": "Local Cache was cleared"
     }
   },
   "Settings": {
@@ -87,6 +86,9 @@
   },
   "Notification": {
     "Notify_Icon_Info": "Access settings and other features via right-click on icon in Taskbar",
-    "Update_Info":  "Update available"
+    "Update_Info": "Update available",
+    "Update_Info_Show_Release_Notes": "Click to show release notes",
+    "Update_Up_To_Date": "Program is up to date",
+    "Update_Error":  "Error requesting update information"
   }
 }

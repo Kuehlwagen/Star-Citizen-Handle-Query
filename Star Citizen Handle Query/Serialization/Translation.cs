@@ -79,8 +79,6 @@
 
     public string Local_Cache_Cleared { get; set; } = "Der lokale Cache wurde geleert";
 
-    public string Update_Question { get; set; } = "Informationen zur Aktualisierung öffnen?";
-
   }
 
   [Serializable()]
@@ -247,6 +245,12 @@
     public string Notify_Icon_Info { get; set; } = "Einstellungen und weitere Bereiche können via Mausrechtsklick auf das Symbol in der Taskleiste erreicht werden";
 
     public string Update_Info { get; set; } = "Update verfügbar";
+
+    public string Update_Info_Show_Release_Notes { get; set; } = "Klicken, um Release-Notes zu öffnen";
+
+    public string Update_Up_To_Date { get; set; } = "Programm ist aktuell";
+
+    public string Update_Error { get; set; } = "Update-Informationen konnten nicht ausgelesen werden";
 
   }
 

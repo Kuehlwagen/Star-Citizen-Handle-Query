@@ -199,9 +199,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           HotKey.HookedKeys.Add(ProgramSettings.GlobalHotkey);
           HotKey.Hook();
         }
-
-        // Prüfen, ob auf GitHub eine aktuellere Version des Tools veröffentlicht wurde
-        CheckForUpdate();
       }
     }
 
@@ -216,7 +213,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private async void CheckForUpdate(bool useMessageBox = false) {
+    private async Task<bool> CheckForUpdate() {
       // Prüfen, ob auf GitHub eine aktuellere Version des Tools veröffentlicht wurde
       using HttpClient client = new();
       client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -228,24 +225,20 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           GitHubRelease gitHubRelease = JsonSerializer.Deserialize<GitHubRelease>(jsonResult);
           if (gitHubRelease != null && !string.IsNullOrEmpty(gitHubRelease.tag_name) && gitHubRelease.tag_name.StartsWith("v")) {
             if (GetProgramVersion() < new Version(gitHubRelease.tag_name[1..])) {
-              string updateInfo = $"{ProgramTranslation.Notification.Update_Info}: {gitHubRelease.tag_name}";
-              if (!useMessageBox) {
                 NotifyIconHandleQuery.BalloonTipClicked += NotifyIconHandleQuery_BalloonTipClicked;
                 NotifyIconHandleQuery.Tag = gitHubRelease;
-                NotifyIconHandleQuery.ShowBalloonTip(10000, Text, updateInfo, ToolTipIcon.Info);
-              } else {
-                if (MessageBox.Show($"{updateInfo}\r\n{ProgramTranslation.Window.MessageBoxes.Update_Question}", Text, MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes) {
-                  OpenGitHubReleasePage(gitHubRelease);
-                }
-              }
+                NotifyIconHandleQuery.ShowBalloonTip(30000, Text, $"{ProgramTranslation.Notification.Update_Info}: {gitHubRelease.tag_name}\r\n{ProgramTranslation.Notification.Update_Info_Show_Release_Notes}", ToolTipIcon.Info);
+            } else {
+              NotifyIconHandleQuery.ShowBalloonTip(30000, Text, $"{ProgramTranslation.Notification.Update_Up_To_Date}", ToolTipIcon.Info);
             }
             error = false;
           }
         }
       } catch { }
-      if (error && useMessageBox) {
-        MessageBox.Show("Aktuelle Version konnte nicht ermittelt werden", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+      if (error) {
+        NotifyIconHandleQuery.ShowBalloonTip(30000, Text, $"{ProgramTranslation.Notification.Update_Error}", ToolTipIcon.Warning);
       }
+      return !error;
     }
 
     private void OpenGitHubReleasePage(GitHubRelease gitHubRelease) {
@@ -576,10 +569,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return $"v{version.Major}.{ version.Minor}.{ version.Build}";
     }
 
-    private void AufUpdatePruefenToolStripMenuItem_Click(object sender, EventArgs e) {
+    private async void AufUpdatePruefenToolStripMenuItem_Click(object sender, EventArgs e) {
       // Nach Programmaktualisierung suchen
       EnableContextMenu(false);
-      CheckForUpdate(true);
+      await CheckForUpdate();
       EnableContextMenu();
     }
 
