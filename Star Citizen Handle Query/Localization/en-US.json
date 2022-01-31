@@ -31,7 +31,8 @@
       "Mode_Description_Eager": "(Live Data / Server Cache)",
       "Test": "API-Test",
       "Test_Error": "Error requesting API information",
-      "Test_Information": "Live Requests left"
+      "Test_Information": "Live Requests left",
+      "Test_Please_Wait":  "Please wait..."
     },
     "Display": {
       "Language": "Language:",

@@ -125,6 +125,8 @@
 
     public string Test_Information { get; set; } = "Live-Abfragen übrig";
 
+    public string Test_Please_Wait { get; set; } = "Bitte warten...";
+
   }
 
   [Serializable()]

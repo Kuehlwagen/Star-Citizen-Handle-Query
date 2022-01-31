@@ -31,7 +31,8 @@
       "Mode_Description_Eager": "(Live-Daten / Server-Cache)",
       "Test": "API-Test",
       "Test_Error": "Fehler bei der Abfrage der API",
-      "Test_Information": "Live-Abfragen \u00FCbrig"
+      "Test_Information": "Live-Abfragen \u00FCbrig",
+      "Test_Please_Wait":  "Bitte warten..."
     },
     "Display": {
       "Language": "Sprache:",
