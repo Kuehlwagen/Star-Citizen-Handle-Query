@@ -196,12 +196,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private async void ButtonApiTest_Click(object sender, EventArgs e) {
+      ButtonApiTest.Enabled = false;
       ApiKeyState state = await GetApiTestJson();
       if (state?.success == 1 && state.data != null) {
         LabelApiTestStatus.Text = $"{state?.message}, {state?.data?.value} {CurrentLocalization.Settings.API.Test_Information}";
       } else {
         LabelApiTestStatus.Text = state?.message;
       }
+      ButtonApiTest.Enabled = true;
     }
 
     private async Task<ApiKeyState> GetApiTestJson() {
