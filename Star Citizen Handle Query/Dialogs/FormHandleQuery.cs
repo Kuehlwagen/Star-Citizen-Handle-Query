@@ -225,9 +225,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           GitHubRelease gitHubRelease = JsonSerializer.Deserialize<GitHubRelease>(jsonResult);
           if (gitHubRelease != null && !string.IsNullOrEmpty(gitHubRelease.tag_name) && gitHubRelease.tag_name.StartsWith("v")) {
             if (GetProgramVersion() < new Version(gitHubRelease.tag_name[1..])) {
-                NotifyIconHandleQuery.BalloonTipClicked += NotifyIconHandleQuery_BalloonTipClicked;
-                NotifyIconHandleQuery.Tag = gitHubRelease;
-                NotifyIconHandleQuery.ShowBalloonTip(30000, Text, $"{ProgramTranslation.Notification.Update_Info}: {gitHubRelease.tag_name}\r\n{ProgramTranslation.Notification.Update_Info_Show_Release_Notes}", ToolTipIcon.Info);
+              NotifyIconHandleQuery.BalloonTipClicked += NotifyIconHandleQuery_BalloonTipClicked;
+              NotifyIconHandleQuery.Tag = gitHubRelease;
+              NotifyIconHandleQuery.ShowBalloonTip(30000, Text, $"{ProgramTranslation.Notification.Update_Info}: {gitHubRelease.tag_name}\r\n{ProgramTranslation.Notification.Update_Info_Show_Release_Notes}", ToolTipIcon.Info);
             } else {
               NotifyIconHandleQuery.ShowBalloonTip(30000, Text, $"{ProgramTranslation.Notification.Update_Up_To_Date}", ToolTipIcon.Info);
             }

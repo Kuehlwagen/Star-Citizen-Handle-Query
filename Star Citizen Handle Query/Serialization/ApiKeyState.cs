@@ -2,13 +2,13 @@
 
 #pragma warning disable IDE1006 // Benennungsstile
   public class ApiKeyState {
-    public Data data { get; set; }
+    public ApiKeyState_Data data { get; set; }
     public string message { get; set; }
     public object source { get; set; }
     public int success { get; set; }
   }
 
-  public class Data {
+  public class ApiKeyState_Data {
     public int creation_date { get; set; }
     public int edition_date { get; set; }
     public int id { get; set; }
