@@ -47,16 +47,30 @@ Zusätzlich zum Server-Cache der API verwendet dieses Tool einen lokalen Cache, 
 - __Standard:__ Stellt die Standard-Einstellungen wieder her, mit Ausnahme des API-Schlüssels und der Sprache
 
 ## Kontextmenü Taskleiste
+
+![ContextMenu](/Star%20Citizen%20Handle%20Query/Screenshots/ContextMenu.png?raw=true "ContextMenu")
 - __Anzeigen:__ Falls das Fenster nicht sichtbar ist, wird es angezeigt und die Handle-Eingabebox erhält den Eingabefokus
 - __Einstellungen:__ Öffnet das Einstellungen-Fenster
+- __Lokaler Cache:__ Öffnet ein Fenster mit Informationen zum lokalen Cache
+- __Nach Update suchen:__ Sucht auf GitHub nach einem Update für das Tool
 - __Über:__ Öffnet ein Hinweisfenster mit Informationen zur Version des Tools
-- __Lokalen Cache leeren:__ Löscht sämtliche Dateien im lokalen Cache
-- __Neustarten:__ Startet das Tool neu
 - __Beenden:__ Beendet das Tool
 
+## Lokaler Cache
+
+![LocalCache](/Star%20Citizen%20Handle%20Query/Screenshots/LocalCache.png?raw=true "LocalCache")
+- __Tabelle:__ Hier werden Informationen zu den im lokalen Cache gespeicherten Handles dargestellt. Außerdem kann in der Spalte `Kommentar` ein Kommentar eingegeben werden, welcher sowohl dort als auch im Hauptfenster dargestellt wird.
+- __Handle- und Organisation-Darstellung:__ Unter der Tabelle werden die Informationen zum ausgewählten Handle und zu dessen Organisation so dargestellt, wie sie im Hauptfenster dargestellt werden.
+- __Cache leeren:__ Durch Klicken dieser Schaltfläche kann der komplette lokale Cache geleert werden. Bevor der lokale Cache geleert wird, muss der Benutzer diesen Vorgang bestätigen.
+- __Ordner öffnen:__ Öffnet den Ordner, welcher den lokalen Cache enthält
+- __Schließen:__ Schließt das Fenster
+
 ## Hauptfenster
+
+![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/MainWindow.png?raw=true "Handle Query")
 - Hier kann der eindeutige Name eines Star Citizen Spielers in die Handle-Eingabebox eingegeben werden. Durch die Betätigung der Enter-Taste wird die Abfrage ausgelöst und kurze Zeit später das Ergebnis der Abfrage darunter dargestellt.
   - Wird währenddessen die Strg-Taste gedrückt gehalten, wird das Auslesen der Handle-Informationen inklusive Avatare (Handle, Organisation und Affiliationen) via Live-Modus der API erzwungen.
+  - Drückt man, während die Handle-Eingabebox den Fokus hat, die `+`-Taste, kann man einen Kommentar zum aktuellen Handle eingeben. Durch Betätigung der `Enter`-Taste, wird der Kommentar im lokalen Cache gespeichert. Verliert die Kommentar-Eingabebox den Fokus oder es wird die `Esc`-Taste gedrückt, wird die Eingabe des Kommentars abgebrochen.
 - Durch die Betätigung der Esc-Taste wird das Fenster ausgeblendet.
 - Wurde eine globale Taste(nkobination) in den Einstellungen angegeben, kann das Fenster jederzeit mit dieser Taste(nkombination) wieder angezeigt werden.
 - Folgende Funktionen sind nur aktiv, wenn in den Einstellungen in der Gruppe "Fenster" das Kontrollkästchen "Mauseingaben ignorieren" nicht gesetzt ist:
