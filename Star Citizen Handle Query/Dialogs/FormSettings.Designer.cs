@@ -159,7 +159,6 @@
       // 
       // ButtonSpeichern
       // 
-      this.ButtonSpeichern.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ButtonSpeichern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.ButtonSpeichern.Location = new System.Drawing.Point(12, 536);
       this.ButtonSpeichern.Name = "ButtonSpeichern";
@@ -171,7 +170,6 @@
       // 
       // ButtonSchliessen
       // 
-      this.ButtonSchliessen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ButtonSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.ButtonSchliessen.Location = new System.Drawing.Point(93, 536);
       this.ButtonSchliessen.Name = "ButtonSchliessen";
@@ -201,7 +199,6 @@
       // 
       // GroupBoxFenster
       // 
-      this.GroupBoxFenster.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.GroupBoxFenster.Controls.Add(this.CheckBoxAltTabEnabled);
       this.GroupBoxFenster.Controls.Add(this.CheckBoxUmschalt);
       this.GroupBoxFenster.Controls.Add(this.CheckBoxAlt);
@@ -393,7 +390,6 @@
       // 
       // GroupBoxLokalerCache
       // 
-      this.GroupBoxLokalerCache.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.GroupBoxLokalerCache.Controls.Add(this.LabelLokalerCacheAlterTage);
       this.GroupBoxLokalerCache.Controls.Add(this.NumericUpDownLokalerCacheAlter);
       this.GroupBoxLokalerCache.Controls.Add(this.LabelLokalerCacheAlter);
@@ -408,7 +404,6 @@
       // 
       // ButtonStandard
       // 
-      this.ButtonStandard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ButtonStandard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.ButtonStandard.Location = new System.Drawing.Point(353, 536);
       this.ButtonStandard.Name = "ButtonStandard";
