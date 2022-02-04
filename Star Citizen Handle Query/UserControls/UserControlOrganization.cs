@@ -48,7 +48,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           ApiOrganizationInfo orgInfo = await GetApiInfo<ApiOrganizationInfo>(ForceLive, SID, ProgramSettings, CacheDirectoryType.Organization);
           if (orgInfo?.success == 1) {
             CreateOrganizationJSON(organizationSid, orgInfo);
-            LabelMainOrganizationAffiliate.Text = $"Members: {orgInfo.data.members}";
+            LabelMainOrganizationAffiliate.Text = $"{orgInfo.data.commitment} / {orgInfo.data.members:n0}";
             LabelFocusPrimary.Text = GetString(orgInfo.data.focus.primary.name);
             LabelFocusSecondary.Text = GetString(orgInfo.data.focus.secondary.name);
             if (!string.IsNullOrWhiteSpace(orgInfo.data.focus?.primary?.image)) {

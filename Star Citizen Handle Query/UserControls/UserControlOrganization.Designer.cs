@@ -90,9 +90,9 @@
       // 
       this.LabelMainOrganizationAffiliate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.LabelMainOrganizationAffiliate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(157)))), ((int)(((byte)(158)))));
-      this.LabelMainOrganizationAffiliate.Location = new System.Drawing.Point(254, 59);
+      this.LabelMainOrganizationAffiliate.Location = new System.Drawing.Point(191, 59);
       this.LabelMainOrganizationAffiliate.Name = "LabelMainOrganizationAffiliate";
-      this.LabelMainOrganizationAffiliate.Size = new System.Drawing.Size(121, 15);
+      this.LabelMainOrganizationAffiliate.Size = new System.Drawing.Size(184, 15);
       this.LabelMainOrganizationAffiliate.TabIndex = 8;
       this.LabelMainOrganizationAffiliate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       // 
