@@ -37,7 +37,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       FormHandleQuery.CreateDirectory(FormHandleQuery.CacheDirectoryType.Handle);
       FormHandleQuery.CreateDirectory(FormHandleQuery.CacheDirectoryType.HandleAdditional);
       foreach (string handleJsonPath in Directory.GetFiles(FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.Handle), "*.json").OrderByDescending(x => new FileInfo(x).LastWriteTime)) {
-        HandleInfo handleInfo = JsonSerializer.Deserialize<HandleInfo>(File.ReadAllText(handleJsonPath, Encoding.UTF8));
+        ApiHandleInfo handleInfo = JsonSerializer.Deserialize<ApiHandleInfo>(File.ReadAllText(handleJsonPath, Encoding.UTF8));
         if (handleInfo?.data != null) {
           HandleAdditionalInfo handleAdditionalInfo = null;
           string additionalInfoPath = FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.HandleAdditional, handleInfo.data.profile.handle);
@@ -45,7 +45,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             handleAdditionalInfo = JsonSerializer.Deserialize<HandleAdditionalInfo>(File.ReadAllText(FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.HandleAdditional, handleInfo.data.profile.handle), Encoding.UTF8));
           }
           DataGridViewRow row = new();
-          HandleInfoDataOrganization org = handleInfo?.data?.organization;
+          ApiHandleInfoDataOrganization org = handleInfo?.data?.organization;
           List<object> info = new() {
             new FileInfo(handleJsonPath).LastWriteTime,
             handleInfo.data.profile.handle,
@@ -85,7 +85,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         switch (e.ColumnIndex) {
           case 8: // Kommentar
             DataGridViewRow dgvr = (sender as DataGridView).Rows[e.RowIndex];
-            WriteHandleAdditionalInformation((dgvr.Tag as HandleInfo).data.profile.handle, $"{dgvr.Cells[e.ColumnIndex].Value}");
+            WriteHandleAdditionalInformation((dgvr.Tag as ApiHandleInfo).data.profile.handle, $"{dgvr.Cells[e.ColumnIndex].Value}");
             break;
         }
       }
@@ -112,7 +112,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             break;
           case 5: // Org Name
             if (dgvc is DataGridViewLinkCell) {
-              Process.Start("explorer", $"https://robertsspaceindustries.com/orgs/{(dgvr.Tag as HandleInfo).data.organization.sid}");
+              Process.Start("explorer", $"https://robertsspaceindustries.com/orgs/{(dgvr.Tag as ApiHandleInfo).data.organization.sid}");
             }
             break;
         }
@@ -156,7 +156,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       DataGridView dgv = sender as DataGridView;
       DisposeUserControls();
       if (dgv.SelectedRows.Count > 0) {
-        if (dgv.SelectedRows[0].Tag is HandleInfo handleInfo) {
+        if (dgv.SelectedRows[0].Tag is ApiHandleInfo handleInfo) {
           PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation, false, true));
           PanelInfo.Controls[0].Margin = new Padding(0, 0, 50, 0);
           if (handleInfo?.data?.organization?.name != null) {
@@ -181,6 +181,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             ctrlOrganization.PictureBoxOrganization.Image = null;
             ctrlOrganization.PictureBoxOrganizationRank.Image?.Dispose();
             ctrlOrganization.PictureBoxOrganizationRank.Image = null;
+            ctrlOrganization.PictureBoxFocus1.Image?.Dispose();
+            ctrlOrganization.PictureBoxFocus1.Image = null;
+            ctrlOrganization.PictureBoxFocus2.Image?.Dispose();
+            ctrlOrganization.PictureBoxFocus2.Image = null;
             ctrlOrganization.Dispose();
           }
         }

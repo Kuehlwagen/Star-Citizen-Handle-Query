@@ -241,7 +241,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return !error;
     }
 
-    private void OpenGitHubReleasePage(GitHubRelease gitHubRelease) {
+    private static void OpenGitHubReleasePage(GitHubRelease gitHubRelease) {
       Process.Start("explorer", gitHubRelease.html_url);
     }
 
@@ -276,7 +276,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             // Textbox bis zum Ergebnis deaktivieren
             TextBoxHandle.Enabled = false;
             // Handle-Informationen auslesen
-            HandleInfo handleInfo = await GetHandleInfo(forceLive);
+            ApiHandleInfo handleInfo = await GetApiInfo<ApiHandleInfo>(forceLive, TextBoxHandle.Text, ProgramSettings, CacheDirectoryType.Handle);
 
             // Cache-Typ darstellen
             if (ProgramSettings.ShowCacheType && !string.IsNullOrWhiteSpace(handleInfo?.source)) {
@@ -299,7 +299,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             CreateDirectory(CacheDirectoryType.HandleAdditional);
             CreateDirectory(CacheDirectoryType.HandleAvatar);
             CreateDirectory(CacheDirectoryType.HandleDisplayTitle);
+            CreateDirectory(CacheDirectoryType.Organization);
             CreateDirectory(CacheDirectoryType.OrganizationAvatar);
+            CreateDirectory(CacheDirectoryType.OrganizationFocus);
 
             // UserControl mit Handle-Informationen hinzufügen
             PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation, forceLive));
@@ -357,6 +359,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             ctrlOrganization.PictureBoxOrganization.Image = null;
             ctrlOrganization.PictureBoxOrganizationRank.Image?.Dispose();
             ctrlOrganization.PictureBoxOrganizationRank.Image = null;
+            ctrlOrganization.PictureBoxFocus1.Image?.Dispose();
+            ctrlOrganization.PictureBoxFocus1.Image = null;
+            ctrlOrganization.PictureBoxFocus2.Image?.Dispose();
+            ctrlOrganization.PictureBoxFocus2.Image = null;
             ctrlOrganization.Dispose();
           }
         }
@@ -365,29 +371,30 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Size = new Size(Width, 31);
     }
 
-    private async Task<HandleInfo> GetHandleInfo(bool forceLive) {
-      HandleInfo rtnVal = null;
+    public static async Task<T> GetApiInfo<T>(bool forceLive, string name, Settings programSettings, CacheDirectoryType infoType) where T : new() {
+      T rtnVal = default;
 
-      // Handle-Informationen aus Datei auslesen
-      string handleJsonPath = GetCachePath(CacheDirectoryType.Handle, TextBoxHandle.Text);
-      if (File.Exists(handleJsonPath) && new FileInfo(handleJsonPath).LastWriteTime > DateTime.Now.AddDays(ProgramSettings.LocalCacheMaxAge * -1)) {
-        rtnVal = JsonSerializer.Deserialize<HandleInfo>(File.ReadAllText(handleJsonPath, Encoding.UTF8));
+      // API-Informationen aus Datei auslesen
+      string infoJsonPath = GetCachePath(infoType, name);
+      if (File.Exists(infoJsonPath) && new FileInfo(infoJsonPath).LastWriteTime > DateTime.Now.AddDays(programSettings.LocalCacheMaxAge * -1)) {
+        rtnVal = JsonSerializer.Deserialize<T>(File.ReadAllText(infoJsonPath, Encoding.UTF8));
         if (rtnVal != null) {
-          rtnVal.source = "local";
+          TrySetProperty(rtnVal, "source", "local");
         }
       }
 
-      // Handle-Informationen via API auslesen, wenn die Datei nicht gelesen werden konnte
+      // API-Informationen via API auslesen, wenn die Datei nicht gelesen werden konnte
       if (rtnVal == null || forceLive) {
-        string json = await GetApiHandleJson(ProgramSettings.ApiKey, TextBoxHandle.Text, forceLive);
-        HandleInfo apiHandleInfo = null;
+        string json = await GetApiInfoJson(infoType, programSettings.ApiKey, name, forceLive, programSettings);
+        T apiInfo = default;
         try {
-          apiHandleInfo = JsonSerializer.Deserialize<HandleInfo>(json);
+          apiInfo = JsonSerializer.Deserialize<T>(json);
         } catch { }
-        if (apiHandleInfo == null) {
-          apiHandleInfo = new HandleInfo() { message = json };
+        if (apiInfo == null) {
+          apiInfo = new();
+          TrySetProperty(apiInfo, "message", json);
         }
-        rtnVal = apiHandleInfo;
+        rtnVal = apiInfo;
       }
 
       // Neues HandleInfo-Objekt erstellen, wenn der Rückgabewert null sein sollte
@@ -398,20 +405,44 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return rtnVal;
     }
 
-    private async Task<string> GetApiHandleJson(string apiKey, string handle, bool forceLive) {
+    private static async Task<string> GetApiInfoJson(CacheDirectoryType infoType, string apiKey, string name, bool forceLive, Settings programSettings) {
       using HttpClient client = new();
       // JSON via API herunterladen
       string rtnVal;
       try {
-        ApiMode mode = forceLive ? ApiMode.Live : ProgramSettings.ApiMode;
-        rtnVal = await client.GetStringAsync($"https://api.starcitizen-api.com/{apiKey}/v1/{mode.ToString().ToLower()}/user/{handle}");
+        ApiMode mode = forceLive ? ApiMode.Live : programSettings.ApiMode;
+        rtnVal = await client.GetStringAsync(GetApiInfoUrl(infoType, apiKey, mode, name));
       } catch (HttpRequestException reqEx) {
         rtnVal = GetHttpClientError(reqEx.StatusCode);
       } catch (Exception ex) {
         rtnVal = ex.Message;
       }
 
-      return rtnVal; ;
+      return rtnVal;
+    }
+
+    private static string GetApiInfoUrl(CacheDirectoryType infoType, string apiKey, ApiMode mode, string name) {
+      string rtnVal = string.Empty;
+
+      switch (infoType) {
+        case CacheDirectoryType.Handle:
+          rtnVal = $"https://api.starcitizen-api.com/{apiKey}/v1/{mode.ToString().ToLower()}/user/{name}";
+          break;
+        case CacheDirectoryType.Organization:
+          rtnVal = $"https://api.starcitizen-api.com/{apiKey}/v1/{mode.ToString().ToLower()}/organization/{name}";
+          break;
+      }
+
+      return rtnVal;
+    }
+
+    private static bool TrySetProperty(object obj, string property, object value) {
+      var prop = obj.GetType().GetProperty(property, BindingFlags.Public | BindingFlags.Instance);
+      if (prop != null && prop.CanWrite) {
+        prop.SetValue(obj, value, null);
+        return true;
+      }
+      return false;
     }
 
     public static string GetHttpClientError(HttpStatusCode? code) {
@@ -517,7 +548,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         }
         DeleteDirectoryFiles(CacheDirectoryType.HandleAvatar, onlyExpired);
         DeleteDirectoryFiles(CacheDirectoryType.HandleDisplayTitle, onlyExpired);
+        DeleteDirectoryFiles(CacheDirectoryType.Organization, onlyExpired);
         DeleteDirectoryFiles(CacheDirectoryType.OrganizationAvatar, onlyExpired);
+        DeleteDirectoryFiles(CacheDirectoryType.OrganizationFocus, onlyExpired);
 
         // Autovervollständigung neu einlesen
         if (!onlyExpired) {
@@ -576,7 +609,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       EnableContextMenu();
     }
 
-    internal static string GetCachePath(CacheDirectoryType type, string handle = "") {
+    internal static string GetCachePath(CacheDirectoryType type, string name = "") {
       string rtnVal = string.Empty;
 
       // Verzeichnis ermitteln
@@ -585,19 +618,25 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           rtnVal = Path.Combine(Application.StartupPath, @"Cache");
           break;
         case CacheDirectoryType.Handle:
-          rtnVal = Path.Combine(Application.StartupPath, $@"Cache\Handle\{(!string.IsNullOrWhiteSpace(handle) ? $"{handle}.json" : string.Empty)}");
+          rtnVal = Path.Combine(Application.StartupPath, $@"Cache\Handle\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
           break;
         case CacheDirectoryType.HandleAvatar:
           rtnVal = Path.Combine(Application.StartupPath, @"Cache\Handle_Avatar\");
           break;
         case CacheDirectoryType.HandleAdditional:
-          rtnVal = Path.Combine(Application.StartupPath, $@"Cache\Handle_Additional\{(!string.IsNullOrWhiteSpace(handle) ? $"{handle}.json" : string.Empty)}");
+          rtnVal = Path.Combine(Application.StartupPath, $@"Cache\Handle_Additional\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
           break;
         case CacheDirectoryType.HandleDisplayTitle:
           rtnVal = Path.Combine(Application.StartupPath, @"Cache\Handle_DisplayTitle\");
           break;
+        case CacheDirectoryType.Organization:
+          rtnVal = Path.Combine(Application.StartupPath, $@"Cache\Organization\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
+          break;
         case CacheDirectoryType.OrganizationAvatar:
           rtnVal = Path.Combine(Application.StartupPath, @"Cache\Organization_Avatar\");
+          break;
+        case CacheDirectoryType.OrganizationFocus:
+          rtnVal = Path.Combine(Application.StartupPath, @"Cache\Organization_Focus");
           break;
       }
 
@@ -610,7 +649,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       HandleAdditional,
       HandleAvatar,
       HandleDisplayTitle,
-      OrganizationAvatar
+      Organization,
+      OrganizationAvatar,
+      OrganizationFocus
     }
 
     private void RestartProgram() {
@@ -658,6 +699,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         case CacheDirectoryType.HandleAvatar:
         case CacheDirectoryType.OrganizationAvatar:
         case CacheDirectoryType.HandleDisplayTitle:
+        case CacheDirectoryType.OrganizationFocus:
           rtnVal = Path.Combine(GetCachePath(imageType), GetCorrectFileName($"{name}{url[url.LastIndexOf(".")..]}"));
           break;
       }

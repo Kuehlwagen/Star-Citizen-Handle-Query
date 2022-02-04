@@ -9,13 +9,13 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
   public partial class UserControlHandle : UserControl {
 
-    private readonly HandleInfo HandleInfo;
+    private readonly ApiHandleInfo HandleInfo;
     private readonly Settings ProgramSettings;
     private readonly Translation ProgramTranslation;
     private readonly bool ForceLive;
     private readonly bool DisplayOnly;
 
-    public UserControlHandle(HandleInfo handleInfo, Settings programSettings, Translation programTranslation, bool forceLive, bool displayOnly = false) {
+    public UserControlHandle(ApiHandleInfo handleInfo, Settings programSettings, Translation programTranslation, bool forceLive, bool displayOnly = false) {
       InitializeComponent();
       HandleInfo = handleInfo;
       ProgramSettings = programSettings;
