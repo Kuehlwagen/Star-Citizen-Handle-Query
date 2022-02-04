@@ -52,10 +52,10 @@ namespace Star_Citizen_Handle_Query.UserControls {
             LabelFocusPrimary.Text = GetString(orgInfo.data.focus.primary.name);
             LabelFocusSecondary.Text = GetString(orgInfo.data.focus.secondary.name);
             if (!string.IsNullOrWhiteSpace(orgInfo.data.focus?.primary?.image)) {
-              PictureBoxFocus1.Image = await GetImage(CacheDirectoryType.OrganizationFocus, orgInfo.data.focus.primary.image, orgInfo.data.focus.primary.name, ProgramSettings.LocalCacheMaxAge, ForceLive);
+              PictureBoxFocus1.Image = await GetImage(CacheDirectoryType.OrganizationFocus, orgInfo.data.focus.primary.image, orgInfo.data.focus.primary.name, ProgramSettings.LocalCacheMaxAge);
             }
             if (!string.IsNullOrWhiteSpace(orgInfo.data.focus?.secondary?.image)) {
-              PictureBoxFocus2.Image = await GetImage(CacheDirectoryType.OrganizationFocus, orgInfo.data.focus.secondary.image, orgInfo.data.focus.secondary.name, ProgramSettings.LocalCacheMaxAge, ForceLive);
+              PictureBoxFocus2.Image = await GetImage(CacheDirectoryType.OrganizationFocus, orgInfo.data.focus.secondary.image, orgInfo.data.focus.secondary.name, ProgramSettings.LocalCacheMaxAge);
             }
           }
         }
