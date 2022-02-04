@@ -83,6 +83,9 @@
     /// <summary>Angabe, ob der verwendete Cache-Typ angezeigt werden soll</summary>
     public bool ShowCacheType { get; set; } = false;
 
+    /// <summary>Gibt an, ob für die Hauptorganisation zusätzliche Informationen angezeigt werden sollen (benötigt weitere API-Abfrage)</summary>
+    public bool ShowAdditionalMainOrgInformation { get; set; } = false;
+
     public object Clone() {
       return MemberwiseClone();
     }

@@ -54,6 +54,7 @@
       this.GroupBoxLokalerCache = new System.Windows.Forms.GroupBox();
       this.ButtonStandard = new System.Windows.Forms.Button();
       this.GroupBoxAnzeige = new System.Windows.Forms.GroupBox();
+      this.CheckBoxMainOrgShowAdditionalInformation = new System.Windows.Forms.CheckBox();
       this.NumericUpDownAffiliationenMaximum = new System.Windows.Forms.NumericUpDown();
       this.LabelMaxAffiliationen = new System.Windows.Forms.Label();
       this.CheckBoxUnkenntlicheAffiliationenAusblenden = new System.Windows.Forms.CheckBox();
@@ -158,8 +159,9 @@
       // 
       // ButtonSpeichern
       // 
+      this.ButtonSpeichern.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ButtonSpeichern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 512);
+      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 536);
       this.ButtonSpeichern.Name = "ButtonSpeichern";
       this.ButtonSpeichern.Size = new System.Drawing.Size(75, 28);
       this.ButtonSpeichern.TabIndex = 4;
@@ -169,8 +171,9 @@
       // 
       // ButtonSchliessen
       // 
+      this.ButtonSchliessen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ButtonSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 512);
+      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 536);
       this.ButtonSchliessen.Name = "ButtonSchliessen";
       this.ButtonSchliessen.Size = new System.Drawing.Size(75, 28);
       this.ButtonSchliessen.TabIndex = 5;
@@ -198,6 +201,7 @@
       // 
       // GroupBoxFenster
       // 
+      this.GroupBoxFenster.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.GroupBoxFenster.Controls.Add(this.CheckBoxAltTabEnabled);
       this.GroupBoxFenster.Controls.Add(this.CheckBoxUmschalt);
       this.GroupBoxFenster.Controls.Add(this.CheckBoxAlt);
@@ -210,7 +214,7 @@
       this.GroupBoxFenster.Controls.Add(this.LabelFensterDeckkraftProzent);
       this.GroupBoxFenster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.GroupBoxFenster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxFenster.Location = new System.Drawing.Point(12, 280);
+      this.GroupBoxFenster.Location = new System.Drawing.Point(12, 304);
       this.GroupBoxFenster.Name = "GroupBoxFenster";
       this.GroupBoxFenster.Size = new System.Drawing.Size(416, 159);
       this.GroupBoxFenster.TabIndex = 2;
@@ -287,10 +291,10 @@
       // CheckBoxShowCacheType
       // 
       this.CheckBoxShowCacheType.AutoSize = true;
-      this.CheckBoxShowCacheType.Location = new System.Drawing.Point(15, 105);
+      this.CheckBoxShowCacheType.Location = new System.Drawing.Point(15, 130);
       this.CheckBoxShowCacheType.Name = "CheckBoxShowCacheType";
       this.CheckBoxShowCacheType.Size = new System.Drawing.Size(203, 19);
-      this.CheckBoxShowCacheType.TabIndex = 5;
+      this.CheckBoxShowCacheType.TabIndex = 6;
       this.CheckBoxShowCacheType.Text = "Verwendeten Cache-Typ anzeigen";
       this.CheckBoxShowCacheType.UseVisualStyleBackColor = true;
       this.CheckBoxShowCacheType.CheckedChanged += new System.EventHandler(this.CheckBoxShowCacheType_CheckedChanged);
@@ -389,12 +393,13 @@
       // 
       // GroupBoxLokalerCache
       // 
+      this.GroupBoxLokalerCache.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.GroupBoxLokalerCache.Controls.Add(this.LabelLokalerCacheAlterTage);
       this.GroupBoxLokalerCache.Controls.Add(this.NumericUpDownLokalerCacheAlter);
       this.GroupBoxLokalerCache.Controls.Add(this.LabelLokalerCacheAlter);
       this.GroupBoxLokalerCache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.GroupBoxLokalerCache.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 445);
+      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 469);
       this.GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
       this.GroupBoxLokalerCache.Size = new System.Drawing.Size(416, 61);
       this.GroupBoxLokalerCache.TabIndex = 3;
@@ -403,8 +408,9 @@
       // 
       // ButtonStandard
       // 
+      this.ButtonStandard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
       this.ButtonStandard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonStandard.Location = new System.Drawing.Point(353, 512);
+      this.ButtonStandard.Location = new System.Drawing.Point(353, 536);
       this.ButtonStandard.Name = "ButtonStandard";
       this.ButtonStandard.Size = new System.Drawing.Size(75, 28);
       this.ButtonStandard.TabIndex = 6;
@@ -414,6 +420,7 @@
       // 
       // GroupBoxAnzeige
       // 
+      this.GroupBoxAnzeige.Controls.Add(this.CheckBoxMainOrgShowAdditionalInformation);
       this.GroupBoxAnzeige.Controls.Add(this.CheckBoxShowCacheType);
       this.GroupBoxAnzeige.Controls.Add(this.LabelSprache);
       this.GroupBoxAnzeige.Controls.Add(this.NumericUpDownAffiliationenMaximum);
@@ -424,10 +431,21 @@
       this.GroupBoxAnzeige.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.GroupBoxAnzeige.Location = new System.Drawing.Point(12, 139);
       this.GroupBoxAnzeige.Name = "GroupBoxAnzeige";
-      this.GroupBoxAnzeige.Size = new System.Drawing.Size(416, 135);
+      this.GroupBoxAnzeige.Size = new System.Drawing.Size(416, 159);
       this.GroupBoxAnzeige.TabIndex = 1;
       this.GroupBoxAnzeige.TabStop = false;
       this.GroupBoxAnzeige.Text = "Anzeige";
+      // 
+      // CheckBoxMainOrgShowAdditionalInformation
+      // 
+      this.CheckBoxMainOrgShowAdditionalInformation.AutoSize = true;
+      this.CheckBoxMainOrgShowAdditionalInformation.Location = new System.Drawing.Point(15, 105);
+      this.CheckBoxMainOrgShowAdditionalInformation.Name = "CheckBoxMainOrgShowAdditionalInformation";
+      this.CheckBoxMainOrgShowAdditionalInformation.Size = new System.Drawing.Size(335, 19);
+      this.CheckBoxMainOrgShowAdditionalInformation.TabIndex = 5;
+      this.CheckBoxMainOrgShowAdditionalInformation.Text = "Zusätzliche Informationen zur Hauptorganisation anzeigen";
+      this.CheckBoxMainOrgShowAdditionalInformation.UseVisualStyleBackColor = true;
+      this.CheckBoxMainOrgShowAdditionalInformation.CheckedChanged += new System.EventHandler(this.CheckBoxMainOrgShowAdditionalInformation_CheckedChanged);
       // 
       // NumericUpDownAffiliationenMaximum
       // 
@@ -476,7 +494,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.CancelButton = this.ButtonSchliessen;
-      this.ClientSize = new System.Drawing.Size(440, 551);
+      this.ClientSize = new System.Drawing.Size(440, 575);
       this.Controls.Add(this.GroupBoxAnzeige);
       this.Controls.Add(this.GroupBoxAPI);
       this.Controls.Add(this.GroupBoxLokalerCache);
@@ -486,7 +504,7 @@
       this.Controls.Add(this.ButtonSpeichern);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.MinimumSize = new System.Drawing.Size(456, 590);
+      this.MinimumSize = new System.Drawing.Size(456, 614);
       this.Name = "FormSettings";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Star Citizen Handle Query Einstellungen";
@@ -540,5 +558,6 @@
     private Label LabelMaxAffiliationen;
     private CheckBox CheckBoxUnkenntlicheAffiliationenAusblenden;
     private CheckBox CheckBoxShowCacheType;
+    private CheckBox CheckBoxMainOrgShowAdditionalInformation;
   }
 }

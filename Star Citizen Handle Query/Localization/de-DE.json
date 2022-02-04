@@ -38,7 +38,8 @@
       "Language": "Sprache:",
       "Show_Cache_Type": "Verwendeten Cache-Typ anzeigen",
       "Affiliations_Max": "Affiliationen Maximum:",
-      "Hide_Redacted_Affiliations": "Unkenntliche Affiliationen ausblenden"
+      "Hide_Redacted_Affiliations": "Unkenntliche Affiliationen ausblenden",
+      "Show_Additional_Main_Organization_Information": "Zus\u00E4tzliche Informationen zur Hauptorganisation anzeigen"
     },
     "Window": {
       "Group_Title": "Fenster",

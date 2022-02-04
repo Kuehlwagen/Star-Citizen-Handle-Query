@@ -69,6 +69,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       NumericUpDownAffiliationenMaximum.Value = ProgramSettings.AffiliationsMax;
       CheckBoxUnkenntlicheAffiliationenAusblenden.Checked = ProgramSettings.HideRedactedAffiliations;
       CheckBoxShowCacheType.Checked = ProgramSettings.ShowCacheType;
+      CheckBoxMainOrgShowAdditionalInformation.Checked = ProgramSettings.ShowAdditionalMainOrgInformation;
     }
 
     private string[] GetLocalizations() {
@@ -190,6 +191,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.ShowCacheType = (sender as CheckBox).Checked;
     }
 
+    private void CheckBoxMainOrgShowAdditionalInformation_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.ShowAdditionalMainOrgInformation = (sender as CheckBox).Checked;
+    }
+
     private void ButtonStandard_Click(object sender, EventArgs e) {
       ProgramSettings = new() { ApiKey = ProgramSettings.ApiKey, Language = ProgramSettings.Language };
       SetDialogValues();
@@ -247,6 +252,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LabelMaxAffiliationen.Text = CurrentLocalization.Settings.Display.Affiliations_Max;
       CheckBoxUnkenntlicheAffiliationenAusblenden.Text = CurrentLocalization.Settings.Display.Hide_Redacted_Affiliations;
       CheckBoxShowCacheType.Text = CurrentLocalization.Settings.Display.Show_Cache_Type;
+      CheckBoxMainOrgShowAdditionalInformation.Text = CurrentLocalization.Settings.Display.Show_Additional_Main_Organization_Information;
 
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;
       LabelFensterDeckkraft.Text = CurrentLocalization.Settings.Window.Opacity;

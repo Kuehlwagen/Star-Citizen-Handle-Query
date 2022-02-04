@@ -38,7 +38,8 @@
       "Language": "Language:",
       "Show_Cache_Type": "Show Cache Type",
       "Affiliations_Max": "Maximum Affiliations:",
-      "Hide_Redacted_Affiliations": "Hide Redacted Affiliations"
+      "Hide_Redacted_Affiliations": "Hide Redacted Affiliations",
+      "Show_Additional_Main_Organization_Information": "Show Additional Main Organziation Information"
     },
     "Window": {
       "Group_Title": "Window",

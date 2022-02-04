@@ -44,7 +44,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
         if (OrganizationInfo?.sid != null && OrganizationInfo?.stars >= 0 && OrganizationInfo.stars <= 5) {
           PictureBoxOrganizationRank.Image = Properties.Resources.ResourceManager.GetObject($"OrganizationRank{OrganizationInfo.stars}") as Image;
         }
-        if (IsMainOrg) {
+        if (IsMainOrg && ProgramSettings.ShowAdditionalMainOrgInformation) {
           ApiOrganizationInfo orgInfo = await GetApiInfo<ApiOrganizationInfo>(ForceLive, SID, ProgramSettings, CacheDirectoryType.Organization);
           if (orgInfo?.success == 1) {
             CreateOrganizationJSON(organizationSid, orgInfo);

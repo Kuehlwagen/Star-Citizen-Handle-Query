@@ -140,6 +140,8 @@
 
     public string Hide_Redacted_Affiliations { get; set; } = "Unkenntliche Affiliationen ausblenden";
 
+    public string Show_Additional_Main_Organization_Information { get; set; } = "Zusätzliche Informationen zur Hauptorganisationen anzeigen";
+
   }
 
   [Serializable()]
