@@ -33,6 +33,11 @@ Zusätzlich zum Server-Cache der API verwendet dieses Tool einen lokalen Cache, 
 - __Sprache:__ Hier kann die Sprache für das Tool eingestellt werden. Zur Verfügung stehen "Deutsch" und "English".
 - __Affiliationen Maximum:__ Hier kann angegeben werden, wie viele Affiliationen maximal dargestellt werden sollen.
 - __Unkenntliche Affiliationen ausblenden:__ Hier kann angegeben werden, ob unkenntlich gemachte Affiliationen ausgeblendet werden sollen
+- __Zusätzliche Informationen zur Hauptorganisation anzeigen:__ Wird diese Einstellung aktiviert, wird, zusätzlich zur Handle-Abfrage, eine Anfrage für Informationen zur Hauptorganisation an die API gesendet, um folgende Informationen für die Hauptorganisation anzuzeigen:
+  - Primary Focus (mit Icon)
+  - Secondary Focus (mit Icon)
+  - Commitment
+  - Members (Anzahl)
 - __Verwendeten Cache-Typ anzeigen:__ Wird diese Einstellung aktiviert, wird neben der Handle-Eingabebox ein Hinweis angezeigt, mit welchem Cache-Typ die Daten geladen wurden (LIVE = Live-Daten vom API-Server, CACHE = API Server-Cache, LOCAL = Lokaler Cache)
 ### Fenster
 - __Deckkraft:__ Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
