@@ -80,6 +80,7 @@
       this.TextBoxHandle.PlaceholderText = "Handle eingeben...";
       this.TextBoxHandle.Size = new System.Drawing.Size(315, 23);
       this.TextBoxHandle.TabIndex = 1;
+      this.TextBoxHandle.TextChanged += new System.EventHandler(this.TextBoxHandle_TextChanged);
       this.TextBoxHandle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxHandle_KeyDown);
       // 
       // LabelHandle

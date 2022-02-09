@@ -741,6 +741,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       AufUpdatePruefenToolStripMenuItem.Enabled = enable;
     }
 
+    private void TextBoxHandle_TextChanged(object sender, EventArgs e) {
+      if (string.IsNullOrWhiteSpace((sender as TextBox).Text)) {
+        RemoveUserControls();
+      }
+    }
   }
 
 }
