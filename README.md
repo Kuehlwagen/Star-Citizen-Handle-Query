@@ -76,6 +76,7 @@ Zusätzlich zum Server-Cache der API verwendet dieses Tool einen lokalen Cache, 
 - Hier kann der eindeutige Name eines Star Citizen Spielers in die Handle-Eingabebox eingegeben werden. Durch die Betätigung der Enter-Taste wird die Abfrage ausgelöst und kurze Zeit später das Ergebnis der Abfrage darunter dargestellt.
   - Wird währenddessen die Strg-Taste gedrückt gehalten, wird das Auslesen der Handle-Informationen inklusive Avatare (Handle, Organisation und Affiliationen) via Live-Modus der API erzwungen.
   - Drückt man, während die Handle-Eingabebox den Fokus hat, die `+`-Taste, kann man einen Kommentar zum aktuellen Handle eingeben. Durch Betätigung der `Enter`-Taste, wird der Kommentar im lokalen Cache gespeichert. Verliert die Kommentar-Eingabebox den Fokus oder es wird die `Esc`-Taste gedrückt, wird die Eingabe des Kommentars abgebrochen.
+  - Wird die Handle-Eingabebox geleert, wird ein gegebenenfall zuvor ermitteltes Ergebnis entfernt.
 - Durch die Betätigung der Esc-Taste wird das Fenster ausgeblendet.
 - Wurde eine globale Taste(nkobination) in den Einstellungen angegeben, kann das Fenster jederzeit mit dieser Taste(nkombination) wieder angezeigt werden.
 - Folgende Funktionen sind nur aktiv, wenn in den Einstellungen in der Gruppe "Fenster" das Kontrollkästchen "Mauseingaben ignorieren" nicht gesetzt ist:
