@@ -181,8 +181,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Size = new Size(Width, 31);
 
       // Fenster an die richtige Position bringen
-      CenterToScreen();
-      Location = new Point(Location.X, 0);
+      if (ProgramSettings?.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
+        Location = ProgramSettings.WindowLocation;
+      } else {
+        MoveWindowToDefaultLocation();
+      }
 
       // Prüfen, ob der API-Key eingetragen wurde
       if (ProgramSettings?.ApiKey?.Length != 32) {
@@ -200,6 +203,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           HotKey.Hook();
         }
       }
+    }
+
+    private void MoveWindowToDefaultLocation() {
+      CenterToScreen();
+      Location = new Point(Location.X, 0);
     }
 
     private void HotKey_KeyDown(object sender, KeyEventArgs e) {
@@ -660,10 +668,18 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void FormHandleQuery_FormClosing(object sender, FormClosingEventArgs e) {
+      // Globale Taste wieder freigeben
       if (HotKey?.HookedKeys?.Count > 0) {
         HotKey.Unhook();
         HotKey = null;
       }
+
+      // Fensterposition merken
+      ProgramSettings.WindowLocation = Location;
+      string settingsFilePath = GetSettingsPath();
+      try {
+        File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
+      } catch { }
     }
 
     public static string GetString(string value, string preValue = "") {
@@ -746,6 +762,33 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         RemoveUserControls();
       }
     }
+
+    private void LabelHandle_MouseDown(object sender, MouseEventArgs e) {
+      if (ModifierKeys == Keys.Control) {
+        switch (e.Button) {
+          case MouseButtons.Left:
+            _ = User32Wrappers.ReleaseCapture();
+            _ = User32Wrappers.SendMessage(Handle, User32Wrappers.WM_NCLBUTTONDOWN, User32Wrappers.HT_CAPTION, 0);
+            break;
+          case MouseButtons.Middle:
+            MoveWindowToDefaultLocation();
+            break;
+        }
+      }
+    }
+
+    private void LabelHandle_MouseCaptureChanged(object sender, EventArgs e) {
+      SetHandleLableCursor();
+    }
+
+    private void LabelHandle_MouseMove(object sender, MouseEventArgs e) {
+      SetHandleLableCursor();
+    }
+
+    private void SetHandleLableCursor() {
+      LabelHandle.Cursor = ModifierKeys == Keys.Control ? Cursors.SizeAll : Cursors.Default;
+    }
+
   }
 
 }

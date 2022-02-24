@@ -92,6 +92,9 @@
       this.LabelHandle.Size = new System.Drawing.Size(49, 15);
       this.LabelHandle.TabIndex = 0;
       this.LabelHandle.Text = "Handle:";
+      this.LabelHandle.MouseCaptureChanged += new System.EventHandler(this.LabelHandle_MouseCaptureChanged);
+      this.LabelHandle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LabelHandle_MouseDown);
+      this.LabelHandle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.LabelHandle_MouseMove);
       // 
       // PanelInfo
       // 

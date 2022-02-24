@@ -86,6 +86,9 @@
     /// <summary>Gibt an, ob für die Hauptorganisation zusätzliche Informationen angezeigt werden sollen (benötigt weitere API-Abfrage)</summary>
     public bool ShowAdditionalMainOrgInformation { get; set; } = false;
 
+    /// <summary>Position des Hauptfensters</summary>
+    public Point WindowLocation { get; set; } = Point.Empty;
+
     public object Clone() {
       return MemberwiseClone();
     }
