@@ -14,7 +14,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private readonly int InitialWindowStyle = 0;
     private readonly Translation ProgramTranslation;
-    private readonly Settings ProgramSettings;
+    private Settings ProgramSettings;
     private GlobalHotKey HotKey;
     private AutoCompleteStringCollection AutoCompleteCollection;
     private bool ShowInitialBalloonTip = false;
@@ -507,6 +507,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (rtnVal != null) {
 
         if (mitProgramSettings) {
+          ProgramSettings = rtnVal;
           RestartProgram();
         } else {
           ShowInitialBalloonTip = true;
