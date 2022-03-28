@@ -122,7 +122,7 @@
       this.NumericUpDownLokalerCacheAlter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.NumericUpDownLokalerCacheAlter.Location = new System.Drawing.Point(154, 22);
       this.NumericUpDownLokalerCacheAlter.Maximum = new decimal(new int[] {
-            30,
+            365,
             0,
             0,
             0});

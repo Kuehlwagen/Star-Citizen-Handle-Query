@@ -34,8 +34,8 @@
       set {
         if (value < 0) {
           value = 0;
-        } else if (value > 30) {
-          value = 30;
+        } else if (value > 365) {
+          value = 365;
         }
         _LocalCacheMaxAge = value;
       }
