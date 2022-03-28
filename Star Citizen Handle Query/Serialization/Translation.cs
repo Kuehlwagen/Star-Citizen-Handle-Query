@@ -165,6 +165,8 @@
 
     public string Enable_Alt_Tab { get; set; } = "Erreichbarkeit via Alt + Tab";
 
+    public string RememberWindowLocation { get; set; } = "Position merken";
+
   }
 
   [Serializable()]

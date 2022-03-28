@@ -181,7 +181,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Size = new Size(Width, 31);
 
       // Fenster an die richtige Position bringen
-      if (ProgramSettings?.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
+      if (ProgramSettings?.RememberWindowLocation == true && ProgramSettings?.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
         Location = ProgramSettings.WindowLocation;
       } else {
         MoveWindowToDefaultLocation();
@@ -676,7 +676,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       // Fensterposition merken
-      ProgramSettings.WindowLocation = Location;
+      ProgramSettings.WindowLocation = ProgramSettings.RememberWindowLocation ? Location : Point.Empty;
       string settingsFilePath = GetSettingsPath();
       try {
         File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);

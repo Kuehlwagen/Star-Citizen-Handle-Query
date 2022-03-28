@@ -50,7 +50,8 @@
       "Global_Hotkey_Alt": "Alt",
       "Global_Hotkey_Shift": "Shift",
       "Ignore_Mouseinput": "Ignore Mouse Input",
-      "Enable_Alt_Tab": "Enable Alt + Tab"
+      "Enable_Alt_Tab": "Enable Alt + Tab",
+      "RememberWindowLocation":  "Remember Location"
     },
     "Local_Cache": {
       "Group_Title": "Local Cache",

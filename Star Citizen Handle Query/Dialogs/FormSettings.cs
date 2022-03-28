@@ -66,6 +66,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxAlt.Checked = ProgramSettings.GlobalHotkeyModifierAlt;
       CheckBoxUmschalt.Checked = ProgramSettings.GlobalHotkeyModifierShift;
       CheckBoxAltTabEnabled.Checked = ProgramSettings.AltTabEnabled;
+      CheckBoxPositionMerken.Checked = ProgramSettings.RememberWindowLocation;
       NumericUpDownAffiliationenMaximum.Value = ProgramSettings.AffiliationsMax;
       CheckBoxUnkenntlicheAffiliationenAusblenden.Checked = ProgramSettings.HideRedactedAffiliations;
       CheckBoxShowCacheType.Checked = ProgramSettings.ShowCacheType;
@@ -112,6 +113,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void CheckBoxFensterMauseingabenIgnorieren_CheckedChanged(object sender, EventArgs e) {
       ProgramSettings.WindowIgnoreMouseInput = (sender as CheckBox).Checked;
+    }
+
+    private void CheckBoxPositionMerken_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.RememberWindowLocation = (sender as CheckBox).Checked;
     }
 
     private void NumericUpDownLokalerCacheAlter_ValueChanged(object sender, EventArgs e) {
@@ -263,6 +268,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxUmschalt.Text = CurrentLocalization.Settings.Window.Global_Hotkey_Shift;
       CheckBoxFensterMauseingabenIgnorieren.Text = CurrentLocalization.Settings.Window.Ignore_Mouseinput;
       CheckBoxAltTabEnabled.Text = CurrentLocalization.Settings.Window.Enable_Alt_Tab;
+      CheckBoxPositionMerken.Text = CurrentLocalization.Settings.Window.RememberWindowLocation;
 
       GroupBoxLokalerCache.Text = CurrentLocalization.Settings.Local_Cache.Group_Title;
       LabelLokalerCacheAlter.Text = CurrentLocalization.Settings.Local_Cache.Max_Age;
