@@ -22,9 +22,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Sprachen hinzufügen
       ComboBoxSprache.Items.AddRange(GetLocalizations());
 
-      // API-Modus Werte hinzufügen
-      ComboBoxApiModus.Items.AddRange(Enum.GetNames(typeof(ApiMode)));
-
       // Taste Werte hinzufügen
       ComboBoxTaste.Items.AddRange(KeyCollection.ConvertAll(x => x.ToString()).ToArray());
 
@@ -59,8 +56,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       NumericUpDownFensterDeckkraft.Value = ProgramSettings.WindowOpacity;
       CheckBoxFensterMauseingabenIgnorieren.Checked = ProgramSettings.WindowIgnoreMouseInput;
       NumericUpDownLokalerCacheAlter.Value = ProgramSettings.LocalCacheMaxAge;
-      TextBoxApiKey.Text = ProgramSettings.ApiKey;
-      ComboBoxApiModus.SelectedIndex = (int)ProgramSettings.ApiMode;
       ComboBoxTaste.SelectedIndex = KeyCollection.IndexOf(ProgramSettings.GlobalHotkey);
       CheckBoxStrg.Checked = ProgramSettings.GlobalHotkeyModifierCtrl;
       CheckBoxAlt.Checked = ProgramSettings.GlobalHotkeyModifierAlt;
@@ -70,7 +65,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       NumericUpDownAffiliationenMaximum.Value = ProgramSettings.AffiliationsMax;
       CheckBoxUnkenntlicheAffiliationenAusblenden.Checked = ProgramSettings.HideRedactedAffiliations;
       CheckBoxShowCacheType.Checked = ProgramSettings.ShowCacheType;
-      CheckBoxMainOrgShowAdditionalInformation.Checked = ProgramSettings.ShowAdditionalMainOrgInformation;
     }
 
     private string[] GetLocalizations() {
@@ -90,16 +84,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void ButtonSpeichern_Click(object sender, EventArgs e) {
       ButtonSpeichern.Focus();
-      if (ProgramSettings.ApiKey.Length == 32) {
-        string settingsFilePath = FormHandleQuery.GetSettingsPath();
-        try {
-          File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
-          DialogResult = DialogResult.OK;
-        } catch (Exception ex) {
-          MessageBox.Show($"{CurrentLocalization.Settings.MessageBoxes.Save_Fail} {ex.Message}");
-        }
-      } else {
-        MessageBox.Show(CurrentLocalization.Settings.MessageBoxes.API_Key_Missing, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+      string settingsFilePath = FormHandleQuery.GetSettingsPath();
+      try {
+        File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
+        DialogResult = DialogResult.OK;
+      } catch (Exception ex) {
+        MessageBox.Show($"{CurrentLocalization.Settings.MessageBoxes.Save_Fail} {ex.Message}");
       }
     }
 
@@ -121,38 +111,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void NumericUpDownLokalerCacheAlter_ValueChanged(object sender, EventArgs e) {
       ProgramSettings.LocalCacheMaxAge = Convert.ToInt32((sender as NumericUpDown).Value);
-    }
-
-    private void TextBoxApiKey_TextChanged(object sender, EventArgs e) {
-      ProgramSettings.ApiKey = (sender as TextBox).Text;
-      LabelApiTestStatus.Text = string.Empty;
-      ButtonApiTest.Enabled = ProgramSettings.ApiKey.Length == 32;
-    }
-
-    private void ComboBoxApiModus_SelectedIndexChanged(object sender, EventArgs e) {
-      ProgramSettings.ApiMode = (ApiMode)(sender as ComboBox).SelectedIndex;
-      LabelModusBeschreibung.Text = GetApiModusBeschreibung((sender as ComboBox).SelectedIndex);
-    }
-
-    private string GetApiModusBeschreibung(int index) {
-      string rtnVal = string.Empty;
-
-      switch (index) {
-        case (int)ApiMode.Live:
-          rtnVal = CurrentLocalization.Settings.API.Mode_Description_Live;
-          break;
-        case (int)ApiMode.Cache:
-          rtnVal = CurrentLocalization.Settings.API.Mode_Description_Cache;
-          break;
-        case (int)ApiMode.Auto:
-          rtnVal = CurrentLocalization.Settings.API.Mode_Description_Auto;
-          break;
-        case (int)ApiMode.Eager:
-          rtnVal = CurrentLocalization.Settings.API.Mode_Description_Eager;
-          break;
-      }
-
-      return rtnVal;
     }
 
     private void CheckBoxStrg_CheckedChanged(object sender, EventArgs e) {
@@ -196,49 +154,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.ShowCacheType = (sender as CheckBox).Checked;
     }
 
-    private void CheckBoxMainOrgShowAdditionalInformation_CheckedChanged(object sender, EventArgs e) {
-      ProgramSettings.ShowAdditionalMainOrgInformation = (sender as CheckBox).Checked;
-    }
-
     private void ButtonStandard_Click(object sender, EventArgs e) {
-      ProgramSettings = new() { ApiKey = ProgramSettings.ApiKey, Language = ProgramSettings.Language };
+      ProgramSettings = new() { Language = ProgramSettings.Language };
       SetDialogValues();
-    }
-
-    private async void ButtonApiTest_Click(object sender, EventArgs e) {
-      ButtonApiTest.Enabled = false;
-      LabelApiTestStatus.Text = CurrentLocalization.Settings.API.Test_Please_Wait;
-      ApiKeyState state = await GetApiTestJson();
-      if (state?.success == 1 && state.data != null) {
-        LabelApiTestStatus.Text = $"{state?.message}, {state?.data?.value} {CurrentLocalization.Settings.API.Test_Information}";
-      } else {
-        LabelApiTestStatus.Text = state?.message;
-      }
-      ButtonApiTest.Enabled = true;
-    }
-
-    private async Task<ApiKeyState> GetApiTestJson() {
-      ApiKeyState rtnVal = null;
-
-      using HttpClient client = new();
-      string jsonText = null;
-      try {
-        jsonText = await client.GetStringAsync($"https://api.starcitizen-api.com/{ProgramSettings.ApiKey}/v1/me");
-      } catch (HttpRequestException reqEx) {
-        rtnVal = new ApiKeyState() { message = FormHandleQuery.GetHttpClientError(reqEx.StatusCode) };
-      } catch (Exception ex) {
-        rtnVal = new ApiKeyState() { message = ex.Message };
-      }
-
-      if (!string.IsNullOrWhiteSpace(jsonText)) {
-        rtnVal = JsonSerializer.Deserialize<ApiKeyState>(jsonText);
-      }
-
-      if (rtnVal == null) {
-        rtnVal = new() { message = CurrentLocalization.Settings.API.Test_Error };
-      }
-
-      return rtnVal;
     }
 
     private void UpdateLocalization() {
@@ -246,18 +164,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       Text = $"Star Citizen Handle Query - {CurrentLocalization.Settings.Title}";
 
-      GroupBoxAPI.Text = CurrentLocalization.Settings.API.Group_Title;
-      LabelApiKey.Text = CurrentLocalization.Settings.API.Key;
-      TextBoxApiKey.PlaceholderText = CurrentLocalization.Settings.API.Key_Placeholder;
-      LabelApiMode.Text = CurrentLocalization.Settings.API.Mode;
-      LabelModusBeschreibung.Text = GetApiModusBeschreibung(ComboBoxApiModus.SelectedIndex);
-      ButtonApiTest.Text = CurrentLocalization.Settings.API.Test;
-
       LabelSprache.Text = CurrentLocalization.Settings.Display.Language;
       LabelMaxAffiliationen.Text = CurrentLocalization.Settings.Display.Affiliations_Max;
       CheckBoxUnkenntlicheAffiliationenAusblenden.Text = CurrentLocalization.Settings.Display.Hide_Redacted_Affiliations;
       CheckBoxShowCacheType.Text = CurrentLocalization.Settings.Display.Show_Cache_Type;
-      CheckBoxMainOrgShowAdditionalInformation.Text = CurrentLocalization.Settings.Display.Show_Additional_Main_Organization_Information;
 
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;
       LabelFensterDeckkraft.Text = CurrentLocalization.Settings.Window.Opacity;

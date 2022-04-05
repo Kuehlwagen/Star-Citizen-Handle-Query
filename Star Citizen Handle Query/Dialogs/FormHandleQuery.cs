@@ -2,11 +2,14 @@ using Star_Citizen_Handle_Query.ExternClasses;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Diagnostics;
+using System.Globalization;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
+using System.Web;
 
 namespace Star_Citizen_Handle_Query.Dialogs {
 
@@ -18,6 +21,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private GlobalHotKey HotKey;
     private AutoCompleteStringCollection AutoCompleteCollection;
     private bool ShowInitialBalloonTip = false;
+
+    private readonly Regex RgxIdCmHandleEnlistedFluency = new("<strong class=\"value\">(.+)</strong>", RegexOptions.Multiline | RegexOptions.Compiled);
+    private readonly Regex RgxLocation = new("<span class=\"label\">Location</span>\\s+<strong class=\"value\">\\s+ ([,|\\-|\\p{L}|\\p{M}|\\s]+)</strong>", RegexOptions.Multiline | RegexOptions.Compiled);
+    private readonly Regex RgxAvatar = new("<div class=\"thumb\">\\s+<img src=\"(.+)\" \\/>", RegexOptions.Multiline | RegexOptions.Compiled);
+    private readonly Regex RgxDisplayTitle = new("<span class=\"icon\">\\s+<img src=\"(.+)\"\\/>\\s+<\\/span>\\s+<span class=\"value\">(.+)<", RegexOptions.Multiline | RegexOptions.Compiled);
+    private readonly Regex RgxMainOrganization = new("<a href=\"\\/orgs\\/(.+)\"><img src=\"(.+)\" \\/><\\/a>\\s+<span class=\"members\">(\\d+) members<\\/span>[\\W\\w]+class=\"value\">(.+)<\\/a>[\\W\\w]+Organization rank<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>[\\W\\w]+Prim. Activity<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>[\\W\\w]+Sec. Activity<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>[\\W\\w]+Commitment<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>", RegexOptions.Multiline | RegexOptions.Compiled);
+    private readonly Regex RgxOrganizationStars = new("<span class=\"active\">", RegexOptions.Multiline | RegexOptions.Compiled);
+    private readonly Regex RgxOrganization = new("<a href=\"\\/orgs\\/(.+)\"><img src=\"(.+)\" \\/><\\/a>\\s+<span class=\"members\">(\\d+) members<\\/span>[\\W\\w]+class=\"value\\s[\\w\\d]*\">(.+)<\\/a>[\\W\\w]+Organization rank<\\/span>\\s+<strong class=\"value\\s[\\w\\d]*\">(.+)<\\/strong>", RegexOptions.Multiline | RegexOptions.Compiled);
 
     public FormHandleQuery() {
       InitializeComponent();
@@ -142,8 +153,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       // Wenn die Einstellungen nicht geladen werden konnten, Einstellungen-Fenster anzeigen
-      if (rtnVal == null || rtnVal.ApiKey.Length != 32) {
+      if (rtnVal == null) {
         rtnVal = ShowProperties();
+      }
+
+      if (rtnVal == null) {
+        rtnVal = new();
       }
 
       return rtnVal;
@@ -187,21 +202,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         MoveWindowToDefaultLocation();
       }
 
-      // Prüfen, ob der API-Key eingetragen wurde
-      if (ProgramSettings?.ApiKey?.Length != 32) {
-        MessageBox.Show($"Es muss ein 32-stelliger API-Key angegeben werden.{Environment.NewLine}Das Programm wird beendet.", Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        Application.Exit();
-      } else {
-        // Autovervollständigung aktualisieren
-        UpdateAutoComplete();
+      // Autovervollständigung aktualisieren
+      UpdateAutoComplete();
 
-        // Ggf. Globale Tastenabfrage erstellen
-        if (ProgramSettings.GlobalHotkey != Keys.None) {
-          HotKey = new();
-          HotKey.KeyDown += HotKey_KeyDown;
-          HotKey.HookedKeys.Add(ProgramSettings.GlobalHotkey);
-          HotKey.Hook();
-        }
+      // Ggf. Globale Tastenabfrage erstellen
+      if (ProgramSettings.GlobalHotkey != Keys.None) {
+        HotKey = new();
+        HotKey.KeyDown += HotKey_KeyDown;
+        HotKey.HookedKeys.Add(ProgramSettings.GlobalHotkey);
+        HotKey.Hook();
       }
     }
 
@@ -284,17 +293,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             // Textbox bis zum Ergebnis deaktivieren
             TextBoxHandle.Enabled = false;
             // Handle-Informationen auslesen
-            ApiHandleInfo handleInfo = await GetApiInfo<ApiHandleInfo>(forceLive, TextBoxHandle.Text, ProgramSettings, CacheDirectoryType.Handle);
+            HandleInfo handleInfo = await GetHandleInfo<HandleInfo>(forceLive, TextBoxHandle.Text, ProgramSettings, CacheDirectoryType.Handle);
 
             // Cache-Typ darstellen
-            if (ProgramSettings.ShowCacheType && !string.IsNullOrWhiteSpace(handleInfo?.source)) {
-              LabelCacheType.Text = handleInfo.source.ToUpper();
+            if (ProgramSettings.ShowCacheType && !string.IsNullOrWhiteSpace(handleInfo?.Source)) {
+              LabelCacheType.Text = handleInfo.Source.ToUpper();
               switch (LabelCacheType.Text) {
                 case "LIVE":
                   LabelCacheType.ForeColor = Color.Green;
-                  break;
-                case "CACHE":
-                  LabelCacheType.ForeColor = Color.Orange;
                   break;
                 case "LOCAL":
                   LabelCacheType.ForeColor = Color.OrangeRed;
@@ -307,35 +313,33 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             CreateDirectory(CacheDirectoryType.HandleAdditional);
             CreateDirectory(CacheDirectoryType.HandleAvatar);
             CreateDirectory(CacheDirectoryType.HandleDisplayTitle);
-            CreateDirectory(CacheDirectoryType.Organization);
             CreateDirectory(CacheDirectoryType.OrganizationAvatar);
-            CreateDirectory(CacheDirectoryType.OrganizationFocus);
 
             // UserControl mit Handle-Informationen hinzufügen
             PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation, forceLive));
             Size = new Size(Size.Width, Size.Height + 78);
 
             // Ggf. UserControl mit Organisation-Informationen hinzufügen
-            if (handleInfo?.success == 1 && handleInfo?.data?.organization?.name != null) {
-              PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.data.organization, ProgramSettings, true, forceLive));
-              Size = new Size(Size.Width, Size.Height + (handleInfo.data.organization.name != string.Empty ? 78 : 25));
+            if (handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK && handleInfo.Organizations.MainOrganization != null) {
+              PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.Organizations.MainOrganization, ProgramSettings, true, forceLive));
+              Size = new Size(Size.Width, Size.Height + (handleInfo.Organizations.MainOrganization.Name != string.Empty ? 78 : 25));
             }
 
             // Ggf. UserControls mit Affiliate-Informationen hinzufügen
-            if (handleInfo?.data != null && handleInfo.data.affiliation != null && handleInfo.data.affiliation.Length > 0) {
+            if (handleInfo?.Organizations?.Affiliations?.Count > 0) {
               int affiliatesAdded = 0;
-              for (int i = 0; i < handleInfo.data.affiliation.Length && affiliatesAdded < ProgramSettings.AffiliationsMax; i++) {
+              for (int i = 0; i < handleInfo.Organizations.Affiliations.Count && affiliatesAdded < ProgramSettings.AffiliationsMax; i++) {
                 // Prüfen, ob ausgeblendete Affiliationen dargestellt werden sollen
-                if (!string.IsNullOrWhiteSpace(handleInfo.data.affiliation[i].name) || !ProgramSettings.HideRedactedAffiliations) {
-                  PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.data.affiliation[i], ProgramSettings, false, forceLive));
-                  Size = new Size(Size.Width, Size.Height + (!string.IsNullOrWhiteSpace(handleInfo.data.affiliation[i].name) ? 78 : 25));
+                if (!handleInfo.Organizations.Affiliations[i].Redacted || !ProgramSettings.HideRedactedAffiliations) {
+                  PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.Organizations.Affiliations[i], ProgramSettings, false, forceLive));
+                  Size = new Size(Size.Width, Size.Height + (!string.IsNullOrWhiteSpace(handleInfo.Organizations.Affiliations[i].Name) ? 78 : 25));
                   affiliatesAdded++;
                 }
               }
             }
 
             // Autovervollständigung aktualisieren
-            UpdateAutoComplete(handleInfo?.data?.profile?.handle != null ? handleInfo.data.profile.handle : String.Empty);
+            UpdateAutoComplete(handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK && handleInfo?.Profile?.Handle != null ? handleInfo.Profile.Handle : String.Empty);
 
             // Textbox wieder aktivieren und Text markieren
             TextBoxHandle.Enabled = true;
@@ -367,10 +371,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             ctrlOrganization.PictureBoxOrganization.Image = null;
             ctrlOrganization.PictureBoxOrganizationRank.Image?.Dispose();
             ctrlOrganization.PictureBoxOrganizationRank.Image = null;
-            ctrlOrganization.PictureBoxFocus1.Image?.Dispose();
-            ctrlOrganization.PictureBoxFocus1.Image = null;
-            ctrlOrganization.PictureBoxFocus2.Image?.Dispose();
-            ctrlOrganization.PictureBoxFocus2.Image = null;
             ctrlOrganization.Dispose();
           }
         }
@@ -379,30 +379,24 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Size = new Size(Width, 31);
     }
 
-    public static async Task<T> GetApiInfo<T>(bool forceLive, string name, Settings programSettings, CacheDirectoryType infoType) where T : new() {
-      T rtnVal = default;
+    public async Task<HandleInfo> GetHandleInfo<T>(bool forceLive, string name, Settings programSettings, CacheDirectoryType infoType) where T : new() {
+      HandleInfo rtnVal = default;
 
-      // API-Informationen aus Datei auslesen
+      // Informationen aus Datei auslesen
       string infoJsonPath = GetCachePath(infoType, name);
       if (File.Exists(infoJsonPath) && new FileInfo(infoJsonPath).LastWriteTime > DateTime.Now.AddDays(programSettings.LocalCacheMaxAge * -1)) {
-        rtnVal = JsonSerializer.Deserialize<T>(File.ReadAllText(infoJsonPath, Encoding.UTF8));
+        rtnVal = JsonSerializer.Deserialize<HandleInfo>(File.ReadAllText(infoJsonPath, Encoding.UTF8));
         if (rtnVal != null) {
-          TrySetProperty(rtnVal, "source", "local");
+          rtnVal.Source = "Local";
+          rtnVal.HttpResponse = new() {
+            StatusCode = HttpStatusCode.OK
+          };
         }
       }
 
-      // API-Informationen via API auslesen, wenn die Datei nicht gelesen werden konnte
+      // Informationen live auslesen, wenn die Datei nicht gelesen werden konnte
       if (rtnVal == null || forceLive) {
-        string json = await GetApiInfoJson(infoType, programSettings.ApiKey, name, forceLive, programSettings);
-        T apiInfo = default;
-        try {
-          apiInfo = JsonSerializer.Deserialize<T>(json);
-        } catch { }
-        if (apiInfo == null) {
-          apiInfo = new();
-          TrySetProperty(apiInfo, "message", json);
-        }
-        rtnVal = apiInfo;
+        rtnVal = await GetLiveHandleInfo(name);
       }
 
       // Neues HandleInfo-Objekt erstellen, wenn der Rückgabewert null sein sollte
@@ -413,62 +407,160 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return rtnVal;
     }
 
-    private static async Task<string> GetApiInfoJson(CacheDirectoryType infoType, string apiKey, string name, bool forceLive, Settings programSettings) {
-      using HttpClient client = new();
-      // JSON via API herunterladen
-      string rtnVal;
-      try {
-        ApiMode mode = forceLive ? ApiMode.Live : programSettings.ApiMode;
-        rtnVal = await client.GetStringAsync(GetApiInfoUrl(infoType, apiKey, mode, name));
-      } catch (HttpRequestException reqEx) {
-        rtnVal = GetHttpClientError(reqEx.StatusCode);
-      } catch (Exception ex) {
-        rtnVal = ex.Message;
-      }
+    public async Task<HandleInfo> GetLiveHandleInfo(string handle) {
+      HandleInfo reply = new() {
+        Profile = new() {
+          Handle = handle,
+          Url = $"https://robertsspaceindustries.com/citizens/{handle}"
+        }
+      };
 
-      return rtnVal;
-    }
+      if (!string.IsNullOrWhiteSpace(handle)) {
+        reply.HttpResponse = await GetSource(reply.Profile.Url);
+        if (reply.HttpResponse.StatusCode == HttpStatusCode.OK && reply.HttpResponse.Source != null) {
 
-    private static string GetApiInfoUrl(CacheDirectoryType infoType, string apiKey, ApiMode mode, string name) {
-      string rtnVal = string.Empty;
+          // Live
+          reply.Source = "Live";
 
-      switch (infoType) {
-        case CacheDirectoryType.Handle:
-          rtnVal = $"https://api.starcitizen-api.com/{apiKey}/v1/{mode.ToString().ToLower()}/user/{name}";
-          break;
-        case CacheDirectoryType.Organization:
-          rtnVal = $"https://api.starcitizen-api.com/{apiKey}/v1/{mode.ToString().ToLower()}/organization/{name}";
-          break;
-      }
+          // UEE Citizen Record, Community Monicker, Handle, Enlisted, Fluency
+          MatchCollection mcIdCmHandleEnlistedFluency = RgxIdCmHandleEnlistedFluency.Matches(reply.HttpResponse.Source);
+          if (mcIdCmHandleEnlistedFluency.Count >= 5) {
+            reply.Profile.UeeCitizenRecord = mcIdCmHandleEnlistedFluency[0].Groups[1].Value;
+            reply.Profile.CommunityMonicker = HttpUtility.HtmlDecode(mcIdCmHandleEnlistedFluency[1].Groups[1].Value);
+            reply.Profile.Handle = mcIdCmHandleEnlistedFluency[2].Groups[1].Value;
+            if (DateTime.TryParseExact(mcIdCmHandleEnlistedFluency[3].Groups[1].Value, "MMM d, yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime enlisted)) {
+              reply.Profile.Enlisted = enlisted;
+            }
+            reply.Profile.Fluency.AddRange(mcIdCmHandleEnlistedFluency[4].Groups[1].Value.Replace(" ", string.Empty).Split(","));
+          }
 
-      return rtnVal;
-    }
+          // Location
+          MatchCollection mcLocation = RgxLocation.Matches(reply.HttpResponse.Source);
+          if (mcLocation.Count == 1) {
+            reply.Profile.Location = mcLocation[0].Groups[1].Value.ReplaceLineEndings(string.Empty).Replace(" ", string.Empty).Replace(",", ", ");
+          }
 
-    private static bool TrySetProperty(object obj, string property, object value) {
-      var prop = obj.GetType().GetProperty(property, BindingFlags.Public | BindingFlags.Instance);
-      if (prop != null && prop.CanWrite) {
-        prop.SetValue(obj, value, null);
-        return true;
-      }
-      return false;
-    }
+          // Avatar
+          MatchCollection mcAvatar = RgxAvatar.Matches(reply.HttpResponse.Source);
+          if (mcAvatar.Count == 1) {
+            reply.Profile.AvatarUrl = CorrectUrl(mcAvatar[0].Groups[1].Value);
+          }
 
-    public static string GetHttpClientError(HttpStatusCode? code) {
-      string rtnVal;
+          // Display Title
+          MatchCollection mcDisplayTitle = RgxDisplayTitle.Matches(reply.HttpResponse.Source);
+          if (mcDisplayTitle.Count == 1 && mcDisplayTitle[0].Groups.Count == 3) {
+            reply.Profile.DisplayTitle = mcDisplayTitle[0].Groups[2].Value;
+            reply.Profile.DisplayTitleAvatarUrl = CorrectUrl(mcDisplayTitle[0].Groups[1].Value);
+          }
 
-      // Fehlermeldung generieren
-      if (code != null) {
-        rtnVal = code switch {
-          HttpStatusCode.NotFound => "API down", // This error is also triggered when the API is down.
-          HttpStatusCode.InternalServerError => "Server error", // If the server encounters an unexpected error, and cannot process the request.
-          HttpStatusCode.ServiceUnavailable => "API unavailable", // Triggered when the API is unavailable.
-          _ => "Unknown error",
-        };
+          // Organizations
+          reply.Organizations = await GetOrganizationsInfo(handle);
+
+        } else {
+          reply.HttpResponse.StatusCode = reply.HttpResponse.StatusCode != null ? reply.HttpResponse.StatusCode : HttpStatusCode.InternalServerError;
+          reply.HttpResponse.ErrorText = reply.HttpResponse.ErrorText;
+        }
       } else {
-        rtnVal = "No Internet";
+        reply.HttpResponse.StatusCode = HttpStatusCode.BadRequest;
+        reply.HttpResponse.ErrorText = $"{reply.HttpResponse.StatusCode}: No handle provided";
+      }
+
+      return reply;
+    }
+
+    private async Task<OrganizationsInfo> GetOrganizationsInfo(string handle) {
+      OrganizationsInfo reply = new();
+
+      HttpInfo httpInfo = await GetSource($"https://robertsspaceindustries.com/citizens/{handle}/organizations");
+      if (httpInfo.StatusCode.HasValue && httpInfo.StatusCode == HttpStatusCode.OK && httpInfo.Source != null) {
+
+        string[] organizations = httpInfo.Source.Split("<div class=\"title\">");
+        if (organizations.Length > 1) {
+
+          foreach (string organization in organizations) {
+            if (organization.StartsWith("Main organization")) {
+
+              // Main Organization
+              MatchCollection mcMainOrganization = RgxMainOrganization.Matches(organization);
+              if (mcMainOrganization.Count == 1 && mcMainOrganization[0].Groups.Count == 9) {
+                reply.MainOrganization = new() {
+                  Url = $"https://robertsspaceindustries.com/orgs/{mcMainOrganization[0].Groups[1].Value}",
+                  Sid = mcMainOrganization[0].Groups[1].Value,
+                  AvatarUrl = CorrectUrl(mcMainOrganization[0].Groups[2].Value),
+                  Members = Convert.ToInt32(mcMainOrganization[0].Groups[3].Value),
+                  Name = mcMainOrganization[0].Groups[4].Value,
+                  RankName = mcMainOrganization[0].Groups[5].Value,
+                  PrimaryActivity = mcMainOrganization[0].Groups[6].Value,
+                  SecondaryActivity = mcMainOrganization[0].Groups[7].Value,
+                  Commitment = mcMainOrganization[0].Groups[8].Value
+                };
+                // Main Organization Rank Stars
+                MatchCollection mcMainOrganizationRankStars = RgxOrganizationStars.Matches(organization);
+                reply.MainOrganization.RankStars = mcMainOrganizationRankStars.Count;
+              } else {
+                reply.MainOrganization = new() {
+                  Redacted = true
+                };
+              }
+
+            } else if (organization.StartsWith("Affiliation")) {
+
+              // Affiliation
+              MatchCollection mcOrganization = RgxOrganization.Matches(organization);
+              if (mcOrganization.Count > 0 && mcOrganization[0].Groups.Count == 6) {
+                reply.Affiliations.Add(new OrganizationInfo() {
+                  Url = $"https://robertsspaceindustries.com/orgs/{mcOrganization[0].Groups[1].Value}",
+                  Sid = mcOrganization[0].Groups[1].Value,
+                  AvatarUrl = CorrectUrl(mcOrganization[0].Groups[2].Value),
+                  Members = Convert.ToInt32(mcOrganization[0].Groups[3].Value),
+                  Name = mcOrganization[0].Groups[4].Value,
+                  RankName = mcOrganization[0].Groups[5].Value
+                });
+                // Affiliation Rank Stars
+                MatchCollection mcAffiliationRankStars = RgxOrganizationStars.Matches(organization);
+                reply.Affiliations[^1].RankStars = mcAffiliationRankStars.Count;
+              } else {
+                reply.Affiliations.Add(new OrganizationInfo() {
+                  Redacted = true
+                });
+              }
+
+            }
+          }
+
+        }
+
+      }
+
+      return reply;
+    }
+
+    private static async Task<HttpInfo> GetSource(string url) {
+      HttpInfo rtnVal = new();
+
+      using HttpClient client = new();
+      try {
+        rtnVal.Source = await client.GetStringAsync(url);
+        int index = rtnVal.Source.IndexOf("<div class=\"page-wrapper\">");
+        if (index >= 0) {
+          rtnVal.Source = rtnVal.Source[index..];
+        }
+        index = rtnVal.Source.IndexOf("<script type=\"text/plain\" data-cookieconsent=\"statistics\">");
+        if (index >= 0) {
+          rtnVal.Source = rtnVal.Source[..index];
+        }
+        rtnVal.StatusCode = HttpStatusCode.OK;
+      } catch (HttpRequestException ex) {
+        rtnVal.Source = string.Empty;
+        rtnVal.ErrorText = $"{ex.StatusCode}: {ex.Message}";
+        rtnVal.StatusCode = ex.StatusCode;
       }
 
       return rtnVal;
+    }
+
+    private static string CorrectUrl(string url) {
+      return url.StartsWith("/") ? $"https://robertsspaceindustries.com{url}" : url;
     }
 
     private void BeendenToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -559,7 +651,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         DeleteDirectoryFiles(CacheDirectoryType.HandleDisplayTitle, onlyExpired);
         DeleteDirectoryFiles(CacheDirectoryType.Organization, onlyExpired);
         DeleteDirectoryFiles(CacheDirectoryType.OrganizationAvatar, onlyExpired);
-        DeleteDirectoryFiles(CacheDirectoryType.OrganizationFocus, onlyExpired);
 
         // Autovervollständigung neu einlesen
         if (!onlyExpired) {
@@ -644,9 +735,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         case CacheDirectoryType.OrganizationAvatar:
           rtnVal = Path.Combine(Application.StartupPath, @"Cache\Organization_Avatar\");
           break;
-        case CacheDirectoryType.OrganizationFocus:
-          rtnVal = Path.Combine(Application.StartupPath, @"Cache\Organization_Focus");
-          break;
       }
 
       return rtnVal;
@@ -659,8 +747,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       HandleAvatar,
       HandleDisplayTitle,
       Organization,
-      OrganizationAvatar,
-      OrganizationFocus
+      OrganizationAvatar
     }
 
     private void RestartProgram() {
@@ -716,7 +803,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         case CacheDirectoryType.HandleAvatar:
         case CacheDirectoryType.OrganizationAvatar:
         case CacheDirectoryType.HandleDisplayTitle:
-        case CacheDirectoryType.OrganizationFocus:
           rtnVal = Path.Combine(GetCachePath(imageType), GetCorrectFileName($"{name}{url[url.LastIndexOf(".")..]}"));
           break;
       }

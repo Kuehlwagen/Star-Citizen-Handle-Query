@@ -1,6 +1,7 @@
 ﻿using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 using static Star_Citizen_Handle_Query.Dialogs.FormHandleQuery;
@@ -9,15 +10,15 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
   public partial class UserControlHandle : UserControl {
 
-    private readonly ApiHandleInfo HandleInfo;
+    private readonly HandleInfo Info;
     private readonly Settings ProgramSettings;
     private readonly Translation ProgramTranslation;
     private readonly bool ForceLive;
     private readonly bool DisplayOnly;
 
-    public UserControlHandle(ApiHandleInfo handleInfo, Settings programSettings, Translation programTranslation, bool forceLive, bool displayOnly = false) {
+    public UserControlHandle(HandleInfo handleInfo, Settings programSettings, Translation programTranslation, bool forceLive, bool displayOnly = false) {
       InitializeComponent();
-      HandleInfo = handleInfo;
+      Info = handleInfo;
       ProgramSettings = programSettings;
       ProgramTranslation = programTranslation;
       ForceLive = forceLive;
@@ -25,26 +26,26 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private async void UserControlHandle_Load(object sender, EventArgs e) {
-      if (HandleInfo?.success == 1 && HandleInfo?.data?.profile != null) {
-        string handle = GetString(HandleInfo?.data?.profile?.handle);
+      if (Info?.HttpResponse?.StatusCode == HttpStatusCode.OK && Info?.Profile != null) {
+        string handle = GetString(Info?.Profile?.Handle);
         CreateHandleJSON(handle);
-        if (!string.IsNullOrWhiteSpace(HandleInfo?.data?.profile?.image)) {
-          PictureBoxHandleAvatar.Image = await GetImage(CacheDirectoryType.HandleAvatar, HandleInfo.data.profile.image, handle, ProgramSettings.LocalCacheMaxAge, ForceLive);
+        if (!string.IsNullOrWhiteSpace(Info.Profile?.AvatarUrl)) {
+          PictureBoxHandleAvatar.Image = await GetImage(CacheDirectoryType.HandleAvatar, Info.Profile.AvatarUrl, handle, ProgramSettings.LocalCacheMaxAge, ForceLive);
           if (!DisplayOnly) {
             PictureBoxHandleAvatar.Cursor = Cursors.Hand;
           } else {
             PictureBoxHandleAvatar.Click -= PictureBoxHandleAvatar_Click;
           }
         }
-        if (!string.IsNullOrWhiteSpace(HandleInfo?.data?.profile?.badge_image)) {
-          PictureBoxDisplayTitle.Image = await GetImage(CacheDirectoryType.HandleDisplayTitle, HandleInfo.data.profile.badge_image, HandleInfo?.data?.profile?.badge, ProgramSettings.LocalCacheMaxAge);
+        if (!string.IsNullOrWhiteSpace(Info?.Profile?.DisplayTitleAvatarUrl)) {
+          PictureBoxDisplayTitle.Image = await GetImage(CacheDirectoryType.HandleDisplayTitle, Info.Profile.DisplayTitleAvatarUrl, Info?.Profile?.DisplayTitle, ProgramSettings.LocalCacheMaxAge);
         }
         LabelHandle.Text = handle;
-        LabelCommunityMoniker.Text = GetString(HandleInfo?.data?.profile?.display, "CM: ");
-        LabelDisplayTitle.Text = GetString(HandleInfo?.data?.profile?.badge);
-        LabelFluency.Text = HandleInfo?.data?.profile?.fluency?.Length > 0 ? $"Fluency: {string.Join(", ", HandleInfo.data.profile.fluency)}" : string.Empty;
-        LabelUEECitizenRecord.Text = GetString(HandleInfo?.data?.profile?.id);
-        LabelEnlistedDate.Text = HandleInfo?.data?.profile?.enlisted.ToString("MMM dd, yyyy", System.Globalization.CultureInfo.InvariantCulture);
+        LabelCommunityMoniker.Text = GetString(Info?.Profile?.CommunityMonicker, "CM: ");
+        LabelDisplayTitle.Text = GetString(Info?.Profile?.DisplayTitle);
+        LabelFluency.Text = Info?.Profile?.Fluency?.Count > 0 ? $"Fluency: {string.Join(", ", Info.Profile.Fluency)}" : string.Empty;
+        LabelUEECitizenRecord.Text = GetString(Info?.Profile?.UeeCitizenRecord);
+        LabelEnlistedDate.Text = Info?.Profile?.Enlisted.ToString("MMM dd, yyyy", System.Globalization.CultureInfo.InvariantCulture);
         if (DisplayOnly) {
           LabelAdditionalInformation.Cursor = Cursors.Default;
         }
@@ -58,7 +59,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           }
         }
       } else {
-        LabelCommunityMoniker.Text = HandleInfo?.success == 0 && !string.IsNullOrWhiteSpace(HandleInfo?.message) ? HandleInfo.message : ProgramTranslation.Window.Handle_Not_Found;
+        LabelCommunityMoniker.Text = Info?.HttpResponse?.StatusCode == HttpStatusCode.NotFound ? ProgramTranslation.Window.Handle_Not_Found : Info?.HttpResponse?.ErrorText;
         LabelCommunityMoniker.Location = new Point(3, LabelHandle.Location.Y + 4);
         LabelCommunityMoniker.BringToFront();
         Size = new Size(Size.Width, 25);
@@ -68,7 +69,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private void CreateHandleJSON(string handle) {
       string jsonPath = GetCachePath(CacheDirectoryType.Handle, handle);
       if (ForceLive || !File.Exists(jsonPath) || new FileInfo(jsonPath).LastWriteTime < DateTime.Now.AddDays(ProgramSettings.LocalCacheMaxAge * -1)) {
-        string handleJson = JsonSerializer.Serialize(HandleInfo, new JsonSerializerOptions() { WriteIndented = true });
+        string handleJson = JsonSerializer.Serialize(Info, new JsonSerializerOptions() { WriteIndented = true });
         if (!string.IsNullOrWhiteSpace(handleJson)) {
           File.WriteAllText(jsonPath, handleJson, Encoding.UTF8);
         }
@@ -76,8 +77,8 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private void PictureBoxHandleAvatar_Click(object sender, EventArgs e) {
-      if (HandleInfo?.data?.profile?.page?.url?.Length > 0) {
-        Process.Start("explorer", HandleInfo.data.profile.page.url);
+      if (Info?.Profile.Url?.Length > 0) {
+        Process.Start("explorer", Info.Profile.Url);
       }
     }
 
@@ -88,7 +89,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           e.SuppressKeyPress = true;
           textBox.Tag = textBox.Text;
           LabelAdditionalInformation.Text = textBox.Text;
-          FormLocalCache.WriteHandleAdditionalInformation(HandleInfo.data.profile.handle, textBox.Text);
+          FormLocalCache.WriteHandleAdditionalInformation(Info.Profile.Handle, textBox.Text);
           textBox.Visible = false;
           break;
         case Keys.Escape:

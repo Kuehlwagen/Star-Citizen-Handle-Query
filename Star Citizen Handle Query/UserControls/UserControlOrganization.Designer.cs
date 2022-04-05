@@ -29,14 +29,10 @@
       this.LabelOrganizationRank = new System.Windows.Forms.Label();
       this.PictureBoxOrganizationRank = new System.Windows.Forms.PictureBox();
       this.LabelMainOrganizationAffiliate = new System.Windows.Forms.Label();
-      this.PictureBoxFocus2 = new System.Windows.Forms.PictureBox();
-      this.PictureBoxFocus1 = new System.Windows.Forms.PictureBox();
       this.LabelFocusPrimary = new System.Windows.Forms.Label();
       this.LabelFocusSecondary = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxOrganization)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxOrganizationRank)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxFocus2)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxFocus1)).BeginInit();
       this.SuspendLayout();
       // 
       // LabelOrganizationName
@@ -90,35 +86,15 @@
       // 
       this.LabelMainOrganizationAffiliate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
       this.LabelMainOrganizationAffiliate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(157)))), ((int)(((byte)(158)))));
-      this.LabelMainOrganizationAffiliate.Location = new System.Drawing.Point(191, 59);
+      this.LabelMainOrganizationAffiliate.Location = new System.Drawing.Point(188, 59);
       this.LabelMainOrganizationAffiliate.Name = "LabelMainOrganizationAffiliate";
       this.LabelMainOrganizationAffiliate.Size = new System.Drawing.Size(184, 15);
       this.LabelMainOrganizationAffiliate.TabIndex = 8;
       this.LabelMainOrganizationAffiliate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
       // 
-      // PictureBoxFocus2
-      // 
-      this.PictureBoxFocus2.Location = new System.Drawing.Point(354, 41);
-      this.PictureBoxFocus2.Name = "PictureBoxFocus2";
-      this.PictureBoxFocus2.Size = new System.Drawing.Size(18, 18);
-      this.PictureBoxFocus2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-      this.PictureBoxFocus2.TabIndex = 9;
-      this.PictureBoxFocus2.TabStop = false;
-      this.PictureBoxFocus2.WaitOnLoad = true;
-      // 
-      // PictureBoxFocus1
-      // 
-      this.PictureBoxFocus1.Location = new System.Drawing.Point(354, 23);
-      this.PictureBoxFocus1.Name = "PictureBoxFocus1";
-      this.PictureBoxFocus1.Size = new System.Drawing.Size(18, 18);
-      this.PictureBoxFocus1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-      this.PictureBoxFocus1.TabIndex = 9;
-      this.PictureBoxFocus1.TabStop = false;
-      this.PictureBoxFocus1.WaitOnLoad = true;
-      // 
       // LabelFocusPrimary
       // 
-      this.LabelFocusPrimary.Location = new System.Drawing.Point(235, 23);
+      this.LabelFocusPrimary.Location = new System.Drawing.Point(252, 23);
       this.LabelFocusPrimary.Name = "LabelFocusPrimary";
       this.LabelFocusPrimary.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
       this.LabelFocusPrimary.Size = new System.Drawing.Size(120, 18);
@@ -126,7 +102,7 @@
       // 
       // LabelFocusSecondary
       // 
-      this.LabelFocusSecondary.Location = new System.Drawing.Point(235, 41);
+      this.LabelFocusSecondary.Location = new System.Drawing.Point(252, 41);
       this.LabelFocusSecondary.Name = "LabelFocusSecondary";
       this.LabelFocusSecondary.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
       this.LabelFocusSecondary.Size = new System.Drawing.Size(120, 18);
@@ -139,8 +115,6 @@
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.Controls.Add(this.LabelFocusSecondary);
       this.Controls.Add(this.LabelFocusPrimary);
-      this.Controls.Add(this.PictureBoxFocus1);
-      this.Controls.Add(this.PictureBoxFocus2);
       this.Controls.Add(this.LabelMainOrganizationAffiliate);
       this.Controls.Add(this.LabelOrganizationRank);
       this.Controls.Add(this.LabelOrganizationSID);
@@ -151,11 +125,9 @@
       this.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
       this.Name = "UserControlOrganization";
       this.Size = new System.Drawing.Size(375, 76);
-      this.Load += new System.EventHandler(this.UserControlHandle_Load);
+      this.Load += new System.EventHandler(this.UserControlOrganization_Load);
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxOrganization)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxOrganizationRank)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxFocus2)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxFocus1)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -168,8 +140,6 @@
     internal PictureBox PictureBoxOrganization;
     internal PictureBox PictureBoxOrganizationRank;
     private Label LabelMainOrganizationAffiliate;
-    internal PictureBox PictureBoxFocus2;
-    internal PictureBox PictureBoxFocus1;
     public Label LabelFocusPrimary;
     public Label LabelFocusSecondary;
   }

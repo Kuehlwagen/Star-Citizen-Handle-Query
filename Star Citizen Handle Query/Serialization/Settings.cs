@@ -25,7 +25,7 @@
     /// <summary>Mauseingaben ignorieren</summary>
     public bool WindowIgnoreMouseInput { get; set; } = false;
 
-    private int _LocalCacheMaxAge = 3;
+    private int _LocalCacheMaxAge = 30;
     /// <summary>Maximales Alter in Tagen für den lokalen Cache (Standard 3 Tage, Mimimum 0 Tage [deaktiviert], Maximum 30 Tage)</summary>
     public int LocalCacheMaxAge {
       get {
@@ -41,12 +41,6 @@
       }
     }
 
-    /// <summary>API-Key für starcitizen-api.com</summary>
-    public string ApiKey { get; set; } = string.Empty;
-
-    /// <summary>API-Modus für starcitizen-api.com</summary>
-    public ApiMode ApiMode { get; set; } = ApiMode.Auto;
-
     /// <summary>Globaler Hotkey</summary>
     public Keys GlobalHotkey { get; set; } = Keys.F3;
 
@@ -60,7 +54,7 @@
     public bool GlobalHotkeyModifierShift { get; set; } = true;
 
     /// <summary>Gibt an, ob das Hauptfenster via Alt + Tab erreichbar sein soll</summary>
-    public bool AltTabEnabled { get; set; } = false;
+    public bool AltTabEnabled { get; set; } = true;
 
     /// <summary>Maximal darzustellende Affiliationen</summary>
     private int _AffiliationsMax = 3;
@@ -83,11 +77,8 @@
     /// <summary>Angabe, ob der verwendete Cache-Typ angezeigt werden soll</summary>
     public bool ShowCacheType { get; set; } = false;
 
-    /// <summary>Gibt an, ob für die Hauptorganisation zusätzliche Informationen angezeigt werden sollen (benötigt weitere API-Abfrage)</summary>
-    public bool ShowAdditionalMainOrgInformation { get; set; } = false;
-
     /// <summary>Angabe, ob sich die Position des Hauptfensters gemerkt werden soll</summary>
-    public bool RememberWindowLocation { get; set; }
+    public bool RememberWindowLocation { get; set; } = false;
 
     /// <summary>Position des Hauptfensters</summary>
     public Point WindowLocation { get; set; } = Point.Empty;
@@ -95,18 +86,6 @@
     public object Clone() {
       return MemberwiseClone();
     }
-  }
-
-  /// <summary>API-Modus</summary>
-  public enum ApiMode {
-    /// <summary>Immer aktuelle Daten</summary>
-    Live,
-    /// <summary>Auf dem Server gecachte Daten</summary>
-    Cache,
-    /// <summary>Wenn möglich, auf dem Server gecachte, ansonsten aktuelle Daten</summary>
-    Auto,
-    /// <summary>Wenn möglich, aktuelle Daten, ansonsten gecachte Daten</summary>
-    Eager
   }
 
 }

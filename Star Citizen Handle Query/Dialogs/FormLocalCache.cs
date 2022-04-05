@@ -2,6 +2,7 @@
 using Star_Citizen_Handle_Query.UserControls;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
@@ -37,29 +38,32 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       FormHandleQuery.CreateDirectory(FormHandleQuery.CacheDirectoryType.Handle);
       FormHandleQuery.CreateDirectory(FormHandleQuery.CacheDirectoryType.HandleAdditional);
       foreach (string handleJsonPath in Directory.GetFiles(FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.Handle), "*.json").OrderByDescending(x => new FileInfo(x).LastWriteTime)) {
-        ApiHandleInfo handleInfo = JsonSerializer.Deserialize<ApiHandleInfo>(File.ReadAllText(handleJsonPath, Encoding.UTF8));
-        if (handleInfo?.data != null) {
+        HandleInfo handleInfo = JsonSerializer.Deserialize<HandleInfo>(File.ReadAllText(handleJsonPath, Encoding.UTF8));
+        if (handleInfo != null) {
+          handleInfo.HttpResponse = new() {
+            StatusCode = HttpStatusCode.OK
+          };
           HandleAdditionalInfo handleAdditionalInfo = null;
-          string additionalInfoPath = FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.HandleAdditional, handleInfo.data.profile.handle);
+          string additionalInfoPath = FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.HandleAdditional, handleInfo.Profile.Handle);
           if (File.Exists(additionalInfoPath)) {
-            handleAdditionalInfo = JsonSerializer.Deserialize<HandleAdditionalInfo>(File.ReadAllText(FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.HandleAdditional, handleInfo.data.profile.handle), Encoding.UTF8));
+            handleAdditionalInfo = JsonSerializer.Deserialize<HandleAdditionalInfo>(File.ReadAllText(FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.HandleAdditional, handleInfo.Profile.Handle), Encoding.UTF8));
           }
           DataGridViewRow row = new();
-          ApiHandleInfoDataOrganization org = handleInfo?.data?.organization;
+          OrganizationInfo org = handleInfo?.Organizations.MainOrganization;
           List<object> info = new() {
             new FileInfo(handleJsonPath).LastWriteTime,
-            handleInfo.data.profile.handle,
-            handleInfo.data.profile.display,
-            handleInfo.data.profile.enlisted,
-            handleInfo.data.profile.id,
-            org?.name,
-            org?.stars,
-            handleInfo?.data?.affiliation?.Length,
+            handleInfo.Profile.Handle,
+            handleInfo.Profile.CommunityMonicker,
+            handleInfo.Profile.Enlisted,
+            handleInfo.Profile.UeeCitizenRecord,
+            org?.Name,
+            org?.RankStars,
+            handleInfo.Organizations.Affiliations.Count,
             handleAdditionalInfo?.Comment ?? string.Empty
           };
           row.Tag = handleInfo;
           row.CreateCells(DataGridViewLokalerCache, info.ToArray());
-          if (info[5]?.ToString() == string.Empty) {
+          if (handleInfo.Organizations.MainOrganization?.Redacted == true) {
 #pragma warning disable IDE0017 // Initialisierung von Objekten vereinfachen
             row.Cells[5] = new DataGridViewTextBoxCell();
 #pragma warning restore IDE0017 // Initialisierung von Objekten vereinfachen
@@ -85,7 +89,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         switch (e.ColumnIndex) {
           case 8: // Kommentar
             DataGridViewRow dgvr = (sender as DataGridView).Rows[e.RowIndex];
-            WriteHandleAdditionalInformation((dgvr.Tag as ApiHandleInfo).data.profile.handle, $"{dgvr.Cells[e.ColumnIndex].Value}");
+            WriteHandleAdditionalInformation((dgvr.Tag as HandleInfo).Profile.Handle, $"{dgvr.Cells[e.ColumnIndex].Value}");
             break;
         }
       }
@@ -112,7 +116,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             break;
           case 5: // Org Name
             if (dgvc is DataGridViewLinkCell) {
-              Process.Start("explorer", $"https://robertsspaceindustries.com/orgs/{(dgvr.Tag as ApiHandleInfo).data.organization.sid}");
+              Process.Start("explorer", $"https://robertsspaceindustries.com/orgs/{(dgvr.Tag as HandleInfo).Organizations.MainOrganization.Sid}");
             }
             break;
         }
@@ -156,11 +160,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       DataGridView dgv = sender as DataGridView;
       DisposeUserControls();
       if (dgv.SelectedRows.Count > 0) {
-        if (dgv.SelectedRows[0].Tag is ApiHandleInfo handleInfo) {
+        if (dgv.SelectedRows[0].Tag is HandleInfo handleInfo) {
           PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation, false, true));
           PanelInfo.Controls[0].Margin = new Padding(0, 0, 50, 0);
-          if (handleInfo?.data?.organization?.name != null) {
-            PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.data.organization, ProgramSettings, true, false, true));
+          if (handleInfo?.Organizations?.MainOrganization != null) {
+            PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.Organizations.MainOrganization, ProgramSettings, true, false, true));
           }
         }
       }
@@ -181,10 +185,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             ctrlOrganization.PictureBoxOrganization.Image = null;
             ctrlOrganization.PictureBoxOrganizationRank.Image?.Dispose();
             ctrlOrganization.PictureBoxOrganizationRank.Image = null;
-            ctrlOrganization.PictureBoxFocus1.Image?.Dispose();
-            ctrlOrganization.PictureBoxFocus1.Image = null;
-            ctrlOrganization.PictureBoxFocus2.Image?.Dispose();
-            ctrlOrganization.PictureBoxFocus2.Image = null;
             ctrlOrganization.Dispose();
           }
         }

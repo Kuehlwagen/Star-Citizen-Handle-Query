@@ -73,8 +73,6 @@
   [Serializable()]
   public class Translation_Window_MessageBoxes {
 
-    public string API_Key_Missing { get; set; } = "Es muss ein 32-stelliger API-Key angegeben werden.\r\nDas Programm wird beendet.";
-
     public string Clear_Local_Cache_Question { get; set; } = "Der komplette lokale Cache wird geleert. Fortfahren?";
 
     public string Local_Cache_Cleared { get; set; } = "Der lokale Cache wurde geleert";
@@ -85,8 +83,6 @@
   public class Translation_Settings {
 
     public string Title { get; set; } = "Einstellungen";
-
-    public Translation_Settings_API API { get; set; } = new ();
 
     public Translation_Settings_Display Display { get; set; } = new();
 
@@ -101,35 +97,6 @@
   }
 
   [Serializable()]
-  public class Translation_Settings_API {
-
-    public string Group_Title { get; set; } = "API";
-
-    public string Key { get; set; } = "Schlüssel:";
-
-    public string Key_Placeholder { get; set; } = "32-stelligen API-Schlüssel eingeben";
-
-    public string Mode { get; set; } = "Modus:";
-
-    public string Mode_Description_Live { get; set; } = "(immer Live-Daten)";
-
-    public string Mode_Description_Cache { get; set; } = "(immer Server-Cache)";
-
-    public string Mode_Description_Auto { get; set; } = "(Server-Cache / Live-Daten)";
-
-    public string Mode_Description_Eager { get; set; } = "(Live-Daten / Server-Cache)";
-
-    public string Test { get; set; } = "API-Test";
-
-    public string Test_Error { get; set; } = "Fehler bei der Abfrage der API";
-
-    public string Test_Information { get; set; } = "Live-Abfragen übrig";
-
-    public string Test_Please_Wait { get; set; } = "Bitte warten...";
-
-  }
-
-  [Serializable()]
   public class Translation_Settings_Display {
 
     public string Language { get; set; } = "Sprache:";
@@ -139,8 +106,6 @@
     public string Affiliations_Max { get; set; } = "Max. Affiliationen:";
 
     public string Hide_Redacted_Affiliations { get; set; } = "Unkenntliche Affiliationen ausblenden";
-
-    public string Show_Additional_Main_Organization_Information { get; set; } = "Zusätzliche Informationen zur Hauptorganisationen anzeigen";
 
   }
 
@@ -195,8 +160,6 @@
   public class Translation_Settings_MessageBoxes {
 
     public string Save_Fail { get; set; } = "Das Speichern der Einstellungen ist fehlgeschlagen:\r\nFehlermeldung:";
-
-    public string API_Key_Missing { get; set; } = "Es muss ein 32-stelliger API-Key angegeben werden.";
 
   }
 

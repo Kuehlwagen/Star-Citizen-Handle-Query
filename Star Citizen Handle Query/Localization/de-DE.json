@@ -13,33 +13,17 @@
       "Check_For_Update": "Nach Update suchen"
     },
     "MessageBoxes": {
-      "API_Key_Missing": "Es muss ein 32-stelliger API-Key angegeben werden.\r\nDas Programm wird beendet.",
       "Clear_Local_Cache_Question": "Der lokale Cache wird komplett geleert. Fortfahren?",
       "Local_Cache_Cleared": "Der lokale Cache wurde geleert"
     }
   },
   "Settings": {
     "Title": "Einstellungen",
-    "API": {
-      "Group_Title": "API",
-      "Key": "Schl\u00FCssel:",
-      "Key_Placeholder": "32-stelligen API-Schl\u00FCssel eingeben",
-      "Mode": "Modus:",
-      "Mode_Description_Live": "(immer Live-Daten)",
-      "Mode_Description_Cache": "(immer Server-Cache)",
-      "Mode_Description_Auto": "(Server-Cache / Live-Daten)",
-      "Mode_Description_Eager": "(Live-Daten / Server-Cache)",
-      "Test": "API-Test",
-      "Test_Error": "Fehler bei der Abfrage der API",
-      "Test_Information": "Live-Abfragen \u00FCbrig",
-      "Test_Please_Wait":  "Bitte warten..."
-    },
     "Display": {
       "Language": "Sprache:",
       "Show_Cache_Type": "Verwendeten Cache-Typ anzeigen",
       "Affiliations_Max": "Affiliationen Maximum:",
-      "Hide_Redacted_Affiliations": "Unkenntliche Affiliationen ausblenden",
-      "Show_Additional_Main_Organization_Information": "Zus\u00E4tzliche Informationen zur Hauptorganisation anzeigen"
+      "Hide_Redacted_Affiliations": "Unkenntliche Affiliationen ausblenden"
     },
     "Window": {
       "Group_Title": "Fenster",
@@ -64,8 +48,7 @@
       "Standard": "Standard"
     },
     "MessageBoxes": {
-      "Save_Fail": "Das Speichern der Einstellungen ist fehlgeschlagen:\r\nFehlermeldung:",
-      "API_Key_Missing": "Es muss ein 32-stelliger API-Key angegeben werden."
+      "Save_Fail": "Das Speichern der Einstellungen ist fehlgeschlagen:\r\nFehlermeldung:"
     }
   },
   "Local_Cache": {

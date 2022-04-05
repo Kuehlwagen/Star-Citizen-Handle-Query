@@ -29,8 +29,6 @@
       this.CheckBoxFensterMauseingabenIgnorieren = new System.Windows.Forms.CheckBox();
       this.LabelLokalerCacheAlter = new System.Windows.Forms.Label();
       this.NumericUpDownLokalerCacheAlter = new System.Windows.Forms.NumericUpDown();
-      this.LabelApiKey = new System.Windows.Forms.Label();
-      this.TextBoxApiKey = new System.Windows.Forms.TextBox();
       this.ButtonSpeichern = new System.Windows.Forms.Button();
       this.ButtonSchliessen = new System.Windows.Forms.Button();
       this.LabelFensterDeckkraftProzent = new System.Windows.Forms.Label();
@@ -46,23 +44,15 @@
       this.CheckBoxShowCacheType = new System.Windows.Forms.CheckBox();
       this.LabelSprache = new System.Windows.Forms.Label();
       this.ComboBoxSprache = new System.Windows.Forms.ComboBox();
-      this.GroupBoxAPI = new System.Windows.Forms.GroupBox();
-      this.LabelApiTestStatus = new System.Windows.Forms.Label();
-      this.LabelModusBeschreibung = new System.Windows.Forms.Label();
-      this.ComboBoxApiModus = new System.Windows.Forms.ComboBox();
-      this.LabelApiMode = new System.Windows.Forms.Label();
-      this.ButtonApiTest = new System.Windows.Forms.Button();
       this.GroupBoxLokalerCache = new System.Windows.Forms.GroupBox();
       this.ButtonStandard = new System.Windows.Forms.Button();
       this.GroupBoxAnzeige = new System.Windows.Forms.GroupBox();
-      this.CheckBoxMainOrgShowAdditionalInformation = new System.Windows.Forms.CheckBox();
       this.NumericUpDownAffiliationenMaximum = new System.Windows.Forms.NumericUpDown();
       this.LabelMaxAffiliationen = new System.Windows.Forms.Label();
       this.CheckBoxUnkenntlicheAffiliationenAusblenden = new System.Windows.Forms.CheckBox();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownFensterDeckkraft)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownLokalerCacheAlter)).BeginInit();
       this.GroupBoxFenster.SuspendLayout();
-      this.GroupBoxAPI.SuspendLayout();
       this.GroupBoxLokalerCache.SuspendLayout();
       this.GroupBoxAnzeige.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownAffiliationenMaximum)).BeginInit();
@@ -137,31 +127,10 @@
             0});
       this.NumericUpDownLokalerCacheAlter.ValueChanged += new System.EventHandler(this.NumericUpDownLokalerCacheAlter_ValueChanged);
       // 
-      // LabelApiKey
-      // 
-      this.LabelApiKey.AutoSize = true;
-      this.LabelApiKey.Location = new System.Drawing.Point(15, 25);
-      this.LabelApiKey.Name = "LabelApiKey";
-      this.LabelApiKey.Size = new System.Drawing.Size(58, 15);
-      this.LabelApiKey.TabIndex = 0;
-      this.LabelApiKey.Text = "Schlüssel:";
-      // 
-      // TextBoxApiKey
-      // 
-      this.TextBoxApiKey.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.TextBoxApiKey.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.TextBoxApiKey.Location = new System.Drawing.Point(154, 22);
-      this.TextBoxApiKey.MaxLength = 32;
-      this.TextBoxApiKey.Name = "TextBoxApiKey";
-      this.TextBoxApiKey.PlaceholderText = "32-stelligen API-Schlüssel eingeben...";
-      this.TextBoxApiKey.Size = new System.Drawing.Size(243, 23);
-      this.TextBoxApiKey.TabIndex = 1;
-      this.TextBoxApiKey.TextChanged += new System.EventHandler(this.TextBoxApiKey_TextChanged);
-      // 
       // ButtonSpeichern
       // 
       this.ButtonSpeichern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 566);
+      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 418);
       this.ButtonSpeichern.Name = "ButtonSpeichern";
       this.ButtonSpeichern.Size = new System.Drawing.Size(75, 28);
       this.ButtonSpeichern.TabIndex = 4;
@@ -172,7 +141,7 @@
       // ButtonSchliessen
       // 
       this.ButtonSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 566);
+      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 418);
       this.ButtonSchliessen.Name = "ButtonSchliessen";
       this.ButtonSchliessen.Size = new System.Drawing.Size(75, 28);
       this.ButtonSchliessen.TabIndex = 5;
@@ -213,7 +182,7 @@
       this.GroupBoxFenster.Controls.Add(this.LabelFensterDeckkraftProzent);
       this.GroupBoxFenster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.GroupBoxFenster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxFenster.Location = new System.Drawing.Point(12, 304);
+      this.GroupBoxFenster.Location = new System.Drawing.Point(12, 156);
       this.GroupBoxFenster.Name = "GroupBoxFenster";
       this.GroupBoxFenster.Size = new System.Drawing.Size(416, 187);
       this.GroupBoxFenster.TabIndex = 2;
@@ -301,7 +270,7 @@
       // CheckBoxShowCacheType
       // 
       this.CheckBoxShowCacheType.AutoSize = true;
-      this.CheckBoxShowCacheType.Location = new System.Drawing.Point(15, 130);
+      this.CheckBoxShowCacheType.Location = new System.Drawing.Point(15, 105);
       this.CheckBoxShowCacheType.Name = "CheckBoxShowCacheType";
       this.CheckBoxShowCacheType.Size = new System.Drawing.Size(203, 19);
       this.CheckBoxShowCacheType.TabIndex = 6;
@@ -332,75 +301,6 @@
       this.ComboBoxSprache.TabIndex = 1;
       this.ComboBoxSprache.SelectedIndexChanged += new System.EventHandler(this.ComboBoxSprache_SelectedIndexChanged);
       // 
-      // GroupBoxAPI
-      // 
-      this.GroupBoxAPI.Controls.Add(this.LabelApiTestStatus);
-      this.GroupBoxAPI.Controls.Add(this.LabelModusBeschreibung);
-      this.GroupBoxAPI.Controls.Add(this.ComboBoxApiModus);
-      this.GroupBoxAPI.Controls.Add(this.LabelApiMode);
-      this.GroupBoxAPI.Controls.Add(this.TextBoxApiKey);
-      this.GroupBoxAPI.Controls.Add(this.LabelApiKey);
-      this.GroupBoxAPI.Controls.Add(this.ButtonApiTest);
-      this.GroupBoxAPI.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxAPI.Location = new System.Drawing.Point(12, 12);
-      this.GroupBoxAPI.Name = "GroupBoxAPI";
-      this.GroupBoxAPI.Size = new System.Drawing.Size(416, 121);
-      this.GroupBoxAPI.TabIndex = 0;
-      this.GroupBoxAPI.TabStop = false;
-      this.GroupBoxAPI.Text = "API (starcitizen-api.com)";
-      // 
-      // LabelApiTestStatus
-      // 
-      this.LabelApiTestStatus.AutoSize = true;
-      this.LabelApiTestStatus.Location = new System.Drawing.Point(235, 87);
-      this.LabelApiTestStatus.Name = "LabelApiTestStatus";
-      this.LabelApiTestStatus.Size = new System.Drawing.Size(0, 15);
-      this.LabelApiTestStatus.TabIndex = 5;
-      // 
-      // LabelModusBeschreibung
-      // 
-      this.LabelModusBeschreibung.AutoSize = true;
-      this.LabelModusBeschreibung.ForeColor = System.Drawing.SystemColors.GrayText;
-      this.LabelModusBeschreibung.Location = new System.Drawing.Point(249, 54);
-      this.LabelModusBeschreibung.Name = "LabelModusBeschreibung";
-      this.LabelModusBeschreibung.Size = new System.Drawing.Size(0, 15);
-      this.LabelModusBeschreibung.TabIndex = 11;
-      // 
-      // ComboBoxApiModus
-      // 
-      this.ComboBoxApiModus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.ComboBoxApiModus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-      this.ComboBoxApiModus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ComboBoxApiModus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.ComboBoxApiModus.FormattingEnabled = true;
-      this.ComboBoxApiModus.Location = new System.Drawing.Point(154, 51);
-      this.ComboBoxApiModus.MaxDropDownItems = 5;
-      this.ComboBoxApiModus.Name = "ComboBoxApiModus";
-      this.ComboBoxApiModus.Size = new System.Drawing.Size(89, 23);
-      this.ComboBoxApiModus.TabIndex = 3;
-      this.ComboBoxApiModus.SelectedIndexChanged += new System.EventHandler(this.ComboBoxApiModus_SelectedIndexChanged);
-      // 
-      // LabelApiMode
-      // 
-      this.LabelApiMode.AutoSize = true;
-      this.LabelApiMode.Location = new System.Drawing.Point(15, 54);
-      this.LabelApiMode.Name = "LabelApiMode";
-      this.LabelApiMode.Size = new System.Drawing.Size(47, 15);
-      this.LabelApiMode.TabIndex = 2;
-      this.LabelApiMode.Text = "Modus:";
-      // 
-      // ButtonApiTest
-      // 
-      this.ButtonApiTest.Enabled = false;
-      this.ButtonApiTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonApiTest.Location = new System.Drawing.Point(154, 80);
-      this.ButtonApiTest.Name = "ButtonApiTest";
-      this.ButtonApiTest.Size = new System.Drawing.Size(75, 28);
-      this.ButtonApiTest.TabIndex = 4;
-      this.ButtonApiTest.Text = "API-Test";
-      this.ButtonApiTest.UseVisualStyleBackColor = true;
-      this.ButtonApiTest.Click += new System.EventHandler(this.ButtonApiTest_Click);
-      // 
       // GroupBoxLokalerCache
       // 
       this.GroupBoxLokalerCache.Controls.Add(this.LabelLokalerCacheAlterTage);
@@ -408,7 +308,7 @@
       this.GroupBoxLokalerCache.Controls.Add(this.LabelLokalerCacheAlter);
       this.GroupBoxLokalerCache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.GroupBoxLokalerCache.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 499);
+      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 351);
       this.GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
       this.GroupBoxLokalerCache.Size = new System.Drawing.Size(416, 61);
       this.GroupBoxLokalerCache.TabIndex = 3;
@@ -418,7 +318,7 @@
       // ButtonStandard
       // 
       this.ButtonStandard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonStandard.Location = new System.Drawing.Point(353, 566);
+      this.ButtonStandard.Location = new System.Drawing.Point(353, 418);
       this.ButtonStandard.Name = "ButtonStandard";
       this.ButtonStandard.Size = new System.Drawing.Size(75, 28);
       this.ButtonStandard.TabIndex = 6;
@@ -428,7 +328,6 @@
       // 
       // GroupBoxAnzeige
       // 
-      this.GroupBoxAnzeige.Controls.Add(this.CheckBoxMainOrgShowAdditionalInformation);
       this.GroupBoxAnzeige.Controls.Add(this.CheckBoxShowCacheType);
       this.GroupBoxAnzeige.Controls.Add(this.LabelSprache);
       this.GroupBoxAnzeige.Controls.Add(this.NumericUpDownAffiliationenMaximum);
@@ -437,23 +336,12 @@
       this.GroupBoxAnzeige.Controls.Add(this.ComboBoxSprache);
       this.GroupBoxAnzeige.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.GroupBoxAnzeige.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxAnzeige.Location = new System.Drawing.Point(12, 139);
+      this.GroupBoxAnzeige.Location = new System.Drawing.Point(12, 12);
       this.GroupBoxAnzeige.Name = "GroupBoxAnzeige";
-      this.GroupBoxAnzeige.Size = new System.Drawing.Size(416, 159);
+      this.GroupBoxAnzeige.Size = new System.Drawing.Size(416, 138);
       this.GroupBoxAnzeige.TabIndex = 1;
       this.GroupBoxAnzeige.TabStop = false;
       this.GroupBoxAnzeige.Text = "Anzeige";
-      // 
-      // CheckBoxMainOrgShowAdditionalInformation
-      // 
-      this.CheckBoxMainOrgShowAdditionalInformation.AutoSize = true;
-      this.CheckBoxMainOrgShowAdditionalInformation.Location = new System.Drawing.Point(15, 105);
-      this.CheckBoxMainOrgShowAdditionalInformation.Name = "CheckBoxMainOrgShowAdditionalInformation";
-      this.CheckBoxMainOrgShowAdditionalInformation.Size = new System.Drawing.Size(335, 19);
-      this.CheckBoxMainOrgShowAdditionalInformation.TabIndex = 5;
-      this.CheckBoxMainOrgShowAdditionalInformation.Text = "Zusätzliche Informationen zur Hauptorganisation anzeigen";
-      this.CheckBoxMainOrgShowAdditionalInformation.UseVisualStyleBackColor = true;
-      this.CheckBoxMainOrgShowAdditionalInformation.CheckedChanged += new System.EventHandler(this.CheckBoxMainOrgShowAdditionalInformation_CheckedChanged);
       // 
       // NumericUpDownAffiliationenMaximum
       // 
@@ -502,9 +390,8 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.CancelButton = this.ButtonSchliessen;
-      this.ClientSize = new System.Drawing.Size(440, 605);
+      this.ClientSize = new System.Drawing.Size(440, 460);
       this.Controls.Add(this.GroupBoxAnzeige);
-      this.Controls.Add(this.GroupBoxAPI);
       this.Controls.Add(this.GroupBoxLokalerCache);
       this.Controls.Add(this.GroupBoxFenster);
       this.Controls.Add(this.ButtonStandard);
@@ -512,7 +399,7 @@
       this.Controls.Add(this.ButtonSpeichern);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.MinimumSize = new System.Drawing.Size(456, 644);
+      this.MinimumSize = new System.Drawing.Size(456, 499);
       this.Name = "FormSettings";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Star Citizen Handle Query Einstellungen";
@@ -520,8 +407,6 @@
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownLokalerCacheAlter)).EndInit();
       this.GroupBoxFenster.ResumeLayout(false);
       this.GroupBoxFenster.PerformLayout();
-      this.GroupBoxAPI.ResumeLayout(false);
-      this.GroupBoxAPI.PerformLayout();
       this.GroupBoxLokalerCache.ResumeLayout(false);
       this.GroupBoxLokalerCache.PerformLayout();
       this.GroupBoxAnzeige.ResumeLayout(false);
@@ -538,26 +423,18 @@
     private CheckBox CheckBoxFensterMauseingabenIgnorieren;
     private Label LabelLokalerCacheAlter;
     private NumericUpDown NumericUpDownLokalerCacheAlter;
-    private Label LabelApiKey;
-    private TextBox TextBoxApiKey;
     private Button ButtonSpeichern;
     private Button ButtonSchliessen;
     private Label LabelFensterDeckkraftProzent;
     private Label LabelLokalerCacheAlterTage;
     private GroupBox GroupBoxFenster;
-    private GroupBox GroupBoxAPI;
-    private Label LabelApiMode;
-    private ComboBox ComboBoxApiModus;
     private ComboBox ComboBoxTaste;
     private Label LabelTastenkombination;
     private CheckBox CheckBoxUmschalt;
     private CheckBox CheckBoxAlt;
     private CheckBox CheckBoxStrg;
     private GroupBox GroupBoxLokalerCache;
-    private Label LabelModusBeschreibung;
     private Button ButtonStandard;
-    private Button ButtonApiTest;
-    private Label LabelApiTestStatus;
     private CheckBox CheckBoxAltTabEnabled;
     private Label LabelSprache;
     private ComboBox ComboBoxSprache;
@@ -566,7 +443,6 @@
     private Label LabelMaxAffiliationen;
     private CheckBox CheckBoxUnkenntlicheAffiliationenAusblenden;
     private CheckBox CheckBoxShowCacheType;
-    private CheckBox CheckBoxMainOrgShowAdditionalInformation;
     private CheckBox CheckBoxPositionMerken;
   }
 }

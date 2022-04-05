@@ -1,63 +1,52 @@
-﻿using Star_Citizen_Handle_Query.Dialogs;
-using Star_Citizen_Handle_Query.Serialization;
+﻿using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
-using System.Text;
-using System.Text.Json;
 using static Star_Citizen_Handle_Query.Dialogs.FormHandleQuery;
 
 namespace Star_Citizen_Handle_Query.UserControls {
 
   public partial class UserControlOrganization : UserControl {
 
-    private readonly ApiHandleInfoDataOrganization OrganizationInfo;
+    private readonly OrganizationInfo Info;
     private readonly Settings ProgramSettings;
     private readonly bool IsMainOrg;
     private string SID;
     private readonly bool ForceLive;
     private readonly bool DisplayOnly;
 
-    public UserControlOrganization(ApiHandleInfoDataOrganization organizationInfo, Settings programSettings, bool isMainOrg, bool forceLive, bool displayOnly = false) {
+    public UserControlOrganization(OrganizationInfo organizationInfo, Settings programSettings, bool isMainOrg, bool forceLive, bool displayOnly = false) {
       InitializeComponent();
-      OrganizationInfo = organizationInfo;
+      Info = organizationInfo;
       ProgramSettings = programSettings;
       IsMainOrg = isMainOrg;
       ForceLive = forceLive;
       DisplayOnly = displayOnly;
     }
 
-    private async void UserControlHandle_Load(object sender, EventArgs e) {
+    private async void UserControlOrganization_Load(object sender, EventArgs e) {
       LabelMainOrganizationAffiliate.Text = IsMainOrg ? "Main Organization" : "Affiliation";
-      string organizationSid = GetString(OrganizationInfo?.sid);
+      string organizationSid = GetString(Info?.Sid);
       SID = organizationSid;
-      if ((IsMainOrg &&  OrganizationInfo?.name != string.Empty) || (!IsMainOrg && !string.IsNullOrWhiteSpace(organizationSid))) {
-        LabelOrganizationName.Text = GetString(OrganizationInfo?.name);
+      if (Info?.Redacted == false) {
+        LabelOrganizationName.Text = GetString(Info?.Name);
         LabelOrganizationSID.Text = GetString(organizationSid, "SID: ");
-        LabelOrganizationRank.Text = GetString(OrganizationInfo?.rank);
-        if (!string.IsNullOrWhiteSpace(OrganizationInfo?.image)) {
-          PictureBoxOrganization.Image = await GetImage(CacheDirectoryType.OrganizationAvatar, OrganizationInfo.image, organizationSid, ProgramSettings.LocalCacheMaxAge, ForceLive);
+        LabelOrganizationRank.Text = GetString(Info?.RankName);
+        LabelFocusPrimary.Text = GetString(Info?.PrimaryActivity);
+        LabelFocusSecondary.Text = GetString(Info?.SecondaryActivity);
+        if (!string.IsNullOrWhiteSpace(Info?.Commitment)) {
+          LabelMainOrganizationAffiliate.Text = $"{Info.Commitment} / {Info.Members:n0} Member{(Info.Members > 0 ? "s" : string.Empty)}";
+        } else {
+          LabelMainOrganizationAffiliate.Text += $" / {Info.Members:n0} Member{(Info.Members > 0 ? "s" : string.Empty)}";
+        }
+        if (!string.IsNullOrWhiteSpace(Info?.AvatarUrl)) {
+          PictureBoxOrganization.Image = await GetImage(CacheDirectoryType.OrganizationAvatar, Info.AvatarUrl, organizationSid, ProgramSettings.LocalCacheMaxAge, ForceLive);
           if (!DisplayOnly) {
             PictureBoxOrganization.Cursor = Cursors.Hand;
           } else {
             PictureBoxOrganization.Click -= PictureBoxOrganization_Click;
           }
         }
-        if (OrganizationInfo?.sid != null && OrganizationInfo?.stars >= 0 && OrganizationInfo.stars <= 5) {
-          PictureBoxOrganizationRank.Image = Properties.Resources.ResourceManager.GetObject($"OrganizationRank{OrganizationInfo.stars}") as Image;
-        }
-        if (IsMainOrg && ProgramSettings.ShowAdditionalMainOrgInformation) {
-          ApiOrganizationInfo orgInfo = await GetApiInfo<ApiOrganizationInfo>(ForceLive, SID, ProgramSettings, CacheDirectoryType.Organization);
-          if (orgInfo?.success == 1) {
-            CreateOrganizationJSON(organizationSid, orgInfo);
-            LabelMainOrganizationAffiliate.Text = $"{orgInfo.data.commitment} / {orgInfo.data.members:n0}";
-            LabelFocusPrimary.Text = GetString(orgInfo.data.focus.primary.name);
-            LabelFocusSecondary.Text = GetString(orgInfo.data.focus.secondary.name);
-            if (!string.IsNullOrWhiteSpace(orgInfo.data.focus?.primary?.image)) {
-              PictureBoxFocus1.Image = await GetImage(CacheDirectoryType.OrganizationFocus, orgInfo.data.focus.primary.image, orgInfo.data.focus.primary.name, ProgramSettings.LocalCacheMaxAge);
-            }
-            if (!string.IsNullOrWhiteSpace(orgInfo.data.focus?.secondary?.image)) {
-              PictureBoxFocus2.Image = await GetImage(CacheDirectoryType.OrganizationFocus, orgInfo.data.focus.secondary.image, orgInfo.data.focus.secondary.name, ProgramSettings.LocalCacheMaxAge);
-            }
-          }
+        if (Info?.Sid != null && Info?.RankStars >= 0 && Info.RankStars <= 5) {
+          PictureBoxOrganizationRank.Image = Properties.Resources.ResourceManager.GetObject($"OrganizationRank{Info.RankStars}") as Image;
         }
       } else {
         BackColor = Color.FromArgb(33, 26, 19);
@@ -67,17 +56,8 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelOrganizationName.Text = "REDACTED";
         LabelMainOrganizationAffiliate.ForeColor = Color.FromArgb(173, 39, 39);
         PictureBoxOrganization.Click -= PictureBoxOrganization_Click;
+        LabelMainOrganizationAffiliate.Location = new Point(LabelMainOrganizationAffiliate.Left, LabelMainOrganizationAffiliate.Top - 3);
         Size = new Size(Size.Width, 25);
-      }
-    }
-
-    private void CreateOrganizationJSON(string organizationSid, ApiOrganizationInfo orgInfo) {
-      string jsonPath = GetCachePath(CacheDirectoryType.Organization, organizationSid);
-      if (ForceLive || !File.Exists(jsonPath) || new FileInfo(jsonPath).LastWriteTime < DateTime.Now.AddDays(ProgramSettings.LocalCacheMaxAge * -1)) {
-        string organizationJson = JsonSerializer.Serialize(orgInfo, new JsonSerializerOptions() { WriteIndented = true });
-        if (!string.IsNullOrWhiteSpace(organizationJson)) {
-          File.WriteAllText(jsonPath, organizationJson, Encoding.UTF8);
-        }
       }
     }
 

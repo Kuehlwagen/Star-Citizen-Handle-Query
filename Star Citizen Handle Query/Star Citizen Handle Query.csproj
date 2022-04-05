@@ -12,7 +12,7 @@
     <DebugType>full</DebugType>
     <PackageIcon>SCHQ.png</PackageIcon>
     <ApplicationIcon>Resources\SCHQ.ico</ApplicationIcon>
-    <AssemblyVersion>1.5.1</AssemblyVersion>
+    <AssemblyVersion>1.6.0</AssemblyVersion>
     <FileVersion></FileVersion>
   </PropertyGroup>
 
