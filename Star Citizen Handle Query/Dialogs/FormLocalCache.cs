@@ -58,7 +58,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             handleInfo.Profile.UeeCitizenRecord,
             org?.Name,
             org?.RankStars,
-            handleInfo.Organizations.Affiliations.Count,
+            handleInfo.Organizations.Affiliations?.Count ?? 0,
             handleAdditionalInfo?.Comment ?? string.Empty
           };
           row.Tag = handleInfo;
