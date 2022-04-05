@@ -32,7 +32,6 @@ namespace Star_Citizen_Handle_Query.Serialization {
     public string AvatarUrl { get; set; }
     public string DisplayTitle { get; set; }
     public string DisplayTitleAvatarUrl { get; set; }
-    public string Location { get; set; }
     public List<string> Fluency { get; set; } = new List<string>();
 
   }

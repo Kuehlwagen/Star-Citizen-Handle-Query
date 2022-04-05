@@ -23,7 +23,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private bool ShowInitialBalloonTip = false;
 
     private readonly Regex RgxIdCmHandleEnlistedFluency = new("<strong class=\"value\">(.+)</strong>", RegexOptions.Multiline | RegexOptions.Compiled);
-    private readonly Regex RgxLocation = new("<span class=\"label\">Location</span>\\s+<strong class=\"value\">\\s+ ([,|\\-|\\p{L}|\\p{M}|\\s]+)</strong>", RegexOptions.Multiline | RegexOptions.Compiled);
     private readonly Regex RgxAvatar = new("<div class=\"thumb\">\\s+<img src=\"(.+)\" \\/>", RegexOptions.Multiline | RegexOptions.Compiled);
     private readonly Regex RgxDisplayTitle = new("<span class=\"icon\">\\s+<img src=\"(.+)\"\\/>\\s+<\\/span>\\s+<span class=\"value\">(.+)<", RegexOptions.Multiline | RegexOptions.Compiled);
     private readonly Regex RgxMainOrganization = new("<a href=\"\\/orgs\\/(.+)\"><img src=\"(.+)\" \\/><\\/a>\\s+<span class=\"members\">(\\d+) members<\\/span>[\\W\\w]+class=\"value\">(.+)<\\/a>[\\W\\w]+Organization rank<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>[\\W\\w]+Prim. Activity<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>[\\W\\w]+Sec. Activity<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>[\\W\\w]+Commitment<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>", RegexOptions.Multiline | RegexOptions.Compiled);
@@ -432,12 +431,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               reply.Profile.Enlisted = enlisted;
             }
             reply.Profile.Fluency.AddRange(mcIdCmHandleEnlistedFluency[4].Groups[1].Value.Replace(" ", string.Empty).Split(","));
-          }
-
-          // Location
-          MatchCollection mcLocation = RgxLocation.Matches(reply.HttpResponse.Source);
-          if (mcLocation.Count == 1) {
-            reply.Profile.Location = mcLocation[0].Groups[1].Value.ReplaceLineEndings(string.Empty).Replace(" ", string.Empty).Replace(",", ", ");
           }
 
           // Avatar
