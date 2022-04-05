@@ -8,6 +8,7 @@ using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Web;
 
@@ -485,7 +486,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                   RankName = mcMainOrganization[0].Groups[5].Value,
                   PrimaryActivity = mcMainOrganization[0].Groups[6].Value,
                   SecondaryActivity = mcMainOrganization[0].Groups[7].Value,
-                  Commitment = mcMainOrganization[0].Groups[8].Value
+                  Commitment = mcMainOrganization[0].Groups[8].Value,
+                  Redacted = false
                 };
                 // Main Organization Rank Stars
                 MatchCollection mcMainOrganizationRankStars = RgxOrganizationStars.Matches(organization);
@@ -501,13 +503,17 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               // Affiliation
               MatchCollection mcOrganization = RgxOrganization.Matches(organization);
               if (mcOrganization.Count > 0 && mcOrganization[0].Groups.Count == 6) {
+                if (reply.Affiliations == null) {
+                  reply.Affiliations = new List<OrganizationInfo>();
+                }
                 reply.Affiliations.Add(new OrganizationInfo() {
                   Url = $"https://robertsspaceindustries.com/orgs/{mcOrganization[0].Groups[1].Value}",
                   Sid = mcOrganization[0].Groups[1].Value,
                   AvatarUrl = CorrectUrl(mcOrganization[0].Groups[2].Value),
                   Members = Convert.ToInt32(mcOrganization[0].Groups[3].Value),
                   Name = mcOrganization[0].Groups[4].Value,
-                  RankName = mcOrganization[0].Groups[5].Value
+                  RankName = mcOrganization[0].Groups[5].Value,
+                  Redacted = false
                 });
                 // Affiliation Rank Stars
                 MatchCollection mcAffiliationRankStars = RgxOrganizationStars.Matches(organization);
@@ -759,7 +765,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.WindowLocation = ProgramSettings.RememberWindowLocation ? Location : Point.Empty;
       string settingsFilePath = GetSettingsPath();
       try {
-        File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
+        File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, new JsonSerializerOptions() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull }), Encoding.UTF8);
       } catch { }
     }
 

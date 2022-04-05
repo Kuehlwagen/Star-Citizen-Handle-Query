@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using static Star_Citizen_Handle_Query.Dialogs.FormHandleQuery;
 
 namespace Star_Citizen_Handle_Query.UserControls {
@@ -69,7 +70,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private void CreateHandleJSON(string handle) {
       string jsonPath = GetCachePath(CacheDirectoryType.Handle, handle);
       if (ForceLive || !File.Exists(jsonPath) || new FileInfo(jsonPath).LastWriteTime < DateTime.Now.AddDays(ProgramSettings.LocalCacheMaxAge * -1)) {
-        string handleJson = JsonSerializer.Serialize(Info, new JsonSerializerOptions() { WriteIndented = true });
+        string handleJson = JsonSerializer.Serialize(Info, new JsonSerializerOptions() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull });
         if (!string.IsNullOrWhiteSpace(handleJson)) {
           File.WriteAllText(jsonPath, handleJson, Encoding.UTF8);
         }
