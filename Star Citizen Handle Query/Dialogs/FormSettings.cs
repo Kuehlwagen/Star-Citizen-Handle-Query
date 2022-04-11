@@ -79,7 +79,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     public static string GetLocalizationPath() {
-      return Path.Combine(Application.StartupPath, "Localization");
+      return Path.Combine(FormHandleQuery.GetSaveFilesRootPath(), "Localization");
     }
 
     private void ButtonSpeichern_Click(object sender, EventArgs e) {

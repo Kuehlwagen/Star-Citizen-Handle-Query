@@ -165,7 +165,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     internal static string GetSettingsPath() {
-      return Path.Combine(Application.StartupPath, $"{Application.ProductName}.settings.json");
+      return Path.Combine(GetSaveFilesRootPath(), $"{Application.ProductName}.settings.json");
     }
 
     protected override CreateParams CreateParams {
@@ -714,29 +714,33 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Verzeichnis ermitteln
       switch (type) {
         case CacheDirectoryType.Root:
-          rtnVal = Path.Combine(Application.StartupPath, @"Cache");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache");
           break;
         case CacheDirectoryType.Handle:
-          rtnVal = Path.Combine(Application.StartupPath, $@"Cache\Handle\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), $@"Cache\Handle\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
           break;
         case CacheDirectoryType.HandleAvatar:
-          rtnVal = Path.Combine(Application.StartupPath, @"Cache\Handle_Avatar\");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Handle_Avatar\");
           break;
         case CacheDirectoryType.HandleAdditional:
-          rtnVal = Path.Combine(Application.StartupPath, $@"Cache\Handle_Additional\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), $@"Cache\Handle_Additional\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
           break;
         case CacheDirectoryType.HandleDisplayTitle:
-          rtnVal = Path.Combine(Application.StartupPath, @"Cache\Handle_DisplayTitle\");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Handle_DisplayTitle\");
           break;
         case CacheDirectoryType.Organization:
-          rtnVal = Path.Combine(Application.StartupPath, $@"Cache\Organization\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), $@"Cache\Organization\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
           break;
         case CacheDirectoryType.OrganizationAvatar:
-          rtnVal = Path.Combine(Application.StartupPath, @"Cache\Organization_Avatar\");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Organization_Avatar\");
           break;
       }
 
       return rtnVal;
+    }
+
+    internal static string GetSaveFilesRootPath() {
+      return Application.LocalUserAppDataPath;
     }
 
     public enum CacheDirectoryType {
