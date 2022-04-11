@@ -32,7 +32,6 @@ namespace Star_Citizen_Handle_Query.Serialization {
     public string AvatarUrl { get; set; }
     public string DisplayTitle { get; set; }
     public string DisplayTitleAvatarUrl { get; set; }
-    public string Location { get; set; }
     public List<string> Fluency { get; set; } = new List<string>();
 
   }
@@ -40,7 +39,7 @@ namespace Star_Citizen_Handle_Query.Serialization {
   public class OrganizationsInfo {
 
     public OrganizationInfo MainOrganization { get; set; }
-    public List<OrganizationInfo> Affiliations { get; set; } = new List<OrganizationInfo>();
+    public List<OrganizationInfo> Affiliations { get; set; }
 
   }
 
@@ -48,12 +47,12 @@ namespace Star_Citizen_Handle_Query.Serialization {
 
     public bool Redacted { get; set; }
     public string RankName { get; set; }
-    public int RankStars { get; set; }
+    public int? RankStars { get; set; }
     public string Sid { get; set; }
     public string Name { get; set; }
     public string Url { get; set; }
     public string AvatarUrl { get; set; }
-    public int Members { get; set; }
+    public int? Members { get; set; }
     public string PrimaryActivity { get; set; }
     public string SecondaryActivity { get; set; }
     public string Commitment { get; set; }
