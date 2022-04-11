@@ -147,9 +147,24 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Settings rtnVal = null;
 
       // Einstellungen aus Datei lesen
-      string settingsFilePath = GetSettingsPath();
+      string settingsFilePath = GetSettingsFilePath();
       if (File.Exists(settingsFilePath)) {
         rtnVal = JsonSerializer.Deserialize<Settings>(File.ReadAllText(settingsFilePath));
+      } else {
+        Version programVersion = GetProgramVersion();
+        foreach (string directory in Directory.GetDirectories(Directory.GetParent(GetSaveFilesRootPath()).FullName).OrderByDescending(x => x)) {
+          Version version = new(Path.GetFileName(directory) + ".0");
+          if (version < programVersion) {
+            string legacySettingsFilePath = Path.Combine(directory, GetSettingsFileName());
+            if (File.Exists(legacySettingsFilePath)) {
+              rtnVal = JsonSerializer.Deserialize<Settings>(File.ReadAllText(legacySettingsFilePath));
+              if (rtnVal != null) {
+                File.Copy(legacySettingsFilePath, settingsFilePath);
+              }
+            }
+            break;
+          }
+        }
       }
 
       // Wenn die Einstellungen nicht geladen werden konnten, Einstellungen-Fenster anzeigen
@@ -164,8 +179,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return rtnVal;
     }
 
-    internal static string GetSettingsPath() {
-      return Path.Combine(GetSaveFilesRootPath(), $"{Application.ProductName}.settings.json");
+    internal static string GetSettingsFilePath() {
+      return Path.Combine(GetSaveFilesRootPath(), GetSettingsFileName());
+    }
+
+    internal static string GetSettingsFileName() {
+      return $"{Application.ProductName}.settings.json";
     }
 
     protected override CreateParams CreateParams {
@@ -767,7 +786,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       // Fensterposition merken
       ProgramSettings.WindowLocation = ProgramSettings.RememberWindowLocation ? Location : Point.Empty;
-      string settingsFilePath = GetSettingsPath();
+      string settingsFilePath = GetSettingsFilePath();
       try {
         File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, new JsonSerializerOptions() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull }), Encoding.UTF8);
       } catch { }

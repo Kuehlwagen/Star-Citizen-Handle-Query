@@ -30,7 +30,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       if (ProgramSettings == null) {
         // Versuchen die Einstellungen aus der Einstellungen-Datei zu laden
-        string settingsFilePath = FormHandleQuery.GetSettingsPath();
+        string settingsFilePath = FormHandleQuery.GetSettingsFilePath();
         if (File.Exists(settingsFilePath)) {
           string jsonSettings = File.ReadAllText(settingsFilePath, Encoding.UTF8);
           ProgramSettings = JsonSerializer.Deserialize<Settings>(jsonSettings);
@@ -84,7 +84,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void ButtonSpeichern_Click(object sender, EventArgs e) {
       ButtonSpeichern.Focus();
-      string settingsFilePath = FormHandleQuery.GetSettingsPath();
+      string settingsFilePath = FormHandleQuery.GetSettingsFilePath();
       try {
         File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
         DialogResult = DialogResult.OK;
