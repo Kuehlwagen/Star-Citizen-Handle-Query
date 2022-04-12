@@ -99,6 +99,8 @@
   [Serializable()]
   public class Translation_Settings_Display {
 
+    public string Group_Title { get; set; } = "Anzeige";
+
     public string Language { get; set; } = "Sprache:";
 
     public string Show_Cache_Type { get; set; } = "Verwendeten Cache-Typ anzeigen";

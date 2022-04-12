@@ -164,6 +164,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       Text = $"Star Citizen Handle Query - {CurrentLocalization.Settings.Title}";
 
+      GroupBoxAnzeige.Text = CurrentLocalization.Settings.Display.Group_Title;
       LabelSprache.Text = CurrentLocalization.Settings.Display.Language;
       LabelMaxAffiliationen.Text = CurrentLocalization.Settings.Display.Affiliations_Max;
       CheckBoxUnkenntlicheAffiliationenAusblenden.Text = CurrentLocalization.Settings.Display.Hide_Redacted_Affiliations;

@@ -20,6 +20,7 @@
   "Settings": {
     "Title": "Settings",
     "Display": {
+      "Group_Title": "Display",
       "Language": "Language:",
       "Show_Cache_Type": "Show Cache Type",
       "Affiliations_Max": "Maximum Affiliations:",

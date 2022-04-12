@@ -20,6 +20,7 @@
   "Settings": {
     "Title": "Einstellungen",
     "Display": {
+      "Group_Title": "Anzeige",
       "Language": "Sprache:",
       "Show_Cache_Type": "Verwendeten Cache-Typ anzeigen",
       "Affiliations_Max": "Affiliationen Maximum:",
