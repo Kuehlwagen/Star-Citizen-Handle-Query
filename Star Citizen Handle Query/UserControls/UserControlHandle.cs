@@ -30,13 +30,11 @@ namespace Star_Citizen_Handle_Query.UserControls {
       if (Info?.HttpResponse?.StatusCode == HttpStatusCode.OK && Info?.Profile != null) {
         string handle = GetString(Info?.Profile?.Handle);
         CreateHandleJSON(handle);
-        if (!string.IsNullOrWhiteSpace(Info.Profile?.AvatarUrl)) {
-          PictureBoxHandleAvatar.Image = await GetImage(CacheDirectoryType.HandleAvatar, Info.Profile.AvatarUrl, handle, ProgramSettings.LocalCacheMaxAge, ForceLive);
-          if (!DisplayOnly) {
-            PictureBoxHandleAvatar.Cursor = Cursors.Hand;
-          } else {
-            PictureBoxHandleAvatar.Click -= PictureBoxHandleAvatar_Click;
-          }
+        PictureBoxHandleAvatar.Image = await GetImage(CacheDirectoryType.HandleAvatar, Info.Profile?.AvatarUrl, handle, ProgramSettings.LocalCacheMaxAge, ForceLive);
+        if (!DisplayOnly) {
+          PictureBoxHandleAvatar.Cursor = Cursors.Hand;
+        } else {
+          PictureBoxHandleAvatar.MouseClick -= PictureBoxHandleAvatar_MouseClick;
         }
         if (!string.IsNullOrWhiteSpace(Info?.Profile?.DisplayTitleAvatarUrl)) {
           PictureBoxDisplayTitle.Image = await GetImage(CacheDirectoryType.HandleDisplayTitle, Info.Profile.DisplayTitleAvatarUrl, Info?.Profile?.DisplayTitle, ProgramSettings.LocalCacheMaxAge);
@@ -77,8 +75,8 @@ namespace Star_Citizen_Handle_Query.UserControls {
       }
     }
 
-    private void PictureBoxHandleAvatar_Click(object sender, EventArgs e) {
-      if (Info?.Profile.Url?.Length > 0) {
+    private void PictureBoxHandleAvatar_MouseClick(object sender, MouseEventArgs e) {
+      if (e.Button == MouseButtons.Left && Info?.Profile.Url?.Length > 0) {
         Process.Start("explorer", Info.Profile.Url);
       }
     }

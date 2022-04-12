@@ -53,7 +53,7 @@
       this.PictureBoxOrganization.TabIndex = 6;
       this.PictureBoxOrganization.TabStop = false;
       this.PictureBoxOrganization.WaitOnLoad = true;
-      this.PictureBoxOrganization.Click += new System.EventHandler(this.PictureBoxOrganization_Click);
+      this.PictureBoxOrganization.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBoxOrganization_MouseClick);
       // 
       // LabelOrganizationSID
       // 

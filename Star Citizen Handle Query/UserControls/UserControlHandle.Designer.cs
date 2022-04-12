@@ -64,7 +64,7 @@
       this.PictureBoxHandleAvatar.TabIndex = 2;
       this.PictureBoxHandleAvatar.TabStop = false;
       this.PictureBoxHandleAvatar.WaitOnLoad = true;
-      this.PictureBoxHandleAvatar.Click += new System.EventHandler(this.PictureBoxHandleAvatar_Click);
+      this.PictureBoxHandleAvatar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBoxHandleAvatar_MouseClick);
       // 
       // PictureBoxDisplayTitle
       // 

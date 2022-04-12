@@ -42,7 +42,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           if (!DisplayOnly) {
             PictureBoxOrganization.Cursor = Cursors.Hand;
           } else {
-            PictureBoxOrganization.Click -= PictureBoxOrganization_Click;
+            PictureBoxOrganization.MouseClick -= PictureBoxOrganization_MouseClick;
           }
         }
         if (Info?.Sid != null && Info?.RankStars >= 0 && Info.RankStars <= 5) {
@@ -55,18 +55,17 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelOrganizationName.ForeColor = Color.FromArgb(255, 57, 57);
         LabelOrganizationName.Text = "REDACTED";
         LabelMainOrganizationAffiliate.ForeColor = Color.FromArgb(173, 39, 39);
-        PictureBoxOrganization.Click -= PictureBoxOrganization_Click;
+        PictureBoxOrganization.MouseClick -= PictureBoxOrganization_MouseClick;
         LabelMainOrganizationAffiliate.Location = new Point(LabelMainOrganizationAffiliate.Left, LabelMainOrganizationAffiliate.Top - 3);
         Size = new Size(Size.Width, 25);
       }
     }
 
-    private void PictureBoxOrganization_Click(object sender, EventArgs e) {
-      if (!string.IsNullOrWhiteSpace(SID)) {
+    private void PictureBoxOrganization_MouseClick(object sender, MouseEventArgs e) {
+      if (e.Button == MouseButtons.Left && !string.IsNullOrWhiteSpace(SID)) {
         Process.Start("explorer", $"https://robertsspaceindustries.com/orgs/{SID}");
       }
     }
-
   }
 
 }

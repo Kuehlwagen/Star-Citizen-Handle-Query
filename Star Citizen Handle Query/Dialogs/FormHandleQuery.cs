@@ -799,20 +799,26 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public static async Task<Image> GetImage(CacheDirectoryType imageType, string url, string name, int localCacheMaxAge, bool forceLive = false) {
       Image rtnVal = null;
 
-      if (url.Count(x => x == '/') > 2) {
-        string filePath = GetImagePath(imageType, url, name);
-        if (forceLive || !File.Exists(filePath) || new FileInfo(filePath).LastWriteTime < DateTime.Now.AddDays(localCacheMaxAge * -1)) {
-          using Stream urlStream = await GetImageFromUrl(url);
-          if (urlStream != null) {
-            try {
-              using FileStream fileStream = new(filePath, FileMode.OpenOrCreate);
-              urlStream.CopyTo(fileStream);
-            } catch { }
+      if (!string.IsNullOrWhiteSpace(url)) {
+        if (url.Count(x => x == '/') > 2) {
+          string filePath = GetImagePath(imageType, url, name);
+          if (forceLive || !File.Exists(filePath) || new FileInfo(filePath).LastWriteTime < DateTime.Now.AddDays(localCacheMaxAge * -1)) {
+            using Stream urlStream = await GetImageFromUrl(url);
+            if (urlStream != null) {
+              try {
+                using FileStream fileStream = new(filePath, FileMode.OpenOrCreate);
+                urlStream.CopyTo(fileStream);
+              } catch { }
+            }
+          }
+          if (File.Exists(filePath)) {
+            rtnVal = Image.FromFile(filePath);
           }
         }
-        if (File.Exists(filePath)) {
-          rtnVal = Image.FromFile(filePath);
-        }
+      }
+
+      if (rtnVal == null && imageType == CacheDirectoryType.HandleAvatar) {
+        rtnVal = Properties.Resources.Avatar_Default;
       }
 
       return rtnVal;
