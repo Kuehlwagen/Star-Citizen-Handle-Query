@@ -29,7 +29,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private async void UserControlHandle_Load(object sender, EventArgs e) {
       if (Info?.HttpResponse?.StatusCode == HttpStatusCode.OK && Info?.Profile != null) {
         string handle = GetString(Info?.Profile?.Handle);
-        CreateHandleJSON(handle);
+        CreateHandleJSON(Info, forceLive: ForceLive, programSettings: ProgramSettings);
         PictureBoxHandleAvatar.Image = await GetImage(CacheDirectoryType.HandleAvatar, Info.Profile?.AvatarUrl, handle, ProgramSettings.LocalCacheMaxAge, ForceLive);
         if (!DisplayOnly) {
           PictureBoxHandleAvatar.Cursor = Cursors.Hand;
@@ -45,17 +45,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelFluency.Text = Info?.Profile?.Fluency?.Count > 0 ? $"Fluency: {string.Join(", ", Info.Profile.Fluency)}" : string.Empty;
         LabelUEECitizenRecord.Text = GetString(Info?.Profile?.UeeCitizenRecord);
         LabelEnlistedDate.Text = Info?.Profile?.Enlisted.ToString("MMM dd, yyyy", System.Globalization.CultureInfo.InvariantCulture);
+        LabelAdditionalInformation.Text = GetString(Info?.Comment);
         if (DisplayOnly) {
           LabelAdditionalInformation.Cursor = Cursors.Default;
-        }
-        string additionalInfoPath = FormHandleQuery.GetCachePath(CacheDirectoryType.HandleAdditional, handle);
-        if (File.Exists(additionalInfoPath)) {
-          HandleAdditionalInfo handleAdditionalInfo = JsonSerializer.Deserialize<HandleAdditionalInfo>(File.ReadAllText(additionalInfoPath, Encoding.UTF8));
-          if (!string.IsNullOrWhiteSpace(handleAdditionalInfo?.Comment)) {
-            LabelAdditionalInformation.Text = handleAdditionalInfo.Comment;
-            TextBoxAdditionalInformation.Text = handleAdditionalInfo.Comment;
-            TextBoxAdditionalInformation.Tag = TextBoxAdditionalInformation.Text;
-          }
         }
       } else {
         LabelCommunityMoniker.Text = Info?.HttpResponse?.StatusCode == HttpStatusCode.NotFound ? ProgramTranslation.Window.Handle_Not_Found : Info?.HttpResponse?.ErrorText;
@@ -65,10 +57,10 @@ namespace Star_Citizen_Handle_Query.UserControls {
       }
     }
 
-    private void CreateHandleJSON(string handle) {
-      string jsonPath = GetCachePath(CacheDirectoryType.Handle, handle);
-      if (ForceLive || !File.Exists(jsonPath) || new FileInfo(jsonPath).LastWriteTime < DateTime.Now.AddDays(ProgramSettings.LocalCacheMaxAge * -1)) {
-        string handleJson = JsonSerializer.Serialize(Info, new JsonSerializerOptions() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull });
+    internal static void CreateHandleJSON(HandleInfo handleInfo, Settings programSettings, bool forceLive = false, bool forceExport = false) {
+      string jsonPath = GetCachePath(CacheDirectoryType.Handle, handleInfo?.Profile?.Handle);
+      if (forceExport || forceLive || !File.Exists(jsonPath) || new FileInfo(jsonPath).LastWriteTime < DateTime.Now.AddDays(programSettings.LocalCacheMaxAge * -1)) {
+        string handleJson = JsonSerializer.Serialize(handleInfo, new JsonSerializerOptions() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull });
         if (!string.IsNullOrWhiteSpace(handleJson)) {
           File.WriteAllText(jsonPath, handleJson, Encoding.UTF8);
         }
@@ -86,9 +78,10 @@ namespace Star_Citizen_Handle_Query.UserControls {
       switch (e.KeyCode) {
         case Keys.Enter:
           e.SuppressKeyPress = true;
-          textBox.Tag = textBox.Text;
-          LabelAdditionalInformation.Text = textBox.Text;
-          FormLocalCache.WriteHandleAdditionalInformation(Info.Profile.Handle, textBox.Text);
+          Info.Comment = !string.IsNullOrWhiteSpace(textBox.Text) ? textBox.Text : null;
+          textBox.Tag = Info.Comment;
+          LabelAdditionalInformation.Text = Info.Comment;
+          CreateHandleJSON(Info, ProgramSettings, forceExport: true);
           textBox.Visible = false;
           break;
         case Keys.Escape:

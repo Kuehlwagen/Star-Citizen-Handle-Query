@@ -11,6 +11,7 @@ namespace Star_Citizen_Handle_Query.Serialization {
     public HttpInfo HttpResponse { get; set; }
     public HandleProfileInfo Profile { get; set; }
     public OrganizationsInfo Organizations { get; set; }
+    public string Comment { get; set; }
 
   }
 

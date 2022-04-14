@@ -342,7 +342,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
             // Ggf. Cache-Verzeichnisse erstellen
             CreateDirectory(CacheDirectoryType.Handle);
-            CreateDirectory(CacheDirectoryType.HandleAdditional);
             CreateDirectory(CacheDirectoryType.HandleAvatar);
             CreateDirectory(CacheDirectoryType.HandleDisplayTitle);
             CreateDirectory(CacheDirectoryType.OrganizationAvatar);
@@ -683,9 +682,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
         // Cache leeren
         DeleteDirectoryFiles(CacheDirectoryType.Handle, onlyExpired);
-        if (!onlyExpired) {
-          DeleteDirectoryFiles(CacheDirectoryType.HandleAdditional, onlyExpired);
-        }
         DeleteDirectoryFiles(CacheDirectoryType.HandleAvatar, onlyExpired);
         DeleteDirectoryFiles(CacheDirectoryType.HandleDisplayTitle, onlyExpired);
         DeleteDirectoryFiles(CacheDirectoryType.OrganizationAvatar, onlyExpired);
@@ -756,13 +752,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache");
           break;
         case CacheDirectoryType.Handle:
-          rtnVal = Path.Combine(GetSaveFilesRootPath(), $@"Cache\Data\Handle\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), $@"Cache\Data\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
           break;
         case CacheDirectoryType.HandleAvatar:
           rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Images\Handle\");
-          break;
-        case CacheDirectoryType.HandleAdditional:
-          rtnVal = Path.Combine(GetSaveFilesRootPath(), $@"Cache\Data\Handle\Additional Information\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
           break;
         case CacheDirectoryType.HandleDisplayTitle:
           rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Images\Display Title\");
@@ -785,7 +778,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public enum CacheDirectoryType {
       Root,
       Handle,
-      HandleAdditional,
       HandleAvatar,
       HandleDisplayTitle,
       OrganizationAvatar,

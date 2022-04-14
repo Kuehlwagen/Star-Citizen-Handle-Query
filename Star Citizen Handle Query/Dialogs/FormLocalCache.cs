@@ -36,18 +36,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       DataGridViewLokalerCache.PerformLayout();
       List<DataGridViewRow> rows = new();
       FormHandleQuery.CreateDirectory(FormHandleQuery.CacheDirectoryType.Handle);
-      FormHandleQuery.CreateDirectory(FormHandleQuery.CacheDirectoryType.HandleAdditional);
       foreach (string handleJsonPath in Directory.GetFiles(FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.Handle), "*.json").OrderByDescending(x => new FileInfo(x).LastWriteTime)) {
         HandleInfo handleInfo = JsonSerializer.Deserialize<HandleInfo>(File.ReadAllText(handleJsonPath, Encoding.UTF8));
         if (handleInfo != null) {
           handleInfo.HttpResponse = new() {
             StatusCode = HttpStatusCode.OK
           };
-          HandleAdditionalInfo handleAdditionalInfo = null;
-          string additionalInfoPath = FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.HandleAdditional, handleInfo.Profile.Handle);
-          if (File.Exists(additionalInfoPath)) {
-            handleAdditionalInfo = JsonSerializer.Deserialize<HandleAdditionalInfo>(File.ReadAllText(FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.HandleAdditional, handleInfo.Profile.Handle), Encoding.UTF8));
-          }
           DataGridViewRow row = new();
           OrganizationInfo org = handleInfo?.Organizations.MainOrganization;
           List<object> info = new() {
@@ -59,7 +53,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             org?.Name,
             org?.RankStars,
             handleInfo.Organizations.Affiliations?.Count ?? 0,
-            handleAdditionalInfo?.Comment ?? string.Empty
+            handleInfo?.Comment ?? string.Empty
           };
           row.Tag = handleInfo;
           row.CreateCells(DataGridViewLokalerCache, info.ToArray());
@@ -89,19 +83,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         switch (e.ColumnIndex) {
           case 8: // Kommentar
             DataGridViewRow dgvr = (sender as DataGridView).Rows[e.RowIndex];
-            WriteHandleAdditionalInformation((dgvr.Tag as HandleInfo).Profile.Handle, $"{dgvr.Cells[e.ColumnIndex].Value}");
+            HandleInfo handleInfo = (dgvr.Tag as HandleInfo);
+            string cellValue = $"{dgvr.Cells[e.ColumnIndex].Value}";
+            handleInfo.Comment = !string.IsNullOrWhiteSpace(cellValue) ? cellValue : null;
+            UserControlHandle.CreateHandleJSON(handleInfo, ProgramSettings, forceExport: true);
             break;
         }
-      }
-    }
-
-    public static void WriteHandleAdditionalInformation(string handle, string additionalInfo) {
-      string additionalPath = FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.HandleAdditional, handle);
-      if (!string.IsNullOrWhiteSpace(additionalInfo)) {
-        File.WriteAllText(additionalPath, JsonSerializer.Serialize(new HandleAdditionalInfo() { Comment = $"{additionalInfo}" },
-          new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
-      } else if (File.Exists(additionalPath)) {
-        File.Delete(additionalPath);
       }
     }
 
