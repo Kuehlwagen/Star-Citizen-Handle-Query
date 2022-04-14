@@ -1,6 +1,6 @@
 # Star Citizen Handle Query
 
-Overlay zur Abfrage von Spielern und ihrer Organisationszugehörigkeiten
+Overlay zur Abfrage von Star Citizen Spielern und ihrer Organisationszugehörigkeiten
 
 ![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/MainWindow.png?raw=true "Handle Query")
 
