@@ -16,6 +16,7 @@ Das Tool-Hauptfenster kann nur dann im Vordergrund des Spiels dargestellt werden
 - __Unkenntliche Affiliationen ausblenden:__ Hier kann angegeben werden, ob unkenntlich gemachte Affiliationen ausgeblendet werden sollen
 - __Verwendeten Cache-Typ anzeigen:__ Wird diese Einstellung aktiviert, wird rechts neben der Handle-Eingabebox ein Hinweis angezeigt, mit welchem Cache-Typ die Daten geladen wurden (`LIVE` = Live-Daten von der Star Citizen Webseite, `LOCAL` = Lokaler Cache)
 - __Bei Programmstart nach Update suchen:__ Angabe, ob bei jedem Programmstart geprüft werden soll, ob ein Programmupdate zur Verfügung steht
+  - Ausschließlich wenn ein Update zur Verfügung steht, wird eine Benachrichtigung angezeigt.
 ### Fenster
 - __Deckkraft:__ Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
 - __Globale Taste:__ Hier kann die Taste angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifikatoren (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
