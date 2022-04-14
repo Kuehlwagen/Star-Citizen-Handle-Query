@@ -1,6 +1,6 @@
 # Star Citizen Handle Query
 
-Mit Hilfe dieses Tools kann man mit einer globalen Tastenkombination schnell Informationen zum Handle eines Star Citizen Spielers einsehen.
+Overlay zur Abfrage von Spielern und ihrer Organisationszugehörigkeiten
 
 ![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/MainWindow.png?raw=true "Handle Query")
 
