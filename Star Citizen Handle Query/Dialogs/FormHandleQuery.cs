@@ -597,9 +597,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return url.StartsWith("/") ? $"https://robertsspaceindustries.com{url}" : url;
     }
 
-    private static void ExportSource(string handle, string source) {
+    private static void ExportSource(string name, string source) {
       CreateDirectory(CacheDirectoryType.Source);
-      File.WriteAllText(Path.Combine(GetCachePath(CacheDirectoryType.Source), $"{handle}.txt"), source, Encoding.Default);
+      File.WriteAllText(Path.Combine(GetCachePath(CacheDirectoryType.Source), $"{name}.html"), source, Encoding.Default);
     }
 
     private void BeendenToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -688,7 +688,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         }
         DeleteDirectoryFiles(CacheDirectoryType.HandleAvatar, onlyExpired);
         DeleteDirectoryFiles(CacheDirectoryType.HandleDisplayTitle, onlyExpired);
-        DeleteDirectoryFiles(CacheDirectoryType.Organization, onlyExpired);
         DeleteDirectoryFiles(CacheDirectoryType.OrganizationAvatar, onlyExpired);
 
         // Autovervollständigung neu einlesen
@@ -757,25 +756,22 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache");
           break;
         case CacheDirectoryType.Handle:
-          rtnVal = Path.Combine(GetSaveFilesRootPath(), $@"Cache\Handle\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), $@"Cache\Data\Handle\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
           break;
         case CacheDirectoryType.HandleAvatar:
-          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Handle_Avatar\");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Images\Handle\");
           break;
         case CacheDirectoryType.HandleAdditional:
-          rtnVal = Path.Combine(GetSaveFilesRootPath(), $@"Cache\Handle_Additional\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), $@"Cache\Data\Handle\Additional Information\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
           break;
         case CacheDirectoryType.HandleDisplayTitle:
-          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Handle_DisplayTitle\");
-          break;
-        case CacheDirectoryType.Organization:
-          rtnVal = Path.Combine(GetSaveFilesRootPath(), $@"Cache\Organization\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Images\Display Title\");
           break;
         case CacheDirectoryType.OrganizationAvatar:
-          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Organization_Avatar\");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Images\Organization");
           break;
         case CacheDirectoryType.Source:
-          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Source");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Data\Source");
           break;
       }
 
@@ -792,7 +788,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       HandleAdditional,
       HandleAvatar,
       HandleDisplayTitle,
-      Organization,
       OrganizationAvatar,
       Source
     }
