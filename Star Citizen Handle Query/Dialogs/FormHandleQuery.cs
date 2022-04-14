@@ -22,6 +22,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private GlobalHotKey HotKey;
     private AutoCompleteStringCollection AutoCompleteCollection;
     private bool ShowInitialBalloonTip = false;
+    private static bool IsDebug = false;
 
     private readonly Regex RgxIdCmHandleEnlistedFluency = new("<strong class=\"value\">(.+)</strong>", RegexOptions.Multiline | RegexOptions.Compiled);
     private readonly Regex RgxAvatar = new("<div class=\"thumb\">\\s+<img src=\"(.+)\" \\/>", RegexOptions.Multiline | RegexOptions.Compiled);
@@ -32,6 +33,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public FormHandleQuery() {
       InitializeComponent();
+
+      if (Environment.GetCommandLineArgs().Any(x => x.Equals("-debug", StringComparison.InvariantCultureIgnoreCase))) {
+        IsDebug = true;
+      }
 
       // Standard-Sprachen erstellen
       CreateDefaultLocalizations();
@@ -272,7 +277,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               NotifyIconHandleQuery.BalloonTipClicked += NotifyIconHandleQuery_BalloonTipClicked;
               NotifyIconHandleQuery.Tag = gitHubRelease;
               NotifyIconHandleQuery.ShowBalloonTip(30000, Text, $"{ProgramTranslation.Notification.Update_Info}: {gitHubRelease.tag_name}\r\n{ProgramTranslation.Notification.Update_Info_Show_Release_Notes}", ToolTipIcon.Info);
-            } else if(!batch) {
+            } else if (!batch) {
               NotifyIconHandleQuery.ShowBalloonTip(30000, Text, $"{ProgramTranslation.Notification.Update_Up_To_Date}", ToolTipIcon.Info);
             }
             error = false;
@@ -443,7 +448,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       };
 
       if (!string.IsNullOrWhiteSpace(handle)) {
-        reply.HttpResponse = await GetSource(reply.Profile.Url);
+        reply.HttpResponse = await GetSource($"{handle}_Profile", reply.Profile.Url);
         if (reply.HttpResponse.StatusCode == HttpStatusCode.OK && reply.HttpResponse.Source != null) {
 
           // Live
@@ -492,7 +497,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private async Task<OrganizationsInfo> GetOrganizationsInfo(string handle) {
       OrganizationsInfo reply = new();
 
-      HttpInfo httpInfo = await GetSource($"https://robertsspaceindustries.com/citizens/{handle}/organizations");
+      HttpInfo httpInfo = await GetSource($"{handle}_Organizations", $"https://robertsspaceindustries.com/citizens/{handle}/organizations");
       if (httpInfo.StatusCode.HasValue && httpInfo.StatusCode == HttpStatusCode.OK && httpInfo.Source != null) {
 
         string[] organizations = httpInfo.Source.Split("<div class=\"title\">");
@@ -561,7 +566,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return reply;
     }
 
-    private static async Task<HttpInfo> GetSource(string url) {
+    private static async Task<HttpInfo> GetSource(string sourceExportName, string url) {
       HttpInfo rtnVal = new();
 
       using HttpClient client = new();
@@ -575,6 +580,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         if (index >= 0) {
           rtnVal.Source = rtnVal.Source[..index];
         }
+        if (IsDebug) {
+          ExportSource(sourceExportName, rtnVal.Source);
+        }
         rtnVal.StatusCode = HttpStatusCode.OK;
       } catch (HttpRequestException ex) {
         rtnVal.Source = string.Empty;
@@ -587,6 +595,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private static string CorrectUrl(string url) {
       return url.StartsWith("/") ? $"https://robertsspaceindustries.com{url}" : url;
+    }
+
+    private static void ExportSource(string handle, string source) {
+      CreateDirectory(CacheDirectoryType.Source);
+      File.WriteAllText(Path.Combine(GetCachePath(CacheDirectoryType.Source), $"{handle}.txt"), source, Encoding.Default);
     }
 
     private void BeendenToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -761,6 +774,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         case CacheDirectoryType.OrganizationAvatar:
           rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Organization_Avatar\");
           break;
+        case CacheDirectoryType.Source:
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Source");
+          break;
       }
 
       return rtnVal;
@@ -777,7 +793,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       HandleAvatar,
       HandleDisplayTitle,
       Organization,
-      OrganizationAvatar
+      OrganizationAvatar,
+      Source
     }
 
     private void RestartProgram() {
