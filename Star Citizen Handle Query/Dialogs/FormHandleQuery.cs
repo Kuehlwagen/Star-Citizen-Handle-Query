@@ -533,10 +533,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
               // Affiliation
               MatchCollection mcOrganization = RgxOrganization.Matches(organization);
+              if (reply.Affiliations == null) {
+                reply.Affiliations = new List<OrganizationInfo>();
+              }
               if (mcOrganization.Count > 0 && mcOrganization[0].Groups.Count == 6) {
-                if (reply.Affiliations == null) {
-                  reply.Affiliations = new List<OrganizationInfo>();
-                }
                 reply.Affiliations.Add(new OrganizationInfo() {
                   Url = $"https://robertsspaceindustries.com/orgs/{mcOrganization[0].Groups[1].Value}",
                   Sid = mcOrganization[0].Groups[1].Value,
