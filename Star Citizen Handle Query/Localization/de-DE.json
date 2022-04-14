@@ -24,7 +24,8 @@
       "Language": "Sprache:",
       "Show_Cache_Type": "Verwendeten Cache-Typ anzeigen",
       "Affiliations_Max": "Affiliationen Maximum:",
-      "Hide_Redacted_Affiliations": "Unkenntliche Affiliationen ausblenden"
+      "Hide_Redacted_Affiliations": "Unkenntliche Affiliationen ausblenden",
+      "Auto_Check_For_Update": "Bei Programmstart nach Update suchen"
     },
     "Window": {
       "Group_Title": "Fenster",

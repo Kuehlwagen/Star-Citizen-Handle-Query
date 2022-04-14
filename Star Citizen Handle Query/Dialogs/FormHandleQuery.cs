@@ -74,6 +74,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
         // Veraltete Cache-Dateien löschen
         ClearCache(true);
+
+        // Kontextmenü aktivieren
+        EnableContextMenu();
+
+        // Ggf. nach Programm-Update suchen
+        if (ProgramSettings.AutoCheckForUpdate) {
+          _ = CheckForUpdate(true);
+        }
       }
 
     }
@@ -249,7 +257,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private async Task<bool> CheckForUpdate() {
+    private async Task<bool> CheckForUpdate(bool batch = false) {
       // Prüfen, ob auf GitHub eine aktuellere Version des Tools veröffentlicht wurde
       using HttpClient client = new();
       client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -264,14 +272,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               NotifyIconHandleQuery.BalloonTipClicked += NotifyIconHandleQuery_BalloonTipClicked;
               NotifyIconHandleQuery.Tag = gitHubRelease;
               NotifyIconHandleQuery.ShowBalloonTip(30000, Text, $"{ProgramTranslation.Notification.Update_Info}: {gitHubRelease.tag_name}\r\n{ProgramTranslation.Notification.Update_Info_Show_Release_Notes}", ToolTipIcon.Info);
-            } else {
+            } else if(!batch) {
               NotifyIconHandleQuery.ShowBalloonTip(30000, Text, $"{ProgramTranslation.Notification.Update_Up_To_Date}", ToolTipIcon.Info);
             }
             error = false;
           }
         }
       } catch { }
-      if (error) {
+      if (error && !batch) {
         NotifyIconHandleQuery.ShowBalloonTip(30000, Text, $"{ProgramTranslation.Notification.Update_Error}", ToolTipIcon.Warning);
       }
       return !error;

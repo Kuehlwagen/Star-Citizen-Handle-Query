@@ -109,6 +109,8 @@
 
     public string Hide_Redacted_Affiliations { get; set; } = "Unkenntliche Affiliationen ausblenden";
 
+    public string Auto_Check_For_Update { get; set; } = "Bei Programmstart nach Update suchen";
+
   }
 
   [Serializable()]

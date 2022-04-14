@@ -47,6 +47,7 @@
       this.GroupBoxLokalerCache = new System.Windows.Forms.GroupBox();
       this.ButtonStandard = new System.Windows.Forms.Button();
       this.GroupBoxAnzeige = new System.Windows.Forms.GroupBox();
+      this.CheckBoxAutoCheckForUpdate = new System.Windows.Forms.CheckBox();
       this.NumericUpDownAffiliationenMaximum = new System.Windows.Forms.NumericUpDown();
       this.LabelMaxAffiliationen = new System.Windows.Forms.Label();
       this.CheckBoxUnkenntlicheAffiliationenAusblenden = new System.Windows.Forms.CheckBox();
@@ -130,7 +131,7 @@
       // ButtonSpeichern
       // 
       this.ButtonSpeichern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 418);
+      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 444);
       this.ButtonSpeichern.Name = "ButtonSpeichern";
       this.ButtonSpeichern.Size = new System.Drawing.Size(75, 28);
       this.ButtonSpeichern.TabIndex = 4;
@@ -141,7 +142,7 @@
       // ButtonSchliessen
       // 
       this.ButtonSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 418);
+      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 444);
       this.ButtonSchliessen.Name = "ButtonSchliessen";
       this.ButtonSchliessen.Size = new System.Drawing.Size(75, 28);
       this.ButtonSchliessen.TabIndex = 5;
@@ -182,7 +183,7 @@
       this.GroupBoxFenster.Controls.Add(this.LabelFensterDeckkraftProzent);
       this.GroupBoxFenster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.GroupBoxFenster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxFenster.Location = new System.Drawing.Point(12, 156);
+      this.GroupBoxFenster.Location = new System.Drawing.Point(12, 182);
       this.GroupBoxFenster.Name = "GroupBoxFenster";
       this.GroupBoxFenster.Size = new System.Drawing.Size(416, 187);
       this.GroupBoxFenster.TabIndex = 2;
@@ -273,7 +274,7 @@
       this.CheckBoxShowCacheType.Location = new System.Drawing.Point(15, 105);
       this.CheckBoxShowCacheType.Name = "CheckBoxShowCacheType";
       this.CheckBoxShowCacheType.Size = new System.Drawing.Size(203, 19);
-      this.CheckBoxShowCacheType.TabIndex = 6;
+      this.CheckBoxShowCacheType.TabIndex = 5;
       this.CheckBoxShowCacheType.Text = "Verwendeten Cache-Typ anzeigen";
       this.CheckBoxShowCacheType.UseVisualStyleBackColor = true;
       this.CheckBoxShowCacheType.CheckedChanged += new System.EventHandler(this.CheckBoxShowCacheType_CheckedChanged);
@@ -308,7 +309,7 @@
       this.GroupBoxLokalerCache.Controls.Add(this.LabelLokalerCacheAlter);
       this.GroupBoxLokalerCache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.GroupBoxLokalerCache.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 351);
+      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 377);
       this.GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
       this.GroupBoxLokalerCache.Size = new System.Drawing.Size(416, 61);
       this.GroupBoxLokalerCache.TabIndex = 3;
@@ -318,7 +319,7 @@
       // ButtonStandard
       // 
       this.ButtonStandard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonStandard.Location = new System.Drawing.Point(353, 418);
+      this.ButtonStandard.Location = new System.Drawing.Point(353, 444);
       this.ButtonStandard.Name = "ButtonStandard";
       this.ButtonStandard.Size = new System.Drawing.Size(75, 28);
       this.ButtonStandard.TabIndex = 6;
@@ -328,6 +329,7 @@
       // 
       // GroupBoxAnzeige
       // 
+      this.GroupBoxAnzeige.Controls.Add(this.CheckBoxAutoCheckForUpdate);
       this.GroupBoxAnzeige.Controls.Add(this.CheckBoxShowCacheType);
       this.GroupBoxAnzeige.Controls.Add(this.LabelSprache);
       this.GroupBoxAnzeige.Controls.Add(this.NumericUpDownAffiliationenMaximum);
@@ -338,10 +340,21 @@
       this.GroupBoxAnzeige.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.GroupBoxAnzeige.Location = new System.Drawing.Point(12, 12);
       this.GroupBoxAnzeige.Name = "GroupBoxAnzeige";
-      this.GroupBoxAnzeige.Size = new System.Drawing.Size(416, 138);
+      this.GroupBoxAnzeige.Size = new System.Drawing.Size(416, 162);
       this.GroupBoxAnzeige.TabIndex = 1;
       this.GroupBoxAnzeige.TabStop = false;
       this.GroupBoxAnzeige.Text = "Anzeige";
+      // 
+      // CheckBoxAutoCheckForUpdate
+      // 
+      this.CheckBoxAutoCheckForUpdate.AutoSize = true;
+      this.CheckBoxAutoCheckForUpdate.Location = new System.Drawing.Point(15, 130);
+      this.CheckBoxAutoCheckForUpdate.Name = "CheckBoxAutoCheckForUpdate";
+      this.CheckBoxAutoCheckForUpdate.Size = new System.Drawing.Size(236, 19);
+      this.CheckBoxAutoCheckForUpdate.TabIndex = 6;
+      this.CheckBoxAutoCheckForUpdate.Text = "Bei Programmstart nach Update suchen";
+      this.CheckBoxAutoCheckForUpdate.UseVisualStyleBackColor = true;
+      this.CheckBoxAutoCheckForUpdate.CheckedChanged += new System.EventHandler(this.CheckBoxAutoCheckForUpdate_CheckedChanged);
       // 
       // NumericUpDownAffiliationenMaximum
       // 
@@ -390,7 +403,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.CancelButton = this.ButtonSchliessen;
-      this.ClientSize = new System.Drawing.Size(440, 460);
+      this.ClientSize = new System.Drawing.Size(440, 486);
       this.Controls.Add(this.GroupBoxAnzeige);
       this.Controls.Add(this.GroupBoxLokalerCache);
       this.Controls.Add(this.GroupBoxFenster);
@@ -444,5 +457,6 @@
     private CheckBox CheckBoxUnkenntlicheAffiliationenAusblenden;
     private CheckBox CheckBoxShowCacheType;
     private CheckBox CheckBoxPositionMerken;
+    private CheckBox CheckBoxAutoCheckForUpdate;
   }
 }

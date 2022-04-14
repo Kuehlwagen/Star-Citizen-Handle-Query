@@ -83,6 +83,9 @@
     /// <summary>Position des Hauptfensters</summary>
     public Point WindowLocation { get; set; } = Point.Empty;
 
+    /// <summary>Angabe, ob beim Programmstart nach einem Programm-Update gesucht werden soll</summary>
+    public bool AutoCheckForUpdate { get; set; } = false;
+
     public object Clone() {
       return MemberwiseClone();
     }
