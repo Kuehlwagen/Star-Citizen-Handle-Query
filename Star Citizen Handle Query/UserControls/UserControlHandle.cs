@@ -44,7 +44,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelDisplayTitle.Text = GetString(Info?.Profile?.DisplayTitle);
         LabelFluency.Text = Info?.Profile?.Fluency?.Count > 0 ? $"Fluency: {string.Join(", ", Info.Profile.Fluency)}" : string.Empty;
         LabelUEECitizenRecord.Text = GetString(Info?.Profile?.UeeCitizenRecord);
-        LabelEnlistedDate.Text = Info?.Profile?.Enlisted.ToString("MMM dd, yyyy", System.Globalization.CultureInfo.InvariantCulture);
+        LabelEnlistedDate.Text = Info?.Profile?.Enlisted.ToString("MMM d, yyyy", System.Globalization.CultureInfo.InvariantCulture);
         LabelAdditionalInformation.Text = GetString(Info?.Comment);
         if (DisplayOnly) {
           LabelAdditionalInformation.Cursor = Cursors.Default;
