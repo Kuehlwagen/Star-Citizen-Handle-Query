@@ -60,12 +60,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           _ = User32Wrappers.SetWindowLong(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered | (int)User32Wrappers.WS_EX.Transparent);
         }
 
-        if (ProgramSettings.ShowCacheType) {
-          // Cache-Typ anzeigen
-          TextBoxHandle.Size = new Size(251, TextBoxHandle.Height);
-          LabelCacheType.Visible = true;
-        }
-
         // Programm-Sprache auslesen
         ProgramTranslation = GetProgramLocalization();
 
@@ -302,7 +296,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private async void TextBoxHandle_KeyDown(object sender, KeyEventArgs e) {
+    private void TextBoxHandle_KeyDown(object sender, KeyEventArgs e) {
       // Handle-Textbox Tastendrücke verarbeiten
       switch (e.KeyCode) {
         case Keys.Oemplus:
@@ -315,74 +309,66 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           break;
         case Keys.Enter:
           e.SuppressKeyPress = true;
-          TextBoxHandle.Text = TextBoxHandle.Text.Trim();
-          bool forceLive = e.Control;
-          if (!string.IsNullOrWhiteSpace(TextBoxHandle.Text)) {
-            // Ggf. existierendes UserControl entfernen
-            RemoveUserControls();
-            // Cache-Typ leeren
-            LabelCacheType.Text = string.Empty;
-            // Textbox bis zum Ergebnis deaktivieren
-            TextBoxHandle.Enabled = false;
-            // Handle-Informationen auslesen
-            HandleInfo handleInfo = await GetHandleInfo<HandleInfo>(forceLive, TextBoxHandle.Text, ProgramSettings, CacheDirectoryType.Handle);
-
-            // Cache-Typ darstellen
-            if (ProgramSettings.ShowCacheType && !string.IsNullOrWhiteSpace(handleInfo?.Source)) {
-              LabelCacheType.Text = handleInfo.Source.ToUpper();
-              switch (LabelCacheType.Text) {
-                case "LIVE":
-                  LabelCacheType.ForeColor = Color.Green;
-                  break;
-                case "LOCAL":
-                  LabelCacheType.ForeColor = Color.OrangeRed;
-                  break;
-              }
-            }
-
-            // Ggf. Cache-Verzeichnisse erstellen
-            CreateDirectory(CacheDirectoryType.Handle);
-            CreateDirectory(CacheDirectoryType.HandleAvatar);
-            CreateDirectory(CacheDirectoryType.HandleDisplayTitle);
-            CreateDirectory(CacheDirectoryType.OrganizationAvatar);
-
-            // UserControl mit Handle-Informationen hinzufügen
-            PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation, forceLive));
-            Size = new Size(Size.Width, Size.Height + 78);
-
-            // Ggf. UserControl mit Organisation-Informationen hinzufügen
-            if (handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK && handleInfo.Organizations.MainOrganization != null) {
-              PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.Organizations.MainOrganization, ProgramSettings, true, forceLive));
-              Size = new Size(Size.Width, Size.Height + (handleInfo.Organizations.MainOrganization.Name != string.Empty ? 78 : 25));
-            }
-
-            // Ggf. UserControls mit Affiliate-Informationen hinzufügen
-            if (handleInfo?.Organizations?.Affiliations?.Count > 0) {
-              int affiliatesAdded = 0;
-              for (int i = 0; i < handleInfo.Organizations.Affiliations.Count && affiliatesAdded < ProgramSettings.AffiliationsMax; i++) {
-                // Prüfen, ob ausgeblendete Affiliationen dargestellt werden sollen
-                if (!handleInfo.Organizations.Affiliations[i].Redacted || !ProgramSettings.HideRedactedAffiliations) {
-                  PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.Organizations.Affiliations[i], ProgramSettings, false, forceLive));
-                  Size = new Size(Size.Width, Size.Height + (!string.IsNullOrWhiteSpace(handleInfo.Organizations.Affiliations[i].Name) ? 78 : 25));
-                  affiliatesAdded++;
-                }
-              }
-            }
-
-            // Autovervollständigung aktualisieren
-            UpdateAutoComplete(handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK && handleInfo?.Profile?.Handle != null ? handleInfo.Profile.Handle : String.Empty);
-
-            // Textbox wieder aktivieren und Text markieren
-            TextBoxHandle.Enabled = true;
-            TextBoxHandle.SelectAll();
-            TextBoxHandle.Focus();
-          }
+          QueryHandle(e.Control);
           break;
         case Keys.Escape:
           e.SuppressKeyPress = true;
           // Fenster verstecken
           Visible = false;
           break;
+      }
+    }
+
+    private async void QueryHandle(bool forceLive) {
+      TextBoxHandle.Text = TextBoxHandle.Text.Trim();
+      if (!string.IsNullOrWhiteSpace(TextBoxHandle.Text)) {
+        // Ggf. existierendes UserControl entfernen
+        RemoveUserControls();
+        // Textbox bis zum Ergebnis deaktivieren
+        TextBoxHandle.Enabled = false;
+        LabelLockUnlock.Enabled = false;
+        LabelQuery.Enabled = false;
+        // Handle-Informationen auslesen
+        HandleInfo handleInfo = await GetHandleInfo<HandleInfo>(forceLive, TextBoxHandle.Text, ProgramSettings, CacheDirectoryType.Handle);
+
+        // Ggf. Cache-Verzeichnisse erstellen
+        CreateDirectory(CacheDirectoryType.Handle);
+        CreateDirectory(CacheDirectoryType.HandleAvatar);
+        CreateDirectory(CacheDirectoryType.HandleDisplayTitle);
+        CreateDirectory(CacheDirectoryType.OrganizationAvatar);
+
+        // UserControl mit Handle-Informationen hinzufügen
+        PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation, forceLive));
+        Size = new Size(Size.Width, Size.Height + 78);
+
+        // Ggf. UserControl mit Organisation-Informationen hinzufügen
+        if (handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK && handleInfo.Organizations.MainOrganization != null) {
+          PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.Organizations.MainOrganization, ProgramSettings, true, forceLive));
+          Size = new Size(Size.Width, Size.Height + (handleInfo.Organizations.MainOrganization.Name != string.Empty ? 78 : 25));
+        }
+
+        // Ggf. UserControls mit Affiliate-Informationen hinzufügen
+        if (handleInfo?.Organizations?.Affiliations?.Count > 0) {
+          int affiliatesAdded = 0;
+          for (int i = 0; i < handleInfo.Organizations.Affiliations.Count && affiliatesAdded < ProgramSettings.AffiliationsMax; i++) {
+            // Prüfen, ob ausgeblendete Affiliationen dargestellt werden sollen
+            if (!handleInfo.Organizations.Affiliations[i].Redacted || !ProgramSettings.HideRedactedAffiliations) {
+              PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.Organizations.Affiliations[i], ProgramSettings, false, forceLive));
+              Size = new Size(Size.Width, Size.Height + (!string.IsNullOrWhiteSpace(handleInfo.Organizations.Affiliations[i].Name) ? 78 : 25));
+              affiliatesAdded++;
+            }
+          }
+        }
+
+        // Autovervollständigung aktualisieren
+        UpdateAutoComplete(handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK && handleInfo?.Profile?.Handle != null ? handleInfo.Profile.Handle : String.Empty);
+
+        // Textbox wieder aktivieren und Text markieren
+        TextBoxHandle.Enabled = true;
+        LabelLockUnlock.Enabled = true;
+        LabelQuery.Enabled = true;
+        TextBoxHandle.SelectAll();
+        TextBoxHandle.Focus();
       }
     }
 
@@ -418,7 +404,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (File.Exists(infoJsonPath) && new FileInfo(infoJsonPath).LastWriteTime > DateTime.Now.AddDays(programSettings.LocalCacheMaxAge * -1)) {
         rtnVal = JsonSerializer.Deserialize<HandleInfo>(File.ReadAllText(infoJsonPath, Encoding.UTF8));
         if (rtnVal != null) {
-          rtnVal.Source = "Local";
           rtnVal.HttpResponse = new() {
             StatusCode = HttpStatusCode.OK
           };
@@ -449,9 +434,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (!string.IsNullOrWhiteSpace(handle)) {
         reply.HttpResponse = await GetSource($"{handle}_Profile", reply.Profile.Url);
         if (reply.HttpResponse.StatusCode == HttpStatusCode.OK && reply.HttpResponse.Source != null) {
-
-          // Live
-          reply.Source = "Live";
 
           // UEE Citizen Record, Community Monicker, Handle, Enlisted, Fluency
           MatchCollection mcIdCmHandleEnlistedFluency = RgxIdCmHandleEnlistedFluency.Matches(reply.HttpResponse.Source);
@@ -650,7 +632,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void ResetHandle() {
       TextBoxHandle.Text = string.Empty;
-      LabelCacheType.Text = string.Empty;
     }
 
     private void LokalerCacheToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -891,7 +872,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void LabelHandle_MouseDown(object sender, MouseEventArgs e) {
-      if (ModifierKeys == Keys.Control) {
+      if (!WindowLocked) {
         switch (e.Button) {
           case MouseButtons.Left:
             _ = User32Wrappers.ReleaseCapture();
@@ -913,9 +894,22 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void SetHandleLableCursor() {
-      LabelHandle.Cursor = ModifierKeys == Keys.Control ? Cursors.SizeAll : Cursors.Default;
+      LabelHandle.Cursor = !WindowLocked ? Cursors.SizeAll : Cursors.Default;
     }
 
+    private bool WindowLocked = true;
+    private void LabelLockUnlock_MouseClick(object sender, MouseEventArgs e) {
+      if (e.Button == MouseButtons.Left) {
+        WindowLocked = !WindowLocked;
+        LabelLockUnlock.Image = WindowLocked ? Properties.Resources.WindowLocked : Properties.Resources.WindowUnlocked;
+      }
+    }
+
+    private void LabelQuery_MouseClick(object sender, MouseEventArgs e) {
+      if (e.Button == MouseButtons.Left) {
+        QueryHandle(ModifierKeys == Keys.Control);
+      }
+    }
   }
 
 }

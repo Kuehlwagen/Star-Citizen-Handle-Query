@@ -6,8 +6,6 @@ namespace Star_Citizen_Handle_Query.Serialization {
   public class HandleInfo {
 
     [JsonIgnore]
-    public string Source { get; set; }
-    [JsonIgnore]
     public HttpInfo HttpResponse { get; set; }
     public HandleProfileInfo Profile { get; set; }
     public OrganizationsInfo Organizations { get; set; }

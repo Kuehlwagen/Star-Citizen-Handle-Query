@@ -74,9 +74,6 @@
     /// <summary>Angabe, ob unkenntliche Affiliationen ausgeblendet werden sollen</summary>
     public bool HideRedactedAffiliations { get; set; } = false;
 
-    /// <summary>Angabe, ob der verwendete Cache-Typ angezeigt werden soll</summary>
-    public bool ShowCacheType { get; set; } = false;
-
     /// <summary>Angabe, ob sich die Position des Hauptfensters gemerkt werden soll</summary>
     public bool RememberWindowLocation { get; set; } = false;
 

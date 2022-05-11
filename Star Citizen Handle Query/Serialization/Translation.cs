@@ -103,8 +103,6 @@
 
     public string Language { get; set; } = "Sprache:";
 
-    public string Show_Cache_Type { get; set; } = "Verwendeten Cache-Typ anzeigen";
-
     public string Affiliations_Max { get; set; } = "Max. Affiliationen:";
 
     public string Hide_Redacted_Affiliations { get; set; } = "Unkenntliche Affiliationen ausblenden";

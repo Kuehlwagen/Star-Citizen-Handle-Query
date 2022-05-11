@@ -93,16 +93,6 @@ namespace Star_Citizen_Handle_Query.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Info_Background {
-            get {
-                object obj = ResourceManager.GetObject("Info_Background", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap OrganizationRank0 {
             get {
                 object obj = ResourceManager.GetObject("OrganizationRank0", resourceCulture);
@@ -166,6 +156,36 @@ namespace Star_Citizen_Handle_Query.Properties {
         internal static System.Drawing.Bitmap Redacted_Small {
             get {
                 object obj = ResourceManager.GetObject("Redacted_Small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Search {
+            get {
+                object obj = ResourceManager.GetObject("Search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WindowLocked {
+            get {
+                object obj = ResourceManager.GetObject("WindowLocked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WindowUnlocked {
+            get {
+                object obj = ResourceManager.GetObject("WindowUnlocked", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

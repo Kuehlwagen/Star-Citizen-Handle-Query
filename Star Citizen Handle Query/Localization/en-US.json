@@ -22,7 +22,6 @@
     "Display": {
       "Group_Title": "Display",
       "Language": "Language:",
-      "Show_Cache_Type": "Show Cache Type",
       "Affiliations_Max": "Maximum Affiliations:",
       "Hide_Redacted_Affiliations": "Hide Redacted Affiliations",
       "Auto_Check_For_Update": "Check for update when program starts"
