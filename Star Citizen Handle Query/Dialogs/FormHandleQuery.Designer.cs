@@ -65,11 +65,11 @@
       this.TextBoxHandle.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
       this.TextBoxHandle.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
       this.TextBoxHandle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.TextBoxHandle.Location = new System.Drawing.Point(80, 3);
+      this.TextBoxHandle.Location = new System.Drawing.Point(69, 3);
       this.TextBoxHandle.MaxLength = 60;
       this.TextBoxHandle.Name = "TextBoxHandle";
       this.TextBoxHandle.PlaceholderText = "Handle eingeben...";
-      this.TextBoxHandle.Size = new System.Drawing.Size(266, 23);
+      this.TextBoxHandle.Size = new System.Drawing.Size(277, 23);
       this.TextBoxHandle.TabIndex = 2;
       this.TextBoxHandle.TextChanged += new System.EventHandler(this.TextBoxHandle_TextChanged);
       this.TextBoxHandle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxHandle_KeyDown);
@@ -90,9 +90,9 @@
       this.LabelLockUnlock.Cursor = System.Windows.Forms.Cursors.Hand;
       this.LabelLockUnlock.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
       this.LabelLockUnlock.Image = global::Star_Citizen_Handle_Query.Properties.Resources.WindowLocked;
-      this.LabelLockUnlock.Location = new System.Drawing.Point(3, 3);
+      this.LabelLockUnlock.Location = new System.Drawing.Point(3, 7);
       this.LabelLockUnlock.Name = "LabelLockUnlock";
-      this.LabelLockUnlock.Size = new System.Drawing.Size(20, 20);
+      this.LabelLockUnlock.Size = new System.Drawing.Size(12, 12);
       this.LabelLockUnlock.TabIndex = 0;
       this.LabelLockUnlock.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LabelLockUnlock_MouseClick);
       // 
@@ -100,7 +100,7 @@
       // 
       this.LabelHandle.AutoSize = true;
       this.LabelHandle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelHandle.Location = new System.Drawing.Point(25, 6);
+      this.LabelHandle.Location = new System.Drawing.Point(14, 6);
       this.LabelHandle.Name = "LabelHandle";
       this.LabelHandle.Size = new System.Drawing.Size(49, 15);
       this.LabelHandle.TabIndex = 1;
