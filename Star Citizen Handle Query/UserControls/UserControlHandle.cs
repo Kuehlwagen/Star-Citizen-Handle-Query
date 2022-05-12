@@ -1,5 +1,4 @@
-﻿using Star_Citizen_Handle_Query.Dialogs;
-using Star_Citizen_Handle_Query.Serialization;
+﻿using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
 using System.Net;
 using System.Text;
