@@ -14,7 +14,6 @@ Das Tool-Hauptfenster kann nur dann im Vordergrund des Spiels dargestellt werden
 - __Sprache:__ Hier kann die Sprache für das Tool eingestellt werden. Zur Verfügung stehen die Sprachen `Deutsch` und `English`.
 - __Affiliationen Maximum:__ Hier kann angegeben werden, wie viele Affiliationen maximal dargestellt werden sollen.
 - __Unkenntliche Affiliationen ausblenden:__ Hier kann angegeben werden, ob unkenntlich gemachte Affiliationen ausgeblendet werden sollen
-- __Verwendeten Cache-Typ anzeigen:__ Wird diese Einstellung aktiviert, wird rechts neben der Handle-Eingabebox ein Hinweis angezeigt, mit welchem Cache-Typ die Daten geladen wurden (`LIVE` = Live-Daten von der Star Citizen Webseite, `LOCAL` = Lokaler Cache)
 - __Bei Programmstart nach Update suchen:__ Angabe, ob bei jedem Programmstart geprüft werden soll, ob ein Programmupdate zur Verfügung steht
   - Ausschließlich wenn ein Update zur Verfügung steht, wird eine Benachrichtigung angezeigt.
 ### Fenster
@@ -63,5 +62,7 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
 - Folgende Funktionen sind nur aktiv, wenn in den Einstellungen in der Gruppe `Fenster` das Kontrollkästchen `Mauseingaben ignorieren` nicht gesetzt ist:
   - Ein Mauslinksklick auf das Handle-Avatar öffnet die Informationsseite des Handles auf der Star Citizen Webseite (z.B. https://robertsspaceindustries.com/citizens/Kuehlwagen).
   - Ein Mauslinksklick auf ein Organisation-Avatar öffnet die Informationsseite der Organisation auf der Star Citizen Webseite (z.B. https://robertsspaceindustries.com/orgs/KRT).
-  - Hält man die linke Maustaste und die `Strg`-Taste gleichzeitig auf dem Handle-Schriftzug gedrückt, kann das Hauptfenster verschoben werden. Hält man statt der linken Maustaste die mittlere Maustaste gedrückt, wird das Hauptfenster an die Standard-Position (oben mittig) zurück gesetzt.
+  - Klickt man die Schloss-Schaltfläche links neben dem Handle-Schriftzug, wird das Hauptfenster entsperrt / gesperrt. Wenn das Hauptfenster entsperrt ist, kann mit gehaltener linker Maustaste auf dem Handle-Schriftzug das Hauptfenster verschoben werden. Drückt man stattdessen die mittlere Maustaste, wird das Hauptfenster an die Standard-Position (oben mittig) zurück gesetzt. Wenn das Hauptfenster gesperrt ist, kann es nicht verschoben werden.
+  - Klickt man die Lupe-Schaltfläche, wird die Abfrage der Handle-Informationen ausgelöst.
+  - Klickt man die Zahnrad-Schaltfläche, wird das Einstellungen-Fenster geöffnet.
   - Ist die Einstellung `Position merken` in der Kategorie `Fenster` aktiviert, wird beim Beenden des Tools die Position des Hauptfensters in den Einstellungen gespeichert. Beim Start des Tools wird das Hauptfenster an die zuvor gespeicherte Position gesetzt. Hält man, während das Tool gestartet wird, die `Umschalt`-Taste gedrückt, wird das Fenster immer an die Standardposition (oben mittig) gesetzt.
