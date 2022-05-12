@@ -4,6 +4,11 @@
     "Handle": "Handle:",
     "Handle_Placeholder": "Handle eingeben...",
     "Handle_Not_Found": "Handle nicht gefunden...",
+    "ToolTips": {
+      "Lock_Unlock_Window": "Fenster sperren/entsperren",
+      "Query_Handle": "Handleinformationen abrufen",
+      "Settings": "Einstellungen \u00F6ffnen"
+    },
     "Context_Menu": {
       "Show": "Anzeigen",
       "Settings": "Einstellungen",

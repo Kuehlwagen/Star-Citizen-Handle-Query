@@ -49,10 +49,21 @@
 
     public string Handle_Not_Found { get; set; } = "Handle nicht gefunden...";
 
+    public Translation_Window_ToolTips ToolTips { get; set; } = new();
+
     public Translation_Window_Context_Menu Context_Menu { get; set; } = new();
 
     public Translation_Window_MessageBoxes MessageBoxes { get; set; } = new();
 
+  }
+
+  [Serializable()]
+  public class Translation_Window_ToolTips {
+    public string Lock_Unlock_Window { get; set; } = "Fenster sperren/freigeben";
+
+    public string Query_Handle { get; set; } = "Handleinformationen aufrufen";
+
+    public string Settings { get; set; } = "Einstellungen öffnen";
   }
 
   [Serializable()]

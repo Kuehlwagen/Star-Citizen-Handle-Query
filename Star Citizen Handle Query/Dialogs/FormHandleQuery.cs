@@ -148,6 +148,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       BeendenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Close;
       UeberToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.About;
       AufUpdatePruefenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Check_For_Update;
+      ToolTipHandleQuery.SetToolTip(LabelLockUnlock, ProgramTranslation.Window.ToolTips.Lock_Unlock_Window);
+      ToolTipHandleQuery.SetToolTip(LabelQuery, ProgramTranslation.Window.ToolTips.Query_Handle);
+      ToolTipHandleQuery.SetToolTip(LabelSettings, ProgramTranslation.Window.ToolTips.Settings);
     }
 
     internal Settings GetProgramSettings() {
@@ -602,9 +605,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void EinstellungenToolStripMenuItem_Click(object sender, EventArgs e) {
       // Einstellungen anzeigen
-      EnableContextMenu(false);
-      ShowProperties(true);
-      EnableContextMenu();
+      ShowPropertiesForm();
     }
 
     private Settings ShowProperties(bool mitProgramSettings = false) {
@@ -909,6 +910,24 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (e.Button == MouseButtons.Left) {
         QueryHandle(ModifierKeys == Keys.Control);
       }
+    }
+
+    private void LabelSettings_MouseClick(object sender, MouseEventArgs e) {
+      // Einstellungen anzeigen
+      ShowPropertiesForm();
+    }
+
+    private void ShowPropertiesForm() {
+      // Einstellungen anzeigen
+      EnableContextMenu(false);
+      ShowProperties(true);
+      EnableContextMenu();
+    }
+
+    private void ToolTipHandleQuery_Draw(object sender, DrawToolTipEventArgs e) {
+      e.DrawBackground();
+      e.DrawBorder();
+      e.DrawText();
     }
   }
 

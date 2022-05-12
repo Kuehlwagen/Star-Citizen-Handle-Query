@@ -4,6 +4,11 @@
     "Handle": "Handle:",
     "Handle_Placeholder": "Insert Handle...",
     "Handle_Not_Found": "Handle not found...",
+    "ToolTips": {
+      "Lock_Unlock_Window": "Lock/Unlock Window",
+      "Query_Handle": "Query Handle Information",
+      "Settings": "Open Settings"
+    },
     "Context_Menu": {
       "Show": "Show",
       "Settings": "Settings",

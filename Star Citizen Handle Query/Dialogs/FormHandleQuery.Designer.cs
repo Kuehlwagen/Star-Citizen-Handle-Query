@@ -27,6 +27,7 @@
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormHandleQuery));
       this.PanelHandleQuery = new System.Windows.Forms.Panel();
       this.TextBoxHandle = new System.Windows.Forms.TextBox();
+      this.LabelSettings = new System.Windows.Forms.Label();
       this.LabelQuery = new System.Windows.Forms.Label();
       this.LabelLockUnlock = new System.Windows.Forms.Label();
       this.LabelHandle = new System.Windows.Forms.Label();
@@ -40,6 +41,7 @@
       this.UeberToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
       this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
       this.BeendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.ToolTipHandleQuery = new System.Windows.Forms.ToolTip(this.components);
       this.PanelHandleQuery.SuspendLayout();
       this.ContextMenuStripNotifyIcon.SuspendLayout();
       this.SuspendLayout();
@@ -50,6 +52,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
       this.PanelHandleQuery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.PanelHandleQuery.Controls.Add(this.TextBoxHandle);
+      this.PanelHandleQuery.Controls.Add(this.LabelSettings);
       this.PanelHandleQuery.Controls.Add(this.LabelQuery);
       this.PanelHandleQuery.Controls.Add(this.LabelLockUnlock);
       this.PanelHandleQuery.Controls.Add(this.LabelHandle);
@@ -69,17 +72,28 @@
       this.TextBoxHandle.MaxLength = 60;
       this.TextBoxHandle.Name = "TextBoxHandle";
       this.TextBoxHandle.PlaceholderText = "Handle eingeben...";
-      this.TextBoxHandle.Size = new System.Drawing.Size(277, 23);
+      this.TextBoxHandle.Size = new System.Drawing.Size(253, 23);
       this.TextBoxHandle.TabIndex = 2;
       this.TextBoxHandle.TextChanged += new System.EventHandler(this.TextBoxHandle_TextChanged);
       this.TextBoxHandle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxHandle_KeyDown);
+      // 
+      // LabelSettings
+      // 
+      this.LabelSettings.Cursor = System.Windows.Forms.Cursors.Hand;
+      this.LabelSettings.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+      this.LabelSettings.Image = global::Star_Citizen_Handle_Query.Properties.Resources.Settings;
+      this.LabelSettings.Location = new System.Drawing.Point(350, 4);
+      this.LabelSettings.Name = "LabelSettings";
+      this.LabelSettings.Size = new System.Drawing.Size(20, 20);
+      this.LabelSettings.TabIndex = 3;
+      this.LabelSettings.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LabelSettings_MouseClick);
       // 
       // LabelQuery
       // 
       this.LabelQuery.Cursor = System.Windows.Forms.Cursors.Hand;
       this.LabelQuery.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
       this.LabelQuery.Image = global::Star_Citizen_Handle_Query.Properties.Resources.Search;
-      this.LabelQuery.Location = new System.Drawing.Point(350, 3);
+      this.LabelQuery.Location = new System.Drawing.Point(328, 4);
       this.LabelQuery.Name = "LabelQuery";
       this.LabelQuery.Size = new System.Drawing.Size(20, 20);
       this.LabelQuery.TabIndex = 3;
@@ -196,6 +210,13 @@
       this.BeendenToolStripMenuItem.Text = "&Beenden";
       this.BeendenToolStripMenuItem.Click += new System.EventHandler(this.BeendenToolStripMenuItem_Click);
       // 
+      // ToolTipHandleQuery
+      // 
+      this.ToolTipHandleQuery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.ToolTipHandleQuery.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      this.ToolTipHandleQuery.OwnerDraw = true;
+      this.ToolTipHandleQuery.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this.ToolTipHandleQuery_Draw);
+      // 
       // FormHandleQuery
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -238,5 +259,7 @@
     private ToolStripMenuItem AufUpdatePruefenToolStripMenuItem;
     private Label LabelLockUnlock;
     private Label LabelQuery;
+    private Label LabelSettings;
+    private ToolTip ToolTipHandleQuery;
   }
 }
