@@ -442,8 +442,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           MatchCollection mcIdCmHandleEnlistedFluency = RgxIdCmHandleEnlistedFluency.Matches(reply.HttpResponse.Source);
           if (mcIdCmHandleEnlistedFluency.Count >= 5) {
             reply.Profile.UeeCitizenRecord = mcIdCmHandleEnlistedFluency[0].Groups[1].Value;
-            reply.Profile.CommunityMonicker = HttpUtility.HtmlDecode(mcIdCmHandleEnlistedFluency[1].Groups[1].Value);
-            reply.Profile.Handle = mcIdCmHandleEnlistedFluency[2].Groups[1].Value;
+            reply.Profile.CommunityMonicker = CorrectText(mcIdCmHandleEnlistedFluency[1].Groups[1].Value);
+            reply.Profile.Handle = CorrectText(mcIdCmHandleEnlistedFluency[2].Groups[1].Value);
             if (DateTime.TryParseExact(mcIdCmHandleEnlistedFluency[3].Groups[1].Value, "MMM d, yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime enlisted)) {
               reply.Profile.Enlisted = enlisted;
             }
@@ -459,7 +459,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           // Display Title
           MatchCollection mcDisplayTitle = RgxDisplayTitle.Matches(reply.HttpResponse.Source);
           if (mcDisplayTitle.Count == 1 && mcDisplayTitle[0].Groups.Count == 3) {
-            reply.Profile.DisplayTitle = mcDisplayTitle[0].Groups[2].Value;
+            reply.Profile.DisplayTitle = CorrectText(mcDisplayTitle[0].Groups[2].Value);
             reply.Profile.DisplayTitleAvatarUrl = CorrectUrl(mcDisplayTitle[0].Groups[1].Value);
           }
 
@@ -495,14 +495,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               if (mcMainOrganization.Count == 1 && mcMainOrganization[0].Groups.Count == 9) {
                 reply.MainOrganization = new() {
                   Url = $"https://robertsspaceindustries.com/orgs/{mcMainOrganization[0].Groups[1].Value}",
-                  Sid = mcMainOrganization[0].Groups[1].Value,
+                  Sid = CorrectText(mcMainOrganization[0].Groups[1].Value),
                   AvatarUrl = CorrectUrl(mcMainOrganization[0].Groups[2].Value),
                   Members = Convert.ToInt32(mcMainOrganization[0].Groups[3].Value),
-                  Name = mcMainOrganization[0].Groups[4].Value,
-                  RankName = mcMainOrganization[0].Groups[5].Value,
-                  PrimaryActivity = mcMainOrganization[0].Groups[6].Value,
-                  SecondaryActivity = mcMainOrganization[0].Groups[7].Value,
-                  Commitment = mcMainOrganization[0].Groups[8].Value,
+                  Name = CorrectText(mcMainOrganization[0].Groups[4].Value),
+                  RankName = CorrectText(mcMainOrganization[0].Groups[5].Value),
+                  PrimaryActivity = CorrectText(mcMainOrganization[0].Groups[6].Value),
+                  SecondaryActivity = CorrectText(mcMainOrganization[0].Groups[7].Value),
+                  Commitment = CorrectText(mcMainOrganization[0].Groups[8].Value),
                   Redacted = false
                 };
                 // Main Organization Rank Stars
@@ -524,11 +524,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               if (mcOrganization.Count > 0 && mcOrganization[0].Groups.Count == 6) {
                 reply.Affiliations.Add(new OrganizationInfo() {
                   Url = $"https://robertsspaceindustries.com/orgs/{mcOrganization[0].Groups[1].Value}",
-                  Sid = mcOrganization[0].Groups[1].Value,
+                  Sid = CorrectText(mcOrganization[0].Groups[1].Value),
                   AvatarUrl = CorrectUrl(mcOrganization[0].Groups[2].Value),
                   Members = Convert.ToInt32(mcOrganization[0].Groups[3].Value),
-                  Name = mcOrganization[0].Groups[4].Value,
-                  RankName = mcOrganization[0].Groups[5].Value,
+                  Name = CorrectText(mcOrganization[0].Groups[4].Value),
+                  RankName = CorrectText(mcOrganization[0].Groups[5].Value.Replace("&", "&&")),
                   Redacted = false
                 });
                 // Affiliation Rank Stars
@@ -548,6 +548,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       return reply;
+    }
+
+    private static string CorrectText(string text) {
+      return HttpUtility.HtmlDecode(text);
     }
 
     private static async Task<HttpInfo> GetSource(string sourceExportName, string url) {
