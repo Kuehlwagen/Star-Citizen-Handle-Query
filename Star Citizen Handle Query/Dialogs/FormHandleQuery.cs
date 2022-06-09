@@ -157,20 +157,43 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Settings rtnVal = null;
 
       // Einstellungen aus Datei lesen
-      string settingsFilePath = GetSettingsFilePath();
-      if (File.Exists(settingsFilePath)) {
-        rtnVal = JsonSerializer.Deserialize<Settings>(File.ReadAllText(settingsFilePath));
+      string newPath = GetSettingsFilePath();
+      if (File.Exists(newPath)) {
+        rtnVal = JsonSerializer.Deserialize<Settings>(File.ReadAllText(newPath));
       } else {
         Version programVersion = GetProgramVersion();
         foreach (string directory in Directory.GetDirectories(Directory.GetParent(GetSaveFilesRootPath()).FullName).OrderByDescending(x => x)) {
           Version version = new(Path.GetFileName(directory) + ".0");
           if (version < programVersion) {
-            string legacySettingsFilePath = Path.Combine(directory, GetSettingsFileName());
-            if (File.Exists(legacySettingsFilePath)) {
-              rtnVal = JsonSerializer.Deserialize<Settings>(File.ReadAllText(legacySettingsFilePath));
+            string legacyPath = Path.Combine(directory, GetSettingsFileName());
+            if (File.Exists(legacyPath)) {
+              rtnVal = JsonSerializer.Deserialize<Settings>(File.ReadAllText(legacyPath));
               if (rtnVal != null) {
-                File.Copy(legacySettingsFilePath, settingsFilePath);
+                try {
+                  File.Move(legacyPath, newPath);
+                } catch { }
               }
+              legacyPath = Path.Combine(directory, "Cache");
+              newPath = GetCachePath(CacheDirectoryType.Root);
+              if (Directory.Exists(legacyPath) && !Directory.Exists(newPath)) {
+                try {
+                  Directory.Move(legacyPath, newPath);
+                } catch { }
+              }
+              legacyPath = Path.Combine(directory, "Localization");
+              if (Directory.Exists(legacyPath)) {
+                foreach (string file in Directory.GetFiles(legacyPath)) {
+                  try {
+                    File.Delete(file);
+                  } catch { }
+                }
+                try {
+                  Directory.Delete(legacyPath);
+                } catch { }
+              }
+              try {
+                Directory.Delete(directory);
+              } catch { }
             }
             break;
           }
