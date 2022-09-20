@@ -38,9 +38,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       // Fallback auf leeres Settings-Objekt
-      if (ProgramSettings == null) {
-        ProgramSettings = new Settings();
-      }
+      ProgramSettings ??= new Settings();
 
       // Einstellungen auf den Dialog übernehmen
       SetDialogValues();

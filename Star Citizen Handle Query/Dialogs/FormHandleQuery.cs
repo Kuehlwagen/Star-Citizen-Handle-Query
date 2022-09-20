@@ -131,9 +131,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       // Fallback auf Standard-Sprache
-      if (rtnVal == null) {
-        rtnVal = new();
-      }
+      rtnVal ??= new();
 
       return rtnVal;
     }
@@ -201,13 +199,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       // Wenn die Einstellungen nicht geladen werden konnten, Einstellungen-Fenster anzeigen
-      if (rtnVal == null) {
-        rtnVal = ShowProperties();
-      }
+      rtnVal ??= ShowProperties();
 
-      if (rtnVal == null) {
-        rtnVal = new();
-      }
+      rtnVal ??= new();
 
       return rtnVal;
     }
@@ -442,9 +436,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       // Neues HandleInfo-Objekt erstellen, wenn der Rückgabewert null sein sollte
-      if (rtnVal == null) {
-        rtnVal = new();
-      }
+      rtnVal ??= new();
 
       return rtnVal;
     }
@@ -541,9 +533,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
               // Affiliation
               MatchCollection mcOrganization = RgxOrganization.Matches(organization);
-              if (reply.Affiliations == null) {
-                reply.Affiliations = new List<OrganizationInfo>();
-              }
+              reply.Affiliations ??= new List<OrganizationInfo>();
               if (mcOrganization.Count > 0 && mcOrganization[0].Groups.Count == 6) {
                 reply.Affiliations.Add(new OrganizationInfo() {
                   Url = $"https://robertsspaceindustries.com/orgs/{mcOrganization[0].Groups[1].Value}",
