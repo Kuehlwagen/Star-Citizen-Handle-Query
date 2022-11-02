@@ -1,4 +1,5 @@
-﻿using Star_Citizen_Handle_Query.Serialization;
+﻿using Star_Citizen_Handle_Query.Dialogs;
+using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
 using System.Net;
 using System.Text;
@@ -47,6 +48,11 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelAdditionalInformation.Text = GetString(Info?.Comment);
         if (DisplayOnly) {
           LabelAdditionalInformation.Cursor = Cursors.Default;
+        } else {
+          bool isLive = await CheckCommunityHubIsLive(handle);
+          if (isLive) {
+            PictureBoxLive.Visible = true;
+          }
         }
       } else {
         LabelCommunityMoniker.Text = Info?.HttpResponse?.StatusCode == HttpStatusCode.NotFound ? ProgramTranslation.Window.Handle_Not_Found : Info?.HttpResponse?.ErrorText;
@@ -64,6 +70,19 @@ namespace Star_Citizen_Handle_Query.UserControls {
           File.WriteAllText(jsonPath, handleJson, Encoding.UTF8);
         }
       }
+    }
+
+    internal static async Task<bool> CheckCommunityHubIsLive(string handle) {
+      bool rtnVal = false;
+
+      HttpInfo httpInfo = await GetSource($"{handle}_CommunityHub", $"https://robertsspaceindustries.com/community-hub/user/{handle}", true);
+      if (httpInfo?.StatusCode == HttpStatusCode.OK) {
+        if (httpInfo.Source.Contains("\"live\":true")) {
+          rtnVal = true;
+        }
+      }
+
+      return rtnVal;
     }
 
     private void PictureBoxHandleAvatar_MouseClick(object sender, MouseEventArgs e) {
@@ -109,6 +128,11 @@ namespace Star_Citizen_Handle_Query.UserControls {
       }
     }
 
+    private void PictureBoxLive_MouseClick(object sender, MouseEventArgs e) {
+      if (e.Button == MouseButtons.Left) {
+        Process.Start("explorer", $"https://robertsspaceindustries.com/community-hub/user/{Info.Profile.Handle}");
+      }
+    }
   }
 
 }

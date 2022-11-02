@@ -33,8 +33,10 @@
       this.LabelEnlistedDate = new System.Windows.Forms.Label();
       this.TextBoxAdditionalInformation = new System.Windows.Forms.TextBox();
       this.LabelAdditionalInformation = new System.Windows.Forms.Label();
+      this.PictureBoxLive = new System.Windows.Forms.PictureBox();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxHandleAvatar)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxDisplayTitle)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLive)).BeginInit();
       this.SuspendLayout();
       // 
       // LabelHandle
@@ -137,11 +139,25 @@
       this.LabelAdditionalInformation.TextAlign = System.Drawing.ContentAlignment.TopRight;
       this.LabelAdditionalInformation.Click += new System.EventHandler(this.LabelAdditionalInformation_Click);
       // 
+      // PictureBoxLive
+      // 
+      this.PictureBoxLive.BackColor = System.Drawing.Color.Transparent;
+      this.PictureBoxLive.Cursor = System.Windows.Forms.Cursors.Hand;
+      this.PictureBoxLive.Image = global::Star_Citizen_Handle_Query.Properties.Resources.Live;
+      this.PictureBoxLive.Location = new System.Drawing.Point(336, 57);
+      this.PictureBoxLive.Name = "PictureBoxLive";
+      this.PictureBoxLive.Size = new System.Drawing.Size(32, 16);
+      this.PictureBoxLive.TabIndex = 13;
+      this.PictureBoxLive.TabStop = false;
+      this.PictureBoxLive.Visible = false;
+      this.PictureBoxLive.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBoxLive_MouseClick);
+      // 
       // UserControlHandle
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.Controls.Add(this.PictureBoxLive);
       this.Controls.Add(this.TextBoxAdditionalInformation);
       this.Controls.Add(this.LabelAdditionalInformation);
       this.Controls.Add(this.LabelUEECitizenRecord);
@@ -159,6 +175,7 @@
       this.Load += new System.EventHandler(this.UserControlHandle_Load);
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxHandleAvatar)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxDisplayTitle)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLive)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -176,5 +193,6 @@
     private Label LabelEnlistedDate;
     private TextBox TextBoxAdditionalInformation;
     private Label LabelAdditionalInformation;
-  }
+        private PictureBox PictureBoxLive;
+    }
 }

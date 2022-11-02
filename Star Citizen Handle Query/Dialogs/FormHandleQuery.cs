@@ -34,9 +34,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public FormHandleQuery() {
       InitializeComponent();
 
+#if DEBUG
+      IsDebug = true;
+#else
       if (Environment.GetCommandLineArgs().Any(x => x.Equals("-debug", StringComparison.InvariantCultureIgnoreCase))) {
         IsDebug = true;
       }
+#endif
 
       // Standard-Sprachen erstellen
       CreateDefaultLocalizations();
@@ -349,7 +353,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         LabelLockUnlock.Enabled = false;
         LabelQuery.Enabled = false;
         // Handle-Informationen auslesen
-        HandleInfo handleInfo = await GetHandleInfo<HandleInfo>(forceLive, TextBoxHandle.Text, ProgramSettings, CacheDirectoryType.Handle);
+        HandleInfo handleInfo = await GetHandleInfo(forceLive, TextBoxHandle.Text, ProgramSettings, CacheDirectoryType.Handle);
 
         // Ggf. Cache-Verzeichnisse erstellen
         CreateDirectory(CacheDirectoryType.Handle);
@@ -416,7 +420,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Size = new Size(Width, 31);
     }
 
-    public async Task<HandleInfo> GetHandleInfo<T>(bool forceLive, string name, Settings programSettings, CacheDirectoryType infoType) where T : new() {
+    public async Task<HandleInfo> GetHandleInfo(bool forceLive, string name, Settings programSettings, CacheDirectoryType infoType) {
       HandleInfo rtnVal = default;
 
       // Informationen aus Datei auslesen
@@ -567,19 +571,30 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return HttpUtility.HtmlDecode(text);
     }
 
-    private static async Task<HttpInfo> GetSource(string sourceExportName, string url) {
+    internal static async Task<HttpInfo> GetSource(string sourceExportName, string url, bool isCommunityHub = false) {
       HttpInfo rtnVal = new();
 
       using HttpClient client = new();
       try {
         rtnVal.Source = await client.GetStringAsync(url);
-        int index = rtnVal.Source.IndexOf("<div class=\"page-wrapper\">");
-        if (index >= 0) {
-          rtnVal.Source = rtnVal.Source[index..];
-        }
-        index = rtnVal.Source.IndexOf("<script type=\"text/plain\" data-cookieconsent=\"statistics\">");
-        if (index >= 0) {
-          rtnVal.Source = rtnVal.Source[..index];
+        if (!isCommunityHub) {
+          int index = rtnVal.Source.IndexOf("<div class=\"page-wrapper\">");
+          if (index >= 0) {
+            rtnVal.Source = rtnVal.Source[index..];
+          }
+          index = rtnVal.Source.IndexOf("<script type=\"text/plain\" data-cookieconsent=\"statistics\">");
+          if (index >= 0) {
+            rtnVal.Source = rtnVal.Source[..index];
+          }
+        } else {
+          int index = rtnVal.Source.IndexOf("{\"props\":");
+          if (index >= 0) {
+            rtnVal.Source = rtnVal.Source[index..];
+          }
+          index = rtnVal.Source.IndexOf("</script></body></html>");
+          if (index >= 0) {
+            rtnVal.Source = rtnVal.Source[..index];
+          }
         }
         if (IsDebug) {
           ExportSource(sourceExportName, rtnVal.Source);

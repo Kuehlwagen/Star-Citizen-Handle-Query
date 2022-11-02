@@ -93,6 +93,16 @@ namespace Star_Citizen_Handle_Query.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Live {
+            get {
+                object obj = ResourceManager.GetObject("Live", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap OrganizationRank0 {
             get {
                 object obj = ResourceManager.GetObject("OrganizationRank0", resourceCulture);
