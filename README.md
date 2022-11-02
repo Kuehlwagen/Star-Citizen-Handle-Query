@@ -59,9 +59,11 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
   - Wird die Handle-Eingabebox geleert, wird ein gegebenenfall zuvor ermitteltes Ergebnis ausgeblendet.
 - Durch die Betätigung der Esc-Taste wird das Hauptfenster ausgeblendet.
 - Wurde eine globale Taste(nkobination) in den Einstellungen angegeben, kann das Fenster jederzeit mit dieser Taste(nkombination) wieder angezeigt werden.
+- Wenn das Profil des Handles mit Twitch.tv verknüpft ist und gerade live auf Twitch.tv streamt, wird unten rechts eine LIVE-Schaltfläche angezeigt.
 - Folgende Funktionen sind nur aktiv, wenn in den Einstellungen in der Gruppe `Fenster` das Kontrollkästchen `Mauseingaben ignorieren` nicht gesetzt ist:
   - Ein Mauslinksklick auf das Handle-Avatar öffnet die Informationsseite des Handles auf der Star Citizen Webseite (z.B. https://robertsspaceindustries.com/citizens/Kuehlwagen).
   - Ein Mauslinksklick auf ein Organisation-Avatar öffnet die Informationsseite der Organisation auf der Star Citizen Webseite (z.B. https://robertsspaceindustries.com/orgs/KRT).
+  - Ein Mauslinksklick auf die LIVE-Schaltfläche öffnet das Community-Hub-Profil des Handles (z.B. https://robertsspaceindustries.com/community-hub/user/Kuehlwagen).
   - Klickt man die Schloss-Schaltfläche links neben dem Handle-Schriftzug, wird das Hauptfenster entsperrt / gesperrt. Wenn das Hauptfenster entsperrt ist, kann mit gehaltener linker Maustaste auf dem Handle-Schriftzug das Hauptfenster verschoben werden. Drückt man stattdessen die mittlere Maustaste, wird das Hauptfenster an die Standard-Position (oben mittig) zurück gesetzt. Wenn das Hauptfenster gesperrt ist, kann es nicht verschoben werden.
   - Klickt man die Lupe-Schaltfläche, wird die Abfrage der Handle-Informationen ausgelöst.
     - Wird währenddessen die `Strg`-Taste gedrückt gehalten, wird das Auslesen der Handle-Informationen inklusive Avatare (Handle, Organisation und Affiliationen) via Star Citizen Webseite erzwungen.
