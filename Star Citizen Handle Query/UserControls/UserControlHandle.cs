@@ -47,7 +47,8 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelAdditionalInformation.Text = GetString(Info?.Comment);
         if (DisplayOnly) {
           LabelAdditionalInformation.Cursor = Cursors.Default;
-        } else {
+        } else if (!ProgramSettings.HideStreamLiveStatus) {
+          PictureBoxLive.Visible = true;
           CommunityHubLiveState liveState = await CheckCommunityHubIsLive(handle);
           Image imageLiveState = Properties.Resources.NotAvailable;
           switch (liveState) {

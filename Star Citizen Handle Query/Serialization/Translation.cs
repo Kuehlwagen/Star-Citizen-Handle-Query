@@ -120,6 +120,8 @@
 
     public string Auto_Check_For_Update { get; set; } = "Bei Programmstart nach Update suchen";
 
+    public string Hide_Stream_Live_Status { get; set; } = "Stream Live-Status ausblenden";
+
   }
 
   [Serializable()]

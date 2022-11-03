@@ -46,6 +46,7 @@
       this.GroupBoxLokalerCache = new System.Windows.Forms.GroupBox();
       this.ButtonStandard = new System.Windows.Forms.Button();
       this.GroupBoxAnzeige = new System.Windows.Forms.GroupBox();
+      this.CheckBoxHideStreamLiveStatus = new System.Windows.Forms.CheckBox();
       this.CheckBoxAutoCheckForUpdate = new System.Windows.Forms.CheckBox();
       this.NumericUpDownAffiliationenMaximum = new System.Windows.Forms.NumericUpDown();
       this.LabelMaxAffiliationen = new System.Windows.Forms.Label();
@@ -130,10 +131,10 @@
       // ButtonSpeichern
       // 
       this.ButtonSpeichern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 415);
+      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 444);
       this.ButtonSpeichern.Name = "ButtonSpeichern";
       this.ButtonSpeichern.Size = new System.Drawing.Size(75, 28);
-      this.ButtonSpeichern.TabIndex = 4;
+      this.ButtonSpeichern.TabIndex = 3;
       this.ButtonSpeichern.Text = "Speichern";
       this.ButtonSpeichern.UseVisualStyleBackColor = true;
       this.ButtonSpeichern.Click += new System.EventHandler(this.ButtonSpeichern_Click);
@@ -141,10 +142,10 @@
       // ButtonSchliessen
       // 
       this.ButtonSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 415);
+      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 444);
       this.ButtonSchliessen.Name = "ButtonSchliessen";
       this.ButtonSchliessen.Size = new System.Drawing.Size(75, 28);
-      this.ButtonSchliessen.TabIndex = 5;
+      this.ButtonSchliessen.TabIndex = 4;
       this.ButtonSchliessen.Text = "Schließen";
       this.ButtonSchliessen.UseVisualStyleBackColor = true;
       this.ButtonSchliessen.Click += new System.EventHandler(this.ButtonSchliessen_Click);
@@ -182,10 +183,10 @@
       this.GroupBoxFenster.Controls.Add(this.LabelFensterDeckkraftProzent);
       this.GroupBoxFenster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.GroupBoxFenster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxFenster.Location = new System.Drawing.Point(12, 153);
+      this.GroupBoxFenster.Location = new System.Drawing.Point(12, 182);
       this.GroupBoxFenster.Name = "GroupBoxFenster";
       this.GroupBoxFenster.Size = new System.Drawing.Size(416, 187);
-      this.GroupBoxFenster.TabIndex = 2;
+      this.GroupBoxFenster.TabIndex = 1;
       this.GroupBoxFenster.TabStop = false;
       this.GroupBoxFenster.Text = "Fenster";
       // 
@@ -297,26 +298,27 @@
       this.GroupBoxLokalerCache.Controls.Add(this.LabelLokalerCacheAlter);
       this.GroupBoxLokalerCache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.GroupBoxLokalerCache.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 348);
+      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 377);
       this.GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
       this.GroupBoxLokalerCache.Size = new System.Drawing.Size(416, 61);
-      this.GroupBoxLokalerCache.TabIndex = 3;
+      this.GroupBoxLokalerCache.TabIndex = 2;
       this.GroupBoxLokalerCache.TabStop = false;
       this.GroupBoxLokalerCache.Text = "Lokaler Cache";
       // 
       // ButtonStandard
       // 
       this.ButtonStandard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonStandard.Location = new System.Drawing.Point(353, 415);
+      this.ButtonStandard.Location = new System.Drawing.Point(353, 444);
       this.ButtonStandard.Name = "ButtonStandard";
       this.ButtonStandard.Size = new System.Drawing.Size(75, 28);
-      this.ButtonStandard.TabIndex = 6;
+      this.ButtonStandard.TabIndex = 5;
       this.ButtonStandard.Text = "Standard";
       this.ButtonStandard.UseVisualStyleBackColor = true;
       this.ButtonStandard.Click += new System.EventHandler(this.ButtonStandard_Click);
       // 
       // GroupBoxAnzeige
       // 
+      this.GroupBoxAnzeige.Controls.Add(this.CheckBoxHideStreamLiveStatus);
       this.GroupBoxAnzeige.Controls.Add(this.CheckBoxAutoCheckForUpdate);
       this.GroupBoxAnzeige.Controls.Add(this.LabelSprache);
       this.GroupBoxAnzeige.Controls.Add(this.NumericUpDownAffiliationenMaximum);
@@ -327,18 +329,29 @@
       this.GroupBoxAnzeige.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.GroupBoxAnzeige.Location = new System.Drawing.Point(12, 12);
       this.GroupBoxAnzeige.Name = "GroupBoxAnzeige";
-      this.GroupBoxAnzeige.Size = new System.Drawing.Size(416, 135);
-      this.GroupBoxAnzeige.TabIndex = 1;
+      this.GroupBoxAnzeige.Size = new System.Drawing.Size(416, 160);
+      this.GroupBoxAnzeige.TabIndex = 0;
       this.GroupBoxAnzeige.TabStop = false;
       this.GroupBoxAnzeige.Text = "Anzeige";
+      // 
+      // CheckBoxHideStreamLiveStatus
+      // 
+      this.CheckBoxHideStreamLiveStatus.AutoSize = true;
+      this.CheckBoxHideStreamLiveStatus.Location = new System.Drawing.Point(15, 105);
+      this.CheckBoxHideStreamLiveStatus.Name = "CheckBoxHideStreamLiveStatus";
+      this.CheckBoxHideStreamLiveStatus.Size = new System.Drawing.Size(188, 19);
+      this.CheckBoxHideStreamLiveStatus.TabIndex = 5;
+      this.CheckBoxHideStreamLiveStatus.Text = "Stream Live-Status ausblenden";
+      this.CheckBoxHideStreamLiveStatus.UseVisualStyleBackColor = true;
+      this.CheckBoxHideStreamLiveStatus.CheckedChanged += new System.EventHandler(this.CheckBoxHideStreamLiveStatus_CheckedChanged);
       // 
       // CheckBoxAutoCheckForUpdate
       // 
       this.CheckBoxAutoCheckForUpdate.AutoSize = true;
-      this.CheckBoxAutoCheckForUpdate.Location = new System.Drawing.Point(15, 105);
+      this.CheckBoxAutoCheckForUpdate.Location = new System.Drawing.Point(15, 130);
       this.CheckBoxAutoCheckForUpdate.Name = "CheckBoxAutoCheckForUpdate";
       this.CheckBoxAutoCheckForUpdate.Size = new System.Drawing.Size(236, 19);
-      this.CheckBoxAutoCheckForUpdate.TabIndex = 5;
+      this.CheckBoxAutoCheckForUpdate.TabIndex = 6;
       this.CheckBoxAutoCheckForUpdate.Text = "Bei Programmstart nach Update suchen";
       this.CheckBoxAutoCheckForUpdate.UseVisualStyleBackColor = true;
       this.CheckBoxAutoCheckForUpdate.CheckedChanged += new System.EventHandler(this.CheckBoxAutoCheckForUpdate_CheckedChanged);
@@ -390,7 +403,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.CancelButton = this.ButtonSchliessen;
-      this.ClientSize = new System.Drawing.Size(440, 456);
+      this.ClientSize = new System.Drawing.Size(440, 485);
       this.Controls.Add(this.GroupBoxAnzeige);
       this.Controls.Add(this.GroupBoxLokalerCache);
       this.Controls.Add(this.GroupBoxFenster);
@@ -399,7 +412,7 @@
       this.Controls.Add(this.ButtonSpeichern);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.MinimumSize = new System.Drawing.Size(456, 495);
+      this.MinimumSize = new System.Drawing.Size(456, 524);
       this.Name = "FormSettings";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Star Citizen Handle Query Einstellungen";
@@ -444,5 +457,6 @@
     private CheckBox CheckBoxUnkenntlicheAffiliationenAusblenden;
     private CheckBox CheckBoxPositionMerken;
     private CheckBox CheckBoxAutoCheckForUpdate;
-  }
+        private CheckBox CheckBoxHideStreamLiveStatus;
+    }
 }

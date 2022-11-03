@@ -83,6 +83,9 @@
     /// <summary>Angabe, ob beim Programmstart nach einem Programm-Update gesucht werden soll</summary>
     public bool AutoCheckForUpdate { get; set; } = false;
 
+    /// <summary>Angabe, ob die Stream Live-Anzeige ausgeblendet werden soll</summary>
+    public bool HideStreamLiveStatus { get; set; } = false;
+
     public object Clone() {
       return MemberwiseClone();
     }

@@ -150,6 +150,7 @@
       this.PictureBoxLive.Size = new System.Drawing.Size(32, 16);
       this.PictureBoxLive.TabIndex = 13;
       this.PictureBoxLive.TabStop = false;
+      this.PictureBoxLive.Visible = false;
       this.PictureBoxLive.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBoxLive_MouseClick);
       // 
       // UserControlHandle

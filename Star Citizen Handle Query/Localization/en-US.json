@@ -5,21 +5,21 @@
     "Handle_Placeholder": "Insert Handle...",
     "Handle_Not_Found": "Handle not found...",
     "ToolTips": {
-      "Lock_Unlock_Window": "Lock/Unlock Window",
-      "Query_Handle": "Query Handle Information",
-      "Settings": "Open Settings"
+      "Lock_Unlock_Window": "Lock/Unlock window",
+      "Query_Handle": "Query Handle information",
+      "Settings": "Open settings"
     },
     "Context_Menu": {
       "Show": "Show",
       "Settings": "Settings",
-      "Local_Cache": "Local Cache",
+      "Local_Cache": "Local cache",
       "Close": "Close",
       "About": "About",
-      "Check_For_Update": "Check for Update"
+      "Check_For_Update": "Check for update"
     },
     "MessageBoxes": {
-      "Clear_Local_Cache_Question": "Complete Local Cache will be cleared. Continue?",
-      "Local_Cache_Cleared": "Local Cache was cleared"
+      "Clear_Local_Cache_Question": "Complete local cache will be cleared. Continue?",
+      "Local_Cache_Cleared": "Local cache was cleared"
     }
   },
   "Settings": {
@@ -27,25 +27,26 @@
     "Display": {
       "Group_Title": "Display",
       "Language": "Language:",
-      "Affiliations_Max": "Maximum Affiliations:",
-      "Hide_Redacted_Affiliations": "Hide Redacted Affiliations",
-      "Auto_Check_For_Update": "Check for update when program starts"
+      "Affiliations_Max": "Maximum affiliations:",
+      "Hide_Redacted_Affiliations": "Hide redacted affiliations",
+      "Auto_Check_For_Update": "Check for update when program starts",
+      "Hide_Stream_Live_Status":  "Hide stream live status"
     },
     "Window": {
       "Group_Title": "Window",
       "Opacity": "Opacity:",
       "Opacity_Percent": "%",
-      "Global_Hotkey": "Global Hotkey:",
+      "Global_Hotkey": "Global hotkey:",
       "Global_Hotkey_Ctrl": "Ctrl",
       "Global_Hotkey_Alt": "Alt",
       "Global_Hotkey_Shift": "Shift",
-      "Ignore_Mouseinput": "Ignore Mouse Input",
+      "Ignore_Mouseinput": "Ignore mouse input",
       "Enable_Alt_Tab": "Enable Alt + Tab",
-      "RememberWindowLocation":  "Remember Location"
+      "RememberWindowLocation":  "Remember location"
     },
     "Local_Cache": {
-      "Group_Title": "Local Cache",
-      "Max_Age": "Max Age:",
+      "Group_Title": "Local cache",
+      "Max_Age": "Max age:",
       "Max_Age_Days": "Day(s)"
     },
     "Buttons": {
@@ -54,25 +55,25 @@
       "Standard": "Default"
     },
     "MessageBoxes": {
-      "Save_Fail": "Saving Settings failed:\r\nError Message:"
+      "Save_Fail": "Saving settings failed:\r\nError message:"
     }
   },
   "Local_Cache": {
-    "Title": "Local Cache",
+    "Title": "Local cache",
     "Columns": {
-      "Cache_Date": "Cache Date",
+      "Cache_Date": "Cache date",
       "Handle": "Handle",
       "Community_Moniker": "CM",
       "Enlisted": "Enlisted",
       "UEE_Citizen_Record": "UEE CR",
       "Organization": "Organization",
-      "Organization_Rank": "Org. Rank",
-      "Affiliation_Count": "Aff. Count",
+      "Organization_Rank": "Org. rank",
+      "Affiliation_Count": "Aff. count",
       "Comment": "Comment"
     },
     "Buttons": {
-      "Clear_Cache": "Clear Cache",
-      "Open_Folder": "Open Folder",
+      "Clear_Cache": "Clear cache",
+      "Open_Folder": "Open folder",
       "Close": "Close"
     }
   },

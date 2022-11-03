@@ -63,6 +63,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       NumericUpDownAffiliationenMaximum.Value = ProgramSettings.AffiliationsMax;
       CheckBoxUnkenntlicheAffiliationenAusblenden.Checked = ProgramSettings.HideRedactedAffiliations;
       CheckBoxAutoCheckForUpdate.Checked = ProgramSettings.AutoCheckForUpdate;
+      CheckBoxHideStreamLiveStatus.Checked = ProgramSettings.HideStreamLiveStatus;
     }
 
     private string[] GetLocalizations() {
@@ -148,6 +149,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.HideRedactedAffiliations = (sender as CheckBox).Checked;
     }
 
+    private void CheckBoxHideStreamLiveStatus_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.HideStreamLiveStatus = (sender as CheckBox).Checked;
+    }
+
     private void CheckBoxAutoCheckForUpdate_CheckedChanged(object sender, EventArgs e) {
       ProgramSettings.AutoCheckForUpdate = (sender as CheckBox).Checked;
     }
@@ -166,6 +171,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LabelSprache.Text = CurrentLocalization.Settings.Display.Language;
       LabelMaxAffiliationen.Text = CurrentLocalization.Settings.Display.Affiliations_Max;
       CheckBoxUnkenntlicheAffiliationenAusblenden.Text = CurrentLocalization.Settings.Display.Hide_Redacted_Affiliations;
+      CheckBoxHideStreamLiveStatus.Text = CurrentLocalization.Settings.Display.Hide_Stream_Live_Status;
       CheckBoxAutoCheckForUpdate.Text = CurrentLocalization.Settings.Display.Auto_Check_For_Update;
 
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;
