@@ -1,4 +1,5 @@
-﻿using Star_Citizen_Handle_Query.Serialization;
+﻿using Star_Citizen_Handle_Query.Dialogs;
+using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
 using System.Net;
 using System.Text;
@@ -58,6 +59,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
             case CommunityHubLiveState.Live:
               imageLiveState = Properties.Resources.Live;
               break;
+            case CommunityHubLiveState.Error:
+              imageLiveState = Properties.Resources.Error;
+              break;
           }
           PictureBoxLive.Image = imageLiveState;
         }
@@ -82,15 +86,20 @@ namespace Star_Citizen_Handle_Query.UserControls {
     internal static async Task<CommunityHubLiveState> CheckCommunityHubIsLive(string handle) {
       CommunityHubLiveState rtnVal = CommunityHubLiveState.NotAvailable;
 
-      HttpInfo httpInfo = await GetSource($"{handle}_CommunityHub", $"https://robertsspaceindustries.com/community-hub/user/{handle}", true);
-      if (httpInfo?.StatusCode == HttpStatusCode.OK) {
-        if (!httpInfo.Source.Contains("\"twitchUserId\":null")) {
-          if (httpInfo.Source.Contains("\"live\":true")) {
-            rtnVal = CommunityHubLiveState.Live;
-          } else {
-            rtnVal = CommunityHubLiveState.Offline;
+      HttpInfo httpInfo = await GetSource($"{handle}_CommunityHub", $"https://robertsspaceindustries.com/community-hub/user/{handle}", CancelToken, true);
+      switch (httpInfo.StatusCode) {
+        case HttpStatusCode.OK:
+          if (!httpInfo.Source.Contains("\"twitchUserId\":null")) {
+            if (httpInfo.Source.Contains("\"live\":true")) {
+              rtnVal = CommunityHubLiveState.Live;
+            } else {
+              rtnVal = CommunityHubLiveState.Offline;
+            }
           }
-        }
+          break;
+        case HttpStatusCode.BadGateway:
+          rtnVal = CommunityHubLiveState.Error;
+          break;
       }
 
       return rtnVal;

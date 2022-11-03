@@ -23,6 +23,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private AutoCompleteStringCollection AutoCompleteCollection;
     private bool ShowInitialBalloonTip = false;
     private static bool IsDebug = false;
+    internal static CancellationTokenSource CancelToken = new();
 
     private readonly Regex RgxIdCmHandleEnlistedFluency = new("<strong class=\"value\">(.+)</strong>", RegexOptions.Multiline | RegexOptions.Compiled);
     private readonly Regex RgxAvatar = new("<div class=\"thumb\">\\s+<img src=\"(.+)\" \\/>", RegexOptions.Multiline | RegexOptions.Compiled);
@@ -408,6 +409,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void RemoveUserControls() {
       // Ggf. UserControl entfernen
       if (PanelInfo.Controls.Count > 0) {
+        CancelToken.Cancel();
         for (int i = PanelInfo.Controls.Count - 1; i >= 0; i--) {
           Control control = PanelInfo.Controls[i];
           if (control is UserControlHandle ctrlHandle) {
@@ -425,6 +427,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           }
         }
         PanelInfo.Controls.Clear();
+        CancelToken = new CancellationTokenSource();
       }
       Size = new Size(Width, 31);
     }
@@ -463,7 +466,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       };
 
       if (!string.IsNullOrWhiteSpace(handle)) {
-        reply.HttpResponse = await GetSource($"{handle}_Profile", reply.Profile.Url);
+        reply.HttpResponse = await GetSource($"{handle}_Profile", reply.Profile.Url, CancelToken);
         if (reply.HttpResponse.StatusCode == HttpStatusCode.OK && reply.HttpResponse.Source != null) {
 
           // UEE Citizen Record, Community Monicker, Handle, Enlisted, Fluency
@@ -509,7 +512,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private async Task<OrganizationsInfo> GetOrganizationsInfo(string handle) {
       OrganizationsInfo reply = new();
 
-      HttpInfo httpInfo = await GetSource($"{handle}_Organizations", $"https://robertsspaceindustries.com/citizens/{handle}/organizations");
+      HttpInfo httpInfo = await GetSource($"{handle}_Organizations", $"https://robertsspaceindustries.com/citizens/{handle}/organizations", CancelToken);
       if (httpInfo.StatusCode.HasValue && httpInfo.StatusCode == HttpStatusCode.OK && httpInfo.Source != null) {
 
         string[] organizations = httpInfo.Source.Split("<div class=\"title\">");
@@ -580,12 +583,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return HttpUtility.HtmlDecode(text);
     }
 
-    internal static async Task<HttpInfo> GetSource(string sourceExportName, string url, bool isCommunityHub = false) {
+    internal static async Task<HttpInfo> GetSource(string sourceExportName, string url, CancellationTokenSource cancellationToken, bool isCommunityHub = false) {
       HttpInfo rtnVal = new();
 
-      using HttpClient client = new();
+      using HttpClient client = new() {
+        Timeout = TimeSpan.FromSeconds(10)
+      };
       try {
-        rtnVal.Source = await client.GetStringAsync(url);
+        rtnVal.Source = await client.GetStringAsync(url, cancellationToken.Token).ConfigureAwait(false);
         if (!isCommunityHub) {
           int index = rtnVal.Source.IndexOf("<div class=\"page-wrapper\">");
           if (index >= 0) {
@@ -613,6 +618,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         rtnVal.Source = string.Empty;
         rtnVal.ErrorText = $"{ex.StatusCode}: {ex.Message}";
         rtnVal.StatusCode = ex.StatusCode;
+      } catch (OperationCanceledException ex) {
+        rtnVal.Source = string.Empty;
+        rtnVal.ErrorText = $"{ex.Message}";
+        rtnVal.StatusCode = HttpStatusCode.BadGateway;
       }
 
       return rtnVal;
@@ -756,7 +765,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private static string GetVersionString(Version version) {
       // Version als String ermitteln
-      return $"v{version.Major}.{ version.Minor}.{ version.Build}";
+      return $"v{version.Major}.{version.Minor}.{version.Build}";
     }
 
     private async void AufUpdatePruefenToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -974,7 +983,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public enum CommunityHubLiveState {
       NotAvailable,
       Offline,
-      Live
+      Live,
+      Error
     }
 
   }
