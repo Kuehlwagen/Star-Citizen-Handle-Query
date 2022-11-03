@@ -241,10 +241,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void ShowWindow() {
       // Fenster einblenden
       Visible = true;
-      if (!User32Wrappers.SetForegroundWindow(Handle)) {
-        Activate();
-        BringToFront();
-      }
+      User32Wrappers.SetForegroundWindow(Handle);
+      User32Wrappers.ShowWindow(Handle, User32Wrappers.SW_MINIMIZE);
+      User32Wrappers.ShowWindow(Handle, User32Wrappers.SW_RESTORE);
+      User32Wrappers.SetForegroundWindow(Handle);
+      Activate();
       TextBoxHandle.SelectAll();
       TextBoxHandle.Focus();
     }

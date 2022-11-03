@@ -32,6 +32,12 @@ namespace Star_Citizen_Handle_Query.ExternClasses {
     [DllImport("user32.dll")]
     static internal extern bool ReleaseCapture();
 
+    public const int SW_MINIMIZE = 6;
+    public const int SW_RESTORE = 9;
+
+    [DllImport("user32.dll")]
+    static internal extern bool ShowWindow(IntPtr hwnd, int nCmdShow);
+
   }
 
 }
