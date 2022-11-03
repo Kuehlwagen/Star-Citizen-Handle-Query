@@ -59,7 +59,7 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
   - Wird die Handle-Eingabebox geleert, wird ein gegebenenfall zuvor ermitteltes Ergebnis ausgeblendet.
 - Durch die Betätigung der Esc-Taste wird das Hauptfenster ausgeblendet.
 - Wurde eine globale Taste(nkobination) in den Einstellungen angegeben, kann das Fenster jederzeit mit dieser Taste(nkombination) wieder angezeigt werden.
-- Unten rechts im Handle-Informationsfenster wird der Live-Status des Handles angezeigt.
+- Unten rechts im Handle-Informationsfenster wird der Twitch.tv Live-Status des Handles angezeigt.
   - `...` = Live-Status wird ermittelt
   - `N/A` = Im Handle-Profil ist kein Twitch.tv-Konto verknüpft
   - `OFF` = Im Handle-Profil ist ein Twitch.tv-Konto verknüpft, es wird aber gerade nicht gestreamt
