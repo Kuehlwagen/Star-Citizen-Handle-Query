@@ -49,8 +49,17 @@ namespace Star_Citizen_Handle_Query.UserControls {
         if (DisplayOnly) {
           LabelAdditionalInformation.Cursor = Cursors.Default;
         } else {
-          bool isLive = await CheckCommunityHubIsLive(handle);
-          PictureBoxLive.Image = isLive ? Properties.Resources.Live : Properties.Resources.Offline;
+          CommunityHubLiveState liveState = await CheckCommunityHubIsLive(handle);
+          Image imageLiveState = Properties.Resources.NotAvailable;
+          switch (liveState) {
+            case CommunityHubLiveState.Offline:
+              imageLiveState = Properties.Resources.Offline;
+              break;
+            case CommunityHubLiveState.Live:
+              imageLiveState = Properties.Resources.Live;
+              break;
+          }
+          PictureBoxLive.Image = imageLiveState;
         }
       } else {
         LabelCommunityMoniker.Text = Info?.HttpResponse?.StatusCode == HttpStatusCode.NotFound ? ProgramTranslation.Window.Handle_Not_Found : Info?.HttpResponse?.ErrorText;
@@ -70,13 +79,17 @@ namespace Star_Citizen_Handle_Query.UserControls {
       }
     }
 
-    internal static async Task<bool> CheckCommunityHubIsLive(string handle) {
-      bool rtnVal = false;
+    internal static async Task<CommunityHubLiveState> CheckCommunityHubIsLive(string handle) {
+      CommunityHubLiveState rtnVal = CommunityHubLiveState.NotAvailable;
 
       HttpInfo httpInfo = await GetSource($"{handle}_CommunityHub", $"https://robertsspaceindustries.com/community-hub/user/{handle}", true);
       if (httpInfo?.StatusCode == HttpStatusCode.OK) {
-        if (httpInfo.Source.Contains("\"live\":true")) {
-          rtnVal = true;
+        if (!httpInfo.Source.Contains("\"twitchUserId\":null")) {
+          if (httpInfo.Source.Contains("\"live\":true")) {
+            rtnVal = CommunityHubLiveState.Live;
+          } else {
+            rtnVal = CommunityHubLiveState.Offline;
+          }
         }
       }
 

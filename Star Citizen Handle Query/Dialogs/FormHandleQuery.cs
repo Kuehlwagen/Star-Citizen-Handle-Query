@@ -969,6 +969,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       e.DrawBorder();
       e.DrawText();
     }
+
+    public enum CommunityHubLiveState {
+      NotAvailable,
+      Offline,
+      Live
+    }
+
   }
 
 }
