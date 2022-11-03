@@ -63,7 +63,7 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
   - `...` = Live-Status wird ermittelt
   - `N/A` = Im Handle-Profil ist kein Twitch.tv-Konto verknüpft
   - `OFF` = Im Handle-Profil ist ein Twitch.tv-Konto verknüpft, es wird aber gerade nicht gestreamt
-  - `ON` = Im Handle-Profil ist ein Twitch.tv-Konto verknüpft und es wird gerade aktiv gestreamt
+  - `LIVE` = Im Handle-Profil ist ein Twitch.tv-Konto verknüpft und es wird gerade aktiv gestreamt
 - Folgende Funktionen sind nur aktiv, wenn in den Einstellungen in der Gruppe `Fenster` das Kontrollkästchen `Mauseingaben ignorieren` nicht gesetzt ist:
   - Ein Mauslinksklick auf das Handle-Avatar öffnet die Informationsseite des Handles auf der Star Citizen Webseite (z.B. https://robertsspaceindustries.com/citizens/Kuehlwagen).
   - Ein Mauslinksklick auf ein Organisation-Avatar öffnet die Informationsseite der Organisation auf der Star Citizen Webseite (z.B. https://robertsspaceindustries.com/orgs/KRT).
