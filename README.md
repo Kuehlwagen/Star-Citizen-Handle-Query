@@ -14,6 +14,7 @@ Das Tool-Hauptfenster kann nur dann im Vordergrund des Spiels dargestellt werden
 - __Sprache:__ Hier kann die Sprache für das Tool eingestellt werden. Zur Verfügung stehen die Sprachen `Deutsch` und `English`.
 - __Affiliationen Maximum:__ Hier kann angegeben werden, wie viele Affiliationen maximal dargestellt werden sollen.
 - __Unkenntliche Affiliationen ausblenden:__ Hier kann angegeben werden, ob unkenntlich gemachte Affiliationen ausgeblendet werden sollen
+- __Stream Live-Status ausblenden:__ Angabe, ob der Twitch.tv Stream Live-Status eines Handles ausgeblendet werden soll
 - __Bei Programmstart nach Update suchen:__ Angabe, ob bei jedem Programmstart geprüft werden soll, ob ein Programmupdate zur Verfügung steht
   - Ausschließlich wenn ein Update zur Verfügung steht, wird eine Benachrichtigung angezeigt.
 ### Fenster
