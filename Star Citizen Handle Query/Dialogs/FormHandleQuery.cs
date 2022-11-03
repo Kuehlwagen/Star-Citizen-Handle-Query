@@ -62,6 +62,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           // Durch das Fenster klicken lassen
           InitialWindowStyle = User32Wrappers.GetWindowLong(Handle, User32Wrappers.GWL.ExStyle);
           _ = User32Wrappers.SetWindowLong(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered | (int)User32Wrappers.WS_EX.Transparent);
+
+          // Controls verstecken, verschieben und vergrößern
+          LabelLockUnlock.Visible = false;
+          LabelQuery.Visible = false;
+          LabelSettings.Visible = false;
+          LabelHandle.Location = new Point(LabelLockUnlock.Left, LabelHandle.Top);
+          TextBoxHandle.Location = new Point(LabelHandle.Right + 2, TextBoxHandle.Top);
+          TextBoxHandle.Width += LabelQuery.Width + LabelSettings.Width + LabelLockUnlock.Width + 6;
         }
 
         // Programm-Sprache auslesen

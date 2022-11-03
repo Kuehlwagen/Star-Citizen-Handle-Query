@@ -50,9 +50,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           LabelAdditionalInformation.Cursor = Cursors.Default;
         } else {
           bool isLive = await CheckCommunityHubIsLive(handle);
-          if (isLive) {
-            PictureBoxLive.Visible = true;
-          }
+          PictureBoxLive.Image = isLive ? Properties.Resources.Live : Properties.Resources.Offline;
         }
       } else {
         LabelCommunityMoniker.Text = Info?.HttpResponse?.StatusCode == HttpStatusCode.NotFound ? ProgramTranslation.Window.Handle_Not_Found : Info?.HttpResponse?.ErrorText;
@@ -101,11 +99,13 @@ namespace Star_Citizen_Handle_Query.UserControls {
           LabelAdditionalInformation.Text = Info.Comment;
           CreateHandleJSON(Info, ProgramSettings, forceExport: true);
           textBox.Visible = false;
+          ActivateTextBoxHandle();
           break;
         case Keys.Escape:
           e.SuppressKeyPress = true;
           textBox.Text = textBox.Tag as string;
           textBox.Visible = false;
+          ActivateTextBoxHandle();
           break;
       }
     }
@@ -114,6 +114,13 @@ namespace Star_Citizen_Handle_Query.UserControls {
       TextBox textBox = sender as TextBox;
       textBox.Text = textBox.Tag as string;
       textBox.Visible = false;
+      ActivateTextBoxHandle();
+    }
+
+    private void ActivateTextBoxHandle() {
+      TextBox textBoxHandle = Parent.Parent.Controls[1].Controls[0] as TextBox;
+      textBoxHandle.SelectAll();
+      textBoxHandle.Focus();
     }
 
     private void LabelAdditionalInformation_Click(object sender, EventArgs e) {

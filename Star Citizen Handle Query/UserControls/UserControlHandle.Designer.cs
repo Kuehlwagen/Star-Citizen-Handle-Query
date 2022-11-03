@@ -143,13 +143,13 @@
       // 
       this.PictureBoxLive.BackColor = System.Drawing.Color.Transparent;
       this.PictureBoxLive.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.PictureBoxLive.Image = global::Star_Citizen_Handle_Query.Properties.Resources.Live;
+      this.PictureBoxLive.Image = global::Star_Citizen_Handle_Query.Properties.Resources.Check;
+      this.PictureBoxLive.InitialImage = null;
       this.PictureBoxLive.Location = new System.Drawing.Point(336, 57);
       this.PictureBoxLive.Name = "PictureBoxLive";
       this.PictureBoxLive.Size = new System.Drawing.Size(32, 16);
       this.PictureBoxLive.TabIndex = 13;
       this.PictureBoxLive.TabStop = false;
-      this.PictureBoxLive.Visible = false;
       this.PictureBoxLive.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBoxLive_MouseClick);
       // 
       // UserControlHandle
