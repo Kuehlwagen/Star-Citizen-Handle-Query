@@ -72,6 +72,21 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
   - Ein Mauslinksklick auf die Live-Status-Schaltfläche öffnet das Community-Hub-Profil des Handles (z.B. https://robertsspaceindustries.com/community-hub/user/Kuehlwagen).
   - Klickt man die Schloss-Schaltfläche links neben dem Handle-Schriftzug, wird das Hauptfenster entsperrt / gesperrt. Wenn das Hauptfenster entsperrt ist, kann mit gehaltener linker Maustaste auf dem Handle-Schriftzug das Hauptfenster verschoben werden. Drückt man stattdessen die mittlere Maustaste, wird das Hauptfenster an die Standard-Position (oben mittig) zurück gesetzt. Wenn das Hauptfenster gesperrt ist, kann es nicht verschoben werden.
   - Klickt man die Lupe-Schaltfläche, wird die Abfrage der Handle-Informationen ausgelöst.
-    - Wird währenddessen die `Strg`-Taste gedrückt gehalten, wird das Auslesen der Handle-Informationen inklusive Avatare (Handle, Organisation und Affiliationen) via Star Citizen Webseite erzwungen.
+  - Wird währenddessen die `Strg`-Taste gedrückt gehalten, wird das Auslesen der Handle-Informationen inklusive Avatare (Handle, Organisation und Affiliationen) via Star Citizen Webseite erzwungen.
   - Klickt man die Zahnrad-Schaltfläche, wird das Einstellungen-Fenster geöffnet.
   - Ist die Einstellung `Position merken` in der Kategorie `Fenster` aktiviert, wird beim Beenden des Tools die Position des Hauptfensters in den Einstellungen gespeichert. Beim Start des Tools wird das Hauptfenster an die zuvor gespeicherte Position gesetzt. Hält man, während das Tool gestartet wird, die `Umschalt`-Taste gedrückt, wird das Fenster immer an die Standardposition (oben mittig) gesetzt.
+
+## Sprachen / Übersetzungen
+
+Die standardmäßig mit ausgelieferten Sprachen werden über die eingebetteten Ressourcen des Programms ermittelt. Diese werden zusätzlich als Vorlage beim Programmstart in folgendes Verzeichnis geschrieben:
+- `%LocalAppData%\Kuehlwagen@GitHub\SC_Handle_Query\{VERSION}\Localization\Templates\`
+
+Die Sprachen aus den eingebetteten Ressourcen werden durch gültige Sprachdateien (JSON) aus dem Verzeichnis `%LocalAppData%\Kuehlwagen@GitHub\SC_Handle_Query\{VERSION}\Localization\` erweitert / überschrieben. Bindend ist hierfür das Feld `Language` der JSON-Sprachdatei.
+
+Möchte man das Programm in eine neue Sprache übersetzen, kann man folgendermaßen vorgehen:
+1. Die Sprachdatei `de-DE.json` aus dem Sprachen-Vorlageverzeichnis `%LocalAppData%\Kuehlwagen@GitHub\SC_Handle_Query\{VERSION}\Localization\Templates\` in das Sprachen-Verzeichnis `%LocalAppData%\Kuehlwagen@GitHub\SC_Handle_Query\{VERSION}\Localization\` kopieren
+2. Die kopierte Datei im Sprachen-Verzeichnis umbenennen (z.B.: `xx-XX.json`)
+3. Die Datei mit einem Texteditor öffnen und den Wert des Feldes `Language` von `Deutsch` nach `Xxxxxx` ändern
+4. Die Werte aller anderen Felder übersetzen
+5. Die Datei speichern
+6. Das Programm (neu-)starten und die Einstellungen öffnen, um die neue Sprache auszuwählen
