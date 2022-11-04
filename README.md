@@ -60,11 +60,12 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
   - Wird die Handle-Eingabebox geleert, wird ein gegebenenfall zuvor ermitteltes Ergebnis ausgeblendet.
 - Durch die Betätigung der Esc-Taste wird das Hauptfenster ausgeblendet.
 - Wurde eine globale Taste(nkobination) in den Einstellungen angegeben, kann das Fenster jederzeit mit dieser Taste(nkombination) wieder angezeigt werden.
-- Unten rechts im Handle-Informationsfenster wird der Twitch.tv Live-Status des Handles angezeigt.
+- Sofern der Stream Live-Status dargestellt werden soll, wird unten rechts im Handle-Informationsfenster der Twitch.tv Live-Status des Handles angezeigt. Dieser kann folgende Werte enthalten:
   - `...` = Live-Status wird ermittelt
   - `N/A` = Im Handle-Profil ist kein Twitch.tv-Konto verknüpft
   - `OFF` = Im Handle-Profil ist ein Twitch.tv-Konto verknüpft, es wird aber gerade nicht gestreamt
   - `LIVE` = Im Handle-Profil ist ein Twitch.tv-Konto verknüpft und es wird gerade aktiv gestreamt
+  - `ERR` = Beim Aufruf des Community-Hub-Profils des Handles gab es einen Fehler / Timeout (maximale Wartezeit: 10 Sekunden)
 - Folgende Funktionen sind nur aktiv, wenn in den Einstellungen in der Gruppe `Fenster` das Kontrollkästchen `Mauseingaben ignorieren` nicht gesetzt ist:
   - Ein Mauslinksklick auf das Handle-Avatar öffnet die Informationsseite des Handles auf der Star Citizen Webseite (z.B. https://robertsspaceindustries.com/citizens/Kuehlwagen).
   - Ein Mauslinksklick auf ein Organisation-Avatar öffnet die Informationsseite der Organisation auf der Star Citizen Webseite (z.B. https://robertsspaceindustries.com/orgs/KRT).
