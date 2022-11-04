@@ -90,3 +90,14 @@ Möchte man das Programm in eine neue Sprache übersetzen, kann man folgenderma�
 4. Die Werte aller anderen Felder übersetzen
 5. Die Datei speichern
 6. Das Programm (neu-)starten und die Einstellungen öffnen, um die neue Sprache auszuwählen
+
+Felder und Gruppen, die in der Sprachdatei (JSON) nicht enthalten sind, erben von der Standardsprache `Deutsch`. Eine Sprachdatei mit dem Namen `xx-XX.json` und folgendem Inhalt ist demnach eine gültige Sprachdatei:
+
+```json
+{
+  "Language": "Xxxxx",
+  "Window": {
+    "Handle": "Name:"
+  }
+}
+```
