@@ -19,8 +19,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public FormSettings(Settings settings = null) {
       InitializeComponent();
 
+      // Sprachen ermitteln
+      GetLocalizations();
+
       // Sprachen hinzufügen
-      ComboBoxSprache.Items.AddRange(GetLocalizations());
+      ComboBoxSprache.Items.AddRange(Localizations.Select(x => x.Language).ToArray());
 
       // Taste Werte hinzufügen
       ComboBoxTaste.Items.AddRange(KeyCollection.ConvertAll(x => x.ToString()).ToArray());
@@ -66,15 +69,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxHideStreamLiveStatus.Checked = ProgramSettings.HideStreamLiveStatus;
     }
 
-    private string[] GetLocalizations() {
-      // Sprachdateien einlesen
-      foreach (string jsonPath in Directory.GetFiles(GetLocalizationPath(), "*.json")) {
-        Translation translation = JsonSerializer.Deserialize<Translation>(File.ReadAllText(jsonPath, Encoding.UTF8));
-        if (translation != null && !Localizations.Contains(translation)) {
-          Localizations.Add(translation);
-        }
-      }
-      return Localizations.Select(x => x.Language).OrderBy(x => x).ToArray();
+    private void GetLocalizations() {
+      // Sprachen ermitteln
+      Localizations.AddRange(FormHandleQuery.GetAllTranslations().Select(x => x.Value));
     }
 
     public static string GetLocalizationPath() {

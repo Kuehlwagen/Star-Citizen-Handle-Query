@@ -1,6 +1,8 @@
 using Star_Citizen_Handle_Query.ExternClasses;
+using Star_Citizen_Handle_Query.Properties;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
+using System.Collections;
 using System.Diagnostics;
 using System.Globalization;
 using System.Net;
@@ -43,7 +45,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 #endif
 
-      // Standard-Sprachen erstellen
+      // Ggf. Standard-Sprachdateien erstellen
       CreateDefaultLocalizations();
 
       // Programm-Einstellungen auslesen
@@ -117,34 +119,61 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private static void CreateDefaultLocalizations() {
-      // Falls noch nicht vorhanden, Localization-Verzeichnis erstellen
+      // Localization-Verzeichnis erstellen, falls es noch nicht existiert
       string localizationPath = FormSettings.GetLocalizationPath();
       if (!Directory.Exists(localizationPath)) {
         Directory.CreateDirectory(localizationPath);
       }
 
-      // Datei für die Sprache "Deutsch" erstellen
-      File.WriteAllText(Path.Combine(localizationPath, "de-DE.json"), Encoding.UTF8.GetString(Properties.Resources.de_DE), Encoding.Default);
+      if (IsDebug) {
+        // Datei für die Sprache "Deutsch" erstellen, falls sie noch nicht existiert
+        string localizationFilePath = Path.Combine(localizationPath, "de-DE.json");
+        if (!File.Exists(localizationFilePath)) {
+          File.WriteAllText(localizationFilePath, Encoding.UTF8.GetString(Resources.de_DE), Encoding.Default);
+        }
 
-      // Falls noch nicht vorhanden, Datei für die Sprache "English" erstellen
-      File.WriteAllText(Path.Combine(localizationPath, "en-US.json"), Encoding.UTF8.GetString(Properties.Resources.en_US), Encoding.Default);
+        // Datei für die Sprache "English" erstellen, falls sie noch nicht existiert
+        localizationFilePath = Path.Combine(localizationPath, "en-US.json");
+        if (!File.Exists(localizationFilePath)) {
+          File.WriteAllText(localizationFilePath, Encoding.UTF8.GetString(Resources.en_US), Encoding.Default);
+        }
+      }
     }
 
     internal Translation GetProgramLocalization() {
-      Translation rtnVal = null;
-
-      // Aktuell konfigurierte Sprache ermitteln
-      string localizationPath = FormSettings.GetLocalizationPath();
-      foreach (string languagePath in Directory.GetFiles(localizationPath, "*.json")) {
-        Translation translation = JsonSerializer.Deserialize<Translation>(File.ReadAllText(languagePath, Encoding.UTF8));
-        if (translation?.Language == ProgramSettings.Language) {
-          rtnVal = translation;
-          break;
-        }
-      }
+      // Konfigurierte Sprache ermitteln
+      Translation rtnVal = GetAllTranslations().Values
+        .FirstOrDefault(x => x.Language.Equals(ProgramSettings.Language, StringComparison.InvariantCultureIgnoreCase));
 
       // Fallback auf Standard-Sprache
       rtnVal ??= new();
+
+      return rtnVal;
+    }
+
+    internal static Dictionary<string, Translation> GetAllTranslations() {
+      // Ressourcenmanager nach Sprachen durchsuchen
+      Dictionary<string, Translation> rtnVal = Resources.ResourceManager
+        .GetResourceSet(CultureInfo.CurrentCulture, false, true)
+        .Cast<DictionaryEntry>()
+        .Where(x => x.Value.GetType() == typeof(byte[]) && Regex.IsMatch(x.Key.ToString(), @"^[a-z]{2}-[A-Z]{2}$"))
+        .Select(x => new KeyValuePair<string, Translation>(x.Key.ToString(), JsonSerializer.Deserialize<Translation>(Encoding.UTF8.GetString(x.Value as byte[]))))
+        .OrderBy(x => x.Value.Language)
+        .ToDictionary(x => x.Key, y => y.Value);
+
+      // Localization-Verzeichnis nach Sprachen durchsuchen
+      foreach (string languagePath in Directory.GetFiles(FormSettings.GetLocalizationPath(), "*.json")) {
+        Translation translation = JsonSerializer.Deserialize<Translation>(File.ReadAllText(languagePath, Encoding.UTF8));
+        if (translation?.Language?.Length > 0) {
+          string translationName = Path.GetFileNameWithoutExtension(languagePath);
+          rtnVal[translationName] = translation;
+        }
+      }
+
+      // Nach Sprache sortieren
+      rtnVal = rtnVal
+        .OrderBy(x => x.Value.Language)
+        .ToDictionary(x => x.Key, y => y.Value);
 
       return rtnVal;
     }
@@ -862,7 +891,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       if (rtnVal == null && imageType == CacheDirectoryType.HandleAvatar) {
-        rtnVal = Properties.Resources.Avatar_Default;
+        rtnVal = Resources.Avatar_Default;
       }
 
       return rtnVal;
@@ -952,7 +981,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void LabelLockUnlock_MouseClick(object sender, MouseEventArgs e) {
       if (e.Button == MouseButtons.Left) {
         WindowLocked = !WindowLocked;
-        LabelLockUnlock.Image = WindowLocked ? Properties.Resources.WindowLocked : Properties.Resources.WindowUnlocked;
+        LabelLockUnlock.Image = WindowLocked ? Resources.WindowLocked : Resources.WindowUnlocked;
       }
     }
 
