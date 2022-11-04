@@ -114,7 +114,7 @@
 
     public string Language { get; set; } = "Sprache:";
 
-    public string Affiliations_Max { get; set; } = "Max. Affiliationen:";
+    public string Affiliations_Max { get; set; } = "Affiliationen Maximum:";
 
     public string Hide_Redacted_Affiliations { get; set; } = "Unkenntliche Affiliationen ausblenden";
 
