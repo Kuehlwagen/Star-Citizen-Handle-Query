@@ -120,23 +120,21 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private static void CreateDefaultLocalizations() {
       // Localization-Verzeichnis erstellen, falls es noch nicht existiert
-      string localizationPath = FormSettings.GetLocalizationPath();
+      string localizationPath = Path.Combine(FormSettings.GetLocalizationPath(), "Templates");
       if (!Directory.Exists(localizationPath)) {
         Directory.CreateDirectory(localizationPath);
       }
 
-      if (IsDebug) {
-        // Datei für die Sprache "Deutsch" erstellen, falls sie noch nicht existiert
-        string localizationFilePath = Path.Combine(localizationPath, "de-DE.json");
-        if (!File.Exists(localizationFilePath)) {
-          File.WriteAllText(localizationFilePath, Encoding.UTF8.GetString(Resources.de_DE), Encoding.Default);
-        }
+      // Datei für die Sprache "Deutsch" erstellen, falls sie noch nicht existiert
+      string localizationFilePath = Path.Combine(localizationPath, "de-DE.json");
+      if (!File.Exists(localizationFilePath)) {
+        File.WriteAllText(localizationFilePath, Encoding.UTF8.GetString(Resources.de_DE), Encoding.Default);
+      }
 
-        // Datei für die Sprache "English" erstellen, falls sie noch nicht existiert
-        localizationFilePath = Path.Combine(localizationPath, "en-US.json");
-        if (!File.Exists(localizationFilePath)) {
-          File.WriteAllText(localizationFilePath, Encoding.UTF8.GetString(Resources.en_US), Encoding.Default);
-        }
+      // Datei für die Sprache "English" erstellen, falls sie noch nicht existiert
+      localizationFilePath = Path.Combine(localizationPath, "en-US.json");
+      if (!File.Exists(localizationFilePath)) {
+        File.WriteAllText(localizationFilePath, Encoding.UTF8.GetString(Resources.en_US), Encoding.Default);
       }
     }
 
@@ -220,11 +218,23 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                   Directory.Move(legacyPath, newPath);
                 } catch { }
               }
-              legacyPath = Path.Combine(directory, "Localization");
+              legacyPath = Path.Combine(directory, @"Localization\Templates");
               if (Directory.Exists(legacyPath)) {
                 foreach (string file in Directory.GetFiles(legacyPath)) {
                   try {
                     File.Delete(file);
+                  } catch { }
+                }
+                try {
+                  Directory.Delete(legacyPath);
+                } catch { }
+              }
+              legacyPath = Path.Combine(legacyPath, @"..\");
+              newPath = FormSettings.GetLocalizationPath();
+              if (Directory.Exists(legacyPath) && Directory.Exists(newPath)) {
+                foreach (string file in Directory.GetFiles(legacyPath)) {
+                  try {
+                    File.Move(file, Path.Combine(newPath, Path.GetFileName(file)));
                   } catch { }
                 }
                 try {
