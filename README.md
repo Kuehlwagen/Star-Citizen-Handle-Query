@@ -11,7 +11,7 @@ Das Tool-Hauptfenster kann nur dann im Vordergrund des Spiels dargestellt werden
 ![Settings](/Star%20Citizen%20Handle%20Query/Screenshots/Settings.png?raw=true "Settings")
 
 ### Anzeige
-- __Sprache:__ Hier kann die Sprache für das Tool eingestellt werden. Zur Verfügung stehen die Sprachen `Deutsch` und `English`.
+- __Sprache:__ Hier kann die Sprache für das Tool eingestellt werden. Standardmäßig stehen die Sprachen `Deutsch` und `English` zur Auswahl.
 - __Affiliationen Maximum:__ Hier kann angegeben werden, wie viele Affiliationen maximal dargestellt werden sollen.
 - __Unkenntliche Affiliationen ausblenden:__ Hier kann angegeben werden, ob unkenntlich gemachte Affiliationen ausgeblendet werden sollen
 - __Stream Live-Status ausblenden:__ Angabe, ob der Twitch.tv Stream Live-Status eines Handles ausgeblendet werden soll
