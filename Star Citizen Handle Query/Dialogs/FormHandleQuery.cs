@@ -861,6 +861,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void FormHandleQuery_FormClosing(object sender, FormClosingEventArgs e) {
+      // Panel leeren
+      RemoveUserControls();
+
       // Globale Taste wieder freigeben
       if (HotKey?.HookedKeys?.Count > 0) {
         HotKey.Unhook();
