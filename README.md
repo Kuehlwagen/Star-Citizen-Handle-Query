@@ -95,7 +95,7 @@ Felder und Gruppen, die in der Sprachdatei (JSON) nicht enthalten sind, erben vo
 
 ```json
 {
-  "Language": "Xxxxx",
+  "Language": "Xxxxxx",
   "Window": {
     "Handle": "Name:"
   }
