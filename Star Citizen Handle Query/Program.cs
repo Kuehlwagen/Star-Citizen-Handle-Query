@@ -1,5 +1,4 @@
 using Star_Citizen_Handle_Query.Dialogs;
-using System.Diagnostics;
 
 namespace Star_Citizen_Handle_Query {
 
@@ -15,16 +14,21 @@ namespace Star_Citizen_Handle_Query {
     static void Main() {
       ApplicationConfiguration.Initialize();
 
+      bool restart = false;
       WaitHandle = new EventWaitHandle(false, EventResetMode.AutoReset, Application.ProductName, out bool isNew);
       if (isNew) {
         FormMain = new();
         Thread thread = new(BringThreadToFront);
         thread.Start();
         Application.Run(FormMain);
+        restart = FormMain.DialogResult == DialogResult.Retry;
         FormMain.Dispose();
         FormMain = null;
       }
       WaitHandle.Set();
+      if (restart) {
+        Application.Restart();
+      }
     }
 
     private static void BringThreadToFront() {
@@ -38,11 +42,7 @@ namespace Star_Citizen_Handle_Query {
     }
 
     private static void BringToFront() {
-      if (!FormMain.Visible) {
-        FormMain.Visible = true;
-      }
-      FormMain.Activate();
-      FormMain.BringToFront();
+      FormMain.ShowWindow();
     }
 
   }

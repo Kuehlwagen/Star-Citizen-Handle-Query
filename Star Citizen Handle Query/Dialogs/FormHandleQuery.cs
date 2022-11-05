@@ -278,7 +278,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private void ShowWindow() {
+    internal void ShowWindow() {
       // Fenster einblenden
       Visible = true;
       User32Wrappers.SetForegroundWindow(Handle);
@@ -857,7 +857,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void RestartProgram() {
       RemoveUserControls();
-      Application.Restart();
+      DialogResult = DialogResult.Retry;
+      Close();
     }
 
     private void FormHandleQuery_FormClosing(object sender, FormClosingEventArgs e) {
