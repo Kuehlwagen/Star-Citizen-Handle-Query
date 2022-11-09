@@ -98,6 +98,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
           if (processSC != null) {
 
+            Invoke(new Action(() => ClearSARInfos()));
             Invoke(new Action(() => ChangeStatus(Status.Initializing)));
 
             string scLogPath = Path.Combine(Path.GetDirectoryName(processSC.Modules[0].FileName), $@"Game.log");
@@ -139,12 +140,18 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void AddSARInfo(SARMonitorInfo line) {
+      UserControlSAR uc = new(line);
       if (PanelSARInfo.Controls.Count == ProgramSettings.SARMonitor.EntriesMax) {
         PanelSARInfo.Controls.RemoveAt(0);
+      } else {
+        Size = new Size(Width, Height + uc.Height + 2);
       }
-      UserControlSAR uc = new(line);
-      Size = new Size(Width, Height + uc.Height + 2);
       PanelSARInfo.Controls.Add(uc);
+    }
+
+    private void ClearSARInfos() {
+      PanelSARInfo.Controls.Clear();
+      Size = new Size(Width, 60);
     }
 
     private void ChangeStatus(Status status) {
