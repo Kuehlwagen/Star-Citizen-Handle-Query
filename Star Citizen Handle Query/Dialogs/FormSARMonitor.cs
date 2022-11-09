@@ -90,17 +90,17 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
           Invoke(new Action(() => ChangeStatus(Status.Inactive)));
 
-          Process[] processes = Process.GetProcessesByName("StarCitizen");
+          Process[] processes = Process.GetProcessesByName("StarCitizen_Launcher");
           Process processSC = null;
           if (processes?.Length > 0) {
-            processSC = Process.GetProcessesByName("StarCitizen")[0];
+            processSC = Process.GetProcessesByName("StarCitizen_Launcher")[0];
           }
 
           if (processSC != null) {
 
             Invoke(new Action(() => ChangeStatus(Status.Initializing)));
 
-            string scLogPath = Path.Combine(Path.GetDirectoryName(ProgramSettings.SARMonitor.StarCitizenExePath), $@"..\Game.log");
+            string scLogPath = Path.Combine(Path.GetDirectoryName(processSC.Modules[0].FileName), $@"Game.log");
             if (File.Exists(scLogPath)) {
 
               LogReader = new StreamReader(new FileStream(scLogPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite), Encoding.UTF8);

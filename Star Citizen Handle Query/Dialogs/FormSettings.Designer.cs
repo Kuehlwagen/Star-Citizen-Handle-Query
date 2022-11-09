@@ -46,9 +46,6 @@
       this.GroupBoxLokalerCache = new System.Windows.Forms.GroupBox();
       this.ButtonStandard = new System.Windows.Forms.Button();
       this.GroupBoxAnzeige = new System.Windows.Forms.GroupBox();
-      this.ButtonStarCitizenPfadSuchen = new System.Windows.Forms.Button();
-      this.LabelStarCitizenPfad = new System.Windows.Forms.Label();
-      this.TextBoxStarCitizenPfad = new System.Windows.Forms.TextBox();
       this.NumericUpDownSAREintraegeMaximum = new System.Windows.Forms.NumericUpDown();
       this.LabelSAREintraegeMaximum = new System.Windows.Forms.Label();
       this.CheckBoxShowSAR = new System.Windows.Forms.CheckBox();
@@ -109,7 +106,7 @@
       // ButtonSpeichern
       // 
       this.ButtonSpeichern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 528);
+      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 498);
       this.ButtonSpeichern.Name = "ButtonSpeichern";
       this.ButtonSpeichern.Size = new System.Drawing.Size(75, 28);
       this.ButtonSpeichern.TabIndex = 3;
@@ -120,7 +117,7 @@
       // ButtonSchliessen
       // 
       this.ButtonSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 528);
+      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 498);
       this.ButtonSchliessen.Name = "ButtonSchliessen";
       this.ButtonSchliessen.Size = new System.Drawing.Size(75, 28);
       this.ButtonSchliessen.TabIndex = 4;
@@ -161,7 +158,7 @@
       this.GroupBoxFenster.Controls.Add(this.LabelFensterDeckkraftProzent);
       this.GroupBoxFenster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.GroupBoxFenster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxFenster.Location = new System.Drawing.Point(12, 266);
+      this.GroupBoxFenster.Location = new System.Drawing.Point(12, 236);
       this.GroupBoxFenster.Name = "GroupBoxFenster";
       this.GroupBoxFenster.Size = new System.Drawing.Size(416, 187);
       this.GroupBoxFenster.TabIndex = 1;
@@ -305,7 +302,7 @@
       this.GroupBoxLokalerCache.Controls.Add(this.LabelLokalerCacheAlter);
       this.GroupBoxLokalerCache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.GroupBoxLokalerCache.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 461);
+      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 431);
       this.GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
       this.GroupBoxLokalerCache.Size = new System.Drawing.Size(416, 61);
       this.GroupBoxLokalerCache.TabIndex = 2;
@@ -315,7 +312,7 @@
       // ButtonStandard
       // 
       this.ButtonStandard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonStandard.Location = new System.Drawing.Point(353, 528);
+      this.ButtonStandard.Location = new System.Drawing.Point(353, 498);
       this.ButtonStandard.Name = "ButtonStandard";
       this.ButtonStandard.Size = new System.Drawing.Size(75, 28);
       this.ButtonStandard.TabIndex = 5;
@@ -325,9 +322,6 @@
       // 
       // GroupBoxAnzeige
       // 
-      this.GroupBoxAnzeige.Controls.Add(this.ButtonStarCitizenPfadSuchen);
-      this.GroupBoxAnzeige.Controls.Add(this.LabelStarCitizenPfad);
-      this.GroupBoxAnzeige.Controls.Add(this.TextBoxStarCitizenPfad);
       this.GroupBoxAnzeige.Controls.Add(this.NumericUpDownSAREintraegeMaximum);
       this.GroupBoxAnzeige.Controls.Add(this.LabelSAREintraegeMaximum);
       this.GroupBoxAnzeige.Controls.Add(this.CheckBoxShowSAR);
@@ -342,42 +336,10 @@
       this.GroupBoxAnzeige.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.GroupBoxAnzeige.Location = new System.Drawing.Point(12, 12);
       this.GroupBoxAnzeige.Name = "GroupBoxAnzeige";
-      this.GroupBoxAnzeige.Size = new System.Drawing.Size(416, 246);
+      this.GroupBoxAnzeige.Size = new System.Drawing.Size(416, 218);
       this.GroupBoxAnzeige.TabIndex = 0;
       this.GroupBoxAnzeige.TabStop = false;
       this.GroupBoxAnzeige.Text = "Anzeige";
-      // 
-      // ButtonStarCitizenPfadSuchen
-      // 
-      this.ButtonStarCitizenPfadSuchen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonStarCitizenPfadSuchen.Location = new System.Drawing.Point(348, 208);
-      this.ButtonStarCitizenPfadSuchen.Name = "ButtonStarCitizenPfadSuchen";
-      this.ButtonStarCitizenPfadSuchen.Size = new System.Drawing.Size(62, 24);
-      this.ButtonStarCitizenPfadSuchen.TabIndex = 12;
-      this.ButtonStarCitizenPfadSuchen.Text = "Suchen";
-      this.ButtonStarCitizenPfadSuchen.UseVisualStyleBackColor = true;
-      this.ButtonStarCitizenPfadSuchen.Click += new System.EventHandler(this.ButtonStarCitizenPfadSuchen_Click);
-      // 
-      // LabelStarCitizenPfad
-      // 
-      this.LabelStarCitizenPfad.AutoSize = true;
-      this.LabelStarCitizenPfad.Location = new System.Drawing.Point(15, 212);
-      this.LabelStarCitizenPfad.Name = "LabelStarCitizenPfad";
-      this.LabelStarCitizenPfad.Size = new System.Drawing.Size(96, 15);
-      this.LabelStarCitizenPfad.TabIndex = 10;
-      this.LabelStarCitizenPfad.Text = "Star Citizen Pfad:";
-      // 
-      // TextBoxStarCitizenPfad
-      // 
-      this.TextBoxStarCitizenPfad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.TextBoxStarCitizenPfad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-      this.TextBoxStarCitizenPfad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.TextBoxStarCitizenPfad.Location = new System.Drawing.Point(154, 209);
-      this.TextBoxStarCitizenPfad.Name = "TextBoxStarCitizenPfad";
-      this.TextBoxStarCitizenPfad.PlaceholderText = "Pfad zur StarCitizen.exe";
-      this.TextBoxStarCitizenPfad.Size = new System.Drawing.Size(188, 23);
-      this.TextBoxStarCitizenPfad.TabIndex = 11;
-      this.TextBoxStarCitizenPfad.TextChanged += new System.EventHandler(this.TextBoxStarCitizenPfad_TextChanged);
       // 
       // NumericUpDownSAREintraegeMaximum
       // 
@@ -493,7 +455,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.CancelButton = this.ButtonSchliessen;
-      this.ClientSize = new System.Drawing.Size(440, 569);
+      this.ClientSize = new System.Drawing.Size(440, 538);
       this.Controls.Add(this.GroupBoxAnzeige);
       this.Controls.Add(this.GroupBoxLokalerCache);
       this.Controls.Add(this.GroupBoxFenster);
@@ -502,7 +464,7 @@
       this.Controls.Add(this.ButtonSpeichern);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.MinimumSize = new System.Drawing.Size(456, 608);
+      this.MinimumSize = new System.Drawing.Size(456, 577);
       this.Name = "FormSettings";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Star Citizen Handle Query Einstellungen";
@@ -551,8 +513,5 @@
         private Label LabelFensterDeckkraft;
         private NumericUpDown NumericUpDownSAREintraegeMaximum;
         private Label LabelSAREintraegeMaximum;
-        private Label LabelStarCitizenPfad;
-        private TextBox TextBoxStarCitizenPfad;
-        private Button ButtonStarCitizenPfadSuchen;
     }
 }

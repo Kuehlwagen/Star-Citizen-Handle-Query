@@ -99,9 +99,6 @@
     /// <summary>Angabe, ob das Fenster angezeigt werden soll</summary>
     public bool ShowWindow { get; set; } = false;
 
-    /// <summary>Pfad zur StarCitizen.exe-Datei</summary>
-    public string StarCitizenExePath { get; set; } = string.Empty;
-
     /// <summary>Position des LogFileWatcher-Fensters</summary>
     public Point WindowLocation { get; set; } = Point.Empty;
 

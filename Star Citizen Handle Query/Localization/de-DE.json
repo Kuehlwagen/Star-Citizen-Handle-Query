@@ -32,10 +32,7 @@
       "Auto_Check_For_Update": "Bei Programmstart nach Update suchen",
       "Hide_Stream_Live_Status": "Stream Live-Status ausblenden",
       "Show_Search_And_Rescue_Monitor": "Search and Rescue Monitor anzeigen",
-      "SAR_Entries_Max": "SAR-Eintr\u00E4ge Maximum:",
-      "Star_Citizen_Path": "Star Citizen Pfad:",
-      "Star_Citizen_Path_Placeholder": "Pfad zur StarCitizen.exe",
-      "Search_StarCitizen_Exe_Button": "Suchen"
+      "SAR_Entries_Max": "SAR-Eintr\u00E4ge Maximum:"
     },
     "Window": {
       "Group_Title": "Fenster",

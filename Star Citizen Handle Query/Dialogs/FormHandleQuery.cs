@@ -316,7 +316,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       // Ggf. LogFileWatcher-Fenster anzeigen
-      if (ProgramSettings.SARMonitor.ShowWindow && File.Exists(ProgramSettings.SARMonitor.StarCitizenExePath)) {
+      if (ProgramSettings.SARMonitor.ShowWindow) {
         SARMonitorForm = new(ProgramSettings);
         SARMonitorForm.Show(this);
         if (ProgramSettings?.RememberWindowLocation == true && ProgramSettings?.SARMonitor?.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
