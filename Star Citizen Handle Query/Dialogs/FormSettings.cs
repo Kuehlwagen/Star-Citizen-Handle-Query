@@ -9,7 +9,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public Settings ProgramSettings;
     private Translation CurrentLocalization;
     private readonly List<Translation> Localizations = new();
-    private readonly List<Keys> KeyCollection = new () {
+    private readonly List<Keys> KeyCollection = new() {
       Keys.None, Keys.A, Keys.B, Keys.C, Keys.D, Keys.D0, Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.D6, Keys.D7, Keys.D8, Keys.D9,
       Keys.Delete, Keys.E, Keys.End, Keys.F, Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10,
       Keys.F11, Keys.F12, Keys.G, Keys.H, Keys.Home, Keys.I, Keys.Insert, Keys.J, Keys.K, Keys.L, Keys.M, Keys.N, Keys.O, Keys.P, Keys.Q,
@@ -30,6 +30,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       // Kopie der Einstellungen erstellen
       ProgramSettings = settings != null ? (Settings)settings.Clone() : null;
+      if (ProgramSettings != null) {
+        ProgramSettings.SARMonitor = settings?.SARMonitor != null ? (SARMonitorSettings)settings.SARMonitor.Clone() : null;
+      }
 
       if (ProgramSettings == null) {
         // Versuchen die Einstellungen aus der Einstellungen-Datei zu laden
@@ -67,6 +70,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxUnkenntlicheAffiliationenAusblenden.Checked = ProgramSettings.HideRedactedAffiliations;
       CheckBoxAutoCheckForUpdate.Checked = ProgramSettings.AutoCheckForUpdate;
       CheckBoxHideStreamLiveStatus.Checked = ProgramSettings.HideStreamLiveStatus;
+      CheckBoxShowSAR.Checked = ProgramSettings.SARMonitor.ShowWindow;
+      NumericUpDownSAREintraegeMaximum.Value = ProgramSettings.SARMonitor.EntriesMax;
+      TextBoxStarCitizenPfad.Text = ProgramSettings.SARMonitor.StarCitizenExePath;
     }
 
     private void GetLocalizations() {
@@ -80,12 +86,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void ButtonSpeichern_Click(object sender, EventArgs e) {
       ButtonSpeichern.Focus();
-      string settingsFilePath = FormHandleQuery.GetSettingsFilePath();
-      try {
-        File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
-        DialogResult = DialogResult.OK;
-      } catch (Exception ex) {
-        MessageBox.Show($"{CurrentLocalization.Settings.MessageBoxes.Save_Fail} {ex.Message}");
+      if (!ProgramSettings.SARMonitor.ShowWindow || File.Exists(ProgramSettings.SARMonitor.StarCitizenExePath)) {
+        string settingsFilePath = FormHandleQuery.GetSettingsFilePath();
+        try {
+          File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
+          DialogResult = DialogResult.OK;
+        } catch (Exception ex) {
+          MessageBox.Show($"{CurrentLocalization.Settings.MessageBoxes.Save_Fail} {ex.Message}", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+      } else {
+        MessageBox.Show(CurrentLocalization.Settings.MessageBoxes.Save_StarCitizen_Exe_No_Access, Text, MessageBoxButtons.OK, MessageBoxIcon.Warning);
       }
     }
 
@@ -154,6 +164,27 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.AutoCheckForUpdate = (sender as CheckBox).Checked;
     }
 
+    private void CheckBoxShowSAR_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.SARMonitor.ShowWindow = CheckBoxShowSAR.Checked;
+    }
+
+    private void NumericUpDownSAREintraegeMaximum_ValueChanged(object sender, EventArgs e) {
+      ProgramSettings.SARMonitor.EntriesMax = Convert.ToInt32(NumericUpDownSAREintraegeMaximum.Value);
+    }
+
+    private void TextBoxStarCitizenPfad_TextChanged(object sender, EventArgs e) {
+      ProgramSettings.SARMonitor.StarCitizenExePath = TextBoxStarCitizenPfad.Text;
+    }
+
+    private void ButtonStarCitizenPfadSuchen_Click(object sender, EventArgs e) {
+      using OpenFileDialog ofd = new() {
+        Filter = "StarCitizen.exe|StarCitizen.exe"
+      };
+      if (ofd.ShowDialog() == DialogResult.OK) {
+        TextBoxStarCitizenPfad.Text = ofd.FileName;
+      }
+    }
+
     private void ButtonStandard_Click(object sender, EventArgs e) {
       ProgramSettings = new() { Language = ProgramSettings.Language };
       SetDialogValues();
@@ -170,6 +201,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxUnkenntlicheAffiliationenAusblenden.Text = CurrentLocalization.Settings.Display.Hide_Redacted_Affiliations;
       CheckBoxHideStreamLiveStatus.Text = CurrentLocalization.Settings.Display.Hide_Stream_Live_Status;
       CheckBoxAutoCheckForUpdate.Text = CurrentLocalization.Settings.Display.Auto_Check_For_Update;
+      CheckBoxShowSAR.Text = CurrentLocalization.Settings.Display.Show_Search_And_Rescue_Monitor;
+      LabelSAREintraegeMaximum.Text = CurrentLocalization.Settings.Display.SAR_Entries_Max;
+      LabelStarCitizenPfad.Text = CurrentLocalization.Settings.Display.Star_Citizen_Path;
+      TextBoxStarCitizenPfad.PlaceholderText = CurrentLocalization.Settings.Display.Star_Citizen_Path_Placeholder;
+      ButtonStarCitizenPfadSuchen.Text = CurrentLocalization.Settings.Display.Search_StarCitizen_Exe_Button;
 
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;
       LabelFensterDeckkraft.Text = CurrentLocalization.Settings.Window.Opacity;

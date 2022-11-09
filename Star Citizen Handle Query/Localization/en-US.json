@@ -30,7 +30,12 @@
       "Affiliations_Max": "Maximum affiliations:",
       "Hide_Redacted_Affiliations": "Hide redacted affiliations",
       "Auto_Check_For_Update": "Check for update when program starts",
-      "Hide_Stream_Live_Status":  "Hide stream live status"
+      "Hide_Stream_Live_Status": "Hide stream live status",
+      "Show_Search_And_Rescue_Monitor": "Show search and rescue monitor",
+      "SAR_Entries_Max": "Maximum SAR entries:",
+      "Star_Citizen_Path": "Star Citizen path:",
+      "Star_Citizen_Path_Placeholder": "Path to StarCitizen.exe",
+      "Search_StarCitizen_Exe_Button": "Search"
     },
     "Window": {
       "Group_Title": "Window",
@@ -55,7 +60,8 @@
       "Standard": "Default"
     },
     "MessageBoxes": {
-      "Save_Fail": "Saving settings failed:\r\nError message:"
+      "Save_Fail": "Saving settings failed:\r\nError message:",
+      "Save_StarCitizen_Exe_No_Access": "Cannot access StarCitizen.exe path"
     }
   },
   "Local_Cache": {

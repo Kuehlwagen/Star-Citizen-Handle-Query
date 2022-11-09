@@ -24,8 +24,6 @@
     /// </summary>
     private void InitializeComponent() {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
-      this.LabelFensterDeckkraft = new System.Windows.Forms.Label();
-      this.NumericUpDownFensterDeckkraft = new System.Windows.Forms.NumericUpDown();
       this.CheckBoxFensterMauseingabenIgnorieren = new System.Windows.Forms.CheckBox();
       this.LabelLokalerCacheAlter = new System.Windows.Forms.Label();
       this.NumericUpDownLokalerCacheAlter = new System.Windows.Forms.NumericUpDown();
@@ -41,52 +39,32 @@
       this.CheckBoxStrg = new System.Windows.Forms.CheckBox();
       this.ComboBoxTaste = new System.Windows.Forms.ComboBox();
       this.LabelTastenkombination = new System.Windows.Forms.Label();
+      this.NumericUpDownFensterDeckkraft = new System.Windows.Forms.NumericUpDown();
+      this.LabelFensterDeckkraft = new System.Windows.Forms.Label();
       this.LabelSprache = new System.Windows.Forms.Label();
       this.ComboBoxSprache = new System.Windows.Forms.ComboBox();
       this.GroupBoxLokalerCache = new System.Windows.Forms.GroupBox();
       this.ButtonStandard = new System.Windows.Forms.Button();
       this.GroupBoxAnzeige = new System.Windows.Forms.GroupBox();
+      this.ButtonStarCitizenPfadSuchen = new System.Windows.Forms.Button();
+      this.LabelStarCitizenPfad = new System.Windows.Forms.Label();
+      this.TextBoxStarCitizenPfad = new System.Windows.Forms.TextBox();
+      this.NumericUpDownSAREintraegeMaximum = new System.Windows.Forms.NumericUpDown();
+      this.LabelSAREintraegeMaximum = new System.Windows.Forms.Label();
+      this.CheckBoxShowSAR = new System.Windows.Forms.CheckBox();
       this.CheckBoxHideStreamLiveStatus = new System.Windows.Forms.CheckBox();
       this.CheckBoxAutoCheckForUpdate = new System.Windows.Forms.CheckBox();
       this.NumericUpDownAffiliationenMaximum = new System.Windows.Forms.NumericUpDown();
       this.LabelMaxAffiliationen = new System.Windows.Forms.Label();
       this.CheckBoxUnkenntlicheAffiliationenAusblenden = new System.Windows.Forms.CheckBox();
-      ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownFensterDeckkraft)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownLokalerCacheAlter)).BeginInit();
       this.GroupBoxFenster.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownFensterDeckkraft)).BeginInit();
       this.GroupBoxLokalerCache.SuspendLayout();
       this.GroupBoxAnzeige.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownSAREintraegeMaximum)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownAffiliationenMaximum)).BeginInit();
       this.SuspendLayout();
-      // 
-      // LabelFensterDeckkraft
-      // 
-      this.LabelFensterDeckkraft.AutoSize = true;
-      this.LabelFensterDeckkraft.Location = new System.Drawing.Point(15, 24);
-      this.LabelFensterDeckkraft.Name = "LabelFensterDeckkraft";
-      this.LabelFensterDeckkraft.Size = new System.Drawing.Size(60, 15);
-      this.LabelFensterDeckkraft.TabIndex = 0;
-      this.LabelFensterDeckkraft.Text = "Deckkraft:";
-      // 
-      // NumericUpDownFensterDeckkraft
-      // 
-      this.NumericUpDownFensterDeckkraft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.NumericUpDownFensterDeckkraft.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.NumericUpDownFensterDeckkraft.Location = new System.Drawing.Point(154, 22);
-      this.NumericUpDownFensterDeckkraft.Minimum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-      this.NumericUpDownFensterDeckkraft.Name = "NumericUpDownFensterDeckkraft";
-      this.NumericUpDownFensterDeckkraft.Size = new System.Drawing.Size(44, 23);
-      this.NumericUpDownFensterDeckkraft.TabIndex = 1;
-      this.NumericUpDownFensterDeckkraft.Value = new decimal(new int[] {
-            85,
-            0,
-            0,
-            0});
-      this.NumericUpDownFensterDeckkraft.ValueChanged += new System.EventHandler(this.NumericUpDownFensterDeckkraft_ValueChanged);
       // 
       // CheckBoxFensterMauseingabenIgnorieren
       // 
@@ -131,7 +109,7 @@
       // ButtonSpeichern
       // 
       this.ButtonSpeichern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 444);
+      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 528);
       this.ButtonSpeichern.Name = "ButtonSpeichern";
       this.ButtonSpeichern.Size = new System.Drawing.Size(75, 28);
       this.ButtonSpeichern.TabIndex = 3;
@@ -142,7 +120,7 @@
       // ButtonSchliessen
       // 
       this.ButtonSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 444);
+      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 528);
       this.ButtonSchliessen.Name = "ButtonSchliessen";
       this.ButtonSchliessen.Size = new System.Drawing.Size(75, 28);
       this.ButtonSchliessen.TabIndex = 4;
@@ -183,7 +161,7 @@
       this.GroupBoxFenster.Controls.Add(this.LabelFensterDeckkraftProzent);
       this.GroupBoxFenster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.GroupBoxFenster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxFenster.Location = new System.Drawing.Point(12, 182);
+      this.GroupBoxFenster.Location = new System.Drawing.Point(12, 266);
       this.GroupBoxFenster.Name = "GroupBoxFenster";
       this.GroupBoxFenster.Size = new System.Drawing.Size(416, 187);
       this.GroupBoxFenster.TabIndex = 1;
@@ -268,6 +246,35 @@
       this.LabelTastenkombination.TabIndex = 3;
       this.LabelTastenkombination.Text = "Globale Taste:";
       // 
+      // NumericUpDownFensterDeckkraft
+      // 
+      this.NumericUpDownFensterDeckkraft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.NumericUpDownFensterDeckkraft.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      this.NumericUpDownFensterDeckkraft.Location = new System.Drawing.Point(154, 22);
+      this.NumericUpDownFensterDeckkraft.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+      this.NumericUpDownFensterDeckkraft.Name = "NumericUpDownFensterDeckkraft";
+      this.NumericUpDownFensterDeckkraft.Size = new System.Drawing.Size(44, 23);
+      this.NumericUpDownFensterDeckkraft.TabIndex = 1;
+      this.NumericUpDownFensterDeckkraft.Value = new decimal(new int[] {
+            85,
+            0,
+            0,
+            0});
+      this.NumericUpDownFensterDeckkraft.ValueChanged += new System.EventHandler(this.NumericUpDownFensterDeckkraft_ValueChanged);
+      // 
+      // LabelFensterDeckkraft
+      // 
+      this.LabelFensterDeckkraft.AutoSize = true;
+      this.LabelFensterDeckkraft.Location = new System.Drawing.Point(15, 24);
+      this.LabelFensterDeckkraft.Name = "LabelFensterDeckkraft";
+      this.LabelFensterDeckkraft.Size = new System.Drawing.Size(60, 15);
+      this.LabelFensterDeckkraft.TabIndex = 0;
+      this.LabelFensterDeckkraft.Text = "Deckkraft:";
+      // 
       // LabelSprache
       // 
       this.LabelSprache.AutoSize = true;
@@ -298,7 +305,7 @@
       this.GroupBoxLokalerCache.Controls.Add(this.LabelLokalerCacheAlter);
       this.GroupBoxLokalerCache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.GroupBoxLokalerCache.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 377);
+      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 461);
       this.GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
       this.GroupBoxLokalerCache.Size = new System.Drawing.Size(416, 61);
       this.GroupBoxLokalerCache.TabIndex = 2;
@@ -308,7 +315,7 @@
       // ButtonStandard
       // 
       this.ButtonStandard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonStandard.Location = new System.Drawing.Point(353, 444);
+      this.ButtonStandard.Location = new System.Drawing.Point(353, 528);
       this.ButtonStandard.Name = "ButtonStandard";
       this.ButtonStandard.Size = new System.Drawing.Size(75, 28);
       this.ButtonStandard.TabIndex = 5;
@@ -318,6 +325,12 @@
       // 
       // GroupBoxAnzeige
       // 
+      this.GroupBoxAnzeige.Controls.Add(this.ButtonStarCitizenPfadSuchen);
+      this.GroupBoxAnzeige.Controls.Add(this.LabelStarCitizenPfad);
+      this.GroupBoxAnzeige.Controls.Add(this.TextBoxStarCitizenPfad);
+      this.GroupBoxAnzeige.Controls.Add(this.NumericUpDownSAREintraegeMaximum);
+      this.GroupBoxAnzeige.Controls.Add(this.LabelSAREintraegeMaximum);
+      this.GroupBoxAnzeige.Controls.Add(this.CheckBoxShowSAR);
       this.GroupBoxAnzeige.Controls.Add(this.CheckBoxHideStreamLiveStatus);
       this.GroupBoxAnzeige.Controls.Add(this.CheckBoxAutoCheckForUpdate);
       this.GroupBoxAnzeige.Controls.Add(this.LabelSprache);
@@ -329,10 +342,87 @@
       this.GroupBoxAnzeige.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.GroupBoxAnzeige.Location = new System.Drawing.Point(12, 12);
       this.GroupBoxAnzeige.Name = "GroupBoxAnzeige";
-      this.GroupBoxAnzeige.Size = new System.Drawing.Size(416, 160);
+      this.GroupBoxAnzeige.Size = new System.Drawing.Size(416, 246);
       this.GroupBoxAnzeige.TabIndex = 0;
       this.GroupBoxAnzeige.TabStop = false;
       this.GroupBoxAnzeige.Text = "Anzeige";
+      // 
+      // ButtonStarCitizenPfadSuchen
+      // 
+      this.ButtonStarCitizenPfadSuchen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+      this.ButtonStarCitizenPfadSuchen.Location = new System.Drawing.Point(348, 208);
+      this.ButtonStarCitizenPfadSuchen.Name = "ButtonStarCitizenPfadSuchen";
+      this.ButtonStarCitizenPfadSuchen.Size = new System.Drawing.Size(62, 24);
+      this.ButtonStarCitizenPfadSuchen.TabIndex = 12;
+      this.ButtonStarCitizenPfadSuchen.Text = "Suchen";
+      this.ButtonStarCitizenPfadSuchen.UseVisualStyleBackColor = true;
+      this.ButtonStarCitizenPfadSuchen.Click += new System.EventHandler(this.ButtonStarCitizenPfadSuchen_Click);
+      // 
+      // LabelStarCitizenPfad
+      // 
+      this.LabelStarCitizenPfad.AutoSize = true;
+      this.LabelStarCitizenPfad.Location = new System.Drawing.Point(15, 212);
+      this.LabelStarCitizenPfad.Name = "LabelStarCitizenPfad";
+      this.LabelStarCitizenPfad.Size = new System.Drawing.Size(96, 15);
+      this.LabelStarCitizenPfad.TabIndex = 10;
+      this.LabelStarCitizenPfad.Text = "Star Citizen Pfad:";
+      // 
+      // TextBoxStarCitizenPfad
+      // 
+      this.TextBoxStarCitizenPfad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.TextBoxStarCitizenPfad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+      this.TextBoxStarCitizenPfad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      this.TextBoxStarCitizenPfad.Location = new System.Drawing.Point(154, 209);
+      this.TextBoxStarCitizenPfad.Name = "TextBoxStarCitizenPfad";
+      this.TextBoxStarCitizenPfad.PlaceholderText = "Pfad zur StarCitizen.exe";
+      this.TextBoxStarCitizenPfad.Size = new System.Drawing.Size(188, 23);
+      this.TextBoxStarCitizenPfad.TabIndex = 11;
+      this.TextBoxStarCitizenPfad.TextChanged += new System.EventHandler(this.TextBoxStarCitizenPfad_TextChanged);
+      // 
+      // NumericUpDownSAREintraegeMaximum
+      // 
+      this.NumericUpDownSAREintraegeMaximum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.NumericUpDownSAREintraegeMaximum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      this.NumericUpDownSAREintraegeMaximum.Location = new System.Drawing.Point(154, 180);
+      this.NumericUpDownSAREintraegeMaximum.Maximum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+      this.NumericUpDownSAREintraegeMaximum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+      this.NumericUpDownSAREintraegeMaximum.Name = "NumericUpDownSAREintraegeMaximum";
+      this.NumericUpDownSAREintraegeMaximum.Size = new System.Drawing.Size(44, 23);
+      this.NumericUpDownSAREintraegeMaximum.TabIndex = 9;
+      this.NumericUpDownSAREintraegeMaximum.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+      this.NumericUpDownSAREintraegeMaximum.ValueChanged += new System.EventHandler(this.NumericUpDownSAREintraegeMaximum_ValueChanged);
+      // 
+      // LabelSAREintraegeMaximum
+      // 
+      this.LabelSAREintraegeMaximum.AutoSize = true;
+      this.LabelSAREintraegeMaximum.Location = new System.Drawing.Point(15, 182);
+      this.LabelSAREintraegeMaximum.Name = "LabelSAREintraegeMaximum";
+      this.LabelSAREintraegeMaximum.Size = new System.Drawing.Size(137, 15);
+      this.LabelSAREintraegeMaximum.TabIndex = 8;
+      this.LabelSAREintraegeMaximum.Text = "SAR-Einträge Maximum:";
+      // 
+      // CheckBoxShowSAR
+      // 
+      this.CheckBoxShowSAR.AutoSize = true;
+      this.CheckBoxShowSAR.Location = new System.Drawing.Point(15, 155);
+      this.CheckBoxShowSAR.Name = "CheckBoxShowSAR";
+      this.CheckBoxShowSAR.Size = new System.Drawing.Size(220, 19);
+      this.CheckBoxShowSAR.TabIndex = 7;
+      this.CheckBoxShowSAR.Text = "Search and Rescue Monitor anzeigen";
+      this.CheckBoxShowSAR.UseVisualStyleBackColor = true;
+      this.CheckBoxShowSAR.CheckedChanged += new System.EventHandler(this.CheckBoxShowSAR_CheckedChanged);
       // 
       // CheckBoxHideStreamLiveStatus
       // 
@@ -403,7 +493,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.CancelButton = this.ButtonSchliessen;
-      this.ClientSize = new System.Drawing.Size(440, 485);
+      this.ClientSize = new System.Drawing.Size(440, 569);
       this.Controls.Add(this.GroupBoxAnzeige);
       this.Controls.Add(this.GroupBoxLokalerCache);
       this.Controls.Add(this.GroupBoxFenster);
@@ -412,27 +502,25 @@
       this.Controls.Add(this.ButtonSpeichern);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.MinimumSize = new System.Drawing.Size(456, 524);
+      this.MinimumSize = new System.Drawing.Size(456, 608);
       this.Name = "FormSettings";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Star Citizen Handle Query Einstellungen";
-      ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownFensterDeckkraft)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownLokalerCacheAlter)).EndInit();
       this.GroupBoxFenster.ResumeLayout(false);
       this.GroupBoxFenster.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownFensterDeckkraft)).EndInit();
       this.GroupBoxLokalerCache.ResumeLayout(false);
       this.GroupBoxLokalerCache.PerformLayout();
       this.GroupBoxAnzeige.ResumeLayout(false);
       this.GroupBoxAnzeige.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownSAREintraegeMaximum)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownAffiliationenMaximum)).EndInit();
       this.ResumeLayout(false);
 
     }
 
     #endregion
-
-    private Label LabelFensterDeckkraft;
-    private NumericUpDown NumericUpDownFensterDeckkraft;
     private CheckBox CheckBoxFensterMauseingabenIgnorieren;
     private Label LabelLokalerCacheAlter;
     private NumericUpDown NumericUpDownLokalerCacheAlter;
@@ -458,5 +546,13 @@
     private CheckBox CheckBoxPositionMerken;
     private CheckBox CheckBoxAutoCheckForUpdate;
         private CheckBox CheckBoxHideStreamLiveStatus;
+        private CheckBox CheckBoxShowSAR;
+        private NumericUpDown NumericUpDownFensterDeckkraft;
+        private Label LabelFensterDeckkraft;
+        private NumericUpDown NumericUpDownSAREintraegeMaximum;
+        private Label LabelSAREintraegeMaximum;
+        private Label LabelStarCitizenPfad;
+        private TextBox TextBoxStarCitizenPfad;
+        private Button ButtonStarCitizenPfadSuchen;
     }
 }

@@ -12,7 +12,7 @@
     <DebugType>embedded</DebugType>
     <PackageIcon>SCHQ.png</PackageIcon>
     <ApplicationIcon>Resources\SCHQ.ico</ApplicationIcon>
-    <AssemblyVersion>1.9.0</AssemblyVersion>
+    <AssemblyVersion>1.10.0</AssemblyVersion>
     <FileVersion></FileVersion>
     <Company>Kuehlwagen@GitHub</Company>
     <Version>$(Assemblyversion)</Version>
@@ -34,10 +34,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Dialogs\FormSARMonitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="UserControls\UserControlSAR.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserControls\UserControlOrganization.cs">
       <SubType>UserControl</SubType>

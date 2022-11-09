@@ -122,6 +122,16 @@
 
     public string Hide_Stream_Live_Status { get; set; } = "Stream Live-Status ausblenden";
 
+    public string Show_Search_And_Rescue_Monitor { get; set; } = "Search and Rescue Monitor anzeigen";
+
+    public string SAR_Entries_Max { get; set; } = "SAR-Einträge Maximum:";
+
+    public string Star_Citizen_Path { get; set; } = "Star Citizen Pfad:";
+
+    public string Star_Citizen_Path_Placeholder { get; set; } = "Pfad zur StarCitizen.exe";
+
+    public string Search_StarCitizen_Exe_Button { get; set; } = "Suchen";
+
   }
 
   [Serializable()]
@@ -175,6 +185,8 @@
   public class Translation_Settings_MessageBoxes {
 
     public string Save_Fail { get; set; } = "Das Speichern der Einstellungen ist fehlgeschlagen:\r\nFehlermeldung:";
+
+    public string Save_StarCitizen_Exe_No_Access { get; set; } = "Auf den Star Citizen Pfad kann nicht zugegriffen werden.";
 
   }
 

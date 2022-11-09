@@ -19,6 +19,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
   public partial class FormHandleQuery : Form {
 
     private readonly int InitialWindowStyle = 0;
+    private FormSARMonitor SARMonitorForm = null;
     private readonly Translation ProgramTranslation;
     private Settings ProgramSettings;
     private GlobalHotKey HotKey;
@@ -280,11 +281,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     internal void ShowWindow() {
       // Fenster einblenden
-      Visible = true;
-      User32Wrappers.SetForegroundWindow(Handle);
       User32Wrappers.ShowWindow(Handle, User32Wrappers.SW_MINIMIZE);
       User32Wrappers.ShowWindow(Handle, User32Wrappers.SW_RESTORE);
       User32Wrappers.SetForegroundWindow(Handle);
+      Visible = true;
+      if (SARMonitorForm != null) {
+        SARMonitorForm.Visible = true;
+      }
       Activate();
       TextBoxHandle.SelectAll();
       TextBoxHandle.Focus();
@@ -311,6 +314,20 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         HotKey.HookedKeys.Add(ProgramSettings.GlobalHotkey);
         HotKey.Hook();
       }
+
+      // Ggf. LogFileWatcher-Fenster anzeigen
+      if (ProgramSettings.SARMonitor.ShowWindow && File.Exists(ProgramSettings.SARMonitor.StarCitizenExePath)) {
+        SARMonitorForm = new(ProgramSettings);
+        SARMonitorForm.Show(this);
+        if (ProgramSettings?.RememberWindowLocation == true && ProgramSettings?.SARMonitor?.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
+          SARMonitorForm.Location = ProgramSettings.SARMonitor.WindowLocation;
+        } else {
+          SARMonitorForm.MoveWindowToDefaultLocation();
+        }
+      }
+
+      // Fenster auf jeden Fall nochmal in den Vordergrund holen
+      ShowWindow();
     }
 
     private void MoveWindowToDefaultLocation() {
@@ -388,6 +405,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           e.SuppressKeyPress = true;
           // Fenster verstecken
           Visible = false;
+          if (SARMonitorForm != null) {
+            SARMonitorForm.Visible = false;
+          }
           break;
       }
     }
@@ -442,6 +462,17 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         LabelQuery.Enabled = true;
         TextBoxHandle.SelectAll();
         TextBoxHandle.Focus();
+      }
+    }
+
+    public void SetAndQueryHandle(string handle) {
+      // Handle setzen und die Suche ausführen
+      if (TextBoxHandle.Enabled) {
+        if (!Visible) {
+          ShowWindow();
+        }
+        TextBoxHandle.Text = handle;
+        QueryHandle(ModifierKeys == Keys.Control);
       }
     }
 
@@ -677,7 +708,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void BeendenToolStripMenuItem_Click(object sender, EventArgs e) {
       // Programm beenden
-      Application.Exit();
+      Close();
     }
 
     private void NotifyIconHandleQuery_MouseClick(object sender, MouseEventArgs e) {
@@ -873,10 +904,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       // Fensterposition merken
       ProgramSettings.WindowLocation = ProgramSettings.RememberWindowLocation ? Location : Point.Empty;
+      ProgramSettings.SARMonitor.WindowLocation = ProgramSettings.RememberWindowLocation ? SARMonitorForm.Location : Point.Empty;
       string settingsFilePath = GetSettingsFilePath();
       try {
         File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, new JsonSerializerOptions() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull }), Encoding.UTF8);
       } catch { }
+
+      SARMonitorForm?.Close();
     }
 
     public static string GetString(string value, string preValue = "") {
@@ -996,6 +1030,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (e.Button == MouseButtons.Left) {
         WindowLocked = !WindowLocked;
         LabelLockUnlock.Image = WindowLocked ? Resources.WindowLocked : Resources.WindowUnlocked;
+        SARMonitorForm?.LockUnlockWindow(WindowLocked);
       }
     }
 
