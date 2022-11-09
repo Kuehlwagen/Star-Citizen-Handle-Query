@@ -19,7 +19,6 @@ Das Tool-Hauptfenster kann nur dann im Vordergrund des Spiels dargestellt werden
   - Ausschließlich wenn ein Update zur Verfügung steht, wird eine Benachrichtigung angezeigt.
 - __Search and Rescue Monitor anzeigen:__ Angabe, ob das Search and Rescue Monitor Fenster angezeigt werden soll
 - __SAR-Einträge Maximum:__ Angabe, wie viele Einträge maximal im SAR-Monitor angezeigt werden sollen
-- __Star Citizen Pfad:__ Pfad zur StarCitizen.exe-Datei (wird benötigt, um den relativen Pfad zur Games.log zu ermitteln)
 ### Fenster
 - __Deckkraft:__ Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
 - __Globale Taste:__ Hier kann die Taste angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifikatoren (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
