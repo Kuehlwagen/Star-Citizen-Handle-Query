@@ -31,7 +31,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Kopie der Einstellungen erstellen
       ProgramSettings = settings != null ? (Settings)settings.Clone() : null;
       if (ProgramSettings != null) {
-        ProgramSettings.SARMonitor = settings?.SARMonitor != null ? (SARMonitorSettings)settings.SARMonitor.Clone() : null;
+        ProgramSettings.CorpseMonitor = settings?.CorpseMonitor != null ? (CorpseMonitorSettings)settings.CorpseMonitor.Clone() : null;
       }
 
       if (ProgramSettings == null) {
@@ -70,8 +70,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxUnkenntlicheAffiliationenAusblenden.Checked = ProgramSettings.HideRedactedAffiliations;
       CheckBoxAutoCheckForUpdate.Checked = ProgramSettings.AutoCheckForUpdate;
       CheckBoxHideStreamLiveStatus.Checked = ProgramSettings.HideStreamLiveStatus;
-      CheckBoxShowSAR.Checked = ProgramSettings.SARMonitor.ShowWindow;
-      NumericUpDownSAREintraegeMaximum.Value = ProgramSettings.SARMonitor.EntriesMax;
+      CheckBoxShowCorpse.Checked = ProgramSettings.CorpseMonitor.ShowWindow;
+      NumericUpDownCorpseEintraegeMaximum.Value = ProgramSettings.CorpseMonitor.EntriesMax;
     }
 
     private void GetLocalizations() {
@@ -159,12 +159,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.AutoCheckForUpdate = (sender as CheckBox).Checked;
     }
 
-    private void CheckBoxShowSAR_CheckedChanged(object sender, EventArgs e) {
-      ProgramSettings.SARMonitor.ShowWindow = CheckBoxShowSAR.Checked;
+    private void CheckBoxShowCorpse_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.CorpseMonitor.ShowWindow = CheckBoxShowCorpse.Checked;
     }
 
-    private void NumericUpDownSAREintraegeMaximum_ValueChanged(object sender, EventArgs e) {
-      ProgramSettings.SARMonitor.EntriesMax = Convert.ToInt32(NumericUpDownSAREintraegeMaximum.Value);
+    private void NumericUpDownCorpseEintraegeMaximum_ValueChanged(object sender, EventArgs e) {
+      ProgramSettings.CorpseMonitor.EntriesMax = Convert.ToInt32(NumericUpDownCorpseEintraegeMaximum.Value);
     }
 
     private void ButtonStandard_Click(object sender, EventArgs e) {
@@ -183,8 +183,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxUnkenntlicheAffiliationenAusblenden.Text = CurrentLocalization.Settings.Display.Hide_Redacted_Affiliations;
       CheckBoxHideStreamLiveStatus.Text = CurrentLocalization.Settings.Display.Hide_Stream_Live_Status;
       CheckBoxAutoCheckForUpdate.Text = CurrentLocalization.Settings.Display.Auto_Check_For_Update;
-      CheckBoxShowSAR.Text = CurrentLocalization.Settings.Display.Show_Search_And_Rescue_Monitor;
-      LabelSAREintraegeMaximum.Text = CurrentLocalization.Settings.Display.SAR_Entries_Max;
+      CheckBoxShowCorpse.Text = CurrentLocalization.Settings.Display.Show_Search_And_Rescue_Monitor;
+      LabelCorpseEintraegeMaximum.Text = CurrentLocalization.Settings.Display.Corpse_Entries_Max;
 
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;
       LabelFensterDeckkraft.Text = CurrentLocalization.Settings.Window.Opacity;

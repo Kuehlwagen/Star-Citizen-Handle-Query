@@ -87,14 +87,14 @@
     public bool HideStreamLiveStatus { get; set; } = false;
 
     /// <summary>LogFileWatcher relevante Einstellungen</summary>
-    public SARMonitorSettings SARMonitor { get; set; } = new SARMonitorSettings();
+    public CorpseMonitorSettings CorpseMonitor { get; set; } = new CorpseMonitorSettings();
 
     public object Clone() {
       return MemberwiseClone();
     }
   }
 
-  public class SARMonitorSettings : ICloneable {
+  public class CorpseMonitorSettings : ICloneable {
 
     /// <summary>Angabe, ob das Fenster angezeigt werden soll</summary>
     public bool ShowWindow { get; set; } = false;

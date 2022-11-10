@@ -31,8 +31,8 @@
       "Hide_Redacted_Affiliations": "Hide redacted affiliations",
       "Auto_Check_For_Update": "Check for update when program starts",
       "Hide_Stream_Live_Status": "Hide stream live status",
-      "Show_Search_And_Rescue_Monitor": "Show search and rescue monitor",
-      "SAR_Entries_Max": "Maximum SAR entries:"
+      "Show_Search_And_Rescue_Monitor": "Show corpse monitor",
+      "Corpse_Entries_Max": "Maximum corpse entries:"
     },
     "Window": {
       "Group_Title": "Window",
@@ -84,6 +84,9 @@
     "Update_Info": "Update available",
     "Update_Info_Show_Release_Notes": "Click to show release notes",
     "Update_Up_To_Date": "Program is up to date",
-    "Update_Error":  "Error requesting update information"
+    "Update_Error": "Error requesting update information"
+  },
+  "Corpse_Monitor": {
+    "Title":  "Corpse Monitor"
   }
 }

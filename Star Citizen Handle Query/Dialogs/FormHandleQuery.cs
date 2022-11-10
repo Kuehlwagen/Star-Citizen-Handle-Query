@@ -19,7 +19,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
   public partial class FormHandleQuery : Form {
 
     private readonly int InitialWindowStyle = 0;
-    private FormSARMonitor SARMonitorForm = null;
+    private FormCorpseMonitor CorpseMonitorForm = null;
     private readonly Translation ProgramTranslation;
     private Settings ProgramSettings;
     private GlobalHotKey HotKey;
@@ -285,8 +285,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       User32Wrappers.ShowWindow(Handle, User32Wrappers.SW_RESTORE);
       User32Wrappers.SetForegroundWindow(Handle);
       Visible = true;
-      if (SARMonitorForm != null) {
-        SARMonitorForm.Visible = true;
+      if (CorpseMonitorForm != null) {
+        CorpseMonitorForm.Visible = true;
       }
       Activate();
       TextBoxHandle.SelectAll();
@@ -316,13 +316,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       // Ggf. LogFileWatcher-Fenster anzeigen
-      if (ProgramSettings.SARMonitor.ShowWindow) {
-        SARMonitorForm = new(ProgramSettings);
-        SARMonitorForm.Show(this);
-        if (ProgramSettings?.RememberWindowLocation == true && ProgramSettings?.SARMonitor?.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
-          SARMonitorForm.Location = ProgramSettings.SARMonitor.WindowLocation;
+      if (ProgramSettings.CorpseMonitor.ShowWindow) {
+        CorpseMonitorForm = new(ProgramSettings, ProgramTranslation);
+        CorpseMonitorForm.Show(this);
+        if (ProgramSettings?.RememberWindowLocation == true && ProgramSettings?.CorpseMonitor?.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
+          CorpseMonitorForm.Location = ProgramSettings.CorpseMonitor.WindowLocation;
         } else {
-          SARMonitorForm.MoveWindowToDefaultLocation();
+          CorpseMonitorForm.MoveWindowToDefaultLocation();
         }
       }
 
@@ -405,8 +405,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           e.SuppressKeyPress = true;
           // Fenster verstecken
           Visible = false;
-          if (SARMonitorForm != null) {
-            SARMonitorForm.Visible = false;
+          if (CorpseMonitorForm != null) {
+            CorpseMonitorForm.Visible = false;
           }
           break;
       }
@@ -904,13 +904,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       // Fensterposition merken
       ProgramSettings.WindowLocation = ProgramSettings.RememberWindowLocation ? Location : Point.Empty;
-      ProgramSettings.SARMonitor.WindowLocation = ProgramSettings.RememberWindowLocation ? SARMonitorForm.Location : Point.Empty;
+      ProgramSettings.CorpseMonitor.WindowLocation = ProgramSettings.RememberWindowLocation ? CorpseMonitorForm.Location : Point.Empty;
       string settingsFilePath = GetSettingsFilePath();
       try {
         File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, new JsonSerializerOptions() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull }), Encoding.UTF8);
       } catch { }
 
-      SARMonitorForm?.Close();
+      CorpseMonitorForm?.Close();
     }
 
     public static string GetString(string value, string preValue = "") {
@@ -1030,7 +1030,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (e.Button == MouseButtons.Left) {
         WindowLocked = !WindowLocked;
         LabelLockUnlock.Image = WindowLocked ? Resources.WindowLocked : Resources.WindowUnlocked;
-        SARMonitorForm?.LockUnlockWindow(WindowLocked);
+        CorpseMonitorForm?.LockUnlockWindow(WindowLocked);
       }
     }
 

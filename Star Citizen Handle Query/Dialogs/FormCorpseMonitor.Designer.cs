@@ -1,5 +1,5 @@
 ﻿namespace Star_Citizen_Handle_Query.Dialogs {
-  partial class FormSARMonitor {
+  partial class FormCorpseMonitor {
     /// <summary>
     ///  Required designer variable.
     /// </summary>
@@ -23,11 +23,11 @@
     ///  the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSARMonitor));
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCorpseMonitor));
       this.PanelHeader = new System.Windows.Forms.Panel();
       this.PictureBoxStatus = new System.Windows.Forms.PictureBox();
       this.LabelTitle = new System.Windows.Forms.Label();
-      this.PanelSARInfo = new System.Windows.Forms.FlowLayoutPanel();
+      this.PanelCorpseInfo = new System.Windows.Forms.FlowLayoutPanel();
       this.PanelHeader.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxStatus)).BeginInit();
       this.SuspendLayout();
@@ -61,23 +61,23 @@
       this.LabelTitle.Name = "LabelTitle";
       this.LabelTitle.Size = new System.Drawing.Size(159, 15);
       this.LabelTitle.TabIndex = 0;
-      this.LabelTitle.Text = "Search and Rescue Monitor";
+      this.LabelTitle.Text = "Leichnam-Monitor";
       this.LabelTitle.MouseCaptureChanged += new System.EventHandler(this.LabelTitle_MouseCaptureChanged);
       this.LabelTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LabelTitle_MouseDown);
       this.LabelTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.LabelTitle_MouseMove);
       // 
       // PanelCorpseInfo
       // 
-      this.PanelSARInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+      this.PanelCorpseInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.PanelSARInfo.BackColor = System.Drawing.Color.Lime;
-      this.PanelSARInfo.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.PanelSARInfo.Location = new System.Drawing.Point(1, 30);
-      this.PanelSARInfo.Margin = new System.Windows.Forms.Padding(0);
-      this.PanelSARInfo.Name = "PanelCorpseInfo";
-      this.PanelSARInfo.Size = new System.Drawing.Size(238, 29);
-      this.PanelSARInfo.TabIndex = 1;
+      this.PanelCorpseInfo.BackColor = System.Drawing.Color.Lime;
+      this.PanelCorpseInfo.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+      this.PanelCorpseInfo.Location = new System.Drawing.Point(1, 30);
+      this.PanelCorpseInfo.Margin = new System.Windows.Forms.Padding(0);
+      this.PanelCorpseInfo.Name = "PanelCorpseInfo";
+      this.PanelCorpseInfo.Size = new System.Drawing.Size(238, 29);
+      this.PanelCorpseInfo.TabIndex = 1;
       // 
       // FormCorpseWatcher
       // 
@@ -85,7 +85,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.Lime;
       this.ClientSize = new System.Drawing.Size(240, 60);
-      this.Controls.Add(this.PanelSARInfo);
+      this.Controls.Add(this.PanelCorpseInfo);
       this.Controls.Add(this.PanelHeader);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -95,8 +95,8 @@
       this.Text = "Star Citizen Handle Query";
       this.TopMost = true;
       this.TransparencyKey = System.Drawing.Color.Lime;
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSARMonitor_FormClosing);
-      this.Shown += new System.EventHandler(this.FormSARMonitor_Shown);
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCorpseMonitor_FormClosing);
+      this.Shown += new System.EventHandler(this.FormCorpseMonitor_Shown);
       this.PanelHeader.ResumeLayout(false);
       this.PanelHeader.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxStatus)).EndInit();
@@ -108,7 +108,7 @@
 
     private Panel PanelHeader;
     private Label LabelTitle;
-    private FlowLayoutPanel PanelSARInfo;
+    private FlowLayoutPanel PanelCorpseInfo;
         private PictureBox PictureBoxStatus;
     }
 }

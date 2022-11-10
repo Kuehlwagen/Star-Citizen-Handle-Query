@@ -31,8 +31,8 @@
       "Hide_Redacted_Affiliations": "Unkenntliche Affiliationen ausblenden",
       "Auto_Check_For_Update": "Bei Programmstart nach Update suchen",
       "Hide_Stream_Live_Status": "Stream Live-Status ausblenden",
-      "Show_Search_And_Rescue_Monitor": "Search and Rescue Monitor anzeigen",
-      "SAR_Entries_Max": "SAR-Eintr\u00E4ge Maximum:"
+      "Show_Search_And_Rescue_Monitor": "Leichnam-Monitor anzeigen",
+      "Corpse_Entries_Max": "Leichnam-Eintr\u00E4ge Maximum:"
     },
     "Window": {
       "Group_Title": "Fenster",
@@ -44,7 +44,7 @@
       "Global_Hotkey_Shift": "Umschalt",
       "Ignore_Mouseinput": "Mauseingaben ignorieren",
       "Enable_Alt_Tab": "Erreichbarkeit via Alt \u002B Tab",
-      "RememberWindowLocation":  "Position merken"
+      "RememberWindowLocation": "Position merken"
     },
     "Local_Cache": {
       "Group_Title": "Lokaler Cache",
@@ -57,8 +57,7 @@
       "Standard": "Standard"
     },
     "MessageBoxes": {
-      "Save_Fail": "Das Speichern der Einstellungen ist fehlgeschlagen:\r\nFehlermeldung:",
-      "Save_StarCitizen_Exe_No_Access": "Auf den Star Citizen Pfad kann nicht zugegriffen werden."
+      "Save_Fail": "Das Speichern der Einstellungen ist fehlgeschlagen:\r\nFehlermeldung:"
     }
   },
   "Local_Cache": {
@@ -86,5 +85,8 @@
     "Update_Info_Show_Release_Notes": "Klicken, um Release-Notes zu \u00F6ffnen",
     "Update_Up_To_Date": "Programm ist aktuell",
     "Update_Error": "Update-Informationen konnten nicht ausgelesen werden"
+  },
+  "Corpse_Monitor": {
+    "Title": "Leichnam-Monitor"
   }
 }

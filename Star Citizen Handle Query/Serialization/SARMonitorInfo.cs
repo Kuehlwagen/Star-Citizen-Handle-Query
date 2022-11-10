@@ -1,7 +1,7 @@
 ﻿namespace Star_Citizen_Handle_Query.Serialization {
 
   [Serializable()]
-  public class SARMonitorInfo : ICloneable {
+  public class CorpseMonitorInfo : ICloneable {
 
     public DateTime Date { get; set; } = DateTime.MinValue;
 

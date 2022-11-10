@@ -17,6 +17,8 @@
 
     public Translation_Notification Notification { get; set; } = new();
 
+    public Translation_CorpseMonitor Corpse_Monitor { get; set; } = new();
+
     /// <summary>Vergleich in Liste ermöglichen</summary>
     /// <param name="other">Anderes Translation-Objekt</param>
     /// <returns>true, wenn das Feld "Language" übereinstimmt, andernfalls false</returns>
@@ -122,11 +124,9 @@
 
     public string Hide_Stream_Live_Status { get; set; } = "Stream Live-Status ausblenden";
 
-    public string Show_Search_And_Rescue_Monitor { get; set; } = "Search and Rescue Monitor anzeigen";
+    public string Show_Search_And_Rescue_Monitor { get; set; } = "Leichnam-Monitor anzeigen";
 
-    public string SAR_Entries_Max { get; set; } = "SAR-Einträge Maximum:";
-
-    public string Star_Citizen_Path { get; set; } = "Star Citizen Pfad:";
+    public string Corpse_Entries_Max { get; set; } = "Leichnam-Einträge Maximum:";
 
   }
 
@@ -241,6 +241,13 @@
     public string Update_Up_To_Date { get; set; } = "Programm ist aktuell";
 
     public string Update_Error { get; set; } = "Update-Informationen konnten nicht ausgelesen werden";
+
+  }
+
+  [Serializable]
+  public class Translation_CorpseMonitor {
+
+    public string Title { get; set; } = "Leichnam-Monitor";
 
   }
 

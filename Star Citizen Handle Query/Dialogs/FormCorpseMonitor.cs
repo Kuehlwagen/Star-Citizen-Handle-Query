@@ -8,19 +8,21 @@ using System.Text.RegularExpressions;
 
 namespace Star_Citizen_Handle_Query.Dialogs {
 
-  public partial class FormSARMonitor : Form {
+  public partial class FormCorpseMonitor : Form {
 
     private readonly int InitialWindowStyle = 0;
     private bool WindowLocked = true;
     private bool Cancel = false;
     private readonly Settings ProgramSettings;
+    private readonly Translation ProgramTranslation;
 
-    private readonly Regex RegexSAR = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})\.\d{3}Z>.+<Corpse> Player '(?<Handle>[\w_\-]+)'.+IsCorpseEnabled: (?<Corpse>\w{2,3})[,\.] ?(?<Info>[\w\s]*)\.?$",
+    private readonly Regex RegexCorpse = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})\.\d{3}Z>.+<Corpse> Player '(?<Handle>[\w_\-]+)'.+IsCorpseEnabled: (?<Corpse>\w{2,3})[,\.] ?(?<Info>[\w\s]*)\.?$",
      RegexOptions.Compiled);
 
-    public FormSARMonitor(Settings programSettings = null) {
+    public FormCorpseMonitor(Settings programSettings, Translation translation) {
       InitializeComponent();
       ProgramSettings = programSettings;
+      ProgramTranslation = translation;
 
       // Prüfen, ob die Programm-Einstellungen valide sind
       if (ProgramSettings != null) {
@@ -32,6 +34,17 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           InitialWindowStyle = User32Wrappers.GetWindowLong(Handle, User32Wrappers.GWL.ExStyle);
           _ = User32Wrappers.SetWindowLong(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered | (int)User32Wrappers.WS_EX.Transparent);
         }
+      }
+
+      // Übersetzung laden
+      SetTranslation();
+    }
+
+    private void SetTranslation() {
+      // Prüfen, ob die Übersetzung valide ist
+      if (ProgramTranslation != null) {
+        // Control-Texte setzen
+        LabelTitle.Text = ProgramTranslation.Corpse_Monitor.Title;
       }
     }
 
@@ -80,7 +93,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       WindowLocked = locked;
     }
 
-    private void FormSARMonitor_Shown(object sender, EventArgs e) {
+    private void FormCorpseMonitor_Shown(object sender, EventArgs e) {
       Size = new Size(Width, 31);
 
       Task.Run(() => {
@@ -99,7 +112,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
             if (processSC != null) {
 
-              Invoke(new Action(() => ClearSARInfos()));
+              Invoke(new Action(() => ClearCorpseInfos()));
               Invoke(new Action(() => ChangeStatus(Status.Initializing)));
 
               string scLogPath = Path.Combine(Path.GetDirectoryName(processSC.Modules[0].FileName), $@"Game.log");
@@ -130,7 +143,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                   }
 
                   logReader.BaseStream.Seek(lastMaxOffset, SeekOrigin.Begin);
-                  Invoke(new Action(() => AddSARInfo(CheckRegEx(logReader.ReadToEnd()))));
+                  Invoke(new Action(() => AddCorpseInfo(CheckRegEx(logReader.ReadToEnd()))));
 
                   currentPosition = logReader.BaseStream.Position;
                   lastMaxOffset = currentPosition;
@@ -149,22 +162,22 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       });
     }
 
-    private void AddSARInfo(List<SARMonitorInfo> lines) {
-      foreach (SARMonitorInfo line in lines) {
+    private void AddCorpseInfo(List<CorpseMonitorInfo> lines) {
+      foreach (CorpseMonitorInfo line in lines) {
         if (line.IsValid) {
-          UserControlSAR uc = new(line);
-          if (PanelSARInfo.Controls.Count == ProgramSettings.SARMonitor.EntriesMax) {
-            PanelSARInfo.Controls.RemoveAt(0);
-          } else if (PanelSARInfo.Controls.Count > 0) {
+          UserControlCorpse uc = new(line);
+          if (PanelCorpseInfo.Controls.Count == ProgramSettings.CorpseMonitor.EntriesMax) {
+            PanelCorpseInfo.Controls.RemoveAt(0);
+          } else if (PanelCorpseInfo.Controls.Count > 0) {
             Size = new Size(Width, Height + uc.Height + 2);
           }
-          PanelSARInfo.Controls.Add(uc);
+          PanelCorpseInfo.Controls.Add(uc);
         }
       }
     }
 
-    private void ClearSARInfos() {
-      PanelSARInfo.Controls.Clear();
+    private void ClearCorpseInfos() {
+      PanelCorpseInfo.Controls.Clear();
       Size = new Size(Width, 60);
     }
 
@@ -185,15 +198,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private List<SARMonitorInfo> CheckRegEx(string input) {
-      List<SARMonitorInfo> rtnVal = input != null ? new() : null;
+    private List<CorpseMonitorInfo> CheckRegEx(string input) {
+      List<CorpseMonitorInfo> rtnVal = input != null ? new() : null;
 
       if (rtnVal != null) {
         try {
           foreach (string line in input.Split(Environment.NewLine)) {
-            Match match = RegexSAR.Match(line);
+            Match match = RegexCorpse.Match(line);
             if (match != null && match.Success) {
-              rtnVal.Add(new SARMonitorInfo() {
+              rtnVal.Add(new CorpseMonitorInfo() {
                 Date = DateTime.Parse(match.Groups["Date"].Value, CultureInfo.InvariantCulture).ToLocalTime(),
                 Handle = match.Groups["Handle"].Value,
                 CorpseEnabled = match.Groups["Corpse"].Value == "Yes",
@@ -207,7 +220,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return rtnVal;
     }
 
-    private void FormSARMonitor_FormClosing(object sender, FormClosingEventArgs e) {
+    private void FormCorpseMonitor_FormClosing(object sender, FormClosingEventArgs e) {
       Cancel = true;
     }
 

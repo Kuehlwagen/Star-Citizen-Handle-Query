@@ -46,9 +46,9 @@
       this.GroupBoxLokalerCache = new System.Windows.Forms.GroupBox();
       this.ButtonStandard = new System.Windows.Forms.Button();
       this.GroupBoxAnzeige = new System.Windows.Forms.GroupBox();
-      this.NumericUpDownSAREintraegeMaximum = new System.Windows.Forms.NumericUpDown();
-      this.LabelSAREintraegeMaximum = new System.Windows.Forms.Label();
-      this.CheckBoxShowSAR = new System.Windows.Forms.CheckBox();
+      this.NumericUpDownCorpseEintraegeMaximum = new System.Windows.Forms.NumericUpDown();
+      this.LabelCorpseEintraegeMaximum = new System.Windows.Forms.Label();
+      this.CheckBoxShowCorpse = new System.Windows.Forms.CheckBox();
       this.CheckBoxHideStreamLiveStatus = new System.Windows.Forms.CheckBox();
       this.CheckBoxAutoCheckForUpdate = new System.Windows.Forms.CheckBox();
       this.NumericUpDownAffiliationenMaximum = new System.Windows.Forms.NumericUpDown();
@@ -59,7 +59,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownFensterDeckkraft)).BeginInit();
       this.GroupBoxLokalerCache.SuspendLayout();
       this.GroupBoxAnzeige.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownSAREintraegeMaximum)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownCorpseEintraegeMaximum)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownAffiliationenMaximum)).BeginInit();
       this.SuspendLayout();
       // 
@@ -322,9 +322,9 @@
       // 
       // GroupBoxAnzeige
       // 
-      this.GroupBoxAnzeige.Controls.Add(this.NumericUpDownSAREintraegeMaximum);
-      this.GroupBoxAnzeige.Controls.Add(this.LabelSAREintraegeMaximum);
-      this.GroupBoxAnzeige.Controls.Add(this.CheckBoxShowSAR);
+      this.GroupBoxAnzeige.Controls.Add(this.NumericUpDownCorpseEintraegeMaximum);
+      this.GroupBoxAnzeige.Controls.Add(this.LabelCorpseEintraegeMaximum);
+      this.GroupBoxAnzeige.Controls.Add(this.CheckBoxShowCorpse);
       this.GroupBoxAnzeige.Controls.Add(this.CheckBoxHideStreamLiveStatus);
       this.GroupBoxAnzeige.Controls.Add(this.CheckBoxAutoCheckForUpdate);
       this.GroupBoxAnzeige.Controls.Add(this.LabelSprache);
@@ -341,50 +341,50 @@
       this.GroupBoxAnzeige.TabStop = false;
       this.GroupBoxAnzeige.Text = "Anzeige";
       // 
-      // NumericUpDownSAREintraegeMaximum
+      // NumericUpDownCorpseEintraegeMaximum
       // 
-      this.NumericUpDownSAREintraegeMaximum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.NumericUpDownSAREintraegeMaximum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.NumericUpDownSAREintraegeMaximum.Location = new System.Drawing.Point(154, 180);
-      this.NumericUpDownSAREintraegeMaximum.Maximum = new decimal(new int[] {
+      this.NumericUpDownCorpseEintraegeMaximum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.NumericUpDownCorpseEintraegeMaximum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      this.NumericUpDownCorpseEintraegeMaximum.Location = new System.Drawing.Point(154, 180);
+      this.NumericUpDownCorpseEintraegeMaximum.Maximum = new decimal(new int[] {
             25,
             0,
             0,
             0});
-      this.NumericUpDownSAREintraegeMaximum.Minimum = new decimal(new int[] {
+      this.NumericUpDownCorpseEintraegeMaximum.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-      this.NumericUpDownSAREintraegeMaximum.Name = "NumericUpDownSAREintraegeMaximum";
-      this.NumericUpDownSAREintraegeMaximum.Size = new System.Drawing.Size(44, 23);
-      this.NumericUpDownSAREintraegeMaximum.TabIndex = 9;
-      this.NumericUpDownSAREintraegeMaximum.Value = new decimal(new int[] {
+      this.NumericUpDownCorpseEintraegeMaximum.Name = "NumericUpDownCorpseEintraegeMaximum";
+      this.NumericUpDownCorpseEintraegeMaximum.Size = new System.Drawing.Size(44, 23);
+      this.NumericUpDownCorpseEintraegeMaximum.TabIndex = 9;
+      this.NumericUpDownCorpseEintraegeMaximum.Value = new decimal(new int[] {
             10,
             0,
             0,
             0});
-      this.NumericUpDownSAREintraegeMaximum.ValueChanged += new System.EventHandler(this.NumericUpDownSAREintraegeMaximum_ValueChanged);
+      this.NumericUpDownCorpseEintraegeMaximum.ValueChanged += new System.EventHandler(this.NumericUpDownCorpseEintraegeMaximum_ValueChanged);
       // 
-      // LabelSAREintraegeMaximum
+      // LabelCorpseEintraegeMaximum
       // 
-      this.LabelSAREintraegeMaximum.AutoSize = true;
-      this.LabelSAREintraegeMaximum.Location = new System.Drawing.Point(15, 182);
-      this.LabelSAREintraegeMaximum.Name = "LabelSAREintraegeMaximum";
-      this.LabelSAREintraegeMaximum.Size = new System.Drawing.Size(137, 15);
-      this.LabelSAREintraegeMaximum.TabIndex = 8;
-      this.LabelSAREintraegeMaximum.Text = "SAR-Einträge Maximum:";
+      this.LabelCorpseEintraegeMaximum.AutoSize = true;
+      this.LabelCorpseEintraegeMaximum.Location = new System.Drawing.Point(15, 182);
+      this.LabelCorpseEintraegeMaximum.Name = "LabelCorpseEintraegeMaximum";
+      this.LabelCorpseEintraegeMaximum.Size = new System.Drawing.Size(137, 15);
+      this.LabelCorpseEintraegeMaximum.TabIndex = 8;
+      this.LabelCorpseEintraegeMaximum.Text = "Leichnam-Einträge Maximum:";
       // 
-      // CheckBoxShowSAR
+      // CheckBoxShowCorpse
       // 
-      this.CheckBoxShowSAR.AutoSize = true;
-      this.CheckBoxShowSAR.Location = new System.Drawing.Point(15, 155);
-      this.CheckBoxShowSAR.Name = "CheckBoxShowSAR";
-      this.CheckBoxShowSAR.Size = new System.Drawing.Size(220, 19);
-      this.CheckBoxShowSAR.TabIndex = 7;
-      this.CheckBoxShowSAR.Text = "Search and Rescue Monitor anzeigen";
-      this.CheckBoxShowSAR.UseVisualStyleBackColor = true;
-      this.CheckBoxShowSAR.CheckedChanged += new System.EventHandler(this.CheckBoxShowSAR_CheckedChanged);
+      this.CheckBoxShowCorpse.AutoSize = true;
+      this.CheckBoxShowCorpse.Location = new System.Drawing.Point(15, 155);
+      this.CheckBoxShowCorpse.Name = "CheckBoxShowCorpse";
+      this.CheckBoxShowCorpse.Size = new System.Drawing.Size(220, 19);
+      this.CheckBoxShowCorpse.TabIndex = 7;
+      this.CheckBoxShowCorpse.Text = "Leichnam-Monitor anzeigen";
+      this.CheckBoxShowCorpse.UseVisualStyleBackColor = true;
+      this.CheckBoxShowCorpse.CheckedChanged += new System.EventHandler(this.CheckBoxShowCorpse_CheckedChanged);
       // 
       // CheckBoxHideStreamLiveStatus
       // 
@@ -476,7 +476,7 @@
       this.GroupBoxLokalerCache.PerformLayout();
       this.GroupBoxAnzeige.ResumeLayout(false);
       this.GroupBoxAnzeige.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownSAREintraegeMaximum)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownCorpseEintraegeMaximum)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownAffiliationenMaximum)).EndInit();
       this.ResumeLayout(false);
 
@@ -508,10 +508,10 @@
     private CheckBox CheckBoxPositionMerken;
     private CheckBox CheckBoxAutoCheckForUpdate;
         private CheckBox CheckBoxHideStreamLiveStatus;
-        private CheckBox CheckBoxShowSAR;
+        private CheckBox CheckBoxShowCorpse;
         private NumericUpDown NumericUpDownFensterDeckkraft;
         private Label LabelFensterDeckkraft;
-        private NumericUpDown NumericUpDownSAREintraegeMaximum;
-        private Label LabelSAREintraegeMaximum;
+        private NumericUpDown NumericUpDownCorpseEintraegeMaximum;
+        private Label LabelCorpseEintraegeMaximum;
     }
 }
