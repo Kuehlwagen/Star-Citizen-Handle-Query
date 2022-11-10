@@ -3,6 +3,7 @@ using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Diagnostics;
 using System.Globalization;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -16,7 +17,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly Settings ProgramSettings;
 
     private readonly Regex RegexSAR = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})\.\d{3}Z>.+<Corpse> Player '(?<Handle>[\w_\-]+)'.+IsCorpseEnabled: (?<Corpse>\w{2,3})[,\.] ?(?<Info>[\w\s]*)\.?$",
-      RegexOptions.Compiled);
+     RegexOptions.Multiline | RegexOptions.Compiled);
 
     public FormSARMonitor(Settings programSettings = null) {
       InitializeComponent();
@@ -88,12 +89,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
           try {
 
+            Encoding encoding = Encoding.UTF8;
+            string processName = "StarCitizen_Launcher";
+
             Invoke(new Action(() => ChangeStatus(Status.Inactive)));
 
-            Process[] processes = Process.GetProcessesByName("StarCitizen_Launcher");
+            Process[] processes = Process.GetProcessesByName(processName);
             Process processSC = null;
             if (processes?.Length > 0) {
-              processSC = Process.GetProcessesByName("StarCitizen_Launcher")[0];
+              processSC = Process.GetProcessesByName(processName)[0];
             }
 
             if (processSC != null) {
@@ -104,28 +108,34 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               string scLogPath = Path.Combine(Path.GetDirectoryName(processSC.Modules[0].FileName), $@"Game.log");
               if (File.Exists(scLogPath)) {
 
-                StreamReader logReader = new(new FileStream(scLogPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite), Encoding.UTF8);
-                long lastMaxOffset = logReader.BaseStream.Length;
+                StreamReader logReader = new(new FileStream(scLogPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite), encoding);
+                long currentPosition = logReader.BaseStream.Seek(0, SeekOrigin.End); ;
+                long lastMaxOffset = currentPosition;
 
                 while (!Cancel && processSC != null && !processSC.HasExited) {
 
                   Application.DoEvents();
-                  Thread.Sleep(TimeSpan.FromMilliseconds(50));
+                  Thread.Sleep(TimeSpan.FromSeconds(1));
 
                   Invoke(new Action(() => ChangeStatus(Status.Monitoring)));
 
-                  if (logReader.BaseStream.Length == lastMaxOffset) {
+                  currentPosition = logReader.BaseStream.Seek(0, SeekOrigin.End); ;
+
+                  if (currentPosition == lastMaxOffset) {
+                    continue;
+                  } else if (currentPosition < lastMaxOffset) {
+                    lastMaxOffset = currentPosition;
                     continue;
                   }
 
-                  logReader.BaseStream.Seek(lastMaxOffset < logReader.BaseStream.Length ? lastMaxOffset : 0, SeekOrigin.Begin);
+                  currentPosition = logReader.BaseStream.Seek(currentPosition - lastMaxOffset, SeekOrigin.End);
 
-                  SARMonitorInfo logInfo;
-                  while ((logInfo = CheckRegEx(logReader.ReadLine())) != null && logInfo.IsValid) {
-                    Invoke(new Action(() => AddSARInfo(logInfo)));
-                  }
+                  Invoke(new Action(() => AddSARInfo(CheckRegEx(logReader.ReadToEnd()))));
 
-                  lastMaxOffset = logReader.BaseStream.Position;
+                  lastMaxOffset = currentPosition;
+
+                  logReader.Close();
+                  logReader = new(new FileStream(scLogPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite), encoding);
 
                 }
 
@@ -141,14 +151,18 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       });
     }
 
-    private void AddSARInfo(SARMonitorInfo line) {
-      UserControlSAR uc = new(line);
-      if (PanelSARInfo.Controls.Count == ProgramSettings.SARMonitor.EntriesMax) {
-        PanelSARInfo.Controls.RemoveAt(0);
-      } else {
-        Size = new Size(Width, Height + uc.Height + 2);
+    private void AddSARInfo(List<SARMonitorInfo> lines) {
+      foreach (SARMonitorInfo line in lines) {
+        if (line.IsValid) {
+          UserControlSAR uc = new(line);
+          if (PanelSARInfo.Controls.Count == ProgramSettings.SARMonitor.EntriesMax) {
+            PanelSARInfo.Controls.RemoveAt(0);
+          } else {
+            Size = new Size(Width, Height + uc.Height + 2);
+          }
+          PanelSARInfo.Controls.Add(uc);
+        }
       }
-      PanelSARInfo.Controls.Add(uc);
     }
 
     private void ClearSARInfos() {
@@ -173,24 +187,18 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private SARMonitorInfo CheckRegEx(string input) {
-      SARMonitorInfo rtnVal = input != null ? new SARMonitorInfo() : null;
+    private List<SARMonitorInfo> CheckRegEx(string input) {
+      List<SARMonitorInfo> rtnVal = input != null ? new() : null;
 
       try {
-        Match match = RegexSAR.Match(input);
-        if (match.Success) {
-          if (match.Groups.Count == 5 &&
-            match.Groups.ContainsKey("Date") &&
-            match.Groups.ContainsKey("Handle") &&
-            match.Groups.ContainsKey("Corpse") &&
-            match.Groups.ContainsKey("Info")) {
-
-            rtnVal = new SARMonitorInfo() {
+        foreach (Match match in RegexSAR.Matches(input)?.Cast<Match>()) {
+          if (match.Success) {
+            rtnVal.Add(new SARMonitorInfo() {
               Date = DateTime.Parse(match.Groups["Date"].Value, CultureInfo.InvariantCulture).ToLocalTime(),
               Handle = match.Groups["Handle"].Value,
               CorpseEnabled = match.Groups["Corpse"].Value == "Yes",
               Info = match.Groups["Info"].Value
-            };
+            });
           }
         }
       } catch { }
