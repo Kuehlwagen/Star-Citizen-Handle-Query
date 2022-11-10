@@ -32,7 +32,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private void Handle_MouseClick(object sender, MouseEventArgs e) {
-      ((Parent.Parent as FormCorpseMonitor).Owner as FormHandleQuery).SetAndQueryHandle(CorpseInfoItem.Handle);
+      ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(CorpseInfoItem.Handle);
     }
   }
 

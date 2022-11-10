@@ -87,14 +87,14 @@
     public bool HideStreamLiveStatus { get; set; } = false;
 
     /// <summary>LogFileWatcher relevante Einstellungen</summary>
-    public CorpseMonitorSettings CorpseMonitor { get; set; } = new CorpseMonitorSettings();
+    public LogMonitorSettings LogMonitor { get; set; } = new LogMonitorSettings();
 
     public object Clone() {
       return MemberwiseClone();
     }
   }
 
-  public class CorpseMonitorSettings : ICloneable {
+  public class LogMonitorSettings : ICloneable {
 
     /// <summary>Angabe, ob das Fenster angezeigt werden soll</summary>
     public bool ShowWindow { get; set; } = false;

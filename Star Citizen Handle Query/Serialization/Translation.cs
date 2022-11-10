@@ -17,7 +17,7 @@
 
     public Translation_Notification Notification { get; set; } = new();
 
-    public Translation_CorpseMonitor Corpse_Monitor { get; set; } = new();
+    public Translation_LogMonitor Log_Monitor { get; set; } = new();
 
     /// <summary>Vergleich in Liste ermöglichen</summary>
     /// <param name="other">Anderes Translation-Objekt</param>
@@ -124,9 +124,9 @@
 
     public string Hide_Stream_Live_Status { get; set; } = "Stream Live-Status ausblenden";
 
-    public string Show_Search_And_Rescue_Monitor { get; set; } = "Leichnam-Monitor anzeigen";
+    public string Show_Log_Monitor { get; set; } = "Log-Monitor anzeigen";
 
-    public string Corpse_Entries_Max { get; set; } = "Leichnam-Einträge Maximum:";
+    public string Log_Entries_Max { get; set; } = "Log-Einträge Maximum:";
 
   }
 
@@ -245,9 +245,9 @@
   }
 
   [Serializable]
-  public class Translation_CorpseMonitor {
+  public class Translation_LogMonitor {
 
-    public string Title { get; set; } = "Leichnam-Monitor";
+    public string Title { get; set; } = "Log-Monitor";
 
   }
 

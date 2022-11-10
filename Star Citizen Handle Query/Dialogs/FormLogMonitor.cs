@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace Star_Citizen_Handle_Query.Dialogs {
 
-  public partial class FormCorpseMonitor : Form {
+  public partial class FormLogMonitor : Form {
 
     private readonly int InitialWindowStyle = 0;
     private bool WindowLocked = true;
@@ -19,7 +19,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly Regex RegexCorpse = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})\.\d{3}Z>.+<Corpse> Player '(?<Handle>[\w_\-]+)'.+IsCorpseEnabled: (?<Corpse>\w{2,3})[,\.] ?(?<Info>[\w\s]*)\.?$",
      RegexOptions.Compiled);
 
-    public FormCorpseMonitor(Settings programSettings, Translation translation) {
+    public FormLogMonitor(Settings programSettings, Translation translation) {
       InitializeComponent();
       ProgramSettings = programSettings;
       ProgramTranslation = translation;
@@ -44,7 +44,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Prüfen, ob die Übersetzung valide ist
       if (ProgramTranslation != null) {
         // Control-Texte setzen
-        LabelTitle.Text = ProgramTranslation.Corpse_Monitor.Title;
+        LabelTitle.Text = ProgramTranslation.Log_Monitor.Title;
       }
     }
 
@@ -93,7 +93,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       WindowLocked = locked;
     }
 
-    private void FormCorpseMonitor_Shown(object sender, EventArgs e) {
+    private void FormLogMonitor_Shown(object sender, EventArgs e) {
       Size = new Size(Width, 31);
 
       Task.Run(() => {
@@ -112,7 +112,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
             if (processSC != null) {
 
-              Invoke(new Action(() => ClearCorpseInfos()));
+              Invoke(new Action(() => ClearLogInfos()));
               Invoke(new Action(() => ChangeStatus(Status.Initializing)));
 
               string scLogPath = Path.Combine(Path.GetDirectoryName(processSC.Modules[0].FileName), $@"Game.log");
@@ -143,7 +143,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                   }
 
                   logReader.BaseStream.Seek(lastMaxOffset, SeekOrigin.Begin);
-                  Invoke(new Action(() => AddCorpseInfo(CheckRegEx(logReader.ReadToEnd()))));
+                  Invoke(new Action(() => AddLogInfo(CheckRegEx(logReader.ReadToEnd()))));
 
                   currentPosition = logReader.BaseStream.Position;
                   lastMaxOffset = currentPosition;
@@ -162,22 +162,22 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       });
     }
 
-    private void AddCorpseInfo(List<CorpseMonitorInfo> lines) {
+    private void AddLogInfo(List<CorpseMonitorInfo> lines) {
       foreach (CorpseMonitorInfo line in lines) {
         if (line.IsValid) {
           UserControlCorpse uc = new(line);
-          if (PanelCorpseInfo.Controls.Count == ProgramSettings.CorpseMonitor.EntriesMax) {
-            PanelCorpseInfo.Controls.RemoveAt(0);
-          } else if (PanelCorpseInfo.Controls.Count > 0) {
+          if (PanelLogInfo.Controls.Count == ProgramSettings.LogMonitor.EntriesMax) {
+            PanelLogInfo.Controls.RemoveAt(0);
+          } else if (PanelLogInfo.Controls.Count > 0) {
             Size = new Size(Width, Height + uc.Height + 2);
           }
-          PanelCorpseInfo.Controls.Add(uc);
+          PanelLogInfo.Controls.Add(uc);
         }
       }
     }
 
-    private void ClearCorpseInfos() {
-      PanelCorpseInfo.Controls.Clear();
+    private void ClearLogInfos() {
+      PanelLogInfo.Controls.Clear();
       Size = new Size(Width, 60);
     }
 
@@ -220,7 +220,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return rtnVal;
     }
 
-    private void FormCorpseMonitor_FormClosing(object sender, FormClosingEventArgs e) {
+    private void FormLogMonitor_FormClosing(object sender, FormClosingEventArgs e) {
       Cancel = true;
     }
 

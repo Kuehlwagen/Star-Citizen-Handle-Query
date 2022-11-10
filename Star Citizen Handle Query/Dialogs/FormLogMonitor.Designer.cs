@@ -1,5 +1,5 @@
 ﻿namespace Star_Citizen_Handle_Query.Dialogs {
-  partial class FormCorpseMonitor {
+  partial class FormLogMonitor {
     /// <summary>
     ///  Required designer variable.
     /// </summary>
@@ -23,11 +23,11 @@
     ///  the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCorpseMonitor));
+      System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogMonitor));
       this.PanelHeader = new System.Windows.Forms.Panel();
       this.PictureBoxStatus = new System.Windows.Forms.PictureBox();
       this.LabelTitle = new System.Windows.Forms.Label();
-      this.PanelCorpseInfo = new System.Windows.Forms.FlowLayoutPanel();
+      this.PanelLogInfo = new System.Windows.Forms.FlowLayoutPanel();
       this.PanelHeader.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxStatus)).BeginInit();
       this.SuspendLayout();
@@ -61,42 +61,42 @@
       this.LabelTitle.Name = "LabelTitle";
       this.LabelTitle.Size = new System.Drawing.Size(159, 15);
       this.LabelTitle.TabIndex = 0;
-      this.LabelTitle.Text = "Leichnam-Monitor";
+      this.LabelTitle.Text = "Log-Monitor";
       this.LabelTitle.MouseCaptureChanged += new System.EventHandler(this.LabelTitle_MouseCaptureChanged);
       this.LabelTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LabelTitle_MouseDown);
       this.LabelTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.LabelTitle_MouseMove);
       // 
-      // PanelCorpseInfo
+      // PanelLogInfo
       // 
-      this.PanelCorpseInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+      this.PanelLogInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-      this.PanelCorpseInfo.BackColor = System.Drawing.Color.Lime;
-      this.PanelCorpseInfo.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.PanelCorpseInfo.Location = new System.Drawing.Point(1, 30);
-      this.PanelCorpseInfo.Margin = new System.Windows.Forms.Padding(0);
-      this.PanelCorpseInfo.Name = "PanelCorpseInfo";
-      this.PanelCorpseInfo.Size = new System.Drawing.Size(238, 29);
-      this.PanelCorpseInfo.TabIndex = 1;
+      this.PanelLogInfo.BackColor = System.Drawing.Color.Lime;
+      this.PanelLogInfo.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+      this.PanelLogInfo.Location = new System.Drawing.Point(1, 30);
+      this.PanelLogInfo.Margin = new System.Windows.Forms.Padding(0);
+      this.PanelLogInfo.Name = "PanelLogInfo";
+      this.PanelLogInfo.Size = new System.Drawing.Size(238, 29);
+      this.PanelLogInfo.TabIndex = 1;
       // 
-      // FormCorpseWatcher
+      // FormLogWatcher
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.Lime;
       this.ClientSize = new System.Drawing.Size(240, 60);
-      this.Controls.Add(this.PanelCorpseInfo);
+      this.Controls.Add(this.PanelLogInfo);
       this.Controls.Add(this.PanelHeader);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.Name = "FormCorpseWatcher";
+      this.Name = "FormLogWatcher";
       this.ShowInTaskbar = false;
       this.Text = "Star Citizen Handle Query";
       this.TopMost = true;
       this.TransparencyKey = System.Drawing.Color.Lime;
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormCorpseMonitor_FormClosing);
-      this.Shown += new System.EventHandler(this.FormCorpseMonitor_Shown);
+      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLogMonitor_FormClosing);
+      this.Shown += new System.EventHandler(this.FormLogMonitor_Shown);
       this.PanelHeader.ResumeLayout(false);
       this.PanelHeader.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxStatus)).EndInit();
@@ -108,7 +108,7 @@
 
     private Panel PanelHeader;
     private Label LabelTitle;
-    private FlowLayoutPanel PanelCorpseInfo;
+    private FlowLayoutPanel PanelLogInfo;
         private PictureBox PictureBoxStatus;
     }
 }

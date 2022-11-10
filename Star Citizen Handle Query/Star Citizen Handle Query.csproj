@@ -34,7 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Dialogs\FormCorpseMonitor.cs">
+    <Compile Update="Dialogs\FormLogMonitor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">

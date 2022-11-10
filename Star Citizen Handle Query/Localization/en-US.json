@@ -31,8 +31,8 @@
       "Hide_Redacted_Affiliations": "Hide redacted affiliations",
       "Auto_Check_For_Update": "Check for update when program starts",
       "Hide_Stream_Live_Status": "Hide stream live status",
-      "Show_Search_And_Rescue_Monitor": "Show corpse monitor",
-      "Corpse_Entries_Max": "Maximum corpse entries:"
+      "Show_Log_Monitor": "Show log monitor",
+      "Log_Entries_Max": "Maximum log entries:"
     },
     "Window": {
       "Group_Title": "Window",
@@ -86,7 +86,7 @@
     "Update_Up_To_Date": "Program is up to date",
     "Update_Error": "Error requesting update information"
   },
-  "Corpse_Monitor": {
-    "Title":  "Corpse Monitor"
+  "Log_Monitor": {
+    "Title":  "Log Monitor"
   }
 }
