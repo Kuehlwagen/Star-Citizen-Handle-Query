@@ -371,16 +371,16 @@
       this.LabelCorpseEintraegeMaximum.AutoSize = true;
       this.LabelCorpseEintraegeMaximum.Location = new System.Drawing.Point(15, 182);
       this.LabelCorpseEintraegeMaximum.Name = "LabelCorpseEintraegeMaximum";
-      this.LabelCorpseEintraegeMaximum.Size = new System.Drawing.Size(137, 15);
+      this.LabelCorpseEintraegeMaximum.Size = new System.Drawing.Size(139, 15);
       this.LabelCorpseEintraegeMaximum.TabIndex = 8;
-      this.LabelCorpseEintraegeMaximum.Text = "Leichnam-Einträge Maximum:";
+      this.LabelCorpseEintraegeMaximum.Text = "Leichnam-Einträge Max.:";
       // 
       // CheckBoxShowCorpse
       // 
       this.CheckBoxShowCorpse.AutoSize = true;
       this.CheckBoxShowCorpse.Location = new System.Drawing.Point(15, 155);
       this.CheckBoxShowCorpse.Name = "CheckBoxShowCorpse";
-      this.CheckBoxShowCorpse.Size = new System.Drawing.Size(220, 19);
+      this.CheckBoxShowCorpse.Size = new System.Drawing.Size(176, 19);
       this.CheckBoxShowCorpse.TabIndex = 7;
       this.CheckBoxShowCorpse.Text = "Leichnam-Monitor anzeigen";
       this.CheckBoxShowCorpse.UseVisualStyleBackColor = true;
