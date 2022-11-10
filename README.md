@@ -17,8 +17,8 @@ Das Tool-Hauptfenster kann nur dann im Vordergrund des Spiels dargestellt werden
 - __Stream Live-Status ausblenden:__ Angabe, ob der Twitch.tv Stream Live-Status eines Handles ausgeblendet werden soll
 - __Bei Programmstart nach Update suchen:__ Angabe, ob bei jedem Programmstart geprüft werden soll, ob ein Programmupdate zur Verfügung steht
   - Ausschließlich wenn ein Update zur Verfügung steht, wird eine Benachrichtigung angezeigt.
-- __Search and Rescue Monitor anzeigen:__ Angabe, ob das Search and Rescue Monitor Fenster angezeigt werden soll
-- __SAR-Einträge Maximum:__ Angabe, wie viele Einträge maximal im SAR-Monitor angezeigt werden sollen
+- __Leichnam-Monitor anzeigen:__ Angabe, ob das Leichnam-Monitor Fenster angezeigt werden soll
+- __Leichnam-Einträge Max.:__ Angabe, wie viele Einträge maximal im Leichnam-Monitor angezeigt werden sollen
 ### Fenster
 - __Deckkraft:__ Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
 - __Globale Taste:__ Hier kann die Taste angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifikatoren (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
@@ -78,18 +78,18 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
   - Klickt man die Zahnrad-Schaltfläche, wird das Einstellungen-Fenster geöffnet.
   - Ist die Einstellung `Position merken` in der Kategorie `Fenster` aktiviert, wird beim Beenden des Tools die Position des Hauptfensters in den Einstellungen gespeichert. Beim Start des Tools wird das Hauptfenster an die zuvor gespeicherte Position gesetzt. Hält man, während das Tool gestartet wird, die `Umschalt`-Taste gedrückt, wird das Fenster immer an die Standardposition (oben mittig) gesetzt.
 
-### Search and Rescue Monitor Fenster
+### Leichnam-Monitor Fenster
 
-Wenn in den Einstellungen die Anzeige des Search and Rescue Monitors aktiviert ist, wird das SAR-Monitor-Fenster angezeigt. Hier wird die Star Citizen Games.log-Datei in nahezu Echtzeit ausgelesen, um Informationen zu gestorbenen / getöteten Spielern auf dem eigenen Server darzustellen.
-- Wenn das Hauptfenster entsperrt ist, wird auch das SAR-Monitor-Fenster entsperrt und kann durch Mauslinksklich und ziehen des "Search and Rescue Monitor"-Schriftzugs an eine andere Positon gezogen werden. Ist die Einstellung `Position merken` aktiviert, wird die Position des Fensters beim Beenden des Tools gespeichert und beim Start wieder an die gespeicherte Position gesetzt.
+Wenn in den Einstellungen die Anzeige des Leichnam-Monitors aktiviert ist, wird Fenster angezeigt. Hier wird die Star Citizen Games.log-Datei in nahezu Echtzeit ausgelesen, um Informationen zu gestorbenen / getöteten Spielern auf dem eigenen Server darzustellen.
+- Wenn das Hauptfenster entsperrt ist, wird auch das Leichnam-Monitor-Fenster entsperrt und kann durch Mauslinksklick und ziehen des `Leichnam-Monitor`-Schriftzugs an eine andere Positon gezogen werden. Ist die Einstellung `Position merken` aktiviert, wird die Position des Fensters beim Beenden des Tools gespeichert und beim Start wieder an die gespeicherte Position gesetzt.
 
 Das Fenster enthält folgende Informationen:
 - Titelleiste
-  - Auf der rechten Seite wird mit einem farbigen ausgefüllten Kreis dargestellt, in welchem Status sich der SAR-Monitor gerade befindet:
+  - Auf der rechten Seite wird mit einem farbigen ausgefüllten Kreis dargestellt, in welchem Status sich der Leichnam-Monitor gerade befindet:
     - `Rot`: Star Citizen ist nicht gestartet 
     - `Orange`: Star Citizen ist gestartet und die Games.log-Datei wird gerade initial geöffnet
     - `Grün`: Die Games.log-Datei wird in Echtzeit ausgelesen
-- SAR-Einträge
+- Leichnam-Einträge
   - Auf der linken Seite wird ein Symbol angezeigt, welches folgende Informationen bereitstellen kann:
     - `Totenkopf`: Der Spieler ist gestorben und es wurde kein Leichnam erstellt (z.B. Selbstmord in einer Hauptstadt)
     - `Kreuz`: Der Spieler ist gestorben und es wurde ein Leichnam erstellt
