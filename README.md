@@ -80,7 +80,7 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
 
 ### Leichnam-Monitor Fenster
 
-Wenn in den Einstellungen die Anzeige des Leichnam-Monitors aktiviert ist, wird Fenster angezeigt. Hier wird die Star Citizen Games.log-Datei in nahezu Echtzeit ausgelesen, um Informationen zu gestorbenen / getöteten Spielern auf dem eigenen Server darzustellen.
+Wenn in den Einstellungen die Anzeige des Leichnam-Monitors aktiviert ist, wird das Fenster angezeigt. Hier wird die Star Citizen Games.log-Datei in nahezu Echtzeit ausgelesen, um Informationen zu gestorbenen / getöteten Spielern auf dem eigenen Server darzustellen.
 - Wenn das Hauptfenster entsperrt ist, wird auch das Leichnam-Monitor-Fenster entsperrt und kann durch Mauslinksklick und ziehen des `Leichnam-Monitor`-Schriftzugs an eine andere Positon gezogen werden. Ist die Einstellung `Position merken` aktiviert, wird die Position des Fensters beim Beenden des Tools gespeichert und beim Start wieder an die gespeicherte Position gesetzt.
 
 Das Fenster enthält folgende Informationen:
@@ -95,7 +95,7 @@ Das Fenster enthält folgende Informationen:
     - `Kreuz`: Der Spieler ist gestorben und es wurde ein Leichnam erstellt
     - `Totenkopf mit Zielmarkierung`: Der Spieler ist gestorben und wurde zur Rehabilitation nach Klescher geschickt
   - Rechts daneben werden Uhrzeit und Spieler-Handle angezeigt
-  - Wenn der Spieler in einer Zone gestorben ist, in der es ein lokales Inventar gibt, wird ganz rechts noch ein Ressourcen-Symbol dargestellt.
+  - Wenn der Spieler in einer Zone gestorben ist, in der es ein lokales Inventar gibt, wird ganz rechts zusätzlich ein Ressourcen-Symbol dargestellt.
   - Ein Mauslinksklick auf eine der genannten Informationen trägt den Handle des Spielers in das Hauptfenster ein und startet direkt eine Handle-Abfrage. Wird dabei die `Strg`-Taste gedrückt gehalten, wird ein Auslesen der Handle-Informationen von der RSI-Webseite erzwungen.
 
 ## Sprachen / Übersetzungen
