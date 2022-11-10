@@ -13,8 +13,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly int InitialWindowStyle = 0;
     private bool WindowLocked = true;
     private bool Cancel = false;
-    private StreamReader LogReader;
-    private long LastMaxOffset = 0;
     private readonly Settings ProgramSettings;
 
     private readonly Regex RegexSAR = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})\.\d{3}Z>.+<Corpse> Player '(?<Handle>[\w_\-]+)'.+IsCorpseEnabled: (?<Corpse>\w{2,3})[,\.] ?(?<Info>[\w\s]*)\.?$",
@@ -88,50 +86,54 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Task.Run(() => {
         while (!Cancel) {
 
-          Invoke(new Action(() => ChangeStatus(Status.Inactive)));
+          try {
 
-          Process[] processes = Process.GetProcessesByName("StarCitizen_Launcher");
-          Process processSC = null;
-          if (processes?.Length > 0) {
-            processSC = Process.GetProcessesByName("StarCitizen_Launcher")[0];
-          }
+            Invoke(new Action(() => ChangeStatus(Status.Inactive)));
 
-          if (processSC != null) {
+            Process[] processes = Process.GetProcessesByName("StarCitizen_Launcher");
+            Process processSC = null;
+            if (processes?.Length > 0) {
+              processSC = Process.GetProcessesByName("StarCitizen_Launcher")[0];
+            }
 
-            Invoke(new Action(() => ClearSARInfos()));
-            Invoke(new Action(() => ChangeStatus(Status.Initializing)));
+            if (processSC != null) {
 
-            string scLogPath = Path.Combine(Path.GetDirectoryName(processSC.Modules[0].FileName), $@"Game.log");
-            if (File.Exists(scLogPath)) {
+              Invoke(new Action(() => ClearSARInfos()));
+              Invoke(new Action(() => ChangeStatus(Status.Initializing)));
 
-              LogReader = new StreamReader(new FileStream(scLogPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite), Encoding.UTF8);
-              LastMaxOffset = LogReader.BaseStream.Length;
+              string scLogPath = Path.Combine(Path.GetDirectoryName(processSC.Modules[0].FileName), $@"Game.log");
+              if (File.Exists(scLogPath)) {
 
-              while (!Cancel && processSC != null && !processSC.HasExited) {
+                StreamReader logReader = new(new FileStream(scLogPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite), Encoding.UTF8);
+                long lastMaxOffset = logReader.BaseStream.Length;
 
-                Application.DoEvents();
-                Thread.Sleep(TimeSpan.FromSeconds(1));
+                while (!Cancel && processSC != null && !processSC.HasExited) {
 
-                Invoke(new Action(() => ChangeStatus(Status.Monitoring)));
+                  Application.DoEvents();
+                  Thread.Sleep(TimeSpan.FromMilliseconds(50));
 
-                if (LogReader.BaseStream.Length == LastMaxOffset) {
-                  continue;
+                  Invoke(new Action(() => ChangeStatus(Status.Monitoring)));
+
+                  if (logReader.BaseStream.Length == lastMaxOffset) {
+                    continue;
+                  }
+
+                  logReader.BaseStream.Seek(lastMaxOffset < logReader.BaseStream.Length ? lastMaxOffset : 0, SeekOrigin.Begin);
+
+                  SARMonitorInfo logInfo;
+                  while ((logInfo = CheckRegEx(logReader.ReadLine())) != null && logInfo.IsValid) {
+                    Invoke(new Action(() => AddSARInfo(logInfo)));
+                  }
+
+                  lastMaxOffset = logReader.BaseStream.Position;
+
                 }
-
-                LogReader.BaseStream.Seek(LastMaxOffset < LogReader.BaseStream.Length ? LastMaxOffset : 0, SeekOrigin.Begin);
-
-                SARMonitorInfo logInfo;
-                while ((logInfo = CheckRegEx(LogReader.ReadLine())) != null && logInfo.IsValid) {
-                  Invoke(new Action(() => AddSARInfo(logInfo)));
-                }
-
-                LastMaxOffset = LogReader.BaseStream.Position;
 
               }
 
             }
 
-          }
+          } catch { }
 
           Application.DoEvents();
           Thread.Sleep(TimeSpan.FromSeconds(1));
