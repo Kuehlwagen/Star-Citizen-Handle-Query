@@ -67,13 +67,13 @@
       // 
       // LabelTitle
       // 
-      this.LabelTitle.AutoSize = true;
       this.LabelTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
       this.LabelTitle.Location = new System.Drawing.Point(19, 7);
       this.LabelTitle.Name = "LabelTitle";
-      this.LabelTitle.Size = new System.Drawing.Size(77, 15);
+      this.LabelTitle.Size = new System.Drawing.Size(198, 15);
       this.LabelTitle.TabIndex = 0;
       this.LabelTitle.Text = "Log-Monitor";
+      this.LabelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
       this.LabelTitle.MouseCaptureChanged += new System.EventHandler(this.LabelTitle_MouseCaptureChanged);
       this.LabelTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LabelTitle_MouseDown);
       this.LabelTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.LabelTitle_MouseMove);
@@ -110,7 +110,6 @@
       this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLogMonitor_FormClosing);
       this.Shown += new System.EventHandler(this.FormLogMonitor_Shown);
       this.PanelHeader.ResumeLayout(false);
-      this.PanelHeader.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClearAll)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxStatus)).EndInit();
       this.ResumeLayout(false);
