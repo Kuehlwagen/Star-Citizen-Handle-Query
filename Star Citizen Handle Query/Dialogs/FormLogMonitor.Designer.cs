@@ -55,7 +55,6 @@
       this.PictureBoxClearAll.Size = new System.Drawing.Size(12, 15);
       this.PictureBoxClearAll.TabIndex = 2;
       this.PictureBoxClearAll.TabStop = false;
-      this.PictureBoxClearAll.Click += new System.EventHandler(this.PictureBoxClearAll_Click);
       // 
       // PictureBoxStatus
       // 

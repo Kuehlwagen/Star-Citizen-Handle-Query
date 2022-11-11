@@ -176,6 +176,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           }
           PanelLogInfo.Controls.Add(uc);
           if (PanelLogInfo.Controls.Count == 1) {
+            PictureBoxClearAll.Click += PictureBoxClearAll_Click;
             PictureBoxClearAll.Image = Properties.Resources.ClearAll;
             PictureBoxClearAll.Cursor = Cursors.Hand;
           }
@@ -187,6 +188,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (PanelLogInfo.Controls.Count > 0) {
         PanelLogInfo.Controls.Clear();
         Size = new Size(Width, 60);
+        PictureBoxClearAll.Click -= PictureBoxClearAll_Click;
         PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
         PictureBoxClearAll.Cursor = Cursors.Default;
       }
