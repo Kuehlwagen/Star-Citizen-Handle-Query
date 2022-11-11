@@ -96,14 +96,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void FormLogMonitor_Shown(object sender, EventArgs e) {
       Size = new Size(Width, 31);
       StartMonitor();
-#if DEBUG
-      AddLogInfo(new List<CorpseMonitorInfo>() {
-        { new() { Date = DateTime.Now, Handle = "Kuehlwagen", CorpseEnabled = true } },
-        { new() { Date = DateTime.Now, Handle = "DudeCrocker" } },
-        { new() { Date = DateTime.Now, Handle = "LanceFlair", Info = "criminal arrest"} },
-        { new() { Date = DateTime.Now, Handle = "Gentle81", CorpseEnabled = true, Info = "there is a local inventory"} }
-      });
-#endif
     }
 
     private void StartMonitor() {
@@ -200,6 +192,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
         PictureBoxClearAll.Cursor = Cursors.Default;
       }
+#if DEBUG
+      AddLogInfo(new List<CorpseMonitorInfo>() {
+        { new() { Date = DateTime.Now, Handle = "Kuehlwagen", CorpseEnabled = true } },
+        { new() { Date = DateTime.Now, Handle = "DudeCrocker" } },
+        { new() { Date = DateTime.Now, Handle = "LanceFlair", Info = "criminal arrest"} },
+        { new() { Date = DateTime.Now, Handle = "Gentle81", CorpseEnabled = true, Info = "there is a local inventory"} }
+      });
+#endif
     }
 
     private void ChangeStatus(Status status) {
