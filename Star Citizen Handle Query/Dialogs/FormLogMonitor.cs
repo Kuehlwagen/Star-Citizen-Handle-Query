@@ -95,7 +95,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void FormLogMonitor_Shown(object sender, EventArgs e) {
       Size = new Size(Width, 31);
+      StartMonitor();
+    }
 
+    private void StartMonitor() {
       Task.Run(() => {
         while (!Cancel) {
 
@@ -172,13 +175,21 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             Size = new Size(Width, Height + uc.Height + 2);
           }
           PanelLogInfo.Controls.Add(uc);
+          if (PanelLogInfo.Controls.Count == 1) {
+            PictureBoxClearAll.Image = Properties.Resources.ClearAll;
+            PictureBoxClearAll.Cursor = Cursors.Hand;
+          }
         }
       }
     }
 
     private void ClearLogInfos() {
-      PanelLogInfo.Controls.Clear();
-      Size = new Size(Width, 60);
+      if (PanelLogInfo.Controls.Count > 0) {
+        PanelLogInfo.Controls.Clear();
+        Size = new Size(Width, 60);
+        PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
+        PictureBoxClearAll.Cursor = Cursors.Default;
+      }
     }
 
     private void ChangeStatus(Status status) {
@@ -228,6 +239,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Monitoring,
       Initializing,
       Inactive
+    }
+
+    private void PictureBoxClearAll_Click(object sender, EventArgs e) {
+      ClearLogInfos();
     }
 
   }

@@ -25,10 +25,12 @@
     private void InitializeComponent() {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogMonitor));
       this.PanelHeader = new System.Windows.Forms.Panel();
+      this.PictureBoxClearAll = new System.Windows.Forms.PictureBox();
       this.PictureBoxStatus = new System.Windows.Forms.PictureBox();
       this.LabelTitle = new System.Windows.Forms.Label();
       this.PanelLogInfo = new System.Windows.Forms.FlowLayoutPanel();
       this.PanelHeader.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClearAll)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxStatus)).BeginInit();
       this.SuspendLayout();
       // 
@@ -37,6 +39,7 @@
       this.PanelHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
       this.PanelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.PanelHeader.Controls.Add(this.PictureBoxClearAll);
       this.PanelHeader.Controls.Add(this.PictureBoxStatus);
       this.PanelHeader.Controls.Add(this.LabelTitle);
       this.PanelHeader.Location = new System.Drawing.Point(1, 1);
@@ -44,10 +47,20 @@
       this.PanelHeader.Size = new System.Drawing.Size(238, 29);
       this.PanelHeader.TabIndex = 0;
       // 
+      // PictureBoxClearAll
+      // 
+      this.PictureBoxClearAll.Image = global::Star_Citizen_Handle_Query.Properties.Resources.ClearAll_Deactivated;
+      this.PictureBoxClearAll.Location = new System.Drawing.Point(223, 6);
+      this.PictureBoxClearAll.Name = "PictureBoxClearAll";
+      this.PictureBoxClearAll.Size = new System.Drawing.Size(12, 15);
+      this.PictureBoxClearAll.TabIndex = 2;
+      this.PictureBoxClearAll.TabStop = false;
+      this.PictureBoxClearAll.Click += new System.EventHandler(this.PictureBoxClearAll_Click);
+      // 
       // PictureBoxStatus
       // 
       this.PictureBoxStatus.Image = global::Star_Citizen_Handle_Query.Properties.Resources.StatusRed;
-      this.PictureBoxStatus.Location = new System.Drawing.Point(219, 7);
+      this.PictureBoxStatus.Location = new System.Drawing.Point(3, 6);
       this.PictureBoxStatus.Name = "PictureBoxStatus";
       this.PictureBoxStatus.Size = new System.Drawing.Size(15, 15);
       this.PictureBoxStatus.TabIndex = 2;
@@ -57,9 +70,9 @@
       // 
       this.LabelTitle.AutoSize = true;
       this.LabelTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelTitle.Location = new System.Drawing.Point(4, 6);
+      this.LabelTitle.Location = new System.Drawing.Point(19, 6);
       this.LabelTitle.Name = "LabelTitle";
-      this.LabelTitle.Size = new System.Drawing.Size(159, 15);
+      this.LabelTitle.Size = new System.Drawing.Size(77, 15);
       this.LabelTitle.TabIndex = 0;
       this.LabelTitle.Text = "Log-Monitor";
       this.LabelTitle.MouseCaptureChanged += new System.EventHandler(this.LabelTitle_MouseCaptureChanged);
@@ -79,7 +92,7 @@
       this.PanelLogInfo.Size = new System.Drawing.Size(238, 29);
       this.PanelLogInfo.TabIndex = 1;
       // 
-      // FormLogWatcher
+      // FormLogMonitor
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -90,7 +103,7 @@
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.Name = "FormLogWatcher";
+      this.Name = "FormLogMonitor";
       this.ShowInTaskbar = false;
       this.Text = "Star Citizen Handle Query";
       this.TopMost = true;
@@ -99,6 +112,7 @@
       this.Shown += new System.EventHandler(this.FormLogMonitor_Shown);
       this.PanelHeader.ResumeLayout(false);
       this.PanelHeader.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClearAll)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxStatus)).EndInit();
       this.ResumeLayout(false);
 
@@ -110,5 +124,6 @@
     private Label LabelTitle;
     private FlowLayoutPanel PanelLogInfo;
         private PictureBox PictureBoxStatus;
+        private PictureBox PictureBoxClearAll;
     }
 }
