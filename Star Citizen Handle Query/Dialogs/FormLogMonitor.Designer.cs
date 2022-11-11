@@ -50,7 +50,7 @@
       // PictureBoxClearAll
       // 
       this.PictureBoxClearAll.Image = global::Star_Citizen_Handle_Query.Properties.Resources.ClearAll_Deactivated;
-      this.PictureBoxClearAll.Location = new System.Drawing.Point(223, 6);
+      this.PictureBoxClearAll.Location = new System.Drawing.Point(223, 7);
       this.PictureBoxClearAll.Name = "PictureBoxClearAll";
       this.PictureBoxClearAll.Size = new System.Drawing.Size(12, 15);
       this.PictureBoxClearAll.TabIndex = 2;
@@ -60,7 +60,7 @@
       // PictureBoxStatus
       // 
       this.PictureBoxStatus.Image = global::Star_Citizen_Handle_Query.Properties.Resources.StatusRed;
-      this.PictureBoxStatus.Location = new System.Drawing.Point(3, 6);
+      this.PictureBoxStatus.Location = new System.Drawing.Point(3, 7);
       this.PictureBoxStatus.Name = "PictureBoxStatus";
       this.PictureBoxStatus.Size = new System.Drawing.Size(15, 15);
       this.PictureBoxStatus.TabIndex = 2;
@@ -70,7 +70,7 @@
       // 
       this.LabelTitle.AutoSize = true;
       this.LabelTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelTitle.Location = new System.Drawing.Point(19, 6);
+      this.LabelTitle.Location = new System.Drawing.Point(19, 7);
       this.LabelTitle.Name = "LabelTitle";
       this.LabelTitle.Size = new System.Drawing.Size(77, 15);
       this.LabelTitle.TabIndex = 0;
