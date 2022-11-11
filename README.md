@@ -99,7 +99,7 @@ Das Fenster enthält folgende Informationen:
     - `Kreuz`: Der Spieler ist gestorben und es wurde ein Leichnam erstellt
     - `Totenkopf mit Zielmarkierung`: Der Spieler ist gestorben und wurde zur Rehabilitation nach Klescher geschickt
   - Rechts daneben werden Uhrzeit und Spieler-Handle angezeigt
-  - Wenn der Spieler in einer Zone gestorben ist, in der es ein lokales Inventar gibt, wird ganz rechts zusätzlich ein Ressourcen-Symbol dargestellt.
+  - Wenn der Spieler in einer Zone gestorben ist, in der es ein lokales Inventar gibt, wird ganz rechts zusätzlich ein `Ressourcen`-Symbol dargestellt.
   - Ein Mauslinksklick auf eine der genannten Informationen trägt den Handle des Spielers in das Hauptfenster ein und startet direkt eine Handle-Abfrage. Wird dabei die `Strg`-Taste gedrückt gehalten, wird ein Auslesen der Handle-Informationen von der RSI-Webseite erzwungen.
 
 ## Sprachen / Übersetzungen
