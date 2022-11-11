@@ -2,13 +2,13 @@
 
 Overlay zur Abfrage von Star Citizen Spielern und ihrer Organisationszugehörigkeiten
 
-![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/MainWindow.png?raw=true "Handle Query")
+![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/MainWindow_LogMonitor.png?raw=true "Star Citizen Handle Query")
 
 Das Tool-Hauptfenster kann nur dann im Vordergrund des Spiels dargestellt werden, wenn das Star Citizen Fenster im (randlosen) Fenstermodus läuft.
 
 ## Einstellungen
 
-![Settings](/Star%20Citizen%20Handle%20Query/Screenshots/Settings.png?raw=true "Settings")
+![Settings](/Star%20Citizen%20Handle%20Query/Screenshots/Settings.png?raw=true "Einstellungen")
 
 ### Anzeige
 - __Sprache:__ Hier kann die Sprache für das Tool eingestellt werden. Standardmäßig stehen die Sprachen `Deutsch` und `English` zur Auswahl.
@@ -17,8 +17,8 @@ Das Tool-Hauptfenster kann nur dann im Vordergrund des Spiels dargestellt werden
 - __Stream Live-Status ausblenden:__ Angabe, ob der Twitch.tv Stream Live-Status eines Handles ausgeblendet werden soll
 - __Bei Programmstart nach Update suchen:__ Angabe, ob bei jedem Programmstart geprüft werden soll, ob ein Programmupdate zur Verfügung steht
   - Ausschließlich wenn ein Update zur Verfügung steht, wird eine Benachrichtigung angezeigt.
-- __Leichnam-Monitor anzeigen:__ Angabe, ob das Leichnam-Monitor Fenster angezeigt werden soll
-- __Leichnam-Einträge Max.:__ Angabe, wie viele Einträge maximal im Leichnam-Monitor angezeigt werden sollen
+- __Log-Monitor anzeigen:__ Angabe, ob der Log-Monitor angezeigt werden soll
+- __Log-Einträge Max.:__ Angabe, wie viele Einträge maximal im Log-Monitor angezeigt werden sollen
 ### Fenster
 - __Deckkraft:__ Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
 - __Globale Taste:__ Hier kann die Taste angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifikatoren (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
@@ -36,7 +36,8 @@ Das Tool-Hauptfenster kann nur dann im Vordergrund des Spiels dargestellt werden
 
 Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der Windows-Taskbar erreicht werden.
 
-![ContextMenu](/Star%20Citizen%20Handle%20Query/Screenshots/ContextMenu.png?raw=true "ContextMenu")
+![ContextMenu](/Star%20Citizen%20Handle%20Query/Screenshots/ContextMenu.png?raw=true "Kontextmenü")
+
 - __Anzeigen:__ Falls das Fenster nicht sichtbar ist, wird es angezeigt und die Handle-Eingabebox erhält den Eingabefokus
 - __Einstellungen:__ Öffnet das Einstellungen-Fenster
 - __Lokaler Cache:__ Öffnet ein Fenster mit Informationen zum lokalen Cache
@@ -46,7 +47,7 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
 
 ## Lokaler Cache
 
-![LocalCache](/Star%20Citizen%20Handle%20Query/Screenshots/LocalCache.png?raw=true "LocalCache")
+![LocalCache](/Star%20Citizen%20Handle%20Query/Screenshots/LocalCache.png?raw=true "Lokaler Cache")
 - __Tabelle:__ Hier werden Informationen zu den im lokalen Cache gespeicherten Handles dargestellt. Außerdem kann in der Spalte `Kommentar` ein Kommentar eingegeben werden, welcher sowohl dort als auch im Hauptfenster dargestellt wird.
 - __Handle- und Organisation-Darstellung:__ Unter der Tabelle werden die Informationen zum ausgewählten Handle und zu dessen Organisation so dargestellt, wie sie im Hauptfenster dargestellt werden.
 - __Cache leeren:__ Durch Klicken dieser Schaltfläche kann der komplette lokale Cache geleert werden. Bevor der lokale Cache geleert wird, muss der Benutzer diesen Vorgang bestätigen.
@@ -55,7 +56,7 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
 
 ## Hauptfenster
 
-![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/MainWindow.png?raw=true "Handle Query")
+![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/MainWindow.png?raw=true "Hauptfenster")
 - Hier kann der eindeutige Name eines Star Citizen Spielers in die Handle-Eingabebox eingegeben werden (maximal 60 Zeichen). Durch die Betätigung der Enter-Taste wird die Abfrage ausgelöst und kurze Zeit später das Ergebnis der Abfrage unter der Handle-Eingabebox dargestellt.
   - Wird währenddessen die `Strg`-Taste gedrückt gehalten, wird das Auslesen der Handle-Informationen inklusive Avatare (Handle, Organisation und Affiliationen) via Star Citizen Webseite erzwungen.
   - Drückt man, während die Handle-Eingabebox den Fokus hat, die `+`-Taste, kann man einen Kommentar zum aktuellen Handle eingeben. Durch Betätigung der `Enter`-Taste, wird der Kommentar im lokalen Cache gespeichert. Verliert die Kommentar-Eingabebox den Fokus oder es wird die `Esc`-Taste gedrückt, wird die Eingabe des Kommentars abgebrochen.
@@ -78,18 +79,21 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
   - Klickt man die Zahnrad-Schaltfläche, wird das Einstellungen-Fenster geöffnet.
   - Ist die Einstellung `Position merken` in der Kategorie `Fenster` aktiviert, wird beim Beenden des Tools die Position des Hauptfensters in den Einstellungen gespeichert. Beim Start des Tools wird das Hauptfenster an die zuvor gespeicherte Position gesetzt. Hält man, während das Tool gestartet wird, die `Umschalt`-Taste gedrückt, wird das Fenster immer an die Standardposition (oben mittig) gesetzt.
 
-### Leichnam-Monitor Fenster
+## Log-Monitor Fenster
 
-Wenn in den Einstellungen die Anzeige des Leichnam-Monitors aktiviert ist, wird das Fenster angezeigt. Hier wird die Star Citizen Games.log-Datei in nahezu Echtzeit ausgelesen, um Informationen zu gestorbenen / getöteten Spielern auf dem eigenen Server darzustellen.
-- Wenn das Hauptfenster entsperrt ist, wird auch das Leichnam-Monitor-Fenster entsperrt und kann durch Mauslinksklick und ziehen des `Leichnam-Monitor`-Schriftzugs an eine andere Positon gezogen werden. Ist die Einstellung `Position merken` aktiviert, wird die Position des Fensters beim Beenden des Tools gespeichert und beim Start wieder an die gespeicherte Position gesetzt.
+![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/LogMonitor.png?raw=true "Log-Monitor")
+
+Wenn in den Einstellungen die Anzeige des Log-Monitors aktiviert ist, wird das Fenster angezeigt. Hier wird die Star Citizen Games.log-Datei in nahezu Echtzeit ausgelesen, um Informationen zu gestorbenen / getöteten Spielern auf dem eigenen Server darzustellen.
+- Wenn das Hauptfenster entsperrt ist, wird auch das Log-Monitor-Fenster entsperrt und kann durch Mauslinksklick und ziehen des `Log-Monitor`-Schriftzugs an eine andere Positon gezogen werden. Ist die Einstellung `Position merken` aktiviert, wird die Position des Fensters beim Beenden des Tools gespeichert und beim Start wieder an die gespeicherte Position gesetzt.
 
 Das Fenster enthält folgende Informationen:
 - Titelleiste
-  - Auf der rechten Seite wird mit einem farbigen ausgefüllten Kreis dargestellt, in welchem Status sich der Leichnam-Monitor gerade befindet:
+  - Auf der linken Seite wird mit einem farbigen ausgefüllten Kreis dargestellt, in welchem Status sich der Log-Monitor gerade befindet:
     - `Rot`: Star Citizen ist nicht gestartet 
     - `Orange`: Star Citizen ist gestartet und die Games.log-Datei wird gerade initial geöffnet
     - `Grün`: Die Games.log-Datei wird in Echtzeit ausgelesen
-- Leichnam-Einträge
+  - Auf der rechten Seite wird ein Mülltonnen-Symbol angezeigt. Wenn mindestens ein Log-Eintrag dargestellt wird, können via Mauslinksklick alle Log-Einträge entfernt werden. Beim Start von Star Citizen werden automatisch alle Log-Einträge entfernt.
+- Log-Einträge
   - Auf der linken Seite wird ein Symbol angezeigt, welches folgende Informationen bereitstellen kann:
     - `Totenkopf`: Der Spieler ist gestorben und es wurde kein Leichnam erstellt (z.B. Selbstmord in einer Hauptstadt)
     - `Kreuz`: Der Spieler ist gestorben und es wurde ein Leichnam erstellt
