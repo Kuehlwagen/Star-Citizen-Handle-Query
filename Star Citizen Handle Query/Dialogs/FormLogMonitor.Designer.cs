@@ -50,7 +50,7 @@
       // PictureBoxClearAll
       // 
       this.PictureBoxClearAll.Image = global::Star_Citizen_Handle_Query.Properties.Resources.ClearAll_Deactivated;
-      this.PictureBoxClearAll.Location = new System.Drawing.Point(223, 7);
+      this.PictureBoxClearAll.Location = new System.Drawing.Point(219, 7);
       this.PictureBoxClearAll.Name = "PictureBoxClearAll";
       this.PictureBoxClearAll.Size = new System.Drawing.Size(12, 15);
       this.PictureBoxClearAll.TabIndex = 2;
@@ -59,7 +59,7 @@
       // PictureBoxStatus
       // 
       this.PictureBoxStatus.Image = global::Star_Citizen_Handle_Query.Properties.Resources.StatusRed;
-      this.PictureBoxStatus.Location = new System.Drawing.Point(3, 7);
+      this.PictureBoxStatus.Location = new System.Drawing.Point(5, 7);
       this.PictureBoxStatus.Name = "PictureBoxStatus";
       this.PictureBoxStatus.Size = new System.Drawing.Size(15, 15);
       this.PictureBoxStatus.TabIndex = 2;

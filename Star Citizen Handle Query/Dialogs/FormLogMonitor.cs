@@ -194,10 +194,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 #if DEBUG
       AddLogInfo(new List<CorpseMonitorInfo>() {
-        { new() { Date = DateTime.Now, Handle = "Kuehlwagen", CorpseEnabled = true } },
-        { new() { Date = DateTime.Now, Handle = "DudeCrocker" } },
-        { new() { Date = DateTime.Now, Handle = "LanceFlair", Info = "criminal arrest"} },
-        { new() { Date = DateTime.Now, Handle = "Gentle81", CorpseEnabled = true, Info = "there is a local inventory"} }
+        { new() { Date = DateTime.Now, Handle = "Kuehlwagen", CorpseEnabled = true, Info = "there is a local inventory"} },
+        { new() { Date = DateTime.Now, Handle = "DudeCrocker", CorpseEnabled = true } },
+        { new() { Date = DateTime.Now, Handle = "LanceFlair" } },
+        { new() { Date = DateTime.Now, Handle = "Gentle81", Info = "criminal arrest"} }
       });
 #endif
     }
