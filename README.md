@@ -83,7 +83,7 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
 
 ![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/LogMonitor.png?raw=true "Log-Monitor")
 
-Wenn in den Einstellungen die Anzeige des Log-Monitors aktiviert ist, wird das Fenster angezeigt. Hier wird die Star Citizen Games.log-Datei in nahezu Echtzeit ausgelesen, um Informationen zu gestorbenen / getöteten Spielern auf dem eigenen Server darzustellen.
+Wenn in den Einstellungen die Anzeige des Log-Monitors aktiviert ist, wird das Fenster angezeigt. Hier wird die Star Citizen `Games.log`-Datei in nahezu Echtzeit ausgelesen, um Informationen zu gestorbenen / getöteten Spielercharakteren auf dem eigenen Server darzustellen.
 - Wenn das Hauptfenster entsperrt ist, wird auch das Log-Monitor-Fenster entsperrt und kann durch Mauslinksklick und ziehen des `Log-Monitor`-Schriftzugs an eine andere Positon gezogen werden. Ist die Einstellung `Position merken` aktiviert, wird die Position des Fensters beim Beenden des Tools gespeichert und beim Start wieder an die gespeicherte Position gesetzt.
 
 Das Fenster enthält folgende Informationen:
