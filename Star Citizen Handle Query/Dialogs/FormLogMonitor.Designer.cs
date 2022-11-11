@@ -68,9 +68,9 @@
       // LabelTitle
       // 
       this.LabelTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelTitle.Location = new System.Drawing.Point(19, 7);
+      this.LabelTitle.Location = new System.Drawing.Point(24, 7);
       this.LabelTitle.Name = "LabelTitle";
-      this.LabelTitle.Size = new System.Drawing.Size(198, 15);
+      this.LabelTitle.Size = new System.Drawing.Size(194, 15);
       this.LabelTitle.TabIndex = 0;
       this.LabelTitle.Text = "Log-Monitor";
       this.LabelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
