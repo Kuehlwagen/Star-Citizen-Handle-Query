@@ -242,7 +242,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void FormLogMonitor_FormClosing(object sender, FormClosingEventArgs e) {
-      Cancel = true;
+      if (e.CloseReason == CloseReason.UserClosing) {
+        e.Cancel = true;
+      } else {
+        Cancel = true;
+      }
     }
 
     public enum Status {
