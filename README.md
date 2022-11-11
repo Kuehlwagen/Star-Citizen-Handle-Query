@@ -92,7 +92,8 @@ Das Fenster enthält folgende Informationen:
     - `Rot`: Star Citizen ist nicht gestartet 
     - `Orange`: Star Citizen ist gestartet und die Games.log-Datei wird gerade initial geöffnet
     - `Grün`: Die Games.log-Datei wird in Echtzeit ausgelesen
-  - Auf der rechten Seite wird ein Mülltonnen-Symbol angezeigt. Wenn mindestens ein Log-Eintrag dargestellt wird, können via Mauslinksklick alle Log-Einträge entfernt werden. Beim Start von Star Citizen werden automatisch alle Log-Einträge entfernt.
+  - Auf der rechten Seite wird ein Mülltonnen-Symbol angezeigt. Wenn mindestens ein Log-Eintrag dargestellt wird, können via Mauslinksklick alle Log-Einträge entfernt werden.
+  - Beim Start eines Star Citizen-Prozesses werden die Log-Einträge automatisch entfernt.
 - Log-Einträge
   - Auf der linken Seite wird ein Symbol angezeigt, welches folgende Informationen bereitstellen kann:
     - `Totenkopf`: Der Spieler ist gestorben und es wurde kein Leichnam erstellt (z.B. Selbstmord in einer Hauptstadt)
