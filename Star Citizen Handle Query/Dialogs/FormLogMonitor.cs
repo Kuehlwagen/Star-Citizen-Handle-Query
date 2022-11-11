@@ -171,7 +171,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           UserControlCorpse uc = new(line);
           if (PanelLogInfo.Controls.Count == ProgramSettings.LogMonitor.EntriesMax) {
             PanelLogInfo.Controls.RemoveAt(0);
-          } else if (PanelLogInfo.Controls.Count > 0) {
+          } else {
             Size = new Size(Width, Height + uc.Height + 2);
           }
           PanelLogInfo.Controls.Add(uc);
