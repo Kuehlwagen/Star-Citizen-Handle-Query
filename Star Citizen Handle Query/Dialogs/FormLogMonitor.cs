@@ -259,6 +259,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ClearLogInfos();
     }
 
+    protected override void OnResizeEnd(EventArgs e) {
+      base.OnResizeEnd(e);
+      FormHandleQuery.CheckSnap(this, Location);
+    }
+
   }
 
 }

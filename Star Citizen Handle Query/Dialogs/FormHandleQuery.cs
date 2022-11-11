@@ -18,6 +18,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
   public partial class FormHandleQuery : Form {
 
+    internal const int SnapDistance = 10;
     private readonly int InitialWindowStyle = 0;
     private FormLogMonitor LogMonitorForm = null;
     private readonly Translation ProgramTranslation;
@@ -1056,6 +1057,24 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       e.DrawBackground();
       e.DrawBorder();
       e.DrawText();
+    }
+
+    internal static bool ShouldSnap(int pos, int edge) {
+      int delta = pos - edge;
+      return (delta < 0) || (delta > 0 && delta <= SnapDistance);
+    }
+
+    internal static void CheckSnap(Form form, Point location) {
+      Rectangle bounds = Screen.FromPoint(location).Bounds;
+      if (ShouldSnap(form.Left, bounds.Left)) form.Left = bounds.Left;
+      if (ShouldSnap(form.Top, bounds.Top)) form.Top = bounds.Top;
+      if (ShouldSnap(bounds.Right, form.Right)) form.Left = bounds.Right - form.Width;
+      if (ShouldSnap(bounds.Bottom, form.Bottom)) form.Top = bounds.Bottom - form.Height;
+    }
+
+    protected override void OnResizeEnd(EventArgs e) {
+      base.OnResizeEnd(e);
+      CheckSnap(this, Location);
     }
 
     public enum CommunityHubLiveState {
