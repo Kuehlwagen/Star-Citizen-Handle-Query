@@ -26,7 +26,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
       }
       PictureBoxEvent.Image = img;
 
-      if (LogInfoItem.IsLocalInventory) {
+      if (LogInfoItem.IsLocalInventoryAvailable) {
         PictureBoxLocalInventory.Image = Properties.Resources.Resource;
       }
     }

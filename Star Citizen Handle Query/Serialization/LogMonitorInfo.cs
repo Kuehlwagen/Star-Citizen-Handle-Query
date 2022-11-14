@@ -22,7 +22,7 @@ namespace Star_Citizen_Handle_Query.Serialization {
 
     public bool IsCriminalArrest { get { return Info.ToLower().Contains("criminal arrest"); } }
 
-    public bool IsLocalInventory { get { return Info.ToLower().Contains("there is a local inventory"); } }
+    public bool IsLocalInventoryAvailable { get { return Info.ToLower().Contains("there is a local inventory"); } }
 
     public bool IsValid { get { return Date > DateTime.MinValue && Handle?.Length > 0; } }
 
