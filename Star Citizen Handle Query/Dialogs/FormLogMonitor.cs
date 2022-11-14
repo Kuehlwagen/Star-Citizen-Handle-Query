@@ -2,7 +2,6 @@ using Star_Citizen_Handle_Query.ExternClasses;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Diagnostics;
-using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -165,10 +164,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       });
     }
 
-    private void AddLogInfo(List<CorpseMonitorInfo> lines) {
-      foreach (CorpseMonitorInfo line in lines) {
+    private void AddLogInfo(List<LogMonitorInfo> lines) {
+      foreach (LogMonitorInfo line in lines) {
         if (line.IsValid) {
-          UserControlCorpse uc = new(line);
+          UserControlLog uc = new(line);
           if (PanelLogInfo.Controls.Count == ProgramSettings.LogMonitor.EntriesMax) {
             PanelLogInfo.Controls.RemoveAt(0);
           } else {
@@ -192,14 +191,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
         PictureBoxClearAll.Cursor = Cursors.Default;
       }
-#if DEBUG
-      AddLogInfo(new List<CorpseMonitorInfo>() {
-        { new() { Date = DateTime.Now, Handle = "Kuehlwagen", CorpseEnabled = true, Info = "there is a local inventory"} },
-        { new() { Date = DateTime.Now, Handle = "DudeCrocker", CorpseEnabled = true } },
-        { new() { Date = DateTime.Now, Handle = "LanceFlair" } },
-        { new() { Date = DateTime.Now, Handle = "Gentle81", Info = "criminal arrest"} }
-      });
-#endif
     }
 
     private void ChangeStatus(Status status) {
@@ -219,20 +210,18 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private List<CorpseMonitorInfo> CheckRegEx(string input) {
-      List<CorpseMonitorInfo> rtnVal = input != null ? new() : null;
+    private List<LogMonitorInfo> CheckRegEx(string input) {
+      List<LogMonitorInfo> rtnVal = input != null ? new() : null;
 
       if (rtnVal != null) {
         try {
           foreach (string line in input.Split(Environment.NewLine)) {
             Match match = RegexCorpse.Match(line);
             if (match != null && match.Success) {
-              rtnVal.Add(new CorpseMonitorInfo() {
-                Date = DateTime.Parse(match.Groups["Date"].Value, CultureInfo.InvariantCulture).ToLocalTime(),
-                Handle = match.Groups["Handle"].Value,
-                CorpseEnabled = match.Groups["Corpse"].Value == "Yes",
-                Info = match.Groups["Info"].Value
-              });
+              rtnVal.Add(new LogMonitorInfo(match.Groups["Date"].Value,
+                match.Groups["Handle"].Value,
+                match.Groups["Info"].Value,
+                match.Groups["Corpse"].Value));
             }
           }
         } catch { }

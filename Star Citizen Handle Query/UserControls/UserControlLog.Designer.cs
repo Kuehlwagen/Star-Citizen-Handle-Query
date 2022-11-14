@@ -1,5 +1,5 @@
 ﻿namespace Star_Citizen_Handle_Query.UserControls {
-  partial class UserControlCorpse {
+  partial class UserControlLog {
     /// <summary> 
     /// Erforderliche Designervariable.
     /// </summary>
@@ -75,7 +75,7 @@
       this.PictureBoxLocalInventory.TabStop = false;
       this.PictureBoxLocalInventory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Handle_MouseClick);
       // 
-      // UserControlCorpse
+      // UserControlLog
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -86,9 +86,9 @@
       this.Controls.Add(this.PictureBoxEvent);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
-      this.Name = "UserControlCorpse";
+      this.Name = "UserControlLog";
       this.Size = new System.Drawing.Size(238, 25);
-      this.Load += new System.EventHandler(this.UserControlCorpse_Load);
+      this.Load += new System.EventHandler(this.UserControlLog_Load);
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxEvent)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLocalInventory)).EndInit();
       this.ResumeLayout(false);

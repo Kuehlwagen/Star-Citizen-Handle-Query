@@ -42,7 +42,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="UserControls\UserControlCorpse.cs">
+    <Compile Update="UserControls\UserControlLog.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserControls\UserControlOrganization.cs">
