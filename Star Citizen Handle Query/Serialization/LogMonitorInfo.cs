@@ -29,6 +29,7 @@ namespace Star_Citizen_Handle_Query.Serialization {
     public object Clone() {
       return MemberwiseClone();
     }
+
   }
 
 }
