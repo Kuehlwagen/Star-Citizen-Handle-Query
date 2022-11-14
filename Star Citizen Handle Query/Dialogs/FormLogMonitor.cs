@@ -164,10 +164,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       });
     }
 
-    private void AddLogInfo(List<LogMonitorInfo> lines) {
-      foreach (LogMonitorInfo line in lines) {
-        if (line.IsValid) {
-          UserControlLog uc = new(line);
+    private void AddLogInfo(List<LogMonitorInfo> logInfos) {
+      foreach (LogMonitorInfo logInfo in logInfos) {
+        if (logInfo.IsValid) {
+          UserControlLog uc = new(logInfo);
           if (PanelLogInfo.Controls.Count == ProgramSettings.LogMonitor.EntriesMax) {
             PanelLogInfo.Controls.RemoveAt(0);
           } else {
