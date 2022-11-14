@@ -6,6 +6,11 @@ Overlay zur Abfrage von Star Citizen Spielern und ihrer Organisationszugehörigk
 
 Das Tool-Hauptfenster kann nur dann im Vordergrund des Spiels dargestellt werden, wenn das Star Citizen Fenster im (randlosen) Fenstermodus läuft.
 
+## Discord Server
+
+Für das Tool existiert ein Discord Server, auf dem man über das Tool diskutieren kann.
+https://discord.com/invite/WmzNY3mCm6
+
 ## Einstellungen
 
 ![Settings](/Star%20Citizen%20Handle%20Query/Screenshots/Settings.png?raw=true "Einstellungen")
