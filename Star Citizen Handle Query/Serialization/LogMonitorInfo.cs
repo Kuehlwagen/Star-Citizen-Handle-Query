@@ -5,11 +5,11 @@ namespace Star_Citizen_Handle_Query.Serialization {
   [Serializable()]
   public class LogMonitorInfo : ICloneable {
 
-    public LogMonitorInfo(string date, string handle, string info, string corpse = null) {
+    public LogMonitorInfo(string date, string handle, string info = null, string corpse = null) {
       Date = DateTime.Parse(date, CultureInfo.InvariantCulture).ToLocalTime();
       Handle = handle ?? string.Empty;
-      IsCorpseEnabled = corpse?.ToLower() == "yes";
       Info = info ?? string.Empty;
+      IsCorpseEnabled = corpse?.ToLower() == "yes";
     }
 
     public DateTime Date { get; } = DateTime.MinValue;

@@ -191,6 +191,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
         PictureBoxClearAll.Cursor = Cursors.Default;
       }
+#if DEBUG
+      AddLogInfo(new List<LogMonitorInfo>() {
+        new(DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff"), "Kuehlwagen", "there is a local inventory", "Yes"),
+        new(DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff"), "DudeCrocker", corpse: "Yes"),
+        new(DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff"), "LanceFlair"),
+        new(DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff"), "Gentle81", "criminal arrest")
+      });
+#endif
     }
 
     private void ChangeStatus(Status status) {
