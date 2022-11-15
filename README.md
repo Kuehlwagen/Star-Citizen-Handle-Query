@@ -142,4 +142,4 @@ Um das Programm vollständig zu deinstallieren und alle vom Programm erstellten 
   - `SC_Handle_Query.exe`
   - `SC_Handle_Query.deps.json`
   - `SC_Handle_Query.runtimeconfig.json`
-- Das lokale Cache-Verzeichnis: `%LocalAppData%\Kuehlwagen@GitHub\SC_Handle_Query\`
+- Das lokale App-Verzeichnis: `%LocalAppData%\Kuehlwagen@GitHub\SC_Handle_Query\` und ggf. auch das darüber liegende `Kuehlwagen@GitHub`-Verzeichnis
