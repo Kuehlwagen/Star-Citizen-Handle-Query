@@ -169,7 +169,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         if (logInfo.IsValid) {
           UserControlLog uc = new(logInfo);
           if (PanelLogInfo.Controls.Count == ProgramSettings.LogMonitor.EntriesMax) {
-            PanelLogInfo.Controls.RemoveAt(0);
+            UserControl ucRemove = PanelLogInfo.Controls[0] as UserControl;
+            PanelLogInfo.Controls.Remove(ucRemove);
+            ucRemove.Dispose();
           } else {
             Size = new Size(Width, Height + uc.Height + 2);
           }
@@ -185,7 +187,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void ClearLogInfos() {
       if (PanelLogInfo.Controls.Count > 0) {
+        List<Control> ctrls = new(PanelLogInfo.Controls.OfType<Control>());
         PanelLogInfo.Controls.Clear();
+        foreach (Control c in ctrls) {
+          c.Dispose();
+        }
         Size = new Size(Width, 60);
         PictureBoxClearAll.Click -= PictureBoxClearAll_Click;
         PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
