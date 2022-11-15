@@ -5,12 +5,15 @@ namespace Star_Citizen_Handle_Query.Serialization {
   [Serializable()]
   public class LogMonitorInfo : ICloneable {
 
-    public LogMonitorInfo(string date, string handle, string info = null, string corpse = null) {
+    public LogMonitorInfo(LogType logType, string date, string handle = null, string info = null, string additionalInfo = null) {
+      LogType = logType;
       Date = DateTime.Parse(date, CultureInfo.InvariantCulture).ToLocalTime();
       Handle = handle ?? string.Empty;
       Info = info ?? string.Empty;
-      IsCorpseEnabled = corpse?.ToLower() == "yes";
+      IsCorpseEnabled = logType == LogType.Corpse && additionalInfo?.ToLower() == "yes";
     }
+
+    public LogType LogType { get; } = LogType.Corpse;
 
     public DateTime Date { get; } = DateTime.MinValue;
 
@@ -20,16 +23,20 @@ namespace Star_Citizen_Handle_Query.Serialization {
 
     public bool IsCorpseEnabled { get; } = false;
 
-    public bool IsCriminalArrest { get { return Info.ToLower().Contains("criminal arrest"); } }
+    public bool IsCriminalArrest { get { return LogType == LogType.Corpse && Info.ToLower().Contains("criminal arrest"); } }
 
-    public bool IsLocalInventoryAvailable { get { return Info.ToLower().Contains("there is a local inventory"); } }
+    public bool IsLocalInventoryAvailable { get { return LogType == LogType.Corpse && Info.ToLower().Contains("there is a local inventory"); } }
 
-    public bool IsValid { get { return Date > DateTime.MinValue && Handle?.Length > 0; } }
+    public bool IsValid { get { return Date > DateTime.MinValue; } }
 
     public object Clone() {
       return MemberwiseClone();
     }
 
+  }
+
+  public enum LogType {
+    Corpse
   }
 
 }

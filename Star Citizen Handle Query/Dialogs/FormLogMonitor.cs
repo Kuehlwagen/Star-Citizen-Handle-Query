@@ -15,7 +15,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly Settings ProgramSettings;
     private readonly Translation ProgramTranslation;
 
-    private readonly Regex RegexCorpse = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2})\.\d{3}Z>.+<Corpse> Player '(?<Handle>[\w_\-]+)'.+IsCorpseEnabled: (?<Corpse>\w{2,3})[,\.] ?(?<Info>[\w\s]*)\.?$",
+    private readonly Regex RegexCorpse = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>.+<Corpse> Player '(?<Handle>[\w_\-]+)'.+IsCorpseEnabled: (?<Corpse>\w{2,3})[,\.] ?(?<Info>[\w\s]*)\.?$",
      RegexOptions.Compiled);
 
     public FormLogMonitor(Settings programSettings, Translation translation) {
@@ -193,10 +193,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 #if DEBUG
       AddLogInfo(new List<LogMonitorInfo>() {
-        new(DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff"), "Kuehlwagen", "there is a local inventory", "Yes"),
-        new(DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff"), "DudeCrocker", corpse: "Yes"),
-        new(DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff"), "LanceFlair"),
-        new(DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff"), "Gentle81", "criminal arrest")
+        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "there is a local inventory", "Yes"),
+        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", additionalInfo: "Yes"),
+        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair"),
+        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "criminal arrest")
       });
 #endif
     }
@@ -226,7 +226,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           foreach (string line in input.Split(Environment.NewLine)) {
             Match match = RegexCorpse.Match(line);
             if (match != null && match.Success) {
-              rtnVal.Add(new LogMonitorInfo(match.Groups["Date"].Value,
+              rtnVal.Add(new LogMonitorInfo(LogType.Corpse,
+                match.Groups["Date"].Value,
                 match.Groups["Handle"].Value,
                 match.Groups["Info"].Value,
                 match.Groups["Corpse"].Value));
