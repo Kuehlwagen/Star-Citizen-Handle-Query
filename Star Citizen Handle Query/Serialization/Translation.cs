@@ -128,6 +128,10 @@
 
     public string Log_Entries_Max { get; set; } = "Log-Einträge Maximum:";
 
+    public string Log_Entry_Display_Duration { get; set; } = "Log-Eintrag Anzeigedauer:";
+
+    public string Log_Entry_Display_Duration_Minutes { get; set; } = "Minute(n)";
+
   }
 
   [Serializable()]

@@ -93,7 +93,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void FormLogMonitor_Shown(object sender, EventArgs e) {
-      Size = new Size(Width, 31);
+      Height = 31;
       StartMonitor();
     }
 
@@ -167,35 +167,23 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void AddLogInfo(List<LogMonitorInfo> logInfos) {
       foreach (LogMonitorInfo logInfo in logInfos) {
         if (logInfo.IsValid) {
-          UserControlLog uc = new(logInfo);
+          UserControlLog uc = new(logInfo, ProgramSettings);
           if (PanelLogInfo.Controls.Count == ProgramSettings.LogMonitor.EntriesMax) {
-            UserControl ucRemove = PanelLogInfo.Controls[0] as UserControl;
-            PanelLogInfo.Controls.Remove(ucRemove);
-            ucRemove.Dispose();
-          } else {
-            Size = new Size(Width, Height + uc.Height + 2);
+            RemoveControl(PanelLogInfo.Controls[0] as UserControlLog);
           }
           PanelLogInfo.Controls.Add(uc);
-          if (PanelLogInfo.Controls.Count == 1) {
-            PictureBoxClearAll.Click += PictureBoxClearAll_Click;
-            PictureBoxClearAll.Image = Properties.Resources.ClearAll;
-            PictureBoxClearAll.Cursor = Cursors.Hand;
-          }
         }
       }
     }
 
     private void ClearLogInfos() {
       if (PanelLogInfo.Controls.Count > 0) {
-        List<Control> ctrls = new(PanelLogInfo.Controls.OfType<Control>());
+        List<UserControlLog> ctrls = new(PanelLogInfo.Controls.OfType<UserControlLog>());
         PanelLogInfo.Controls.Clear();
-        foreach (Control c in ctrls) {
+        foreach (UserControlLog c in ctrls) {
+          c.StopTimer();
           c.Dispose();
         }
-        Size = new Size(Width, 60);
-        PictureBoxClearAll.Click -= PictureBoxClearAll_Click;
-        PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
-        PictureBoxClearAll.Cursor = Cursors.Default;
       }
 #if DEBUG
       AddLogInfo(new List<LogMonitorInfo>() {
@@ -266,6 +254,32 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     protected override void OnResizeEnd(EventArgs e) {
       base.OnResizeEnd(e);
       FormHandleQuery.CheckSnap(this, Location);
+    }
+
+    private void PanelLogInfo_ControlAdded(object sender, ControlEventArgs e) {
+      if (PanelLogInfo.Controls.Count == 1) {
+        PictureBoxClearAll.Click += PictureBoxClearAll_Click;
+        PictureBoxClearAll.Image = Properties.Resources.ClearAll;
+        PictureBoxClearAll.Cursor = Cursors.Hand;
+      }
+      if (PanelLogInfo.Controls.Count < ProgramSettings.LogMonitor.EntriesMax) {
+        Height += e.Control.Height + 2;
+      }
+    }
+
+    private void PanelLogInfo_ControlRemoved(object sender, ControlEventArgs e) {
+      Height -= e.Control.Height + 2;
+      if (PanelLogInfo.Controls.Count == 0) {
+        PictureBoxClearAll.Click -= PictureBoxClearAll_Click;
+        PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
+        PictureBoxClearAll.Cursor = Cursors.Default;
+      }
+    }
+
+    public void RemoveControl(UserControlLog uc) {
+      uc.StopTimer();
+      PanelLogInfo.Controls.Remove(uc);
+      uc.Dispose();
     }
 
   }

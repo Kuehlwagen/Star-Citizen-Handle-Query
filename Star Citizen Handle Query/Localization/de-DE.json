@@ -32,7 +32,9 @@
       "Auto_Check_For_Update": "Bei Programmstart nach Update suchen",
       "Hide_Stream_Live_Status": "Stream Live-Status ausblenden",
       "Show_Log_Monitor": "Log-Monitor anzeigen",
-      "Log_Entries_Max": "Log-Eintr\u00E4ge Maximum:"
+      "Log_Entries_Max": "Log-Eintr\u00E4ge Maximum:",
+      "Log_Entry_Display_Duration": "Log-Eintrag Anzeigedauer:",
+      "Log_Entry_Display_Duration_Minutes": "Minute(n)"
     },
     "Window": {
       "Group_Title": "Fenster",

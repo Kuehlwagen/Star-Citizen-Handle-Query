@@ -118,6 +118,22 @@
       }
     }
 
+    /// <summary>Anzeigedauer eines Eintrags in Minuten (0 = unendlich)</summary>
+    private int _EntryDisplayDurationInMinutes = 10;
+    public int EntryDisplayDurationInMinutes {
+      get {
+        return _EntryDisplayDurationInMinutes;
+      }
+      set {
+        if (value < 0) {
+          value = 0;
+        } else if (value > 60) {
+          value = 60;
+        }
+        _EntryDisplayDurationInMinutes = value;
+      }
+    }
+
     public object Clone() {
       return MemberwiseClone();
     }

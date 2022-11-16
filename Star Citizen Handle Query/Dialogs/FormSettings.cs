@@ -72,6 +72,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxHideStreamLiveStatus.Checked = ProgramSettings.HideStreamLiveStatus;
       CheckBoxShowLog.Checked = ProgramSettings.LogMonitor.ShowWindow;
       NumericUpDownLogEintraegeMaximum.Value = ProgramSettings.LogMonitor.EntriesMax;
+      NumericUpDownLogEintragAnzeigedauer.Value = ProgramSettings.LogMonitor.EntryDisplayDurationInMinutes;
     }
 
     private void GetLocalizations() {
@@ -161,10 +162,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void CheckBoxShowLog_CheckedChanged(object sender, EventArgs e) {
       ProgramSettings.LogMonitor.ShowWindow = CheckBoxShowLog.Checked;
+      NumericUpDownLogEintraegeMaximum.Enabled = CheckBoxShowLog.Checked;
+      NumericUpDownLogEintragAnzeigedauer.Enabled = CheckBoxShowLog.Checked;
     }
 
     private void NumericUpDownLogEintraegeMaximum_ValueChanged(object sender, EventArgs e) {
       ProgramSettings.LogMonitor.EntriesMax = Convert.ToInt32(NumericUpDownLogEintraegeMaximum.Value);
+    }
+
+    private void NumericUpDownLogEintragAnzeigedauer_ValueChanged(object sender, EventArgs e) {
+      ProgramSettings.LogMonitor.EntryDisplayDurationInMinutes = Convert.ToInt32(NumericUpDownLogEintragAnzeigedauer.Value);
     }
 
     private void ButtonStandard_Click(object sender, EventArgs e) {
@@ -185,6 +192,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxAutoCheckForUpdate.Text = CurrentLocalization.Settings.Display.Auto_Check_For_Update;
       CheckBoxShowLog.Text = CurrentLocalization.Settings.Display.Show_Log_Monitor;
       LabelLogEintraegeMaximum.Text = CurrentLocalization.Settings.Display.Log_Entries_Max;
+      LabelLogEintragAnzeigeDauer.Text = CurrentLocalization.Settings.Display.Log_Entry_Display_Duration;
+      LabelLogEintragAnzeigedauerMinuten.Text = CurrentLocalization.Settings.Display.Log_Entry_Display_Duration_Minutes;
 
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;
       LabelFensterDeckkraft.Text = CurrentLocalization.Settings.Window.Opacity;

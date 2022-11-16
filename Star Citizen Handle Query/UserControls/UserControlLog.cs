@@ -6,10 +6,16 @@ namespace Star_Citizen_Handle_Query.UserControls {
   public partial class UserControlLog : UserControl {
 
     private readonly LogMonitorInfo LogInfoItem;
+    private readonly System.Windows.Forms.Timer TimerRemoveControl = new();
 
-    public UserControlLog(LogMonitorInfo logInfo) {
+    public UserControlLog(LogMonitorInfo logInfo, Settings programSettings) {
       InitializeComponent();
       LogInfoItem = logInfo;
+      if (programSettings.LogMonitor.EntryDisplayDurationInMinutes > 0) {
+        TimerRemoveControl.Interval = programSettings.LogMonitor.EntryDisplayDurationInMinutes * 60000;
+        TimerRemoveControl.Tick += TimerRemoveControl_Tick;
+        TimerRemoveControl.Start();
+      }
     }
 
     private void UserControlLog_Load(object sender, EventArgs e) {
@@ -34,6 +40,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           break;
       }
 
+      TimerRemoveControl.Enabled = true;
     }
 
     private void AddMouseEvents() {
@@ -49,6 +56,15 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     private void Handle_MouseClick(object sender, MouseEventArgs e) {
       ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(LogInfoItem.Handle);
+    }
+
+    private void TimerRemoveControl_Tick(object sender, EventArgs e) {
+      StopTimer();
+      (Parent.Parent as FormLogMonitor).RemoveControl(this);
+    }
+
+    public void StopTimer() {
+      TimerRemoveControl.Stop();
     }
 
   }

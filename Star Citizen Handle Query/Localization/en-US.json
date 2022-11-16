@@ -32,7 +32,9 @@
       "Auto_Check_For_Update": "Check for update when program starts",
       "Hide_Stream_Live_Status": "Hide stream live status",
       "Show_Log_Monitor": "Show log monitor",
-      "Log_Entries_Max": "Maximum log entries:"
+      "Log_Entries_Max": "Maximum log entries:",
+      "Log_Entry_Display_Duration": "Log entry display duration:",
+      "Log_Entry_Display_Duration_Minutes": "Minute(s)"
     },
     "Window": {
       "Group_Title": "Window",

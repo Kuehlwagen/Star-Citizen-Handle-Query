@@ -90,6 +90,8 @@
       this.PanelLogInfo.Name = "PanelLogInfo";
       this.PanelLogInfo.Size = new System.Drawing.Size(238, 29);
       this.PanelLogInfo.TabIndex = 1;
+      this.PanelLogInfo.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.PanelLogInfo_ControlAdded);
+      this.PanelLogInfo.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.PanelLogInfo_ControlRemoved);
       // 
       // FormLogMonitor
       // 
