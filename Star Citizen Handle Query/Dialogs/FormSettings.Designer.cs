@@ -351,7 +351,7 @@
       // LabelLogEintragAnzeigedauerMinuten
       // 
       this.LabelLogEintragAnzeigedauerMinuten.AutoSize = true;
-      this.LabelLogEintragAnzeigedauerMinuten.Location = new System.Drawing.Point(224, 211);
+      this.LabelLogEintragAnzeigedauerMinuten.Location = new System.Drawing.Point(218, 211);
       this.LabelLogEintragAnzeigedauerMinuten.Name = "LabelLogEintragAnzeigedauerMinuten";
       this.LabelLogEintragAnzeigedauerMinuten.Size = new System.Drawing.Size(60, 15);
       this.LabelLogEintragAnzeigedauerMinuten.TabIndex = 12;
