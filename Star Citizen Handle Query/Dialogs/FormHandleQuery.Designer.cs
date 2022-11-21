@@ -48,7 +48,7 @@
       // 
       // PanelHandleQuery
       // 
-      this.PanelHandleQuery.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      this.PanelHandleQuery.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.PanelHandleQuery.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.PanelHandleQuery.Controls.Add(this.TextBoxHandle);
@@ -63,7 +63,7 @@
       // 
       // TextBoxHandle
       // 
-      this.TextBoxHandle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+      this.TextBoxHandle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.TextBoxHandle.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
       this.TextBoxHandle.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
@@ -125,8 +125,8 @@
       // 
       // PanelInfo
       // 
-      this.PanelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+      this.PanelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
       this.PanelInfo.BackColor = System.Drawing.Color.Lime;
       this.PanelInfo.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -260,6 +260,6 @@
     private Label LabelLockUnlock;
     private Label LabelQuery;
     private Label LabelSettings;
-        private ToolTip ToolTipHandleQuery;
-    }
+    private ToolTip ToolTipHandleQuery;
+  }
 }

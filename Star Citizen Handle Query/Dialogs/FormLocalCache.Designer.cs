@@ -229,7 +229,7 @@
       // 
       this.ColumnKommentar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
       this.ColumnKommentar.HeaderText = "Kommentar";
-      this.ColumnKommentar.MaxInputLength = 15;
+      this.ColumnKommentar.MaxInputLength = 0;
       this.ColumnKommentar.Name = "ColumnKommentar";
       // 
       // FormLocalCache
@@ -264,14 +264,14 @@
     private Button ButtonSchliessen;
     private Button ButtonOrdnerOeffnen;
     private FlowLayoutPanel PanelInfo;
-    private DataGridViewTextBoxColumn ColumnCacheDatum;
-    private DataGridViewLinkColumn ColumnHandle;
-    private DataGridViewTextBoxColumn ColumnCommunityMoniker;
-    private DataGridViewTextBoxColumn ColumnEnlisted;
-    private DataGridViewTextBoxColumn ColumnUEECitizenRecord;
-    private DataGridViewLinkColumn ColumnOrganisation;
-    private DataGridViewTextBoxColumn ColumnOrganisationRang;
-    private DataGridViewTextBoxColumn ColumnAnzahlAffiliationen;
-    private DataGridViewTextBoxColumn ColumnKommentar;
-  }
+        private DataGridViewTextBoxColumn ColumnCacheDatum;
+        private DataGridViewLinkColumn ColumnHandle;
+        private DataGridViewTextBoxColumn ColumnCommunityMoniker;
+        private DataGridViewTextBoxColumn ColumnEnlisted;
+        private DataGridViewTextBoxColumn ColumnUEECitizenRecord;
+        private DataGridViewLinkColumn ColumnOrganisation;
+        private DataGridViewTextBoxColumn ColumnOrganisationRang;
+        private DataGridViewTextBoxColumn ColumnAnzahlAffiliationen;
+        private DataGridViewTextBoxColumn ColumnKommentar;
+    }
 }
