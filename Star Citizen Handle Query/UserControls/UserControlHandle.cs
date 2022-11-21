@@ -40,12 +40,24 @@ namespace Star_Citizen_Handle_Query.UserControls {
           PictureBoxDisplayTitle.Image = await GetImage(CacheDirectoryType.HandleDisplayTitle, Info.Profile.DisplayTitleAvatarUrl, Info?.Profile?.DisplayTitle, ProgramSettings.LocalCacheMaxAge);
         }
         LabelHandle.Text = handle;
+        SetToolTip(LabelHandle);
         LabelCommunityMoniker.Text = GetString(Info?.Profile?.CommunityMonicker, "CM: ");
+        SetToolTip(LabelCommunityMoniker);
         LabelDisplayTitle.Text = GetString(Info?.Profile?.DisplayTitle);
-        LabelFluency.Text = Info?.Profile?.Fluency?.Count > 0 ? $"Fluency: {string.Join(", ", Info.Profile.Fluency)}" : string.Empty;
+        SetToolTip(PictureBoxDisplayTitle, LabelDisplayTitle.Text);
+        SetToolTip(LabelDisplayTitle);
+        if (!string.IsNullOrWhiteSpace(Info?.Profile?.Country)) {
+          LabelLocationFluency.Text = $"{Info.Profile.Country}{(!string.IsNullOrWhiteSpace(Info.Profile.Region) ? $", {Info.Profile.Region}" : string.Empty)} ({string.Join(", ", Info.Profile.Fluency)})";
+          SetToolTip(LabelLocationFluency);
+        } else {
+          string fluency = string.Join(", ", Info.Profile.Fluency);
+          LabelLocationFluency.Text = $"Fluency: {fluency}";
+          SetToolTip(LabelLocationFluency);
+        }
         LabelUEECitizenRecord.Text = GetString(Info?.Profile?.UeeCitizenRecord);
         LabelEnlistedDate.Text = Info?.Profile?.Enlisted.ToString("MMM d, yyyy", System.Globalization.CultureInfo.InvariantCulture);
         LabelAdditionalInformation.Text = GetString(Info?.Comment);
+        SetToolTip(LabelAdditionalInformation);
         if (DisplayOnly) {
           LabelAdditionalInformation.Cursor = Cursors.Default;
         } else if (!ProgramSettings.HideStreamLiveStatus) {
@@ -69,6 +81,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelCommunityMoniker.Text = Info?.HttpResponse?.StatusCode == HttpStatusCode.NotFound ? ProgramTranslation.Window.Handle_Not_Found : Info?.HttpResponse?.ErrorText;
         LabelCommunityMoniker.Location = new Point(3, LabelHandle.Location.Y + 4);
         LabelCommunityMoniker.BringToFront();
+        SetToolTip(LabelCommunityMoniker);
         Size = new Size(Size.Width, 25);
       }
     }
@@ -119,6 +132,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           Info.Comment = !string.IsNullOrWhiteSpace(textBox.Text) ? textBox.Text : null;
           textBox.Tag = Info.Comment;
           LabelAdditionalInformation.Text = Info.Comment;
+          SetToolTip(LabelAdditionalInformation);
           CreateHandleJSON(Info, ProgramSettings, forceExport: true);
           textBox.Visible = false;
           ActivateTextBoxHandle();
@@ -140,7 +154,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private void ActivateTextBoxHandle() {
-      TextBox textBoxHandle = Parent.Parent.Controls[1].Controls[0] as TextBox;
+      TextBox textBoxHandle = GetMainForm().Controls[1].Controls[0] as TextBox;
       textBoxHandle.SelectAll();
       textBoxHandle.Focus();
     }
@@ -162,6 +176,15 @@ namespace Star_Citizen_Handle_Query.UserControls {
         Process.Start("explorer", $"https://robertsspaceindustries.com/community-hub/user/{Info.Profile.Handle}");
       }
     }
+
+    private FormHandleQuery GetMainForm() {
+      return Parent.Parent as FormHandleQuery;
+    }
+
+    private void SetToolTip(Control control, string text = null) {
+      GetMainForm()?.SetToolTip(control, text ?? control.Text);
+    }
+
   }
 
 }

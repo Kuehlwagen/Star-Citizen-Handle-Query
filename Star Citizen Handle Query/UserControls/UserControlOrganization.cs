@@ -1,4 +1,5 @@
-﻿using Star_Citizen_Handle_Query.Serialization;
+﻿using Star_Citizen_Handle_Query.Dialogs;
+using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
 using static Star_Citizen_Handle_Query.Dialogs.FormHandleQuery;
 
@@ -28,8 +29,10 @@ namespace Star_Citizen_Handle_Query.UserControls {
       SID = organizationSid;
       if (Info?.Redacted == false) {
         LabelOrganizationName.Text = GetString(Info?.Name);
+        SetToolTip(LabelOrganizationName);
         LabelOrganizationSID.Text = GetString(organizationSid, "SID: ");
         LabelOrganizationRank.Text = GetString(Info?.RankName);
+        SetToolTip(LabelOrganizationRank);
         LabelFocusPrimary.Text = GetString(Info?.PrimaryActivity);
         LabelFocusSecondary.Text = GetString(Info?.SecondaryActivity);
         if (!string.IsNullOrWhiteSpace(Info?.Commitment)) {
@@ -66,6 +69,15 @@ namespace Star_Citizen_Handle_Query.UserControls {
         Process.Start("explorer", $"https://robertsspaceindustries.com/orgs/{SID}");
       }
     }
+
+    private FormHandleQuery GetMainForm() {
+      return Parent.Parent as FormHandleQuery;
+    }
+
+    private void SetToolTip(Control control, string text = null) {
+      GetMainForm()?.SetToolTip(control, text ?? control.Text);
+    }
+
   }
 
 }

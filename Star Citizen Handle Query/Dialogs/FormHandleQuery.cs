@@ -30,6 +30,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     internal static CancellationTokenSource CancelToken = new();
 
     private readonly Regex RgxIdCmHandleEnlistedFluency = new("<strong class=\"value\">(.+)</strong>", RegexOptions.Multiline | RegexOptions.Compiled);
+    private readonly Regex RgxLocation = new("<span class=\"label\">Location</span>\\s+<strong class=\"value\">(.+)</strong>\\s+</p>\\s+<p class=\"entry\">", RegexOptions.Singleline | RegexOptions.Compiled);
     private readonly Regex RgxAvatar = new("<div class=\"thumb\">\\s+<img src=\"(.+)\" \\/>", RegexOptions.Multiline | RegexOptions.Compiled);
     private readonly Regex RgxDisplayTitle = new("<span class=\"icon\">\\s+<img src=\"(.+)\"\\/>\\s+<\\/span>\\s+<span class=\"value\">(.+)<", RegexOptions.Multiline | RegexOptions.Compiled);
     private readonly Regex RgxMainOrganization = new("<a href=\"\\/orgs\\/(.+)\"><img src=\"(.+)\" \\/><\\/a>\\s+<span class=\"members\">(\\d+) members<\\/span>[\\W\\w]+class=\"value\">(.+)<\\/a>[\\W\\w]+Organization rank<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>[\\W\\w]+Prim. Activity<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>[\\W\\w]+Sec. Activity<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>[\\W\\w]+Commitment<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>", RegexOptions.Multiline | RegexOptions.Compiled);
@@ -188,9 +189,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       BeendenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Close;
       UeberToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.About;
       AufUpdatePruefenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Check_For_Update;
-      ToolTipHandleQuery.SetToolTip(LabelLockUnlock, ProgramTranslation.Window.ToolTips.Lock_Unlock_Window);
-      ToolTipHandleQuery.SetToolTip(LabelQuery, ProgramTranslation.Window.ToolTips.Query_Handle);
-      ToolTipHandleQuery.SetToolTip(LabelSettings, ProgramTranslation.Window.ToolTips.Settings);
+      SetToolTip(LabelLockUnlock, ProgramTranslation.Window.ToolTips.Lock_Unlock_Window);
+      SetToolTip(LabelQuery, ProgramTranslation.Window.ToolTips.Query_Handle);
+      SetToolTip(LabelSettings, ProgramTranslation.Window.ToolTips.Settings);
     }
 
     internal Settings GetProgramSettings() {
@@ -550,6 +551,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               reply.Profile.Enlisted = enlisted;
             }
             reply.Profile.Fluency.AddRange(mcIdCmHandleEnlistedFluency[4].Groups[1].Value.Replace(" ", string.Empty).Split(","));
+          }
+
+          Match matchLocation = RgxLocation.Match(reply.HttpResponse.Source);
+          if (matchLocation?.Groups.Count > 1) {
+            string[] countryRegion = matchLocation.Groups[1].Value.Split(",");
+            reply.Profile.Country = countryRegion[0].Trim();
+            reply.Profile.Region = countryRegion.Length > 1 ? countryRegion[1].Trim() : string.Empty;
           }
 
           // Avatar
@@ -1057,6 +1065,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       e.DrawBackground();
       e.DrawBorder();
       e.DrawText();
+    }
+
+    public void SetToolTip(Control control, string text = null) {
+      ToolTipHandleQuery.SetToolTip(control, text ?? control.Text);
     }
 
     internal static bool ShouldSnap(int pos, int edge) {

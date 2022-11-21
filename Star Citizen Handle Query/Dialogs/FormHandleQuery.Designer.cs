@@ -260,6 +260,6 @@
     private Label LabelLockUnlock;
     private Label LabelQuery;
     private Label LabelSettings;
-    private ToolTip ToolTipHandleQuery;
-  }
+        private ToolTip ToolTipHandleQuery;
+    }
 }

@@ -28,7 +28,7 @@
       this.PictureBoxHandleAvatar = new System.Windows.Forms.PictureBox();
       this.PictureBoxDisplayTitle = new System.Windows.Forms.PictureBox();
       this.LabelDisplayTitle = new System.Windows.Forms.Label();
-      this.LabelFluency = new System.Windows.Forms.Label();
+      this.LabelLocationFluency = new System.Windows.Forms.Label();
       this.LabelUEECitizenRecord = new System.Windows.Forms.Label();
       this.LabelEnlistedDate = new System.Windows.Forms.Label();
       this.TextBoxAdditionalInformation = new System.Windows.Forms.TextBox();
@@ -86,13 +86,13 @@
       this.LabelDisplayTitle.Size = new System.Drawing.Size(0, 15);
       this.LabelDisplayTitle.TabIndex = 4;
       // 
-      // LabelFluency
+      // LabelLocationFluency
       // 
-      this.LabelFluency.AutoSize = true;
-      this.LabelFluency.Location = new System.Drawing.Point(77, 59);
-      this.LabelFluency.Name = "LabelFluency";
-      this.LabelFluency.Size = new System.Drawing.Size(0, 15);
-      this.LabelFluency.TabIndex = 9;
+      this.LabelLocationFluency.AutoSize = true;
+      this.LabelLocationFluency.Location = new System.Drawing.Point(77, 59);
+      this.LabelLocationFluency.Name = "LabelLocationFluency";
+      this.LabelLocationFluency.Size = new System.Drawing.Size(0, 15);
+      this.LabelLocationFluency.TabIndex = 9;
       // 
       // LabelUEECitizenRecord
       // 
@@ -119,7 +119,7 @@
       this.TextBoxAdditionalInformation.BorderStyle = System.Windows.Forms.BorderStyle.None;
       this.TextBoxAdditionalInformation.ForeColor = System.Drawing.Color.Khaki;
       this.TextBoxAdditionalInformation.Location = new System.Drawing.Point(230, 40);
-      this.TextBoxAdditionalInformation.MaxLength = 15;
+      this.TextBoxAdditionalInformation.MaxLength = 0;
       this.TextBoxAdditionalInformation.Name = "TextBoxAdditionalInformation";
       this.TextBoxAdditionalInformation.Size = new System.Drawing.Size(138, 16);
       this.TextBoxAdditionalInformation.TabIndex = 12;
@@ -162,7 +162,7 @@
       this.Controls.Add(this.TextBoxAdditionalInformation);
       this.Controls.Add(this.LabelAdditionalInformation);
       this.Controls.Add(this.LabelUEECitizenRecord);
-      this.Controls.Add(this.LabelFluency);
+      this.Controls.Add(this.LabelLocationFluency);
       this.Controls.Add(this.LabelDisplayTitle);
       this.Controls.Add(this.PictureBoxDisplayTitle);
       this.Controls.Add(this.PictureBoxHandleAvatar);
@@ -187,7 +187,7 @@
     private Label LabelHandle;
     private Label LabelCommunityMoniker;
     private Label LabelDisplayTitle;
-    private Label LabelFluency;
+    private Label LabelLocationFluency;
     internal PictureBox PictureBoxHandleAvatar;
     internal PictureBox PictureBoxDisplayTitle;
     private Label LabelUEECitizenRecord;
