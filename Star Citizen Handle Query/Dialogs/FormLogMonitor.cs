@@ -15,8 +15,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly Settings ProgramSettings;
     private readonly Translation ProgramTranslation;
 
-    private readonly Regex RegexCorpse = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>.+<Corpse> Player '(?<Handle>[\w_\-]+)'.+IsCorpseEnabled: (?<Corpse>\w{2,3})[,\.] ?(?<Info>[\w\s]*)\.?$",
+    private readonly Regex RgxCorpse = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>.+<Corpse> Player '(?<Handle>[\w_\-]+)'.+IsCorpseEnabled: (?<Corpse>\w{2,3})[,\.] ?(?<Info>[\w\s]*)\.?$",
      RegexOptions.Compiled);
+    private readonly Regex RgxLoadingScreenDuration = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>.+SC_Default closed after (?<Seconds>\d+\.\d+) seconds$",
+      RegexOptions.Compiled);
 
     public FormLogMonitor(Settings programSettings, Translation translation) {
       InitializeComponent();
@@ -43,7 +45,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Prüfen, ob die Übersetzung valide ist
       if (ProgramTranslation != null) {
         // Control-Texte setzen
-        LabelTitle.Text = ProgramTranslation.Log_Monitor.Title;
+        SetTitle();
       }
     }
 
@@ -130,6 +132,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                   Application.DoEvents();
                   Thread.Sleep(100);
 
+                  string livePtuFolder = Path.GetFileName(Path.GetDirectoryName(scLogPath));
+                  Invoke(new Action(() => SetTitle(livePtuFolder)));
+
                   Invoke(new Action(() => ChangeStatus(Status.Monitoring)));
 
                   logReader.Close();
@@ -151,6 +156,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                   lastMaxOffset = currentPosition;
 
                 }
+
+                SetTitle();
 
               }
 
@@ -177,6 +184,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void ClearLogInfos() {
+      SetTitle();
       if (PanelLogInfo.Controls.Count > 0) {
         List<UserControlLog> ctrls = new(PanelLogInfo.Controls.OfType<UserControlLog>());
         PanelLogInfo.Controls.Clear();
@@ -225,13 +233,20 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (rtnVal != null) {
         try {
           foreach (string line in input.Split(Environment.NewLine)) {
-            Match match = RegexCorpse.Match(line);
+            Match match = RgxCorpse.Match(line);
             if (match != null && match.Success) {
               rtnVal.Add(new LogMonitorInfo(LogType.Corpse,
                 match.Groups["Date"].Value,
                 match.Groups["Handle"].Value,
                 match.Groups["Info"].Value,
                 match.Groups["Corpse"].Value));
+            } else {
+              match = RgxLoadingScreenDuration.Match(line);
+              if (match != null && match.Success) {
+                rtnVal.Add(new LogMonitorInfo(LogType.LoadingScreenDuration,
+                  match.Groups["Date"].Value,
+                  info: match.Groups["Seconds"].Value));
+              }
             }
           }
         } catch { }
@@ -256,6 +271,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void PictureBoxClearAll_Click(object sender, EventArgs e) {
       ClearLogInfos();
+    }
+
+    private void SetTitle(string livePtu = null) {
+      LabelTitle.Text = $"{ProgramTranslation.Log_Monitor.Title}{(livePtu != null ? $" - {livePtu}" : string.Empty)}";
     }
 
     protected override void OnResizeEnd(EventArgs e) {

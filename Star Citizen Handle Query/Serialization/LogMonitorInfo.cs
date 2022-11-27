@@ -36,7 +36,8 @@ namespace Star_Citizen_Handle_Query.Serialization {
   }
 
   public enum LogType {
-    Corpse
+    Corpse,
+    LoadingScreenDuration
   }
 
 }

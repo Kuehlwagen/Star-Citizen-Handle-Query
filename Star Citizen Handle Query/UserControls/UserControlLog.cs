@@ -38,6 +38,10 @@ namespace Star_Citizen_Handle_Query.UserControls {
           }
           AddMouseEvents();
           break;
+        case LogType.LoadingScreenDuration:
+          PictureBoxLeft.Image = Properties.Resources.Info;
+          LabelText.Text = $"Loading screen: {LogInfoItem.Info}s";
+          break;
       }
 
       TimerRemoveControl.Enabled = true;
