@@ -47,8 +47,8 @@ namespace Star_Citizen_Handle_Query.UserControls {
         SetToolTip(PictureBoxDisplayTitle, LabelDisplayTitle.Text);
         SetToolTip(LabelDisplayTitle);
         if (!string.IsNullOrWhiteSpace(Info?.Profile?.Country)) {
-          LabelLocationFluency.Text = $"{Info.Profile.Country}{(!string.IsNullOrWhiteSpace(Info.Profile.Region) ? $", {Info.Profile.Region}" : string.Empty)} ({string.Join(", ", Info.Profile.Fluency)})";
-          SetToolTip(LabelLocationFluency);
+          LabelLocationFluency.Text = $"{Info.Profile.Country} ({string.Join(", ", Info.Profile.Fluency)})";
+          SetToolTip(LabelLocationFluency, $"{Info.Profile.Country}{(!string.IsNullOrWhiteSpace(Info.Profile.Region) ? $", {Info.Profile.Region}" : string.Empty)} ({string.Join(", ", Info.Profile.Fluency)})");
         } else {
           string fluency = string.Join(", ", Info.Profile.Fluency);
           LabelLocationFluency.Text = $"Fluency: {fluency}";
