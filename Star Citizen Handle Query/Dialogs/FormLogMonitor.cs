@@ -173,7 +173,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void AddLogInfo(List<LogMonitorInfo> logInfos) {
       foreach (LogMonitorInfo logInfo in logInfos) {
-        if (logInfo.IsValid) {
+        if (logInfo.IsValid && (PanelLogInfo.Controls.Count == 0 ||
+          (PanelLogInfo.Controls[PanelLogInfo.Controls.Count - 1] is UserControlLog ucl) && !logInfo.Equals(ucl.LogInfoItem))) {
           UserControlLog uc = new(logInfo, ProgramSettings);
           if (PanelLogInfo.Controls.Count == ProgramSettings.LogMonitor.EntriesMax) {
             RemoveControl(PanelLogInfo.Controls[0] as UserControlLog);
@@ -200,7 +201,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair"),
         new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "criminal arrest"),
         new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "there is a local inventory", "Yes"),
+        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "there is a local inventory", "Yes"),
         new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", additionalInfo: "Yes"),
+        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker"),
         new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair"),
         new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "criminal arrest"),
         new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "there is a local inventory", "Yes"),

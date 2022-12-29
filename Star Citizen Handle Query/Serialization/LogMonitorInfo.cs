@@ -29,6 +29,24 @@ namespace Star_Citizen_Handle_Query.Serialization {
 
     public bool IsValid { get { return Date > DateTime.MinValue; } }
 
+    public override bool Equals(object obj) {
+      if (obj != null && obj is LogMonitorInfo lmi) {
+        return lmi.LogType == LogType &&
+          lmi.Handle == Handle &&
+          lmi.Info == Info &&
+          lmi.IsCorpseEnabled == IsCorpseEnabled &&
+          lmi.IsCriminalArrest == IsCriminalArrest &&
+          lmi.IsLocalInventoryAvailable == IsLocalInventoryAvailable &&
+          lmi.Date <= Date && lmi.Date.AddSeconds(5) >= Date;
+      } else {
+        return base.Equals(obj);
+      }
+    }
+
+    public override int GetHashCode() {
+      return base.GetHashCode();
+    }
+
     public object Clone() {
       return MemberwiseClone();
     }

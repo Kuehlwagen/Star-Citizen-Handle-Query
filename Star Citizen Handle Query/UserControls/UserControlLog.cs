@@ -5,7 +5,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
   public partial class UserControlLog : UserControl {
 
-    private readonly LogMonitorInfo LogInfoItem;
+    internal readonly LogMonitorInfo LogInfoItem;
     private readonly System.Windows.Forms.Timer TimerRemoveControl = new();
 
     public UserControlLog(LogMonitorInfo logInfo, Settings programSettings) {
