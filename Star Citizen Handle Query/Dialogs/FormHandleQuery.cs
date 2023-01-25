@@ -425,6 +425,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               RelationsForm?.UpdateRelation(handleControl.HandleName, handleControl.HandleRelation);
             }
             break;
+          case Keys.Enter:
+            e.SuppressKeyPress = true;
+            QueryHandle(true);
+            break;
         }
       } else {
         switch (e.KeyCode) {
@@ -438,7 +442,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             break;
           case Keys.Enter:
             e.SuppressKeyPress = true;
-            QueryHandle(e.Control);
+            QueryHandle(false);
             break;
           case Keys.Escape:
             e.SuppressKeyPress = true;
@@ -497,7 +501,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         }
 
         // Ggf. Beziehung aktualisieren
-        if (RelationsForm != null && handleInfo?.Relation > Relation.NotAssigned) {
+        if (RelationsForm != null) {
           RelationsForm.UpdateRelation(handleInfo.Profile.Handle, handleInfo.Relation);
         }
 
