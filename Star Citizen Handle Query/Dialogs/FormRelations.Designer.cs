@@ -64,7 +64,7 @@
       this.CheckBoxFilterBandit.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
       this.CheckBoxFilterBandit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.CheckBoxFilterBandit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.CheckBoxFilterBandit.Location = new System.Drawing.Point(201, 7);
+      this.CheckBoxFilterBandit.Location = new System.Drawing.Point(194, 7);
       this.CheckBoxFilterBandit.Name = "CheckBoxFilterBandit";
       this.CheckBoxFilterBandit.Size = new System.Drawing.Size(15, 15);
       this.CheckBoxFilterBandit.TabIndex = 3;
@@ -84,7 +84,7 @@
       this.CheckBoxFilterBogey.FlatAppearance.CheckedBackColor = System.Drawing.Color.Orange;
       this.CheckBoxFilterBogey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.CheckBoxFilterBogey.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.CheckBoxFilterBogey.Location = new System.Drawing.Point(184, 7);
+      this.CheckBoxFilterBogey.Location = new System.Drawing.Point(177, 7);
       this.CheckBoxFilterBogey.Name = "CheckBoxFilterBogey";
       this.CheckBoxFilterBogey.Size = new System.Drawing.Size(15, 15);
       this.CheckBoxFilterBogey.TabIndex = 3;
@@ -104,7 +104,7 @@
       this.CheckBoxFilterNeutral.FlatAppearance.CheckedBackColor = System.Drawing.Color.Gray;
       this.CheckBoxFilterNeutral.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.CheckBoxFilterNeutral.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.CheckBoxFilterNeutral.Location = new System.Drawing.Point(167, 7);
+      this.CheckBoxFilterNeutral.Location = new System.Drawing.Point(160, 7);
       this.CheckBoxFilterNeutral.Name = "CheckBoxFilterNeutral";
       this.CheckBoxFilterNeutral.Size = new System.Drawing.Size(15, 15);
       this.CheckBoxFilterNeutral.TabIndex = 3;
@@ -124,7 +124,7 @@
       this.CheckBoxFilterFriendly.FlatAppearance.CheckedBackColor = System.Drawing.Color.Green;
       this.CheckBoxFilterFriendly.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.CheckBoxFilterFriendly.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.CheckBoxFilterFriendly.Location = new System.Drawing.Point(150, 7);
+      this.CheckBoxFilterFriendly.Location = new System.Drawing.Point(143, 7);
       this.CheckBoxFilterFriendly.Name = "CheckBoxFilterFriendly";
       this.CheckBoxFilterFriendly.Size = new System.Drawing.Size(15, 15);
       this.CheckBoxFilterFriendly.TabIndex = 3;
@@ -146,7 +146,7 @@
       this.LabelTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
       this.LabelTitle.Location = new System.Drawing.Point(4, 7);
       this.LabelTitle.Name = "LabelTitle";
-      this.LabelTitle.Size = new System.Drawing.Size(140, 15);
+      this.LabelTitle.Size = new System.Drawing.Size(137, 15);
       this.LabelTitle.TabIndex = 0;
       this.LabelTitle.Text = "Beziehungen";
       this.LabelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
