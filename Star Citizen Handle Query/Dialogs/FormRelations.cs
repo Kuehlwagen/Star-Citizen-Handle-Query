@@ -161,19 +161,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private bool RelationIsVisible(Relation relation) {
-      switch (relation) {
-        case Relation.Friendly:
-          return CheckBoxFilterFriendly.Checked;
-        case Relation.Neutral:
-          return CheckBoxFilterNeutral.Checked;
-        case Relation.Bogey:
-          return CheckBoxFilterBogey.Checked;
-        case Relation.Bandit:
-          return CheckBoxFilterBandit.Checked;
-        case Relation.NotAssigned:
-        default:
-          return false;
-      }
+      return relation switch {
+        Relation.Friendly => CheckBoxFilterFriendly.Checked,
+        Relation.Neutral => CheckBoxFilterNeutral.Checked,
+        Relation.Bogey => CheckBoxFilterBogey.Checked,
+        Relation.Bandit => CheckBoxFilterBandit.Checked,
+        _ => false,
+      };
     }
 
     private void CheckBoxFilterFriendly_CheckedChanged(object sender, EventArgs e) {
