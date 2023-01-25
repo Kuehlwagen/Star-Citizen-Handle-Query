@@ -1,6 +1,7 @@
 using Star_Citizen_Handle_Query.ExternClasses;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
+using System.Drawing.Drawing2D;
 
 namespace Star_Citizen_Handle_Query.Dialogs {
 
@@ -146,15 +147,65 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         if (controls?.Length == 1) {
           if (relation == Relation.NotAssigned) {
             RemoveControl(controls[0] as UserControlRelation);
-          } else {
-            (controls[0] as UserControlRelation).UpdateRelation(relation);
+          } else if (controls[0] is UserControlRelation control) {
+            control.UpdateRelation(relation);
+            control.Visible = RelationIsVisible(relation);
           }
         } else if (relation > Relation.NotAssigned) {
           if (PanelRelations.Controls.Count == ProgramSettings.Relations.EntriesMax) {
             RemoveControl(PanelRelations.Controls[0] as UserControlRelation);
           }
-          PanelRelations.Controls.Add(new UserControlRelation(handle, relation) { Name = controlName });
+          PanelRelations.Controls.Add(new UserControlRelation(handle, relation) { Name = controlName, Visible = RelationIsVisible(relation) });
         }
+      }
+    }
+
+    private bool RelationIsVisible(Relation relation) {
+      switch (relation) {
+        case Relation.Friendly:
+          return CheckBoxFilterFriendly.Checked;
+        case Relation.Neutral:
+          return CheckBoxFilterNeutral.Checked;
+        case Relation.Bogey:
+          return CheckBoxFilterBogey.Checked;
+        case Relation.Bandit:
+          return CheckBoxFilterBandit.Checked;
+        case Relation.NotAssigned:
+        default:
+          return false;
+      }
+    }
+
+    private void CheckBoxFilterFriendly_CheckedChanged(object sender, EventArgs e) {
+      FilterRelations(Relation.Friendly, CheckBoxFilterFriendly.Checked);
+    }
+
+    private void CheckBoxFilterNeutral_CheckedChanged(object sender, EventArgs e) {
+      FilterRelations(Relation.Neutral, CheckBoxFilterNeutral.Checked);
+    }
+
+    private void CheckBoxFilterBogey_CheckedChanged(object sender, EventArgs e) {
+      FilterRelations(Relation.Bogey, CheckBoxFilterBogey.Checked);
+    }
+
+    private void CheckBoxFilterBandit_CheckedChanged(object sender, EventArgs e) {
+      FilterRelations(Relation.Bandit, CheckBoxFilterBandit.Checked);
+    }
+
+    private void FilterRelations(Relation relation, bool showRelation) {
+      for (int i = PanelRelations.Controls.Count - 1; i >= 0; i--) {
+        if (PanelRelations.Controls[i] is UserControlRelation control) {
+          if (control.HandleRelation == relation) {
+            control.Visible = showRelation;
+          }
+        }
+      }
+    }
+
+    private void CheckBoxFilter_Paint(object sender, PaintEventArgs e) {
+      if (sender is CheckBox checkBox && checkBox.Checked) {
+        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+        e.Graphics.FillEllipse(new SolidBrush(Color.FromArgb(19, 26, 33)), 4, 4, 6, 6);
       }
     }
 
