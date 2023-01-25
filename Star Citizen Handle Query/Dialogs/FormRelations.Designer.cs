@@ -59,6 +59,7 @@
       this.CheckBoxFilterBandit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
       this.CheckBoxFilterBandit.Checked = true;
       this.CheckBoxFilterBandit.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.CheckBoxFilterBandit.Cursor = System.Windows.Forms.Cursors.Hand;
       this.CheckBoxFilterBandit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
       this.CheckBoxFilterBandit.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
       this.CheckBoxFilterBandit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -78,6 +79,7 @@
       this.CheckBoxFilterBogey.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
       this.CheckBoxFilterBogey.Checked = true;
       this.CheckBoxFilterBogey.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.CheckBoxFilterBogey.Cursor = System.Windows.Forms.Cursors.Hand;
       this.CheckBoxFilterBogey.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(82)))), ((int)(((byte)(0)))));
       this.CheckBoxFilterBogey.FlatAppearance.CheckedBackColor = System.Drawing.Color.Orange;
       this.CheckBoxFilterBogey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -97,6 +99,7 @@
       this.CheckBoxFilterNeutral.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
       this.CheckBoxFilterNeutral.Checked = true;
       this.CheckBoxFilterNeutral.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.CheckBoxFilterNeutral.Cursor = System.Windows.Forms.Cursors.Hand;
       this.CheckBoxFilterNeutral.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
       this.CheckBoxFilterNeutral.FlatAppearance.CheckedBackColor = System.Drawing.Color.Gray;
       this.CheckBoxFilterNeutral.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -116,6 +119,7 @@
       this.CheckBoxFilterFriendly.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
       this.CheckBoxFilterFriendly.Checked = true;
       this.CheckBoxFilterFriendly.CheckState = System.Windows.Forms.CheckState.Checked;
+      this.CheckBoxFilterFriendly.Cursor = System.Windows.Forms.Cursors.Hand;
       this.CheckBoxFilterFriendly.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
       this.CheckBoxFilterFriendly.FlatAppearance.CheckedBackColor = System.Drawing.Color.Green;
       this.CheckBoxFilterFriendly.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

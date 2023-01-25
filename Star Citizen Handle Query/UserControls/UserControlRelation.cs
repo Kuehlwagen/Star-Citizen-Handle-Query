@@ -5,8 +5,8 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
   public partial class UserControlRelation : UserControl {
 
-    internal readonly string HandleName;
-    internal readonly Relation HandleRelation;
+    private readonly string HandleName;
+    internal Relation HandleRelation;
 
     public UserControlRelation(string handle, Relation relation) {
       InitializeComponent();
@@ -32,6 +32,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     public void UpdateRelation(Relation relation) {
+      HandleRelation = relation;
       LabelRelation.BackColor = FormHandleQuery.GetRelationColor(relation);
     }
 
