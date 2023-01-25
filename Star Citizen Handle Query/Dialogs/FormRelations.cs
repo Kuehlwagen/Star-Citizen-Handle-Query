@@ -150,6 +150,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             (controls[0] as UserControlRelation).UpdateRelation(relation);
           }
         } else if (relation > Relation.NotAssigned) {
+          if (PanelRelations.Controls.Count == ProgramSettings.Relations.EntriesMax) {
+            RemoveControl(PanelRelations.Controls[0] as UserControlRelation);
+          }
           PanelRelations.Controls.Add(new UserControlRelation(handle, relation) { Name = controlName });
         }
       }
