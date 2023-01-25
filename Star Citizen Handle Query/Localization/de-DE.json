@@ -85,10 +85,10 @@
     },
     "Relation": {
       "Not_Assigned": "",
-      "Friendly": "FRIENDLY",
+      "Friendly": "FREUNDLICH",
       "Neutral": "NEUTRAL",
-      "BOGEY": "BOGEY",
-      "BANDIT": "BANDIT"
+      "Bogey": "UNBEKANNT",
+      "Bandit": "FEINDLICH"
     }
   },
   "Notification": {
