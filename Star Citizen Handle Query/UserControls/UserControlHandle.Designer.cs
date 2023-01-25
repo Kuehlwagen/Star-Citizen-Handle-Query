@@ -157,10 +157,10 @@
       // LabelRelation
       // 
       this.LabelRelation.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.LabelRelation.Location = new System.Drawing.Point(68, 3);
+      this.LabelRelation.Location = new System.Drawing.Point(68, 2);
       this.LabelRelation.Margin = new System.Windows.Forms.Padding(0);
       this.LabelRelation.Name = "LabelRelation";
-      this.LabelRelation.Size = new System.Drawing.Size(6, 71);
+      this.LabelRelation.Size = new System.Drawing.Size(6, 72);
       this.LabelRelation.TabIndex = 14;
       this.LabelRelation.Visible = false;
       this.LabelRelation.Paint += new System.Windows.Forms.PaintEventHandler(this.LabelRelation_Paint);
