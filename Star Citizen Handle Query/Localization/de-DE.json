@@ -75,7 +75,7 @@
       "Organization": "Organisation",
       "Organization_Rank": "Org. Rang",
       "Affiliation_Count": "Anz. Aff.",
-      "Relation":  "Beziehung",
+      "Relation": "Beziehung",
       "Comment": "Kommentar"
     },
     "Buttons": {
@@ -100,5 +100,8 @@
   },
   "Log_Monitor": {
     "Title": "Log-Monitor"
+  },
+  "Relations": {
+    "Title":  "Beziehungen"
   }
 }

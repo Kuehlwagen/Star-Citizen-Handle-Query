@@ -34,6 +34,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Dialogs\FormRelations.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Dialogs\FormLogMonitor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -41,6 +44,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="UserControls\UserControlRelation.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserControls\UserControlLog.cs">
       <SubType>UserControl</SubType>

@@ -48,7 +48,7 @@
       "Global_Hotkey_Shift": "Shift",
       "Ignore_Mouseinput": "Ignore mouse input",
       "Enable_Alt_Tab": "Enable Alt + Tab",
-      "RememberWindowLocation":  "Remember location"
+      "RememberWindowLocation": "Remember location"
     },
     "Local_Cache": {
       "Group_Title": "Local cache",
@@ -99,6 +99,9 @@
     "Update_Error": "Error requesting update information"
   },
   "Log_Monitor": {
-    "Title":  "Log Monitor"
+    "Title": "Log Monitor"
+  },
+  "Relations": {
+    "Title": "Relations"
   }
 }

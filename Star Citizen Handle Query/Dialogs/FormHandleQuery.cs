@@ -21,6 +21,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     internal const int SnapDistance = 10;
     private readonly int InitialWindowStyle = 0;
     private FormLogMonitor LogMonitorForm = null;
+    private FormRelations RelationsForm = null;
     private readonly Translation ProgramTranslation;
     private Settings ProgramSettings;
     private GlobalHotKey HotKey;
@@ -290,6 +291,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (LogMonitorForm != null) {
         LogMonitorForm.Visible = true;
       }
+      if (RelationsForm != null) {
+        RelationsForm.Visible = true;
+      }
       Activate();
       TextBoxHandle.SelectAll();
       TextBoxHandle.Focus();
@@ -325,6 +329,17 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           LogMonitorForm.Location = ProgramSettings.LogMonitor.WindowLocation;
         } else {
           LogMonitorForm.MoveWindowToDefaultLocation();
+        }
+      }
+
+      // Ggf. Beziehungen-Fenster anzeigen
+      if (ProgramSettings.Relations.ShowWindow) {
+        RelationsForm = new(ProgramSettings, ProgramTranslation);
+        RelationsForm.Show(this);
+        if (ProgramSettings?.RememberWindowLocation == true && ProgramSettings?.Relations.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
+          RelationsForm.Location = ProgramSettings.Relations.WindowLocation;
+        } else {
+          RelationsForm.MoveWindowToDefaultLocation();
         }
       }
 
@@ -429,6 +444,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             Visible = false;
             if (LogMonitorForm != null) {
               LogMonitorForm.Visible = false;
+            }
+            if (RelationsForm != null) {
+              RelationsForm.Visible = false;
             }
             break;
         }
@@ -941,6 +959,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       } catch { }
 
       LogMonitorForm?.Close();
+      RelationsForm?.Close();
     }
 
     public static string GetString(string value, string preValue = "") {
@@ -1061,6 +1080,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         WindowLocked = !WindowLocked;
         LabelLockUnlock.Image = WindowLocked ? Resources.WindowLocked : Resources.WindowUnlocked;
         LogMonitorForm?.LockUnlockWindow(WindowLocked);
+        RelationsForm?.LockUnlockWindow(WindowLocked);
       }
     }
 

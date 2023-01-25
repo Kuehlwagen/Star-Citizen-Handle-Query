@@ -19,6 +19,8 @@
 
     public Translation_LogMonitor Log_Monitor { get; set; } = new();
 
+    public Translation_Relations Relations { get; set; } = new();
+
     /// <summary>Vergleich in Liste ermöglichen</summary>
     /// <param name="other">Anderes Translation-Objekt</param>
     /// <returns>true, wenn das Feld "Language" übereinstimmt, andernfalls false</returns>
@@ -271,6 +273,13 @@
   public class Translation_LogMonitor {
 
     public string Title { get; set; } = "Log-Monitor";
+
+  }
+
+  [Serializable]
+  public class Translation_Relations {
+
+    public string Title { get; set; } = "Beziehungen";
 
   }
 
