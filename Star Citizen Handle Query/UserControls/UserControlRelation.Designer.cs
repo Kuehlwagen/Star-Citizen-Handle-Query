@@ -30,9 +30,9 @@
       // LabelHandle
       // 
       this.LabelHandle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelHandle.Location = new System.Drawing.Point(18, 2);
+      this.LabelHandle.Location = new System.Drawing.Point(14, 2);
       this.LabelHandle.Name = "LabelHandle";
-      this.LabelHandle.Size = new System.Drawing.Size(217, 21);
+      this.LabelHandle.Size = new System.Drawing.Size(221, 21);
       this.LabelHandle.TabIndex = 1;
       this.LabelHandle.Text = "Handle";
       this.LabelHandle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
