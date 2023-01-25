@@ -53,6 +53,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             org?.Name,
             org?.RankStars,
             handleInfo.Organizations.Affiliations?.Count ?? 0,
+            $"{(int)handleInfo.Relation}-{handleInfo.Relation}",
             handleInfo?.Comment ?? string.Empty
           };
           row.Tag = handleInfo;
@@ -81,7 +82,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void DataGridViewExport_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
       if (e.RowIndex > -1 && e.ColumnIndex > -1) {
         switch (e.ColumnIndex) {
-          case 8: // Kommentar
+          case 9: // Kommentar
             DataGridViewRow dgvr = (sender as DataGridView).Rows[e.RowIndex];
             HandleInfo handleInfo = (dgvr.Tag as HandleInfo);
             string cellValue = $"{dgvr.Cells[e.ColumnIndex].Value}";
@@ -122,6 +123,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ColumnOrganisation.HeaderText = ProgramTranslation.Local_Cache.Columns.Organization;
       ColumnOrganisationRang.HeaderText = ProgramTranslation.Local_Cache.Columns.Organization_Rank;
       ColumnAnzahlAffiliationen.HeaderText = ProgramTranslation.Local_Cache.Columns.Affiliation_Count;
+      ColumnRelation.HeaderText = ProgramTranslation.Local_Cache.Columns.Relation;
       ColumnKommentar.HeaderText = ProgramTranslation.Local_Cache.Columns.Comment;
 
       ButtonCacheLeeren.Text = ProgramTranslation.Local_Cache.Buttons.Clear_Cache;
@@ -181,6 +183,42 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void FormLocalCache_FormClosing(object sender, FormClosingEventArgs e) {
       DisposeUserControls();
+    }
+
+    private void DataGridViewLokalerCache_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
+      if (e.RowIndex > -1 && e.ColumnIndex == 8) {
+        string[] values = $"{e.Value}".Split("-");
+        if (values?.Length == 2 && Enum.TryParse(values[0], out Relation value)) {
+          e.CellStyle.BackColor = FormHandleQuery.GetRelationColor(value);
+          e.CellStyle.ForeColor = value > 0 ? Color.FromArgb(19, 26, 33) : ForeColor;
+          e.Value = GetTranslatedRelationText(ProgramTranslation, value);
+          e.FormattingApplied = true;
+        }
+      }
+    }
+
+    public static string GetTranslatedRelationText(Translation translation, Relation relation) {
+      string translationText = $"{relation}";
+
+      switch (relation) {
+        case Relation.NotAssigned:
+          translationText = translation.Local_Cache.Relation.Not_Assigned;
+          break;
+        case Relation.Friendly:
+          translationText = translation.Local_Cache.Relation.Friendly;
+          break;
+        case Relation.Neutral:
+          translationText = translation.Local_Cache.Relation.Neutral;
+          break;
+        case Relation.Annoying:
+          translationText = translation.Local_Cache.Relation.Annoying;
+          break;
+        case Relation.Hostile:
+          translationText = translation.Local_Cache.Relation.Hostile;
+          break;
+      }
+
+      return translationText;
     }
 
   }

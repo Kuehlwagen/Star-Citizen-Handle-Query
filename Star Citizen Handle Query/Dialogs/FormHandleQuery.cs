@@ -390,27 +390,48 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void TextBoxHandle_KeyDown(object sender, KeyEventArgs e) {
       // Handle-Textbox Tastendrücke verarbeiten
-      switch (e.KeyCode) {
-        case Keys.Oemplus:
-        case Keys.Add:
-          // Ggf. Handle-Kommentar aktivieren
-          e.SuppressKeyPress = true;
-          if (PanelInfo.Controls.Count > 0) {
-            (PanelInfo.Controls[0] as UserControlHandle).ActivateComment();
-          }
-          break;
-        case Keys.Enter:
-          e.SuppressKeyPress = true;
-          QueryHandle(e.Control);
-          break;
-        case Keys.Escape:
-          e.SuppressKeyPress = true;
-          // Fenster verstecken
-          Visible = false;
-          if (LogMonitorForm != null) {
-            LogMonitorForm.Visible = false;
-          }
-          break;
+      if (e.Control) {
+        switch (e.KeyCode) {
+          case Keys.D0:
+          case Keys.D1:
+          case Keys.D2:
+          case Keys.D3:
+          case Keys.D4:
+          case Keys.NumPad0:
+          case Keys.NumPad1:
+          case Keys.NumPad2:
+          case Keys.NumPad3:
+          case Keys.NumPad4:
+            // Ggf. Handle-Beziehung ändern
+            e.SuppressKeyPress = true;
+            if (PanelInfo.Controls.Count > 0) {
+              (PanelInfo.Controls[0] as UserControlHandle).ChangeRelation(e.KeyCode);
+            }
+            break;
+        }
+      } else {
+        switch (e.KeyCode) {
+          case Keys.Oemplus:
+          case Keys.Add:
+            // Ggf. Handle-Kommentar aktivieren
+            e.SuppressKeyPress = true;
+            if (PanelInfo.Controls.Count > 0) {
+              (PanelInfo.Controls[0] as UserControlHandle).ActivateComment();
+            }
+            break;
+          case Keys.Enter:
+            e.SuppressKeyPress = true;
+            QueryHandle(e.Control);
+            break;
+          case Keys.Escape:
+            e.SuppressKeyPress = true;
+            // Fenster verstecken
+            Visible = false;
+            if (LogMonitorForm != null) {
+              LogMonitorForm.Visible = false;
+            }
+            break;
+        }
       }
     }
 
@@ -1069,6 +1090,29 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public void SetToolTip(Control control, string text = null) {
       ToolTipHandleQuery.SetToolTip(control, text ?? control.Text);
+    }
+
+    public static Color GetRelationColor(Relation relation) {
+      Color colorRelation;
+      switch (relation) {
+        case Relation.Friendly:
+          colorRelation = Color.Green;
+          break;
+        case Relation.Neutral:
+          colorRelation = Color.Gray;
+          break;
+        case Relation.Annoying:
+          colorRelation = Color.Orange;
+          break;
+        case Relation.Hostile:
+          colorRelation = Color.Red;
+          break;
+        case Relation.NotAssigned:
+        default:
+          colorRelation = Color.FromArgb(19, 26, 33);
+          break;
+      }
+      return colorRelation;
     }
 
     internal static bool ShouldSnap(int pos, int edge) {

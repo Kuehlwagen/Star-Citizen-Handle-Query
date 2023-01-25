@@ -1,6 +1,7 @@
 ﻿using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
+using System.Reflection.Metadata.Ecma335;
 using static Star_Citizen_Handle_Query.Dialogs.FormHandleQuery;
 
 namespace Star_Citizen_Handle_Query.UserControls {
@@ -65,6 +66,14 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private void PictureBoxOrganization_MouseClick(object sender, MouseEventArgs e) {
+      OpenProfile(e);
+    }
+
+    private void LabelRelation_MouseClick(object sender, MouseEventArgs e) {
+      OpenProfile(e);
+    }
+
+    private void OpenProfile(MouseEventArgs e) {
       if (e.Button == MouseButtons.Left && !string.IsNullOrWhiteSpace(SID)) {
         Process.Start("explorer", $"https://robertsspaceindustries.com/orgs/{SID}");
       }
@@ -76,6 +85,10 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     private void SetToolTip(Control control, string text = null) {
       GetMainForm()?.SetToolTip(control, text ?? control.Text);
+    }
+
+    private void LabelRelation_Paint(object sender, PaintEventArgs e) {
+      ControlPaint.DrawBorder(e.Graphics, LabelRelation.ClientRectangle, BackColor, ButtonBorderStyle.Solid);
     }
 
   }

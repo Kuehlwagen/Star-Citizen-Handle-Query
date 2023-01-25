@@ -197,6 +197,8 @@
 
     public Translation_Local_Cache_Buttons Buttons { get; set; } = new();
 
+    public Translation_Local_Cache_Relation Relation { get; set; } = new();
+
   }
 
   [Serializable()]
@@ -218,6 +220,8 @@
 
     public string Affiliation_Count { get; set; } = "Anz. Aff.";
 
+    public string Relation { get; set; } = "Beziehung";
+
     public string Comment { get; set; } = "Kommentar";
 
   }
@@ -230,6 +234,17 @@
     public string Open_Folder { get; set; } = "Ordner öffnen";
 
     public string Close { get; set; } = "Schließen";
+
+  }
+
+  [Serializable()]
+  public class Translation_Local_Cache_Relation {
+
+    public string Not_Assigned { get; set; } = "Keine Zuordnung";
+    public string Friendly { get; set; } = "Freundlich";
+    public string Neutral { get; set; } = "Neutral";
+    public string Annoying { get; set; } = "Lästig";
+    public string Hostile { get; set; } = "Feindlich";
 
   }
 

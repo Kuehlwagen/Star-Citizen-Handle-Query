@@ -34,6 +34,7 @@
       this.TextBoxAdditionalInformation = new System.Windows.Forms.TextBox();
       this.LabelAdditionalInformation = new System.Windows.Forms.Label();
       this.PictureBoxLive = new System.Windows.Forms.PictureBox();
+      this.LabelRelation = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxHandleAvatar)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxDisplayTitle)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLive)).BeginInit();
@@ -153,11 +154,24 @@
       this.PictureBoxLive.Visible = false;
       this.PictureBoxLive.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBoxLive_MouseClick);
       // 
+      // LabelRelation
+      // 
+      this.LabelRelation.Cursor = System.Windows.Forms.Cursors.Hand;
+      this.LabelRelation.Location = new System.Drawing.Point(68, 3);
+      this.LabelRelation.Margin = new System.Windows.Forms.Padding(0);
+      this.LabelRelation.Name = "LabelRelation";
+      this.LabelRelation.Size = new System.Drawing.Size(6, 71);
+      this.LabelRelation.TabIndex = 14;
+      this.LabelRelation.Visible = false;
+      this.LabelRelation.Paint += new System.Windows.Forms.PaintEventHandler(this.LabelRelation_Paint);
+      this.LabelRelation.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LabelRelation_MouseClick);
+      // 
       // UserControlHandle
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.Controls.Add(this.LabelRelation);
       this.Controls.Add(this.PictureBoxLive);
       this.Controls.Add(this.TextBoxAdditionalInformation);
       this.Controls.Add(this.LabelAdditionalInformation);
@@ -195,5 +209,6 @@
     private TextBox TextBoxAdditionalInformation;
     private Label LabelAdditionalInformation;
         private PictureBox PictureBoxLive;
-    }
+    private Label LabelRelation;
+  }
 }

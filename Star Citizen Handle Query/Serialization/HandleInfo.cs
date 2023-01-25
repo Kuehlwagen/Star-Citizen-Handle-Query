@@ -10,6 +10,7 @@ namespace Star_Citizen_Handle_Query.Serialization {
     public HandleProfileInfo Profile { get; set; }
     public OrganizationsInfo Organizations { get; set; }
     public string Comment { get; set; }
+    public Relation Relation { get; set; }
 
   }
 
@@ -58,6 +59,14 @@ namespace Star_Citizen_Handle_Query.Serialization {
     public string SecondaryActivity { get; set; }
     public string Commitment { get; set; }
 
+  }
+
+  public enum Relation {
+    NotAssigned,
+    Friendly,
+    Neutral,
+    Annoying,
+    Hostile
   }
 
 }

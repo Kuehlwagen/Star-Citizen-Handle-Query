@@ -73,12 +73,20 @@
       "Organization": "Organization",
       "Organization_Rank": "Org. rank",
       "Affiliation_Count": "Aff. count",
+      "Relation": "Relation",
       "Comment": "Comment"
     },
     "Buttons": {
       "Clear_Cache": "Clear cache",
       "Open_Folder": "Open folder",
       "Close": "Close"
+    },
+    "Relation": {
+      "Not_Assigned": "Not assigned",
+      "Friendly": "Friendly",
+      "Neutral": "Neutral",
+      "Annoying": "Annoying",
+      "Hostile": "Hostile"
     }
   },
   "Notification": {

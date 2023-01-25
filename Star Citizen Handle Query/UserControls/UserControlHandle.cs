@@ -58,8 +58,15 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelEnlistedDate.Text = Info?.Profile?.Enlisted.ToString("MMM d, yyyy", System.Globalization.CultureInfo.InvariantCulture);
         LabelAdditionalInformation.Text = GetString(Info?.Comment);
         SetToolTip(LabelAdditionalInformation);
+        if (Info?.Relation > Relation.NotAssigned) {
+          LabelRelation.BackColor = GetRelationColor(Info.Relation);
+          SetToolTip(LabelRelation, FormLocalCache.GetTranslatedRelationText(ProgramTranslation, Info.Relation));
+          LabelRelation.Visible = true;
+        }
         if (DisplayOnly) {
           LabelAdditionalInformation.Cursor = Cursors.Default;
+          LabelRelation.Cursor = Cursors.Default;
+          LabelRelation.MouseClick -= LabelRelation_MouseClick;
         } else if (!ProgramSettings.HideStreamLiveStatus) {
           PictureBoxLive.Visible = true;
           CommunityHubLiveState liveState = await CheckCommunityHubIsLive(handle);
@@ -119,6 +126,14 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private void PictureBoxHandleAvatar_MouseClick(object sender, MouseEventArgs e) {
+      OpenProfile(e);
+    }
+
+    private void LabelRelation_MouseClick(object sender, MouseEventArgs e) {
+      OpenProfile(e);
+    }
+
+    private void OpenProfile(MouseEventArgs e) {
       if (e.Button == MouseButtons.Left && Info?.Profile.Url?.Length > 0) {
         Process.Start("explorer", Info.Profile.Url);
       }
@@ -171,6 +186,34 @@ namespace Star_Citizen_Handle_Query.UserControls {
       }
     }
 
+    public void ChangeRelation(Keys keyCode) {
+      Relation relation = Relation.NotAssigned;
+      switch (keyCode) {
+        case Keys.D1:
+        case Keys.NumPad1:
+          relation = Relation.Friendly;
+          break;
+        case Keys.D2:
+        case Keys.NumPad2:
+          relation = Relation.Neutral;
+          break;
+        case Keys.D3:
+        case Keys.NumPad3:
+          relation = Relation.Annoying;
+          break;
+        case Keys.D4:
+        case Keys.NumPad4:
+          relation = Relation.Hostile;
+          break;
+      }
+      Info.Relation = relation;
+      CreateHandleJSON(Info, ProgramSettings, forceExport: true);
+      LabelRelation.Visible = relation > Relation.NotAssigned;
+      LabelRelation.BackColor = GetRelationColor(Info.Relation);
+      SetToolTip(LabelRelation, FormLocalCache.GetTranslatedRelationText(ProgramTranslation, Info.Relation));
+      ActivateTextBoxHandle();
+    }
+
     private void PictureBoxLive_MouseClick(object sender, MouseEventArgs e) {
       if (e.Button == MouseButtons.Left) {
         Process.Start("explorer", $"https://robertsspaceindustries.com/community-hub/user/{Info.Profile.Handle}");
@@ -183,6 +226,10 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     private void SetToolTip(Control control, string text = null) {
       GetMainForm()?.SetToolTip(control, text ?? control.Text);
+    }
+
+    private void LabelRelation_Paint(object sender, PaintEventArgs e) {
+      ControlPaint.DrawBorder(e.Graphics, LabelRelation.ClientRectangle, BackColor, ButtonBorderStyle.Solid);
     }
 
   }
