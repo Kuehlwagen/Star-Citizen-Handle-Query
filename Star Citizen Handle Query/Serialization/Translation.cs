@@ -132,6 +132,10 @@
 
     public string Log_Entry_Display_Duration_Minutes { get; set; } = "Minute(n)";
 
+    public string Show_Relations { get; set; } = "Beziehungen anzeigen";
+
+    public string Relations_Entries_Max { get; set; } = "Beziehungen-Einträge Max.:";
+
   }
 
   [Serializable()]

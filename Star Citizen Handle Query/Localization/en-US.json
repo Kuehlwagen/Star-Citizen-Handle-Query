@@ -34,7 +34,9 @@
       "Show_Log_Monitor": "Show log monitor",
       "Log_Entries_Max": "Maximum log entries:",
       "Log_Entry_Display_Duration": "Log entry display duration:",
-      "Log_Entry_Display_Duration_Minutes": "Minute(s)"
+      "Log_Entry_Display_Duration_Minutes": "Minute(s)",
+      "Show_Relations": "Show relations",
+      "Relations_Entries_Max": "Maximum relations entries:"
     },
     "Window": {
       "Group_Title": "Window",

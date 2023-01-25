@@ -87,7 +87,10 @@
     public bool HideStreamLiveStatus { get; set; } = false;
 
     /// <summary>LogFileWatcher relevante Einstellungen</summary>
-    public LogMonitorSettings LogMonitor { get; set; } = new LogMonitorSettings();
+    public LogMonitorSettings LogMonitor { get; set; } = new();
+
+    /// <summary>Beziehungen relevante Einstellungen</summary>
+    public RelationsSettings Relations { get; set; } = new();
 
     public object Clone() {
       return MemberwiseClone();
@@ -137,6 +140,37 @@
     public object Clone() {
       return MemberwiseClone();
     }
+
+  }
+
+  public class RelationsSettings : ICloneable {
+
+    /// <summary>Angabe, ob das Fenster angezeigt werden soll</summary>
+    public bool ShowWindow { get; set; } = false;
+
+    /// <summary>Position des Relation-Fensters</summary>
+    public Point WindowLocation { get; set; } = Point.Empty;
+
+    /// <summary>Maximal anzuzeigende Einträge</summary>
+    private int _EntriesMax = 10;
+    public int EntriesMax {
+      get {
+        return _EntriesMax;
+      }
+      set {
+        if (value < 1) {
+          value = 1;
+        } else if (_EntriesMax > 25) {
+          value = 25;
+        }
+        _EntriesMax = value;
+      }
+    }
+
+    public object Clone() {
+      return MemberwiseClone();
+    }
+
   }
 
 }

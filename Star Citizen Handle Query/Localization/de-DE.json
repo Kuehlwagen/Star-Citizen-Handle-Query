@@ -34,7 +34,9 @@
       "Show_Log_Monitor": "Log-Monitor anzeigen",
       "Log_Entries_Max": "Log-Eintr\u00E4ge Maximum:",
       "Log_Entry_Display_Duration": "Log-Eintrag Anzeigedauer:",
-      "Log_Entry_Display_Duration_Minutes": "Minute(n)"
+      "Log_Entry_Display_Duration_Minutes": "Minute(n)",
+      "Show_Relations": "Beziehungen anzeigen",
+      "Relations_Entries_Max": "Beziehungen-Eintr\u00E4ge Max.:"
     },
     "Window": {
       "Group_Title": "Fenster",

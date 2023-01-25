@@ -46,6 +46,9 @@
       this.GroupBoxLokalerCache = new System.Windows.Forms.GroupBox();
       this.ButtonStandard = new System.Windows.Forms.Button();
       this.GroupBoxAnzeige = new System.Windows.Forms.GroupBox();
+      this.NumericUpDownRelationsEntriesMaximum = new System.Windows.Forms.NumericUpDown();
+      this.LabelRelationsEntriesMaximum = new System.Windows.Forms.Label();
+      this.CheckBoxShowRelations = new System.Windows.Forms.CheckBox();
       this.LabelLogEintragAnzeigedauerMinuten = new System.Windows.Forms.Label();
       this.LabelLogEintragAnzeigeDauer = new System.Windows.Forms.Label();
       this.NumericUpDownLogEintragAnzeigedauer = new System.Windows.Forms.NumericUpDown();
@@ -62,6 +65,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownFensterDeckkraft)).BeginInit();
       this.GroupBoxLokalerCache.SuspendLayout();
       this.GroupBoxAnzeige.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownRelationsEntriesMaximum)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownLogEintragAnzeigedauer)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownLogEintraegeMaximum)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownAffiliationenMaximum)).BeginInit();
@@ -91,7 +95,7 @@
       // 
       this.NumericUpDownLokalerCacheAlter.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.NumericUpDownLokalerCacheAlter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.NumericUpDownLokalerCacheAlter.Location = new System.Drawing.Point(168, 22);
+      this.NumericUpDownLokalerCacheAlter.Location = new System.Drawing.Point(173, 22);
       this.NumericUpDownLokalerCacheAlter.Maximum = new decimal(new int[] {
             365,
             0,
@@ -110,7 +114,7 @@
       // ButtonSpeichern
       // 
       this.ButtonSpeichern.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 527);
+      this.ButtonSpeichern.Location = new System.Drawing.Point(12, 584);
       this.ButtonSpeichern.Name = "ButtonSpeichern";
       this.ButtonSpeichern.Size = new System.Drawing.Size(75, 28);
       this.ButtonSpeichern.TabIndex = 3;
@@ -121,7 +125,7 @@
       // ButtonSchliessen
       // 
       this.ButtonSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 527);
+      this.ButtonSchliessen.Location = new System.Drawing.Point(93, 584);
       this.ButtonSchliessen.Name = "ButtonSchliessen";
       this.ButtonSchliessen.Size = new System.Drawing.Size(75, 28);
       this.ButtonSchliessen.TabIndex = 4;
@@ -132,7 +136,7 @@
       // LabelFensterDeckkraftProzent
       // 
       this.LabelFensterDeckkraftProzent.AutoSize = true;
-      this.LabelFensterDeckkraftProzent.Location = new System.Drawing.Point(218, 24);
+      this.LabelFensterDeckkraftProzent.Location = new System.Drawing.Point(223, 24);
       this.LabelFensterDeckkraftProzent.Name = "LabelFensterDeckkraftProzent";
       this.LabelFensterDeckkraftProzent.Size = new System.Drawing.Size(17, 15);
       this.LabelFensterDeckkraftProzent.TabIndex = 2;
@@ -141,7 +145,7 @@
       // LabelLokalerCacheAlterTage
       // 
       this.LabelLokalerCacheAlterTage.AutoSize = true;
-      this.LabelLokalerCacheAlterTage.Location = new System.Drawing.Point(218, 24);
+      this.LabelLokalerCacheAlterTage.Location = new System.Drawing.Point(223, 24);
       this.LabelLokalerCacheAlterTage.Name = "LabelLokalerCacheAlterTage";
       this.LabelLokalerCacheAlterTage.Size = new System.Drawing.Size(39, 15);
       this.LabelLokalerCacheAlterTage.TabIndex = 2;
@@ -162,7 +166,7 @@
       this.GroupBoxFenster.Controls.Add(this.LabelFensterDeckkraftProzent);
       this.GroupBoxFenster.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.GroupBoxFenster.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxFenster.Location = new System.Drawing.Point(12, 265);
+      this.GroupBoxFenster.Location = new System.Drawing.Point(12, 322);
       this.GroupBoxFenster.Name = "GroupBoxFenster";
       this.GroupBoxFenster.Size = new System.Drawing.Size(416, 187);
       this.GroupBoxFenster.TabIndex = 1;
@@ -194,7 +198,7 @@
       // CheckBoxUmschalt
       // 
       this.CheckBoxUmschalt.AutoSize = true;
-      this.CheckBoxUmschalt.Location = new System.Drawing.Point(268, 80);
+      this.CheckBoxUmschalt.Location = new System.Drawing.Point(273, 80);
       this.CheckBoxUmschalt.Name = "CheckBoxUmschalt";
       this.CheckBoxUmschalt.Size = new System.Drawing.Size(76, 19);
       this.CheckBoxUmschalt.TabIndex = 7;
@@ -205,7 +209,7 @@
       // CheckBoxAlt
       // 
       this.CheckBoxAlt.AutoSize = true;
-      this.CheckBoxAlt.Location = new System.Drawing.Point(221, 80);
+      this.CheckBoxAlt.Location = new System.Drawing.Point(226, 80);
       this.CheckBoxAlt.Name = "CheckBoxAlt";
       this.CheckBoxAlt.Size = new System.Drawing.Size(41, 19);
       this.CheckBoxAlt.TabIndex = 6;
@@ -216,7 +220,7 @@
       // CheckBoxStrg
       // 
       this.CheckBoxStrg.AutoSize = true;
-      this.CheckBoxStrg.Location = new System.Drawing.Point(168, 80);
+      this.CheckBoxStrg.Location = new System.Drawing.Point(173, 80);
       this.CheckBoxStrg.Name = "CheckBoxStrg";
       this.CheckBoxStrg.Size = new System.Drawing.Size(47, 19);
       this.CheckBoxStrg.TabIndex = 5;
@@ -231,7 +235,7 @@
       this.ComboBoxTaste.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.ComboBoxTaste.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.ComboBoxTaste.FormattingEnabled = true;
-      this.ComboBoxTaste.Location = new System.Drawing.Point(168, 51);
+      this.ComboBoxTaste.Location = new System.Drawing.Point(173, 51);
       this.ComboBoxTaste.MaxDropDownItems = 5;
       this.ComboBoxTaste.Name = "ComboBoxTaste";
       this.ComboBoxTaste.Size = new System.Drawing.Size(78, 23);
@@ -251,7 +255,7 @@
       // 
       this.NumericUpDownFensterDeckkraft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.NumericUpDownFensterDeckkraft.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.NumericUpDownFensterDeckkraft.Location = new System.Drawing.Point(168, 22);
+      this.NumericUpDownFensterDeckkraft.Location = new System.Drawing.Point(173, 22);
       this.NumericUpDownFensterDeckkraft.Minimum = new decimal(new int[] {
             50,
             0,
@@ -292,7 +296,7 @@
       this.ComboBoxSprache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.ComboBoxSprache.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.ComboBoxSprache.FormattingEnabled = true;
-      this.ComboBoxSprache.Location = new System.Drawing.Point(168, 22);
+      this.ComboBoxSprache.Location = new System.Drawing.Point(173, 22);
       this.ComboBoxSprache.MaxDropDownItems = 5;
       this.ComboBoxSprache.Name = "ComboBoxSprache";
       this.ComboBoxSprache.Size = new System.Drawing.Size(147, 23);
@@ -306,7 +310,7 @@
       this.GroupBoxLokalerCache.Controls.Add(this.LabelLokalerCacheAlter);
       this.GroupBoxLokalerCache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
       this.GroupBoxLokalerCache.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 460);
+      this.GroupBoxLokalerCache.Location = new System.Drawing.Point(12, 517);
       this.GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
       this.GroupBoxLokalerCache.Size = new System.Drawing.Size(416, 61);
       this.GroupBoxLokalerCache.TabIndex = 2;
@@ -316,7 +320,7 @@
       // ButtonStandard
       // 
       this.ButtonStandard.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonStandard.Location = new System.Drawing.Point(353, 527);
+      this.ButtonStandard.Location = new System.Drawing.Point(353, 584);
       this.ButtonStandard.Name = "ButtonStandard";
       this.ButtonStandard.Size = new System.Drawing.Size(75, 28);
       this.ButtonStandard.TabIndex = 5;
@@ -326,6 +330,9 @@
       // 
       // GroupBoxAnzeige
       // 
+      this.GroupBoxAnzeige.Controls.Add(this.NumericUpDownRelationsEntriesMaximum);
+      this.GroupBoxAnzeige.Controls.Add(this.LabelRelationsEntriesMaximum);
+      this.GroupBoxAnzeige.Controls.Add(this.CheckBoxShowRelations);
       this.GroupBoxAnzeige.Controls.Add(this.LabelLogEintragAnzeigedauerMinuten);
       this.GroupBoxAnzeige.Controls.Add(this.LabelLogEintragAnzeigeDauer);
       this.GroupBoxAnzeige.Controls.Add(this.NumericUpDownLogEintragAnzeigedauer);
@@ -343,15 +350,61 @@
       this.GroupBoxAnzeige.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.GroupBoxAnzeige.Location = new System.Drawing.Point(12, 12);
       this.GroupBoxAnzeige.Name = "GroupBoxAnzeige";
-      this.GroupBoxAnzeige.Size = new System.Drawing.Size(416, 247);
+      this.GroupBoxAnzeige.Size = new System.Drawing.Size(416, 301);
       this.GroupBoxAnzeige.TabIndex = 0;
       this.GroupBoxAnzeige.TabStop = false;
       this.GroupBoxAnzeige.Text = "Anzeige";
       // 
+      // NumericUpDownRelationsEntriesMaximum
+      // 
+      this.NumericUpDownRelationsEntriesMaximum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
+      this.NumericUpDownRelationsEntriesMaximum.Enabled = false;
+      this.NumericUpDownRelationsEntriesMaximum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
+      this.NumericUpDownRelationsEntriesMaximum.Location = new System.Drawing.Point(174, 263);
+      this.NumericUpDownRelationsEntriesMaximum.Maximum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+      this.NumericUpDownRelationsEntriesMaximum.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+      this.NumericUpDownRelationsEntriesMaximum.Name = "NumericUpDownRelationsEntriesMaximum";
+      this.NumericUpDownRelationsEntriesMaximum.Size = new System.Drawing.Size(44, 23);
+      this.NumericUpDownRelationsEntriesMaximum.TabIndex = 15;
+      this.NumericUpDownRelationsEntriesMaximum.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+      this.NumericUpDownRelationsEntriesMaximum.ValueChanged += new System.EventHandler(this.NumericUpDownRelationsEntriesMaximum_ValueChanged);
+      // 
+      // LabelRelationsEntriesMaximum
+      // 
+      this.LabelRelationsEntriesMaximum.AutoSize = true;
+      this.LabelRelationsEntriesMaximum.Location = new System.Drawing.Point(16, 265);
+      this.LabelRelationsEntriesMaximum.Name = "LabelRelationsEntriesMaximum";
+      this.LabelRelationsEntriesMaximum.Size = new System.Drawing.Size(155, 15);
+      this.LabelRelationsEntriesMaximum.TabIndex = 14;
+      this.LabelRelationsEntriesMaximum.Text = "Beziehungen-Einträge Max.:";
+      // 
+      // CheckBoxShowRelations
+      // 
+      this.CheckBoxShowRelations.AutoSize = true;
+      this.CheckBoxShowRelations.Location = new System.Drawing.Point(16, 238);
+      this.CheckBoxShowRelations.Name = "CheckBoxShowRelations";
+      this.CheckBoxShowRelations.Size = new System.Drawing.Size(144, 19);
+      this.CheckBoxShowRelations.TabIndex = 13;
+      this.CheckBoxShowRelations.Text = "Beziehungen anzeigen";
+      this.CheckBoxShowRelations.UseVisualStyleBackColor = true;
+      this.CheckBoxShowRelations.CheckedChanged += new System.EventHandler(this.CheckBoxShowRelations_CheckedChanged);
+      // 
       // LabelLogEintragAnzeigedauerMinuten
       // 
       this.LabelLogEintragAnzeigedauerMinuten.AutoSize = true;
-      this.LabelLogEintragAnzeigedauerMinuten.Location = new System.Drawing.Point(218, 211);
+      this.LabelLogEintragAnzeigedauerMinuten.Location = new System.Drawing.Point(223, 211);
       this.LabelLogEintragAnzeigedauerMinuten.Name = "LabelLogEintragAnzeigedauerMinuten";
       this.LabelLogEintragAnzeigedauerMinuten.Size = new System.Drawing.Size(60, 15);
       this.LabelLogEintragAnzeigedauerMinuten.TabIndex = 12;
@@ -371,7 +424,7 @@
       this.NumericUpDownLogEintragAnzeigedauer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.NumericUpDownLogEintragAnzeigedauer.Enabled = false;
       this.NumericUpDownLogEintragAnzeigedauer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.NumericUpDownLogEintragAnzeigedauer.Location = new System.Drawing.Point(168, 209);
+      this.NumericUpDownLogEintragAnzeigedauer.Location = new System.Drawing.Point(173, 209);
       this.NumericUpDownLogEintragAnzeigedauer.Maximum = new decimal(new int[] {
             60,
             0,
@@ -392,7 +445,7 @@
       this.NumericUpDownLogEintraegeMaximum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.NumericUpDownLogEintraegeMaximum.Enabled = false;
       this.NumericUpDownLogEintraegeMaximum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.NumericUpDownLogEintraegeMaximum.Location = new System.Drawing.Point(168, 180);
+      this.NumericUpDownLogEintraegeMaximum.Location = new System.Drawing.Point(173, 180);
       this.NumericUpDownLogEintraegeMaximum.Maximum = new decimal(new int[] {
             25,
             0,
@@ -459,7 +512,7 @@
       // 
       this.NumericUpDownAffiliationenMaximum.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.NumericUpDownAffiliationenMaximum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.NumericUpDownAffiliationenMaximum.Location = new System.Drawing.Point(168, 51);
+      this.NumericUpDownAffiliationenMaximum.Location = new System.Drawing.Point(173, 51);
       this.NumericUpDownAffiliationenMaximum.Maximum = new decimal(new int[] {
             9,
             0,
@@ -502,7 +555,7 @@
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
       this.CancelButton = this.ButtonSchliessen;
-      this.ClientSize = new System.Drawing.Size(440, 572);
+      this.ClientSize = new System.Drawing.Size(440, 629);
       this.Controls.Add(this.GroupBoxAnzeige);
       this.Controls.Add(this.GroupBoxLokalerCache);
       this.Controls.Add(this.GroupBoxFenster);
@@ -511,7 +564,7 @@
       this.Controls.Add(this.ButtonSpeichern);
       this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.MinimumSize = new System.Drawing.Size(456, 611);
+      this.MinimumSize = new System.Drawing.Size(456, 668);
       this.Name = "FormSettings";
       this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
       this.Text = "Star Citizen Handle Query Einstellungen";
@@ -523,6 +576,7 @@
       this.GroupBoxLokalerCache.PerformLayout();
       this.GroupBoxAnzeige.ResumeLayout(false);
       this.GroupBoxAnzeige.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownRelationsEntriesMaximum)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownLogEintragAnzeigedauer)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownLogEintraegeMaximum)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownAffiliationenMaximum)).EndInit();
@@ -564,5 +618,8 @@
         private Label LabelLogEintragAnzeigeDauer;
         private NumericUpDown NumericUpDownLogEintragAnzeigedauer;
         private Label LabelLogEintragAnzeigedauerMinuten;
-    }
+    private NumericUpDown NumericUpDownRelationsEntriesMaximum;
+    private Label LabelRelationsEntriesMaximum;
+    private CheckBox CheckBoxShowRelations;
+  }
 }

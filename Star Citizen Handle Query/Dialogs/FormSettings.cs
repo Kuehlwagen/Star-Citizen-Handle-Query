@@ -73,6 +73,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxShowLog.Checked = ProgramSettings.LogMonitor.ShowWindow;
       NumericUpDownLogEintraegeMaximum.Value = ProgramSettings.LogMonitor.EntriesMax;
       NumericUpDownLogEintragAnzeigedauer.Value = ProgramSettings.LogMonitor.EntryDisplayDurationInMinutes;
+      CheckBoxShowRelations.Checked = ProgramSettings.Relations.ShowWindow;
+      NumericUpDownRelationsEntriesMaximum.Value = ProgramSettings.Relations.EntriesMax;
     }
 
     private void GetLocalizations() {
@@ -174,6 +176,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.LogMonitor.EntryDisplayDurationInMinutes = Convert.ToInt32(NumericUpDownLogEintragAnzeigedauer.Value);
     }
 
+    private void CheckBoxShowRelations_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.Relations.ShowWindow = CheckBoxShowRelations.Checked;
+      NumericUpDownRelationsEntriesMaximum.Enabled = CheckBoxShowRelations.Checked;
+    }
+
+    private void NumericUpDownRelationsEntriesMaximum_ValueChanged(object sender, EventArgs e) {
+      ProgramSettings.Relations.EntriesMax = Convert.ToInt32(NumericUpDownRelationsEntriesMaximum.Value);
+    }
+
     private void ButtonStandard_Click(object sender, EventArgs e) {
       ProgramSettings = new() { Language = ProgramSettings.Language };
       SetDialogValues();
@@ -194,6 +205,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LabelLogEintraegeMaximum.Text = CurrentLocalization.Settings.Display.Log_Entries_Max;
       LabelLogEintragAnzeigeDauer.Text = CurrentLocalization.Settings.Display.Log_Entry_Display_Duration;
       LabelLogEintragAnzeigedauerMinuten.Text = CurrentLocalization.Settings.Display.Log_Entry_Display_Duration_Minutes;
+      CheckBoxShowRelations.Text = CurrentLocalization.Settings.Display.Show_Relations;
+      LabelRelationsEntriesMaximum.Text = CurrentLocalization.Settings.Display.Relations_Entries_Max;
 
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;
       LabelFensterDeckkraft.Text = CurrentLocalization.Settings.Window.Opacity;
