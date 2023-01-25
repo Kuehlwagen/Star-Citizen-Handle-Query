@@ -836,7 +836,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       if (weiter) {
-        // Ggf. UserControl entfernen
+
+        // Ggf. UserControls entfernen
         RemoveUserControls();
 
         ResetHandle();
@@ -852,11 +853,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           AutoCompleteCollection.Clear();
           AutoCompleteCollection = null;
           UpdateAutoComplete();
+          
+          // Ggf. Beziehungen-UserControls entfernen
+          RelationsForm?.ClearRelations();
+
+          MessageBox.Show(ProgramTranslation.Window.MessageBoxes.Local_Cache_Cleared, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+          TextBoxHandle.Focus();
         }
 
-        if (!onlyExpired) {
-          MessageBox.Show(ProgramTranslation.Window.MessageBoxes.Local_Cache_Cleared, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
       }
     }
 

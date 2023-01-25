@@ -89,7 +89,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Height = 31;
     }
 
-    private void ClearRelations() {
+    public void ClearRelations() {
       if (PanelRelations.Controls.Count > 0) {
         List<UserControlRelation> ctrls = new(PanelRelations.Controls.OfType<UserControlRelation>());
         PanelRelations.Controls.Clear();
