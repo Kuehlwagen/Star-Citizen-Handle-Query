@@ -82,11 +82,11 @@
       "Close": "Close"
     },
     "Relation": {
-      "Not_Assigned": "Not assigned",
-      "Friendly": "Friendly",
-      "Neutral": "Neutral",
-      "Annoying": "Annoying",
-      "Hostile": "Hostile"
+      "Not_Assigned": "",
+      "Friendly": "FRIENDLY",
+      "Neutral": "NEUTRAL",
+      "Bogey": "BOGEY",
+      "Bandit": "BANDIT"
     }
   },
   "Notification": {

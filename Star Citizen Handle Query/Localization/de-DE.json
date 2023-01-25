@@ -82,11 +82,11 @@
       "Close": "Schlie\u00DFen"
     },
     "Relation": {
-      "Not_Assigned": "Nicht angegeben",
-      "Friendly": "Freundlich",
-      "Neutral": "Neutral",
-      "Annoying": "L\u00E4stig",
-      "Hostile": "Feindlich"
+      "Not_Assigned": "",
+      "Friendly": "FRIENDLY",
+      "Neutral": "NEUTRAL",
+      "BOGEY": "BOGEY",
+      "BANDIT": "BANDIT"
     }
   },
   "Notification": {

@@ -241,10 +241,10 @@
   public class Translation_Local_Cache_Relation {
 
     public string Not_Assigned { get; set; } = "Keine Zuordnung";
-    public string Friendly { get; set; } = "Freundlich";
-    public string Neutral { get; set; } = "Neutral";
-    public string Annoying { get; set; } = "Lästig";
-    public string Hostile { get; set; } = "Feindlich";
+    public string Friendly { get; set; } = "FRIENDLY";
+    public string Neutral { get; set; } = "NEUTRAL";
+    public string Bogey { get; set; } = "BOGEY";
+    public string Bandit { get; set; } = "BANDIT";
 
   }
 

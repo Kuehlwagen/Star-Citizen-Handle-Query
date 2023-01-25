@@ -199,11 +199,11 @@ namespace Star_Citizen_Handle_Query.UserControls {
           break;
         case Keys.D3:
         case Keys.NumPad3:
-          relation = Relation.Annoying;
+          relation = Relation.Bogey;
           break;
         case Keys.D4:
         case Keys.NumPad4:
-          relation = Relation.Hostile;
+          relation = Relation.Bandit;
           break;
       }
       Info.Relation = relation;

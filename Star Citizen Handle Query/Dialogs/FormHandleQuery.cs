@@ -1101,10 +1101,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         case Relation.Neutral:
           colorRelation = Color.Gray;
           break;
-        case Relation.Annoying:
+        case Relation.Bogey:
           colorRelation = Color.Orange;
           break;
-        case Relation.Hostile:
+        case Relation.Bandit:
           colorRelation = Color.Red;
           break;
         case Relation.NotAssigned:

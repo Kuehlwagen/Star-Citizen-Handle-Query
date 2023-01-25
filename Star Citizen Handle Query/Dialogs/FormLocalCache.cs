@@ -210,11 +210,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         case Relation.Neutral:
           translationText = translation.Local_Cache.Relation.Neutral;
           break;
-        case Relation.Annoying:
-          translationText = translation.Local_Cache.Relation.Annoying;
+        case Relation.Bogey:
+          translationText = translation.Local_Cache.Relation.Bogey;
           break;
-        case Relation.Hostile:
-          translationText = translation.Local_Cache.Relation.Hostile;
+        case Relation.Bandit:
+          translationText = translation.Local_Cache.Relation.Bandit;
           break;
       }
 

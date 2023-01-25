@@ -65,8 +65,8 @@ namespace Star_Citizen_Handle_Query.Serialization {
     NotAssigned,
     Friendly,
     Neutral,
-    Annoying,
-    Hostile
+    Bogey,
+    Bandit
   }
 
 }
