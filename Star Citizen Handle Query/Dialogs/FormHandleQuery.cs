@@ -968,7 +968,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       // Fensterposition merken
       ProgramSettings.WindowLocation = ProgramSettings.RememberWindowLocation ? Location : Point.Empty;
-      ProgramSettings.LogMonitor.WindowLocation = ProgramSettings.RememberWindowLocation ? LogMonitorForm.Location : Point.Empty;
+      ProgramSettings.LogMonitor.WindowLocation = LogMonitorForm != null && ProgramSettings.RememberWindowLocation ? LogMonitorForm.Location : Point.Empty;
+      ProgramSettings.Relations.WindowLocation = RelationsForm != null && ProgramSettings.RememberWindowLocation ? RelationsForm.Location : Point.Empty;
       string settingsFilePath = GetSettingsFilePath();
       try {
         File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, new JsonSerializerOptions() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull }), Encoding.UTF8);
