@@ -5,28 +5,34 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
   public partial class UserControlRelation : UserControl {
 
-    internal readonly HandleInfo HandleInfoItem;
+    internal readonly string HandleName;
+    internal readonly Relation HandleRelation;
 
-    public UserControlRelation(HandleInfo handleInfo) {
+    public UserControlRelation(string handle, Relation relation) {
       InitializeComponent();
-      HandleInfoItem = handleInfo;
+      HandleName = handle;
+      HandleRelation = relation;
     }
 
     private void UserControlLog_Load(object sender, EventArgs e) {
-      LabelHandle.Text = HandleInfoItem.Profile.Handle;
-      PictureBoxLeft.BackColor = FormHandleQuery.GetRelationColor(HandleInfoItem.Relation);
+      LabelHandle.Text = HandleName;
+      UpdateRelation(HandleRelation);
       AddMouseEvents();
     }
 
     private void AddMouseEvents() {
-      PictureBoxLeft.MouseClick += Handle_MouseClick;
-      PictureBoxLeft.Cursor = Cursors.Hand;
+      LabelRelation.MouseClick += Handle_MouseClick;
+      LabelRelation.Cursor = Cursors.Hand;
       LabelHandle.MouseClick += Handle_MouseClick;
       LabelHandle.Cursor = Cursors.Hand;
     }
 
     private void Handle_MouseClick(object sender, MouseEventArgs e) {
-      ((Parent.Parent as FormRelations).Owner as FormHandleQuery).SetAndQueryHandle(HandleInfoItem.Profile.Handle);
+      ((Parent.Parent as FormRelations).Owner as FormHandleQuery).SetAndQueryHandle(HandleName);
+    }
+
+    public void UpdateRelation(Relation relation) {
+      LabelRelation.BackColor = FormHandleQuery.GetRelationColor(relation);
     }
 
   }

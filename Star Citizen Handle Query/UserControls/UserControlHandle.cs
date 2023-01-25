@@ -17,6 +17,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private readonly bool ForceLive;
     private readonly bool DisplayOnly;
 
+    public string HandleName { get { return Info.Profile.Handle; } }
+    public Relation HandleRelation { get { return Info.Relation; } }
+
     public UserControlHandle(HandleInfo handleInfo, Settings programSettings, Translation programTranslation, bool forceLive, bool displayOnly = false) {
       InitializeComponent();
       Info = handleInfo;

@@ -139,6 +139,22 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       uc.Dispose();
     }
 
+    public void UpdateRelation(string handle, Relation relation) {
+      if (!string.IsNullOrWhiteSpace(handle)) {
+        string controlName = $"UserControlRelation_{handle}";
+        Control[] controls = PanelRelations.Controls.Find(controlName, false);
+        if (controls?.Length == 1) {
+          if (relation == Relation.NotAssigned) {
+            RemoveControl(controls[0] as UserControlRelation);
+          } else {
+            (controls[0] as UserControlRelation).UpdateRelation(relation);
+          }
+        } else if (relation > Relation.NotAssigned) {
+          PanelRelations.Controls.Add(new UserControlRelation(handle, relation) { Name = controlName });
+        }
+      }
+    }
+
   }
 
 }

@@ -420,7 +420,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             // Ggf. Handle-Beziehung ändern
             e.SuppressKeyPress = true;
             if (PanelInfo.Controls.Count > 0) {
-              (PanelInfo.Controls[0] as UserControlHandle).ChangeRelation(e.KeyCode);
+              UserControlHandle handleControl = PanelInfo.Controls[0] as UserControlHandle;
+              handleControl.ChangeRelation(e.KeyCode);
+              RelationsForm?.UpdateRelation(handleControl.HandleName, handleControl.HandleRelation);
             }
             break;
         }
@@ -494,8 +496,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           }
         }
 
+        // Ggf. Beziehung aktualisieren
+        if (RelationsForm != null && handleInfo?.Relation > Relation.NotAssigned) {
+          RelationsForm.UpdateRelation(handleInfo.Profile.Handle, handleInfo.Relation);
+        }
+
         // Autovervollständigung aktualisieren
-        UpdateAutoComplete(handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK && handleInfo?.Profile?.Handle != null ? handleInfo.Profile.Handle : String.Empty);
+        UpdateAutoComplete(handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK && handleInfo?.Profile?.Handle != null ? handleInfo.Profile.Handle : string.Empty);
 
         // Textbox wieder aktivieren und Text markieren
         TextBoxHandle.Enabled = true;
