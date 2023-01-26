@@ -196,6 +196,27 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
+    public void FilterRelations(Keys keyCode) {
+      switch (keyCode) {
+        case Keys.D1:
+        case Keys.NumPad1:
+          CheckBoxFilterFriendly.Checked = !CheckBoxFilterFriendly.Checked;
+          break;
+        case Keys.D2:
+        case Keys.NumPad2:
+          CheckBoxFilterNeutral.Checked = !CheckBoxFilterNeutral.Checked;
+          break;
+        case Keys.D3:
+        case Keys.NumPad3:
+          CheckBoxFilterBogey.Checked = !CheckBoxFilterBogey.Checked;
+          break;
+        case Keys.D4:
+        case Keys.NumPad4:
+          CheckBoxFilterBandit.Checked = !CheckBoxFilterBandit.Checked;
+          break;
+      }
+    }
+
     private void CheckBoxFilter_Paint(object sender, PaintEventArgs e) {
       if (sender is CheckBox checkBox && checkBox.Checked) {
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;

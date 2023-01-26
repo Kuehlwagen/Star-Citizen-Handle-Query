@@ -430,6 +430,21 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             QueryHandle(true);
             break;
         }
+      } else if (e.Alt) {
+        switch (e.KeyCode) {
+          case Keys.D1:
+          case Keys.D2:
+          case Keys.D3:
+          case Keys.D4:
+          case Keys.NumPad1:
+          case Keys.NumPad2:
+          case Keys.NumPad3:
+          case Keys.NumPad4:
+            e.SuppressKeyPress = true;
+            e.Handled = true;
+            RelationsForm?.FilterRelations(e.KeyCode);
+            break;
+        }
       } else {
         switch (e.KeyCode) {
           case Keys.Oemplus:
