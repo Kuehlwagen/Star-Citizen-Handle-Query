@@ -272,8 +272,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Inactive
     }
 
-    private void PictureBoxClearAll_Click(object sender, EventArgs e) {
-      ClearLogInfos();
+    private void PictureBoxClearAll_MouseClick(object sender, MouseEventArgs e) {
+      if (e.Button == MouseButtons.Left) {
+        ClearLogInfos();
+      }
     }
 
     private void SetTitle(string livePtu = null) {
@@ -287,7 +289,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void PanelLogInfo_ControlAdded(object sender, ControlEventArgs e) {
       if (PanelLogInfo.Controls.Count == 1) {
-        PictureBoxClearAll.Click += PictureBoxClearAll_Click;
+        PictureBoxClearAll.MouseClick += PictureBoxClearAll_MouseClick;
         PictureBoxClearAll.Image = Properties.Resources.ClearAll;
         PictureBoxClearAll.Cursor = Cursors.Hand;
       }
@@ -299,7 +301,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void PanelLogInfo_ControlRemoved(object sender, ControlEventArgs e) {
       Height -= e.Control.Height + 2;
       if (PanelLogInfo.Controls.Count == 0) {
-        PictureBoxClearAll.Click -= PictureBoxClearAll_Click;
+        PictureBoxClearAll.MouseClick -= PictureBoxClearAll_MouseClick;
         PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
         PictureBoxClearAll.Cursor = Cursors.Default;
       }

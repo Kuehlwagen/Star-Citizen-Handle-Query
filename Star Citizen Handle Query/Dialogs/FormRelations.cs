@@ -106,8 +106,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private void PictureBoxClearAll_Click(object sender, EventArgs e) {
-      ClearRelations();
+    private void PictureBoxClearAll_MouseClick(object sender, MouseEventArgs e) {
+      if (e.Button == MouseButtons.Left) {
+        ClearRelations();
+      }
     }
 
     protected override void OnResizeEnd(EventArgs e) {
@@ -117,7 +119,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void PanelRelations_ControlAdded(object sender, ControlEventArgs e) {
       if (PanelRelations.Controls.Count == 1) {
-        PictureBoxClearAll.Click += PictureBoxClearAll_Click;
+        PictureBoxClearAll.MouseClick += PictureBoxClearAll_MouseClick;
         PictureBoxClearAll.Image = Properties.Resources.ClearAll;
         PictureBoxClearAll.Cursor = Cursors.Hand;
       }
@@ -129,7 +131,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void PanelRelations_ControlRemoved(object sender, ControlEventArgs e) {
       Height -= e.Control.Height + 2;
       if (PanelRelations.Controls.Count == 0) {
-        PictureBoxClearAll.Click -= PictureBoxClearAll_Click;
+        PictureBoxClearAll.MouseClick -= PictureBoxClearAll_MouseClick;
         PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
         PictureBoxClearAll.Cursor = Cursors.Default;
       }
