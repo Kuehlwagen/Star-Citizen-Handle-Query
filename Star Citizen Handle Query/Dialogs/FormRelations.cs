@@ -200,6 +200,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public void FilterRelations(Keys keyCode) {
       switch (keyCode) {
+        case Keys.D0:
+        case Keys.NumPad0:
+          bool check = !CheckBoxFilterFriendly.Checked;
+          CheckBoxFilterFriendly.Checked = check;
+          CheckBoxFilterNeutral.Checked = check;
+          CheckBoxFilterBogey.Checked = check;
+          CheckBoxFilterBandit.Checked = check;
+          break;
         case Keys.D1:
         case Keys.NumPad1:
           CheckBoxFilterFriendly.Checked = !CheckBoxFilterFriendly.Checked;
