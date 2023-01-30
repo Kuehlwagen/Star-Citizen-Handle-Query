@@ -215,6 +215,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                   File.Move(legacyPath, newPath);
                 } catch { }
               }
+              legacyPath = Path.Combine(directory, "Relations.json");
+              if (File.Exists(legacyPath)) {
+                try {
+                  File.Move(legacyPath, GetCachePath(CacheDirectoryType.Root, "Relations"));
+                } catch { }
+              }
               legacyPath = Path.Combine(directory, "Cache");
               newPath = GetCachePath(CacheDirectoryType.Root);
               if (Directory.Exists(legacyPath) && !Directory.Exists(newPath)) {
@@ -518,9 +524,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         }
 
         // Ggf. Beziehung aktualisieren
-        if (RelationsForm != null) {
-          RelationsForm.UpdateRelation(handleInfo.Profile.Handle, handleInfo.Relation);
-        }
+        RelationsForm?.UpdateRelation(handleInfo.Profile.Handle, handleInfo.Relation);
 
         // Autovervollständigung aktualisieren
         UpdateAutoComplete(handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK && handleInfo?.Profile?.Handle != null ? handleInfo.Profile.Handle : string.Empty);
@@ -932,7 +936,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Verzeichnis ermitteln
       switch (type) {
         case CacheDirectoryType.Root:
-          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), $@"Cache\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
           break;
         case CacheDirectoryType.Handle:
           rtnVal = Path.Combine(GetSaveFilesRootPath(), $@"Cache\Data\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
@@ -1147,25 +1151,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     public static Color GetRelationColor(Relation relation) {
-      Color colorRelation;
-      switch (relation) {
-        case Relation.Friendly:
-          colorRelation = Color.Green;
-          break;
-        case Relation.Neutral:
-          colorRelation = Color.Gray;
-          break;
-        case Relation.Bogey:
-          colorRelation = Color.Orange;
-          break;
-        case Relation.Bandit:
-          colorRelation = Color.Red;
-          break;
-        case Relation.NotAssigned:
-        default:
-          colorRelation = Color.FromArgb(19, 26, 33);
-          break;
-      }
+      var colorRelation = relation switch {
+        Relation.Friendly => Color.Green,
+        Relation.Neutral => Color.Gray,
+        Relation.Bogey => Color.Orange,
+        Relation.Bandit => Color.Red,
+        _ => Color.FromArgb(19, 26, 33),
+      };
       return colorRelation;
     }
 

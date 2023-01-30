@@ -2,6 +2,9 @@ using Star_Citizen_Handle_Query.ExternClasses;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Drawing.Drawing2D;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using System.Text;
 
 namespace Star_Citizen_Handle_Query.Dialogs {
 
@@ -89,10 +92,28 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void FormRelations_Shown(object sender, EventArgs e) {
       Height = 31;
+      string jsonFilePath = FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.Root, "Relations");
+      if (File.Exists(jsonFilePath)) {
+        try {
+          RelationInfos infos = JsonSerializer.Deserialize<RelationInfos>(File.ReadAllText(jsonFilePath, Encoding.UTF8));
+          if (infos != null) {
+            CheckBoxFilterFriendly.Checked = infos.FilterFriendlyChecked;
+            CheckBoxFilterNeutral.Checked = infos.FilterNeutralChecked;
+            CheckBoxFilterBogey.Checked = infos.FilterBogeyChecked;
+            CheckBoxFilterBandit.Checked = infos.FilterBanditChecked;
+            if (infos.Relations?.Count > 0) {
+              foreach (RelationInfo info in infos.Relations) {
+                AddControl(info.HandleName, info.HandleRelation);
+              }
+            }
+          }
+        } catch { }
+      }
     }
 
     public void ClearRelations() {
       if (PanelRelations.Controls.Count > 0) {
+        UserControlRelations.Clear();
         List<UserControlRelation> ctrls = new(PanelRelations.Controls.OfType<UserControlRelation>());
         PanelRelations.Controls.Clear();
         foreach (UserControlRelation c in ctrls) {
@@ -104,6 +125,23 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void FormRelations_FormClosing(object sender, FormClosingEventArgs e) {
       if (e.CloseReason == CloseReason.UserClosing) {
         e.Cancel = true;
+      } else {
+        RelationInfos infos = new() {
+          FilterFriendlyChecked = CheckBoxFilterFriendly.Checked,
+          FilterNeutralChecked = CheckBoxFilterNeutral.Checked,
+          FilterBogeyChecked = CheckBoxFilterBogey.Checked,
+          FilterBanditChecked = CheckBoxFilterBandit.Checked
+        };
+        foreach (KeyValuePair<string, UserControlRelation> kvp in UserControlRelations) {
+          infos.Relations.Add(new RelationInfo() { HandleName = kvp.Value.HandleName, HandleRelation = kvp.Value.HandleRelation });
+        }
+        try {
+          File.WriteAllText(FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.Root, "Relations"),
+            JsonSerializer.Serialize(infos, new JsonSerializerOptions() {
+              WriteIndented = true,
+              DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            }), Encoding.UTF8);
+        } catch { }
       }
     }
 
@@ -140,6 +178,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
+    private void AddControl(string handle, Relation relation) {
+      UserControlRelation control = new(handle, relation) { Name = $"UserControlRelation_{handle}", Visible = RelationIsVisible(relation) };
+      UserControlRelations.Add(handle, control);
+      PanelRelations.Controls.Add(control);
+      if (ProgramSettings.Relations.SortAlphabetically && UserControlRelations.ContainsKey(handle)) {
+        PanelRelations.Controls.SetChildIndex(control, UserControlRelations.IndexOfKey(handle));
+      }
+    }
+
     public void RemoveControl(UserControlRelation uc) {
       if (UserControlRelations.ContainsKey(uc.HandleName)) {
         UserControlRelations.Remove(uc.HandleName);
@@ -150,8 +197,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public void UpdateRelation(string handle, Relation relation) {
       if (!string.IsNullOrWhiteSpace(handle)) {
-        string controlName = $"UserControlRelation_{handle}";
-        Control[] controls = PanelRelations.Controls.Find(controlName, false);
+        Control[] controls = PanelRelations.Controls.Find($"UserControlRelation_{handle}", false);
         if (controls?.Length == 1) {
           if (relation == Relation.NotAssigned) {
             RemoveControl(controls[0] as UserControlRelation);
@@ -164,12 +210,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           //if (PanelRelations.Controls.Count == ProgramSettings.Relations.EntriesMax) {
           //  RemoveControl(PanelRelations.Controls[0] as UserControlRelation);
           //}
-          UserControlRelation control = new(handle, relation) { Name = controlName, Visible = RelationIsVisible(relation) };
-          UserControlRelations.Add(handle, control);
-          PanelRelations.Controls.Add(control);
-          if (ProgramSettings.Relations.SortAlphabetically && UserControlRelations.ContainsKey(handle)) {
-            PanelRelations.Controls.SetChildIndex(control, UserControlRelations.IndexOfKey(handle));
-          }
+          AddControl(handle, relation);
         }
       }
     }
