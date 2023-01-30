@@ -45,6 +45,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="UserControls\UserControlHandleRelation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserControls\UserControlRelation.cs">
       <SubType>UserControl</SubType>
     </Compile>

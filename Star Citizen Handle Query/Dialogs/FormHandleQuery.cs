@@ -409,6 +409,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
+    public void ChangeRelation(Keys key) {
+      if (PanelInfo.Controls.Count > 0) {
+        UserControlHandle handleControl = PanelInfo.Controls[0] as UserControlHandle;
+        handleControl.ChangeRelation(key);
+        RelationsForm?.UpdateRelation(handleControl.HandleName, handleControl.HandleRelation);
+      }
+    }
+
     private void TextBoxHandle_KeyDown(object sender, KeyEventArgs e) {
       // Handle-Textbox Tastendrücke verarbeiten
       if (e.Control) {
@@ -425,11 +433,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           case Keys.NumPad4:
             // Ggf. Handle-Beziehung ändern
             e.SuppressKeyPress = true;
-            if (PanelInfo.Controls.Count > 0) {
-              UserControlHandle handleControl = PanelInfo.Controls[0] as UserControlHandle;
-              handleControl.ChangeRelation(e.KeyCode);
-              RelationsForm?.UpdateRelation(handleControl.HandleName, handleControl.HandleRelation);
-            }
+            ChangeRelation(e.KeyCode);
             break;
           case Keys.Enter:
             e.SuppressKeyPress = true;
@@ -504,6 +508,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation, forceLive));
         Height += 78;
 
+        // Ggf. Relations-Control hinzufügen
+        if (ProgramSettings.Relations.ShowWindow && !ProgramSettings.WindowIgnoreMouseInput) {
+          PanelInfo.Controls.Add(new UserControlHandleRelation(ProgramTranslation));
+          Height += 23;
+        }
+
         // Ggf. UserControl mit Organisation-Informationen hinzufügen
         if (handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK && handleInfo.Organizations.MainOrganization != null) {
           PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.Organizations.MainOrganization, ProgramSettings, true, forceLive));
@@ -567,6 +577,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             ctrlOrganization.PictureBoxOrganizationRank.Image?.Dispose();
             ctrlOrganization.PictureBoxOrganizationRank.Image = null;
             ctrlOrganization.Dispose();
+          } else if (control is UserControlHandleRelation ctrlHandleRelation) {
+            ctrlHandleRelation.Dispose();
           }
         }
         PanelInfo.Controls.Clear();
@@ -1157,6 +1169,17 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         Relation.Neutral => Color.Gray,
         Relation.Bogey => Color.Orange,
         Relation.Bandit => Color.Red,
+        _ => Color.FromArgb(19, 26, 33),
+      };
+      return colorRelation;
+    }
+
+    public static Color GetRelationInactiveColor(Relation relation) {
+      var colorRelation = relation switch {
+        Relation.Friendly => Color.FromArgb(0, 64, 0),
+        Relation.Neutral => Color.FromArgb(64, 64, 64),
+        Relation.Bogey => Color.FromArgb(127, 82, 0),
+        Relation.Bandit => Color.FromArgb(127, 0, 0),
         _ => Color.FromArgb(19, 26, 33),
       };
       return colorRelation;

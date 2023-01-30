@@ -31,7 +31,6 @@
       this.LabelMainOrganizationAffiliate = new System.Windows.Forms.Label();
       this.LabelFocusPrimary = new System.Windows.Forms.Label();
       this.LabelFocusSecondary = new System.Windows.Forms.Label();
-      this.LabelRelation = new System.Windows.Forms.Label();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxOrganization)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.PictureBoxOrganizationRank)).BeginInit();
       this.SuspendLayout();
@@ -109,25 +108,11 @@
       this.LabelFocusSecondary.Size = new System.Drawing.Size(120, 18);
       this.LabelFocusSecondary.TabIndex = 10;
       // 
-      // LabelRelation
-      // 
-      this.LabelRelation.BackColor = System.Drawing.Color.Transparent;
-      this.LabelRelation.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.LabelRelation.Location = new System.Drawing.Point(68, 3);
-      this.LabelRelation.Margin = new System.Windows.Forms.Padding(0);
-      this.LabelRelation.Name = "LabelRelation";
-      this.LabelRelation.Size = new System.Drawing.Size(6, 71);
-      this.LabelRelation.TabIndex = 15;
-      this.LabelRelation.Visible = false;
-      this.LabelRelation.Paint += new System.Windows.Forms.PaintEventHandler(this.LabelRelation_Paint);
-      this.LabelRelation.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LabelRelation_MouseClick);
-      // 
       // UserControlOrganization
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.Controls.Add(this.LabelRelation);
       this.Controls.Add(this.LabelFocusSecondary);
       this.Controls.Add(this.LabelFocusPrimary);
       this.Controls.Add(this.LabelMainOrganizationAffiliate);
@@ -157,6 +142,5 @@
     private Label LabelMainOrganizationAffiliate;
     public Label LabelFocusPrimary;
     public Label LabelFocusSecondary;
-    private Label LabelRelation;
   }
 }
