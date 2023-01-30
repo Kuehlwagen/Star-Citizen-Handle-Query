@@ -401,6 +401,7 @@
       this.CheckBoxSortRelationsAlphabetically.TabIndex = 14;
       this.CheckBoxSortRelationsAlphabetically.Text = "Beziehungen alphabetisch sortieren";
       this.CheckBoxSortRelationsAlphabetically.UseVisualStyleBackColor = true;
+      this.CheckBoxSortRelationsAlphabetically.Visible = false;
       this.CheckBoxSortRelationsAlphabetically.CheckedChanged += new System.EventHandler(this.CheckBoxSortRelationsAlphabetically_CheckedChanged);
       // 
       // CheckBoxShowRelations
