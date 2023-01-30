@@ -74,6 +74,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       NumericUpDownLogEintraegeMaximum.Value = ProgramSettings.LogMonitor.EntriesMax;
       NumericUpDownLogEintragAnzeigedauer.Value = ProgramSettings.LogMonitor.EntryDisplayDurationInMinutes;
       CheckBoxShowRelations.Checked = ProgramSettings.Relations.ShowWindow;
+      CheckBoxSortRelationsAlphabetically.Checked = ProgramSettings.Relations.SortAlphabetically;
       NumericUpDownRelationsEntriesMaximum.Value = ProgramSettings.Relations.EntriesMax;
     }
 
@@ -178,7 +179,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void CheckBoxShowRelations_CheckedChanged(object sender, EventArgs e) {
       ProgramSettings.Relations.ShowWindow = CheckBoxShowRelations.Checked;
+      CheckBoxSortRelationsAlphabetically.Visible = CheckBoxShowRelations.Checked;
       NumericUpDownRelationsEntriesMaximum.Enabled = CheckBoxShowRelations.Checked;
+    }
+
+    private void CheckBoxSortRelationsAlphabetically_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.Relations.SortAlphabetically = CheckBoxSortRelationsAlphabetically.Checked;
     }
 
     private void NumericUpDownRelationsEntriesMaximum_ValueChanged(object sender, EventArgs e) {
@@ -206,6 +212,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LabelLogEintragAnzeigeDauer.Text = CurrentLocalization.Settings.Display.Log_Entry_Display_Duration;
       LabelLogEintragAnzeigedauerMinuten.Text = CurrentLocalization.Settings.Display.Log_Entry_Display_Duration_Minutes;
       CheckBoxShowRelations.Text = CurrentLocalization.Settings.Display.Show_Relations;
+      CheckBoxSortRelationsAlphabetically.Text = CurrentLocalization.Settings.Display.Sort_Relations_Alphabetically;
       LabelRelationsEntriesMaximum.Text = CurrentLocalization.Settings.Display.Relations_Entries_Max;
 
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;

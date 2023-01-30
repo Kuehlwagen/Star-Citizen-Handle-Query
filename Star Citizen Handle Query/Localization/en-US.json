@@ -36,6 +36,7 @@
       "Log_Entry_Display_Duration": "Log entry display duration:",
       "Log_Entry_Display_Duration_Minutes": "Minute(s)",
       "Show_Relations": "Show relations",
+      "Sort_Relations_Alphabetically": "Sort relations alphabetically",
       "Relations_Entries_Max": "Maximum relations entries:"
     },
     "Window": {

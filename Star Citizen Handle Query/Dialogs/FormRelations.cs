@@ -11,6 +11,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private bool WindowLocked = true;
     private readonly Settings ProgramSettings;
     private readonly Translation ProgramTranslation;
+    private readonly SortedList<string, UserControlRelation> UserControlRelations = new();
 
     public FormRelations(Settings programSettings, Translation translation) {
       InitializeComponent();
@@ -129,7 +130,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void PanelRelations_ControlRemoved(object sender, ControlEventArgs e) {
-      Height -= e.Control.Height + 2;
+      if (PanelRelations.Controls.Count < ProgramSettings.Relations.EntriesMax) {
+        Height -= e.Control.Height + 2;
+      }
       if (PanelRelations.Controls.Count == 0) {
         PictureBoxClearAll.MouseClick -= PictureBoxClearAll_MouseClick;
         PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
@@ -138,6 +141,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     public void RemoveControl(UserControlRelation uc) {
+      if (UserControlRelations.ContainsKey(uc.HandleName)) {
+        UserControlRelations.Remove(uc.HandleName);
+      }
       PanelRelations.Controls.Remove(uc);
       uc.Dispose();
     }
@@ -154,10 +160,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             control.Visible = RelationIsVisible(relation);
           }
         } else if (relation > Relation.NotAssigned) {
-          if (PanelRelations.Controls.Count == ProgramSettings.Relations.EntriesMax) {
-            RemoveControl(PanelRelations.Controls[0] as UserControlRelation);
+          // Da gefiltert werden kann, die Daten nicht auf die maximale Anzahl von darzustellenden Einträgen begrenzen
+          //if (PanelRelations.Controls.Count == ProgramSettings.Relations.EntriesMax) {
+          //  RemoveControl(PanelRelations.Controls[0] as UserControlRelation);
+          //}
+          UserControlRelation control = new(handle, relation) { Name = controlName, Visible = RelationIsVisible(relation) };
+          UserControlRelations.Add(handle, control);
+          PanelRelations.Controls.Add(control);
+          if (ProgramSettings.Relations.SortAlphabetically && UserControlRelations.ContainsKey(handle)) {
+            PanelRelations.Controls.SetChildIndex(control, UserControlRelations.IndexOfKey(handle));
           }
-          PanelRelations.Controls.Add(new UserControlRelation(handle, relation) { Name = controlName, Visible = RelationIsVisible(relation) });
         }
       }
     }

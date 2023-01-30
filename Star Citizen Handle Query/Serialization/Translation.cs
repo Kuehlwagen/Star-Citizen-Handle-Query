@@ -136,6 +136,8 @@
 
     public string Show_Relations { get; set; } = "Beziehungen anzeigen";
 
+    public string Sort_Relations_Alphabetically { get; set; } = "Beziehungen alphabetisch sortieren";
+
     public string Relations_Entries_Max { get; set; } = "Beziehungen-Einträge Max.:";
 
   }

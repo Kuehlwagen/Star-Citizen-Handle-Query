@@ -5,7 +5,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
   public partial class UserControlRelation : UserControl {
 
-    private readonly string HandleName;
+    internal readonly string HandleName;
     internal Relation HandleRelation;
 
     public UserControlRelation(string handle, Relation relation) {

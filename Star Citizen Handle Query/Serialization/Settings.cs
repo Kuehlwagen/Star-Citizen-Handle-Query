@@ -167,6 +167,12 @@
       }
     }
 
+    /// <summary>Angabe, ob die Einträge alphabetisch aufsteigend sortiert werden sollen</summary>
+    public bool SortAlphabetically { get; set; }
+
+    /// <summary>Angabe, ob die Einträge bei Beendigung des Tools gespeichert und beim Start wieder geladen werden sollen</summary>
+    public bool RememberEntries { get; set; }
+
     public object Clone() {
       return MemberwiseClone();
     }

@@ -48,6 +48,7 @@
       this.GroupBoxAnzeige = new System.Windows.Forms.GroupBox();
       this.NumericUpDownRelationsEntriesMaximum = new System.Windows.Forms.NumericUpDown();
       this.LabelRelationsEntriesMaximum = new System.Windows.Forms.Label();
+      this.CheckBoxSortRelationsAlphabetically = new System.Windows.Forms.CheckBox();
       this.CheckBoxShowRelations = new System.Windows.Forms.CheckBox();
       this.LabelLogEintragAnzeigedauerMinuten = new System.Windows.Forms.Label();
       this.LabelLogEintragAnzeigeDauer = new System.Windows.Forms.Label();
@@ -332,6 +333,7 @@
       // 
       this.GroupBoxAnzeige.Controls.Add(this.NumericUpDownRelationsEntriesMaximum);
       this.GroupBoxAnzeige.Controls.Add(this.LabelRelationsEntriesMaximum);
+      this.GroupBoxAnzeige.Controls.Add(this.CheckBoxSortRelationsAlphabetically);
       this.GroupBoxAnzeige.Controls.Add(this.CheckBoxShowRelations);
       this.GroupBoxAnzeige.Controls.Add(this.LabelLogEintragAnzeigedauerMinuten);
       this.GroupBoxAnzeige.Controls.Add(this.LabelLogEintragAnzeigeDauer);
@@ -373,7 +375,7 @@
             0});
       this.NumericUpDownRelationsEntriesMaximum.Name = "NumericUpDownRelationsEntriesMaximum";
       this.NumericUpDownRelationsEntriesMaximum.Size = new System.Drawing.Size(44, 23);
-      this.NumericUpDownRelationsEntriesMaximum.TabIndex = 15;
+      this.NumericUpDownRelationsEntriesMaximum.TabIndex = 16;
       this.NumericUpDownRelationsEntriesMaximum.Value = new decimal(new int[] {
             10,
             0,
@@ -387,8 +389,19 @@
       this.LabelRelationsEntriesMaximum.Location = new System.Drawing.Point(16, 265);
       this.LabelRelationsEntriesMaximum.Name = "LabelRelationsEntriesMaximum";
       this.LabelRelationsEntriesMaximum.Size = new System.Drawing.Size(155, 15);
-      this.LabelRelationsEntriesMaximum.TabIndex = 14;
+      this.LabelRelationsEntriesMaximum.TabIndex = 15;
       this.LabelRelationsEntriesMaximum.Text = "Beziehungen-Einträge Max.:";
+      // 
+      // CheckBoxSortRelationsAlphabetically
+      // 
+      this.CheckBoxSortRelationsAlphabetically.AutoSize = true;
+      this.CheckBoxSortRelationsAlphabetically.Location = new System.Drawing.Point(173, 238);
+      this.CheckBoxSortRelationsAlphabetically.Name = "CheckBoxSortRelationsAlphabetically";
+      this.CheckBoxSortRelationsAlphabetically.Size = new System.Drawing.Size(213, 19);
+      this.CheckBoxSortRelationsAlphabetically.TabIndex = 14;
+      this.CheckBoxSortRelationsAlphabetically.Text = "Beziehungen alphabetisch sortieren";
+      this.CheckBoxSortRelationsAlphabetically.UseVisualStyleBackColor = true;
+      this.CheckBoxSortRelationsAlphabetically.CheckedChanged += new System.EventHandler(this.CheckBoxSortRelationsAlphabetically_CheckedChanged);
       // 
       // CheckBoxShowRelations
       // 
@@ -621,5 +634,6 @@
     private NumericUpDown NumericUpDownRelationsEntriesMaximum;
     private Label LabelRelationsEntriesMaximum;
     private CheckBox CheckBoxShowRelations;
+    private CheckBox CheckBoxSortRelationsAlphabetically;
   }
 }
