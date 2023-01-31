@@ -1,0 +1,12 @@
+{
+  "Language": "Deutsch (Brevity Code)",
+  "Local_Cache": {
+    "Relation": {
+      "Not_Assigned": "",
+      "Friendly": "FRIENDLY",
+      "Neutral": "NEUTRAL",
+      "Bogey": "BOGEY",
+      "Bandit": "BANDIT"
+    }
+  }
+}

@@ -158,7 +158,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Dictionary<string, Translation> rtnVal = Resources.ResourceManager
         .GetResourceSet(CultureInfo.CurrentCulture, false, true)
         .Cast<DictionaryEntry>()
-        .Where(x => x.Value.GetType() == typeof(byte[]) && Regex.IsMatch(x.Key.ToString(), @"^[a-z]{2}-[A-Z]{2}$"))
+        .Where(x => x.Value.GetType() == typeof(byte[]) && Regex.IsMatch(x.Key.ToString(), @"^[a-z]{2}-[A-Z]{2}_*\w*$"))
         .Select(x => new KeyValuePair<string, Translation>(x.Key.ToString(), JsonSerializer.Deserialize<Translation>(Encoding.UTF8.GetString(x.Value as byte[]))))
         .OrderBy(x => x.Value.Language)
         .ToDictionary(x => x.Key, y => y.Value);
