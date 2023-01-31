@@ -16,7 +16,7 @@ https://discord.com/invite/WmzNY3mCm6
 ![Settings](/Star%20Citizen%20Handle%20Query/Screenshots/Settings.png?raw=true "Einstellungen")
 
 ### Anzeige
-- __Sprache:__ Hier kann die Sprache für das Tool eingestellt werden. Standardmäßig stehen die Sprachen `Deutsch` und `English` zur Auswahl.
+- __Sprache:__ Hier kann die Sprache für das Tool eingestellt werden. Standardmäßig stehen die Sprachen `Deutsch`, `Deutsch (Brevity Code)` und `English` zur Auswahl.
 - __Affiliationen Maximum:__ Hier kann angegeben werden, wie viele Affiliationen maximal dargestellt werden sollen.
 - __Unkenntliche Affiliationen ausblenden:__ Hier kann angegeben werden, ob unkenntlich gemachte Affiliationen ausgeblendet werden sollen
 - __Stream Live-Status ausblenden:__ Angabe, ob der Twitch.tv Stream Live-Status eines Handles ausgeblendet werden soll
@@ -25,6 +25,9 @@ https://discord.com/invite/WmzNY3mCm6
 - __Log-Monitor anzeigen:__ Angabe, ob der Log-Monitor angezeigt werden soll
 - __Log-Einträge Maximum:__ Angabe, wie viele Einträge maximal im Log-Monitor angezeigt werden sollen
 - __Log-Eintrag Anzeigedauer:__ Anzeigedauer eines Logeintrags in Minuten (`0` = unendlich)
+- __Beziehungen anzeigen:__ Angabe, ob das Beziehungen-Fenster angezeigt werden soll
+- __Beziehungen alphabetisch sortieren:__ Angabe, ob die Einträge auf dem Beziehungen-Fenster alphabetisch sortiert werden sollen (Standard: Reihenfolge, in welcher die Einträge hinzugefügt werden)
+- __Beziehungen-Einträge Max.:__ Angabe, wie viele Einträge maximal auf dem Beziehungen-Fenster dargestellt werden sollen
 ### Fenster
 - __Deckkraft:__ Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
 - __Globale Taste:__ Hier kann die Taste angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifikatoren (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
@@ -75,6 +78,18 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
   - `OFF` = Im Handle-Profil ist ein Twitch.tv-Konto verknüpft, es wird aber gerade nicht gestreamt
   - `LIVE` = Im Handle-Profil ist ein Twitch.tv-Konto verknüpft und es wird gerade aktiv gestreamt
   - `ERR` = Beim Aufruf des Community-Hub-Profils des Handles gab es einen Fehler / Timeout (maximale Wartezeit: 10 Sekunden)
+- Per Tastenkürzel kann der Beziehungsstatus des aktuellen Handles festgelegt werden (auch dann, wenn die Anzeige des Beziehungen-Fensters nicht aktiviert ist):
+  - `Strg + 1`: Freundlich
+  - `Strg + 2`: Neutral
+  - `Strg + 3`: Unbekannt
+  - `Strg + 4`: Feindlich
+  - `Strg + 0`: Beziehungsstatus entfernen
+- Sofern in den Einstellungen die Anzeige des Beziehungen-Fensters aktiviert ist, können die Filter via Tastenkombination umgeschaltet werden:
+  - `Alt + 1`: Freundlich
+  - `Alt + 2`: Neutral
+  - `Alt + 3`: Unbekannt
+  - `Alt + 4`: Feindlich
+  - `Alt + 0`: Alle Filter
 - Folgende Funktionen sind nur aktiv, wenn in den Einstellungen in der Gruppe `Fenster` das Kontrollkästchen `Mauseingaben ignorieren` nicht gesetzt ist:
   - Ein Mauslinksklick auf das Handle-Avatar öffnet die Informationsseite des Handles auf der Star Citizen Webseite (z.B. https://robertsspaceindustries.com/citizens/Kuehlwagen).
   - Ein Mauslinksklick auf ein Organisation-Avatar öffnet die Informationsseite der Organisation auf der Star Citizen Webseite (z.B. https://robertsspaceindustries.com/orgs/KRT).
@@ -84,6 +99,7 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
   - Wird währenddessen die `Strg`-Taste gedrückt gehalten, wird das Auslesen der Handle-Informationen inklusive Avatare (Handle, Organisation und Affiliationen) via Star Citizen Webseite erzwungen.
   - Klickt man die Zahnrad-Schaltfläche, wird das Einstellungen-Fenster geöffnet.
   - Ist die Einstellung `Position merken` in der Kategorie `Fenster` aktiviert, wird beim Beenden des Tools die Position des Hauptfensters in den Einstellungen gespeichert. Beim Start des Tools wird das Hauptfenster an die zuvor gespeicherte Position gesetzt. Hält man, während das Tool gestartet wird, die `Umschalt`-Taste gedrückt, wird das Fenster immer an die Standardposition (oben mittig) gesetzt.
+  - Wenn in den Einstellungen die Anzeige des Beziehungen-Fensters aktiviert ist, werden unterhalb des Handle-Bereichs Schaltflächen dargestellt, mit denen man via Mauslinksklick die Beziehung des Handles festlegen kann. Die aktuell zugewiesene Beziehung wird als farblicher Balken rechts am Handle-Avatar dargestellt. Zusätzlich wird ein Eintrag auf dem Beziehungen-Fenster erstellt oder aktualisiert.
 
 ## Log-Monitor Fenster
 
@@ -108,6 +124,26 @@ Das Fenster enthält folgende Informationen:
   - Rechts daneben werden Uhrzeit und Spieler-Handle angezeigt
   - Wenn der Spieler in einer Zone gestorben ist, in der es ein lokales Inventar gibt, wird ganz rechts zusätzlich ein `Ressourcen`-Symbol dargestellt.
   - Ein Mauslinksklick auf eine der genannten Informationen trägt den Handle des Spielers in das Hauptfenster ein und startet direkt eine Handle-Abfrage. Wird dabei die `Strg`-Taste gedrückt gehalten, wird ein Auslesen der Handle-Informationen von der RSI-Webseite erzwungen.
+
+## Beziehungen Fenster
+
+![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/Relations.png?raw=true "Beziehungen")
+
+Hier werden sämtliche Handles aufgelistet, denen eine Beziehung zugewiesen wurde. Dabei wird der Beziehungsstatus farblich vor dem Handle dargestellt:
+- `Grün`: Freundlich
+- `Grau`: Neutral
+- `Orange`: Unbekannt
+- `Rot`: Feindlich
+Diese Liste wird beim Beenden des Tools gespeichert und beim erneuten Start des Tools wieder dargestellt.
+
+# Titelleiste
+- Via Mauslinksklick kann per Mauslinksklick auf eines der farbigen Vierecke der Filter für diesen Beziehungsstatus umgeschaltet werden. Die Filter können ebenfalls aus dem Hauptfenster heraus via Tastenkombination umgeschaltet werden:
+  - `Alt + 1`: Freundlich
+  - `Alt + 2`: Neutral
+  - `Alt + 3`: Unbekannt
+  - `Alt + 4`: Feindlich
+  - `Alt + 0`: Alle Filter
+- Via Mauslinksklick auf das Mülltonnen-Symbol kann, sofern mindestens ein Eintrag enthalten ist, die Liste gelöscht werden.
 
 ## Sprachen / Übersetzungen
 
