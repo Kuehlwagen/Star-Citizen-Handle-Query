@@ -508,36 +508,38 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation, forceLive));
         Height += 78;
 
-        // Ggf. Relations-Control hinzufügen
-        if (ProgramSettings.Relations.ShowWindow && !ProgramSettings.WindowIgnoreMouseInput) {
-          PanelInfo.Controls.Add(new UserControlHandleRelation(ProgramTranslation));
-          Height += 23;
-        }
+        if (handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK) {
+          // Ggf. Relations-Control hinzufügen
+          if (ProgramSettings.Relations.ShowWindow && !ProgramSettings.WindowIgnoreMouseInput) {
+            PanelInfo.Controls.Add(new UserControlHandleRelation(ProgramTranslation));
+            Height += 23;
+          }
 
-        // Ggf. UserControl mit Organisation-Informationen hinzufügen
-        if (handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK && handleInfo.Organizations.MainOrganization != null) {
-          PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.Organizations.MainOrganization, ProgramSettings, true, forceLive));
-          Height += handleInfo.Organizations.MainOrganization.Name != string.Empty ? 78 : 25;
-        }
+          // Ggf. UserControl mit Organisation-Informationen hinzufügen
+          if (handleInfo?.Organizations?.MainOrganization != null) {
+            PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.Organizations.MainOrganization, ProgramSettings, true, forceLive));
+            Height += handleInfo.Organizations.MainOrganization.Name != string.Empty ? 78 : 25;
+          }
 
-        // Ggf. UserControls mit Affiliate-Informationen hinzufügen
-        if (handleInfo?.Organizations?.Affiliations?.Count > 0) {
-          int affiliatesAdded = 0;
-          for (int i = 0; i < handleInfo.Organizations.Affiliations.Count && affiliatesAdded < ProgramSettings.AffiliationsMax; i++) {
-            // Prüfen, ob ausgeblendete Affiliationen dargestellt werden sollen
-            if (!handleInfo.Organizations.Affiliations[i].Redacted || !ProgramSettings.HideRedactedAffiliations) {
-              PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.Organizations.Affiliations[i], ProgramSettings, false, forceLive));
-              Height += !string.IsNullOrWhiteSpace(handleInfo.Organizations.Affiliations[i].Name) ? 78 : 25;
-              affiliatesAdded++;
+          // Ggf. UserControls mit Affiliate-Informationen hinzufügen
+          if (handleInfo?.Organizations?.Affiliations?.Count > 0) {
+            int affiliatesAdded = 0;
+            for (int i = 0; i < handleInfo.Organizations.Affiliations.Count && affiliatesAdded < ProgramSettings.AffiliationsMax; i++) {
+              // Prüfen, ob ausgeblendete Affiliationen dargestellt werden sollen
+              if (!handleInfo.Organizations.Affiliations[i].Redacted || !ProgramSettings.HideRedactedAffiliations) {
+                PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.Organizations.Affiliations[i], ProgramSettings, false, forceLive));
+                Height += !string.IsNullOrWhiteSpace(handleInfo.Organizations.Affiliations[i].Name) ? 78 : 25;
+                affiliatesAdded++;
+              }
             }
           }
+
+          // Ggf. Beziehung aktualisieren
+          RelationsForm?.UpdateRelation(handleInfo.Profile.Handle, handleInfo.Relation);
+
+          // Autovervollständigung aktualisieren
+          UpdateAutoComplete(handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK && handleInfo?.Profile?.Handle != null ? handleInfo.Profile.Handle : string.Empty);
         }
-
-        // Ggf. Beziehung aktualisieren
-        RelationsForm?.UpdateRelation(handleInfo.Profile.Handle, handleInfo.Relation);
-
-        // Autovervollständigung aktualisieren
-        UpdateAutoComplete(handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK && handleInfo?.Profile?.Handle != null ? handleInfo.Profile.Handle : string.Empty);
 
         // Textbox wieder aktivieren und Text markieren
         TextBoxHandle.Enabled = true;
