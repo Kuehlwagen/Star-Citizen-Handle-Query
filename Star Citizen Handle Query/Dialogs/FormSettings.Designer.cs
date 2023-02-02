@@ -364,7 +364,7 @@
       this.NumericUpDownRelationsEntriesMaximum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.NumericUpDownRelationsEntriesMaximum.Location = new System.Drawing.Point(174, 263);
       this.NumericUpDownRelationsEntriesMaximum.Maximum = new decimal(new int[] {
-            25,
+            50,
             0,
             0,
             0});
@@ -461,7 +461,7 @@
       this.NumericUpDownLogEintraegeMaximum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
       this.NumericUpDownLogEintraegeMaximum.Location = new System.Drawing.Point(173, 180);
       this.NumericUpDownLogEintraegeMaximum.Maximum = new decimal(new int[] {
-            25,
+            50,
             0,
             0,
             0});

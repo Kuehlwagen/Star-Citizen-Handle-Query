@@ -114,8 +114,8 @@
       set {
         if (value < 1) {
           value = 1;
-        } else if (_EntriesMax > 25) {
-          value = 25;
+        } else if (_EntriesMax > 50) {
+          value = 50;
         }
         _EntriesMax = value;
       }
@@ -160,8 +160,8 @@
       set {
         if (value < 1) {
           value = 1;
-        } else if (_EntriesMax > 25) {
-          value = 25;
+        } else if (_EntriesMax > 50) {
+          value = 50;
         }
         _EntriesMax = value;
       }
