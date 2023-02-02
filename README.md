@@ -27,7 +27,7 @@ https://discord.com/invite/WmzNY3mCm6
 - __Log-Eintrag Anzeigedauer:__ Anzeigedauer eines Logeintrags in Minuten (`0` = unendlich)
 - __Beziehungen anzeigen:__ Angabe, ob das Beziehungen-Fenster angezeigt werden soll
 - __Beziehungen alphabetisch sortieren:__ Angabe, ob die Einträge auf dem Beziehungen-Fenster alphabetisch sortiert werden sollen (Standard: Reihenfolge, in welcher die Einträge hinzugefügt werden)
-- __Beziehungen-Einträge Max.:__ Angabe, wie viele Einträge maximal auf dem Beziehungen-Fenster dargestellt werden sollen
+- __Beziehungen-Einträge Max.:__ Angabe, wie viele Einträge maximal auf dem Beziehungen-Fenster dargestellt werden sollen (es werden unendlich viele Einträge im lokalen Cache gespeichert)
 ### Fenster
 - __Deckkraft:__ Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
 - __Globale Taste:__ Hier kann die Taste angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifikatoren (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
