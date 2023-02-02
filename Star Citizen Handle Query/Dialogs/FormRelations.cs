@@ -97,13 +97,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         try {
           RelationInfos infos = JsonSerializer.Deserialize<RelationInfos>(File.ReadAllText(jsonFilePath, Encoding.UTF8));
           if (infos != null) {
-            CheckBoxFilterFriendly.Checked = infos.FilterFriendlyChecked;
-            CheckBoxFilterNeutral.Checked = infos.FilterNeutralChecked;
-            CheckBoxFilterBogey.Checked = infos.FilterBogeyChecked;
-            CheckBoxFilterBandit.Checked = infos.FilterBanditChecked;
+            if (infos.FilterVisibility != null) {
+              CheckBoxFilterFriendly.Checked = infos.FilterVisibility.Friendly;
+              CheckBoxFilterNeutral.Checked = infos.FilterVisibility.Neutral;
+              CheckBoxFilterBogey.Checked = infos.FilterVisibility.Bogey;
+              CheckBoxFilterBandit.Checked = infos.FilterVisibility.Bandit;
+            }
             if (infos.Relations?.Count > 0) {
               foreach (RelationInfo info in infos.Relations) {
-                AddControl(info.HandleName, info.HandleRelation);
+                AddControl(info.Handle, info.Relation);
               }
             }
           }
@@ -127,13 +129,18 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         e.Cancel = true;
       } else {
         RelationInfos infos = new() {
-          FilterFriendlyChecked = CheckBoxFilterFriendly.Checked,
-          FilterNeutralChecked = CheckBoxFilterNeutral.Checked,
-          FilterBogeyChecked = CheckBoxFilterBogey.Checked,
-          FilterBanditChecked = CheckBoxFilterBandit.Checked
+          FilterVisibility = new() {
+            Friendly = CheckBoxFilterFriendly.Checked,
+            Neutral = CheckBoxFilterNeutral.Checked,
+            Bogey = CheckBoxFilterBogey.Checked,
+            Bandit = CheckBoxFilterBandit.Checked
+          }
         };
         foreach (KeyValuePair<string, UserControlRelation> kvp in UserControlRelations) {
-          infos.Relations.Add(new RelationInfo() { HandleName = kvp.Value.HandleName, HandleRelation = kvp.Value.HandleRelation });
+          infos.Relations.Add(new RelationInfo() {
+            Handle = kvp.Value.HandleName,
+            Relation = kvp.Value.HandleRelation
+          });
         }
         try {
           File.WriteAllText(FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.Root, "Relations"),

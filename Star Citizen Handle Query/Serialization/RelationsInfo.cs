@@ -3,24 +3,31 @@
   [Serializable]
   public class RelationInfos {
 
-    public bool FilterFriendlyChecked { get; set; }
-    
-    public bool FilterNeutralChecked { get; set; }
-    
-    public bool FilterBogeyChecked { get; set; }
-    
-    public bool FilterBanditChecked { get; set; }
+    public Filter FilterVisibility { get; set; } = new();
 
     public List<RelationInfo> Relations { get; set; } = new();
 
   }
 
   [Serializable]
+  public class Filter {
+
+    public bool Friendly { get; set; }
+
+    public bool Neutral { get; set; }
+
+    public bool Bogey { get; set; }
+
+    public bool Bandit { get; set; }
+
+  }
+
+  [Serializable]
   public class RelationInfo {
 
-    public string HandleName { get; set; }
+    public string Handle { get; set; }
 
-    public Relation HandleRelation { get; set; }
+    public Relation Relation { get; set; }
 
   }
 
