@@ -136,7 +136,7 @@ Hier werden sämtliche Handles aufgelistet, denen eine Beziehung zugewiesen wurd
 - `Rot`: Feindlich
 Diese Liste wird beim Beenden des Tools gespeichert und beim erneuten Start des Tools wieder dargestellt.
 
-# Titelleiste
+### Titelleiste
 - Via Mauslinksklick kann per Mauslinksklick auf eines der farbigen Vierecke der Filter für diesen Beziehungsstatus umgeschaltet werden. Die Filter können ebenfalls aus dem Hauptfenster heraus via Tastenkombination umgeschaltet werden:
   - `Alt + 1`: Freundlich
   - `Alt + 2`: Neutral
