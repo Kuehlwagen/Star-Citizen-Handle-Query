@@ -105,7 +105,7 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
 
 ![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/LogMonitor.png?raw=true "Log-Monitor")
 
-Wenn in den Einstellungen die Anzeige des Log-Monitors aktiviert ist, wird das Fenster angezeigt. Hier wird die Star Citizen `Games.log`-Datei in nahezu Echtzeit ausgelesen, um Informationen zu gestorbenen / getöteten Spielercharakteren auf dem eigenen Server darzustellen.
+Wenn in den Einstellungen die Anzeige des Log-Monitors aktiviert ist, wird das Fenster angezeigt. Hier wird die Star Citizen `Games.log`-Datei in nahezu Echtzeit ausgelesen, um beispielsweise Informationen zu gestorbenen / getöteten Spielercharakteren auf dem eigenen Server darzustellen.
 - Wenn das Hauptfenster entsperrt ist, wird auch das Log-Monitor-Fenster entsperrt und kann durch Mauslinksklick und ziehen des `Log-Monitor`-Schriftzugs an eine andere Positon gezogen werden. Ist die Einstellung `Position merken` aktiviert, wird die Position des Fensters beim Beenden des Tools gespeichert und beim Start wieder an die gespeicherte Position gesetzt.
 
 Das Fenster enthält folgende Informationen:
@@ -121,7 +121,9 @@ Das Fenster enthält folgende Informationen:
     - `Totenkopf`: Der Spieler ist gestorben und es wurde kein Leichnam erstellt (z.B. Selbstmord in einer Hauptstadt)
     - `Kreuz`: Der Spieler ist gestorben und es wurde ein Leichnam erstellt
     - `Totenkopf mit Zielmarkierung`: Der Spieler ist gestorben und wurde zur Rehabilitation nach Klescher geschickt
-  - Rechts daneben werden Uhrzeit und Spieler-Handle angezeigt
+    - `Information`: Es handelt sich um einen Info-Eintrag (z.B.: Ladezeit im Ladebildschirm)
+    - `Zahlenrad` (rot): Es werden zur Zeit von Star Citizen Shader kompiliert - Diese Info verschwindet, wenn 10 Sekunden lang keine weiteren Shader kompiliert werden
+  - Rechts daneben werden Uhrzeit und weitere Informationen, welche zum Log-Typ passen, angezeigt
   - Wenn der Spieler in einer Zone gestorben ist, in der es ein lokales Inventar gibt, wird ganz rechts zusätzlich ein `Ressourcen`-Symbol dargestellt.
   - Ein Mauslinksklick auf eine der genannten Informationen trägt den Handle des Spielers in das Hauptfenster ein und startet direkt eine Handle-Abfrage. Wird dabei die `Strg`-Taste gedrückt gehalten, wird ein Auslesen der Handle-Informationen von der RSI-Webseite erzwungen.
 
