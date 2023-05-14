@@ -19,6 +19,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
      RegexOptions.Compiled);
     private readonly Regex RgxLoadingScreenDuration = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>.+SC_Default closed after (?<Seconds>\d+\.\d+) seconds$",
       RegexOptions.Compiled);
+    private readonly Regex RgxCompile = new Regex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>\s*Compile\s*(?<Type>\w+)@\w+\((?<Type2>\w+)\)",
+      RegexOptions.Compiled);
 
     public FormLogMonitor(Settings programSettings, Translation translation) {
       InitializeComponent();
@@ -173,13 +175,28 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void AddLogInfo(List<LogMonitorInfo> logInfos) {
       foreach (LogMonitorInfo logInfo in logInfos) {
-        if (logInfo.IsValid && (PanelLogInfo.Controls.Count == 0 ||
-          (PanelLogInfo.Controls[PanelLogInfo.Controls.Count - 1] is UserControlLog ucl) && !logInfo.Equals(ucl.LogInfoItem))) {
-          UserControlLog uc = new(logInfo, ProgramSettings);
-          if (PanelLogInfo.Controls.Count == ProgramSettings.LogMonitor.EntriesMax) {
-            RemoveControl(PanelLogInfo.Controls[0] as UserControlLog);
+        if (logInfo.IsValid) {
+          if (logInfo.LogType == LogType.Compile) {
+            if (PanelLogInfo.Controls.Count > 0 && PanelLogInfo.Controls[0] is UserControlLog ucl && ucl.LogInfoItem.LogType == LogType.Compile) {
+              ucl.SetText($"Compile {logInfo.Info}", true);
+            } else {
+              UserControlLog uc = new(logInfo, ProgramSettings);
+              if (PanelLogInfo.Controls.Count == ProgramSettings.LogMonitor.EntriesMax) {
+                RemoveControl(PanelLogInfo.Controls[1] as UserControlLog);
+              }
+              PanelLogInfo.Controls.Add(uc);
+              PanelLogInfo.Controls.SetChildIndex(uc, 0);
+            }
+          } else if (PanelLogInfo.Controls.Count == 0 ||
+            (PanelLogInfo.Controls[PanelLogInfo.Controls.Count - 1] is UserControlLog ucl) && !logInfo.Equals(ucl.LogInfoItem)) {
+            UserControlLog uc = new(logInfo, ProgramSettings);
+            if (PanelLogInfo.Controls.Count == ProgramSettings.LogMonitor.EntriesMax) {
+              int removeIndex = PanelLogInfo.Controls[0] is UserControlLog ucl2 && ucl2.LogInfoItem.LogType != LogType.Compile ? 0 : 1;
+              RemoveControl(PanelLogInfo.Controls[removeIndex] as UserControlLog);
+            }
+            PanelLogInfo.Controls.Add(uc);
           }
-          PanelLogInfo.Controls.Add(uc);
+
         }
       }
     }
@@ -249,6 +266,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                 rtnVal.Add(new LogMonitorInfo(LogType.LoadingScreenDuration,
                   match.Groups["Date"].Value,
                   info: match.Groups["Seconds"].Value));
+              } else {
+                match = RgxCompile.Match(line);
+                if (match != null && match.Success) {
+                  rtnVal.Add(new LogMonitorInfo(LogType.Compile,
+                    match.Groups["Date"].Value,
+                    info: $"{match.Groups["Type"].Value} {match.Groups["Type2"].Value}"));
+                }
               }
             }
           }

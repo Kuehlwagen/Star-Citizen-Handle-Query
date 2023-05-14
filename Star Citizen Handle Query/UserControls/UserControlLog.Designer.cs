@@ -23,75 +23,74 @@
     /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
     /// </summary>
     private void InitializeComponent() {
-      this.PictureBoxLeft = new System.Windows.Forms.PictureBox();
-      this.LabelText = new System.Windows.Forms.Label();
-      this.LabelTime = new System.Windows.Forms.Label();
-      this.PictureBoxRight = new System.Windows.Forms.PictureBox();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLeft)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxRight)).BeginInit();
-      this.SuspendLayout();
+      PictureBoxLeft = new PictureBox();
+      LabelText = new Label();
+      LabelTime = new Label();
+      PictureBoxRight = new PictureBox();
+      ((System.ComponentModel.ISupportInitialize)PictureBoxLeft).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)PictureBoxRight).BeginInit();
+      SuspendLayout();
       // 
       // PictureBoxLeft
       // 
-      this.PictureBoxLeft.Location = new System.Drawing.Point(1, 2);
-      this.PictureBoxLeft.Name = "PictureBoxLeft";
-      this.PictureBoxLeft.Size = new System.Drawing.Size(21, 21);
-      this.PictureBoxLeft.TabIndex = 0;
-      this.PictureBoxLeft.TabStop = false;
+      PictureBoxLeft.Location = new Point(1, 2);
+      PictureBoxLeft.Name = "PictureBoxLeft";
+      PictureBoxLeft.Size = new Size(21, 21);
+      PictureBoxLeft.TabIndex = 0;
+      PictureBoxLeft.TabStop = false;
       // 
       // LabelText
       // 
-      this.LabelText.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelText.Location = new System.Drawing.Point(58, 2);
-      this.LabelText.Name = "LabelText";
-      this.LabelText.Size = new System.Drawing.Size(156, 21);
-      this.LabelText.TabIndex = 1;
-      this.LabelText.Text = "Text";
-      this.LabelText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      LabelText.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelText.Location = new Point(55, 5);
+      LabelText.Name = "LabelText";
+      LabelText.Size = new Size(160, 15);
+      LabelText.TabIndex = 1;
+      LabelText.Text = "Text";
+      LabelText.TextAlign = ContentAlignment.MiddleLeft;
       // 
       // LabelTime
       // 
-      this.LabelTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(157)))), ((int)(((byte)(158)))));
-      this.LabelTime.Location = new System.Drawing.Point(23, 2);
-      this.LabelTime.Name = "LabelTime";
-      this.LabelTime.Size = new System.Drawing.Size(37, 21);
-      this.LabelTime.TabIndex = 0;
-      this.LabelTime.Text = "00:00";
-      this.LabelTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      LabelTime.ForeColor = Color.FromArgb(46, 157, 158);
+      LabelTime.Location = new Point(23, 2);
+      LabelTime.Name = "LabelTime";
+      LabelTime.Size = new Size(34, 21);
+      LabelTime.TabIndex = 0;
+      LabelTime.Text = "00:00";
+      LabelTime.TextAlign = ContentAlignment.MiddleLeft;
       // 
       // PictureBoxRight
       // 
-      this.PictureBoxRight.Location = new System.Drawing.Point(214, 2);
-      this.PictureBoxRight.Name = "PictureBoxRight";
-      this.PictureBoxRight.Size = new System.Drawing.Size(21, 21);
-      this.PictureBoxRight.TabIndex = 0;
-      this.PictureBoxRight.TabStop = false;
+      PictureBoxRight.Location = new Point(214, 2);
+      PictureBoxRight.Name = "PictureBoxRight";
+      PictureBoxRight.Size = new Size(21, 21);
+      PictureBoxRight.TabIndex = 0;
+      PictureBoxRight.TabStop = false;
       // 
       // UserControlLog
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.Controls.Add(this.LabelTime);
-      this.Controls.Add(this.LabelText);
-      this.Controls.Add(this.PictureBoxRight);
-      this.Controls.Add(this.PictureBoxLeft);
-      this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
-      this.Name = "UserControlLog";
-      this.Size = new System.Drawing.Size(238, 25);
-      this.Load += new System.EventHandler(this.UserControlLog_Load);
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLeft)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxRight)).EndInit();
-      this.ResumeLayout(false);
-
+      AutoScaleDimensions = new SizeF(7F, 15F);
+      AutoScaleMode = AutoScaleMode.Font;
+      BackColor = Color.FromArgb(19, 26, 33);
+      Controls.Add(LabelTime);
+      Controls.Add(LabelText);
+      Controls.Add(PictureBoxRight);
+      Controls.Add(PictureBoxLeft);
+      ForeColor = Color.FromArgb(57, 206, 216);
+      Margin = new Padding(0, 1, 0, 0);
+      Name = "UserControlLog";
+      Size = new Size(238, 25);
+      Load += UserControlLog_Load;
+      ((System.ComponentModel.ISupportInitialize)PictureBoxLeft).EndInit();
+      ((System.ComponentModel.ISupportInitialize)PictureBoxRight).EndInit();
+      ResumeLayout(false);
     }
 
-        #endregion
+    #endregion
 
-        private PictureBox PictureBoxLeft;
-        private Label LabelText;
-        private Label LabelTime;
-        private PictureBox PictureBoxRight;
-    }
+    private PictureBox PictureBoxLeft;
+    private Label LabelText;
+    private Label LabelTime;
+    private PictureBox PictureBoxRight;
+  }
 }
