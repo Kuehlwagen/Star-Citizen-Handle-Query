@@ -137,6 +137,26 @@
       }
     }
 
+    /// <summary>Filter für den Log-Monitor</summary>
+    public LogMonitorFilter Filter { get; set; } = new LogMonitorFilter();
+
+    public object Clone() {
+      return MemberwiseClone();
+    }
+
+  }
+
+  public class LogMonitorFilter : ICloneable {
+
+    /// <summary>Angabe, ob Spielertode angezeigt werden sollen</summary>
+    public bool Corpse { get; set; } = true;
+
+    /// <summary>Angabe, ob Ladezeiten angezeigt werden sollen</summary>
+    public bool LoadingScreenDuration { get; set; } = true;
+
+    /// <summary>Angabe, ob Shader-Kompilierungen angezeigt werden sollen</summary>
+    public bool Compile { get; set; } = true;
+
     public object Clone() {
       return MemberwiseClone();
     }

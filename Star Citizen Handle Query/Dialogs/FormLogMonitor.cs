@@ -252,27 +252,35 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       if (rtnVal != null) {
         try {
+          Match match = null;
           foreach (string line in input.Split(Environment.NewLine)) {
-            Match match = RgxCorpse.Match(line);
-            if (match != null && match.Success) {
-              rtnVal.Add(new LogMonitorInfo(LogType.Corpse,
-                match.Groups["Date"].Value,
-                match.Groups["Handle"].Value,
-                match.Groups["Info"].Value,
-                match.Groups["Corpse"].Value));
-            } else {
+            if (ProgramSettings.LogMonitor.Filter.Corpse) {
+              match = RgxCorpse.Match(line);
+              if (match != null && match.Success) {
+                rtnVal.Add(new LogMonitorInfo(LogType.Corpse,
+                  match.Groups["Date"].Value,
+                  match.Groups["Handle"].Value,
+                  match.Groups["Info"].Value,
+                  match.Groups["Corpse"].Value));
+                continue;
+              }
+            }
+            if (ProgramSettings.LogMonitor.Filter.LoadingScreenDuration) {
               match = RgxLoadingScreenDuration.Match(line);
               if (match != null && match.Success) {
                 rtnVal.Add(new LogMonitorInfo(LogType.LoadingScreenDuration,
                   match.Groups["Date"].Value,
                   info: match.Groups["Seconds"].Value));
-              } else {
-                match = RgxCompile.Match(line);
-                if (match != null && match.Success) {
-                  rtnVal.Add(new LogMonitorInfo(LogType.Compile,
-                    match.Groups["Date"].Value,
-                    info: $"{match.Groups["Type"].Value} {match.Groups["Type2"].Value}"));
-                }
+                continue;
+              }
+            }
+            if (ProgramSettings.LogMonitor.Filter.Compile) {
+              match = RgxCompile.Match(line);
+              if (match != null && match.Success) {
+                rtnVal.Add(new LogMonitorInfo(LogType.Compile,
+                  match.Groups["Date"].Value,
+                  info: $"{match.Groups["Type"].Value} {match.Groups["Type2"].Value}"));
+                continue;
               }
             }
           }
