@@ -15,7 +15,9 @@
       "Local_Cache": "Lokaler Cache",
       "Close": "Beenden",
       "About": "\u00DCber",
-      "Check_For_Update": "Nach Update suchen"
+      "Check_For_Update": "Nach Update suchen",
+      "Export_Relations": "Beziehungen bereitstellen",
+      "Import_Relations": "Bezeichnungen \u00DCbernehmen"
     },
     "MessageBoxes": {
       "Clear_Local_Cache_Question": "Der lokale Cache wird komplett geleert. Fortfahren?",

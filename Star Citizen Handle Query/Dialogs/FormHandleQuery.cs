@@ -93,6 +93,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         // Veraltete Cache-Dateien löschen
         ClearCache(true);
 
+        // Ggf. Beziehungen bereitsetllen/übernehmen anzeigen
+        if (ProgramSettings.Relations.ShowWindow) {
+          BeziehungenBereitstellenToolStripMenuItem.Visible = true;
+          BeziehungenUebernehmenToolStripMenuItem.Visible = true;
+          ToolStripSeparator1.Visible = true;
+        }
+
         // Kontextmenü aktivieren
         EnableContextMenu();
 
@@ -190,6 +197,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       BeendenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Close;
       UeberToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.About;
       AufUpdatePruefenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Check_For_Update;
+      BeziehungenBereitstellenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Export_Relations;
+      BeziehungenUebernehmenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Import_Relations;
       SetToolTip(LabelLockUnlock, ProgramTranslation.Window.ToolTips.Lock_Unlock_Window);
       SetToolTip(LabelQuery, ProgramTranslation.Window.ToolTips.Query_Handle);
       SetToolTip(LabelSettings, ProgramTranslation.Window.ToolTips.Settings);
@@ -943,7 +952,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           AutoCompleteCollection.Clear();
           AutoCompleteCollection = null;
           UpdateAutoComplete();
-          
+
           // Ggf. Beziehungen-UserControls entfernen
           RelationsForm?.ClearRelations();
 
@@ -1147,6 +1156,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       UeberToolStripMenuItem.Enabled = enable;
       LokalerCacheToolStripMenuItem.Enabled = enable;
       AufUpdatePruefenToolStripMenuItem.Enabled = enable;
+      BeziehungenBereitstellenToolStripMenuItem.Enabled = enable;
+      BeziehungenUebernehmenToolStripMenuItem.Enabled = enable;
     }
 
     private void TextBoxHandle_TextChanged(object sender, EventArgs e) {
@@ -1259,6 +1270,27 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     protected override void OnResizeEnd(EventArgs e) {
       base.OnResizeEnd(e);
       CheckSnap(this, Location);
+    }
+
+    private void BeziehungenBereitstellenToolStripMenuItem_Click(object sender, EventArgs e) {
+      using SaveFileDialog svd = new() {
+        DefaultExt = "json",
+        FileName = "Relations.json",
+        Filter = "JSON (*.json)|*.json",
+        OverwritePrompt = true
+      };
+      if (svd.ShowDialog() == DialogResult.OK) {
+        RelationsForm?.ExportRelationInfos(svd.FileName);
+      }
+    }
+
+    private void BeziehungenUebernehmenToolStripMenuItem_Click(object sender, EventArgs e) {
+      using OpenFileDialog ofd = new() {
+        Filter = "JSON (*.json)|*.json"
+      };
+      if (ofd.ShowDialog() == DialogResult.OK) {
+        RelationsForm?.ImportRelationInfos(ofd.FileName);
+      }
     }
 
     public enum CommunityHubLiveState {

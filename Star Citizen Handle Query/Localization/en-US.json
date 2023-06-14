@@ -15,7 +15,9 @@
       "Local_Cache": "Local cache",
       "Close": "Close",
       "About": "About",
-      "Check_For_Update": "Check for update"
+      "Check_For_Update": "Check for update",
+      "Export_Relations": "Export relations",
+      "Import_Relations": "Import relations"
     },
     "MessageBoxes": {
       "Clear_Local_Cache_Question": "Complete local cache will be cleared. Continue?",

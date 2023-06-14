@@ -92,27 +92,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void FormRelations_Shown(object sender, EventArgs e) {
       Height = 31;
-      string jsonFilePath = FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.Root, "Relations");
-      if (File.Exists(jsonFilePath)) {
-        try {
-          RelationInfos infos = JsonSerializer.Deserialize<RelationInfos>(File.ReadAllText(jsonFilePath, Encoding.UTF8));
-          if (infos != null) {
-            if (infos.FilterVisibility != null) {
-              CheckBoxFilterOrganization.Checked = infos.FilterVisibility.Organization;
-              CheckBoxFilterFriendly.Checked = infos.FilterVisibility.Friendly;
-              CheckBoxFilterNeutral.Checked = infos.FilterVisibility.Neutral;
-              CheckBoxFilterBogey.Checked = infos.FilterVisibility.Bogey;
-              CheckBoxFilterBandit.Checked = infos.FilterVisibility.Bandit;
-            }
-            if (infos.Relations?.Count > 0) {
-              foreach (RelationInfo info in infos.Relations) {
-                AddControl(info.Name, info.Type, info.Relation);
-              }
-            }
-          }
-          FilterRelations();
-        } catch { }
-      }
+      ImportRelationInfos();
     }
 
     public void ClearRelations() {
@@ -130,28 +110,58 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (e.CloseReason == CloseReason.UserClosing) {
         e.Cancel = true;
       } else {
-        RelationInfos infos = new() {
-          FilterVisibility = new() {
-            Organization = CheckBoxFilterOrganization.Checked,
-            Friendly = CheckBoxFilterFriendly.Checked,
-            Neutral = CheckBoxFilterNeutral.Checked,
-            Bogey = CheckBoxFilterBogey.Checked,
-            Bandit = CheckBoxFilterBandit.Checked
-          }
-        };
-        foreach (KeyValuePair<string, UserControlRelation> kvp in UserControlRelations.OrderByDescending(x => x.Value.Type).ThenBy(x => x.Value.RelationName)) {
-          infos.Relations.Add(new RelationInfo() {
-            Name = kvp.Value.RelationName,
-            Relation = kvp.Value.Relation,
-            Type = kvp.Value.Type
-          });
+        ExportRelationInfos();
+      }
+    }
+
+    internal void ExportRelationInfos(string exportPath = null) {
+      RelationInfos infos = new() {
+        FilterVisibility = new() {
+          Organization = CheckBoxFilterOrganization.Checked,
+          Friendly = CheckBoxFilterFriendly.Checked,
+          Neutral = CheckBoxFilterNeutral.Checked,
+          Bogey = CheckBoxFilterBogey.Checked,
+          Bandit = CheckBoxFilterBandit.Checked
         }
+      };
+      foreach (KeyValuePair<string, UserControlRelation> kvp in UserControlRelations.OrderByDescending(x => x.Value.Type).ThenBy(x => x.Value.RelationName)) {
+        infos.Relations.Add(new RelationInfo() {
+          Name = kvp.Value.RelationName,
+          Relation = kvp.Value.Relation,
+          Type = kvp.Value.Type
+        });
+      }
+      try {
+        File.WriteAllText(exportPath ?? FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.Root, "Relations"),
+          JsonSerializer.Serialize(infos, new JsonSerializerOptions() {
+            WriteIndented = true,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+          }), Encoding.UTF8);
+      } catch { }
+    }
+
+    internal void ImportRelationInfos(string importPath = null) {
+      string jsonFilePath = importPath ?? FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.Root, "Relations");
+      if (File.Exists(jsonFilePath)) {
         try {
-          File.WriteAllText(FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.Root, "Relations"),
-            JsonSerializer.Serialize(infos, new JsonSerializerOptions() {
-              WriteIndented = true,
-              DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-            }), Encoding.UTF8);
+          RelationInfos infos = JsonSerializer.Deserialize<RelationInfos>(File.ReadAllText(jsonFilePath, Encoding.UTF8));
+          if (infos != null) {
+            PanelRelations.Controls.Clear();
+            UserControlRelations.Clear();
+            if (infos.FilterVisibility != null) {
+              CheckBoxFilterOrganization.Checked = infos.FilterVisibility.Organization;
+              CheckBoxFilterFriendly.Checked = infos.FilterVisibility.Friendly;
+              CheckBoxFilterNeutral.Checked = infos.FilterVisibility.Neutral;
+              CheckBoxFilterBogey.Checked = infos.FilterVisibility.Bogey;
+              CheckBoxFilterBandit.Checked = infos.FilterVisibility.Bandit;
+            }
+            if (infos.Relations?.Count > 0) {
+              foreach (RelationInfo info in infos.Relations) {
+                AddControl(info.Name, info.Type, info.Relation);
+              }
+            }
+          }
+          FilterRelations();
         } catch { }
       }
     }

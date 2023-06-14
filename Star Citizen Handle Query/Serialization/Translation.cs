@@ -83,6 +83,10 @@
     public string About { get; set; } = "Über";
 
     public string Check_For_Update { get; set; } = "Nach Update suchen";
+
+    public string Export_Relations { get; set; } = "Beziehungen bereitstellen";
+
+    public string Import_Relations { get; set; } = "Beziehungen übernehmen";
   }
 
   [Serializable()]
