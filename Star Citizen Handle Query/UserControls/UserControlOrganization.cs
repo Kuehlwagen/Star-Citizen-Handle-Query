@@ -52,10 +52,12 @@ namespace Star_Citizen_Handle_Query.UserControls {
         if (Info?.Sid != null && Info?.RankStars >= 0 && Info.RankStars <= 5) {
           PictureBoxOrganizationRank.Image = Properties.Resources.ResourceManager.GetObject($"OrganizationRank{Info.RankStars}") as Image;
         }
-        Relation = GetMainForm().GetOrganizationRelation(Info.Sid);
-        if (Relation > Relation.NotAssigned) {
-          LabelRelation.BackColor = GetRelationColor(Relation);
-          LabelRelation.Visible = true;
+        if (!DisplayOnly) {
+          Relation = GetMainForm().GetOrganizationRelation(Info.Sid);
+          if (Relation > Relation.NotAssigned) {
+            LabelRelation.BackColor = GetRelationColor(Relation);
+            LabelRelation.Visible = true;
+          }
         }
       } else {
         BackColor = Color.FromArgb(33, 26, 19);
