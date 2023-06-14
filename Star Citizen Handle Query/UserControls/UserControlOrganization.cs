@@ -1,7 +1,6 @@
 ﻿using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
-using System.Reflection.Metadata.Ecma335;
 using static Star_Citizen_Handle_Query.Dialogs.FormHandleQuery;
 
 namespace Star_Citizen_Handle_Query.UserControls {
@@ -11,7 +10,8 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private readonly OrganizationInfo Info;
     private readonly Settings ProgramSettings;
     private readonly bool IsMainOrg;
-    private string SID;
+    internal string SID;
+    internal Relation Relation;
     private readonly bool ForceLive;
     private readonly bool DisplayOnly;
 
@@ -52,6 +52,11 @@ namespace Star_Citizen_Handle_Query.UserControls {
         if (Info?.Sid != null && Info?.RankStars >= 0 && Info.RankStars <= 5) {
           PictureBoxOrganizationRank.Image = Properties.Resources.ResourceManager.GetObject($"OrganizationRank{Info.RankStars}") as Image;
         }
+        Relation = GetMainForm().GetOrganizationRelation(Info.Sid);
+        if (Relation > Relation.NotAssigned) {
+          LabelRelation.BackColor = GetRelationColor(Relation);
+          LabelRelation.Visible = true;
+        }
       } else {
         BackColor = Color.FromArgb(33, 26, 19);
         PictureBoxOrganization.Size = new Size(PictureBoxOrganization.Width, 19);
@@ -81,6 +86,35 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     private void SetToolTip(Control control, string text = null) {
       GetMainForm()?.SetToolTip(control, text ?? control.Text);
+    }
+
+    public void ChangeRelation(Keys keyCode) {
+      Relation relation = Relation.NotAssigned;
+      switch (keyCode) {
+        case Keys.D1:
+        case Keys.NumPad1:
+          relation = Relation.Friendly;
+          break;
+        case Keys.D2:
+        case Keys.NumPad2:
+          relation = Relation.Neutral;
+          break;
+        case Keys.D3:
+        case Keys.NumPad3:
+          relation = Relation.Bogey;
+          break;
+        case Keys.D4:
+        case Keys.NumPad4:
+          relation = Relation.Bandit;
+          break;
+      }
+      Relation = relation;
+      LabelRelation.Visible = relation > Relation.NotAssigned;
+      LabelRelation.BackColor = GetRelationColor(Relation);
+    }
+
+    private void LabelRelation_Paint(object sender, PaintEventArgs e) {
+      ControlPaint.DrawBorder(e.Graphics, LabelRelation.ClientRectangle, BackColor, ButtonBorderStyle.Solid);
     }
 
   }

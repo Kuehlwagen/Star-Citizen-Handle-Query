@@ -5,34 +5,41 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
   public partial class UserControlRelation : UserControl {
 
-    internal readonly string HandleName;
-    internal Relation HandleRelation;
+    internal readonly RelationType Type;
+    internal readonly string RelationName;
+    internal Relation Relation;
 
-    public UserControlRelation(string handle, Relation relation) {
+    public UserControlRelation(string handle, RelationType relationType, Relation relation) {
       InitializeComponent();
-      HandleName = handle;
-      HandleRelation = relation;
+      RelationName = handle;
+      Relation = relation;
+      Type = relationType;
+      LabelOrganization.Visible = relationType == RelationType.Organization;
     }
 
     private void UserControlLog_Load(object sender, EventArgs e) {
-      LabelHandle.Text = HandleName;
-      UpdateRelation(HandleRelation);
+      LabelHandle.Text = RelationName;
+      UpdateRelation(Relation);
       AddMouseEvents();
     }
 
     private void AddMouseEvents() {
-      LabelRelation.MouseClick += Handle_MouseClick;
-      LabelRelation.Cursor = Cursors.Hand;
-      LabelHandle.MouseClick += Handle_MouseClick;
-      LabelHandle.Cursor = Cursors.Hand;
+      if (Type == RelationType.Handle) {
+        LabelRelation.MouseClick += Handle_MouseClick;
+        LabelRelation.Cursor = Cursors.Hand;
+        LabelHandle.MouseClick += Handle_MouseClick;
+        LabelHandle.Cursor = Cursors.Hand;
+      }
     }
 
     private void Handle_MouseClick(object sender, MouseEventArgs e) {
-      ((Parent.Parent as FormRelations).Owner as FormHandleQuery).SetAndQueryHandle(HandleName);
+      if (Type == RelationType.Handle) {
+        ((Parent.Parent as FormRelations).Owner as FormHandleQuery).SetAndQueryHandle(RelationName, Relation);
+      }
     }
 
     public void UpdateRelation(Relation relation) {
-      HandleRelation = relation;
+      Relation = relation;
       LabelRelation.BackColor = FormHandleQuery.GetRelationColor(relation);
     }
 

@@ -49,7 +49,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
             break;
         }
         if (key != Keys.None) {
-          GetMainForm().ChangeRelation(key);
+          GetMainForm().ChangeRelation(ModifierKeys == Keys.Shift ? RelationType.Organization : RelationType.Handle, key);
         }
       }
     }

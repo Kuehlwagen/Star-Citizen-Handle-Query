@@ -24,173 +24,190 @@
     /// </summary>
     private void InitializeComponent() {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRelations));
-      this.PanelHeader = new System.Windows.Forms.Panel();
-      this.CheckBoxFilterBandit = new System.Windows.Forms.CheckBox();
-      this.CheckBoxFilterBogey = new System.Windows.Forms.CheckBox();
-      this.CheckBoxFilterNeutral = new System.Windows.Forms.CheckBox();
-      this.CheckBoxFilterFriendly = new System.Windows.Forms.CheckBox();
-      this.PictureBoxClearAll = new System.Windows.Forms.PictureBox();
-      this.LabelTitle = new System.Windows.Forms.Label();
-      this.PanelRelations = new System.Windows.Forms.FlowLayoutPanel();
-      this.PanelHeader.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClearAll)).BeginInit();
-      this.SuspendLayout();
+      PanelHeader = new Panel();
+      CheckBoxFilterBandit = new CheckBox();
+      CheckBoxFilterBogey = new CheckBox();
+      CheckBoxFilterNeutral = new CheckBox();
+      CheckBoxFilterOrganization = new CheckBox();
+      CheckBoxFilterFriendly = new CheckBox();
+      PictureBoxClearAll = new PictureBox();
+      LabelTitle = new Label();
+      PanelRelations = new FlowLayoutPanel();
+      PanelHeader.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)PictureBoxClearAll).BeginInit();
+      SuspendLayout();
       // 
       // PanelHeader
       // 
-      this.PanelHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.PanelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.PanelHeader.Controls.Add(this.CheckBoxFilterBandit);
-      this.PanelHeader.Controls.Add(this.CheckBoxFilterBogey);
-      this.PanelHeader.Controls.Add(this.CheckBoxFilterNeutral);
-      this.PanelHeader.Controls.Add(this.CheckBoxFilterFriendly);
-      this.PanelHeader.Controls.Add(this.PictureBoxClearAll);
-      this.PanelHeader.Controls.Add(this.LabelTitle);
-      this.PanelHeader.Location = new System.Drawing.Point(1, 1);
-      this.PanelHeader.Name = "PanelHeader";
-      this.PanelHeader.Size = new System.Drawing.Size(238, 29);
-      this.PanelHeader.TabIndex = 0;
+      PanelHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+      PanelHeader.BackColor = Color.FromArgb(19, 26, 33);
+      PanelHeader.Controls.Add(CheckBoxFilterBandit);
+      PanelHeader.Controls.Add(CheckBoxFilterBogey);
+      PanelHeader.Controls.Add(CheckBoxFilterNeutral);
+      PanelHeader.Controls.Add(CheckBoxFilterOrganization);
+      PanelHeader.Controls.Add(CheckBoxFilterFriendly);
+      PanelHeader.Controls.Add(PictureBoxClearAll);
+      PanelHeader.Controls.Add(LabelTitle);
+      PanelHeader.Location = new Point(1, 1);
+      PanelHeader.Name = "PanelHeader";
+      PanelHeader.Size = new Size(238, 29);
+      PanelHeader.TabIndex = 0;
       // 
       // CheckBoxFilterBandit
       // 
-      this.CheckBoxFilterBandit.Appearance = System.Windows.Forms.Appearance.Button;
-      this.CheckBoxFilterBandit.BackColor = System.Drawing.Color.Red;
-      this.CheckBoxFilterBandit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-      this.CheckBoxFilterBandit.Checked = true;
-      this.CheckBoxFilterBandit.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.CheckBoxFilterBandit.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.CheckBoxFilterBandit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-      this.CheckBoxFilterBandit.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
-      this.CheckBoxFilterBandit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.CheckBoxFilterBandit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.CheckBoxFilterBandit.Location = new System.Drawing.Point(194, 7);
-      this.CheckBoxFilterBandit.Name = "CheckBoxFilterBandit";
-      this.CheckBoxFilterBandit.Size = new System.Drawing.Size(15, 15);
-      this.CheckBoxFilterBandit.TabIndex = 3;
-      this.CheckBoxFilterBandit.UseVisualStyleBackColor = false;
-      this.CheckBoxFilterBandit.CheckedChanged += new System.EventHandler(this.CheckBoxFilterBandit_CheckedChanged);
-      this.CheckBoxFilterBandit.Paint += new System.Windows.Forms.PaintEventHandler(this.CheckBoxFilter_Paint);
+      CheckBoxFilterBandit.Appearance = Appearance.Button;
+      CheckBoxFilterBandit.BackColor = Color.Red;
+      CheckBoxFilterBandit.BackgroundImageLayout = ImageLayout.Center;
+      CheckBoxFilterBandit.Checked = true;
+      CheckBoxFilterBandit.CheckState = CheckState.Checked;
+      CheckBoxFilterBandit.Cursor = Cursors.Hand;
+      CheckBoxFilterBandit.FlatAppearance.BorderColor = Color.FromArgb(127, 0, 0);
+      CheckBoxFilterBandit.FlatAppearance.CheckedBackColor = Color.Red;
+      CheckBoxFilterBandit.FlatStyle = FlatStyle.Flat;
+      CheckBoxFilterBandit.ForeColor = Color.FromArgb(19, 26, 33);
+      CheckBoxFilterBandit.Location = new Point(182, 7);
+      CheckBoxFilterBandit.Name = "CheckBoxFilterBandit";
+      CheckBoxFilterBandit.Size = new Size(15, 15);
+      CheckBoxFilterBandit.TabIndex = 3;
+      CheckBoxFilterBandit.UseVisualStyleBackColor = false;
+      CheckBoxFilterBandit.CheckedChanged += CheckBoxFilterChanged;
+      CheckBoxFilterBandit.Paint += CheckBoxFilter_Paint;
       // 
       // CheckBoxFilterBogey
       // 
-      this.CheckBoxFilterBogey.Appearance = System.Windows.Forms.Appearance.Button;
-      this.CheckBoxFilterBogey.BackColor = System.Drawing.Color.Orange;
-      this.CheckBoxFilterBogey.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-      this.CheckBoxFilterBogey.Checked = true;
-      this.CheckBoxFilterBogey.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.CheckBoxFilterBogey.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.CheckBoxFilterBogey.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(82)))), ((int)(((byte)(0)))));
-      this.CheckBoxFilterBogey.FlatAppearance.CheckedBackColor = System.Drawing.Color.Orange;
-      this.CheckBoxFilterBogey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.CheckBoxFilterBogey.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.CheckBoxFilterBogey.Location = new System.Drawing.Point(177, 7);
-      this.CheckBoxFilterBogey.Name = "CheckBoxFilterBogey";
-      this.CheckBoxFilterBogey.Size = new System.Drawing.Size(15, 15);
-      this.CheckBoxFilterBogey.TabIndex = 3;
-      this.CheckBoxFilterBogey.UseVisualStyleBackColor = false;
-      this.CheckBoxFilterBogey.CheckedChanged += new System.EventHandler(this.CheckBoxFilterBogey_CheckedChanged);
-      this.CheckBoxFilterBogey.Paint += new System.Windows.Forms.PaintEventHandler(this.CheckBoxFilter_Paint);
+      CheckBoxFilterBogey.Appearance = Appearance.Button;
+      CheckBoxFilterBogey.BackColor = Color.Orange;
+      CheckBoxFilterBogey.BackgroundImageLayout = ImageLayout.Center;
+      CheckBoxFilterBogey.Checked = true;
+      CheckBoxFilterBogey.CheckState = CheckState.Checked;
+      CheckBoxFilterBogey.Cursor = Cursors.Hand;
+      CheckBoxFilterBogey.FlatAppearance.BorderColor = Color.FromArgb(127, 82, 0);
+      CheckBoxFilterBogey.FlatAppearance.CheckedBackColor = Color.Orange;
+      CheckBoxFilterBogey.FlatStyle = FlatStyle.Flat;
+      CheckBoxFilterBogey.ForeColor = Color.FromArgb(19, 26, 33);
+      CheckBoxFilterBogey.Location = new Point(165, 7);
+      CheckBoxFilterBogey.Name = "CheckBoxFilterBogey";
+      CheckBoxFilterBogey.Size = new Size(15, 15);
+      CheckBoxFilterBogey.TabIndex = 3;
+      CheckBoxFilterBogey.UseVisualStyleBackColor = false;
+      CheckBoxFilterBogey.CheckedChanged += CheckBoxFilterChanged;
+      CheckBoxFilterBogey.Paint += CheckBoxFilter_Paint;
       // 
       // CheckBoxFilterNeutral
       // 
-      this.CheckBoxFilterNeutral.Appearance = System.Windows.Forms.Appearance.Button;
-      this.CheckBoxFilterNeutral.BackColor = System.Drawing.Color.Gray;
-      this.CheckBoxFilterNeutral.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-      this.CheckBoxFilterNeutral.Checked = true;
-      this.CheckBoxFilterNeutral.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.CheckBoxFilterNeutral.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.CheckBoxFilterNeutral.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-      this.CheckBoxFilterNeutral.FlatAppearance.CheckedBackColor = System.Drawing.Color.Gray;
-      this.CheckBoxFilterNeutral.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.CheckBoxFilterNeutral.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.CheckBoxFilterNeutral.Location = new System.Drawing.Point(160, 7);
-      this.CheckBoxFilterNeutral.Name = "CheckBoxFilterNeutral";
-      this.CheckBoxFilterNeutral.Size = new System.Drawing.Size(15, 15);
-      this.CheckBoxFilterNeutral.TabIndex = 3;
-      this.CheckBoxFilterNeutral.UseVisualStyleBackColor = false;
-      this.CheckBoxFilterNeutral.CheckedChanged += new System.EventHandler(this.CheckBoxFilterNeutral_CheckedChanged);
-      this.CheckBoxFilterNeutral.Paint += new System.Windows.Forms.PaintEventHandler(this.CheckBoxFilter_Paint);
+      CheckBoxFilterNeutral.Appearance = Appearance.Button;
+      CheckBoxFilterNeutral.BackColor = Color.Gray;
+      CheckBoxFilterNeutral.BackgroundImageLayout = ImageLayout.Center;
+      CheckBoxFilterNeutral.Checked = true;
+      CheckBoxFilterNeutral.CheckState = CheckState.Checked;
+      CheckBoxFilterNeutral.Cursor = Cursors.Hand;
+      CheckBoxFilterNeutral.FlatAppearance.BorderColor = Color.FromArgb(64, 64, 64);
+      CheckBoxFilterNeutral.FlatAppearance.CheckedBackColor = Color.Gray;
+      CheckBoxFilterNeutral.FlatStyle = FlatStyle.Flat;
+      CheckBoxFilterNeutral.ForeColor = Color.FromArgb(19, 26, 33);
+      CheckBoxFilterNeutral.Location = new Point(148, 7);
+      CheckBoxFilterNeutral.Name = "CheckBoxFilterNeutral";
+      CheckBoxFilterNeutral.Size = new Size(15, 15);
+      CheckBoxFilterNeutral.TabIndex = 3;
+      CheckBoxFilterNeutral.UseVisualStyleBackColor = false;
+      CheckBoxFilterNeutral.CheckedChanged += CheckBoxFilterChanged;
+      CheckBoxFilterNeutral.Paint += CheckBoxFilter_Paint;
+      // 
+      // CheckBoxFilterOrganization
+      // 
+      CheckBoxFilterOrganization.Appearance = Appearance.Button;
+      CheckBoxFilterOrganization.BackColor = Color.FromArgb(57, 206, 216);
+      CheckBoxFilterOrganization.Checked = true;
+      CheckBoxFilterOrganization.CheckState = CheckState.Checked;
+      CheckBoxFilterOrganization.Cursor = Cursors.Hand;
+      CheckBoxFilterOrganization.FlatAppearance.BorderColor = Color.FromArgb(0, 64, 0);
+      CheckBoxFilterOrganization.FlatAppearance.CheckedBackColor = Color.FromArgb(57, 206, 216);
+      CheckBoxFilterOrganization.FlatStyle = FlatStyle.Flat;
+      CheckBoxFilterOrganization.ForeColor = Color.FromArgb(19, 26, 33);
+      CheckBoxFilterOrganization.Location = new Point(198, 7);
+      CheckBoxFilterOrganization.Name = "CheckBoxFilterOrganization";
+      CheckBoxFilterOrganization.Size = new Size(15, 15);
+      CheckBoxFilterOrganization.TabIndex = 3;
+      CheckBoxFilterOrganization.UseVisualStyleBackColor = false;
+      CheckBoxFilterOrganization.CheckedChanged += CheckBoxFilterChanged;
+      CheckBoxFilterOrganization.Paint += CheckBoxFilter_Paint;
       // 
       // CheckBoxFilterFriendly
       // 
-      this.CheckBoxFilterFriendly.Appearance = System.Windows.Forms.Appearance.Button;
-      this.CheckBoxFilterFriendly.BackColor = System.Drawing.Color.Green;
-      this.CheckBoxFilterFriendly.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-      this.CheckBoxFilterFriendly.Checked = true;
-      this.CheckBoxFilterFriendly.CheckState = System.Windows.Forms.CheckState.Checked;
-      this.CheckBoxFilterFriendly.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.CheckBoxFilterFriendly.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-      this.CheckBoxFilterFriendly.FlatAppearance.CheckedBackColor = System.Drawing.Color.Green;
-      this.CheckBoxFilterFriendly.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.CheckBoxFilterFriendly.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.CheckBoxFilterFriendly.Location = new System.Drawing.Point(143, 7);
-      this.CheckBoxFilterFriendly.Name = "CheckBoxFilterFriendly";
-      this.CheckBoxFilterFriendly.Size = new System.Drawing.Size(15, 15);
-      this.CheckBoxFilterFriendly.TabIndex = 3;
-      this.CheckBoxFilterFriendly.UseVisualStyleBackColor = false;
-      this.CheckBoxFilterFriendly.CheckedChanged += new System.EventHandler(this.CheckBoxFilterFriendly_CheckedChanged);
-      this.CheckBoxFilterFriendly.Paint += new System.Windows.Forms.PaintEventHandler(this.CheckBoxFilter_Paint);
+      CheckBoxFilterFriendly.Appearance = Appearance.Button;
+      CheckBoxFilterFriendly.BackColor = Color.Green;
+      CheckBoxFilterFriendly.BackgroundImageLayout = ImageLayout.Center;
+      CheckBoxFilterFriendly.Checked = true;
+      CheckBoxFilterFriendly.CheckState = CheckState.Checked;
+      CheckBoxFilterFriendly.Cursor = Cursors.Hand;
+      CheckBoxFilterFriendly.FlatAppearance.BorderColor = Color.FromArgb(0, 64, 0);
+      CheckBoxFilterFriendly.FlatAppearance.CheckedBackColor = Color.Green;
+      CheckBoxFilterFriendly.FlatStyle = FlatStyle.Flat;
+      CheckBoxFilterFriendly.ForeColor = Color.FromArgb(19, 26, 33);
+      CheckBoxFilterFriendly.Location = new Point(131, 7);
+      CheckBoxFilterFriendly.Name = "CheckBoxFilterFriendly";
+      CheckBoxFilterFriendly.Size = new Size(15, 15);
+      CheckBoxFilterFriendly.TabIndex = 3;
+      CheckBoxFilterFriendly.UseVisualStyleBackColor = false;
+      CheckBoxFilterFriendly.CheckedChanged += CheckBoxFilterChanged;
+      CheckBoxFilterFriendly.Paint += CheckBoxFilter_Paint;
       // 
       // PictureBoxClearAll
       // 
-      this.PictureBoxClearAll.Image = global::Star_Citizen_Handle_Query.Properties.Resources.ClearAll_Deactivated;
-      this.PictureBoxClearAll.Location = new System.Drawing.Point(219, 7);
-      this.PictureBoxClearAll.Name = "PictureBoxClearAll";
-      this.PictureBoxClearAll.Size = new System.Drawing.Size(12, 15);
-      this.PictureBoxClearAll.TabIndex = 2;
-      this.PictureBoxClearAll.TabStop = false;
+      PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
+      PictureBoxClearAll.Location = new Point(219, 7);
+      PictureBoxClearAll.Name = "PictureBoxClearAll";
+      PictureBoxClearAll.Size = new Size(12, 15);
+      PictureBoxClearAll.TabIndex = 2;
+      PictureBoxClearAll.TabStop = false;
       // 
       // LabelTitle
       // 
-      this.LabelTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelTitle.Location = new System.Drawing.Point(4, 7);
-      this.LabelTitle.Name = "LabelTitle";
-      this.LabelTitle.Size = new System.Drawing.Size(137, 15);
-      this.LabelTitle.TabIndex = 0;
-      this.LabelTitle.Text = "Beziehungen";
-      this.LabelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.LabelTitle.MouseCaptureChanged += new System.EventHandler(this.LabelTitle_MouseCaptureChanged);
-      this.LabelTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LabelTitle_MouseDown);
-      this.LabelTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.LabelTitle_MouseMove);
+      LabelTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelTitle.Location = new Point(4, 7);
+      LabelTitle.Name = "LabelTitle";
+      LabelTitle.Size = new Size(125, 15);
+      LabelTitle.TabIndex = 0;
+      LabelTitle.Text = "Beziehungen";
+      LabelTitle.TextAlign = ContentAlignment.MiddleLeft;
+      LabelTitle.MouseCaptureChanged += LabelTitle_MouseCaptureChanged;
+      LabelTitle.MouseDown += LabelTitle_MouseDown;
+      LabelTitle.MouseMove += LabelTitle_MouseMove;
       // 
       // PanelRelations
       // 
-      this.PanelRelations.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.PanelRelations.BackColor = System.Drawing.Color.Lime;
-      this.PanelRelations.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.PanelRelations.Location = new System.Drawing.Point(1, 30);
-      this.PanelRelations.Margin = new System.Windows.Forms.Padding(0);
-      this.PanelRelations.Name = "PanelRelations";
-      this.PanelRelations.Size = new System.Drawing.Size(238, 29);
-      this.PanelRelations.TabIndex = 1;
-      this.PanelRelations.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.PanelRelations_ControlAdded);
-      this.PanelRelations.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.PanelRelations_ControlRemoved);
+      PanelRelations.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      PanelRelations.BackColor = Color.Lime;
+      PanelRelations.FlowDirection = FlowDirection.TopDown;
+      PanelRelations.Location = new Point(1, 30);
+      PanelRelations.Margin = new Padding(0);
+      PanelRelations.Name = "PanelRelations";
+      PanelRelations.Size = new Size(238, 29);
+      PanelRelations.TabIndex = 1;
+      PanelRelations.ControlAdded += PanelRelations_ControlAdded;
+      PanelRelations.ControlRemoved += PanelRelations_ControlRemoved;
       // 
       // FormRelations
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.BackColor = System.Drawing.Color.Lime;
-      this.ClientSize = new System.Drawing.Size(240, 60);
-      this.Controls.Add(this.PanelRelations);
-      this.Controls.Add(this.PanelHeader);
-      this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.Name = "FormRelations";
-      this.ShowInTaskbar = false;
-      this.Text = "Star Citizen Handle Query";
-      this.TopMost = true;
-      this.TransparencyKey = System.Drawing.Color.Lime;
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormRelations_FormClosing);
-      this.Shown += new System.EventHandler(this.FormRelations_Shown);
-      this.PanelHeader.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClearAll)).EndInit();
-      this.ResumeLayout(false);
-
+      AutoScaleDimensions = new SizeF(7F, 15F);
+      AutoScaleMode = AutoScaleMode.Font;
+      BackColor = Color.Lime;
+      ClientSize = new Size(240, 60);
+      Controls.Add(PanelRelations);
+      Controls.Add(PanelHeader);
+      ForeColor = Color.FromArgb(57, 206, 216);
+      FormBorderStyle = FormBorderStyle.None;
+      Icon = (Icon)resources.GetObject("$this.Icon");
+      Name = "FormRelations";
+      ShowInTaskbar = false;
+      Text = "Star Citizen Handle Query";
+      TopMost = true;
+      TransparencyKey = Color.Lime;
+      FormClosing += FormRelations_FormClosing;
+      Shown += FormRelations_Shown;
+      PanelHeader.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)PictureBoxClearAll).EndInit();
+      ResumeLayout(false);
     }
 
     #endregion
@@ -198,10 +215,11 @@
     private Panel PanelHeader;
     private Label LabelTitle;
     private FlowLayoutPanel PanelRelations;
-        private PictureBox PictureBoxClearAll;
+    private PictureBox PictureBoxClearAll;
     private CheckBox CheckBoxFilterFriendly;
     private CheckBox CheckBoxFilterNeutral;
     private CheckBox CheckBoxFilterBogey;
     private CheckBox CheckBoxFilterBandit;
+    private CheckBox CheckBoxFilterOrganization;
   }
 }

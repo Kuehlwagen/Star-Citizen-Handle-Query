@@ -70,7 +70,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private void Handle_MouseClick(object sender, MouseEventArgs e) {
-      ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(LogInfoItem.Handle);
+      ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(LogInfoItem.Handle, Relation.NotAssigned);
     }
 
     private void TimerRemoveControl_Tick(object sender, EventArgs e) {

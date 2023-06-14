@@ -409,12 +409,44 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    public void ChangeRelation(Keys key) {
+    public void ChangeRelation(RelationType relationType, Keys key) {
       if (PanelInfo.Controls.Count > 0) {
-        UserControlHandle handleControl = PanelInfo.Controls[0] as UserControlHandle;
-        handleControl.ChangeRelation(key);
-        RelationsForm?.UpdateRelation(handleControl.HandleName, handleControl.HandleRelation);
+        switch (relationType) {
+          case RelationType.Handle:
+            UserControlHandle handleControl = PanelInfo.Controls[0] as UserControlHandle;
+            handleControl.ChangeRelation(key);
+            RelationsForm?.UpdateRelation(handleControl.HandleName, RelationType.Handle, handleControl.HandleRelation);
+            break;
+          case RelationType.Organization:
+            UserControlOrganization orgControl = null;
+            if (!ProgramSettings.Relations.ShowWindow && PanelInfo.Controls.Count > 1 && PanelInfo.Controls[1] is UserControlOrganization) {
+              orgControl = PanelInfo.Controls[1] as UserControlOrganization;
+            } else if (ProgramSettings.Relations.ShowWindow && PanelInfo.Controls.Count > 2) {
+              orgControl = PanelInfo.Controls[2] as UserControlOrganization;
+            }
+            if (orgControl != null) {
+              orgControl.ChangeRelation(key);
+              RelationsForm?.UpdateRelation(orgControl.SID, RelationType.Organization, orgControl.Relation);
+            }
+            break;
+        }
       }
+    }
+
+    public Relation GetOrganizationRelation(string sid) {
+      Relation rtnVal = Relation.NotAssigned;
+      if (RelationsForm != null) {
+        rtnVal = RelationsForm.GetOrganizationRelation(sid);
+      }
+      return rtnVal;
+    }
+
+    public Relation GetHandleRelation(string handle) {
+      Relation rtnVal = Relation.NotAssigned;
+      if (RelationsForm != null) {
+        rtnVal = RelationsForm.GetHandleRelation(handle);
+      }
+      return rtnVal;
     }
 
     private void TextBoxHandle_KeyDown(object sender, KeyEventArgs e) {
@@ -431,9 +463,28 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           case Keys.NumPad2:
           case Keys.NumPad3:
           case Keys.NumPad4:
-            // Ggf. Handle-Beziehung ändern
             e.SuppressKeyPress = true;
-            ChangeRelation(e.KeyCode);
+            ChangeRelation(RelationType.Handle, e.KeyCode);
+            break;
+          case Keys.Enter:
+            e.SuppressKeyPress = true;
+            QueryHandle(true);
+            break;
+        }
+      } else if (e.Shift) {
+        switch (e.KeyCode) {
+          case Keys.D0:
+          case Keys.D1:
+          case Keys.D2:
+          case Keys.D3:
+          case Keys.D4:
+          case Keys.NumPad0:
+          case Keys.NumPad1:
+          case Keys.NumPad2:
+          case Keys.NumPad3:
+          case Keys.NumPad4:
+            e.SuppressKeyPress = true;
+            ChangeRelation(RelationType.Organization, e.KeyCode);
             break;
           case Keys.Enter:
             e.SuppressKeyPress = true;
@@ -447,11 +498,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           case Keys.D2:
           case Keys.D3:
           case Keys.D4:
+          case Keys.D5:
           case Keys.NumPad0:
           case Keys.NumPad1:
           case Keys.NumPad2:
           case Keys.NumPad3:
           case Keys.NumPad4:
+          case Keys.NumPad5:
             e.SuppressKeyPress = true;
             e.Handled = true;
             RelationsForm?.FilterRelations(e.KeyCode);
@@ -497,6 +550,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         LabelQuery.Enabled = false;
         // Handle-Informationen auslesen
         HandleInfo handleInfo = await GetHandleInfo(forceLive, TextBoxHandle.Text, ProgramSettings, CacheDirectoryType.Handle);
+        handleInfo.Relation = GetHandleRelation(handleInfo.Profile.Handle);
 
         // Ggf. Cache-Verzeichnisse erstellen
         CreateDirectory(CacheDirectoryType.Handle);
@@ -535,7 +589,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           }
 
           // Ggf. Beziehung aktualisieren
-          RelationsForm?.UpdateRelation(handleInfo.Profile.Handle, handleInfo.Relation);
+          RelationsForm?.UpdateRelation(handleInfo.Profile.Handle, RelationType.Handle, handleInfo.Relation);
 
           // Autovervollständigung aktualisieren
           UpdateAutoComplete(handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK && handleInfo?.Profile?.Handle != null ? handleInfo.Profile.Handle : string.Empty);
@@ -550,7 +604,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    public void SetAndQueryHandle(string handle) {
+    public void SetAndQueryHandle(string handle, Relation relation) {
       // Handle setzen und die Suche ausführen
       if (TextBoxHandle.Enabled) {
         if (!Visible) {

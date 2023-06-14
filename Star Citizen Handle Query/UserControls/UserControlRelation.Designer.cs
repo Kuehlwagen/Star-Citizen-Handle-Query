@@ -23,45 +23,57 @@
     /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
     /// </summary>
     private void InitializeComponent() {
-      this.LabelHandle = new System.Windows.Forms.Label();
-      this.LabelRelation = new System.Windows.Forms.Label();
-      this.SuspendLayout();
+      LabelHandle = new Label();
+      LabelRelation = new Label();
+      LabelOrganization = new Label();
+      SuspendLayout();
       // 
       // LabelHandle
       // 
-      this.LabelHandle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelHandle.Location = new System.Drawing.Point(14, 2);
-      this.LabelHandle.Name = "LabelHandle";
-      this.LabelHandle.Size = new System.Drawing.Size(221, 21);
-      this.LabelHandle.TabIndex = 1;
-      this.LabelHandle.Text = "Handle";
-      this.LabelHandle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+      LabelHandle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelHandle.Location = new Point(14, 2);
+      LabelHandle.Name = "LabelHandle";
+      LabelHandle.Size = new Size(199, 21);
+      LabelHandle.TabIndex = 1;
+      LabelHandle.Text = "Handle";
+      LabelHandle.TextAlign = ContentAlignment.MiddleLeft;
       // 
       // LabelRelation
       // 
-      this.LabelRelation.Location = new System.Drawing.Point(8, 2);
-      this.LabelRelation.Name = "LabelRelation";
-      this.LabelRelation.Size = new System.Drawing.Size(4, 21);
-      this.LabelRelation.TabIndex = 2;
+      LabelRelation.Location = new Point(8, 2);
+      LabelRelation.Name = "LabelRelation";
+      LabelRelation.Size = new Size(4, 21);
+      LabelRelation.TabIndex = 2;
+      // 
+      // LabelOrganization
+      // 
+      LabelOrganization.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelOrganization.Image = Properties.Resources.Organization_Small;
+      LabelOrganization.Location = new Point(215, 2);
+      LabelOrganization.Name = "LabelOrganization";
+      LabelOrganization.Size = new Size(20, 20);
+      LabelOrganization.TabIndex = 4;
+      LabelOrganization.Visible = false;
       // 
       // UserControlRelation
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.Controls.Add(this.LabelRelation);
-      this.Controls.Add(this.LabelHandle);
-      this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
-      this.Name = "UserControlRelation";
-      this.Size = new System.Drawing.Size(238, 25);
-      this.Load += new System.EventHandler(this.UserControlLog_Load);
-      this.ResumeLayout(false);
-
+      AutoScaleDimensions = new SizeF(7F, 15F);
+      AutoScaleMode = AutoScaleMode.Font;
+      BackColor = Color.FromArgb(19, 26, 33);
+      Controls.Add(LabelOrganization);
+      Controls.Add(LabelRelation);
+      Controls.Add(LabelHandle);
+      ForeColor = Color.FromArgb(57, 206, 216);
+      Margin = new Padding(0, 1, 0, 0);
+      Name = "UserControlRelation";
+      Size = new Size(238, 25);
+      Load += UserControlLog_Load;
+      ResumeLayout(false);
     }
 
-        #endregion
-        private Label LabelHandle;
+    #endregion
+    private Label LabelHandle;
     private Label LabelRelation;
+    private Label LabelOrganization;
   }
 }

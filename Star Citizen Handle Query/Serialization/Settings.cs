@@ -84,7 +84,7 @@
     public bool AutoCheckForUpdate { get; set; } = false;
 
     /// <summary>Angabe, ob die Stream Live-Anzeige ausgeblendet werden soll</summary>
-    public bool HideStreamLiveStatus { get; set; } = false;
+    public bool HideStreamLiveStatus { get; set; } = true;
 
     /// <summary>LogFileWatcher relevante Einstellungen</summary>
     public LogMonitorSettings LogMonitor { get; set; } = new();
