@@ -52,6 +52,8 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
 - __Lokaler Cache:__ Öffnet ein Fenster mit Informationen zum lokalen Cache
 - __Nach Update suchen:__ Sucht auf GitHub nach einem Update für das Tool
 - __Über:__ Öffnet ein Hinweisfenster mit Informationen zur Version des Tools
+- __Beziehungen bereitstellen:__ Stellt die Beziehungen in einer JSON-Datei bereit (nur sichtbar, wenn das Beziehungen-Fenster dargestellt werden soll)
+- __Beziehungen übernehmen:__ Übernimmt die Beziehungen aus einer zuvor bereitgestellten JSON-Datei (nur sichtbar, wenn das Beziehungen-Fenster dargestellt werden soll)
 - __Beenden:__ Beendet das Tool
 
 ## Lokaler Cache
@@ -84,11 +86,18 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
   - `Strg + 3`: Unbekannt
   - `Strg + 4`: Feindlich
   - `Strg + 0`: Beziehungsstatus entfernen
+- Per Tastenkürzel kann der Beziehungsstatus der aktuellen Hauptorganisation festgelegt werden (auch dann, wenn die Anzeige des Beziehungen-Fensters nicht aktiviert ist):
+  - `Umschalt + 1`: Freundlich
+  - `Umschalt + 2`: Neutral
+  - `Umschalt + 3`: Unbekannt
+  - `Umschalt + 4`: Feindlich
+  - `Umschalt + 0`: Beziehungsstatus entfernen
 - Sofern in den Einstellungen die Anzeige des Beziehungen-Fensters aktiviert ist, können die Filter via Tastenkombination umgeschaltet werden:
   - `Alt + 1`: Freundlich
   - `Alt + 2`: Neutral
   - `Alt + 3`: Unbekannt
   - `Alt + 4`: Feindlich
+  - `Alt + 5`: Organisation
   - `Alt + 0`: Alle Filter
 - Folgende Funktionen sind nur aktiv, wenn in den Einstellungen in der Gruppe `Fenster` das Kontrollkästchen `Mauseingaben ignorieren` nicht gesetzt ist:
   - Ein Mauslinksklick auf das Handle-Avatar öffnet die Informationsseite des Handles auf der Star Citizen Webseite (z.B. https://robertsspaceindustries.com/citizens/Kuehlwagen).
@@ -99,7 +108,7 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
   - Wird währenddessen die `Strg`-Taste gedrückt gehalten, wird das Auslesen der Handle-Informationen inklusive Avatare (Handle, Organisation und Affiliationen) via Star Citizen Webseite erzwungen.
   - Klickt man die Zahnrad-Schaltfläche, wird das Einstellungen-Fenster geöffnet.
   - Ist die Einstellung `Position merken` in der Kategorie `Fenster` aktiviert, wird beim Beenden des Tools die Position des Hauptfensters in den Einstellungen gespeichert. Beim Start des Tools wird das Hauptfenster an die zuvor gespeicherte Position gesetzt. Hält man, während das Tool gestartet wird, die `Umschalt`-Taste gedrückt, wird das Fenster immer an die Standardposition (oben mittig) gesetzt.
-  - Wenn in den Einstellungen die Anzeige des Beziehungen-Fensters aktiviert ist, werden unterhalb des Handle-Bereichs Schaltflächen dargestellt, mit denen man via Mauslinksklick die Beziehung des Handles festlegen kann. Die aktuell zugewiesene Beziehung wird als farblicher Balken rechts am Handle-Avatar dargestellt. Zusätzlich wird ein Eintrag auf dem Beziehungen-Fenster erstellt oder aktualisiert.
+  - Wenn in den Einstellungen die Anzeige des Beziehungen-Fensters aktiviert ist, werden unterhalb des Handle-Bereichs Schaltflächen dargestellt, mit denen man via Mauslinksklick die Beziehung des Handles und bei gedrückter Umschalt-Taste die Beziehung der Hauptorganisation festlegen kann. Die aktuell zugewiesene Beziehung wird als farblicher Balken rechts am Handle-Avatar dargestellt. Zusätzlich wird ein Eintrag auf dem Beziehungen-Fenster erstellt oder aktualisiert.
 
 ## Log-Monitor Fenster
 
@@ -131,11 +140,12 @@ Das Fenster enthält folgende Informationen:
 
 ![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/Relations.png?raw=true "Beziehungen")
 
-Hier werden sämtliche Handles aufgelistet, denen eine Beziehung zugewiesen wurde. Dabei wird der Beziehungsstatus farblich vor dem Handle dargestellt:
+Hier werden sämtliche Handles und Organisationen aufgelistet, denen eine Beziehung zugewiesen wurde. Dabei wird der Beziehungsstatus farblich vor dem Handle dargestellt:
 - `Grün`: Freundlich
 - `Grau`: Neutral
 - `Orange`: Unbekannt
 - `Rot`: Feindlich
+Organisationen werden via Organisation-Symbol auf der rechten Seite dargestellt.
 Diese Liste wird beim Beenden des Tools gespeichert und beim erneuten Start des Tools wieder dargestellt.
 
 ### Titelleiste
@@ -144,6 +154,7 @@ Diese Liste wird beim Beenden des Tools gespeichert und beim erneuten Start des 
   - `Alt + 2`: Neutral
   - `Alt + 3`: Unbekannt
   - `Alt + 4`: Feindlich
+  - `Alt + 5`: Organisation
   - `Alt + 0`: Alle Filter
 - Via Mauslinksklick auf das Mülltonnen-Symbol kann, sofern mindestens ein Eintrag enthalten ist, die Liste gelöscht werden.
 
