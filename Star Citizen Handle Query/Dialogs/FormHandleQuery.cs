@@ -93,7 +93,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         // Veraltete Cache-Dateien löschen
         ClearCache(true);
 
-        // Ggf. Beziehungen bereitsetllen/übernehmen anzeigen
+        // Ggf. Beziehungen bereitstellen/übernehmen anzeigen
         if (ProgramSettings.Relations.ShowWindow) {
           BeziehungenBereitstellenToolStripMenuItem.Visible = true;
           BeziehungenUebernehmenToolStripMenuItem.Visible = true;

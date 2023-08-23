@@ -17,7 +17,7 @@
       "About": "\u00DCber",
       "Check_For_Update": "Nach Update suchen",
       "Export_Relations": "Beziehungen bereitstellen",
-      "Import_Relations": "Bezeichnungen \u00FCbernehmen"
+      "Import_Relations": "Beziehungen \u00FCbernehmen"
     },
     "MessageBoxes": {
       "Clear_Local_Cache_Question": "Der lokale Cache wird komplett geleert. Fortfahren?",
