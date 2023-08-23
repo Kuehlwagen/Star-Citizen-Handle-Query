@@ -23,11 +23,14 @@ https://discord.com/invite/WmzNY3mCm6
 - __Bei Programmstart nach Update suchen:__ Angabe, ob bei jedem Programmstart geprüft werden soll, ob ein Programmupdate zur Verfügung steht
   - Ausschließlich wenn ein Update zur Verfügung steht, wird eine Benachrichtigung angezeigt.
 - __Log-Monitor anzeigen:__ Angabe, ob der Log-Monitor angezeigt werden soll
-- __Log-Einträge Maximum:__ Angabe, wie viele Einträge maximal im Log-Monitor angezeigt werden sollen
-- __Log-Eintrag Anzeigedauer:__ Anzeigedauer eines Logeintrags in Minuten (`0` = unendlich)
+  - __Einträge Maximum:__ Angabe, wie viele Einträge maximal im Log-Monitor angezeigt werden sollen
+  - __Eintrag Anzeigedauer:__ Anzeigedauer eines Logeintrags in Minuten (`0` = unendlich)
+  - __Spielertode anzeigen:__ Angabe, ob Spielertode im Log-Monitor angezeigt werden sollen
+  - __Ladebildschirm-Dauer anzeigen:__ Angabe, ob die Ladebildschirm-Dauer im Log-Monitor angezeigt werden sollen
+  - __Shader-Kompilierungen anzeigen:__ Angabe, ob Shader-Kompilierungen im Log-Monitor angezeigt werden sollen
 - __Beziehungen anzeigen:__ Angabe, ob das Beziehungen-Fenster angezeigt werden soll
-- __Beziehungen alphabetisch sortieren:__ Angabe, ob die Einträge auf dem Beziehungen-Fenster alphabetisch sortiert werden sollen (Standard: Reihenfolge, in welcher die Einträge hinzugefügt werden)
-- __Beziehungen-Einträge Max.:__ Angabe, wie viele Einträge maximal auf dem Beziehungen-Fenster dargestellt werden sollen (es werden unendlich viele Einträge im lokalen Cache gespeichert)
+  - __Alphabetisch sortieren:__ Angabe, ob die Einträge auf dem Beziehungen-Fenster alphabetisch sortiert werden sollen (Standard: Reihenfolge, in welcher die Einträge hinzugefügt werden)
+  - __Einträge Maximum:__ Angabe, wie viele Einträge maximal auf dem Beziehungen-Fenster dargestellt werden sollen (es werden unendlich viele Einträge im lokalen Cache gespeichert)
 ### Fenster
 - __Deckkraft:__ Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
 - __Globale Taste:__ Hier kann die Taste angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifikatoren (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
@@ -149,12 +152,12 @@ Organisationen werden via Organisation-Symbol auf der rechten Seite dargestellt.
 Diese Liste wird beim Beenden des Tools gespeichert und beim erneuten Start des Tools wieder dargestellt.
 
 ### Titelleiste
-- Via Mauslinksklick kann per Mauslinksklick auf eines der farbigen Vierecke der Filter für diesen Beziehungsstatus umgeschaltet werden. Die Filter können ebenfalls aus dem Hauptfenster heraus via Tastenkombination umgeschaltet werden:
-  - `Alt + 1`: Freundlich
-  - `Alt + 2`: Neutral
-  - `Alt + 3`: Unbekannt
-  - `Alt + 4`: Feindlich
-  - `Alt + 5`: Organisation
+- Via Mauslinksklick kann auf eines der farbigen Vierecke der Filter für diesen Beziehungsstatus umgeschaltet werden. Die Filter können ebenfalls aus dem Hauptfenster heraus via Tastenkombination umgeschaltet werden:
+  - `Alt + 1`: Freundlich (grün)
+  - `Alt + 2`: Neutral (grau)
+  - `Alt + 3`: Unbekannt (gelb)
+  - `Alt + 4`: Feindlich (rot)
+  - `Alt + 5`: Organisation (cyan)
   - `Alt + 0`: Alle Filter
 - Via Mauslinksklick auf das Mülltonnen-Symbol kann, sofern mindestens ein Eintrag enthalten ist, die Liste gelöscht werden.
 
