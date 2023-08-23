@@ -155,7 +155,7 @@
     public bool LoadingScreenDuration { get; set; } = true;
 
     /// <summary>Angabe, ob Shader-Kompilierungen angezeigt werden sollen</summary>
-    public bool Compile { get; set; } = true;
+    public bool Compile { get; set; } = false;
 
     public object Clone() {
       return MemberwiseClone();

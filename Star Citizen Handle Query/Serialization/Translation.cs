@@ -132,17 +132,23 @@
 
     public string Show_Log_Monitor { get; set; } = "Log-Monitor anzeigen";
 
-    public string Log_Entries_Max { get; set; } = "Log-Einträge Maximum:";
+    public string Log_Entries_Max { get; set; } = "Einträge Maximum:";
 
-    public string Log_Entry_Display_Duration { get; set; } = "Log-Eintrag Anzeigedauer:";
+    public string Log_Entry_Display_Duration { get; set; } = "Eintrag Anzeigedauer:";
+
+    public string Log_Show_Corpse { get; set; } = "Spielertode anzeigen";
+
+    public string Log_Show_Loading_Screen_Duration { get; set; } = "Ladebildschirm-Dauer anzeigen";
+
+    public string Log_Show_Compile { get; set; } = "Shader-Kompilierungen anzeigen";
 
     public string Log_Entry_Display_Duration_Minutes { get; set; } = "Minute(n)";
 
     public string Show_Relations { get; set; } = "Beziehungen anzeigen";
 
-    public string Sort_Relations_Alphabetically { get; set; } = "Beziehungen alphabetisch sortieren";
+    public string Sort_Relations_Alphabetically { get; set; } = "Alphabetisch sortieren";
 
-    public string Relations_Entries_Max { get; set; } = "Beziehungen-Einträge Max.:";
+    public string Relations_Entries_Max { get; set; } = "Einträge Maximum:";
 
   }
 

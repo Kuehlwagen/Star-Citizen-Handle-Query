@@ -73,6 +73,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxShowLog.Checked = ProgramSettings.LogMonitor.ShowWindow;
       NumericUpDownLogEintraegeMaximum.Value = ProgramSettings.LogMonitor.EntriesMax;
       NumericUpDownLogEintragAnzeigedauer.Value = ProgramSettings.LogMonitor.EntryDisplayDurationInMinutes;
+      CheckBoxLogMonitorFilterCorpse.Checked = ProgramSettings.LogMonitor.Filter.Corpse;
+      CheckBoxLogMonitorFilterLoadingScreenDuration.Checked = ProgramSettings.LogMonitor.Filter.LoadingScreenDuration;
+      CheckBoxLogMonitorFIlterCompile.Checked = ProgramSettings.LogMonitor.Filter.Compile;
       CheckBoxShowRelations.Checked = ProgramSettings.Relations.ShowWindow;
       CheckBoxSortRelationsAlphabetically.Checked = ProgramSettings.Relations.SortAlphabetically;
       NumericUpDownRelationsEntriesMaximum.Value = ProgramSettings.Relations.EntriesMax;
@@ -167,6 +170,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.LogMonitor.ShowWindow = CheckBoxShowLog.Checked;
       NumericUpDownLogEintraegeMaximum.Enabled = CheckBoxShowLog.Checked;
       NumericUpDownLogEintragAnzeigedauer.Enabled = CheckBoxShowLog.Checked;
+      CheckBoxLogMonitorFilterCorpse.Enabled = CheckBoxShowLog.Checked;
+      CheckBoxLogMonitorFilterLoadingScreenDuration.Enabled = CheckBoxShowLog.Checked;
+      CheckBoxLogMonitorFIlterCompile.Enabled = CheckBoxShowLog.Checked;
     }
 
     private void NumericUpDownLogEintraegeMaximum_ValueChanged(object sender, EventArgs e) {
@@ -177,9 +183,21 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.LogMonitor.EntryDisplayDurationInMinutes = Convert.ToInt32(NumericUpDownLogEintragAnzeigedauer.Value);
     }
 
+    private void CheckBoxLogMonitorFilterCorpse_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.LogMonitor.Filter.Corpse = CheckBoxLogMonitorFilterCorpse.Checked;
+    }
+
+    private void CheckBoxLogMonitorFilterLoadingScreenDuration_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.LogMonitor.Filter.LoadingScreenDuration = CheckBoxLogMonitorFilterLoadingScreenDuration.Checked;
+    }
+
+    private void CheckBoxLogMonitorFIlterCompile_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.LogMonitor.Filter.Compile = CheckBoxLogMonitorFIlterCompile.Checked;
+    }
+
     private void CheckBoxShowRelations_CheckedChanged(object sender, EventArgs e) {
       ProgramSettings.Relations.ShowWindow = CheckBoxShowRelations.Checked;
-      CheckBoxSortRelationsAlphabetically.Visible = CheckBoxShowRelations.Checked;
+      CheckBoxSortRelationsAlphabetically.Enabled = CheckBoxShowRelations.Checked;
       NumericUpDownRelationsEntriesMaximum.Enabled = CheckBoxShowRelations.Checked;
     }
 
@@ -211,6 +229,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LabelLogEintraegeMaximum.Text = CurrentLocalization.Settings.Display.Log_Entries_Max;
       LabelLogEintragAnzeigeDauer.Text = CurrentLocalization.Settings.Display.Log_Entry_Display_Duration;
       LabelLogEintragAnzeigedauerMinuten.Text = CurrentLocalization.Settings.Display.Log_Entry_Display_Duration_Minutes;
+      CheckBoxLogMonitorFilterCorpse.Text = CurrentLocalization.Settings.Display.Log_Show_Corpse;
+      CheckBoxLogMonitorFilterLoadingScreenDuration.Text = CurrentLocalization.Settings.Display.Log_Show_Loading_Screen_Duration;
+      CheckBoxLogMonitorFIlterCompile.Text = CurrentLocalization.Settings.Display.Log_Show_Compile;
       CheckBoxShowRelations.Text = CurrentLocalization.Settings.Display.Show_Relations;
       CheckBoxSortRelationsAlphabetically.Text = CurrentLocalization.Settings.Display.Sort_Relations_Alphabetically;
       LabelRelationsEntriesMaximum.Text = CurrentLocalization.Settings.Display.Relations_Entries_Max;
