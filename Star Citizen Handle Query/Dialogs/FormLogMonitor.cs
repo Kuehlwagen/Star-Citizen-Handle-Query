@@ -285,7 +285,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                 rtnVal.Add(new LogMonitorInfo(LogType.HandleAction,
                   match.Groups["Date"].Value,
                   match.Groups["Handle"].Value,
-                  match.Groups["Handle"].Value));
+                  match.Groups["Handle"].Value,
+                  icon: Properties.Resources.Ship));
                 continue;
               }
             }
