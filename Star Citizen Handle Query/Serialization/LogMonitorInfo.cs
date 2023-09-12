@@ -5,13 +5,16 @@ namespace Star_Citizen_Handle_Query.Serialization {
   [Serializable()]
   public class LogMonitorInfo : ICloneable {
 
-    public LogMonitorInfo(LogType logType, string date, string handle = null, string info = null, string additionalInfo = null) {
+    public LogMonitorInfo(LogType logType, string date, string handle = null, string info = null, string additionalInfo = null, Bitmap icon = null) {
       LogType = logType;
       Date = DateTime.Parse(date, CultureInfo.InvariantCulture).ToLocalTime();
       Handle = handle ?? string.Empty;
       Info = info ?? string.Empty;
       IsCorpseEnabled = logType == LogType.Corpse && additionalInfo?.ToLower() == "yes";
+      Icon = icon;
     }
+
+    public Bitmap Icon { get; } = Properties.Resources.Info;
 
     public LogType LogType { get; } = LogType.Corpse;
 
@@ -56,7 +59,8 @@ namespace Star_Citizen_Handle_Query.Serialization {
   public enum LogType {
     Corpse,
     LoadingScreenDuration,
-    Compile
+    Compile,
+    HandleAction
   }
 
 }

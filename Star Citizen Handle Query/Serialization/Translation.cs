@@ -142,6 +142,8 @@
 
     public string Log_Show_Compile { get; set; } = "Shader-Kompilierungen anzeigen";
 
+    public string Log_Show_QT { get; set; } = "QT anzeigen";
+
     public string Log_Entry_Display_Duration_Minutes { get; set; } = "Minute(n)";
 
     public string Show_Relations { get; set; } = "Beziehungen anzeigen";

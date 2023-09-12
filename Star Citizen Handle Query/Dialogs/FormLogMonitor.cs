@@ -17,9 +17,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private readonly Regex RgxCorpse = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>.+<Corpse> Player '(?<Handle>[\w_\-]+)'.+IsCorpseEnabled: (?<Corpse>\w{2,3})[,\.] ?(?<Info>[\w\s]*)\.?$",
      RegexOptions.Compiled);
-    private readonly Regex RgxLoadingScreenDuration = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>.+SC_Default closed after (?<Seconds>\d+\.\d+) seconds$",
+    private readonly Regex RgxLoadingScreenDuration = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>\sLoading screen for.+closed after (?<Seconds>\d+\.\d+) seconds$",
       RegexOptions.Compiled);
-    private readonly Regex RgxCompile = new Regex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>\s*Compile\s*(?<Type>\w+)@\w+\((?<Type2>\w+)\)",
+    private readonly Regex RgxCompile = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>\s*Compile\s*(?<Type>\w+)@\w+\((?<Type2>\w+)\)",
+      RegexOptions.Compiled);
+    private readonly Regex RgxQT = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>\s--\sEntity Trying To QT:\s(?<Handle>.+)$",
       RegexOptions.Compiled);
 
     public FormLogMonitor(Settings programSettings, Translation translation) {
@@ -116,6 +118,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               processSC = Process.GetProcessesByName(processName)[0];
             }
 
+#if DEBUG
+            if (processSC == null) {
+              Invoke(new Action(() => ClearLogInfos()));
+            }
+#endif
+
             if (processSC != null) {
 
               Invoke(new Action(() => ClearLogInfos()));
@@ -202,6 +210,19 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void ClearLogInfos() {
+#if DEBUG
+      if (PanelLogInfo.Controls.Count == 0) {
+        AddLogInfo(new List<LogMonitorInfo>() {
+          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "there is a local inventory", "Yes"),
+          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", additionalInfo: "Yes"),
+          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair"),
+          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "criminal arrest"),
+          new(LogType.HandleAction, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair", "LanceFlair", icon: Properties.Resources.Ship),
+          new(LogType.Compile, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), info: "Compile Test"),
+          new(LogType.LoadingScreenDuration, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), info: "15")
+        });
+      }
+#else
       SetTitle();
       if (PanelLogInfo.Controls.Count > 0) {
         List<UserControlLog> ctrls = new(PanelLogInfo.Controls.OfType<UserControlLog>());
@@ -211,22 +232,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           c.Dispose();
         }
       }
-#if DEBUG
-      AddLogInfo(new List<LogMonitorInfo>() {
-        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "there is a local inventory", "Yes"),
-        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", additionalInfo: "Yes"),
-        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair"),
-        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "criminal arrest"),
-        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "there is a local inventory", "Yes"),
-        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "there is a local inventory", "Yes"),
-        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", additionalInfo: "Yes"),
-        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker"),
-        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair"),
-        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "criminal arrest"),
-        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "there is a local inventory", "Yes"),
-        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", additionalInfo: "Yes"),
-        new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair")
-      });
 #endif
     }
 
@@ -271,6 +276,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                 rtnVal.Add(new LogMonitorInfo(LogType.LoadingScreenDuration,
                   match.Groups["Date"].Value,
                   info: match.Groups["Seconds"].Value));
+                continue;
+              }
+            }
+            if (ProgramSettings.LogMonitor.Filter.QT) {
+              match = RgxQT.Match(line);
+              if (match != null && match.Success) {
+                rtnVal.Add(new LogMonitorInfo(LogType.HandleAction,
+                  match.Groups["Date"].Value,
+                  match.Groups["Handle"].Value,
+                  match.Groups["Handle"].Value));
                 continue;
               }
             }

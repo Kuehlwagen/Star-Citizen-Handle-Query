@@ -154,6 +154,9 @@
     /// <summary>Angabe, ob Ladezeiten angezeigt werden sollen</summary>
     public bool LoadingScreenDuration { get; set; } = true;
 
+    /// <summary>Angabe, ob QTs angezeigt werden sollen</summary>
+    public bool QT { get; set; } = true;
+
     /// <summary>Angabe, ob Shader-Kompilierungen angezeigt werden sollen</summary>
     public bool Compile { get; set; } = false;
 

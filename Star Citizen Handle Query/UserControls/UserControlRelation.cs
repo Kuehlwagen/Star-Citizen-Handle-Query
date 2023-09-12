@@ -34,7 +34,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     private void Handle_MouseClick(object sender, MouseEventArgs e) {
       if (Type == RelationType.Handle) {
-        ((Parent.Parent as FormRelations).Owner as FormHandleQuery).SetAndQueryHandle(RelationName, Relation);
+        ((Parent.Parent as FormRelations).Owner as FormHandleQuery).SetAndQueryHandle(RelationName);
       }
     }
 

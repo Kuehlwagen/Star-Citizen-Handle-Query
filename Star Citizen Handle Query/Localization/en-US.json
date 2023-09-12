@@ -39,6 +39,7 @@
       "Log_Entry_Display_Duration_Minutes": "Minute(s)",
       "Log_Show_Corpse": "Show player deaths",
       "Log_Show_Loading_Screen_Duration": "Show loading screen duration",
+      "Log_Show_QT": "Show QT",
       "Log_Show_Compile": "Show shader compilations",
       "Show_Relations": "Show relations",
       "Sort_Relations_Alphabetically": "Sort alphabetically",

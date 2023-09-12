@@ -613,7 +613,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    public void SetAndQueryHandle(string handle, Relation relation) {
+    public void SetAndQueryHandle(string handle) {
       // Handle setzen und die Suche ausführen
       if (TextBoxHandle.Enabled) {
         if (!Visible) {

@@ -39,6 +39,7 @@
       "Log_Entry_Display_Duration_Minutes": "Minute(n)",
       "Log_Show_Corpse": "Spielertode anzeigen",
       "Log_Show_Loading_Screen_Duration": "Ladebildschirm-Dauer anzeigen",
+      "Log_Show_QT": "QT anzeigen",
       "Log_Show_Compile": "Shader-Kompilierungen anzeigen",
       "Show_Relations": "Beziehungen anzeigen",
       "Sort_Relations_Alphabetically": "Alphabetisch sortieren",

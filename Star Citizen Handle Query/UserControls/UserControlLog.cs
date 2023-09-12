@@ -53,6 +53,11 @@ namespace Star_Citizen_Handle_Query.UserControls {
           LabelText.Text = $"Compile {LogInfoItem.Info}";
           LabelText.ForeColor = Color.FromArgb(255, 57, 57);
           break;
+        case LogType.HandleAction:
+          PictureBoxLeft.Image = LogInfoItem.Icon;
+          LabelText.Text = LogInfoItem.Info;
+          AddMouseEvents();
+          break;
       }
 
       TimerRemoveControl.Enabled = true;
@@ -70,7 +75,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private void Handle_MouseClick(object sender, MouseEventArgs e) {
-      ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(LogInfoItem.Handle, Relation.NotAssigned);
+      ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(LogInfoItem.Handle);
     }
 
     private void TimerRemoveControl_Tick(object sender, EventArgs e) {
