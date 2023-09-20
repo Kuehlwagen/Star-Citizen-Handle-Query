@@ -15,7 +15,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly Settings ProgramSettings;
     private readonly Translation ProgramTranslation;
 
-    private readonly Regex RgxCorpse = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>.+<Corpse> Player '(?<Handle>[\w_\-]+)'.+IsCorpseEnabled: (?<Corpse>\w{2,3})[,\.] ?(?<Info>[\w\s]*)\.?$",
+    private readonly Regex RgxCorpse = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>.+<Corpse> Player '(?<Handle>[\w_\-]+)'.+IsCorpseEnabled: (?<Corpse>\w{2,3})[,\.] ?(?<Info>[\w\s]*)\.?.*$",
      RegexOptions.Compiled);
     private readonly Regex RgxLoadingScreenDuration = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>\sLoading screen for.+closed after (?<Seconds>\d+\.\d+) seconds$",
       RegexOptions.Compiled);
