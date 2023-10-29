@@ -107,17 +107,13 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     internal static async Task<CommunityHubLiveState> CheckCommunityHubIsLive(string handle) {
-      CommunityHubLiveState rtnVal = CommunityHubLiveState.NotAvailable;
+      CommunityHubLiveState rtnVal = CommunityHubLiveState.Offline;
 
       HttpInfo httpInfo = await GetSource($"{handle}_CommunityHub", $"https://robertsspaceindustries.com/community-hub/user/{handle}", CancelToken, true);
       switch (httpInfo.StatusCode) {
         case HttpStatusCode.OK:
-          if (!httpInfo.Source.Contains("\"twitchUserId\":null")) {
-            if (httpInfo.Source.Contains("\"live\":true")) {
-              rtnVal = CommunityHubLiveState.Live;
-            } else {
-              rtnVal = CommunityHubLiveState.Offline;
-            }
+          if (httpInfo.Source.Contains("\"live\":true")) {
+            rtnVal = CommunityHubLiveState.Live;
           }
           break;
         case HttpStatusCode.BadGateway:
