@@ -73,11 +73,8 @@ namespace Star_Citizen_Handle_Query.UserControls {
         } else if (!ProgramSettings.HideStreamLiveStatus) {
           PictureBoxLive.Visible = true;
           CommunityHubLiveState liveState = await CheckCommunityHubIsLive(handle);
-          Image imageLiveState = Properties.Resources.NotAvailable;
+          Image imageLiveState = Properties.Resources.Offline;
           switch (liveState) {
-            case CommunityHubLiveState.Offline:
-              imageLiveState = Properties.Resources.Offline;
-              break;
             case CommunityHubLiveState.Live:
               imageLiveState = Properties.Resources.Live;
               break;
