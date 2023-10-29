@@ -55,7 +55,6 @@
       NumericUpDownLogEintragAnzeigedauer = new NumericUpDown();
       NumericUpDownLogEintraegeMaximum = new NumericUpDown();
       LabelLogEintraegeMaximum = new Label();
-      CheckBoxLogMonitorFilterQT = new CheckBox();
       CheckBoxLogMonitorFilterCompile = new CheckBox();
       CheckBoxLogMonitorFilterLoadingScreenDuration = new CheckBox();
       CheckBoxLogMonitorFilterCorpse = new CheckBox();
@@ -111,7 +110,7 @@
       // ButtonSpeichern
       // 
       ButtonSpeichern.FlatStyle = FlatStyle.Flat;
-      ButtonSpeichern.Location = new Point(12, 442);
+      ButtonSpeichern.Location = new Point(12, 420);
       ButtonSpeichern.Name = "ButtonSpeichern";
       ButtonSpeichern.Size = new Size(75, 28);
       ButtonSpeichern.TabIndex = 3;
@@ -122,7 +121,7 @@
       // ButtonSchliessen
       // 
       ButtonSchliessen.FlatStyle = FlatStyle.Flat;
-      ButtonSchliessen.Location = new Point(93, 442);
+      ButtonSchliessen.Location = new Point(93, 420);
       ButtonSchliessen.Name = "ButtonSchliessen";
       ButtonSchliessen.Size = new Size(75, 28);
       ButtonSchliessen.TabIndex = 4;
@@ -301,7 +300,7 @@
       GroupBoxLokalerCache.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxLokalerCache.Location = new Point(370, 205);
       GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
-      GroupBoxLokalerCache.Size = new Size(416, 231);
+      GroupBoxLokalerCache.Size = new Size(416, 209);
       GroupBoxLokalerCache.TabIndex = 2;
       GroupBoxLokalerCache.TabStop = false;
       GroupBoxLokalerCache.Text = "Lokaler Cache";
@@ -309,7 +308,7 @@
       // ButtonStandard
       // 
       ButtonStandard.FlatStyle = FlatStyle.Flat;
-      ButtonStandard.Location = new Point(711, 442);
+      ButtonStandard.Location = new Point(711, 420);
       ButtonStandard.Name = "ButtonStandard";
       ButtonStandard.Size = new Size(75, 28);
       ButtonStandard.TabIndex = 5;
@@ -328,7 +327,6 @@
       GroupBoxAnzeige.Controls.Add(NumericUpDownLogEintragAnzeigedauer);
       GroupBoxAnzeige.Controls.Add(NumericUpDownLogEintraegeMaximum);
       GroupBoxAnzeige.Controls.Add(LabelLogEintraegeMaximum);
-      GroupBoxAnzeige.Controls.Add(CheckBoxLogMonitorFilterQT);
       GroupBoxAnzeige.Controls.Add(CheckBoxLogMonitorFilterCompile);
       GroupBoxAnzeige.Controls.Add(CheckBoxLogMonitorFilterLoadingScreenDuration);
       GroupBoxAnzeige.Controls.Add(CheckBoxLogMonitorFilterCorpse);
@@ -344,7 +342,7 @@
       GroupBoxAnzeige.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxAnzeige.Location = new Point(12, 12);
       GroupBoxAnzeige.Name = "GroupBoxAnzeige";
-      GroupBoxAnzeige.Size = new Size(352, 424);
+      GroupBoxAnzeige.Size = new Size(352, 402);
       GroupBoxAnzeige.TabIndex = 1;
       GroupBoxAnzeige.TabStop = false;
       GroupBoxAnzeige.Text = "Anzeige";
@@ -354,7 +352,7 @@
       NumericUpDownRelationsEntriesMaximum.BackColor = Color.FromArgb(19, 26, 33);
       NumericUpDownRelationsEntriesMaximum.Enabled = false;
       NumericUpDownRelationsEntriesMaximum.ForeColor = Color.FromArgb(57, 206, 216);
-      NumericUpDownRelationsEntriesMaximum.Location = new Point(190, 387);
+      NumericUpDownRelationsEntriesMaximum.Location = new Point(190, 362);
       NumericUpDownRelationsEntriesMaximum.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
       NumericUpDownRelationsEntriesMaximum.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
       NumericUpDownRelationsEntriesMaximum.Name = "NumericUpDownRelationsEntriesMaximum";
@@ -366,7 +364,7 @@
       // LabelRelationsEntriesMaximum
       // 
       LabelRelationsEntriesMaximum.AutoSize = true;
-      LabelRelationsEntriesMaximum.Location = new Point(34, 389);
+      LabelRelationsEntriesMaximum.Location = new Point(34, 364);
       LabelRelationsEntriesMaximum.Name = "LabelRelationsEntriesMaximum";
       LabelRelationsEntriesMaximum.Size = new Size(111, 15);
       LabelRelationsEntriesMaximum.TabIndex = 19;
@@ -376,7 +374,7 @@
       // 
       CheckBoxSortRelationsAlphabetically.AutoSize = true;
       CheckBoxSortRelationsAlphabetically.Enabled = false;
-      CheckBoxSortRelationsAlphabetically.Location = new Point(34, 365);
+      CheckBoxSortRelationsAlphabetically.Location = new Point(34, 340);
       CheckBoxSortRelationsAlphabetically.Name = "CheckBoxSortRelationsAlphabetically";
       CheckBoxSortRelationsAlphabetically.Size = new Size(144, 19);
       CheckBoxSortRelationsAlphabetically.TabIndex = 18;
@@ -387,7 +385,7 @@
       // CheckBoxShowRelations
       // 
       CheckBoxShowRelations.AutoSize = true;
-      CheckBoxShowRelations.Location = new Point(15, 338);
+      CheckBoxShowRelations.Location = new Point(15, 313);
       CheckBoxShowRelations.Name = "CheckBoxShowRelations";
       CheckBoxShowRelations.Size = new Size(144, 19);
       CheckBoxShowRelations.TabIndex = 17;
@@ -449,23 +447,11 @@
       LabelLogEintraegeMaximum.TabIndex = 8;
       LabelLogEintraegeMaximum.Text = "Einträge Maximum:";
       // 
-      // CheckBoxLogMonitorFilterQT
-      // 
-      CheckBoxLogMonitorFilterQT.AutoSize = true;
-      CheckBoxLogMonitorFilterQT.Enabled = false;
-      CheckBoxLogMonitorFilterQT.Location = new Point(34, 288);
-      CheckBoxLogMonitorFilterQT.Name = "CheckBoxLogMonitorFilterQT";
-      CheckBoxLogMonitorFilterQT.Size = new Size(90, 19);
-      CheckBoxLogMonitorFilterQT.TabIndex = 15;
-      CheckBoxLogMonitorFilterQT.Text = "QT anzeigen";
-      CheckBoxLogMonitorFilterQT.UseVisualStyleBackColor = true;
-      CheckBoxLogMonitorFilterQT.CheckedChanged += CheckBoxLogMonitorFilterQT_CheckedChanged;
-      // 
       // CheckBoxLogMonitorFilterCompile
       // 
       CheckBoxLogMonitorFilterCompile.AutoSize = true;
       CheckBoxLogMonitorFilterCompile.Enabled = false;
-      CheckBoxLogMonitorFilterCompile.Location = new Point(34, 313);
+      CheckBoxLogMonitorFilterCompile.Location = new Point(34, 288);
       CheckBoxLogMonitorFilterCompile.Name = "CheckBoxLogMonitorFilterCompile";
       CheckBoxLogMonitorFilterCompile.Size = new Size(202, 19);
       CheckBoxLogMonitorFilterCompile.TabIndex = 16;
@@ -569,7 +555,7 @@
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.FromArgb(19, 26, 33);
       CancelButton = ButtonSchliessen;
-      ClientSize = new Size(798, 483);
+      ClientSize = new Size(798, 462);
       Controls.Add(GroupBoxAnzeige);
       Controls.Add(GroupBoxLokalerCache);
       Controls.Add(GroupBoxFenster);
@@ -578,7 +564,7 @@
       Controls.Add(ButtonSpeichern);
       ForeColor = Color.FromArgb(57, 206, 216);
       Icon = (Icon)resources.GetObject("$this.Icon");
-      MinimumSize = new Size(814, 522);
+      MinimumSize = new Size(814, 501);
       Name = "FormSettings";
       StartPosition = FormStartPosition.CenterScreen;
       Text = "Star Citizen Handle Query Einstellungen";
@@ -638,6 +624,5 @@
     private CheckBox CheckBoxLogMonitorFilterLoadingScreenDuration;
     private CheckBox CheckBoxLogMonitorFilterCorpse;
     private CheckBox CheckBoxLogMonitorFilterCompile;
-    private CheckBox CheckBoxLogMonitorFilterQT;
   }
 }

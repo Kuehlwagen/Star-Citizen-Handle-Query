@@ -76,7 +76,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxLogMonitorFilterCorpse.Checked = ProgramSettings.LogMonitor.Filter.Corpse;
       CheckBoxLogMonitorFilterLoadingScreenDuration.Checked = ProgramSettings.LogMonitor.Filter.LoadingScreenDuration;
       CheckBoxLogMonitorFilterCompile.Checked = ProgramSettings.LogMonitor.Filter.Compile;
-      CheckBoxLogMonitorFilterQT.Checked = ProgramSettings.LogMonitor.Filter.QT;
       CheckBoxShowRelations.Checked = ProgramSettings.Relations.ShowWindow;
       CheckBoxSortRelationsAlphabetically.Checked = ProgramSettings.Relations.SortAlphabetically;
       NumericUpDownRelationsEntriesMaximum.Value = ProgramSettings.Relations.EntriesMax;
@@ -173,7 +172,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       NumericUpDownLogEintragAnzeigedauer.Enabled = CheckBoxShowLog.Checked;
       CheckBoxLogMonitorFilterCorpse.Enabled = CheckBoxShowLog.Checked;
       CheckBoxLogMonitorFilterLoadingScreenDuration.Enabled = CheckBoxShowLog.Checked;
-      CheckBoxLogMonitorFilterQT.Enabled = CheckBoxShowLog.Checked;
       CheckBoxLogMonitorFilterCompile.Enabled = CheckBoxShowLog.Checked;
     }
 
@@ -187,10 +185,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void CheckBoxLogMonitorFilterCorpse_CheckedChanged(object sender, EventArgs e) {
       ProgramSettings.LogMonitor.Filter.Corpse = CheckBoxLogMonitorFilterCorpse.Checked;
-    }
-
-    private void CheckBoxLogMonitorFilterQT_CheckedChanged(object sender, EventArgs e) {
-      ProgramSettings.LogMonitor.Filter.QT = CheckBoxLogMonitorFilterQT.Checked;
     }
 
     private void CheckBoxLogMonitorFilterLoadingScreenDuration_CheckedChanged(object sender, EventArgs e) {
@@ -238,7 +232,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxLogMonitorFilterCorpse.Text = CurrentLocalization.Settings.Display.Log_Show_Corpse;
       CheckBoxLogMonitorFilterLoadingScreenDuration.Text = CurrentLocalization.Settings.Display.Log_Show_Loading_Screen_Duration;
       CheckBoxLogMonitorFilterCompile.Text = CurrentLocalization.Settings.Display.Log_Show_Compile;
-      CheckBoxLogMonitorFilterQT.Text = CurrentLocalization.Settings.Display.Log_Show_QT;
       CheckBoxShowRelations.Text = CurrentLocalization.Settings.Display.Show_Relations;
       CheckBoxSortRelationsAlphabetically.Text = CurrentLocalization.Settings.Display.Sort_Relations_Alphabetically;
       LabelRelationsEntriesMaximum.Text = CurrentLocalization.Settings.Display.Relations_Entries_Max;

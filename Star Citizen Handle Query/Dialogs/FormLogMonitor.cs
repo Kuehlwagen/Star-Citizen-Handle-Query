@@ -279,17 +279,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                 continue;
               }
             }
-            if (ProgramSettings.LogMonitor.Filter.QT) {
-              match = RgxQT.Match(line);
-              if (match != null && match.Success) {
-                rtnVal.Add(new LogMonitorInfo(LogType.HandleAction,
-                  match.Groups["Date"].Value,
-                  match.Groups["Handle"].Value,
-                  match.Groups["Handle"].Value,
-                  icon: Properties.Resources.Ship));
-                continue;
-              }
-            }
             if (ProgramSettings.LogMonitor.Filter.Compile) {
               match = RgxCompile.Match(line);
               if (match != null && match.Success) {
