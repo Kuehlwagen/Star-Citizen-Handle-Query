@@ -79,9 +79,8 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
 - Wurde eine globale Taste(nkobination) in den Einstellungen angegeben, kann das Fenster jederzeit mit dieser Taste(nkombination) wieder angezeigt werden.
 - Sofern der Stream Live-Status dargestellt werden soll, wird unten rechts im Handle-Informationsfenster der Twitch.tv Live-Status des Handles angezeigt. Dieser kann folgende Werte enthalten:
   - `...` = Live-Status wird ermittelt
-  - `N/A` = Im Handle-Profil ist kein Twitch.tv-Konto verknüpft
-  - `OFF` = Im Handle-Profil ist ein Twitch.tv-Konto verknüpft, es wird aber gerade nicht gestreamt
-  - `LIVE` = Im Handle-Profil ist ein Twitch.tv-Konto verknüpft und es wird gerade aktiv gestreamt
+  - `OFF` = Es wird gerade nicht gestreamt
+  - `LIVE` = Es wird gerade aktiv gestreamt
   - `ERR` = Beim Aufruf des Community-Hub-Profils des Handles gab es einen Fehler / Timeout (maximale Wartezeit: 10 Sekunden)
 - Per Tastenkürzel kann der Beziehungsstatus des aktuellen Handles festgelegt werden (auch dann, wenn die Anzeige des Beziehungen-Fensters nicht aktiviert ist):
   - `Strg + 1`: Freundlich
