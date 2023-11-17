@@ -27,7 +27,6 @@ https://discord.com/invite/WmzNY3mCm6
   - __Eintrag Anzeigedauer:__ Anzeigedauer eines Logeintrags in Minuten (`0` = unendlich)
   - __Spielertode anzeigen:__ Angabe, ob Spielertode im Log-Monitor angezeigt werden sollen
   - __Ladebildschirm-Dauer anzeigen:__ Angabe, ob die Ladebildschirm-Dauer im Log-Monitor angezeigt werden sollen
-  - __Shader-Kompilierungen anzeigen:__ Angabe, ob Shader-Kompilierungen im Log-Monitor angezeigt werden sollen
 - __Beziehungen anzeigen:__ Angabe, ob das Beziehungen-Fenster angezeigt werden soll
   - __Alphabetisch sortieren:__ Angabe, ob die Einträge auf dem Beziehungen-Fenster alphabetisch sortiert werden sollen (Standard: Reihenfolge, in welcher die Einträge hinzugefügt werden)
   - __Einträge Maximum:__ Angabe, wie viele Einträge maximal auf dem Beziehungen-Fenster dargestellt werden sollen (es werden unendlich viele Einträge im lokalen Cache gespeichert)
