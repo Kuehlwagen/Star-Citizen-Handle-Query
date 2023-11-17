@@ -75,7 +75,7 @@
     public bool HideRedactedAffiliations { get; set; } = false;
 
     /// <summary>Angabe, ob sich die Position des Hauptfensters gemerkt werden soll</summary>
-    public bool RememberWindowLocation { get; set; } = false;
+    public bool RememberWindowLocation { get; set; } = true;
 
     /// <summary>Position des Hauptfensters</summary>
     public Point WindowLocation { get; set; } = Point.Empty;
@@ -84,7 +84,7 @@
     public bool AutoCheckForUpdate { get; set; } = false;
 
     /// <summary>Angabe, ob die Stream Live-Anzeige ausgeblendet werden soll</summary>
-    public bool HideStreamLiveStatus { get; set; } = true;
+    public bool HideStreamLiveStatus { get; set; } = false;
 
     /// <summary>LogFileWatcher relevante Einstellungen</summary>
     public LogMonitorSettings LogMonitor { get; set; } = new();
@@ -100,7 +100,7 @@
   public class LogMonitorSettings : ICloneable {
 
     /// <summary>Angabe, ob das Fenster angezeigt werden soll</summary>
-    public bool ShowWindow { get; set; } = false;
+    public bool ShowWindow { get; set; } = true;
 
     /// <summary>Position des LogFileWatcher-Fensters</summary>
     public Point WindowLocation { get; set; } = Point.Empty;
@@ -152,10 +152,7 @@
     public bool Corpse { get; set; } = true;
 
     /// <summary>Angabe, ob Ladezeiten angezeigt werden sollen</summary>
-    public bool LoadingScreenDuration { get; set; } = true;
-
-    /// <summary>Angabe, ob Shader-Kompilierungen angezeigt werden sollen</summary>
-    public bool Compile { get; set; } = false;
+    public bool LoadingScreenDuration { get; set; } = false;
 
     public object Clone() {
       return MemberwiseClone();
@@ -166,7 +163,7 @@
   public class RelationsSettings : ICloneable {
 
     /// <summary>Angabe, ob das Fenster angezeigt werden soll</summary>
-    public bool ShowWindow { get; set; } = false;
+    public bool ShowWindow { get; set; } = true;
 
     /// <summary>Position des Relation-Fensters</summary>
     public Point WindowLocation { get; set; } = Point.Empty;
@@ -188,7 +185,7 @@
     }
 
     /// <summary>Angabe, ob die Einträge alphabetisch aufsteigend sortiert werden sollen</summary>
-    public bool SortAlphabetically { get; set; }
+    public bool SortAlphabetically { get; set; } = true;
 
     public object Clone() {
       return MemberwiseClone();

@@ -3,7 +3,13 @@ using System.Runtime.InteropServices;
 
 namespace Star_Citizen_Handle_Query.ExternClasses {
 
-  public class User32Wrappers {
+  public partial class User32Wrappers {
+
+    public const int WM_NCLBUTTONDOWN = 0xA1;
+    public const int HT_CAPTION = 0x2;
+
+    public const int SW_MINIMIZE = 6;
+    public const int SW_RESTORE = 9;
 
     public enum GWL : int {
       ExStyle = -20
@@ -14,29 +20,26 @@ namespace Star_Citizen_Handle_Query.ExternClasses {
       Layered = 0x80000
     }
 
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    static internal extern int GetWindowLong(IntPtr hWnd, GWL nIndex);
+    [LibraryImport("user32.dll")]
+    internal static partial int GetWindowLongA(IntPtr hWnd, GWL nIndex);
 
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    static internal extern int SetWindowLong(IntPtr hWnd, GWL nIndex, int dwNewLong);
+    [LibraryImport("user32.dll")]
+    internal static partial int SetWindowLongA(IntPtr hWnd, GWL nIndex, int dwNewLong);
 
-    [DllImport("user32.dll", CharSet = CharSet.Auto)]
-    static internal extern bool SetForegroundWindow(IntPtr hWnd);
+    [LibraryImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool SetForegroundWindow(IntPtr hWnd);
 
-    public const int WM_NCLBUTTONDOWN = 0xA1;
-    public const int HT_CAPTION = 0x2;
+    [LibraryImport("user32.dll")]
+    internal static partial int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 
-    [DllImport("user32.dll")]
-    static internal extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+    [LibraryImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool ReleaseCapture();
 
-    [DllImport("user32.dll")]
-    static internal extern bool ReleaseCapture();
-
-    public const int SW_MINIMIZE = 6;
-    public const int SW_RESTORE = 9;
-
-    [DllImport("user32.dll")]
-    static internal extern bool ShowWindow(IntPtr hwnd, int nCmdShow);
+    [LibraryImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    internal static partial bool ShowWindow(IntPtr hwnd, int nCmdShow);
 
   }
 

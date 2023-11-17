@@ -30,13 +30,32 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private static bool IsDebug = false;
     internal static CancellationTokenSource CancelToken = new();
 
-    private readonly Regex RgxIdCmHandleEnlistedFluency = new("<strong class=\"value\">(.+)</strong>", RegexOptions.Multiline | RegexOptions.Compiled);
-    private readonly Regex RgxLocation = new("<span class=\"label\">Location</span>\\s+<strong class=\"value\">(.+)</strong>\\s+</p>\\s+<p class=\"entry\">", RegexOptions.Singleline | RegexOptions.Compiled);
-    private readonly Regex RgxAvatar = new("<div class=\"thumb\">\\s+<img src=\"(.+)\" \\/>", RegexOptions.Multiline | RegexOptions.Compiled);
-    private readonly Regex RgxDisplayTitle = new("<span class=\"icon\">\\s+<img src=\"(.+)\"\\/>\\s+<\\/span>\\s+<span class=\"value\">(.+)<", RegexOptions.Multiline | RegexOptions.Compiled);
-    private readonly Regex RgxMainOrganization = new("<a href=\"\\/orgs\\/(.+)\"><img src=\"(.+)\" \\/><\\/a>\\s+<span class=\"members\">(\\d+) members<\\/span>[\\W\\w]+class=\"value\">(.+)<\\/a>[\\W\\w]+Organization rank<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>[\\W\\w]+Prim. Activity<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>[\\W\\w]+Sec. Activity<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>[\\W\\w]+Commitment<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>", RegexOptions.Multiline | RegexOptions.Compiled);
-    private readonly Regex RgxOrganizationStars = new("<span class=\"active\">", RegexOptions.Multiline | RegexOptions.Compiled);
-    private readonly Regex RgxOrganization = new("<a href=\"\\/orgs\\/(.+)\"><img src=\"(.+)\" \\/><\\/a>\\s+<span class=\"members\">(\\d+) members<\\/span>[\\W\\w]+class=\"value\\s[\\w\\d]*\">(.+)<\\/a>[\\W\\w]+Organization rank<\\/span>\\s+<strong class=\"value\\s[\\w\\d]*\">(.+)<\\/strong>", RegexOptions.Multiline | RegexOptions.Compiled);
+    #region Regex
+    private readonly Regex RgxIdCmHandleEnlistedFluency = RgxIdCmHandleEnlistedFluencyMethod();
+    private readonly Regex RgxLocation = RgxLocationMethod();
+    private readonly Regex RgxAvatar = RgxAvatarMethod();
+    private readonly Regex RgxDisplayTitle = RgxDisplayTitleMethod();
+    private readonly Regex RgxMainOrganization = RgxMainOrganizationMethod();
+    private readonly Regex RgxOrganizationStars = RgxOrganizationStarsMethod();
+    private readonly Regex RgxOrganization = RgxOrganizationMethod();
+
+    [GeneratedRegex("<strong class=\"value\">(.+)</strong>", RegexOptions.Multiline | RegexOptions.Compiled)]
+    private static partial Regex RgxIdCmHandleEnlistedFluencyMethod();
+    [GeneratedRegex("<span class=\"label\">Location</span>\\s+<strong class=\"value\">(.+)</strong>\\s+</p>\\s+<p class=\"entry\">", RegexOptions.Compiled | RegexOptions.Singleline)]
+    private static partial Regex RgxLocationMethod();
+    [GeneratedRegex("<div class=\"thumb\">\\s+<img src=\"(.+)\" \\/>", RegexOptions.Multiline | RegexOptions.Compiled)]
+    private static partial Regex RgxAvatarMethod();
+    [GeneratedRegex("<span class=\"icon\">\\s+<img src=\"(.+)\"\\/>\\s+<\\/span>\\s+<span class=\"value\">(.+)<", RegexOptions.Multiline | RegexOptions.Compiled)]
+    private static partial Regex RgxDisplayTitleMethod();
+    [GeneratedRegex("<a href=\"\\/orgs\\/(.+)\"><img src=\"(.+)\" \\/><\\/a>\\s+<span class=\"members\">(\\d+) members<\\/span>[\\W\\w]+class=\"value\">(.+)<\\/a>[\\W\\w]+Organization rank<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>[\\W\\w]+Prim. Activity<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>[\\W\\w]+Sec. Activity<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>[\\W\\w]+Commitment<\\/span>\\s+<strong class=\"value\">(.+)<\\/strong>", RegexOptions.Multiline | RegexOptions.Compiled)]
+    private static partial Regex RgxMainOrganizationMethod();
+    [GeneratedRegex("<span class=\"active\">", RegexOptions.Multiline | RegexOptions.Compiled)]
+    private static partial Regex RgxOrganizationStarsMethod();
+    [GeneratedRegex("<a href=\"\\/orgs\\/(.+)\"><img src=\"(.+)\" \\/><\\/a>\\s+<span class=\"members\">(\\d+) members<\\/span>[\\W\\w]+class=\"value\\s[\\w\\d]*\">(.+)<\\/a>[\\W\\w]+Organization rank<\\/span>\\s+<strong class=\"value\\s[\\w\\d]*\">(.+)<\\/strong>", RegexOptions.Multiline | RegexOptions.Compiled)]
+    private static partial Regex RgxOrganizationMethod();
+    [GeneratedRegex("^[a-z]{2}-[A-Z]{2}_*\\w*$", RegexOptions.Compiled)]
+    private static partial Regex RgxLocalizationMethod();
+    #endregion
 
     public FormHandleQuery() {
       InitializeComponent();
@@ -67,8 +86,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
         if (ProgramSettings.WindowIgnoreMouseInput) {
           // Durch das Fenster klicken lassen
-          InitialWindowStyle = User32Wrappers.GetWindowLong(Handle, User32Wrappers.GWL.ExStyle);
-          _ = User32Wrappers.SetWindowLong(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered | (int)User32Wrappers.WS_EX.Transparent);
+          InitialWindowStyle = User32Wrappers.GetWindowLongA(Handle, User32Wrappers.GWL.ExStyle);
+          _ = User32Wrappers.SetWindowLongA(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered | (int)User32Wrappers.WS_EX.Transparent);
 
           // Controls verstecken, verschieben und vergrößern
           LabelLockUnlock.Visible = false;
@@ -165,7 +184,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Dictionary<string, Translation> rtnVal = Resources.ResourceManager
         .GetResourceSet(CultureInfo.CurrentCulture, false, true)
         .Cast<DictionaryEntry>()
-        .Where(x => x.Value.GetType() == typeof(byte[]) && Regex.IsMatch(x.Key.ToString(), @"^[a-z]{2}-[A-Z]{2}_*\w*$"))
+        .Where(x => x.Value.GetType() == typeof(byte[]) && RgxLocalizationMethod().IsMatch(x.Key.ToString()))
         .Select(x => new KeyValuePair<string, Translation>(x.Key.ToString(), JsonSerializer.Deserialize<Translation>(Encoding.UTF8.GetString(x.Value as byte[]))))
         .OrderBy(x => x.Value.Language)
         .ToDictionary(x => x.Key, y => y.Value);
@@ -1294,7 +1313,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     public enum CommunityHubLiveState {
-      NotAvailable,
       Offline,
       Live,
       Error

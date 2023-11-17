@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net7.0-windows</TargetFramework>
     <RootNamespace>Star_Citizen_Handle_Query</RootNamespace>
     <Nullable>disable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
@@ -12,10 +12,11 @@
     <DebugType>embedded</DebugType>
     <PackageIcon>SCHQ.png</PackageIcon>
     <ApplicationIcon>Resources\SCHQ.ico</ApplicationIcon>
-    <AssemblyVersion>1.13.2</AssemblyVersion>
+    <AssemblyVersion>1.14.0</AssemblyVersion>
     <FileVersion></FileVersion>
     <Company>Kuehlwagen@GitHub</Company>
     <Version>$(Assemblyversion)</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <!-- Workaround für fehlerhaftes Framework https://github.com/dotnet/core/issues/7176 -->
@@ -48,9 +49,7 @@
     <Compile Update="UserControls\UserControlHandleRelation.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="UserControls\UserControlRelation.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="UserControls\UserControlRelation.cs" />
     <Compile Update="UserControls\UserControlLog.cs">
       <SubType>UserControl</SubType>
     </Compile>

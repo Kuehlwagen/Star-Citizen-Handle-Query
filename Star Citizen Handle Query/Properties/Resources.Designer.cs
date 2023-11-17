@@ -111,16 +111,6 @@ namespace Star_Citizen_Handle_Query.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Compile {
-            get {
-                object obj = ResourceManager.GetObject("Compile", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
         /// </summary>
         internal static byte[] de_DE {
@@ -196,16 +186,6 @@ namespace Star_Citizen_Handle_Query.Properties {
         internal static System.Drawing.Bitmap Medical {
             get {
                 object obj = ResourceManager.GetObject("Medical", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap NotAvailable {
-            get {
-                object obj = ResourceManager.GetObject("NotAvailable", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -326,16 +306,6 @@ namespace Star_Citizen_Handle_Query.Properties {
         internal static System.Drawing.Bitmap Settings {
             get {
                 object obj = ResourceManager.GetObject("Settings", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Ship {
-            get {
-                object obj = ResourceManager.GetObject("Ship", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

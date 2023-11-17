@@ -11,11 +11,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
     public UserControlLog(LogMonitorInfo logInfo, Settings programSettings) {
       InitializeComponent();
       LogInfoItem = logInfo;
-      if (logInfo.LogType == LogType.Compile) {
-        TimerRemoveControl.Interval = 5000;
-        TimerRemoveControl.Tick += TimerRemoveControl_Tick;
-        TimerRemoveControl.Start();
-      } else if (programSettings.LogMonitor.EntryDisplayDurationInMinutes > 0) {
+      if (programSettings.LogMonitor.EntryDisplayDurationInMinutes > 0) {
         TimerRemoveControl.Interval = programSettings.LogMonitor.EntryDisplayDurationInMinutes * 60000;
         TimerRemoveControl.Tick += TimerRemoveControl_Tick;
         TimerRemoveControl.Start();
@@ -45,18 +41,6 @@ namespace Star_Citizen_Handle_Query.UserControls {
         case LogType.LoadingScreenDuration:
           PictureBoxLeft.Image = Properties.Resources.Info;
           LabelText.Text = $"Loading screen: {LogInfoItem.Info}s";
-          break;
-        case LogType.Compile:
-          BackColor = Color.FromArgb(33, 26, 19);
-          LabelTime.ForeColor = Color.FromArgb(255, 57, 57);
-          PictureBoxLeft.Image = Properties.Resources.Compile;
-          LabelText.Text = $"Compile {LogInfoItem.Info}";
-          LabelText.ForeColor = Color.FromArgb(255, 57, 57);
-          break;
-        case LogType.HandleAction:
-          PictureBoxLeft.Image = LogInfoItem.Icon;
-          LabelText.Text = LogInfoItem.Info;
-          AddMouseEvents();
           break;
       }
 

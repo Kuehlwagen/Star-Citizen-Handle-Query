@@ -140,8 +140,6 @@
 
     public string Log_Show_Loading_Screen_Duration { get; set; } = "Ladebildschirm-Dauer anzeigen";
 
-    public string Log_Show_Compile { get; set; } = "Shader-Kompilierungen anzeigen";
-
     public string Log_Entry_Display_Duration_Minutes { get; set; } = "Minute(n)";
 
     public string Show_Relations { get; set; } = "Beziehungen anzeigen";
