@@ -65,7 +65,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         switch (e.Button) {
           case MouseButtons.Left:
             _ = User32Wrappers.ReleaseCapture();
-            _ = User32Wrappers.SendMessage(Handle, User32Wrappers.WM_NCLBUTTONDOWN, User32Wrappers.HT_CAPTION, 0);
+            _ = User32Wrappers.SendMessageA(Handle, User32Wrappers.WM_NCLBUTTONDOWN, User32Wrappers.HT_CAPTION, 0);
             break;
           case MouseButtons.Middle:
             MoveWindowToDefaultLocation();

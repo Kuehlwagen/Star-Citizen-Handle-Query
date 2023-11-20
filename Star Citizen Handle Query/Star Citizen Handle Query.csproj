@@ -12,17 +12,17 @@
     <DebugType>embedded</DebugType>
     <PackageIcon>SCHQ.png</PackageIcon>
     <ApplicationIcon>Resources\SCHQ.ico</ApplicationIcon>
-    <AssemblyVersion>1.14.0</AssemblyVersion>
-    <FileVersion></FileVersion>
+    <AssemblyVersion>1.14.1</AssemblyVersion>
+    <FileVersion>$(Assemblyversion)</FileVersion>
     <Company>Kuehlwagen@GitHub</Company>
     <Version>$(Assemblyversion)</Version>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <!-- Workaround für fehlerhaftes Framework https://github.com/dotnet/core/issues/7176 -->
-  <ItemGroup>
+  <!--<ItemGroup>
     <FrameworkReference Update="Microsoft.WindowsDesktop.App;Microsoft.WindowsDesktop.App.WPF;Microsoft.WindowsDesktop.App.WindowsForms" TargetingPackVersion="6.0.0" />
-  </ItemGroup>
+  </ItemGroup>-->
 	
   <ItemGroup>
     <Compile Remove="Screenshots\**" />

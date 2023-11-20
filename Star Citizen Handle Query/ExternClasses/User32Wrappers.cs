@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace Star_Citizen_Handle_Query.ExternClasses {
 
@@ -31,7 +30,7 @@ namespace Star_Citizen_Handle_Query.ExternClasses {
     internal static partial bool SetForegroundWindow(IntPtr hWnd);
 
     [LibraryImport("user32.dll")]
-    internal static partial int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+    internal static partial int SendMessageA(IntPtr hWnd, int Msg, int wParam, int lParam);
 
     [LibraryImport("user32.dll")]
     [return: MarshalAs(UnmanagedType.Bool)]
