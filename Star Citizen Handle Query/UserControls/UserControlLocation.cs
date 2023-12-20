@@ -19,9 +19,15 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private void LabelLocationName_MouseClick(object sender, MouseEventArgs e) {
-      if (e.Button == MouseButtons.Left) {
-        Process.Start("explorer", $"https://dydrmr.github.io/VerseTime/#{Info.Name.Replace(" ", "_")}");
-        (Parent.Parent as Form).Close();
+      switch (e.Button) {
+        case MouseButtons.Left:
+          Process.Start("explorer", $"https://starcitizen.tools/{Info.Name.Replace(" ", "_")}");
+          (Parent.Parent as Form).Close();
+          break;
+        case MouseButtons.Middle:
+          Process.Start("explorer", $"https://dydrmr.github.io/VerseTime/#{Info.Name.Replace(" ", "_")}");
+          (Parent.Parent as Form).Close();
+          break;
       }
     }
 
