@@ -147,7 +147,7 @@
       // 
       ContextMenuStripNotifyIcon.Items.AddRange(new ToolStripItem[] { AnzeigenToolStripMenuItem, EinstellungenToolStripMenuItem, LokalerCacheToolStripMenuItem, AufUpdatePruefenToolStripMenuItem, UeberToolStripMenuItem, ToolStripSeparator1, BeziehungenBereitstellenToolStripMenuItem, BeziehungenUebernehmenToolStripMenuItem, toolStripSeparator2, BeendenToolStripMenuItem });
       ContextMenuStripNotifyIcon.Name = "ContextMenuStripNotifyIcon";
-      ContextMenuStripNotifyIcon.Size = new Size(214, 214);
+      ContextMenuStripNotifyIcon.Size = new Size(214, 192);
       // 
       // AnzeigenToolStripMenuItem
       // 
@@ -196,17 +196,17 @@
       ToolStripSeparator1.Size = new Size(210, 6);
       ToolStripSeparator1.Visible = false;
       // 
-      // BeziehungenExportierenToolStripMenuItem
+      // BeziehungenBereitstellenToolStripMenuItem
       // 
-      BeziehungenBereitstellenToolStripMenuItem.Name = "BeziehungenExportierenToolStripMenuItem";
+      BeziehungenBereitstellenToolStripMenuItem.Name = "BeziehungenBereitstellenToolStripMenuItem";
       BeziehungenBereitstellenToolStripMenuItem.Size = new Size(213, 22);
       BeziehungenBereitstellenToolStripMenuItem.Text = "Beziehungen bereitstellen";
       BeziehungenBereitstellenToolStripMenuItem.Visible = false;
       BeziehungenBereitstellenToolStripMenuItem.Click += BeziehungenBereitstellenToolStripMenuItem_Click;
       // 
-      // BeziehungenImportierenToolStripMenuItem
+      // BeziehungenUebernehmenToolStripMenuItem
       // 
-      BeziehungenUebernehmenToolStripMenuItem.Name = "BeziehungenImportierenToolStripMenuItem";
+      BeziehungenUebernehmenToolStripMenuItem.Name = "BeziehungenUebernehmenToolStripMenuItem";
       BeziehungenUebernehmenToolStripMenuItem.Size = new Size(213, 22);
       BeziehungenUebernehmenToolStripMenuItem.Text = "Beziehungen übernehmen";
       BeziehungenUebernehmenToolStripMenuItem.Visible = false;

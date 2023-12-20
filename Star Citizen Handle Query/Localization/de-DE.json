@@ -107,6 +107,9 @@
     "Title": "Log-Monitor"
   },
   "Relations": {
-    "Title":  "Beziehungen"
+    "Title": "Beziehungen"
+  },
+  "Locations": {
+    "Title": "Orte"
   }
 }

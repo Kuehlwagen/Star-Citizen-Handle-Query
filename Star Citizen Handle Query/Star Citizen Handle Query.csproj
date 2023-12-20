@@ -12,7 +12,7 @@
     <DebugType>embedded</DebugType>
     <PackageIcon>SCHQ.png</PackageIcon>
     <ApplicationIcon>Resources\SCHQ.ico</ApplicationIcon>
-    <AssemblyVersion>1.14.1</AssemblyVersion>
+    <AssemblyVersion>1.15.0</AssemblyVersion>
     <FileVersion>$(Assemblyversion)</FileVersion>
     <Company>Kuehlwagen@GitHub</Company>
     <Version>$(Assemblyversion)</Version>
@@ -35,6 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Dialogs\FormLocations.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Dialogs\FormRelations.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -47,6 +50,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Update="UserControls\UserControlHandleRelation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\UserControlLocation.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserControls\UserControlRelation.cs" />

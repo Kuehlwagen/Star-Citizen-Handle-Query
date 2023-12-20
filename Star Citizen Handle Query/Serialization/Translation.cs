@@ -21,6 +21,8 @@
 
     public Translation_Relations Relations { get; set; } = new();
 
+    public Translation_Locations Locations { get; set; } = new();
+
     /// <summary>Vergleich in Liste ermöglichen</summary>
     /// <param name="other">Anderes Translation-Objekt</param>
     /// <returns>true, wenn das Feld "Language" übereinstimmt, andernfalls false</returns>
@@ -290,6 +292,12 @@
   public class Translation_Relations {
 
     public string Title { get; set; } = "Beziehungen";
+
+  }
+
+  public class Translation_Locations {
+
+    public string Title { get; set; } = "Orte";
 
   }
 

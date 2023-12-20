@@ -181,6 +181,17 @@ namespace Star_Citizen_Handle_Query.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die name,type,parentBody,parentStar,coordinateX,coordinateY,coordinateZ,themeImage
+        ///Abandoned Outpost (Cellin),Ruins,Cellin,Stanton,130.062,184.915,130.356,https://starcitizen.tools/images/thumb/4/43/Abandoned_outpost%2C_Cellin_%28Alpha_3.17.1%29.jpg/300px-Abandoned_outpost%2C_Cellin_%28Alpha_3.17.1%29.jpg
+        ///Abandoned Outpost (Daymar),Ruins,Daymar,Stanton,73.139,285.904,1.906,https://starcitizen.tools/images/thumb/1/13/Abandoned_outpost%2C_Daymar_%28Alpha_3.17%29.png/300px-Abandoned_outpost%2C_Daymar_%28Alpha_3. [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        /// </summary>
+        internal static string locations {
+            get {
+                return ResourceManager.GetString("locations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Medical {
