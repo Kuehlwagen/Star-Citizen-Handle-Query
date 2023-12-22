@@ -31,6 +31,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private static bool IsDebug = false;
     private List<LocationInfo> Locations = null;
     internal static CancellationTokenSource CancelToken = new();
+    private const string LocationsCsvUrl = "https://raw.githubusercontent.com/dydrmr/VerseTime/main/data/locations.csv";
 
     #region Regex
     private readonly Regex RgxIdCmHandleEnlistedFluency = RgxIdCmHandleEnlistedFluencyMethod();
@@ -479,7 +480,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return rtnVal;
     }
 
-    private void TextBoxHandle_KeyDown(object sender, KeyEventArgs e) {
+    private async void TextBoxHandle_KeyDown(object sender, KeyEventArgs e) {
       // Handle-Textbox Tastendrücke verarbeiten
       if (e.Control) {
         switch (e.KeyCode) {
@@ -549,7 +550,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             if (TextBoxHandle.Text.Trim().Length >= 3) {
               if (Locations == null) {
                 Locations = new();
-                string locationCsv = Resources.locations;
+                string locationCsv = Resources.Locations;
+                HttpInfo httpInfo = await GetSource(LocationsCsvUrl, CancelToken);
+                if (httpInfo.StatusCode == HttpStatusCode.OK) {
+                  locationCsv = httpInfo.Source;
+                }
                 foreach (string line in locationCsv.Split(Environment.NewLine)) {
                   string[] v = line.Split(',');
                   Locations.Add(new LocationInfo() {
@@ -742,7 +747,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       };
 
       if (!string.IsNullOrWhiteSpace(handle)) {
-        reply.HttpResponse = await GetSource($"{handle}_Profile", reply.Profile.Url, CancelToken);
+        reply.HttpResponse = await GetRSISource($"{handle}_Profile", reply.Profile.Url, CancelToken);
         if (reply.HttpResponse.StatusCode == HttpStatusCode.OK && reply.HttpResponse.Source != null) {
 
           // UEE Citizen Record, Community Monicker, Handle, Enlisted, Fluency
@@ -795,7 +800,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private async Task<OrganizationsInfo> GetOrganizationsInfo(string handle) {
       OrganizationsInfo reply = new();
 
-      HttpInfo httpInfo = await GetSource($"{handle}_Organizations", $"https://robertsspaceindustries.com/citizens/{handle}/organizations", CancelToken);
+      HttpInfo httpInfo = await GetRSISource($"{handle}_Organizations", $"https://robertsspaceindustries.com/citizens/{handle}/organizations", CancelToken);
       if (httpInfo.StatusCode.HasValue && httpInfo.StatusCode == HttpStatusCode.OK && httpInfo.Source != null) {
 
         string[] organizations = httpInfo.Source.Split("<div class=\"title\">");
@@ -866,7 +871,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return HttpUtility.HtmlDecode(text);
     }
 
-    internal static async Task<HttpInfo> GetSource(string sourceExportName, string url, CancellationTokenSource cancellationToken, bool isCommunityHub = false) {
+    internal static async Task<HttpInfo> GetSource(string url, CancellationTokenSource cancellationToken) {
       HttpInfo rtnVal = new();
 
       using HttpClient client = new() {
@@ -874,6 +879,24 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       };
       try {
         rtnVal.Source = await client.GetStringAsync(url, cancellationToken.Token).ConfigureAwait(false);
+        rtnVal.StatusCode = HttpStatusCode.OK;
+      } catch (HttpRequestException ex) {
+        rtnVal.Source = string.Empty;
+        rtnVal.ErrorText = $"{ex.StatusCode}: {ex.Message}";
+        rtnVal.StatusCode = ex.StatusCode;
+      } catch (OperationCanceledException ex) {
+        rtnVal.Source = string.Empty;
+        rtnVal.ErrorText = ex.Message;
+        rtnVal.StatusCode = HttpStatusCode.BadGateway;
+      }
+
+      return rtnVal;
+    }
+
+    internal static async Task<HttpInfo> GetRSISource(string sourceExportName, string url, CancellationTokenSource cancellationToken, bool isCommunityHub = false) {
+      HttpInfo rtnVal = await GetSource(url, cancellationToken);
+
+      if (rtnVal.StatusCode == HttpStatusCode.OK) {
         if (!isCommunityHub) {
           int index = rtnVal.Source.IndexOf("<div class=\"page-wrapper\">");
           if (index >= 0) {
@@ -893,18 +916,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             rtnVal.Source = rtnVal.Source[..index];
           }
         }
-        if (IsDebug) {
-          ExportSource(sourceExportName, rtnVal.Source);
-        }
-        rtnVal.StatusCode = HttpStatusCode.OK;
-      } catch (HttpRequestException ex) {
-        rtnVal.Source = string.Empty;
-        rtnVal.ErrorText = $"{ex.StatusCode}: {ex.Message}";
-        rtnVal.StatusCode = ex.StatusCode;
-      } catch (OperationCanceledException ex) {
-        rtnVal.Source = string.Empty;
-        rtnVal.ErrorText = $"{ex.Message}";
-        rtnVal.StatusCode = HttpStatusCode.BadGateway;
+      }
+      if (IsDebug) {
+        ExportSource(sourceExportName, rtnVal.Source);
       }
 
       return rtnVal;
