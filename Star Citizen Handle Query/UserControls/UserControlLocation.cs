@@ -1,15 +1,18 @@
 ﻿using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace Star_Citizen_Handle_Query.UserControls {
 
   public partial class UserControlLocation : UserControl {
 
-    internal readonly LocationInfo Info;
+    private readonly LocationInfo Info;
+    private readonly Settings ProgramSettings;
 
-    public UserControlLocation(LocationInfo info) {
+    public UserControlLocation(LocationInfo info, Settings programSettings) {
       InitializeComponent();
       Info = info;
+      ProgramSettings = programSettings;
     }
 
     private void UserControlLog_Load(object sender, EventArgs e) {
@@ -19,16 +22,41 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private void LabelLocationName_MouseClick(object sender, MouseEventArgs e) {
-      switch (e.Button) {
-        case MouseButtons.Left:
-          Process.Start("explorer", $"https://starcitizen.tools/{Info.Name.Replace(" ", "_")}");
-          (Parent.Parent as Form).Close();
-          break;
-        case MouseButtons.Middle:
-          Process.Start("explorer", $"https://dydrmr.github.io/VerseTime/#{Info.Name.Replace(" ", "_")}");
-          (Parent.Parent as Form).Close();
-          break;
+      try {
+        switch (e.Button) {
+          case MouseButtons.Left:
+            if (!string.IsNullOrWhiteSpace(ProgramSettings.Locations.LMB_URL)) {
+              Process.Start("explorer", ReplaceLocationInfo(ProgramSettings.Locations.LMB_URL));
+            }
+            (Parent.Parent as Form).Close();
+            break;
+          case MouseButtons.Middle:
+            if (!string.IsNullOrWhiteSpace(ProgramSettings.Locations.MMB_URL)) {
+              Process.Start("explorer", ReplaceLocationInfo(ProgramSettings.Locations.MMB_URL));
+            }
+            (Parent.Parent as Form).Close();
+            break;
+          case MouseButtons.Right:
+            if (!string.IsNullOrWhiteSpace(ProgramSettings.Locations.RMB_URL)) {
+              Process.Start("explorer", ReplaceLocationInfo(ProgramSettings.Locations.RMB_URL));
+            }
+            (Parent.Parent as Form).Close();
+            break;
+        }
+      } catch { }
+    }
+
+    private string ReplaceLocationInfo(string locationInfo) {
+      string rtnVal = new(locationInfo);
+
+      // LocationInfo-Properties ersetzen
+      foreach (PropertyInfo prop in Info.GetType().GetProperties()) {
+        rtnVal = rtnVal.Replace($"{{{prop.Name.ToUpper()}}}", $"{prop.GetValue(Info)}", StringComparison.InvariantCultureIgnoreCase);
       }
+      // Leerzeichen durch Unterstrich ersetzen
+      rtnVal = rtnVal.Replace(" ", "_");
+
+      return rtnVal;
     }
 
   }

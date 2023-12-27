@@ -2,7 +2,7 @@
 
 Overlay zur Abfrage von Star Citizen Spielern und ihrer Organisationszugehörigkeiten
 
-![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/MainWindow_LogMonitor.png?raw=true "Star Citizen Handle Query")
+![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/MainWindow.png?raw=true "Star Citizen Handle Query")
 
 Das Tool-Hauptfenster kann nur dann im Vordergrund des Spiels dargestellt werden, wenn das Star Citizen Fenster im (randlosen) Fenstermodus läuft.
 
@@ -36,6 +36,19 @@ https://discord.com/invite/WmzNY3mCm6
 - __Mauseingaben ignorieren:__ Wird diese Einstellung aktiviert, gehen sämtliche Mausklicks durch das Fenster durch in das dahinter liegende Programm.
 - __Erreichbariekt via Alt + Tab:__ Wird diese Einstellung aktiviert, kann das Fenster via Tastenkobination `Alt` + `Tab` erreicht werden.
 - __Position merken:__ Ist diese Einstellung aktiviert, merkt sich das Programm beim Beenden die Position des Hauptfensters und stellt sie beim Start wieder her.
+### Orte (Alt + Eingabe)
+- __Linke Maustaste:__ URL, die bei der Betätigung der linken Maustaste geöffnet werden soll (inklusive Platzhalter)
+- __Mittlere Maustaste:__ URL, die bei der Betätigung der mittleren Maustaste geöffnet werden soll (inklusive Platzhalter)
+- __Rechte Maustaste:__ URL, die bei der Betätigung der rechten Maustaste geöffnet werden soll (inklusive Platzhalter)
+- Folgende Platzhalter können verwendet werden:
+  - `{Name}`: Name des Ortes
+  - `{Type}`: Typ des Ortes
+  - `{ParentBody}`: Übergeordnetes Objekt
+  - `{ParentStar}`: Übergeordneter Stern
+  - `{CoordinateX}`: X-Koordinate
+  - `{CoordinateY}`: Y-Koordinate
+  - `{CoordinateZ}`: Z-Koordinate
+  - `{ThemeImage}`: URL zum Beispielbild aus dem Wiki
 ### Lokaler Cache
 - __Maximales Alter:__ Hier kann für den lokalen Cache das maximale Alter in Tagen angegeben werden, wann die Informationen eines bereits zuvor abgefragten Handles erneut via Star Citizen Webseite abgefragt werden sollen. Es können Werte zwischen 0 und 365 Tagen angegeben werden. Die Angabe von 0 Tagen wird die Handle-Informationen immer via Star Citizen Webseite abfragen.
 ### Schaltflächen

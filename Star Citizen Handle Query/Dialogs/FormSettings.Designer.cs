@@ -63,6 +63,13 @@
       NumericUpDownAffiliationenMaximum = new NumericUpDown();
       LabelMaxAffiliationen = new Label();
       CheckBoxUnkenntlicheAffiliationenAusblenden = new CheckBox();
+      GroupBoxLocation = new GroupBox();
+      TextBoxRMB_URL = new TextBox();
+      TextBoxMMB_URL = new TextBox();
+      TextBoxLMB_URL = new TextBox();
+      LabelRMB_URL = new Label();
+      LabelMMB_URL = new Label();
+      LabelLMB_URL = new Label();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLokalerCacheAlter).BeginInit();
       GroupBoxFenster.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownFensterDeckkraft).BeginInit();
@@ -72,6 +79,7 @@
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLogEintragAnzeigedauer).BeginInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLogEintraegeMaximum).BeginInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownAffiliationenMaximum).BeginInit();
+      GroupBoxLocation.SuspendLayout();
       SuspendLayout();
       // 
       // CheckBoxFensterMauseingabenIgnorieren
@@ -112,7 +120,7 @@
       ButtonSpeichern.Location = new Point(12, 394);
       ButtonSpeichern.Name = "ButtonSpeichern";
       ButtonSpeichern.Size = new Size(75, 28);
-      ButtonSpeichern.TabIndex = 3;
+      ButtonSpeichern.TabIndex = 4;
       ButtonSpeichern.Text = "Speichern";
       ButtonSpeichern.UseVisualStyleBackColor = true;
       ButtonSpeichern.Click += ButtonSpeichern_Click;
@@ -123,7 +131,7 @@
       ButtonSchliessen.Location = new Point(93, 394);
       ButtonSchliessen.Name = "ButtonSchliessen";
       ButtonSchliessen.Size = new Size(75, 28);
-      ButtonSchliessen.TabIndex = 4;
+      ButtonSchliessen.TabIndex = 5;
       ButtonSchliessen.Text = "Schließen";
       ButtonSchliessen.UseVisualStyleBackColor = true;
       ButtonSchliessen.Click += ButtonSchliessen_Click;
@@ -297,10 +305,10 @@
       GroupBoxLokalerCache.Controls.Add(LabelLokalerCacheAlter);
       GroupBoxLokalerCache.FlatStyle = FlatStyle.Flat;
       GroupBoxLokalerCache.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxLokalerCache.Location = new Point(370, 205);
+      GroupBoxLokalerCache.Location = new Point(370, 326);
       GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
-      GroupBoxLokalerCache.Size = new Size(416, 183);
-      GroupBoxLokalerCache.TabIndex = 2;
+      GroupBoxLokalerCache.Size = new Size(416, 62);
+      GroupBoxLokalerCache.TabIndex = 3;
       GroupBoxLokalerCache.TabStop = false;
       GroupBoxLokalerCache.Text = "Lokaler Cache";
       // 
@@ -310,7 +318,7 @@
       ButtonStandard.Location = new Point(711, 394);
       ButtonStandard.Name = "ButtonStandard";
       ButtonStandard.Size = new Size(75, 28);
-      ButtonStandard.TabIndex = 5;
+      ButtonStandard.TabIndex = 6;
       ButtonStandard.Text = "Standard";
       ButtonStandard.UseVisualStyleBackColor = true;
       ButtonStandard.Click += ButtonStandard_Click;
@@ -341,7 +349,7 @@
       GroupBoxAnzeige.Location = new Point(12, 12);
       GroupBoxAnzeige.Name = "GroupBoxAnzeige";
       GroupBoxAnzeige.Size = new Size(352, 376);
-      GroupBoxAnzeige.TabIndex = 1;
+      GroupBoxAnzeige.TabIndex = 0;
       GroupBoxAnzeige.TabStop = false;
       GroupBoxAnzeige.Text = "Anzeige";
       // 
@@ -355,7 +363,7 @@
       NumericUpDownRelationsEntriesMaximum.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
       NumericUpDownRelationsEntriesMaximum.Name = "NumericUpDownRelationsEntriesMaximum";
       NumericUpDownRelationsEntriesMaximum.Size = new Size(44, 23);
-      NumericUpDownRelationsEntriesMaximum.TabIndex = 20;
+      NumericUpDownRelationsEntriesMaximum.TabIndex = 18;
       NumericUpDownRelationsEntriesMaximum.Value = new decimal(new int[] { 10, 0, 0, 0 });
       NumericUpDownRelationsEntriesMaximum.ValueChanged += NumericUpDownRelationsEntriesMaximum_ValueChanged;
       // 
@@ -365,7 +373,7 @@
       LabelRelationsEntriesMaximum.Location = new Point(34, 339);
       LabelRelationsEntriesMaximum.Name = "LabelRelationsEntriesMaximum";
       LabelRelationsEntriesMaximum.Size = new Size(111, 15);
-      LabelRelationsEntriesMaximum.TabIndex = 19;
+      LabelRelationsEntriesMaximum.TabIndex = 17;
       LabelRelationsEntriesMaximum.Text = "Einträge Maximum:";
       // 
       // CheckBoxSortRelationsAlphabetically
@@ -375,7 +383,7 @@
       CheckBoxSortRelationsAlphabetically.Location = new Point(34, 315);
       CheckBoxSortRelationsAlphabetically.Name = "CheckBoxSortRelationsAlphabetically";
       CheckBoxSortRelationsAlphabetically.Size = new Size(144, 19);
-      CheckBoxSortRelationsAlphabetically.TabIndex = 18;
+      CheckBoxSortRelationsAlphabetically.TabIndex = 16;
       CheckBoxSortRelationsAlphabetically.Text = "Alphabetisch sortieren";
       CheckBoxSortRelationsAlphabetically.UseVisualStyleBackColor = true;
       CheckBoxSortRelationsAlphabetically.CheckedChanged += CheckBoxSortRelationsAlphabetically_CheckedChanged;
@@ -386,7 +394,7 @@
       CheckBoxShowRelations.Location = new Point(15, 288);
       CheckBoxShowRelations.Name = "CheckBoxShowRelations";
       CheckBoxShowRelations.Size = new Size(144, 19);
-      CheckBoxShowRelations.TabIndex = 17;
+      CheckBoxShowRelations.TabIndex = 15;
       CheckBoxShowRelations.Text = "Beziehungen anzeigen";
       CheckBoxShowRelations.UseVisualStyleBackColor = true;
       CheckBoxShowRelations.CheckedChanged += CheckBoxShowRelations_CheckedChanged;
@@ -534,6 +542,85 @@
       CheckBoxUnkenntlicheAffiliationenAusblenden.UseVisualStyleBackColor = true;
       CheckBoxUnkenntlicheAffiliationenAusblenden.CheckedChanged += CheckBoxUnkenntlicheAffiliationenAusblenden_CheckedChanged;
       // 
+      // GroupBoxLocation
+      // 
+      GroupBoxLocation.Controls.Add(TextBoxRMB_URL);
+      GroupBoxLocation.Controls.Add(TextBoxMMB_URL);
+      GroupBoxLocation.Controls.Add(TextBoxLMB_URL);
+      GroupBoxLocation.Controls.Add(LabelRMB_URL);
+      GroupBoxLocation.Controls.Add(LabelMMB_URL);
+      GroupBoxLocation.Controls.Add(LabelLMB_URL);
+      GroupBoxLocation.FlatStyle = FlatStyle.Flat;
+      GroupBoxLocation.ForeColor = Color.FromArgb(57, 206, 216);
+      GroupBoxLocation.Location = new Point(370, 205);
+      GroupBoxLocation.Name = "GroupBoxLocation";
+      GroupBoxLocation.Size = new Size(416, 115);
+      GroupBoxLocation.TabIndex = 2;
+      GroupBoxLocation.TabStop = false;
+      GroupBoxLocation.Text = "Orte (Alt + Eingabe)";
+      // 
+      // TextBoxRMB_URL
+      // 
+      TextBoxRMB_URL.BackColor = Color.FromArgb(57, 206, 216);
+      TextBoxRMB_URL.BorderStyle = BorderStyle.FixedSingle;
+      TextBoxRMB_URL.ForeColor = Color.FromArgb(19, 26, 33);
+      TextBoxRMB_URL.Location = new Point(173, 79);
+      TextBoxRMB_URL.Name = "TextBoxRMB_URL";
+      TextBoxRMB_URL.Size = new Size(230, 23);
+      TextBoxRMB_URL.TabIndex = 5;
+      TextBoxRMB_URL.TextChanged += TextBoxRMB_URL_TextChanged;
+      // 
+      // TextBoxMMB_URL
+      // 
+      TextBoxMMB_URL.BackColor = Color.FromArgb(57, 206, 216);
+      TextBoxMMB_URL.BorderStyle = BorderStyle.FixedSingle;
+      TextBoxMMB_URL.ForeColor = Color.FromArgb(19, 26, 33);
+      TextBoxMMB_URL.Location = new Point(173, 50);
+      TextBoxMMB_URL.Name = "TextBoxMMB_URL";
+      TextBoxMMB_URL.Size = new Size(230, 23);
+      TextBoxMMB_URL.TabIndex = 3;
+      TextBoxMMB_URL.Text = "https://starcitizen.tools/{Name}";
+      TextBoxMMB_URL.TextChanged += TextBoxMMB_URL_TextChanged;
+      // 
+      // TextBoxLMB_URL
+      // 
+      TextBoxLMB_URL.BackColor = Color.FromArgb(57, 206, 216);
+      TextBoxLMB_URL.BorderStyle = BorderStyle.FixedSingle;
+      TextBoxLMB_URL.ForeColor = Color.FromArgb(19, 26, 33);
+      TextBoxLMB_URL.Location = new Point(173, 21);
+      TextBoxLMB_URL.Name = "TextBoxLMB_URL";
+      TextBoxLMB_URL.Size = new Size(230, 23);
+      TextBoxLMB_URL.TabIndex = 1;
+      TextBoxLMB_URL.Text = "https://dydrmr.github.io/VerseTime/#{Name}";
+      TextBoxLMB_URL.TextChanged += TextBoxLMB_URL_TextChanged;
+      // 
+      // LabelRMB_URL
+      // 
+      LabelRMB_URL.AutoSize = true;
+      LabelRMB_URL.Location = new Point(15, 82);
+      LabelRMB_URL.Name = "LabelRMB_URL";
+      LabelRMB_URL.Size = new Size(103, 15);
+      LabelRMB_URL.TabIndex = 4;
+      LabelRMB_URL.Text = "Rechte Maustaste:";
+      // 
+      // LabelMMB_URL
+      // 
+      LabelMMB_URL.AutoSize = true;
+      LabelMMB_URL.Location = new Point(15, 53);
+      LabelMMB_URL.Name = "LabelMMB_URL";
+      LabelMMB_URL.Size = new Size(108, 15);
+      LabelMMB_URL.TabIndex = 2;
+      LabelMMB_URL.Text = "Mittlere Maustaste:";
+      // 
+      // LabelLMB_URL
+      // 
+      LabelLMB_URL.AutoSize = true;
+      LabelLMB_URL.Location = new Point(15, 24);
+      LabelLMB_URL.Name = "LabelLMB_URL";
+      LabelLMB_URL.Size = new Size(95, 15);
+      LabelLMB_URL.TabIndex = 1;
+      LabelLMB_URL.Text = "Linke Maustaste:";
+      // 
       // FormSettings
       // 
       AcceptButton = ButtonSpeichern;
@@ -543,6 +630,7 @@
       CancelButton = ButtonSchliessen;
       ClientSize = new Size(798, 438);
       Controls.Add(GroupBoxAnzeige);
+      Controls.Add(GroupBoxLocation);
       Controls.Add(GroupBoxLokalerCache);
       Controls.Add(GroupBoxFenster);
       Controls.Add(ButtonStandard);
@@ -566,6 +654,8 @@
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLogEintragAnzeigedauer).EndInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLogEintraegeMaximum).EndInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownAffiliationenMaximum).EndInit();
+      GroupBoxLocation.ResumeLayout(false);
+      GroupBoxLocation.PerformLayout();
       ResumeLayout(false);
     }
 
@@ -609,5 +699,12 @@
     private CheckBox CheckBoxSortRelationsAlphabetically;
     private CheckBox CheckBoxLogMonitorFilterLoadingScreenDuration;
     private CheckBox CheckBoxLogMonitorFilterCorpse;
+    private GroupBox GroupBoxLocation;
+    private TextBox TextBoxLMB_URL;
+    private Label LabelRMB_URL;
+    private Label LabelMMB_URL;
+    private Label LabelLMB_URL;
+    private TextBox TextBoxRMB_URL;
+    private TextBox TextBoxMMB_URL;
   }
 }

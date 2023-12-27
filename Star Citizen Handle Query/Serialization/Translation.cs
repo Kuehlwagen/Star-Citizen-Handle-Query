@@ -109,6 +109,8 @@
 
     public Translation_Settings_Window Window { get; set; } = new();
 
+    public Translation_Settings_Locations Locations { get; set; } = new();
+
     public Translation_Settings_Local_Cache Local_Cache { get; set; } = new();
 
     public Translation_Settings_Buttons Buttons { get; set; } = new();
@@ -174,6 +176,19 @@
     public string Enable_Alt_Tab { get; set; } = "Erreichbarkeit via Alt + Tab";
 
     public string RememberWindowLocation { get; set; } = "Position merken";
+
+  }
+
+  [Serializable()]
+  public class Translation_Settings_Locations {
+
+    public string Group_Title { get; set; } = "Orte (Alt + Eingabe)";
+
+    public string LMB_URL { get; set; } = "Linke Maustaste:";
+
+    public string MMB_URL { get; set; } = "Mittlere Maustaste:";
+
+    public string RMB_URL { get; set; } = "Rechte Maustaste:";
 
   }
 

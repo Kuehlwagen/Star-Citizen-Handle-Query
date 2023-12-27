@@ -55,6 +55,12 @@
       "Enable_Alt_Tab": "Erreichbarkeit via Alt \u002B Tab",
       "RememberWindowLocation": "Position merken"
     },
+    "Locations": {
+      "Group_Title": "Orte (Alt + Eingabe)",
+      "LMB_URL": "Linke Maustaste:",
+      "MMB_URL": "Mittlere Maustaste:",
+      "RMB_URL": "Rechte Maustaste:"
+    },
     "Local_Cache": {
       "Group_Title": "Lokaler Cache",
       "Max_Age": "Maximales Alter:",

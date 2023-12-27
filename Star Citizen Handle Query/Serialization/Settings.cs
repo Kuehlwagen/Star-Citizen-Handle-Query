@@ -92,6 +92,9 @@
     /// <summary>Beziehungen relevante Einstellungen</summary>
     public RelationsSettings Relations { get; set; } = new();
 
+    /// <summary>Orte relevante Einstellungen</summary>
+    public LocationsSettings Locations { get; set; } = new();
+
     public object Clone() {
       return MemberwiseClone();
     }
@@ -186,6 +189,23 @@
 
     /// <summary>Angabe, ob die Einträge alphabetisch aufsteigend sortiert werden sollen</summary>
     public bool SortAlphabetically { get; set; } = true;
+
+    public object Clone() {
+      return MemberwiseClone();
+    }
+
+  }
+
+  public class LocationsSettings : ICloneable {
+
+    /// <summary>URL der linken Maustaste</summary>
+    public string LMB_URL { get; set; } = "https://dydrmr.github.io/VerseTime/#{Name}";
+
+    /// <summary>URL der mittleren Maustaste</summary>
+    public string MMB_URL { get; set; } = "https://starcitizen.tools/{Name}";
+
+    /// <summary>URL der rechten Maustaste</summary>
+    public string RMB_URL { get; set; } = "";
 
     public object Clone() {
       return MemberwiseClone();

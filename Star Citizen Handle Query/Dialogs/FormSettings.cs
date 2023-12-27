@@ -78,6 +78,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxShowRelations.Checked = ProgramSettings.Relations.ShowWindow;
       CheckBoxSortRelationsAlphabetically.Checked = ProgramSettings.Relations.SortAlphabetically;
       NumericUpDownRelationsEntriesMaximum.Value = ProgramSettings.Relations.EntriesMax;
+      TextBoxLMB_URL.Text = ProgramSettings.Locations.LMB_URL;
+      TextBoxMMB_URL.Text = ProgramSettings.Locations.MMB_URL;
+      TextBoxRMB_URL.Text = ProgramSettings.Locations.RMB_URL;
     }
 
     private void GetLocalizations() {
@@ -203,6 +206,18 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.Relations.EntriesMax = Convert.ToInt32(NumericUpDownRelationsEntriesMaximum.Value);
     }
 
+    private void TextBoxLMB_URL_TextChanged(object sender, EventArgs e) {
+      ProgramSettings.Locations.LMB_URL = TextBoxLMB_URL.Text;
+    }
+
+    private void TextBoxMMB_URL_TextChanged(object sender, EventArgs e) {
+      ProgramSettings.Locations.MMB_URL = TextBoxMMB_URL.Text;
+    }
+
+    private void TextBoxRMB_URL_TextChanged(object sender, EventArgs e) {
+      ProgramSettings.Locations.RMB_URL = TextBoxRMB_URL.Text;
+    }
+
     private void ButtonStandard_Click(object sender, EventArgs e) {
       ProgramSettings = new() { Language = ProgramSettings.Language };
       SetDialogValues();
@@ -239,6 +254,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxFensterMauseingabenIgnorieren.Text = CurrentLocalization.Settings.Window.Ignore_Mouseinput;
       CheckBoxAltTabEnabled.Text = CurrentLocalization.Settings.Window.Enable_Alt_Tab;
       CheckBoxPositionMerken.Text = CurrentLocalization.Settings.Window.RememberWindowLocation;
+      GroupBoxLocation.Text = CurrentLocalization.Settings.Locations.Group_Title;
+      LabelLMB_URL.Text = CurrentLocalization.Settings.Locations.LMB_URL;
+      LabelMMB_URL.Text = CurrentLocalization.Settings.Locations.MMB_URL;
+      LabelRMB_URL.Text = CurrentLocalization.Settings.Locations.RMB_URL;
 
       GroupBoxLokalerCache.Text = CurrentLocalization.Settings.Local_Cache.Group_Title;
       LabelLokalerCacheAlter.Text = CurrentLocalization.Settings.Local_Cache.Max_Age;

@@ -35,7 +35,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       // Orte anzeigen
       foreach (LocationInfo location in Filter) {
-        PanelLocations.Controls.Add(new UserControlLocation(location));
+        PanelLocations.Controls.Add(new UserControlLocation(location, ProgramSettings));
       }
 
     }
