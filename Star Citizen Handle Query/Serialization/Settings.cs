@@ -202,7 +202,7 @@
     public string LMB_URL { get; set; } = "https://dydrmr.github.io/VerseTime/#{Name}";
 
     /// <summary>URL der mittleren Maustaste</summary>
-    public string MMB_URL { get; set; } = "https://starcitizen.tools/{Name}";
+    public string MMB_URL { get; set; } = "{WikiLink}|https://starcitizen.tools/{Name}";
 
     /// <summary>URL der rechten Maustaste</summary>
     public string RMB_URL { get; set; } = "";

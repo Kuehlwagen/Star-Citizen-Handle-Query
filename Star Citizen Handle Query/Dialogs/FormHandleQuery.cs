@@ -565,7 +565,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                     CoordinateX = v[4],
                     CoordinateY = v[5],
                     CoordinateZ = v[6],
-                    ThemeImage = v[7]
+                    ThemeImage = v[7],
+                    WikiLink = v[8]
                   });
                 }
                 Locations.RemoveAt(0);

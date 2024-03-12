@@ -47,11 +47,18 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private string ReplaceLocationInfo(string locationInfo) {
-      string rtnVal = new(locationInfo);
+      string rtnVal = string.Empty;
 
-      // LocationInfo-Properties ersetzen
-      foreach (PropertyInfo prop in Info.GetType().GetProperties()) {
-        rtnVal = rtnVal.Replace($"{{{prop.Name.ToUpper()}}}", $"{prop.GetValue(Info)}", StringComparison.InvariantCultureIgnoreCase);
+      // Ggf. mehrere Texte (getrennt durch Pipe) auswerten
+      foreach (string s in locationInfo.Split("|")) {
+        // LocationInfo-Properties ersetzen
+        rtnVal = s;
+        foreach (PropertyInfo prop in Info.GetType().GetProperties()) {
+          rtnVal = rtnVal.Replace($"{{{prop.Name.ToUpper()}}}", $"{prop.GetValue(Info)}", StringComparison.InvariantCultureIgnoreCase);
+        }
+        if (!string.IsNullOrWhiteSpace(rtnVal)) {
+          break;
+        }
       }
       // Leerzeichen durch Unterstrich ersetzen
       rtnVal = rtnVal.Replace(" ", "_");

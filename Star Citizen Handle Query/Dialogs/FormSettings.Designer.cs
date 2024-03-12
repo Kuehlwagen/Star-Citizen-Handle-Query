@@ -579,7 +579,7 @@
       TextBoxMMB_URL.Name = "TextBoxMMB_URL";
       TextBoxMMB_URL.Size = new Size(230, 23);
       TextBoxMMB_URL.TabIndex = 3;
-      TextBoxMMB_URL.Text = "https://starcitizen.tools/{Name}";
+      TextBoxMMB_URL.Text = "{WikiLink}|https://starcitizen.tools/{Name}";
       TextBoxMMB_URL.TextChanged += TextBoxMMB_URL_TextChanged;
       // 
       // TextBoxLMB_URL

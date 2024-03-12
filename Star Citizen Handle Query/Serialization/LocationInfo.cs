@@ -11,6 +11,7 @@
     public string CoordinateY { get; set; }
     public string CoordinateZ { get; set; }
     public string ThemeImage { get; set; }
+    public string WikiLink { get; set; }
 
   }
 
