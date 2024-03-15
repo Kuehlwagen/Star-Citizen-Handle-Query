@@ -50,7 +50,7 @@ https://discord.com/invite/WmzNY3mCm6
   - `{CoordinateZ}`: Z-Koordinate
   - `{ThemeImage}`: URL zum Beispielbild aus dem Wiki
   - `{WikiLink}`: Link zum Wiki (starcitizen.tools)
-- Mehrere Einträge können Pipe `|` getrennt angegeben werden. Sobald ein Eintrag nach der Ersetzung der Platzhalter mindestens ein Zeichen enthält, wird dieser Wert verwendet. Beispiel: `{WikiLink}|https://starcitizen.tools/{Name}`
+- Mehrere Einträge können Pipe `|` getrennt angegeben werden. Sobald ein Eintrag nach der Ersetzung der Platzhalter mindestens ein Zeichen enthält, wird dieser Wert verwendet. Beispiel: `{WikiLink}|https://starcitizen.tools/{Name}` (wenn `{WikiLink}` keinen Text zurückgibt, wird stattdessen `https://starcitizen.tools/{Name}` verwendet)
 ### Lokaler Cache
 - __Maximales Alter:__ Hier kann für den lokalen Cache das maximale Alter in Tagen angegeben werden, wann die Informationen eines bereits zuvor abgefragten Handles erneut via Star Citizen Webseite abgefragt werden sollen. Es können Werte zwischen 0 und 365 Tagen angegeben werden. Die Angabe von 0 Tagen wird die Handle-Informationen immer via Star Citizen Webseite abfragen.
 ### Schaltflächen
