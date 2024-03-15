@@ -12,6 +12,7 @@ namespace Star_Citizen_Handle_Query {
     /// </summary>
     [STAThread]
     static void Main() {
+      Application.SetHighDpiMode(HighDpiMode.DpiUnaware);
       ApplicationConfiguration.Initialize();
 
       bool restart = false;
