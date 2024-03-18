@@ -23,177 +23,177 @@
     /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
     /// </summary>
     private void InitializeComponent() {
-      this.LabelHandle = new System.Windows.Forms.Label();
-      this.LabelCommunityMoniker = new System.Windows.Forms.Label();
-      this.PictureBoxHandleAvatar = new System.Windows.Forms.PictureBox();
-      this.PictureBoxDisplayTitle = new System.Windows.Forms.PictureBox();
-      this.LabelDisplayTitle = new System.Windows.Forms.Label();
-      this.LabelLocationFluency = new System.Windows.Forms.Label();
-      this.LabelUEECitizenRecord = new System.Windows.Forms.Label();
-      this.LabelEnlistedDate = new System.Windows.Forms.Label();
-      this.TextBoxAdditionalInformation = new System.Windows.Forms.TextBox();
-      this.LabelAdditionalInformation = new System.Windows.Forms.Label();
-      this.PictureBoxLive = new System.Windows.Forms.PictureBox();
-      this.LabelRelation = new System.Windows.Forms.Label();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxHandleAvatar)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxDisplayTitle)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLive)).BeginInit();
-      this.SuspendLayout();
+      LabelHandle = new Label();
+      LabelCommunityMoniker = new Label();
+      PictureBoxHandleAvatar = new PictureBox();
+      PictureBoxDisplayTitle = new PictureBox();
+      LabelDisplayTitle = new Label();
+      LabelLocationFluency = new Label();
+      LabelUEECitizenRecord = new Label();
+      LabelEnlistedDate = new Label();
+      TextBoxAdditionalInformation = new TextBox();
+      LabelAdditionalInformation = new Label();
+      PictureBoxLive = new PictureBox();
+      LabelRelation = new Label();
+      ((System.ComponentModel.ISupportInitialize)PictureBoxHandleAvatar).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)PictureBoxDisplayTitle).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)PictureBoxLive).BeginInit();
+      SuspendLayout();
       // 
       // LabelHandle
       // 
-      this.LabelHandle.AutoSize = true;
-      this.LabelHandle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelHandle.Location = new System.Drawing.Point(75, 1);
-      this.LabelHandle.Name = "LabelHandle";
-      this.LabelHandle.Size = new System.Drawing.Size(0, 21);
-      this.LabelHandle.TabIndex = 0;
+      LabelHandle.AutoSize = true;
+      LabelHandle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelHandle.Location = new Point(75, 1);
+      LabelHandle.Name = "LabelHandle";
+      LabelHandle.Size = new Size(0, 21);
+      LabelHandle.TabIndex = 0;
       // 
       // LabelCommunityMoniker
       // 
-      this.LabelCommunityMoniker.AutoSize = true;
-      this.LabelCommunityMoniker.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelCommunityMoniker.Location = new System.Drawing.Point(76, 22);
-      this.LabelCommunityMoniker.Name = "LabelCommunityMoniker";
-      this.LabelCommunityMoniker.Size = new System.Drawing.Size(0, 15);
-      this.LabelCommunityMoniker.TabIndex = 1;
+      LabelCommunityMoniker.AutoSize = true;
+      LabelCommunityMoniker.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelCommunityMoniker.Location = new Point(76, 22);
+      LabelCommunityMoniker.Name = "LabelCommunityMoniker";
+      LabelCommunityMoniker.Size = new Size(0, 15);
+      LabelCommunityMoniker.TabIndex = 1;
       // 
       // PictureBoxHandleAvatar
       // 
-      this.PictureBoxHandleAvatar.Location = new System.Drawing.Point(3, 3);
-      this.PictureBoxHandleAvatar.Name = "PictureBoxHandleAvatar";
-      this.PictureBoxHandleAvatar.Size = new System.Drawing.Size(70, 70);
-      this.PictureBoxHandleAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-      this.PictureBoxHandleAvatar.TabIndex = 2;
-      this.PictureBoxHandleAvatar.TabStop = false;
-      this.PictureBoxHandleAvatar.WaitOnLoad = true;
-      this.PictureBoxHandleAvatar.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBoxHandleAvatar_MouseClick);
+      PictureBoxHandleAvatar.Location = new Point(3, 3);
+      PictureBoxHandleAvatar.Name = "PictureBoxHandleAvatar";
+      PictureBoxHandleAvatar.Size = new Size(70, 70);
+      PictureBoxHandleAvatar.SizeMode = PictureBoxSizeMode.Zoom;
+      PictureBoxHandleAvatar.TabIndex = 2;
+      PictureBoxHandleAvatar.TabStop = false;
+      PictureBoxHandleAvatar.WaitOnLoad = true;
+      PictureBoxHandleAvatar.MouseClick += PictureBoxHandleAvatar_MouseClick;
       // 
       // PictureBoxDisplayTitle
       // 
-      this.PictureBoxDisplayTitle.Location = new System.Drawing.Point(79, 40);
-      this.PictureBoxDisplayTitle.Name = "PictureBoxDisplayTitle";
-      this.PictureBoxDisplayTitle.Size = new System.Drawing.Size(16, 16);
-      this.PictureBoxDisplayTitle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-      this.PictureBoxDisplayTitle.TabIndex = 3;
-      this.PictureBoxDisplayTitle.TabStop = false;
-      this.PictureBoxDisplayTitle.WaitOnLoad = true;
+      PictureBoxDisplayTitle.Location = new Point(79, 40);
+      PictureBoxDisplayTitle.Name = "PictureBoxDisplayTitle";
+      PictureBoxDisplayTitle.Size = new Size(16, 16);
+      PictureBoxDisplayTitle.SizeMode = PictureBoxSizeMode.Zoom;
+      PictureBoxDisplayTitle.TabIndex = 3;
+      PictureBoxDisplayTitle.TabStop = false;
+      PictureBoxDisplayTitle.WaitOnLoad = true;
       // 
       // LabelDisplayTitle
       // 
-      this.LabelDisplayTitle.AutoSize = true;
-      this.LabelDisplayTitle.Location = new System.Drawing.Point(97, 40);
-      this.LabelDisplayTitle.Name = "LabelDisplayTitle";
-      this.LabelDisplayTitle.Size = new System.Drawing.Size(0, 15);
-      this.LabelDisplayTitle.TabIndex = 4;
+      LabelDisplayTitle.AutoSize = true;
+      LabelDisplayTitle.Location = new Point(97, 40);
+      LabelDisplayTitle.Name = "LabelDisplayTitle";
+      LabelDisplayTitle.Size = new Size(0, 15);
+      LabelDisplayTitle.TabIndex = 4;
       // 
       // LabelLocationFluency
       // 
-      this.LabelLocationFluency.AutoSize = true;
-      this.LabelLocationFluency.Location = new System.Drawing.Point(77, 59);
-      this.LabelLocationFluency.Name = "LabelLocationFluency";
-      this.LabelLocationFluency.Size = new System.Drawing.Size(0, 15);
-      this.LabelLocationFluency.TabIndex = 9;
+      LabelLocationFluency.AutoSize = true;
+      LabelLocationFluency.Location = new Point(77, 59);
+      LabelLocationFluency.Name = "LabelLocationFluency";
+      LabelLocationFluency.Size = new Size(0, 15);
+      LabelLocationFluency.TabIndex = 9;
       // 
       // LabelUEECitizenRecord
       // 
-      this.LabelUEECitizenRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-      this.LabelUEECitizenRecord.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelUEECitizenRecord.Location = new System.Drawing.Point(281, 1);
-      this.LabelUEECitizenRecord.Name = "LabelUEECitizenRecord";
-      this.LabelUEECitizenRecord.Size = new System.Drawing.Size(91, 19);
-      this.LabelUEECitizenRecord.TabIndex = 10;
-      this.LabelUEECitizenRecord.TextAlign = System.Drawing.ContentAlignment.TopRight;
+      LabelUEECitizenRecord.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+      LabelUEECitizenRecord.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelUEECitizenRecord.Location = new Point(281, 1);
+      LabelUEECitizenRecord.Name = "LabelUEECitizenRecord";
+      LabelUEECitizenRecord.Size = new Size(91, 19);
+      LabelUEECitizenRecord.TabIndex = 10;
+      LabelUEECitizenRecord.TextAlign = ContentAlignment.TopRight;
       // 
       // LabelEnlistedDate
       // 
-      this.LabelEnlistedDate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelEnlistedDate.Location = new System.Drawing.Point(281, 22);
-      this.LabelEnlistedDate.Name = "LabelEnlistedDate";
-      this.LabelEnlistedDate.Size = new System.Drawing.Size(91, 19);
-      this.LabelEnlistedDate.TabIndex = 1;
-      this.LabelEnlistedDate.TextAlign = System.Drawing.ContentAlignment.TopRight;
+      LabelEnlistedDate.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelEnlistedDate.Location = new Point(281, 22);
+      LabelEnlistedDate.Name = "LabelEnlistedDate";
+      LabelEnlistedDate.Size = new Size(91, 19);
+      LabelEnlistedDate.TabIndex = 1;
+      LabelEnlistedDate.TextAlign = ContentAlignment.TopRight;
       // 
       // TextBoxAdditionalInformation
       // 
-      this.TextBoxAdditionalInformation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.TextBoxAdditionalInformation.BorderStyle = System.Windows.Forms.BorderStyle.None;
-      this.TextBoxAdditionalInformation.ForeColor = System.Drawing.Color.Khaki;
-      this.TextBoxAdditionalInformation.Location = new System.Drawing.Point(230, 40);
-      this.TextBoxAdditionalInformation.MaxLength = 0;
-      this.TextBoxAdditionalInformation.Name = "TextBoxAdditionalInformation";
-      this.TextBoxAdditionalInformation.Size = new System.Drawing.Size(138, 16);
-      this.TextBoxAdditionalInformation.TabIndex = 12;
-      this.TextBoxAdditionalInformation.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-      this.TextBoxAdditionalInformation.Visible = false;
-      this.TextBoxAdditionalInformation.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxAdditionalInformation_KeyDown);
-      this.TextBoxAdditionalInformation.Leave += new System.EventHandler(this.TextBoxAdditionalInformation_Leave);
+      TextBoxAdditionalInformation.BackColor = Color.FromArgb(19, 26, 33);
+      TextBoxAdditionalInformation.BorderStyle = BorderStyle.None;
+      TextBoxAdditionalInformation.ForeColor = Color.Khaki;
+      TextBoxAdditionalInformation.Location = new Point(230, 40);
+      TextBoxAdditionalInformation.MaxLength = 0;
+      TextBoxAdditionalInformation.Name = "TextBoxAdditionalInformation";
+      TextBoxAdditionalInformation.Size = new Size(138, 16);
+      TextBoxAdditionalInformation.TabIndex = 12;
+      TextBoxAdditionalInformation.TextAlign = HorizontalAlignment.Right;
+      TextBoxAdditionalInformation.Visible = false;
+      TextBoxAdditionalInformation.KeyDown += TextBoxAdditionalInformation_KeyDown;
+      TextBoxAdditionalInformation.Leave += TextBoxAdditionalInformation_Leave;
       // 
       // LabelAdditionalInformation
       // 
-      this.LabelAdditionalInformation.Cursor = System.Windows.Forms.Cursors.IBeam;
-      this.LabelAdditionalInformation.ForeColor = System.Drawing.Color.Khaki;
-      this.LabelAdditionalInformation.Location = new System.Drawing.Point(230, 40);
-      this.LabelAdditionalInformation.Name = "LabelAdditionalInformation";
-      this.LabelAdditionalInformation.Size = new System.Drawing.Size(142, 19);
-      this.LabelAdditionalInformation.TabIndex = 1;
-      this.LabelAdditionalInformation.TextAlign = System.Drawing.ContentAlignment.TopRight;
-      this.LabelAdditionalInformation.Click += new System.EventHandler(this.LabelAdditionalInformation_Click);
+      LabelAdditionalInformation.Cursor = Cursors.IBeam;
+      LabelAdditionalInformation.ForeColor = Color.Khaki;
+      LabelAdditionalInformation.Location = new Point(230, 40);
+      LabelAdditionalInformation.Name = "LabelAdditionalInformation";
+      LabelAdditionalInformation.Size = new Size(142, 19);
+      LabelAdditionalInformation.TabIndex = 1;
+      LabelAdditionalInformation.TextAlign = ContentAlignment.TopRight;
+      LabelAdditionalInformation.Click += LabelAdditionalInformation_Click;
       // 
       // PictureBoxLive
       // 
-      this.PictureBoxLive.BackColor = System.Drawing.Color.Transparent;
-      this.PictureBoxLive.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.PictureBoxLive.Image = global::Star_Citizen_Handle_Query.Properties.Resources.Check;
-      this.PictureBoxLive.InitialImage = null;
-      this.PictureBoxLive.Location = new System.Drawing.Point(336, 57);
-      this.PictureBoxLive.Name = "PictureBoxLive";
-      this.PictureBoxLive.Size = new System.Drawing.Size(32, 16);
-      this.PictureBoxLive.TabIndex = 13;
-      this.PictureBoxLive.TabStop = false;
-      this.PictureBoxLive.Visible = false;
-      this.PictureBoxLive.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBoxLive_MouseClick);
+      PictureBoxLive.BackColor = Color.Transparent;
+      PictureBoxLive.Cursor = Cursors.Hand;
+      PictureBoxLive.Image = Properties.Resources.Check;
+      PictureBoxLive.InitialImage = null;
+      PictureBoxLive.Location = new Point(336, 57);
+      PictureBoxLive.Name = "PictureBoxLive";
+      PictureBoxLive.Size = new Size(32, 16);
+      PictureBoxLive.SizeMode = PictureBoxSizeMode.Zoom;
+      PictureBoxLive.TabIndex = 13;
+      PictureBoxLive.TabStop = false;
+      PictureBoxLive.Visible = false;
+      PictureBoxLive.MouseClick += PictureBoxLive_MouseClick;
       // 
       // LabelRelation
       // 
-      this.LabelRelation.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.LabelRelation.Location = new System.Drawing.Point(68, 2);
-      this.LabelRelation.Margin = new System.Windows.Forms.Padding(0);
-      this.LabelRelation.Name = "LabelRelation";
-      this.LabelRelation.Size = new System.Drawing.Size(6, 72);
-      this.LabelRelation.TabIndex = 14;
-      this.LabelRelation.Visible = false;
-      this.LabelRelation.Paint += new System.Windows.Forms.PaintEventHandler(this.LabelRelation_Paint);
-      this.LabelRelation.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LabelRelation_MouseClick);
+      LabelRelation.Cursor = Cursors.Hand;
+      LabelRelation.Location = new Point(68, 2);
+      LabelRelation.Margin = new Padding(0);
+      LabelRelation.Name = "LabelRelation";
+      LabelRelation.Size = new Size(6, 72);
+      LabelRelation.TabIndex = 14;
+      LabelRelation.Visible = false;
+      LabelRelation.Paint += LabelRelation_Paint;
+      LabelRelation.MouseClick += LabelRelation_MouseClick;
       // 
       // UserControlHandle
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.Controls.Add(this.LabelRelation);
-      this.Controls.Add(this.PictureBoxLive);
-      this.Controls.Add(this.TextBoxAdditionalInformation);
-      this.Controls.Add(this.LabelAdditionalInformation);
-      this.Controls.Add(this.LabelUEECitizenRecord);
-      this.Controls.Add(this.LabelLocationFluency);
-      this.Controls.Add(this.LabelDisplayTitle);
-      this.Controls.Add(this.PictureBoxDisplayTitle);
-      this.Controls.Add(this.PictureBoxHandleAvatar);
-      this.Controls.Add(this.LabelEnlistedDate);
-      this.Controls.Add(this.LabelCommunityMoniker);
-      this.Controls.Add(this.LabelHandle);
-      this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
-      this.Name = "UserControlHandle";
-      this.Size = new System.Drawing.Size(375, 76);
-      this.Load += new System.EventHandler(this.UserControlHandle_Load);
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxHandleAvatar)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxDisplayTitle)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLive)).EndInit();
-      this.ResumeLayout(false);
-      this.PerformLayout();
-
+      AutoScaleDimensions = new SizeF(7F, 15F);
+      AutoScaleMode = AutoScaleMode.Font;
+      BackColor = Color.FromArgb(19, 26, 33);
+      Controls.Add(LabelRelation);
+      Controls.Add(PictureBoxLive);
+      Controls.Add(TextBoxAdditionalInformation);
+      Controls.Add(LabelAdditionalInformation);
+      Controls.Add(LabelUEECitizenRecord);
+      Controls.Add(LabelLocationFluency);
+      Controls.Add(LabelDisplayTitle);
+      Controls.Add(PictureBoxDisplayTitle);
+      Controls.Add(PictureBoxHandleAvatar);
+      Controls.Add(LabelEnlistedDate);
+      Controls.Add(LabelCommunityMoniker);
+      Controls.Add(LabelHandle);
+      ForeColor = Color.FromArgb(57, 206, 216);
+      Margin = new Padding(0, 1, 0, 0);
+      Name = "UserControlHandle";
+      Size = new Size(375, 76);
+      Load += UserControlHandle_Load;
+      ((System.ComponentModel.ISupportInitialize)PictureBoxHandleAvatar).EndInit();
+      ((System.ComponentModel.ISupportInitialize)PictureBoxDisplayTitle).EndInit();
+      ((System.ComponentModel.ISupportInitialize)PictureBoxLive).EndInit();
+      ResumeLayout(false);
+      PerformLayout();
     }
 
     #endregion

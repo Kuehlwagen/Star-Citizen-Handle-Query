@@ -91,7 +91,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void FormRelations_Shown(object sender, EventArgs e) {
-      Height = 31;
+      Height = LogicalToDeviceUnits(31);
       ImportRelationInfos();
     }
 
@@ -184,13 +184,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         PictureBoxClearAll.Cursor = Cursors.Hand;
       }
       if (PanelRelations.Controls.Count <= ProgramSettings.Relations.EntriesMax) {
-        Height += e.Control.Height + 2;
+        Height += LogicalToDeviceUnits(e.Control.Height + 2);
       }
     }
 
     private void PanelRelations_ControlRemoved(object sender, ControlEventArgs e) {
       if (PanelRelations.Controls.Count < ProgramSettings.Relations.EntriesMax) {
-        Height -= e.Control.Height + 2;
+        Height -= LogicalToDeviceUnits(e.Control.Height + 2);
       }
       if (PanelRelations.Controls.Count == 0) {
         PictureBoxClearAll.MouseClick -= PictureBoxClearAll_MouseClick;
@@ -324,8 +324,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void CheckBoxFilter_Paint(object sender, PaintEventArgs e) {
       if (sender is CheckBox checkBox && checkBox.Checked) {
+        int x = (checkBox.Width / 2) - LogicalToDeviceUnits(3);
+        int y = (checkBox.Height / 2) - LogicalToDeviceUnits(3);
+        int width = LogicalToDeviceUnits(6);
+        int height = LogicalToDeviceUnits(6);
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-        e.Graphics.FillEllipse(new SolidBrush(Color.FromArgb(19, 26, 33)), 4, 4, 6, 6);
+        e.Graphics.FillEllipse(new SolidBrush(Color.FromArgb(19, 26, 33)), x, y, width, height);
       }
     }
 

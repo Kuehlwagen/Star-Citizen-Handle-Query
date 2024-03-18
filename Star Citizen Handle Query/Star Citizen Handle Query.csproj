@@ -12,7 +12,7 @@
     <DebugType>embedded</DebugType>
     <PackageIcon>SCHQ.png</PackageIcon>
     <ApplicationIcon>Resources\SCHQ.ico</ApplicationIcon>
-    <AssemblyVersion>1.15.2</AssemblyVersion>
+    <AssemblyVersion>1.15.3</AssemblyVersion>
     <FileVersion>$(Assemblyversion)</FileVersion>
     <Company>Kuehlwagen@GitHub</Company>
     <Version>$(Assemblyversion)</Version>
@@ -35,9 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Dialogs\FormLocations.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Dialogs\FormLocations.cs" />
     <Compile Update="Dialogs\FormRelations.cs">
       <SubType>Form</SubType>
     </Compile>

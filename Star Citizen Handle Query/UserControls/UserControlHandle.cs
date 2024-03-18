@@ -89,7 +89,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelCommunityMoniker.Location = new Point(3, LabelHandle.Location.Y + 4);
         LabelCommunityMoniker.BringToFront();
         SetToolTip(LabelCommunityMoniker);
-        Size = new Size(Size.Width, 25);
+        Size = new Size(Size.Width, LogicalToDeviceUnits(25));
       }
     }
 

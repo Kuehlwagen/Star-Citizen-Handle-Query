@@ -12,7 +12,11 @@ namespace Star_Citizen_Handle_Query {
     /// </summary>
     [STAThread]
     static void Main() {
-      Application.SetHighDpiMode(HighDpiMode.DpiUnaware);
+      if (Environment.GetCommandLineArgs().Any(x => x.Equals("-DpiUnaware", StringComparison.InvariantCultureIgnoreCase))) {
+        Application.SetHighDpiMode(HighDpiMode.DpiUnaware);
+      } else {
+        Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
+      }
       ApplicationConfiguration.Initialize();
 
       bool restart = false;

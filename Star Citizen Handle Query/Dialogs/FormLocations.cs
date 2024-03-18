@@ -103,11 +103,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void PanelLocations_ControlAdded(object sender, ControlEventArgs e) {
-      Height += e.Control.Height + 2;
+      Height += LogicalToDeviceUnits(e.Control.Height + 2);
     }
 
     private void PanelLocations_ControlRemoved(object sender, ControlEventArgs e) {
-      Height -= e.Control.Height + 2;
+      Height -= LogicalToDeviceUnits(e.Control.Height + 2);
     }
 
     private void FormLocations_Deactivate(object sender, EventArgs e) {

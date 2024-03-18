@@ -61,14 +61,14 @@ namespace Star_Citizen_Handle_Query.UserControls {
         }
       } else {
         BackColor = Color.FromArgb(33, 26, 19);
-        PictureBoxOrganization.Size = new Size(PictureBoxOrganization.Width, 19);
+        PictureBoxOrganization.Size = new Size(PictureBoxOrganization.Width, LogicalToDeviceUnits(19));
         PictureBoxOrganization.Image = Properties.Resources.Redacted_Small;
         LabelOrganizationName.ForeColor = Color.FromArgb(255, 57, 57);
         LabelOrganizationName.Text = "REDACTED";
         LabelMainOrganizationAffiliate.ForeColor = Color.FromArgb(173, 39, 39);
         PictureBoxOrganization.MouseClick -= PictureBoxOrganization_MouseClick;
         LabelMainOrganizationAffiliate.Location = new Point(LabelMainOrganizationAffiliate.Left, LabelMainOrganizationAffiliate.Top - 3);
-        Size = new Size(Size.Width, 25);
+        Size = new Size(Size.Width, LogicalToDeviceUnits(25));
       }
     }
 

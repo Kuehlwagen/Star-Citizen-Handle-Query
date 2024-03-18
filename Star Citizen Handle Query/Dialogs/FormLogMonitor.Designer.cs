@@ -24,98 +24,101 @@
     /// </summary>
     private void InitializeComponent() {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogMonitor));
-      this.PanelHeader = new System.Windows.Forms.Panel();
-      this.PictureBoxClearAll = new System.Windows.Forms.PictureBox();
-      this.PictureBoxStatus = new System.Windows.Forms.PictureBox();
-      this.LabelTitle = new System.Windows.Forms.Label();
-      this.PanelLogInfo = new System.Windows.Forms.FlowLayoutPanel();
-      this.PanelHeader.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClearAll)).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxStatus)).BeginInit();
-      this.SuspendLayout();
+      PanelHeader = new Panel();
+      PictureBoxClearAll = new PictureBox();
+      PictureBoxStatus = new PictureBox();
+      LabelTitle = new Label();
+      PanelLogInfo = new FlowLayoutPanel();
+      PanelHeader.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)PictureBoxClearAll).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)PictureBoxStatus).BeginInit();
+      SuspendLayout();
       // 
       // PanelHeader
       // 
-      this.PanelHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.PanelHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.PanelHeader.Controls.Add(this.PictureBoxClearAll);
-      this.PanelHeader.Controls.Add(this.PictureBoxStatus);
-      this.PanelHeader.Controls.Add(this.LabelTitle);
-      this.PanelHeader.Location = new System.Drawing.Point(1, 1);
-      this.PanelHeader.Name = "PanelHeader";
-      this.PanelHeader.Size = new System.Drawing.Size(238, 29);
-      this.PanelHeader.TabIndex = 0;
+      PanelHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+      PanelHeader.BackColor = Color.FromArgb(19, 26, 33);
+      PanelHeader.Controls.Add(PictureBoxClearAll);
+      PanelHeader.Controls.Add(PictureBoxStatus);
+      PanelHeader.Controls.Add(LabelTitle);
+      PanelHeader.Location = new Point(1, 2);
+      PanelHeader.Margin = new Padding(4, 5, 4, 5);
+      PanelHeader.Name = "PanelHeader";
+      PanelHeader.Size = new Size(340, 48);
+      PanelHeader.TabIndex = 0;
       // 
       // PictureBoxClearAll
       // 
-      this.PictureBoxClearAll.Image = global::Star_Citizen_Handle_Query.Properties.Resources.ClearAll_Deactivated;
-      this.PictureBoxClearAll.Location = new System.Drawing.Point(219, 7);
-      this.PictureBoxClearAll.Name = "PictureBoxClearAll";
-      this.PictureBoxClearAll.Size = new System.Drawing.Size(12, 15);
-      this.PictureBoxClearAll.TabIndex = 2;
-      this.PictureBoxClearAll.TabStop = false;
+      PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
+      PictureBoxClearAll.Location = new Point(313, 12);
+      PictureBoxClearAll.Margin = new Padding(4, 5, 4, 5);
+      PictureBoxClearAll.Name = "PictureBoxClearAll";
+      PictureBoxClearAll.Size = new Size(17, 25);
+      PictureBoxClearAll.SizeMode = PictureBoxSizeMode.Zoom;
+      PictureBoxClearAll.TabIndex = 2;
+      PictureBoxClearAll.TabStop = false;
       // 
       // PictureBoxStatus
       // 
-      this.PictureBoxStatus.Image = global::Star_Citizen_Handle_Query.Properties.Resources.StatusRed;
-      this.PictureBoxStatus.Location = new System.Drawing.Point(4, 7);
-      this.PictureBoxStatus.Name = "PictureBoxStatus";
-      this.PictureBoxStatus.Size = new System.Drawing.Size(15, 15);
-      this.PictureBoxStatus.TabIndex = 2;
-      this.PictureBoxStatus.TabStop = false;
+      PictureBoxStatus.Image = Properties.Resources.StatusRed;
+      PictureBoxStatus.Location = new Point(6, 12);
+      PictureBoxStatus.Margin = new Padding(4, 5, 4, 5);
+      PictureBoxStatus.Name = "PictureBoxStatus";
+      PictureBoxStatus.Size = new Size(21, 25);
+      PictureBoxStatus.SizeMode = PictureBoxSizeMode.Zoom;
+      PictureBoxStatus.TabIndex = 2;
+      PictureBoxStatus.TabStop = false;
       // 
       // LabelTitle
       // 
-      this.LabelTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      this.LabelTitle.Location = new System.Drawing.Point(23, 7);
-      this.LabelTitle.Name = "LabelTitle";
-      this.LabelTitle.Size = new System.Drawing.Size(194, 15);
-      this.LabelTitle.TabIndex = 0;
-      this.LabelTitle.Text = "Log-Monitor";
-      this.LabelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-      this.LabelTitle.MouseCaptureChanged += new System.EventHandler(this.LabelTitle_MouseCaptureChanged);
-      this.LabelTitle.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LabelTitle_MouseDown);
-      this.LabelTitle.MouseMove += new System.Windows.Forms.MouseEventHandler(this.LabelTitle_MouseMove);
+      LabelTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelTitle.Location = new Point(33, 12);
+      LabelTitle.Margin = new Padding(4, 0, 4, 0);
+      LabelTitle.Name = "LabelTitle";
+      LabelTitle.Size = new Size(277, 25);
+      LabelTitle.TabIndex = 0;
+      LabelTitle.Text = "Log-Monitor";
+      LabelTitle.TextAlign = ContentAlignment.MiddleLeft;
+      LabelTitle.MouseCaptureChanged += LabelTitle_MouseCaptureChanged;
+      LabelTitle.MouseDown += LabelTitle_MouseDown;
+      LabelTitle.MouseMove += LabelTitle_MouseMove;
       // 
       // PanelLogInfo
       // 
-      this.PanelLogInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.PanelLogInfo.BackColor = System.Drawing.Color.Lime;
-      this.PanelLogInfo.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-      this.PanelLogInfo.Location = new System.Drawing.Point(1, 30);
-      this.PanelLogInfo.Margin = new System.Windows.Forms.Padding(0);
-      this.PanelLogInfo.Name = "PanelLogInfo";
-      this.PanelLogInfo.Size = new System.Drawing.Size(238, 29);
-      this.PanelLogInfo.TabIndex = 1;
-      this.PanelLogInfo.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.PanelLogInfo_ControlAdded);
-      this.PanelLogInfo.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.PanelLogInfo_ControlRemoved);
+      PanelLogInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      PanelLogInfo.BackColor = Color.Lime;
+      PanelLogInfo.FlowDirection = FlowDirection.TopDown;
+      PanelLogInfo.Location = new Point(1, 50);
+      PanelLogInfo.Margin = new Padding(0);
+      PanelLogInfo.Name = "PanelLogInfo";
+      PanelLogInfo.Size = new Size(340, 48);
+      PanelLogInfo.TabIndex = 1;
+      PanelLogInfo.ControlAdded += PanelLogInfo_ControlAdded;
+      PanelLogInfo.ControlRemoved += PanelLogInfo_ControlRemoved;
       // 
       // FormLogMonitor
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.BackColor = System.Drawing.Color.Lime;
-      this.ClientSize = new System.Drawing.Size(240, 60);
-      this.Controls.Add(this.PanelLogInfo);
-      this.Controls.Add(this.PanelHeader);
-      this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.Name = "FormLogMonitor";
-      this.ShowInTaskbar = false;
-      this.Text = "Star Citizen Handle Query";
-      this.TopMost = true;
-      this.TransparencyKey = System.Drawing.Color.Lime;
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLogMonitor_FormClosing);
-      this.Shown += new System.EventHandler(this.FormLogMonitor_Shown);
-      this.PanelHeader.ResumeLayout(false);
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxClearAll)).EndInit();
-      ((System.ComponentModel.ISupportInitialize)(this.PictureBoxStatus)).EndInit();
-      this.ResumeLayout(false);
-
+      AutoScaleDimensions = new SizeF(10F, 25F);
+      AutoScaleMode = AutoScaleMode.Font;
+      BackColor = Color.Lime;
+      ClientSize = new Size(343, 100);
+      Controls.Add(PanelLogInfo);
+      Controls.Add(PanelHeader);
+      ForeColor = Color.FromArgb(57, 206, 216);
+      FormBorderStyle = FormBorderStyle.None;
+      Icon = (Icon)resources.GetObject("$this.Icon");
+      Margin = new Padding(4, 5, 4, 5);
+      Name = "FormLogMonitor";
+      ShowInTaskbar = false;
+      Text = "Star Citizen Handle Query";
+      TopMost = true;
+      TransparencyKey = Color.Lime;
+      FormClosing += FormLogMonitor_FormClosing;
+      Shown += FormLogMonitor_Shown;
+      PanelHeader.ResumeLayout(false);
+      ((System.ComponentModel.ISupportInitialize)PictureBoxClearAll).EndInit();
+      ((System.ComponentModel.ISupportInitialize)PictureBoxStatus).EndInit();
+      ResumeLayout(false);
     }
 
     #endregion

@@ -95,7 +95,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void FormLogMonitor_Shown(object sender, EventArgs e) {
-      Height = 31;
+      Height = LogicalToDeviceUnits(31);
       StartMonitor();
     }
 
@@ -304,12 +304,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         PictureBoxClearAll.Cursor = Cursors.Hand;
       }
       if (PanelLogInfo.Controls.Count <= ProgramSettings.LogMonitor.EntriesMax) {
-        Height += e.Control.Height + 2;
+        Height += LogicalToDeviceUnits(e.Control.Height + 2);
       }
     }
 
     private void PanelLogInfo_ControlRemoved(object sender, ControlEventArgs e) {
-      Height -= e.Control.Height + 2;
+      Height -= LogicalToDeviceUnits(e.Control.Height + 2);
       if (PanelLogInfo.Controls.Count == 0) {
         PictureBoxClearAll.MouseClick -= PictureBoxClearAll_MouseClick;
         PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;

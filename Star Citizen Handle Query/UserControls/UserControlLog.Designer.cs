@@ -36,6 +36,7 @@
       PictureBoxLeft.Location = new Point(1, 2);
       PictureBoxLeft.Name = "PictureBoxLeft";
       PictureBoxLeft.Size = new Size(21, 21);
+      PictureBoxLeft.SizeMode = PictureBoxSizeMode.Zoom;
       PictureBoxLeft.TabIndex = 0;
       PictureBoxLeft.TabStop = false;
       // 
@@ -51,10 +52,11 @@
       // 
       // LabelTime
       // 
+      LabelTime.AutoSize = true;
       LabelTime.ForeColor = Color.FromArgb(46, 157, 158);
-      LabelTime.Location = new Point(23, 2);
+      LabelTime.Location = new Point(20, 5);
       LabelTime.Name = "LabelTime";
-      LabelTime.Size = new Size(34, 21);
+      LabelTime.Size = new Size(34, 15);
       LabelTime.TabIndex = 0;
       LabelTime.Text = "00:00";
       LabelTime.TextAlign = ContentAlignment.MiddleLeft;
@@ -64,6 +66,7 @@
       PictureBoxRight.Location = new Point(214, 2);
       PictureBoxRight.Name = "PictureBoxRight";
       PictureBoxRight.Size = new Size(21, 21);
+      PictureBoxRight.SizeMode = PictureBoxSizeMode.Zoom;
       PictureBoxRight.TabIndex = 0;
       PictureBoxRight.TabStop = false;
       // 
@@ -84,6 +87,7 @@
       ((System.ComponentModel.ISupportInitialize)PictureBoxLeft).EndInit();
       ((System.ComponentModel.ISupportInitialize)PictureBoxRight).EndInit();
       ResumeLayout(false);
+      PerformLayout();
     }
 
     #endregion

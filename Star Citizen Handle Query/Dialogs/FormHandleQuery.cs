@@ -338,7 +338,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void FormHandleQuery_Shown(object sender, EventArgs e) {
       // Fenster-Größe initlal verkleinern
-      Height = 31;
+      Height = LogicalToDeviceUnits(31);
 
       // Fenster an die richtige Position bringen
       if (ProgramSettings?.RememberWindowLocation == true && ProgramSettings?.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
@@ -631,19 +631,19 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
         // UserControl mit Handle-Informationen hinzufügen
         PanelInfo.Controls.Add(new UserControlHandle(handleInfo, ProgramSettings, ProgramTranslation, forceLive));
-        Height += 78;
+        Height += LogicalToDeviceUnits(78);
 
         if (handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK) {
           // Ggf. Relations-Control hinzufügen
           if (ProgramSettings.Relations.ShowWindow && !ProgramSettings.WindowIgnoreMouseInput) {
             PanelInfo.Controls.Add(new UserControlHandleRelation(ProgramTranslation));
-            Height += 23;
+            Height += LogicalToDeviceUnits(23);
           }
 
           // Ggf. UserControl mit Organisation-Informationen hinzufügen
           if (handleInfo?.Organizations?.MainOrganization != null) {
             PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.Organizations.MainOrganization, ProgramSettings, true, forceLive));
-            Height += handleInfo.Organizations.MainOrganization.Name != string.Empty ? 78 : 25;
+            Height += LogicalToDeviceUnits(handleInfo.Organizations.MainOrganization.Name != string.Empty ? 78 : 25);
           }
 
           // Ggf. UserControls mit Affiliate-Informationen hinzufügen
@@ -653,7 +653,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               // Prüfen, ob ausgeblendete Affiliationen dargestellt werden sollen
               if (!handleInfo.Organizations.Affiliations[i].Redacted || !ProgramSettings.HideRedactedAffiliations) {
                 PanelInfo.Controls.Add(new UserControlOrganization(handleInfo.Organizations.Affiliations[i], ProgramSettings, false, forceLive));
-                Height += !string.IsNullOrWhiteSpace(handleInfo.Organizations.Affiliations[i].Name) ? 78 : 25;
+                Height += LogicalToDeviceUnits(!string.IsNullOrWhiteSpace(handleInfo.Organizations.Affiliations[i].Name) ? 78 : 25);
                 affiliatesAdded++;
               }
             }
@@ -711,7 +711,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         PanelInfo.Controls.Clear();
         CancelToken = new CancellationTokenSource();
       }
-      Height = 31;
+      Height = LogicalToDeviceUnits(31);
     }
 
     public async Task<HandleInfo> GetHandleInfo(bool forceLive, string name, Settings programSettings, CacheDirectoryType infoType) {
