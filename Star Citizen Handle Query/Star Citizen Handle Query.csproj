@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
     <RootNamespace>Star_Citizen_Handle_Query</RootNamespace>
     <Nullable>disable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
@@ -17,6 +17,7 @@
     <Company>Kuehlwagen@GitHub</Company>
     <Version>$(Assemblyversion)</Version>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
 
   <!-- Workaround für fehlerhaftes Framework https://github.com/dotnet/core/issues/7176 -->
