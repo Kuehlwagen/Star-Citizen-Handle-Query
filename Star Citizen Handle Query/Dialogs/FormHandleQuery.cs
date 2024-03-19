@@ -136,14 +136,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void UpdateAutoComplete(string handle = null) {
       // Autovervollständigung aktualisieren
       if (AutoCompleteCollection == null && handle == null) {
-        AutoCompleteCollection = new();
+        AutoCompleteCollection = [];
         string handleCachePath = GetCachePath(CacheDirectoryType.Handle);
         if (Directory.Exists(handleCachePath)) {
-          List<string> autoCompleteSource = new();
+          List<string> autoCompleteSource = [];
           foreach (string filePath in Directory.GetFiles(handleCachePath, "*.json")) {
             autoCompleteSource.Add(Path.GetFileNameWithoutExtension(filePath));
           }
-          AutoCompleteCollection.AddRange(autoCompleteSource.ToArray());
+          AutoCompleteCollection.AddRange([.. autoCompleteSource]);
         }
         TextBoxHandle.AutoCompleteCustomSource = AutoCompleteCollection;
       } else if (handle != string.Empty && !AutoCompleteCollection.Contains(handle)) {
@@ -410,7 +410,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         string jsonResult = await client.GetStringAsync("https://api.github.com/repos/Kuehlwagen/Star-Citizen-Handle-Query/releases/latest");
         if (!string.IsNullOrWhiteSpace(jsonResult)) {
           GitHubRelease gitHubRelease = JsonSerializer.Deserialize<GitHubRelease>(jsonResult);
-          if (gitHubRelease != null && !string.IsNullOrEmpty(gitHubRelease.tag_name) && gitHubRelease.tag_name.StartsWith("v")) {
+          if (gitHubRelease != null && !string.IsNullOrEmpty(gitHubRelease.tag_name) && gitHubRelease.tag_name.StartsWith('v')) {
             if (GetProgramVersion() < new Version(gitHubRelease.tag_name[1..])) {
               NotifyIconHandleQuery.BalloonTipClicked += NotifyIconHandleQuery_BalloonTipClicked;
               NotifyIconHandleQuery.Tag = gitHubRelease;
@@ -549,7 +549,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             e.Handled = true;
             if (TextBoxHandle.Text.Trim().Length >= 3) {
               if (Locations == null) {
-                Locations = new();
+                Locations = [];
                 string locationCsv = Resources.Locations;
                 HttpInfo httpInfo = await GetSource(LocationsCsvUrl, CancelToken);
                 if (httpInfo.StatusCode == HttpStatusCode.OK) {
@@ -838,7 +838,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
               // Affiliation
               MatchCollection mcOrganization = RgxOrganization.Matches(organization);
-              reply.Affiliations ??= new List<OrganizationInfo>();
+              reply.Affiliations ??= [];
               if (mcOrganization.Count > 0 && mcOrganization[0].Groups.Count == 6) {
                 reply.Affiliations.Add(new OrganizationInfo() {
                   Url = $"https://robertsspaceindustries.com/orgs/{mcOrganization[0].Groups[1].Value}",
@@ -926,7 +926,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private static string CorrectUrl(string url) {
-      return url.StartsWith("/") ? $"https://robertsspaceindustries.com{url}" : url;
+      return url.StartsWith('/') ? $"https://robertsspaceindustries.com{url}" : url;
     }
 
     private static void ExportSource(string name, string source) {
@@ -1126,6 +1126,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Close();
     }
 
+    private readonly JsonSerializerOptions JsonSerOptions = new() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
     private void FormHandleQuery_FormClosing(object sender, FormClosingEventArgs e) {
       // Panel leeren
       RemoveUserControls();
@@ -1142,7 +1143,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.Relations.WindowLocation = RelationsForm != null && ProgramSettings.RememberWindowLocation ? RelationsForm.Location : Point.Empty;
       string settingsFilePath = GetSettingsFilePath();
       try {
-        File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, new JsonSerializerOptions() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull }), Encoding.UTF8);
+        File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, JsonSerOptions), Encoding.UTF8);
       } catch { }
 
       LogMonitorForm?.Close();
@@ -1189,7 +1190,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         case CacheDirectoryType.HandleAvatar:
         case CacheDirectoryType.OrganizationAvatar:
         case CacheDirectoryType.HandleDisplayTitle:
-          rtnVal = Path.Combine(GetCachePath(imageType), GetCorrectFileName($"{name}{url[url.LastIndexOf(".")..]}"));
+          rtnVal = Path.Combine(GetCachePath(imageType), GetCorrectFileName($"{name}{url[url.LastIndexOf('.')..]}"));
           break;
       }
 

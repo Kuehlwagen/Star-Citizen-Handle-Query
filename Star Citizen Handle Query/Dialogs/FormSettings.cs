@@ -8,13 +8,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public Settings ProgramSettings;
     private Translation CurrentLocalization;
-    private readonly List<Translation> Localizations = new();
-    private readonly List<Keys> KeyCollection = new() {
+    private readonly List<Translation> Localizations = [];
+    private readonly List<Keys> KeyCollection = [
       Keys.None, Keys.A, Keys.B, Keys.C, Keys.D, Keys.D0, Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.D6, Keys.D7, Keys.D8, Keys.D9,
       Keys.Delete, Keys.E, Keys.End, Keys.F, Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10,
       Keys.F11, Keys.F12, Keys.G, Keys.H, Keys.Home, Keys.I, Keys.Insert, Keys.J, Keys.K, Keys.L, Keys.M, Keys.N, Keys.O, Keys.P, Keys.Q,
       Keys.R, Keys.S, Keys.T, Keys.U, Keys.V, Keys.W, Keys.X, Keys.Y, Keys.Z
-    };
+    ];
 
     public FormSettings(Settings settings = null) {
       InitializeComponent();
@@ -92,11 +92,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return Path.Combine(FormHandleQuery.GetSaveFilesRootPath(), "Localization");
     }
 
+    private readonly JsonSerializerOptions JsonSerOptions = new() { WriteIndented = true };
     private void ButtonSpeichern_Click(object sender, EventArgs e) {
       ButtonSpeichern.Focus();
       string settingsFilePath = FormHandleQuery.GetSettingsFilePath();
       try {
-        File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, new JsonSerializerOptions() { WriteIndented = true }), Encoding.UTF8);
+        File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, JsonSerOptions), Encoding.UTF8);
         DialogResult = DialogResult.OK;
       } catch (Exception ex) {
         MessageBox.Show($"{CurrentLocalization.Settings.MessageBoxes.Save_Fail} {ex.Message}", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);

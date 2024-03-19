@@ -93,10 +93,11 @@ namespace Star_Citizen_Handle_Query.UserControls {
       }
     }
 
+    private readonly static JsonSerializerOptions JsonSerOptions = new() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
     internal static void CreateHandleJSON(HandleInfo handleInfo, Settings programSettings, bool forceLive = false, bool forceExport = false) {
       string jsonPath = GetCachePath(CacheDirectoryType.Handle, handleInfo?.Profile?.Handle);
       if (forceExport || forceLive || !File.Exists(jsonPath) || new FileInfo(jsonPath).LastWriteTime < DateTime.Now.AddDays(programSettings.LocalCacheMaxAge * -1)) {
-        string handleJson = JsonSerializer.Serialize(handleInfo, new JsonSerializerOptions() { WriteIndented = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull });
+        string handleJson = JsonSerializer.Serialize(handleInfo, JsonSerOptions);
         if (!string.IsNullOrWhiteSpace(handleJson)) {
           File.WriteAllText(jsonPath, handleJson, Encoding.UTF8);
         }

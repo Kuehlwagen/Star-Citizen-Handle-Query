@@ -29,12 +29,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty,
         null,
         DataGridViewLokalerCache,
-        new object[] { true });
+        [true]);
       ColumnCacheDatum.DefaultCellStyle.Format = "G";
       ColumnEnlisted.DefaultCellStyle.Format = "d";
 
       DataGridViewLokalerCache.PerformLayout();
-      List<DataGridViewRow> rows = new();
+      List<DataGridViewRow> rows = [];
       FormHandleQuery.CreateDirectory(FormHandleQuery.CacheDirectoryType.Handle);
       foreach (string handleJsonPath in Directory.GetFiles(FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.Handle), "*.json").OrderByDescending(x => new FileInfo(x).LastWriteTime)) {
         HandleInfo handleInfo = JsonSerializer.Deserialize<HandleInfo>(File.ReadAllText(handleJsonPath, Encoding.UTF8));
@@ -44,7 +44,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           };
           DataGridViewRow row = new();
           OrganizationInfo org = handleInfo?.Organizations.MainOrganization;
-          List<object> info = new() {
+          List<object> info = [
             new FileInfo(handleJsonPath).LastWriteTime,
             handleInfo.Profile.Handle,
             handleInfo.Profile.CommunityMonicker,
@@ -55,9 +55,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             handleInfo.Organizations.Affiliations?.Count ?? 0,
             $"{(int)handleInfo.Relation}-{handleInfo.Relation}",
             handleInfo?.Comment ?? string.Empty
-          };
+          ];
           row.Tag = handleInfo;
-          row.CreateCells(DataGridViewLokalerCache, info.ToArray());
+          row.CreateCells(DataGridViewLokalerCache, [.. info]);
           if (handleInfo.Organizations.MainOrganization?.Redacted == true) {
 #pragma warning disable IDE0017 // Initialisierung von Objekten vereinfachen
             row.Cells[5] = new DataGridViewTextBoxCell();
@@ -70,7 +70,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         }
       }
       if (rows.Count > 0) {
-        DataGridViewLokalerCache.Rows.AddRange(rows.ToArray());
+        DataGridViewLokalerCache.Rows.AddRange([.. rows]);
         DataGridViewLokalerCache.Sort(ColumnCacheDatum, ListSortDirection.Descending);
         DataGridViewLokalerCache.ClearSelection();
         DataGridViewLokalerCache.Rows[0].Selected = true;

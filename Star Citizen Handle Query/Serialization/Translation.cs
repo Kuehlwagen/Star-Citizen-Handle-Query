@@ -1,13 +1,8 @@
 ﻿namespace Star_Citizen_Handle_Query.Serialization {
 
   [Serializable()]
-  public class Translation : IEquatable<Translation> {
-
-    public Translation(string language = null) {
-      Language = language ?? "Deutsch";
-    }
-
-    public string Language { get; set; } = "Deutsch";
+  public class Translation(string language = null) : IEquatable<Translation> {
+    public string Language { get; set; } = language ?? "Deutsch";
 
     public Translation_Window Window { get; set; } = new();
 
