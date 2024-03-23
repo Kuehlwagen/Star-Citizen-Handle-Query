@@ -36,7 +36,7 @@
       LabelLocationName.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelLocationName.Location = new Point(6, 2);
       LabelLocationName.Name = "LabelLocationName";
-      LabelLocationName.Size = new Size(209, 21);
+      LabelLocationName.Size = new Size(215, 21);
       LabelLocationName.TabIndex = 1;
       LabelLocationName.Text = "Name";
       LabelLocationName.TextAlign = ContentAlignment.MiddleLeft;
@@ -48,7 +48,7 @@
       LabelType.ForeColor = Color.FromArgb(46, 157, 158);
       LabelType.Location = new Point(6, 20);
       LabelType.Name = "LabelType";
-      LabelType.Size = new Size(209, 21);
+      LabelType.Size = new Size(215, 21);
       LabelType.TabIndex = 1;
       LabelType.Text = "Typ";
       LabelType.TextAlign = ContentAlignment.MiddleLeft;
@@ -60,7 +60,7 @@
       LabelDescription.ForeColor = Color.FromArgb(46, 157, 158);
       LabelDescription.Location = new Point(6, 38);
       LabelDescription.Name = "LabelDescription";
-      LabelDescription.Size = new Size(209, 21);
+      LabelDescription.Size = new Size(215, 21);
       LabelDescription.TabIndex = 1;
       LabelDescription.Text = "Beschreibung";
       LabelDescription.TextAlign = ContentAlignment.MiddleLeft;
@@ -69,6 +69,7 @@
       // PictureBoxLocation
       // 
       PictureBoxLocation.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+      PictureBoxLocation.Cursor = Cursors.Hand;
       PictureBoxLocation.Location = new Point(223, 2);
       PictureBoxLocation.Name = "PictureBoxLocation";
       PictureBoxLocation.Size = new Size(97, 57);
@@ -76,6 +77,7 @@
       PictureBoxLocation.TabIndex = 3;
       PictureBoxLocation.TabStop = false;
       PictureBoxLocation.WaitOnLoad = true;
+      PictureBoxLocation.MouseClick += LabelLocationName_MouseClick;
       // 
       // UserControlLocation
       // 
