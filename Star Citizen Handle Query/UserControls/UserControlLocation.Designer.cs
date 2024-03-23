@@ -26,13 +26,15 @@
       LabelLocationName = new Label();
       LabelType = new Label();
       LabelDescription = new Label();
+      PictureBoxLocation = new PictureBox();
+      ((System.ComponentModel.ISupportInitialize)PictureBoxLocation).BeginInit();
       SuspendLayout();
       // 
       // LabelLocationName
       // 
       LabelLocationName.Cursor = Cursors.Hand;
-      LabelLocationName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-      LabelLocationName.Location = new Point(14, 2);
+      LabelLocationName.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+      LabelLocationName.Location = new Point(6, 2);
       LabelLocationName.Name = "LabelLocationName";
       LabelLocationName.Size = new Size(209, 21);
       LabelLocationName.TabIndex = 1;
@@ -44,7 +46,7 @@
       // 
       LabelType.Cursor = Cursors.Hand;
       LabelType.ForeColor = Color.FromArgb(46, 157, 158);
-      LabelType.Location = new Point(14, 20);
+      LabelType.Location = new Point(6, 20);
       LabelType.Name = "LabelType";
       LabelType.Size = new Size(209, 21);
       LabelType.TabIndex = 1;
@@ -56,7 +58,7 @@
       // 
       LabelDescription.Cursor = Cursors.Hand;
       LabelDescription.ForeColor = Color.FromArgb(46, 157, 158);
-      LabelDescription.Location = new Point(14, 38);
+      LabelDescription.Location = new Point(6, 38);
       LabelDescription.Name = "LabelDescription";
       LabelDescription.Size = new Size(209, 21);
       LabelDescription.TabIndex = 1;
@@ -64,19 +66,32 @@
       LabelDescription.TextAlign = ContentAlignment.MiddleLeft;
       LabelDescription.MouseClick += LabelLocationName_MouseClick;
       // 
+      // PictureBoxLocation
+      // 
+      PictureBoxLocation.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+      PictureBoxLocation.Location = new Point(223, 2);
+      PictureBoxLocation.Name = "PictureBoxLocation";
+      PictureBoxLocation.Size = new Size(97, 57);
+      PictureBoxLocation.SizeMode = PictureBoxSizeMode.Zoom;
+      PictureBoxLocation.TabIndex = 3;
+      PictureBoxLocation.TabStop = false;
+      PictureBoxLocation.WaitOnLoad = true;
+      // 
       // UserControlLocation
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.FromArgb(19, 26, 33);
+      Controls.Add(PictureBoxLocation);
       Controls.Add(LabelDescription);
       Controls.Add(LabelType);
       Controls.Add(LabelLocationName);
       ForeColor = Color.FromArgb(57, 206, 216);
       Margin = new Padding(0, 1, 0, 0);
       Name = "UserControlLocation";
-      Size = new Size(238, 63);
+      Size = new Size(329, 63);
       Load += UserControlLog_Load;
+      ((System.ComponentModel.ISupportInitialize)PictureBoxLocation).EndInit();
       ResumeLayout(false);
     }
 
@@ -84,5 +99,6 @@
     private Label LabelLocationName;
     private Label LabelType;
     private Label LabelDescription;
+    internal PictureBox PictureBoxLocation;
   }
 }

@@ -1,6 +1,7 @@
 ﻿using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
 using System.Reflection;
+using static Star_Citizen_Handle_Query.Dialogs.FormHandleQuery;
 
 namespace Star_Citizen_Handle_Query.UserControls {
 
@@ -15,10 +16,11 @@ namespace Star_Citizen_Handle_Query.UserControls {
       ProgramSettings = programSettings;
     }
 
-    private void UserControlLog_Load(object sender, EventArgs e) {
+    private async void UserControlLog_Load(object sender, EventArgs e) {
       LabelLocationName.Text = Info.Name;
       LabelType.Text = Info.Type;
       LabelDescription.Text = $"{Info.ParentBody} ({Info.ParentStar})";
+      PictureBoxLocation.Image = await GetImage(CacheDirectoryType.Location, Info.ThemeImage, Info.Name, ProgramSettings.LocalCacheMaxAge);
     }
 
     private void LabelLocationName_MouseClick(object sender, MouseEventArgs e) {
@@ -28,19 +30,16 @@ namespace Star_Citizen_Handle_Query.UserControls {
             if (!string.IsNullOrWhiteSpace(ProgramSettings.Locations.LMB_URL)) {
               Process.Start("explorer", ReplaceLocationInfo(ProgramSettings.Locations.LMB_URL));
             }
-            (Parent.Parent as Form).Close();
             break;
           case MouseButtons.Middle:
             if (!string.IsNullOrWhiteSpace(ProgramSettings.Locations.MMB_URL)) {
               Process.Start("explorer", ReplaceLocationInfo(ProgramSettings.Locations.MMB_URL));
             }
-            (Parent.Parent as Form).Close();
             break;
           case MouseButtons.Right:
             if (!string.IsNullOrWhiteSpace(ProgramSettings.Locations.RMB_URL)) {
               Process.Start("explorer", ReplaceLocationInfo(ProgramSettings.Locations.RMB_URL));
             }
-            (Parent.Parent as Form).Close();
             break;
         }
       } catch { }

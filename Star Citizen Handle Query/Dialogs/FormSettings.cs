@@ -78,6 +78,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxShowRelations.Checked = ProgramSettings.Relations.ShowWindow;
       CheckBoxSortRelationsAlphabetically.Checked = ProgramSettings.Relations.SortAlphabetically;
       NumericUpDownRelationsEntriesMaximum.Value = ProgramSettings.Relations.EntriesMax;
+      CheckBoxShowLocations.Checked = ProgramSettings.Locations.ShowWindow;
+      NumericUpDownOrteEintraegeMaximum.Value = ProgramSettings.Locations.EntriesMax;
       TextBoxLMB_URL.Text = ProgramSettings.Locations.LMB_URL;
       TextBoxMMB_URL.Text = ProgramSettings.Locations.MMB_URL;
       TextBoxRMB_URL.Text = ProgramSettings.Locations.RMB_URL;
@@ -256,6 +258,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxAltTabEnabled.Text = CurrentLocalization.Settings.Window.Enable_Alt_Tab;
       CheckBoxPositionMerken.Text = CurrentLocalization.Settings.Window.RememberWindowLocation;
       GroupBoxLocation.Text = CurrentLocalization.Settings.Locations.Group_Title;
+      CheckBoxShowLocations.Text = CurrentLocalization.Settings.Locations.Show_Locations;
+      LabelOrteEintraegeMaximum.Text = CurrentLocalization.Settings.Locations.Locations_Entries_Max;
       LabelLMB_URL.Text = CurrentLocalization.Settings.Locations.LMB_URL;
       LabelMMB_URL.Text = CurrentLocalization.Settings.Locations.MMB_URL;
       LabelRMB_URL.Text = CurrentLocalization.Settings.Locations.RMB_URL;
@@ -269,6 +273,18 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ButtonStandard.Text = CurrentLocalization.Settings.Buttons.Standard;
 
       ResumeLayout();
+    }
+
+    private void CheckBoxShowLocations_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.Locations.ShowWindow = CheckBoxShowLocations.Checked;
+      NumericUpDownOrteEintraegeMaximum.Enabled = CheckBoxShowLocations.Checked;
+      TextBoxLMB_URL.Enabled = CheckBoxShowLocations.Checked;
+      TextBoxMMB_URL.Enabled = CheckBoxShowLocations.Checked;
+      TextBoxRMB_URL.Enabled = CheckBoxShowLocations.Checked;
+    }
+
+    private void NumericUpDownOrteEintraegeMaximum_ValueChanged(object sender, EventArgs e) {
+      ProgramSettings.Locations.EntriesMax = Convert.ToInt32((sender as NumericUpDown).Value);
     }
 
   }

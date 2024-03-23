@@ -14,7 +14,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private bool WindowLocked = true;
     private readonly Settings ProgramSettings;
     private readonly Translation ProgramTranslation;
-    private readonly SortedList<string, UserControlRelation> UserControlRelations = new();
+    private readonly SortedList<string, UserControlRelation> UserControlRelations = [];
 
     public FormRelations(Settings programSettings, Translation translation) {
       InitializeComponent();
@@ -114,6 +114,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
+    private readonly JsonSerializerOptions JsonSerOptions = new() {
+      WriteIndented = true,
+      DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+    };
     internal void ExportRelationInfos(string exportPath = null) {
       RelationInfos infos = new() {
         FilterVisibility = new() {
@@ -133,10 +137,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
       try {
         File.WriteAllText(exportPath ?? FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.Root, "Relations"),
-          JsonSerializer.Serialize(infos, new JsonSerializerOptions() {
-            WriteIndented = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-          }), Encoding.UTF8);
+          JsonSerializer.Serialize(infos, JsonSerOptions), Encoding.UTF8);
       } catch { }
     }
 

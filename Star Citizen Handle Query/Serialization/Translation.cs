@@ -179,6 +179,10 @@
 
     public string Group_Title { get; set; } = "Orte (Alt + Eingabe)";
 
+    public string Show_Locations { get; set; } = "Orte anzeigen";
+
+    public string Locations_Entries_Max { get; set; } = "Einträge Maximum:";
+
     public string LMB_URL { get; set; } = "Linke Maustaste:";
 
     public string MMB_URL { get; set; } = "Mittlere Maustaste:";
@@ -308,6 +312,12 @@
   public class Translation_Locations {
 
     public string Title { get; set; } = "Orte";
+
+    public string Filter_Placeholder { get; set; } = "Orte filtern...";
+
+    public string More_Location { get; set; } = "weiterer Ort...";
+
+    public string More_Locations { get; set; } = "weitere Orte...";
 
   }
 

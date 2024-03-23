@@ -25,6 +25,7 @@
     private void InitializeComponent() {
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLocations));
       PanelHeader = new Panel();
+      TextBoxFilterLocations = new TextBox();
       LabelTitle = new Label();
       PanelLocations = new FlowLayoutPanel();
       PanelHeader.SuspendLayout();
@@ -34,18 +35,33 @@
       // 
       PanelHeader.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
       PanelHeader.BackColor = Color.FromArgb(19, 26, 33);
+      PanelHeader.Controls.Add(TextBoxFilterLocations);
       PanelHeader.Controls.Add(LabelTitle);
       PanelHeader.Location = new Point(1, 1);
       PanelHeader.Name = "PanelHeader";
-      PanelHeader.Size = new Size(238, 29);
+      PanelHeader.Size = new Size(327, 29);
       PanelHeader.TabIndex = 0;
+      // 
+      // TextBoxFilterLocations
+      // 
+      TextBoxFilterLocations.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+      TextBoxFilterLocations.AutoCompleteSource = AutoCompleteSource.CustomSource;
+      TextBoxFilterLocations.BackColor = Color.FromArgb(57, 206, 216);
+      TextBoxFilterLocations.Location = new Point(121, 3);
+      TextBoxFilterLocations.MaxLength = 60;
+      TextBoxFilterLocations.Name = "TextBoxFilterLocations";
+      TextBoxFilterLocations.PlaceholderText = "Orte filtern...";
+      TextBoxFilterLocations.Size = new Size(198, 23);
+      TextBoxFilterLocations.TabIndex = 3;
+      TextBoxFilterLocations.TextChanged += TextBoxFilterLocations_TextChanged;
+      TextBoxFilterLocations.KeyDown += TextBoxFilterLocations_KeyDown;
       // 
       // LabelTitle
       // 
-      LabelTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelTitle.Location = new Point(4, 7);
       LabelTitle.Name = "LabelTitle";
-      LabelTitle.Size = new Size(223, 15);
+      LabelTitle.Size = new Size(116, 15);
       LabelTitle.TabIndex = 0;
       LabelTitle.Text = "Orte";
       LabelTitle.TextAlign = ContentAlignment.MiddleLeft;
@@ -61,7 +77,7 @@
       PanelLocations.Location = new Point(1, 30);
       PanelLocations.Margin = new Padding(0);
       PanelLocations.Name = "PanelLocations";
-      PanelLocations.Size = new Size(238, 29);
+      PanelLocations.Size = new Size(327, 29);
       PanelLocations.TabIndex = 1;
       PanelLocations.ControlAdded += PanelLocations_ControlAdded;
       PanelLocations.ControlRemoved += PanelLocations_ControlRemoved;
@@ -71,7 +87,7 @@
       AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.Lime;
-      ClientSize = new Size(240, 60);
+      ClientSize = new Size(329, 60);
       Controls.Add(PanelLocations);
       Controls.Add(PanelHeader);
       ForeColor = Color.FromArgb(57, 206, 216);
@@ -79,13 +95,14 @@
       Icon = (Icon)resources.GetObject("$this.Icon");
       Name = "FormLocations";
       ShowInTaskbar = false;
-      StartPosition = FormStartPosition.CenterScreen;
       Text = "Star Citizen Handle Query";
       TopMost = true;
       TransparencyKey = Color.Lime;
       Deactivate += FormLocations_Deactivate;
+      FormClosing += FormLocations_FormClosing;
       Shown += FormLocations_Shown;
       PanelHeader.ResumeLayout(false);
+      PanelHeader.PerformLayout();
       ResumeLayout(false);
     }
 
@@ -94,5 +111,6 @@
     private Panel PanelHeader;
     private Label LabelTitle;
     private FlowLayoutPanel PanelLocations;
+    private TextBox TextBoxFilterLocations;
   }
 }

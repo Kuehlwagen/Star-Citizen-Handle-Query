@@ -64,6 +64,9 @@
       LabelMaxAffiliationen = new Label();
       CheckBoxUnkenntlicheAffiliationenAusblenden = new CheckBox();
       GroupBoxLocation = new GroupBox();
+      NumericUpDownOrteEintraegeMaximum = new NumericUpDown();
+      LabelOrteEintraegeMaximum = new Label();
+      CheckBoxShowLocations = new CheckBox();
       TextBoxRMB_URL = new TextBox();
       TextBoxMMB_URL = new TextBox();
       TextBoxLMB_URL = new TextBox();
@@ -80,6 +83,7 @@
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLogEintraegeMaximum).BeginInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownAffiliationenMaximum).BeginInit();
       GroupBoxLocation.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)NumericUpDownOrteEintraegeMaximum).BeginInit();
       SuspendLayout();
       // 
       // CheckBoxFensterMauseingabenIgnorieren
@@ -117,7 +121,7 @@
       // ButtonSpeichern
       // 
       ButtonSpeichern.FlatStyle = FlatStyle.Flat;
-      ButtonSpeichern.Location = new Point(12, 394);
+      ButtonSpeichern.Location = new Point(12, 462);
       ButtonSpeichern.Name = "ButtonSpeichern";
       ButtonSpeichern.Size = new Size(75, 28);
       ButtonSpeichern.TabIndex = 4;
@@ -128,7 +132,7 @@
       // ButtonSchliessen
       // 
       ButtonSchliessen.FlatStyle = FlatStyle.Flat;
-      ButtonSchliessen.Location = new Point(93, 394);
+      ButtonSchliessen.Location = new Point(93, 462);
       ButtonSchliessen.Name = "ButtonSchliessen";
       ButtonSchliessen.Size = new Size(75, 28);
       ButtonSchliessen.TabIndex = 5;
@@ -305,7 +309,7 @@
       GroupBoxLokalerCache.Controls.Add(LabelLokalerCacheAlter);
       GroupBoxLokalerCache.FlatStyle = FlatStyle.Flat;
       GroupBoxLokalerCache.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxLokalerCache.Location = new Point(370, 326);
+      GroupBoxLokalerCache.Location = new Point(370, 394);
       GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
       GroupBoxLokalerCache.Size = new Size(416, 62);
       GroupBoxLokalerCache.TabIndex = 3;
@@ -315,7 +319,7 @@
       // ButtonStandard
       // 
       ButtonStandard.FlatStyle = FlatStyle.Flat;
-      ButtonStandard.Location = new Point(711, 394);
+      ButtonStandard.Location = new Point(711, 462);
       ButtonStandard.Name = "ButtonStandard";
       ButtonStandard.Size = new Size(75, 28);
       ButtonStandard.TabIndex = 6;
@@ -348,7 +352,7 @@
       GroupBoxAnzeige.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxAnzeige.Location = new Point(12, 12);
       GroupBoxAnzeige.Name = "GroupBoxAnzeige";
-      GroupBoxAnzeige.Size = new Size(352, 376);
+      GroupBoxAnzeige.Size = new Size(352, 444);
       GroupBoxAnzeige.TabIndex = 0;
       GroupBoxAnzeige.TabStop = false;
       GroupBoxAnzeige.Text = "Anzeige";
@@ -544,6 +548,9 @@
       // 
       // GroupBoxLocation
       // 
+      GroupBoxLocation.Controls.Add(NumericUpDownOrteEintraegeMaximum);
+      GroupBoxLocation.Controls.Add(LabelOrteEintraegeMaximum);
+      GroupBoxLocation.Controls.Add(CheckBoxShowLocations);
       GroupBoxLocation.Controls.Add(TextBoxRMB_URL);
       GroupBoxLocation.Controls.Add(TextBoxMMB_URL);
       GroupBoxLocation.Controls.Add(TextBoxLMB_URL);
@@ -554,20 +561,54 @@
       GroupBoxLocation.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxLocation.Location = new Point(370, 205);
       GroupBoxLocation.Name = "GroupBoxLocation";
-      GroupBoxLocation.Size = new Size(416, 115);
+      GroupBoxLocation.Size = new Size(416, 183);
       GroupBoxLocation.TabIndex = 2;
       GroupBoxLocation.TabStop = false;
       GroupBoxLocation.Text = "Orte (Alt + Eingabe)";
+      // 
+      // NumericUpDownOrteEintraegeMaximum
+      // 
+      NumericUpDownOrteEintraegeMaximum.BackColor = Color.FromArgb(19, 26, 33);
+      NumericUpDownOrteEintraegeMaximum.Enabled = false;
+      NumericUpDownOrteEintraegeMaximum.ForeColor = Color.FromArgb(57, 206, 216);
+      NumericUpDownOrteEintraegeMaximum.Location = new Point(173, 48);
+      NumericUpDownOrteEintraegeMaximum.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
+      NumericUpDownOrteEintraegeMaximum.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+      NumericUpDownOrteEintraegeMaximum.Name = "NumericUpDownOrteEintraegeMaximum";
+      NumericUpDownOrteEintraegeMaximum.Size = new Size(44, 23);
+      NumericUpDownOrteEintraegeMaximum.TabIndex = 2;
+      NumericUpDownOrteEintraegeMaximum.Value = new decimal(new int[] { 10, 0, 0, 0 });
+      NumericUpDownOrteEintraegeMaximum.ValueChanged += NumericUpDownOrteEintraegeMaximum_ValueChanged;
+      // 
+      // LabelOrteEintraegeMaximum
+      // 
+      LabelOrteEintraegeMaximum.AutoSize = true;
+      LabelOrteEintraegeMaximum.Location = new Point(32, 50);
+      LabelOrteEintraegeMaximum.Name = "LabelOrteEintraegeMaximum";
+      LabelOrteEintraegeMaximum.Size = new Size(111, 15);
+      LabelOrteEintraegeMaximum.TabIndex = 1;
+      LabelOrteEintraegeMaximum.Text = "Einträge Maximum:";
+      // 
+      // CheckBoxShowLocations
+      // 
+      CheckBoxShowLocations.AutoSize = true;
+      CheckBoxShowLocations.Location = new Point(15, 26);
+      CheckBoxShowLocations.Name = "CheckBoxShowLocations";
+      CheckBoxShowLocations.Size = new Size(99, 19);
+      CheckBoxShowLocations.TabIndex = 0;
+      CheckBoxShowLocations.Text = "Orte anzeigen";
+      CheckBoxShowLocations.UseVisualStyleBackColor = true;
+      CheckBoxShowLocations.CheckedChanged += CheckBoxShowLocations_CheckedChanged;
       // 
       // TextBoxRMB_URL
       // 
       TextBoxRMB_URL.BackColor = Color.FromArgb(57, 206, 216);
       TextBoxRMB_URL.BorderStyle = BorderStyle.FixedSingle;
       TextBoxRMB_URL.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxRMB_URL.Location = new Point(173, 79);
+      TextBoxRMB_URL.Location = new Point(173, 135);
       TextBoxRMB_URL.Name = "TextBoxRMB_URL";
       TextBoxRMB_URL.Size = new Size(230, 23);
-      TextBoxRMB_URL.TabIndex = 5;
+      TextBoxRMB_URL.TabIndex = 8;
       TextBoxRMB_URL.TextChanged += TextBoxRMB_URL_TextChanged;
       // 
       // TextBoxMMB_URL
@@ -575,10 +616,10 @@
       TextBoxMMB_URL.BackColor = Color.FromArgb(57, 206, 216);
       TextBoxMMB_URL.BorderStyle = BorderStyle.FixedSingle;
       TextBoxMMB_URL.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxMMB_URL.Location = new Point(173, 50);
+      TextBoxMMB_URL.Location = new Point(173, 106);
       TextBoxMMB_URL.Name = "TextBoxMMB_URL";
       TextBoxMMB_URL.Size = new Size(230, 23);
-      TextBoxMMB_URL.TabIndex = 3;
+      TextBoxMMB_URL.TabIndex = 6;
       TextBoxMMB_URL.Text = "{WikiLink}|https://starcitizen.tools/{Name}";
       TextBoxMMB_URL.TextChanged += TextBoxMMB_URL_TextChanged;
       // 
@@ -587,38 +628,38 @@
       TextBoxLMB_URL.BackColor = Color.FromArgb(57, 206, 216);
       TextBoxLMB_URL.BorderStyle = BorderStyle.FixedSingle;
       TextBoxLMB_URL.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxLMB_URL.Location = new Point(173, 21);
+      TextBoxLMB_URL.Location = new Point(173, 77);
       TextBoxLMB_URL.Name = "TextBoxLMB_URL";
       TextBoxLMB_URL.Size = new Size(230, 23);
-      TextBoxLMB_URL.TabIndex = 1;
+      TextBoxLMB_URL.TabIndex = 4;
       TextBoxLMB_URL.Text = "https://dydrmr.github.io/VerseTime/#{Name}";
       TextBoxLMB_URL.TextChanged += TextBoxLMB_URL_TextChanged;
       // 
       // LabelRMB_URL
       // 
       LabelRMB_URL.AutoSize = true;
-      LabelRMB_URL.Location = new Point(15, 82);
+      LabelRMB_URL.Location = new Point(15, 138);
       LabelRMB_URL.Name = "LabelRMB_URL";
       LabelRMB_URL.Size = new Size(103, 15);
-      LabelRMB_URL.TabIndex = 4;
+      LabelRMB_URL.TabIndex = 7;
       LabelRMB_URL.Text = "Rechte Maustaste:";
       // 
       // LabelMMB_URL
       // 
       LabelMMB_URL.AutoSize = true;
-      LabelMMB_URL.Location = new Point(15, 53);
+      LabelMMB_URL.Location = new Point(15, 109);
       LabelMMB_URL.Name = "LabelMMB_URL";
       LabelMMB_URL.Size = new Size(108, 15);
-      LabelMMB_URL.TabIndex = 2;
+      LabelMMB_URL.TabIndex = 5;
       LabelMMB_URL.Text = "Mittlere Maustaste:";
       // 
       // LabelLMB_URL
       // 
       LabelLMB_URL.AutoSize = true;
-      LabelLMB_URL.Location = new Point(15, 24);
+      LabelLMB_URL.Location = new Point(15, 80);
       LabelLMB_URL.Name = "LabelLMB_URL";
       LabelLMB_URL.Size = new Size(95, 15);
-      LabelLMB_URL.TabIndex = 1;
+      LabelLMB_URL.TabIndex = 3;
       LabelLMB_URL.Text = "Linke Maustaste:";
       // 
       // FormSettings
@@ -628,7 +669,7 @@
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.FromArgb(19, 26, 33);
       CancelButton = ButtonSchliessen;
-      ClientSize = new Size(798, 438);
+      ClientSize = new Size(798, 502);
       Controls.Add(GroupBoxAnzeige);
       Controls.Add(GroupBoxLocation);
       Controls.Add(GroupBoxLokalerCache);
@@ -656,6 +697,7 @@
       ((System.ComponentModel.ISupportInitialize)NumericUpDownAffiliationenMaximum).EndInit();
       GroupBoxLocation.ResumeLayout(false);
       GroupBoxLocation.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)NumericUpDownOrteEintraegeMaximum).EndInit();
       ResumeLayout(false);
     }
 
@@ -706,5 +748,8 @@
     private Label LabelLMB_URL;
     private TextBox TextBoxRMB_URL;
     private TextBox TextBoxMMB_URL;
+    private NumericUpDown NumericUpDownOrteEintraegeMaximum;
+    private Label LabelOrteEintraegeMaximum;
+    private CheckBox CheckBoxShowLocations;
   }
 }

@@ -57,6 +57,8 @@
     },
     "Locations": {
       "Group_Title": "Locations (Alt + Enter)",
+      "Show_Locations": "Show Locations",
+      "Locations_Entries_Max": "Maximum entries:",
       "LMB_URL": "Left Mouse Button:",
       "MMB_URL": "Middle Mouse Button:",
       "RMB_URL": "Right Mouse Button:"
@@ -116,6 +118,9 @@
     "Title": "Relations"
   },
   "Locations": {
-    "Title":  "Locations"
+    "Title": "Locations",
+    "Filter_Placeholder": "Filter Locations...",
+    "More_Location": "more location",
+    "More_Locations": "more locations..."
   }
 }

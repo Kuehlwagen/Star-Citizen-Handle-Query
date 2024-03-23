@@ -198,6 +198,28 @@
 
   public class LocationsSettings : ICloneable {
 
+    /// <summary>Angabe, ob das Fenster angezeigt werden soll</summary>
+    public bool ShowWindow { get; set; } = true;
+
+    /// <summary>Position des Relation-Fensters</summary>
+    public Point WindowLocation { get; set; } = Point.Empty;
+
+    /// <summary>Maximal anzuzeigende Einträge</summary>
+    private int _EntriesMax = 10;
+    public int EntriesMax {
+      get {
+        return _EntriesMax;
+      }
+      set {
+        if (value < 1) {
+          value = 1;
+        } else if (_EntriesMax > 50) {
+          value = 50;
+        }
+        _EntriesMax = value;
+      }
+    }
+
     /// <summary>URL der linken Maustaste</summary>
     public string LMB_URL { get; set; } = "https://dydrmr.github.io/VerseTime/#{Name}";
 

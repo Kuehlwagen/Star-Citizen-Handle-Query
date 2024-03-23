@@ -29,9 +29,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private AutoCompleteStringCollection AutoCompleteCollection;
     private bool ShowInitialBalloonTip = false;
     private static bool IsDebug = false;
-    private List<LocationInfo> Locations = null;
     internal static CancellationTokenSource CancelToken = new();
-    private const string LocationsCsvUrl = "https://raw.githubusercontent.com/dydrmr/VerseTime/main/data/locations.csv";
 
     #region Regex
     private readonly Regex RgxIdCmHandleEnlistedFluency = RgxIdCmHandleEnlistedFluencyMethod();
@@ -331,6 +329,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (RelationsForm != null) {
         RelationsForm.Visible = true;
       }
+      if (LocationsForm != null) {
+        LocationsForm.Visible = true;
+      }
       Activate();
       TextBoxHandle.SelectAll();
       TextBoxHandle.Focus();
@@ -377,6 +378,17 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           RelationsForm.Location = ProgramSettings.Relations.WindowLocation;
         } else {
           RelationsForm.MoveWindowToDefaultLocation();
+        }
+      }
+
+      // Ggf. Orte-Fenster anzeigen
+      if (ProgramSettings.Locations.ShowWindow) {
+        LocationsForm = new(ProgramSettings, ProgramTranslation);
+        LocationsForm.Show(this);
+        if (ProgramSettings?.RememberWindowLocation == true && ProgramSettings?.Locations?.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
+          LocationsForm.Location = ProgramSettings.Locations.WindowLocation;
+        } else {
+          LocationsForm.MoveWindowToDefaultLocation();
         }
       }
 
@@ -480,7 +492,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return rtnVal;
     }
 
-    private async void TextBoxHandle_KeyDown(object sender, KeyEventArgs e) {
+    private void TextBoxHandle_KeyDown(object sender, KeyEventArgs e) {
       // Handle-Textbox Tastendrücke verarbeiten
       if (e.Control) {
         switch (e.KeyCode) {
@@ -528,6 +540,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         }
       } else if (e.Alt) {
         switch (e.KeyCode) {
+          case Keys.Enter:
+            if (LocationsForm != null) {
+              LocationsForm.ShowWindow();
+            }
+            break;
           case Keys.D0:
           case Keys.D1:
           case Keys.D2:
@@ -543,40 +560,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             e.SuppressKeyPress = true;
             e.Handled = true;
             RelationsForm?.FilterRelations(e.KeyCode);
-            break;
-          case Keys.Enter:
-            e.SuppressKeyPress = true;
-            e.Handled = true;
-            if (TextBoxHandle.Text.Trim().Length >= 3) {
-              if (Locations == null) {
-                Locations = [];
-                string locationCsv = Resources.Locations;
-                HttpInfo httpInfo = await GetSource(LocationsCsvUrl, CancelToken);
-                if (httpInfo.StatusCode == HttpStatusCode.OK) {
-                  locationCsv = httpInfo.Source;
-                }
-                foreach (string line in locationCsv.Split(Environment.NewLine)) {
-                  string[] v = line.Split(',');
-                  Locations.Add(new LocationInfo() {
-                    Name = v[0],
-                    Type = v[1],
-                    ParentBody = v[2],
-                    ParentStar = v[3],
-                    CoordinateX = v[4],
-                    CoordinateY = v[5],
-                    CoordinateZ = v[6],
-                    ThemeImage = v[7],
-                    WikiLink = v[8]
-                  });
-                }
-                Locations.RemoveAt(0);
-              }
-              List<LocationInfo> filter = Locations.Where(x => x.Name.Contains(TextBoxHandle.Text, StringComparison.InvariantCultureIgnoreCase)).ToList();
-              if (filter?.Count > 0) {
-                LocationsForm = new(ProgramSettings, ProgramTranslation, filter);
-                LocationsForm.Show(this);
-              }
-            }
             break;
         }
       } else {
@@ -604,6 +587,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             }
             if (RelationsForm != null) {
               RelationsForm.Visible = false;
+            }
+            if (LocationsForm != null) {
+              LocationsForm.Visible = false;
             }
             break;
         }
@@ -1091,16 +1077,19 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           rtnVal = Path.Combine(GetSaveFilesRootPath(), $@"Cache\Data\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
           break;
         case CacheDirectoryType.HandleAvatar:
-          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Images\Handle\");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Images\Handle");
           break;
         case CacheDirectoryType.HandleDisplayTitle:
-          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Images\Display Title\");
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Images\Display Title");
           break;
         case CacheDirectoryType.OrganizationAvatar:
           rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Images\Organization");
           break;
         case CacheDirectoryType.Source:
           rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Data\Source");
+          break;
+        case CacheDirectoryType.Location:
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Images\Location");
           break;
       }
 
@@ -1117,7 +1106,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       HandleAvatar,
       HandleDisplayTitle,
       OrganizationAvatar,
-      Source
+      Source,
+      Location
     }
 
     private void RestartProgram() {
@@ -1141,6 +1131,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.WindowLocation = ProgramSettings.RememberWindowLocation ? Location : Point.Empty;
       ProgramSettings.LogMonitor.WindowLocation = LogMonitorForm != null && ProgramSettings.RememberWindowLocation ? LogMonitorForm.Location : Point.Empty;
       ProgramSettings.Relations.WindowLocation = RelationsForm != null && ProgramSettings.RememberWindowLocation ? RelationsForm.Location : Point.Empty;
+      ProgramSettings.Locations.WindowLocation = LocationsForm != null && ProgramSettings.RememberWindowLocation ? LocationsForm.Location : Point.Empty;
       string settingsFilePath = GetSettingsFilePath();
       try {
         File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, JsonSerOptions), Encoding.UTF8);
@@ -1190,6 +1181,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         case CacheDirectoryType.HandleAvatar:
         case CacheDirectoryType.OrganizationAvatar:
         case CacheDirectoryType.HandleDisplayTitle:
+        case CacheDirectoryType.Location:
           rtnVal = Path.Combine(GetCachePath(imageType), GetCorrectFileName($"{name}{url[url.LastIndexOf('.')..]}"));
           break;
       }
@@ -1272,6 +1264,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         LabelLockUnlock.Image = WindowLocked ? Resources.WindowLocked : Resources.WindowUnlocked;
         LogMonitorForm?.LockUnlockWindow(WindowLocked);
         RelationsForm?.LockUnlockWindow(WindowLocked);
+        LocationsForm?.LockUnlockWindow(WindowLocked);
       }
     }
 

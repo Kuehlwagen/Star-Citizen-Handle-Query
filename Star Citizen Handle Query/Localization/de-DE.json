@@ -57,6 +57,8 @@
     },
     "Locations": {
       "Group_Title": "Orte (Alt + Eingabe)",
+      "Show_Locations": "Orte anzeigen",
+      "Locations_Entries_Max": "Eintr\u00E4ge Maximum:",
       "LMB_URL": "Linke Maustaste:",
       "MMB_URL": "Mittlere Maustaste:",
       "RMB_URL": "Rechte Maustaste:"
@@ -116,6 +118,9 @@
     "Title": "Beziehungen"
   },
   "Locations": {
-    "Title": "Orte"
+    "Title": "Orte",
+    "Filter_Placeholder": "Orte filtern...",
+    "More_Location": "weiterer Ort...",
+    "More_Locations": "weitere Orte..."
   }
 }

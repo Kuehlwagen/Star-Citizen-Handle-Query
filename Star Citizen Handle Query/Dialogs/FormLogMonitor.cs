@@ -15,10 +15,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly Settings ProgramSettings;
     private readonly Translation ProgramTranslation;
 
-    private readonly Regex RgxCorpse = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>.+<Corpse> Player '(?<Handle>[\w_\-]+)'.+IsCorpseEnabled: (?<Corpse>\w{2,3})[,\.] ?(?<Info>[\w\s]*)\.?.*$",
-     RegexOptions.Compiled);
-    private readonly Regex RgxLoadingScreenDuration = new(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>\sLoading screen for.+closed after (?<Seconds>\d+\.\d+) seconds$",
-      RegexOptions.Compiled);
+    private readonly Regex RgxCorpse = RegexCorpse();
+    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>.+<Corpse> Player '(?<Handle>[\w_\-]+)'.+IsCorpseEnabled: (?<Corpse>\w{2,3})[,\.] ?(?<Info>[\w\s]*)\.?.*$", RegexOptions.Compiled)]
+    private static partial Regex RegexCorpse();
+
+    private readonly Regex RgxLoadingScreenDuration = RegexLoadingScreen();
+    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>\sLoading screen for.+closed after (?<Seconds>\d+\.\d+) seconds$", RegexOptions.Compiled)]
+    private static partial Regex RegexLoadingScreen();
 
     public FormLogMonitor(Settings programSettings, Translation translation) {
       InitializeComponent();
@@ -196,13 +199,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void ClearLogInfos() {
 #if DEBUG
       if (PanelLogInfo.Controls.Count == 0) {
-        AddLogInfo(new List<LogMonitorInfo>() {
+        AddLogInfo([
           new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "there is a local inventory", "Yes"),
           new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", additionalInfo: "Yes"),
           new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair"),
           new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "criminal arrest"),
           new(LogType.LoadingScreenDuration, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), info: "15")
-        });
+        ]);
       }
 #else
       SetTitle();
