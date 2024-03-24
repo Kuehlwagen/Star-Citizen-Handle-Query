@@ -37,6 +37,8 @@ https://discord.com/invite/WmzNY3mCm6
 - __Erreichbariekt via Alt + Tab:__ Wird diese Einstellung aktiviert, kann das Fenster via Tastenkobination `Alt` + `Tab` erreicht werden.
 - __Position merken:__ Ist diese Einstellung aktiviert, merkt sich das Programm beim Beenden die Position des Hauptfensters und stellt sie beim Start wieder her.
 ### Orte (Alt + Eingabe)
+- __Orte anzeigen:__ Angabe, ob das Orte-Fenster angezeigt werden soll
+- __Einträge Maximum:__ Angabe, wie viele Einträge maximal im Orte-Fenster angezeigt werden sollen
 - __Linke Maustaste:__ URL, die bei der Betätigung der linken Maustaste geöffnet werden soll (inklusive Platzhalter)
 - __Mittlere Maustaste:__ URL, die bei der Betätigung der mittleren Maustaste geöffnet werden soll (inklusive Platzhalter)
 - __Rechte Maustaste:__ URL, die bei der Betätigung der rechten Maustaste geöffnet werden soll (inklusive Platzhalter)
@@ -87,7 +89,7 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
 ![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/MainWindow.png?raw=true "Hauptfenster")
 - Hier kann der eindeutige Name eines Star Citizen Spielers in die Handle-Eingabebox eingegeben werden (maximal 60 Zeichen). Durch die Betätigung der Enter-Taste wird die Abfrage ausgelöst und kurze Zeit später das Ergebnis der Abfrage unter der Handle-Eingabebox dargestellt.
   - Wird währenddessen die `Strg`-Taste gedrückt gehalten, wird das Auslesen der Handle-Informationen inklusive Avatare (Handle, Organisation und Affiliationen) via Star Citizen Webseite erzwungen.
-  - Wird währenddessen die `Alt`-Taste gedrückt gehalten und es wurden mindestens drei Zeichen eingegeben, wird stattdessen, sofern mindestens ein Treffer vorhanden, ein Fenster mit einer Auflistung aller Orte angezeigt, welche den eingegebenen Text im Namen enthalten. Wird ein Mauslinksklick auf einem Ort ausgeführt, wird die Webseite `https://starcitizen.tools/` des Ortes im Browser aufgerufen. Wählt man stattdessen die mittlere Maustaste, wird die Webseite `https://dydrmr.github.io/VerseTime/` des Ortes im Browser aufgerufen.
+  - Wird währenddessen die `Alt`-Taste gedrückt gehalten, bekommt das Orte-Fenster den Fokus, sodass man direkt den Namen eines Ortes eintippen kann.
   - Drückt man, während die Handle-Eingabebox den Fokus hat, die `+`-Taste, kann man einen Kommentar zum aktuellen Handle eingeben. Durch Betätigung der `Enter`-Taste, wird der Kommentar im lokalen Cache gespeichert. Verliert die Kommentar-Eingabebox den Fokus oder es wird die `Esc`-Taste gedrückt, wird die Eingabe des Kommentars abgebrochen.
   - Wird die Handle-Eingabebox geleert, wird ein gegebenenfall zuvor ermitteltes Ergebnis ausgeblendet.
 - Durch die Betätigung der Esc-Taste wird das Hauptfenster ausgeblendet.
@@ -174,6 +176,19 @@ Diese Liste wird beim Beenden des Tools gespeichert und beim erneuten Start des 
   - `Alt + 5`: Organisation (cyan)
   - `Alt + 0`: Alle Filter
 - Via Mauslinksklick auf das Mülltonnen-Symbol kann, sofern mindestens ein Eintrag enthalten ist, die Liste gelöscht werden.
+
+## Orte Fenster
+
+![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/Locations.png?raw=true "Orte")
+
+Hier können Informationen zu Star Citizen Orten angezeigt werden.
+
+### Titelleiste
+- In der Titelleiste befindet sich eine Texteingabebox, in welche ein Orte-Name eingetippt werden kann. Nach 600 Millisekunden, oder durch die Betätigung der `Eingabe`-Taste, wird die Suche ausgelöst. Dabei werden alle Orte, welche den eingetippten Text im Namen enthalten, unterhalb der Titelleiste angezeigt. Orte, deren Namen mit dem eingegebenen Text beginnen, werden über den Orten angezeigt, die den eingegebenen Text im Namen beinhalten. Die Orte werden in beiden Fällen alphabetisch sortiert.
+- Wenn die Texteingabebox geleert wird, oder das Orte-Fenster den Fokus verliert, wird das Suchergebnis entfernt.
+
+### Ergebnisse
+- Wird ein Mauslinksklick auf einem Ort ausgeführt, wird standardmäßig die VerseTime-Webseite `https://dydrmr.github.io/VerseTime/` des Ortes im Browser aufgerufen. Wählt man stattdessen die mittlere Maustaste, wird die Wiki-Webseite `https://starcitizen.tools/` des Ortes im Browser aufgerufen.
 
 ## Sprachen / Übersetzungen
 
