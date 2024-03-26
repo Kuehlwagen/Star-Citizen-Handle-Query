@@ -1,4 +1,4 @@
-using Star_Citizen_Handle_Query.ExternClasses;
+using Star_Citizen_Handle_Query.Classes;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Diagnostics;

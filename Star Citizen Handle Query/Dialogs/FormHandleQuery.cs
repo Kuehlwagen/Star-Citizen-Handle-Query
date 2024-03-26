@@ -1,4 +1,4 @@
-using Star_Citizen_Handle_Query.ExternClasses;
+using Star_Citizen_Handle_Query.Classes;
 using Star_Citizen_Handle_Query.Properties;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
@@ -372,6 +372,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       // Ggf. Beziehungen-Fenster anzeigen
       if (ProgramSettings.Relations.ShowWindow) {
+        RPC_Wrapper.SetURL(ProgramSettings.Relations.RPC_URL);
         RelationsForm = new(ProgramSettings, ProgramTranslation);
         RelationsForm.Show(this);
         if (ProgramSettings?.RememberWindowLocation == true && ProgramSettings?.Relations.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
@@ -541,9 +542,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       } else if (e.Alt) {
         switch (e.KeyCode) {
           case Keys.Enter:
-            if (LocationsForm != null) {
-              LocationsForm.ShowWindow();
-            }
+            LocationsForm?.ShowWindow();
             break;
           case Keys.D0:
           case Keys.D1:
@@ -607,7 +606,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         LabelQuery.Enabled = false;
         // Handle-Informationen auslesen
         HandleInfo handleInfo = await GetHandleInfo(forceLive, TextBoxHandle.Text, ProgramSettings, CacheDirectoryType.Handle);
+        // Ggf. Beziehung aktualisieren
         handleInfo.Relation = GetHandleRelation(handleInfo.Profile.Handle);
+        if (handleInfo.Relation == Relation.NotAssigned) {
+          handleInfo.Relation = RPC_Wrapper.GetRelation(ProgramSettings.Relations.RPC_Channel, RelationType.Handle, handleInfo.Profile.Handle);
+          if (handleInfo.Relation != Relation.NotAssigned) {
+            RelationsForm?.UpdateRelation(handleInfo.Profile.Handle, RelationType.Handle, handleInfo.Relation);
+          }
+        }
 
         // Ggf. Cache-Verzeichnisse erstellen
         CreateDirectory(CacheDirectoryType.Handle);
@@ -644,9 +650,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               }
             }
           }
-
-          // Ggf. Beziehung aktualisieren
-          RelationsForm?.UpdateRelation(handleInfo.Profile.Handle, RelationType.Handle, handleInfo.Relation);
 
           // Autovervollständigung aktualisieren
           UpdateAutoComplete(handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK && handleInfo?.Profile?.Handle != null ? handleInfo.Profile.Handle : string.Empty);

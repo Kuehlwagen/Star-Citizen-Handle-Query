@@ -1,4 +1,4 @@
-﻿namespace Star_Citizen_Handle_Query.ExternClasses;
+﻿namespace Star_Citizen_Handle_Query.Classes;
 
 public class TypeAssistant {
   public event EventHandler Idled = delegate { };

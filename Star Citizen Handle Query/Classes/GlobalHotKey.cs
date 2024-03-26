@@ -12,21 +12,21 @@
 
 using System.Runtime.InteropServices;
 
-namespace Star_Citizen_Handle_Query.ExternClasses {
+namespace Star_Citizen_Handle_Query.Classes {
 
-  public class GlobalHotKey {
+  public partial class GlobalHotKey {
 
-    [DllImport("user32.dll")]
-    static extern int CallNextHookEx(IntPtr hhk, int code, int wParam, ref KeyBoardHookStruct lParam);
-    [DllImport("user32.dll")]
-    static extern IntPtr SetWindowsHookEx(int idHook, LLKeyboardHook callback, IntPtr hInstance, uint theardID);
-    [DllImport("user32.dll")]
-    static extern bool UnhookWindowsHookEx(IntPtr hInstance);
-    [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
-    static extern IntPtr LoadLibrary(string lpFileName);
-    [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true, CallingConvention = CallingConvention.Winapi)]
-
-    private static extern short GetKeyState(int keyCode);
+    [LibraryImport("user32.dll")]
+    private static partial int CallNextHookEx(IntPtr hhk, int code, int wParam, ref KeyBoardHookStruct lParam);
+    [LibraryImport("user32.dll")]
+    private static partial IntPtr SetWindowsHookExA(int idHook, LLKeyboardHook callback, IntPtr hInstance, uint theardID);
+    [LibraryImport("user32.dll")]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static partial bool UnhookWindowsHookEx(IntPtr hInstance);
+    [LibraryImport("kernel32.dll", StringMarshalling = StringMarshalling.Utf16)]
+    private static partial IntPtr LoadLibraryA(string lpFileName);
+    [LibraryImport("user32.dll")]
+    private static partial short GetKeyState(int keyCode);
 
     public delegate int LLKeyboardHook(int Code, int wParam, ref KeyBoardHookStruct lParam);
 
@@ -50,7 +50,7 @@ namespace Star_Citizen_Handle_Query.ExternClasses {
     private const int VK_CAPITAL = 0x14;
 
     readonly LLKeyboardHook llkh;
-    public List<Keys> HookedKeys = new();
+    public List<Keys> HookedKeys = [];
 
     IntPtr GlobalHook = IntPtr.Zero;
 
@@ -64,8 +64,8 @@ namespace Star_Citizen_Handle_Query.ExternClasses {
     ~GlobalHotKey() { Unhook(); }
 
     public void Hook() {
-      IntPtr hInstance = LoadLibrary("User32");
-      GlobalHook = SetWindowsHookEx(WH_KEYBOARD_LL, llkh, hInstance, 0);
+      IntPtr hInstance = LoadLibraryA("User32");
+      GlobalHook = SetWindowsHookExA(WH_KEYBOARD_LL, llkh, hInstance, 0);
     }
 
     public void Unhook() {

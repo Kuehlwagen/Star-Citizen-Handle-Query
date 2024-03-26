@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace Star_Citizen_Handle_Query.ExternClasses {
+namespace Star_Citizen_Handle_Query.Classes {
 
   public partial class User32Wrappers {
 

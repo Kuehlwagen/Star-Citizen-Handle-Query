@@ -190,6 +190,12 @@
     /// <summary>Angabe, ob die Einträge alphabetisch aufsteigend sortiert werden sollen</summary>
     public bool SortAlphabetically { get; set; } = true;
 
+    /// <summary>gRPC-URL für den Benutzer übergreifenden Abgleich von Beziehungen</summary>
+    public string RPC_URL { get; set; } = string.Empty;
+
+    /// <summary>Der zu verwendende Channel des gRPC-Servers</summary>
+    public string RPC_Channel { get; set; } = string.Empty;
+
     public object Clone() {
       return MemberwiseClone();
     }
