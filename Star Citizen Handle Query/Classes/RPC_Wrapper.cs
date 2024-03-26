@@ -77,21 +77,26 @@ internal static class RPC_Wrapper {
     }
   }
 
-  public static async void SyncRelations(FormRelations frm, string channel) {
+  public static async void SyncRelations(FormRelations frm, string channel, CancellationTokenSource cts) {
     if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
-      var cts = new CancellationTokenSource();
+      frm.ChangeSync(FormRelations.SyncStatus.Connecting);
       using var gRPC_Channel = GrpcChannel.ForAddress(_url);
       var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
       using var streamingCall = gRPC_Client.SyncRelations(new ChannelRequest() { Channel = channel }, cancellationToken: cts.Token);
       try {
+        frm.ChangeSync(FormRelations.SyncStatus.Connected);
         await foreach (var rel in streamingCall.ResponseStream.ReadAllAsync(cancellationToken: cts.Token)) {
           frm.UpdateRelation(rel.Relation.Name, (Serialization.RelationType)rel.Relation.Type, (Serialization.Relation)rel.Relation.Relation, true);
+          frm.ChangeSync(FormRelations.SyncStatus.Connected);
         }
       } catch (RpcException ex) {
+        frm.ChangeSync(FormRelations.SyncStatus.Connecting);
         Debug.WriteLine($"RpcException: {ex.Message}, {ex.StatusCode}");
       } catch (Exception ex) {
+        frm.ChangeSync(FormRelations.SyncStatus.Connecting);
         Debug.WriteLine($"Exception: {ex.Message}");
       }
+      frm.ChangeSync(FormRelations.SyncStatus.Disconnected);
       cts.Cancel();
     }
   }

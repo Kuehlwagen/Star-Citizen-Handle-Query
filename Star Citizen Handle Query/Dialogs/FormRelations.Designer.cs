@@ -23,6 +23,7 @@
     ///  the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
+      components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormRelations));
       PanelHeader = new Panel();
       CheckBoxFilterBandit = new CheckBox();
@@ -33,6 +34,7 @@
       PictureBoxClearAll = new PictureBox();
       LabelTitle = new Label();
       PanelRelations = new FlowLayoutPanel();
+      ToolTipRelations = new ToolTip(components);
       PanelHeader.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)PictureBoxClearAll).BeginInit();
       SuspendLayout();
@@ -48,10 +50,9 @@
       PanelHeader.Controls.Add(CheckBoxFilterFriendly);
       PanelHeader.Controls.Add(PictureBoxClearAll);
       PanelHeader.Controls.Add(LabelTitle);
-      PanelHeader.Location = new Point(1, 2);
-      PanelHeader.Margin = new Padding(4, 5, 4, 5);
+      PanelHeader.Location = new Point(1, 1);
       PanelHeader.Name = "PanelHeader";
-      PanelHeader.Size = new Size(340, 48);
+      PanelHeader.Size = new Size(238, 29);
       PanelHeader.TabIndex = 0;
       // 
       // CheckBoxFilterBandit
@@ -66,10 +67,9 @@
       CheckBoxFilterBandit.FlatAppearance.CheckedBackColor = Color.Red;
       CheckBoxFilterBandit.FlatStyle = FlatStyle.Flat;
       CheckBoxFilterBandit.ForeColor = Color.FromArgb(19, 26, 33);
-      CheckBoxFilterBandit.Location = new Point(260, 12);
-      CheckBoxFilterBandit.Margin = new Padding(4, 5, 4, 5);
+      CheckBoxFilterBandit.Location = new Point(182, 7);
       CheckBoxFilterBandit.Name = "CheckBoxFilterBandit";
-      CheckBoxFilterBandit.Size = new Size(21, 25);
+      CheckBoxFilterBandit.Size = new Size(15, 15);
       CheckBoxFilterBandit.TabIndex = 3;
       CheckBoxFilterBandit.UseVisualStyleBackColor = false;
       CheckBoxFilterBandit.CheckedChanged += CheckBoxFilterChanged;
@@ -87,10 +87,9 @@
       CheckBoxFilterBogey.FlatAppearance.CheckedBackColor = Color.Orange;
       CheckBoxFilterBogey.FlatStyle = FlatStyle.Flat;
       CheckBoxFilterBogey.ForeColor = Color.FromArgb(19, 26, 33);
-      CheckBoxFilterBogey.Location = new Point(236, 12);
-      CheckBoxFilterBogey.Margin = new Padding(4, 5, 4, 5);
+      CheckBoxFilterBogey.Location = new Point(165, 7);
       CheckBoxFilterBogey.Name = "CheckBoxFilterBogey";
-      CheckBoxFilterBogey.Size = new Size(21, 25);
+      CheckBoxFilterBogey.Size = new Size(15, 15);
       CheckBoxFilterBogey.TabIndex = 3;
       CheckBoxFilterBogey.UseVisualStyleBackColor = false;
       CheckBoxFilterBogey.CheckedChanged += CheckBoxFilterChanged;
@@ -108,10 +107,9 @@
       CheckBoxFilterNeutral.FlatAppearance.CheckedBackColor = Color.Gray;
       CheckBoxFilterNeutral.FlatStyle = FlatStyle.Flat;
       CheckBoxFilterNeutral.ForeColor = Color.FromArgb(19, 26, 33);
-      CheckBoxFilterNeutral.Location = new Point(211, 12);
-      CheckBoxFilterNeutral.Margin = new Padding(4, 5, 4, 5);
+      CheckBoxFilterNeutral.Location = new Point(148, 7);
       CheckBoxFilterNeutral.Name = "CheckBoxFilterNeutral";
-      CheckBoxFilterNeutral.Size = new Size(21, 25);
+      CheckBoxFilterNeutral.Size = new Size(15, 15);
       CheckBoxFilterNeutral.TabIndex = 3;
       CheckBoxFilterNeutral.UseVisualStyleBackColor = false;
       CheckBoxFilterNeutral.CheckedChanged += CheckBoxFilterChanged;
@@ -128,10 +126,9 @@
       CheckBoxFilterOrganization.FlatAppearance.CheckedBackColor = Color.FromArgb(57, 206, 216);
       CheckBoxFilterOrganization.FlatStyle = FlatStyle.Flat;
       CheckBoxFilterOrganization.ForeColor = Color.FromArgb(19, 26, 33);
-      CheckBoxFilterOrganization.Location = new Point(283, 12);
-      CheckBoxFilterOrganization.Margin = new Padding(4, 5, 4, 5);
+      CheckBoxFilterOrganization.Location = new Point(198, 7);
       CheckBoxFilterOrganization.Name = "CheckBoxFilterOrganization";
-      CheckBoxFilterOrganization.Size = new Size(21, 25);
+      CheckBoxFilterOrganization.Size = new Size(15, 15);
       CheckBoxFilterOrganization.TabIndex = 3;
       CheckBoxFilterOrganization.UseVisualStyleBackColor = false;
       CheckBoxFilterOrganization.CheckedChanged += CheckBoxFilterChanged;
@@ -149,10 +146,9 @@
       CheckBoxFilterFriendly.FlatAppearance.CheckedBackColor = Color.Green;
       CheckBoxFilterFriendly.FlatStyle = FlatStyle.Flat;
       CheckBoxFilterFriendly.ForeColor = Color.FromArgb(19, 26, 33);
-      CheckBoxFilterFriendly.Location = new Point(187, 12);
-      CheckBoxFilterFriendly.Margin = new Padding(4, 5, 4, 5);
+      CheckBoxFilterFriendly.Location = new Point(131, 7);
       CheckBoxFilterFriendly.Name = "CheckBoxFilterFriendly";
-      CheckBoxFilterFriendly.Size = new Size(21, 25);
+      CheckBoxFilterFriendly.Size = new Size(15, 15);
       CheckBoxFilterFriendly.TabIndex = 3;
       CheckBoxFilterFriendly.UseVisualStyleBackColor = false;
       CheckBoxFilterFriendly.CheckedChanged += CheckBoxFilterChanged;
@@ -161,21 +157,19 @@
       // PictureBoxClearAll
       // 
       PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
-      PictureBoxClearAll.Location = new Point(313, 12);
-      PictureBoxClearAll.Margin = new Padding(4, 5, 4, 5);
+      PictureBoxClearAll.Location = new Point(219, 7);
       PictureBoxClearAll.Name = "PictureBoxClearAll";
-      PictureBoxClearAll.Size = new Size(17, 25);
+      PictureBoxClearAll.Size = new Size(12, 15);
       PictureBoxClearAll.SizeMode = PictureBoxSizeMode.Zoom;
       PictureBoxClearAll.TabIndex = 2;
       PictureBoxClearAll.TabStop = false;
       // 
       // LabelTitle
       // 
-      LabelTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-      LabelTitle.Location = new Point(6, 12);
-      LabelTitle.Margin = new Padding(4, 0, 4, 0);
+      LabelTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+      LabelTitle.Location = new Point(4, 7);
       LabelTitle.Name = "LabelTitle";
-      LabelTitle.Size = new Size(179, 25);
+      LabelTitle.Size = new Size(125, 15);
       LabelTitle.TabIndex = 0;
       LabelTitle.Text = "Beziehungen";
       LabelTitle.TextAlign = ContentAlignment.MiddleLeft;
@@ -188,26 +182,32 @@
       PanelRelations.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
       PanelRelations.BackColor = Color.Lime;
       PanelRelations.FlowDirection = FlowDirection.TopDown;
-      PanelRelations.Location = new Point(1, 50);
+      PanelRelations.Location = new Point(1, 30);
       PanelRelations.Margin = new Padding(0);
       PanelRelations.Name = "PanelRelations";
-      PanelRelations.Size = new Size(340, 48);
+      PanelRelations.Size = new Size(238, 29);
       PanelRelations.TabIndex = 1;
       PanelRelations.ControlAdded += PanelRelations_ControlAdded;
       PanelRelations.ControlRemoved += PanelRelations_ControlRemoved;
       // 
+      // ToolTipRelations
+      // 
+      ToolTipRelations.BackColor = Color.FromArgb(19, 26, 33);
+      ToolTipRelations.ForeColor = Color.FromArgb(57, 206, 216);
+      ToolTipRelations.OwnerDraw = true;
+      ToolTipRelations.Draw += ToolTipHandleQuery_Draw;
+      // 
       // FormRelations
       // 
-      AutoScaleDimensions = new SizeF(10F, 25F);
+      AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.Lime;
-      ClientSize = new Size(343, 100);
+      ClientSize = new Size(240, 60);
       Controls.Add(PanelRelations);
       Controls.Add(PanelHeader);
       ForeColor = Color.FromArgb(57, 206, 216);
       FormBorderStyle = FormBorderStyle.None;
       Icon = (Icon)resources.GetObject("$this.Icon");
-      Margin = new Padding(4, 5, 4, 5);
       Name = "FormRelations";
       ShowInTaskbar = false;
       Text = "Star Citizen Handle Query";
@@ -225,11 +225,12 @@
     private Panel PanelHeader;
     private Label LabelTitle;
     private FlowLayoutPanel PanelRelations;
-    private PictureBox PictureBoxClearAll;
     private CheckBox CheckBoxFilterFriendly;
     private CheckBox CheckBoxFilterNeutral;
     private CheckBox CheckBoxFilterBogey;
     private CheckBox CheckBoxFilterBandit;
     private CheckBox CheckBoxFilterOrganization;
+    internal PictureBox PictureBoxClearAll;
+    private ToolTip ToolTipRelations;
   }
 }

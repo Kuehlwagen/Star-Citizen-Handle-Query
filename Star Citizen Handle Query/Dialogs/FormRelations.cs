@@ -1,4 +1,5 @@
 using Star_Citizen_Handle_Query.Classes;
+using Star_Citizen_Handle_Query.Properties;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Drawing.Drawing2D;
@@ -15,6 +16,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly Settings ProgramSettings;
     private readonly Translation ProgramTranslation;
     private readonly SortedList<string, UserControlRelation> UserControlRelations = [];
+    private CancellationTokenSource CancelToken = new();
+    private SyncStatus Sync = SyncStatus.Disconnected;
+
+    private bool IsRPCSync {
+      get {
+          return !string.IsNullOrWhiteSpace(ProgramSettings.Relations.RPC_URL) && !string.IsNullOrWhiteSpace(ProgramSettings.Relations.RPC_Channel);
+      }
+    }
 
     public FormRelations(Settings programSettings, Translation translation) {
       InitializeComponent();
@@ -93,14 +102,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void FormRelations_Shown(object sender, EventArgs e) {
       Height = LogicalToDeviceUnits(31);
       ImportRelationInfos();
+      ChangeSync(SyncStatus.Disconnected);
+      StartStopSync();
     }
 
     public void ClearRelations() {
       if (PanelRelations.Controls.Count > 0) {
-        // Nur die gRPC-Liste leeren, wenn Strg- und Umschalt-Taste gedrückt sind
-        if (ModifierKeys == (Keys.Control | Keys.Shift) && !string.IsNullOrWhiteSpace(ProgramSettings.Relations.RPC_URL) && !string.IsNullOrWhiteSpace(ProgramSettings.Relations.RPC_Channel)) {
-          RPC_Wrapper.RemoveRelations(ProgramSettings.Relations.RPC_Channel);
-        }
         UserControlRelations.Clear();
         List<UserControlRelation> ctrls = new(PanelRelations.Controls.OfType<UserControlRelation>());
         PanelRelations.Controls.Clear();
@@ -148,7 +155,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     internal void ImportRelationInfos(string importPath = null) {
       try {
         RelationInfos infos = null;
-        bool isRPC = !string.IsNullOrWhiteSpace(ProgramSettings.Relations.RPC_Channel) && importPath == null;
+        bool isRPC = IsRPCSync && importPath == null;
         if (isRPC) {
           infos = RPC_Wrapper.GetRelations(ProgramSettings.Relations.RPC_Channel);
         } else {
@@ -174,16 +181,60 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           }
         }
         FilterRelations();
-        if (isRPC) {
-          Task.Run(() => RPC_Wrapper.SyncRelations(this, ProgramSettings.Relations.RPC_Channel));
-        }
       } catch { }
     }
 
     private void PictureBoxClearAll_MouseClick(object sender, MouseEventArgs e) {
       if (e.Button == MouseButtons.Left) {
-        ClearRelations();
+        if (IsRPCSync) {
+          StartStopSync();
+        } else {
+          ClearRelations();
+        }
       }
+    }
+
+    private void StartStopSync() {
+      if (IsRPCSync) {
+        if (Sync == SyncStatus.Disconnected) {
+          ImportRelationInfos();
+          CancelToken = new CancellationTokenSource();
+          Task.Run(() => RPC_Wrapper.SyncRelations(this, ProgramSettings.Relations.RPC_Channel, CancelToken));
+        } else {
+          // Die gRPC-Liste leeren, wenn Strg- und Umschalt-Taste gedrückt sind
+          if (ModifierKeys == (Keys.Control | Keys.Shift) && IsRPCSync) {
+            if (RPC_Wrapper.RemoveRelations(ProgramSettings.Relations.RPC_Channel)) {
+              ClearRelations();
+            }
+          } else {
+            CancelToken.Cancel();
+          }
+        }
+      }
+    }
+
+    internal void ChangeSync(SyncStatus status) {
+      if (IsRPCSync) {
+        ToolTipRelations.SetToolTip(PictureBoxClearAll, $"Channel: {ProgramSettings.Relations.RPC_Channel}");
+        Sync = status;
+        switch (Sync) {
+          case SyncStatus.Disconnected:
+            PictureBoxClearAll.Image = Resources.StatusRed;
+            break;
+          case SyncStatus.Connecting:
+            PictureBoxClearAll.Image = Resources.StatusOrange;
+            break;
+          case SyncStatus.Connected:
+            PictureBoxClearAll.Image = Resources.StatusGreen;
+            break;
+        }
+      }
+    }
+
+    internal enum SyncStatus {
+      Disconnected,
+      Connecting,
+      Connected
     }
 
     protected override void OnResizeEnd(EventArgs e) {
@@ -234,7 +285,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public void UpdateRelation(string name, RelationType relationType, Relation relation, bool withoutRPCSet = false) {
       if (!string.IsNullOrWhiteSpace(name)) {
-        if (!withoutRPCSet) {
+        if (IsRPCSync && !withoutRPCSet) {
           RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, relationType, name, relation);
         }
         Control[] controls = PanelRelations.Controls.Find($"UserControlRelation_{relationType}_{name}", false);
@@ -368,6 +419,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
         e.Graphics.FillEllipse(new SolidBrush(Color.FromArgb(19, 26, 33)), x, y, width, height);
       }
+    }
+
+    private void ToolTipHandleQuery_Draw(object sender, DrawToolTipEventArgs e) {
+      e.DrawBackground();
+      e.DrawBorder();
+      e.DrawText();
     }
 
   }
