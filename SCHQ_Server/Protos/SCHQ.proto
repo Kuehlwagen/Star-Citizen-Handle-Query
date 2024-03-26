@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+option csharp_namespace = "SCHQ_Server";
+
+package schq;
+
+service SCHQ_Relations {
+  rpc SetRelation (FullRelationInfo) returns (SuccessReply);
+  rpc GetRelations (ChannelRequest) returns (RelationsReply);
+  rpc GetRelation (RelationRequest) returns (RelationReply);
+  rpc RemoveRelations (ChannelRequest) returns (SuccessReply);
+  rpc SyncRelations (ChannelRequest) returns (stream FullRelationInfo);
+}
+
+message FullRelationInfo {
+  string channel = 1;
+  RelationInfo relation = 2;
+}
+
+message RelationInfo {
+  RelationType type = 1;
+  string name = 2;
+  Relation relation = 3;
+}
+
+message RelationsReply {
+  repeated RelationInfo relations = 1;
+}
+
+message RelationReply {
+  bool found = 1;
+  Relation relation = 2; 
+}
+
+message RelationRequest {
+  string channel = 1;
+  RelationType type = 2;
+  string name = 3;
+}
+
+message ChannelRequest {
+  string channel = 1;
+}
+
+message SuccessReply {
+  bool success = 1;
+}
+
+enum RelationType {
+  Handle = 0;
+  Organization = 1;
+}
+
+enum Relation {
+  NotAssigned = 0;
+  Friendly = 1;
+  Neutral = 2;
+  Bogey = 3;
+  Bandit = 4;
+}
