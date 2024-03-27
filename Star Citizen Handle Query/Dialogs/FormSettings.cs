@@ -83,6 +83,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       TextBoxLMB_URL.Text = ProgramSettings.Locations.LMB_URL;
       TextBoxMMB_URL.Text = ProgramSettings.Locations.MMB_URL;
       TextBoxRMB_URL.Text = ProgramSettings.Locations.RMB_URL;
+      TextBoxGRPCURL.Text = ProgramSettings.Relations.RPC_URL;
+      TextBoxGRPCChannel.Text = ProgramSettings.Relations.RPC_Channel;
     }
 
     private void GetLocalizations() {
@@ -221,6 +223,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.Locations.RMB_URL = TextBoxRMB_URL.Text;
     }
 
+    private void TextBoxGRPCURL_TextChanged(object sender, EventArgs e) {
+      ProgramSettings.Relations.RPC_URL = TextBoxGRPCURL.Text;
+    }
+
+    private void TextBoxGRPCChannel_TextChanged(object sender, EventArgs e) {
+      ProgramSettings.Relations.RPC_Channel = TextBoxGRPCChannel.Text;
+    }
+
     private void ButtonStandard_Click(object sender, EventArgs e) {
       ProgramSettings = new() { Language = ProgramSettings.Language };
       SetDialogValues();
@@ -237,15 +247,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxUnkenntlicheAffiliationenAusblenden.Text = CurrentLocalization.Settings.Display.Hide_Redacted_Affiliations;
       CheckBoxHideStreamLiveStatus.Text = CurrentLocalization.Settings.Display.Hide_Stream_Live_Status;
       CheckBoxAutoCheckForUpdate.Text = CurrentLocalization.Settings.Display.Auto_Check_For_Update;
-      CheckBoxShowLog.Text = CurrentLocalization.Settings.Display.Show_Log_Monitor;
-      LabelLogEintraegeMaximum.Text = CurrentLocalization.Settings.Display.Log_Entries_Max;
-      LabelLogEintragAnzeigeDauer.Text = CurrentLocalization.Settings.Display.Log_Entry_Display_Duration;
-      LabelLogEintragAnzeigedauerMinuten.Text = CurrentLocalization.Settings.Display.Log_Entry_Display_Duration_Minutes;
-      CheckBoxLogMonitorFilterCorpse.Text = CurrentLocalization.Settings.Display.Log_Show_Corpse;
-      CheckBoxLogMonitorFilterLoadingScreenDuration.Text = CurrentLocalization.Settings.Display.Log_Show_Loading_Screen_Duration;
-      CheckBoxShowRelations.Text = CurrentLocalization.Settings.Display.Show_Relations;
-      CheckBoxSortRelationsAlphabetically.Text = CurrentLocalization.Settings.Display.Sort_Relations_Alphabetically;
-      LabelRelationsEntriesMaximum.Text = CurrentLocalization.Settings.Display.Relations_Entries_Max;
 
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;
       LabelFensterDeckkraft.Text = CurrentLocalization.Settings.Window.Opacity;
@@ -257,12 +258,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxFensterMauseingabenIgnorieren.Text = CurrentLocalization.Settings.Window.Ignore_Mouseinput;
       CheckBoxAltTabEnabled.Text = CurrentLocalization.Settings.Window.Enable_Alt_Tab;
       CheckBoxPositionMerken.Text = CurrentLocalization.Settings.Window.RememberWindowLocation;
-      GroupBoxLocation.Text = CurrentLocalization.Settings.Locations.Group_Title;
-      CheckBoxShowLocations.Text = CurrentLocalization.Settings.Locations.Show_Locations;
-      LabelOrteEintraegeMaximum.Text = CurrentLocalization.Settings.Locations.Locations_Entries_Max;
-      LabelLMB_URL.Text = CurrentLocalization.Settings.Locations.LMB_URL;
-      LabelMMB_URL.Text = CurrentLocalization.Settings.Locations.MMB_URL;
-      LabelRMB_URL.Text = CurrentLocalization.Settings.Locations.RMB_URL;
 
       GroupBoxLokalerCache.Text = CurrentLocalization.Settings.Local_Cache.Group_Title;
       LabelLokalerCacheAlter.Text = CurrentLocalization.Settings.Local_Cache.Max_Age;
@@ -271,6 +266,28 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ButtonSpeichern.Text = CurrentLocalization.Settings.Buttons.Save;
       ButtonSchliessen.Text = CurrentLocalization.Settings.Buttons.Close;
       ButtonStandard.Text = CurrentLocalization.Settings.Buttons.Standard;
+
+      GroupBoxLocation.Text = CurrentLocalization.Settings.Locations.Group_Title;
+      CheckBoxShowLocations.Text = CurrentLocalization.Settings.Locations.Show_Locations;
+      LabelOrteEintraegeMaximum.Text = CurrentLocalization.Settings.Locations.Locations_Entries_Max;
+      LabelLMB_URL.Text = CurrentLocalization.Settings.Locations.LMB_URL;
+      LabelMMB_URL.Text = CurrentLocalization.Settings.Locations.MMB_URL;
+      LabelRMB_URL.Text = CurrentLocalization.Settings.Locations.RMB_URL;
+
+      GroupBoxBeziehungen.Text = CurrentLocalization.Settings.Relations.Group_Title;
+      CheckBoxShowRelations.Text = CurrentLocalization.Settings.Relations.Show_Relations;
+      CheckBoxSortRelationsAlphabetically.Text = CurrentLocalization.Settings.Relations.Sort_Relations_Alphabetically;
+      LabelRelationsEntriesMaximum.Text = CurrentLocalization.Settings.Relations.Relations_Entries_Max;
+      LabelGRPCURL.Text = CurrentLocalization.Settings.Relations.RPC_Server_URL;
+      LabelGRPCChannel.Text = CurrentLocalization.Settings.Relations.RPC_Server_Channel;
+
+      GroupBoxLogMonitor.Text = CurrentLocalization.Settings.Log_Monitor.Group_Title;
+      CheckBoxShowLog.Text = CurrentLocalization.Settings.Log_Monitor.Show_Log_Monitor;
+      LabelLogEintraegeMaximum.Text = CurrentLocalization.Settings.Log_Monitor.Log_Entries_Max;
+      LabelLogEintragAnzeigeDauer.Text = CurrentLocalization.Settings.Log_Monitor.Log_Entry_Display_Duration;
+      LabelLogEintragAnzeigedauerMinuten.Text = CurrentLocalization.Settings.Log_Monitor.Log_Entry_Display_Duration_Minutes;
+      CheckBoxLogMonitorFilterCorpse.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Corpse;
+      CheckBoxLogMonitorFilterLoadingScreenDuration.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Loading_Screen_Duration;
 
       ResumeLayout();
     }

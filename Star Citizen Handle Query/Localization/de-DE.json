@@ -32,16 +32,7 @@
       "Affiliations_Max": "Affiliationen Maximum:",
       "Hide_Redacted_Affiliations": "Unkenntliche Affiliationen ausblenden",
       "Auto_Check_For_Update": "Bei Programmstart nach Update suchen",
-      "Hide_Stream_Live_Status": "Stream Live-Status ausblenden",
-      "Show_Log_Monitor": "Log-Monitor anzeigen",
-      "Log_Entries_Max": "Eintr\u00E4ge Maximum:",
-      "Log_Entry_Display_Duration": "Eintrag Anzeigedauer:",
-      "Log_Entry_Display_Duration_Minutes": "Minute(n)",
-      "Log_Show_Corpse": "Spielertode anzeigen",
-      "Log_Show_Loading_Screen_Duration": "Ladebildschirm-Dauer anzeigen",
-      "Show_Relations": "Beziehungen anzeigen",
-      "Sort_Relations_Alphabetically": "Alphabetisch sortieren",
-      "Relations_Entries_Max": "Eintr\u00E4ge Maximum:"
+      "Hide_Stream_Live_Status": "Stream Live-Status ausblenden"
     },
     "Window": {
       "Group_Title": "Fenster",
@@ -62,6 +53,23 @@
       "LMB_URL": "Linke Maustaste:",
       "MMB_URL": "Mittlere Maustaste:",
       "RMB_URL": "Rechte Maustaste:"
+    },
+    "Relations": {
+      "Group_Title": "Beziehungen",
+      "Show_Relations": "Beziehungen anzeigen",
+      "Sort_Relations_Alphabetically": "Alphabetisch sortieren",
+      "Relations_Entries_Max": "Eintr\u00E4ge Maximum:",
+      "RPC_Server_URL": "gRPC Server-URL:",
+      "RPC_Server_Channel": "gRPC Server-Kanal:"
+    },
+    "Log_Monitor": {
+      "Group_Title": "Log-Monitor",
+      "Show_Log_Monitor": "Log-Monitor anzeigen",
+      "Log_Entries_Max": "Eintr\u00E4ge Maximum:",
+      "Log_Entry_Display_Duration": "Eintrag Anzeigedauer:",
+      "Log_Entry_Display_Duration_Minutes": "Minute(n)",
+      "Log_Show_Corpse": "Spielertode anzeigen",
+      "Log_Show_Loading_Screen_Duration": "Ladebildschirm-Dauer anzeigen"
     },
     "Local_Cache": {
       "Group_Title": "Lokaler Cache",

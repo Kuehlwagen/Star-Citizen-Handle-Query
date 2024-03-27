@@ -106,6 +106,10 @@
 
     public Translation_Settings_Locations Locations { get; set; } = new();
 
+    public Translation_Settings_Relations Relations { get; set; } = new();
+
+    public Translation_Settings_Log_Monitor Log_Monitor { get; set; } = new();
+
     public Translation_Settings_Local_Cache Local_Cache { get; set; } = new();
 
     public Translation_Settings_Buttons Buttons { get; set; } = new();
@@ -128,24 +132,6 @@
     public string Auto_Check_For_Update { get; set; } = "Bei Programmstart nach Update suchen";
 
     public string Hide_Stream_Live_Status { get; set; } = "Stream Live-Status ausblenden";
-
-    public string Show_Log_Monitor { get; set; } = "Log-Monitor anzeigen";
-
-    public string Log_Entries_Max { get; set; } = "Einträge Maximum:";
-
-    public string Log_Entry_Display_Duration { get; set; } = "Eintrag Anzeigedauer:";
-
-    public string Log_Show_Corpse { get; set; } = "Spielertode anzeigen";
-
-    public string Log_Show_Loading_Screen_Duration { get; set; } = "Ladebildschirm-Dauer anzeigen";
-
-    public string Log_Entry_Display_Duration_Minutes { get; set; } = "Minute(n)";
-
-    public string Show_Relations { get; set; } = "Beziehungen anzeigen";
-
-    public string Sort_Relations_Alphabetically { get; set; } = "Alphabetisch sortieren";
-
-    public string Relations_Entries_Max { get; set; } = "Einträge Maximum:";
 
   }
 
@@ -188,6 +174,42 @@
     public string MMB_URL { get; set; } = "Mittlere Maustaste:";
 
     public string RMB_URL { get; set; } = "Rechte Maustaste:";
+
+  }
+
+  [Serializable()]
+  public class Translation_Settings_Relations {
+
+    public string Group_Title { get; set; } = "Beziehungen";
+
+    public string Show_Relations { get; set; } = "Beziehungen anzeigen";
+
+    public string Sort_Relations_Alphabetically { get; set; } = "Alphabetisch sortieren";
+
+    public string Relations_Entries_Max { get; set; } = "Einträge Maximum:";
+
+    public string RPC_Server_URL { get; set; } = "gRPC Server-URL:";
+
+    public string RPC_Server_Channel { get; set; } = "gRPC Server-Kanal:";
+
+  }
+
+  [Serializable()]
+  public class Translation_Settings_Log_Monitor {
+
+    public string Group_Title { get; set; } = "Log-Monitor";
+
+    public string Show_Log_Monitor { get; set; } = "Log-Monitor anzeigen";
+
+    public string Log_Entries_Max { get; set; } = "Einträge Maximum:";
+
+    public string Log_Entry_Display_Duration { get; set; } = "Eintrag Anzeigedauer:";
+
+    public string Log_Show_Corpse { get; set; } = "Spielertode anzeigen";
+
+    public string Log_Show_Loading_Screen_Duration { get; set; } = "Ladebildschirm-Dauer anzeigen";
+
+    public string Log_Entry_Display_Duration_Minutes { get; set; } = "Minute(n)";
 
   }
 

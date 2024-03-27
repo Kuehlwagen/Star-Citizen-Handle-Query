@@ -106,8 +106,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void FormRelations_Shown(object sender, EventArgs e) {
       Height = LogicalToDeviceUnits(31);
-      ImportRelationInfos();
+      if (IsRPCSync) {
+        PictureBoxClearAll.MouseClick += PictureBoxClearAll_MouseClick;
+      }
       ChangeSync(SyncStatus.Disconnected);
+      ImportRelationInfos();
       StartStopSync();
     }
 
@@ -223,8 +226,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     internal void ChangeSync(SyncStatus status) {
       if (IsRPCSync) {
         if (InvokeRequired) {
+          Invoke(() => PictureBoxClearAll.Cursor = Cursors.Hand);
           Invoke(() => ToolTipRelations.SetToolTip(PictureBoxClearAll, ProgramSettings.Relations.RPC_Channel));
         } else {
+          PictureBoxClearAll.Cursor = Cursors.Hand;
           ToolTipRelations.SetToolTip(PictureBoxClearAll, ProgramSettings.Relations.RPC_Channel);
         }
         Sync = status;
@@ -257,9 +262,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void PanelRelations_ControlAdded(object sender, ControlEventArgs e) {
-      if (PanelRelations.Controls.Count == 1) {
+      if (PanelRelations.Controls.Count == 1 && !IsRPCSync) {
         PictureBoxClearAll.MouseClick += PictureBoxClearAll_MouseClick;
-        PictureBoxClearAll.Image = Properties.Resources.ClearAll;
+        PictureBoxClearAll.Image = Resources.ClearAll;
         PictureBoxClearAll.Cursor = Cursors.Hand;
       }
       if (PanelRelations.Controls.Count <= ProgramSettings.Relations.EntriesMax) {

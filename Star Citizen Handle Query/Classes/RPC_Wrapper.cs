@@ -90,14 +90,11 @@ internal static class RPC_Wrapper {
           frm.ChangeSync(FormRelations.SyncStatus.Connected);
         }
       } catch (RpcException ex) {
-        frm.ChangeSync(FormRelations.SyncStatus.Connecting);
         Debug.WriteLine($"RpcException: {ex.Message}, {ex.StatusCode}");
       } catch (Exception ex) {
-        frm.ChangeSync(FormRelations.SyncStatus.Connecting);
         Debug.WriteLine($"Exception: {ex.Message}");
       }
       frm.ChangeSync(FormRelations.SyncStatus.Disconnected);
-      cts.Cancel();
     }
   }
 

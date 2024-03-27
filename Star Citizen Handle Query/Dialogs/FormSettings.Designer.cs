@@ -46,6 +46,11 @@
       GroupBoxLokalerCache = new GroupBox();
       ButtonStandard = new Button();
       GroupBoxAnzeige = new GroupBox();
+      CheckBoxHideStreamLiveStatus = new CheckBox();
+      CheckBoxAutoCheckForUpdate = new CheckBox();
+      NumericUpDownAffiliationenMaximum = new NumericUpDown();
+      LabelMaxAffiliationen = new Label();
+      CheckBoxUnkenntlicheAffiliationenAusblenden = new CheckBox();
       NumericUpDownRelationsEntriesMaximum = new NumericUpDown();
       LabelRelationsEntriesMaximum = new Label();
       CheckBoxSortRelationsAlphabetically = new CheckBox();
@@ -58,11 +63,6 @@
       CheckBoxLogMonitorFilterLoadingScreenDuration = new CheckBox();
       CheckBoxLogMonitorFilterCorpse = new CheckBox();
       CheckBoxShowLog = new CheckBox();
-      CheckBoxHideStreamLiveStatus = new CheckBox();
-      CheckBoxAutoCheckForUpdate = new CheckBox();
-      NumericUpDownAffiliationenMaximum = new NumericUpDown();
-      LabelMaxAffiliationen = new Label();
-      CheckBoxUnkenntlicheAffiliationenAusblenden = new CheckBox();
       GroupBoxLocation = new GroupBox();
       NumericUpDownOrteEintraegeMaximum = new NumericUpDown();
       LabelOrteEintraegeMaximum = new Label();
@@ -73,17 +73,25 @@
       LabelRMB_URL = new Label();
       LabelMMB_URL = new Label();
       LabelLMB_URL = new Label();
+      GroupBoxLogMonitor = new GroupBox();
+      GroupBoxBeziehungen = new GroupBox();
+      TextBoxGRPCChannel = new TextBox();
+      TextBoxGRPCURL = new TextBox();
+      LabelGRPCURL = new Label();
+      LabelGRPCChannel = new Label();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLokalerCacheAlter).BeginInit();
       GroupBoxFenster.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownFensterDeckkraft).BeginInit();
       GroupBoxLokalerCache.SuspendLayout();
       GroupBoxAnzeige.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)NumericUpDownAffiliationenMaximum).BeginInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownRelationsEntriesMaximum).BeginInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLogEintragAnzeigedauer).BeginInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLogEintraegeMaximum).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)NumericUpDownAffiliationenMaximum).BeginInit();
       GroupBoxLocation.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownOrteEintraegeMaximum).BeginInit();
+      GroupBoxLogMonitor.SuspendLayout();
+      GroupBoxBeziehungen.SuspendLayout();
       SuspendLayout();
       // 
       // CheckBoxFensterMauseingabenIgnorieren
@@ -121,10 +129,10 @@
       // ButtonSpeichern
       // 
       ButtonSpeichern.FlatStyle = FlatStyle.Flat;
-      ButtonSpeichern.Location = new Point(12, 462);
+      ButtonSpeichern.Location = new Point(12, 543);
       ButtonSpeichern.Name = "ButtonSpeichern";
       ButtonSpeichern.Size = new Size(75, 28);
-      ButtonSpeichern.TabIndex = 4;
+      ButtonSpeichern.TabIndex = 6;
       ButtonSpeichern.Text = "Speichern";
       ButtonSpeichern.UseVisualStyleBackColor = true;
       ButtonSpeichern.Click += ButtonSpeichern_Click;
@@ -132,10 +140,10 @@
       // ButtonSchliessen
       // 
       ButtonSchliessen.FlatStyle = FlatStyle.Flat;
-      ButtonSchliessen.Location = new Point(93, 462);
+      ButtonSchliessen.Location = new Point(93, 543);
       ButtonSchliessen.Name = "ButtonSchliessen";
       ButtonSchliessen.Size = new Size(75, 28);
-      ButtonSchliessen.TabIndex = 5;
+      ButtonSchliessen.TabIndex = 7;
       ButtonSchliessen.Text = "Schließen";
       ButtonSchliessen.UseVisualStyleBackColor = true;
       ButtonSchliessen.Click += ButtonSchliessen_Click;
@@ -173,9 +181,9 @@
       GroupBoxFenster.Controls.Add(LabelFensterDeckkraftProzent);
       GroupBoxFenster.FlatStyle = FlatStyle.Flat;
       GroupBoxFenster.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxFenster.Location = new Point(370, 12);
+      GroupBoxFenster.Location = new Point(12, 188);
       GroupBoxFenster.Name = "GroupBoxFenster";
-      GroupBoxFenster.Size = new Size(416, 187);
+      GroupBoxFenster.Size = new Size(352, 182);
       GroupBoxFenster.TabIndex = 1;
       GroupBoxFenster.TabStop = false;
       GroupBoxFenster.Text = "Fenster";
@@ -309,38 +317,26 @@
       GroupBoxLokalerCache.Controls.Add(LabelLokalerCacheAlter);
       GroupBoxLokalerCache.FlatStyle = FlatStyle.Flat;
       GroupBoxLokalerCache.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxLokalerCache.Location = new Point(370, 394);
+      GroupBoxLokalerCache.Location = new Point(12, 376);
       GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
-      GroupBoxLokalerCache.Size = new Size(416, 62);
-      GroupBoxLokalerCache.TabIndex = 3;
+      GroupBoxLokalerCache.Size = new Size(352, 161);
+      GroupBoxLokalerCache.TabIndex = 2;
       GroupBoxLokalerCache.TabStop = false;
       GroupBoxLokalerCache.Text = "Lokaler Cache";
       // 
       // ButtonStandard
       // 
       ButtonStandard.FlatStyle = FlatStyle.Flat;
-      ButtonStandard.Location = new Point(711, 462);
+      ButtonStandard.Location = new Point(711, 543);
       ButtonStandard.Name = "ButtonStandard";
       ButtonStandard.Size = new Size(75, 28);
-      ButtonStandard.TabIndex = 6;
+      ButtonStandard.TabIndex = 8;
       ButtonStandard.Text = "Standard";
       ButtonStandard.UseVisualStyleBackColor = true;
       ButtonStandard.Click += ButtonStandard_Click;
       // 
       // GroupBoxAnzeige
       // 
-      GroupBoxAnzeige.Controls.Add(NumericUpDownRelationsEntriesMaximum);
-      GroupBoxAnzeige.Controls.Add(LabelRelationsEntriesMaximum);
-      GroupBoxAnzeige.Controls.Add(CheckBoxSortRelationsAlphabetically);
-      GroupBoxAnzeige.Controls.Add(CheckBoxShowRelations);
-      GroupBoxAnzeige.Controls.Add(LabelLogEintragAnzeigedauerMinuten);
-      GroupBoxAnzeige.Controls.Add(LabelLogEintragAnzeigeDauer);
-      GroupBoxAnzeige.Controls.Add(NumericUpDownLogEintragAnzeigedauer);
-      GroupBoxAnzeige.Controls.Add(NumericUpDownLogEintraegeMaximum);
-      GroupBoxAnzeige.Controls.Add(LabelLogEintraegeMaximum);
-      GroupBoxAnzeige.Controls.Add(CheckBoxLogMonitorFilterLoadingScreenDuration);
-      GroupBoxAnzeige.Controls.Add(CheckBoxLogMonitorFilterCorpse);
-      GroupBoxAnzeige.Controls.Add(CheckBoxShowLog);
       GroupBoxAnzeige.Controls.Add(CheckBoxHideStreamLiveStatus);
       GroupBoxAnzeige.Controls.Add(CheckBoxAutoCheckForUpdate);
       GroupBoxAnzeige.Controls.Add(LabelSprache);
@@ -352,145 +348,10 @@
       GroupBoxAnzeige.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxAnzeige.Location = new Point(12, 12);
       GroupBoxAnzeige.Name = "GroupBoxAnzeige";
-      GroupBoxAnzeige.Size = new Size(352, 444);
+      GroupBoxAnzeige.Size = new Size(352, 170);
       GroupBoxAnzeige.TabIndex = 0;
       GroupBoxAnzeige.TabStop = false;
       GroupBoxAnzeige.Text = "Anzeige";
-      // 
-      // NumericUpDownRelationsEntriesMaximum
-      // 
-      NumericUpDownRelationsEntriesMaximum.BackColor = Color.FromArgb(19, 26, 33);
-      NumericUpDownRelationsEntriesMaximum.Enabled = false;
-      NumericUpDownRelationsEntriesMaximum.ForeColor = Color.FromArgb(57, 206, 216);
-      NumericUpDownRelationsEntriesMaximum.Location = new Point(190, 337);
-      NumericUpDownRelationsEntriesMaximum.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
-      NumericUpDownRelationsEntriesMaximum.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-      NumericUpDownRelationsEntriesMaximum.Name = "NumericUpDownRelationsEntriesMaximum";
-      NumericUpDownRelationsEntriesMaximum.Size = new Size(44, 23);
-      NumericUpDownRelationsEntriesMaximum.TabIndex = 18;
-      NumericUpDownRelationsEntriesMaximum.Value = new decimal(new int[] { 10, 0, 0, 0 });
-      NumericUpDownRelationsEntriesMaximum.ValueChanged += NumericUpDownRelationsEntriesMaximum_ValueChanged;
-      // 
-      // LabelRelationsEntriesMaximum
-      // 
-      LabelRelationsEntriesMaximum.AutoSize = true;
-      LabelRelationsEntriesMaximum.Location = new Point(34, 339);
-      LabelRelationsEntriesMaximum.Name = "LabelRelationsEntriesMaximum";
-      LabelRelationsEntriesMaximum.Size = new Size(111, 15);
-      LabelRelationsEntriesMaximum.TabIndex = 17;
-      LabelRelationsEntriesMaximum.Text = "Einträge Maximum:";
-      // 
-      // CheckBoxSortRelationsAlphabetically
-      // 
-      CheckBoxSortRelationsAlphabetically.AutoSize = true;
-      CheckBoxSortRelationsAlphabetically.Enabled = false;
-      CheckBoxSortRelationsAlphabetically.Location = new Point(34, 315);
-      CheckBoxSortRelationsAlphabetically.Name = "CheckBoxSortRelationsAlphabetically";
-      CheckBoxSortRelationsAlphabetically.Size = new Size(144, 19);
-      CheckBoxSortRelationsAlphabetically.TabIndex = 16;
-      CheckBoxSortRelationsAlphabetically.Text = "Alphabetisch sortieren";
-      CheckBoxSortRelationsAlphabetically.UseVisualStyleBackColor = true;
-      CheckBoxSortRelationsAlphabetically.CheckedChanged += CheckBoxSortRelationsAlphabetically_CheckedChanged;
-      // 
-      // CheckBoxShowRelations
-      // 
-      CheckBoxShowRelations.AutoSize = true;
-      CheckBoxShowRelations.Location = new Point(15, 288);
-      CheckBoxShowRelations.Name = "CheckBoxShowRelations";
-      CheckBoxShowRelations.Size = new Size(144, 19);
-      CheckBoxShowRelations.TabIndex = 15;
-      CheckBoxShowRelations.Text = "Beziehungen anzeigen";
-      CheckBoxShowRelations.UseVisualStyleBackColor = true;
-      CheckBoxShowRelations.CheckedChanged += CheckBoxShowRelations_CheckedChanged;
-      // 
-      // LabelLogEintragAnzeigedauerMinuten
-      // 
-      LabelLogEintragAnzeigedauerMinuten.AutoSize = true;
-      LabelLogEintragAnzeigedauerMinuten.Location = new Point(240, 211);
-      LabelLogEintragAnzeigedauerMinuten.Name = "LabelLogEintragAnzeigedauerMinuten";
-      LabelLogEintragAnzeigedauerMinuten.Size = new Size(60, 15);
-      LabelLogEintragAnzeigedauerMinuten.TabIndex = 12;
-      LabelLogEintragAnzeigedauerMinuten.Text = "Minute(n)";
-      // 
-      // LabelLogEintragAnzeigeDauer
-      // 
-      LabelLogEintragAnzeigeDauer.AutoSize = true;
-      LabelLogEintragAnzeigeDauer.Location = new Point(32, 211);
-      LabelLogEintragAnzeigeDauer.Name = "LabelLogEintragAnzeigeDauer";
-      LabelLogEintragAnzeigeDauer.Size = new Size(122, 15);
-      LabelLogEintragAnzeigeDauer.TabIndex = 10;
-      LabelLogEintragAnzeigeDauer.Text = "Eintrag Anzeigedauer:";
-      // 
-      // NumericUpDownLogEintragAnzeigedauer
-      // 
-      NumericUpDownLogEintragAnzeigedauer.BackColor = Color.FromArgb(19, 26, 33);
-      NumericUpDownLogEintragAnzeigedauer.Enabled = false;
-      NumericUpDownLogEintragAnzeigedauer.ForeColor = Color.FromArgb(57, 206, 216);
-      NumericUpDownLogEintragAnzeigedauer.Location = new Point(190, 209);
-      NumericUpDownLogEintragAnzeigedauer.Maximum = new decimal(new int[] { 60, 0, 0, 0 });
-      NumericUpDownLogEintragAnzeigedauer.Name = "NumericUpDownLogEintragAnzeigedauer";
-      NumericUpDownLogEintragAnzeigedauer.Size = new Size(44, 23);
-      NumericUpDownLogEintragAnzeigedauer.TabIndex = 11;
-      NumericUpDownLogEintragAnzeigedauer.Value = new decimal(new int[] { 10, 0, 0, 0 });
-      NumericUpDownLogEintragAnzeigedauer.ValueChanged += NumericUpDownLogEintragAnzeigedauer_ValueChanged;
-      // 
-      // NumericUpDownLogEintraegeMaximum
-      // 
-      NumericUpDownLogEintraegeMaximum.BackColor = Color.FromArgb(19, 26, 33);
-      NumericUpDownLogEintraegeMaximum.Enabled = false;
-      NumericUpDownLogEintraegeMaximum.ForeColor = Color.FromArgb(57, 206, 216);
-      NumericUpDownLogEintraegeMaximum.Location = new Point(190, 180);
-      NumericUpDownLogEintraegeMaximum.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
-      NumericUpDownLogEintraegeMaximum.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-      NumericUpDownLogEintraegeMaximum.Name = "NumericUpDownLogEintraegeMaximum";
-      NumericUpDownLogEintraegeMaximum.Size = new Size(44, 23);
-      NumericUpDownLogEintraegeMaximum.TabIndex = 9;
-      NumericUpDownLogEintraegeMaximum.Value = new decimal(new int[] { 10, 0, 0, 0 });
-      NumericUpDownLogEintraegeMaximum.ValueChanged += NumericUpDownLogEintraegeMaximum_ValueChanged;
-      // 
-      // LabelLogEintraegeMaximum
-      // 
-      LabelLogEintraegeMaximum.AutoSize = true;
-      LabelLogEintraegeMaximum.Location = new Point(32, 182);
-      LabelLogEintraegeMaximum.Name = "LabelLogEintraegeMaximum";
-      LabelLogEintraegeMaximum.Size = new Size(111, 15);
-      LabelLogEintraegeMaximum.TabIndex = 8;
-      LabelLogEintraegeMaximum.Text = "Einträge Maximum:";
-      // 
-      // CheckBoxLogMonitorFilterLoadingScreenDuration
-      // 
-      CheckBoxLogMonitorFilterLoadingScreenDuration.AutoSize = true;
-      CheckBoxLogMonitorFilterLoadingScreenDuration.Enabled = false;
-      CheckBoxLogMonitorFilterLoadingScreenDuration.Location = new Point(34, 263);
-      CheckBoxLogMonitorFilterLoadingScreenDuration.Name = "CheckBoxLogMonitorFilterLoadingScreenDuration";
-      CheckBoxLogMonitorFilterLoadingScreenDuration.Size = new Size(193, 19);
-      CheckBoxLogMonitorFilterLoadingScreenDuration.TabIndex = 14;
-      CheckBoxLogMonitorFilterLoadingScreenDuration.Text = "Ladebildschirm-Dauer anzeigen";
-      CheckBoxLogMonitorFilterLoadingScreenDuration.UseVisualStyleBackColor = true;
-      CheckBoxLogMonitorFilterLoadingScreenDuration.CheckedChanged += CheckBoxLogMonitorFilterLoadingScreenDuration_CheckedChanged;
-      // 
-      // CheckBoxLogMonitorFilterCorpse
-      // 
-      CheckBoxLogMonitorFilterCorpse.AutoSize = true;
-      CheckBoxLogMonitorFilterCorpse.Enabled = false;
-      CheckBoxLogMonitorFilterCorpse.Location = new Point(34, 238);
-      CheckBoxLogMonitorFilterCorpse.Name = "CheckBoxLogMonitorFilterCorpse";
-      CheckBoxLogMonitorFilterCorpse.Size = new Size(135, 19);
-      CheckBoxLogMonitorFilterCorpse.TabIndex = 13;
-      CheckBoxLogMonitorFilterCorpse.Text = "Spielertode anzeigen";
-      CheckBoxLogMonitorFilterCorpse.UseVisualStyleBackColor = true;
-      CheckBoxLogMonitorFilterCorpse.CheckedChanged += CheckBoxLogMonitorFilterCorpse_CheckedChanged;
-      // 
-      // CheckBoxShowLog
-      // 
-      CheckBoxShowLog.AutoSize = true;
-      CheckBoxShowLog.Location = new Point(15, 155);
-      CheckBoxShowLog.Name = "CheckBoxShowLog";
-      CheckBoxShowLog.Size = new Size(144, 19);
-      CheckBoxShowLog.TabIndex = 7;
-      CheckBoxShowLog.Text = "Log-Monitor anzeigen";
-      CheckBoxShowLog.UseVisualStyleBackColor = true;
-      CheckBoxShowLog.CheckedChanged += CheckBoxShowLog_CheckedChanged;
       // 
       // CheckBoxHideStreamLiveStatus
       // 
@@ -546,6 +407,141 @@
       CheckBoxUnkenntlicheAffiliationenAusblenden.UseVisualStyleBackColor = true;
       CheckBoxUnkenntlicheAffiliationenAusblenden.CheckedChanged += CheckBoxUnkenntlicheAffiliationenAusblenden_CheckedChanged;
       // 
+      // NumericUpDownRelationsEntriesMaximum
+      // 
+      NumericUpDownRelationsEntriesMaximum.BackColor = Color.FromArgb(19, 26, 33);
+      NumericUpDownRelationsEntriesMaximum.Enabled = false;
+      NumericUpDownRelationsEntriesMaximum.ForeColor = Color.FromArgb(57, 206, 216);
+      NumericUpDownRelationsEntriesMaximum.Location = new Point(190, 76);
+      NumericUpDownRelationsEntriesMaximum.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
+      NumericUpDownRelationsEntriesMaximum.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+      NumericUpDownRelationsEntriesMaximum.Name = "NumericUpDownRelationsEntriesMaximum";
+      NumericUpDownRelationsEntriesMaximum.Size = new Size(44, 23);
+      NumericUpDownRelationsEntriesMaximum.TabIndex = 3;
+      NumericUpDownRelationsEntriesMaximum.Value = new decimal(new int[] { 10, 0, 0, 0 });
+      NumericUpDownRelationsEntriesMaximum.ValueChanged += NumericUpDownRelationsEntriesMaximum_ValueChanged;
+      // 
+      // LabelRelationsEntriesMaximum
+      // 
+      LabelRelationsEntriesMaximum.AutoSize = true;
+      LabelRelationsEntriesMaximum.Location = new Point(34, 78);
+      LabelRelationsEntriesMaximum.Name = "LabelRelationsEntriesMaximum";
+      LabelRelationsEntriesMaximum.Size = new Size(111, 15);
+      LabelRelationsEntriesMaximum.TabIndex = 2;
+      LabelRelationsEntriesMaximum.Text = "Einträge Maximum:";
+      // 
+      // CheckBoxSortRelationsAlphabetically
+      // 
+      CheckBoxSortRelationsAlphabetically.AutoSize = true;
+      CheckBoxSortRelationsAlphabetically.Enabled = false;
+      CheckBoxSortRelationsAlphabetically.Location = new Point(34, 54);
+      CheckBoxSortRelationsAlphabetically.Name = "CheckBoxSortRelationsAlphabetically";
+      CheckBoxSortRelationsAlphabetically.Size = new Size(144, 19);
+      CheckBoxSortRelationsAlphabetically.TabIndex = 1;
+      CheckBoxSortRelationsAlphabetically.Text = "Alphabetisch sortieren";
+      CheckBoxSortRelationsAlphabetically.UseVisualStyleBackColor = true;
+      CheckBoxSortRelationsAlphabetically.CheckedChanged += CheckBoxSortRelationsAlphabetically_CheckedChanged;
+      // 
+      // CheckBoxShowRelations
+      // 
+      CheckBoxShowRelations.AutoSize = true;
+      CheckBoxShowRelations.Location = new Point(15, 27);
+      CheckBoxShowRelations.Name = "CheckBoxShowRelations";
+      CheckBoxShowRelations.Size = new Size(144, 19);
+      CheckBoxShowRelations.TabIndex = 0;
+      CheckBoxShowRelations.Text = "Beziehungen anzeigen";
+      CheckBoxShowRelations.UseVisualStyleBackColor = true;
+      CheckBoxShowRelations.CheckedChanged += CheckBoxShowRelations_CheckedChanged;
+      // 
+      // LabelLogEintragAnzeigedauerMinuten
+      // 
+      LabelLogEintragAnzeigedauerMinuten.AutoSize = true;
+      LabelLogEintragAnzeigedauerMinuten.Location = new Point(240, 83);
+      LabelLogEintragAnzeigedauerMinuten.Name = "LabelLogEintragAnzeigedauerMinuten";
+      LabelLogEintragAnzeigedauerMinuten.Size = new Size(60, 15);
+      LabelLogEintragAnzeigedauerMinuten.TabIndex = 5;
+      LabelLogEintragAnzeigedauerMinuten.Text = "Minute(n)";
+      // 
+      // LabelLogEintragAnzeigeDauer
+      // 
+      LabelLogEintragAnzeigeDauer.AutoSize = true;
+      LabelLogEintragAnzeigeDauer.Location = new Point(32, 83);
+      LabelLogEintragAnzeigeDauer.Name = "LabelLogEintragAnzeigeDauer";
+      LabelLogEintragAnzeigeDauer.Size = new Size(122, 15);
+      LabelLogEintragAnzeigeDauer.TabIndex = 3;
+      LabelLogEintragAnzeigeDauer.Text = "Eintrag Anzeigedauer:";
+      // 
+      // NumericUpDownLogEintragAnzeigedauer
+      // 
+      NumericUpDownLogEintragAnzeigedauer.BackColor = Color.FromArgb(19, 26, 33);
+      NumericUpDownLogEintragAnzeigedauer.Enabled = false;
+      NumericUpDownLogEintragAnzeigedauer.ForeColor = Color.FromArgb(57, 206, 216);
+      NumericUpDownLogEintragAnzeigedauer.Location = new Point(190, 81);
+      NumericUpDownLogEintragAnzeigedauer.Maximum = new decimal(new int[] { 60, 0, 0, 0 });
+      NumericUpDownLogEintragAnzeigedauer.Name = "NumericUpDownLogEintragAnzeigedauer";
+      NumericUpDownLogEintragAnzeigedauer.Size = new Size(44, 23);
+      NumericUpDownLogEintragAnzeigedauer.TabIndex = 4;
+      NumericUpDownLogEintragAnzeigedauer.Value = new decimal(new int[] { 10, 0, 0, 0 });
+      NumericUpDownLogEintragAnzeigedauer.ValueChanged += NumericUpDownLogEintragAnzeigedauer_ValueChanged;
+      // 
+      // NumericUpDownLogEintraegeMaximum
+      // 
+      NumericUpDownLogEintraegeMaximum.BackColor = Color.FromArgb(19, 26, 33);
+      NumericUpDownLogEintraegeMaximum.Enabled = false;
+      NumericUpDownLogEintraegeMaximum.ForeColor = Color.FromArgb(57, 206, 216);
+      NumericUpDownLogEintraegeMaximum.Location = new Point(190, 52);
+      NumericUpDownLogEintraegeMaximum.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
+      NumericUpDownLogEintraegeMaximum.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+      NumericUpDownLogEintraegeMaximum.Name = "NumericUpDownLogEintraegeMaximum";
+      NumericUpDownLogEintraegeMaximum.Size = new Size(44, 23);
+      NumericUpDownLogEintraegeMaximum.TabIndex = 2;
+      NumericUpDownLogEintraegeMaximum.Value = new decimal(new int[] { 10, 0, 0, 0 });
+      NumericUpDownLogEintraegeMaximum.ValueChanged += NumericUpDownLogEintraegeMaximum_ValueChanged;
+      // 
+      // LabelLogEintraegeMaximum
+      // 
+      LabelLogEintraegeMaximum.AutoSize = true;
+      LabelLogEintraegeMaximum.Location = new Point(32, 54);
+      LabelLogEintraegeMaximum.Name = "LabelLogEintraegeMaximum";
+      LabelLogEintraegeMaximum.Size = new Size(111, 15);
+      LabelLogEintraegeMaximum.TabIndex = 1;
+      LabelLogEintraegeMaximum.Text = "Einträge Maximum:";
+      // 
+      // CheckBoxLogMonitorFilterLoadingScreenDuration
+      // 
+      CheckBoxLogMonitorFilterLoadingScreenDuration.AutoSize = true;
+      CheckBoxLogMonitorFilterLoadingScreenDuration.Enabled = false;
+      CheckBoxLogMonitorFilterLoadingScreenDuration.Location = new Point(34, 135);
+      CheckBoxLogMonitorFilterLoadingScreenDuration.Name = "CheckBoxLogMonitorFilterLoadingScreenDuration";
+      CheckBoxLogMonitorFilterLoadingScreenDuration.Size = new Size(193, 19);
+      CheckBoxLogMonitorFilterLoadingScreenDuration.TabIndex = 7;
+      CheckBoxLogMonitorFilterLoadingScreenDuration.Text = "Ladebildschirm-Dauer anzeigen";
+      CheckBoxLogMonitorFilterLoadingScreenDuration.UseVisualStyleBackColor = true;
+      CheckBoxLogMonitorFilterLoadingScreenDuration.CheckedChanged += CheckBoxLogMonitorFilterLoadingScreenDuration_CheckedChanged;
+      // 
+      // CheckBoxLogMonitorFilterCorpse
+      // 
+      CheckBoxLogMonitorFilterCorpse.AutoSize = true;
+      CheckBoxLogMonitorFilterCorpse.Enabled = false;
+      CheckBoxLogMonitorFilterCorpse.Location = new Point(34, 110);
+      CheckBoxLogMonitorFilterCorpse.Name = "CheckBoxLogMonitorFilterCorpse";
+      CheckBoxLogMonitorFilterCorpse.Size = new Size(135, 19);
+      CheckBoxLogMonitorFilterCorpse.TabIndex = 6;
+      CheckBoxLogMonitorFilterCorpse.Text = "Spielertode anzeigen";
+      CheckBoxLogMonitorFilterCorpse.UseVisualStyleBackColor = true;
+      CheckBoxLogMonitorFilterCorpse.CheckedChanged += CheckBoxLogMonitorFilterCorpse_CheckedChanged;
+      // 
+      // CheckBoxShowLog
+      // 
+      CheckBoxShowLog.AutoSize = true;
+      CheckBoxShowLog.Location = new Point(15, 27);
+      CheckBoxShowLog.Name = "CheckBoxShowLog";
+      CheckBoxShowLog.Size = new Size(144, 19);
+      CheckBoxShowLog.TabIndex = 0;
+      CheckBoxShowLog.Text = "Log-Monitor anzeigen";
+      CheckBoxShowLog.UseVisualStyleBackColor = true;
+      CheckBoxShowLog.CheckedChanged += CheckBoxShowLog_CheckedChanged;
+      // 
       // GroupBoxLocation
       // 
       GroupBoxLocation.Controls.Add(NumericUpDownOrteEintraegeMaximum);
@@ -559,10 +555,10 @@
       GroupBoxLocation.Controls.Add(LabelLMB_URL);
       GroupBoxLocation.FlatStyle = FlatStyle.Flat;
       GroupBoxLocation.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxLocation.Location = new Point(370, 205);
+      GroupBoxLocation.Location = new Point(370, 12);
       GroupBoxLocation.Name = "GroupBoxLocation";
-      GroupBoxLocation.Size = new Size(416, 183);
-      GroupBoxLocation.TabIndex = 2;
+      GroupBoxLocation.Size = new Size(416, 170);
+      GroupBoxLocation.TabIndex = 3;
       GroupBoxLocation.TabStop = false;
       GroupBoxLocation.Text = "Orte (Alt + Eingabe)";
       // 
@@ -571,7 +567,7 @@
       NumericUpDownOrteEintraegeMaximum.BackColor = Color.FromArgb(19, 26, 33);
       NumericUpDownOrteEintraegeMaximum.Enabled = false;
       NumericUpDownOrteEintraegeMaximum.ForeColor = Color.FromArgb(57, 206, 216);
-      NumericUpDownOrteEintraegeMaximum.Location = new Point(173, 48);
+      NumericUpDownOrteEintraegeMaximum.Location = new Point(190, 48);
       NumericUpDownOrteEintraegeMaximum.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
       NumericUpDownOrteEintraegeMaximum.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
       NumericUpDownOrteEintraegeMaximum.Name = "NumericUpDownOrteEintraegeMaximum";
@@ -605,9 +601,9 @@
       TextBoxRMB_URL.BackColor = Color.FromArgb(57, 206, 216);
       TextBoxRMB_URL.BorderStyle = BorderStyle.FixedSingle;
       TextBoxRMB_URL.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxRMB_URL.Location = new Point(173, 135);
+      TextBoxRMB_URL.Location = new Point(190, 135);
       TextBoxRMB_URL.Name = "TextBoxRMB_URL";
-      TextBoxRMB_URL.Size = new Size(230, 23);
+      TextBoxRMB_URL.Size = new Size(213, 23);
       TextBoxRMB_URL.TabIndex = 8;
       TextBoxRMB_URL.TextChanged += TextBoxRMB_URL_TextChanged;
       // 
@@ -616,9 +612,9 @@
       TextBoxMMB_URL.BackColor = Color.FromArgb(57, 206, 216);
       TextBoxMMB_URL.BorderStyle = BorderStyle.FixedSingle;
       TextBoxMMB_URL.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxMMB_URL.Location = new Point(173, 106);
+      TextBoxMMB_URL.Location = new Point(190, 106);
       TextBoxMMB_URL.Name = "TextBoxMMB_URL";
-      TextBoxMMB_URL.Size = new Size(230, 23);
+      TextBoxMMB_URL.Size = new Size(213, 23);
       TextBoxMMB_URL.TabIndex = 6;
       TextBoxMMB_URL.Text = "{WikiLink}|https://starcitizen.tools/{Name}";
       TextBoxMMB_URL.TextChanged += TextBoxMMB_URL_TextChanged;
@@ -628,9 +624,9 @@
       TextBoxLMB_URL.BackColor = Color.FromArgb(57, 206, 216);
       TextBoxLMB_URL.BorderStyle = BorderStyle.FixedSingle;
       TextBoxLMB_URL.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxLMB_URL.Location = new Point(173, 77);
+      TextBoxLMB_URL.Location = new Point(190, 77);
       TextBoxLMB_URL.Name = "TextBoxLMB_URL";
-      TextBoxLMB_URL.Size = new Size(230, 23);
+      TextBoxLMB_URL.Size = new Size(213, 23);
       TextBoxLMB_URL.TabIndex = 4;
       TextBoxLMB_URL.Text = "https://dydrmr.github.io/VerseTime/#{Name}";
       TextBoxLMB_URL.TextChanged += TextBoxLMB_URL_TextChanged;
@@ -638,7 +634,7 @@
       // LabelRMB_URL
       // 
       LabelRMB_URL.AutoSize = true;
-      LabelRMB_URL.Location = new Point(15, 138);
+      LabelRMB_URL.Location = new Point(32, 137);
       LabelRMB_URL.Name = "LabelRMB_URL";
       LabelRMB_URL.Size = new Size(103, 15);
       LabelRMB_URL.TabIndex = 7;
@@ -647,7 +643,7 @@
       // LabelMMB_URL
       // 
       LabelMMB_URL.AutoSize = true;
-      LabelMMB_URL.Location = new Point(15, 109);
+      LabelMMB_URL.Location = new Point(32, 108);
       LabelMMB_URL.Name = "LabelMMB_URL";
       LabelMMB_URL.Size = new Size(108, 15);
       LabelMMB_URL.TabIndex = 5;
@@ -656,11 +652,89 @@
       // LabelLMB_URL
       // 
       LabelLMB_URL.AutoSize = true;
-      LabelLMB_URL.Location = new Point(15, 80);
+      LabelLMB_URL.Location = new Point(32, 79);
       LabelLMB_URL.Name = "LabelLMB_URL";
       LabelLMB_URL.Size = new Size(95, 15);
       LabelLMB_URL.TabIndex = 3;
       LabelLMB_URL.Text = "Linke Maustaste:";
+      // 
+      // GroupBoxLogMonitor
+      // 
+      GroupBoxLogMonitor.Controls.Add(LabelLogEintragAnzeigedauerMinuten);
+      GroupBoxLogMonitor.Controls.Add(CheckBoxShowLog);
+      GroupBoxLogMonitor.Controls.Add(CheckBoxLogMonitorFilterCorpse);
+      GroupBoxLogMonitor.Controls.Add(CheckBoxLogMonitorFilterLoadingScreenDuration);
+      GroupBoxLogMonitor.Controls.Add(LabelLogEintraegeMaximum);
+      GroupBoxLogMonitor.Controls.Add(NumericUpDownLogEintraegeMaximum);
+      GroupBoxLogMonitor.Controls.Add(LabelLogEintragAnzeigeDauer);
+      GroupBoxLogMonitor.Controls.Add(NumericUpDownLogEintragAnzeigedauer);
+      GroupBoxLogMonitor.FlatStyle = FlatStyle.Flat;
+      GroupBoxLogMonitor.ForeColor = Color.FromArgb(57, 206, 216);
+      GroupBoxLogMonitor.Location = new Point(370, 376);
+      GroupBoxLogMonitor.Name = "GroupBoxLogMonitor";
+      GroupBoxLogMonitor.Size = new Size(416, 161);
+      GroupBoxLogMonitor.TabIndex = 5;
+      GroupBoxLogMonitor.TabStop = false;
+      GroupBoxLogMonitor.Text = "Log-Monitor";
+      // 
+      // GroupBoxBeziehungen
+      // 
+      GroupBoxBeziehungen.Controls.Add(NumericUpDownRelationsEntriesMaximum);
+      GroupBoxBeziehungen.Controls.Add(CheckBoxShowRelations);
+      GroupBoxBeziehungen.Controls.Add(LabelRelationsEntriesMaximum);
+      GroupBoxBeziehungen.Controls.Add(CheckBoxSortRelationsAlphabetically);
+      GroupBoxBeziehungen.Controls.Add(TextBoxGRPCChannel);
+      GroupBoxBeziehungen.Controls.Add(TextBoxGRPCURL);
+      GroupBoxBeziehungen.Controls.Add(LabelGRPCURL);
+      GroupBoxBeziehungen.Controls.Add(LabelGRPCChannel);
+      GroupBoxBeziehungen.FlatStyle = FlatStyle.Flat;
+      GroupBoxBeziehungen.ForeColor = Color.FromArgb(57, 206, 216);
+      GroupBoxBeziehungen.Location = new Point(370, 188);
+      GroupBoxBeziehungen.Name = "GroupBoxBeziehungen";
+      GroupBoxBeziehungen.Size = new Size(416, 182);
+      GroupBoxBeziehungen.TabIndex = 4;
+      GroupBoxBeziehungen.TabStop = false;
+      GroupBoxBeziehungen.Text = "Beziehungen";
+      // 
+      // TextBoxGRPCChannel
+      // 
+      TextBoxGRPCChannel.BackColor = Color.FromArgb(57, 206, 216);
+      TextBoxGRPCChannel.BorderStyle = BorderStyle.FixedSingle;
+      TextBoxGRPCChannel.ForeColor = Color.FromArgb(19, 26, 33);
+      TextBoxGRPCChannel.Location = new Point(190, 134);
+      TextBoxGRPCChannel.Name = "TextBoxGRPCChannel";
+      TextBoxGRPCChannel.Size = new Size(213, 23);
+      TextBoxGRPCChannel.TabIndex = 6;
+      TextBoxGRPCChannel.TextChanged += TextBoxGRPCChannel_TextChanged;
+      // 
+      // TextBoxGRPCURL
+      // 
+      TextBoxGRPCURL.BackColor = Color.FromArgb(57, 206, 216);
+      TextBoxGRPCURL.BorderStyle = BorderStyle.FixedSingle;
+      TextBoxGRPCURL.ForeColor = Color.FromArgb(19, 26, 33);
+      TextBoxGRPCURL.Location = new Point(190, 105);
+      TextBoxGRPCURL.Name = "TextBoxGRPCURL";
+      TextBoxGRPCURL.Size = new Size(213, 23);
+      TextBoxGRPCURL.TabIndex = 4;
+      TextBoxGRPCURL.TextChanged += TextBoxGRPCURL_TextChanged;
+      // 
+      // LabelGRPCURL
+      // 
+      LabelGRPCURL.AutoSize = true;
+      LabelGRPCURL.Location = new Point(32, 107);
+      LabelGRPCURL.Name = "LabelGRPCURL";
+      LabelGRPCURL.Size = new Size(100, 15);
+      LabelGRPCURL.TabIndex = 3;
+      LabelGRPCURL.Text = "gRPC Server-URL:";
+      // 
+      // LabelGRPCChannel
+      // 
+      LabelGRPCChannel.AutoSize = true;
+      LabelGRPCChannel.Location = new Point(32, 136);
+      LabelGRPCChannel.Name = "LabelGRPCChannel";
+      LabelGRPCChannel.Size = new Size(108, 15);
+      LabelGRPCChannel.TabIndex = 5;
+      LabelGRPCChannel.Text = "gRPC Server-Kanal:";
       // 
       // FormSettings
       // 
@@ -669,9 +743,11 @@
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.FromArgb(19, 26, 33);
       CancelButton = ButtonSchliessen;
-      ClientSize = new Size(798, 502);
+      ClientSize = new Size(798, 585);
       Controls.Add(GroupBoxAnzeige);
       Controls.Add(GroupBoxLocation);
+      Controls.Add(GroupBoxLogMonitor);
+      Controls.Add(GroupBoxBeziehungen);
       Controls.Add(GroupBoxLokalerCache);
       Controls.Add(GroupBoxFenster);
       Controls.Add(ButtonStandard);
@@ -679,7 +755,7 @@
       Controls.Add(ButtonSpeichern);
       ForeColor = Color.FromArgb(57, 206, 216);
       Icon = (Icon)resources.GetObject("$this.Icon");
-      MinimumSize = new Size(814, 477);
+      MinimumSize = new Size(814, 624);
       Name = "FormSettings";
       StartPosition = FormStartPosition.CenterScreen;
       Text = "Star Citizen Handle Query Einstellungen";
@@ -691,13 +767,17 @@
       GroupBoxLokalerCache.PerformLayout();
       GroupBoxAnzeige.ResumeLayout(false);
       GroupBoxAnzeige.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)NumericUpDownAffiliationenMaximum).EndInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownRelationsEntriesMaximum).EndInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLogEintragAnzeigedauer).EndInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLogEintraegeMaximum).EndInit();
-      ((System.ComponentModel.ISupportInitialize)NumericUpDownAffiliationenMaximum).EndInit();
       GroupBoxLocation.ResumeLayout(false);
       GroupBoxLocation.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownOrteEintraegeMaximum).EndInit();
+      GroupBoxLogMonitor.ResumeLayout(false);
+      GroupBoxLogMonitor.PerformLayout();
+      GroupBoxBeziehungen.ResumeLayout(false);
+      GroupBoxBeziehungen.PerformLayout();
       ResumeLayout(false);
     }
 
@@ -751,5 +831,11 @@
     private NumericUpDown NumericUpDownOrteEintraegeMaximum;
     private Label LabelOrteEintraegeMaximum;
     private CheckBox CheckBoxShowLocations;
+    private GroupBox GroupBoxLogMonitor;
+    private GroupBox GroupBoxBeziehungen;
+    private TextBox TextBoxGRPCChannel;
+    private TextBox TextBoxGRPCURL;
+    private Label LabelGRPCURL;
+    private Label LabelGRPCChannel;
   }
 }
