@@ -243,7 +243,7 @@ Um das Programm vollständig zu deinstallieren und alle vom Programm erstellten 
 Der Star Citizen Handle Query gRPC-Server ermöglicht die Synchronisierung von Beziehungen über mehrere Benutzer. Die Datei `SCHQ_Server.exe` kann direkt gestartet werden.
 
 ### Konfiguration
-- In der Datei `appsettings.json` können URL und Port des gRPC-Servers angepasst werden. Standardmäßig horcht der Server auf den Ports 5043 (HTPP) und 7085 (HTTPS):
+- In der Datei `appsettings.json` können URL und Port des gRPC-Servers angepasst werden. Standardmäßig horcht der Server auf den Ports 5043 (HTTP) und 7085 (HTTPS):
   - `http://localhost:5043`
   - `https://localhost:7085`
 ```XML
