@@ -22,20 +22,14 @@ https://discord.com/invite/WmzNY3mCm6
 - __Stream Live-Status ausblenden:__ Angabe, ob der Twitch.tv Stream Live-Status eines Handles ausgeblendet werden soll
 - __Bei Programmstart nach Update suchen:__ Angabe, ob bei jedem Programmstart geprüft werden soll, ob ein Programmupdate zur Verfügung steht
   - Ausschließlich wenn ein Update zur Verfügung steht, wird eine Benachrichtigung angezeigt.
-- __Log-Monitor anzeigen:__ Angabe, ob der Log-Monitor angezeigt werden soll
-  - __Einträge Maximum:__ Angabe, wie viele Einträge maximal im Log-Monitor angezeigt werden sollen
-  - __Eintrag Anzeigedauer:__ Anzeigedauer eines Logeintrags in Minuten (`0` = unendlich)
-  - __Spielertode anzeigen:__ Angabe, ob Spielertode im Log-Monitor angezeigt werden sollen
-  - __Ladebildschirm-Dauer anzeigen:__ Angabe, ob die Ladebildschirm-Dauer im Log-Monitor angezeigt werden sollen
-- __Beziehungen anzeigen:__ Angabe, ob das Beziehungen-Fenster angezeigt werden soll
-  - __Alphabetisch sortieren:__ Angabe, ob die Einträge auf dem Beziehungen-Fenster alphabetisch sortiert werden sollen (Standard: Reihenfolge, in welcher die Einträge hinzugefügt werden)
-  - __Einträge Maximum:__ Angabe, wie viele Einträge maximal auf dem Beziehungen-Fenster dargestellt werden sollen (es werden unendlich viele Einträge im lokalen Cache gespeichert)
 ### Fenster
 - __Deckkraft:__ Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
 - __Globale Taste:__ Hier kann die Taste angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifikatoren (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
 - __Mauseingaben ignorieren:__ Wird diese Einstellung aktiviert, gehen sämtliche Mausklicks durch das Fenster durch in das dahinter liegende Programm.
 - __Erreichbariekt via Alt + Tab:__ Wird diese Einstellung aktiviert, kann das Fenster via Tastenkobination `Alt` + `Tab` erreicht werden.
 - __Position merken:__ Ist diese Einstellung aktiviert, merkt sich das Programm beim Beenden die Position des Hauptfensters und stellt sie beim Start wieder her.
+### Lokaler Cache
+- __Maximales Alter:__ Hier kann für den lokalen Cache das maximale Alter in Tagen angegeben werden, wann die Informationen eines bereits zuvor abgefragten Handles erneut via Star Citizen Webseite abgefragt werden sollen. Es können Werte zwischen 0 und 365 Tagen angegeben werden. Die Angabe von 0 Tagen wird die Handle-Informationen immer via Star Citizen Webseite abfragen.
 ### Orte (Alt + Eingabe)
 - __Orte anzeigen:__ Angabe, ob das Orte-Fenster angezeigt werden soll
 - __Einträge Maximum:__ Angabe, wie viele Einträge maximal im Orte-Fenster angezeigt werden sollen
@@ -53,8 +47,18 @@ https://discord.com/invite/WmzNY3mCm6
   - `{ThemeImage}`: URL zum Beispielbild aus dem Wiki
   - `{WikiLink}`: Link zum Wiki (starcitizen.tools)
 - Mehrere Einträge können Pipe `|` getrennt angegeben werden. Sobald ein Eintrag nach der Ersetzung der Platzhalter mindestens ein Zeichen enthält, wird dieser Wert verwendet. Beispiel: `{WikiLink}|https://starcitizen.tools/{Name}` (wenn `{WikiLink}` keinen Text zurückgibt, wird stattdessen `https://starcitizen.tools/{Name}` verwendet)
-### Lokaler Cache
-- __Maximales Alter:__ Hier kann für den lokalen Cache das maximale Alter in Tagen angegeben werden, wann die Informationen eines bereits zuvor abgefragten Handles erneut via Star Citizen Webseite abgefragt werden sollen. Es können Werte zwischen 0 und 365 Tagen angegeben werden. Die Angabe von 0 Tagen wird die Handle-Informationen immer via Star Citizen Webseite abfragen.
+### Beziehungen
+- __Beziehungen anzeigen:__ Angabe, ob das Beziehungen-Fenster angezeigt werden soll
+  - __Alphabetisch sortieren:__ Angabe, ob die Einträge auf dem Beziehungen-Fenster alphabetisch sortiert werden sollen (Standard: Reihenfolge, in welcher die Einträge hinzugefügt werden)
+  - __Einträge Maximum:__ Angabe, wie viele Einträge maximal auf dem Beziehungen-Fenster dargestellt werden sollen (es werden unendlich viele Einträge im lokalen Cache gespeichert)
+  - __gRPC Server-URL:__ Hier kann die vollständige URL eines gRPC-Servers (`SCHQ_Server`) angegeben werden, um die Beziehungen mit anderen Benutzern zu synchronisieren
+  - __gRPC Server-Kanal:__ Hier kann der zu verwendende Kanal angegeben werden, welcher für den gRPC-Server verwendet werden soll. Alle Benutzer, die den gleichen Kanal verwenden, synchronisieren die Beziehungen untereinander.
+### Log-Monitor
+- __Log-Monitor anzeigen:__ Angabe, ob der Log-Monitor angezeigt werden soll
+  - __Einträge Maximum:__ Angabe, wie viele Einträge maximal im Log-Monitor angezeigt werden sollen
+  - __Eintrag Anzeigedauer:__ Anzeigedauer eines Logeintrags in Minuten (`0` = unendlich)
+  - __Spielertode anzeigen:__ Angabe, ob Spielertode im Log-Monitor angezeigt werden sollen
+  - __Ladebildschirm-Dauer anzeigen:__ Angabe, ob die Ladebildschirm-Dauer im Log-Monitor angezeigt werden sollen
 ### Schaltflächen
 - __Speichern:__ Speichert die vorgenommenen Einstellungen und schließt das Einstellungen-Fenster
 - __Schließen:__ Schließt das Einstellungen-Fenster, ohne die vorgenommenen Einstellungen zu speichern
@@ -164,6 +168,7 @@ Hier werden sämtliche Handles und Organisationen aufgelistet, denen eine Bezieh
 - `Grau`: Neutral
 - `Orange`: Unbekannt
 - `Rot`: Feindlich
+
 Organisationen werden via Organisation-Symbol auf der rechten Seite dargestellt.
 Diese Liste wird beim Beenden des Tools gespeichert und beim erneuten Start des Tools wieder dargestellt.
 
@@ -176,6 +181,11 @@ Diese Liste wird beim Beenden des Tools gespeichert und beim erneuten Start des 
   - `Alt + 5`: Organisation (cyan)
   - `Alt + 0`: Alle Filter
 - Via Mauslinksklick auf das Mülltonnen-Symbol kann, sofern mindestens ein Eintrag enthalten ist, die Liste gelöscht werden.
+- Wenn in den Einstellungen `gRPC Server-URL` und `gRPC Server-Kanal` angegeben sind, wird statt des Mülltonnen-Symbols der Status der Synchronisierung dargestellt:
+  - `Rot`: Synchronisierung inaktiv
+  - `Orange`: Synchronisierungsverbindung wird hergestellt
+  - `Grün`: Synchronisierung aktiv
+  - Via Mauslinksklick kann die Synchronisierung, abhängig vom aktuellen Synchronisierungsstatus (de-)aktiviert werden.
 
 ## Orte Fenster
 
