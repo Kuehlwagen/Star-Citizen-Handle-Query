@@ -51,6 +51,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (ProgramTranslation != null) {
         // Control-Texte setzen
         LabelTitle.Text = $"{ProgramTranslation.Relations.Title}";
+        ToolTipRelations.SetToolTip(CheckBoxFilterFriendly, ProgramTranslation.Local_Cache.Relation.Friendly);
+        ToolTipRelations.SetToolTip(CheckBoxFilterNeutral, ProgramTranslation.Local_Cache.Relation.Neutral);
+        ToolTipRelations.SetToolTip(CheckBoxFilterBogey, ProgramTranslation.Local_Cache.Relation.Bogey);
+        ToolTipRelations.SetToolTip(CheckBoxFilterBandit, ProgramTranslation.Local_Cache.Relation.Bandit);
+        ToolTipRelations.SetToolTip(CheckBoxFilterOrganization, ProgramTranslation.Local_Cache.Columns.Organization.ToUpper());
       }
     }
 
@@ -175,9 +180,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             CheckBoxFilterBandit.Checked = infos.FilterVisibility.Bandit;
           }
           if (infos.Relations?.Count > 0) {
+            PanelRelations.SuspendLayout();
             foreach (RelationInfo info in infos.Relations) {
               AddControl(info.Name, info.Type, info.Relation);
             }
+            PanelRelations.ResumeLayout();
           }
         }
         FilterRelations();
@@ -215,18 +222,25 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     internal void ChangeSync(SyncStatus status) {
       if (IsRPCSync) {
-        ToolTipRelations.SetToolTip(PictureBoxClearAll, $"Channel: {ProgramSettings.Relations.RPC_Channel}");
+        if (InvokeRequired) {
+          Invoke(() => ToolTipRelations.SetToolTip(PictureBoxClearAll, ProgramSettings.Relations.RPC_Channel));
+        } else {
+          ToolTipRelations.SetToolTip(PictureBoxClearAll, ProgramSettings.Relations.RPC_Channel);
+        }
         Sync = status;
+        Image img = Resources.StatusRed;
         switch (Sync) {
-          case SyncStatus.Disconnected:
-            PictureBoxClearAll.Image = Resources.StatusRed;
-            break;
           case SyncStatus.Connecting:
-            PictureBoxClearAll.Image = Resources.StatusOrange;
+            img = Resources.StatusOrange;
             break;
           case SyncStatus.Connected:
-            PictureBoxClearAll.Image = Resources.StatusGreen;
+            img = Resources.StatusGreen;
             break;
+        }
+        if (InvokeRequired) {
+          Invoke(() => PictureBoxClearAll.Image = img);
+        } else {
+          PictureBoxClearAll.Image = img;
         }
       }
     }
@@ -257,9 +271,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (PanelRelations.Controls.Count < ProgramSettings.Relations.EntriesMax) {
         Height -= LogicalToDeviceUnits(e.Control.Height + 2);
       }
-      if (PanelRelations.Controls.Count == 0) {
+      if (PanelRelations.Controls.Count == 0 && !IsRPCSync) {
         PictureBoxClearAll.MouseClick -= PictureBoxClearAll_MouseClick;
-        PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
+        PictureBoxClearAll.Image = Resources.ClearAll_Deactivated;
         PictureBoxClearAll.Cursor = Cursors.Default;
       }
     }

@@ -4,6 +4,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
+// Use Windows service
+/*
+  sc create SCHQ_Server binPath="c:\Path\To\SCHQ_Server.exe" displayName="SCHQ Server"
+  sc description SCHQ_Server "Star Citizen Handle Query gRPC-Server"
+  sc delete SCHQ_Server
+*/
+builder.Host.UseWindowsService();
 
 var app = builder.Build();
 

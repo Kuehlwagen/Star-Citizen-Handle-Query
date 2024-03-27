@@ -1225,7 +1225,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LokalerCacheToolStripMenuItem.Enabled = enable;
       AufUpdatePruefenToolStripMenuItem.Enabled = enable;
       BeziehungenBereitstellenToolStripMenuItem.Enabled = enable;
-      BeziehungenUebernehmenToolStripMenuItem.Enabled = enable;
+      BeziehungenUebernehmenToolStripMenuItem.Enabled = enable &&
+        string.IsNullOrWhiteSpace(ProgramSettings.Relations.RPC_URL) &&
+        string.IsNullOrWhiteSpace(ProgramSettings.Relations.RPC_Channel);
     }
 
     private void TextBoxHandle_TextChanged(object sender, EventArgs e) {
