@@ -609,7 +609,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         // Ggf. Beziehung aktualisieren
         handleInfo.Relation = GetHandleRelation(handleInfo.Profile.Handle);
         if (handleInfo.Relation == Relation.NotAssigned) {
-          handleInfo.Relation = RPC_Wrapper.GetRelation(ProgramSettings.Relations.RPC_Channel, RelationType.Handle, handleInfo.Profile.Handle);
+          handleInfo.Relation = RelationsForm?.GetRPCRelation(RelationType.Handle, handleInfo.Profile.Handle) ?? Relation.NotAssigned;
           if (handleInfo.Relation != Relation.NotAssigned) {
             RelationsForm?.UpdateRelation(handleInfo.Profile.Handle, RelationType.Handle, handleInfo.Relation);
           }
@@ -1073,6 +1073,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       // Verzeichnis ermitteln
       switch (type) {
+        case CacheDirectoryType.Base:
+          rtnVal = GetSaveFilesRootPath();
+          break;
         case CacheDirectoryType.Root:
           rtnVal = Path.Combine(GetSaveFilesRootPath(), $@"Cache\{(!string.IsNullOrWhiteSpace(name) ? $"{name}.json" : string.Empty)}");
           break;
@@ -1104,6 +1107,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     public enum CacheDirectoryType {
+      Base,
       Root,
       Handle,
       HandleAvatar,

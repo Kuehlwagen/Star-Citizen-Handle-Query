@@ -108,10 +108,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Height = LogicalToDeviceUnits(31);
       if (IsRPCSync) {
         PictureBoxClearAll.MouseClick += PictureBoxClearAll_MouseClick;
+        ChangeSync(SyncStatus.Disconnected);
+        StartStopSync();
+      } else {
+        ImportRelationInfos();
       }
-      ChangeSync(SyncStatus.Disconnected);
-      ImportRelationInfos();
-      StartStopSync();
     }
 
     public void ClearRelations() {
@@ -192,6 +193,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         }
         FilterRelations();
       } catch { }
+    }
+
+    internal Relation GetRPCRelation(RelationType type, string name) {
+      Relation rtnVal = Relation.NotAssigned;
+
+      if (IsRPCSync && Sync == SyncStatus.Connected) {
+        rtnVal = RPC_Wrapper.GetRelation(ProgramSettings.Relations.RPC_Channel, type, name);
+      }
+
+      return rtnVal;
     }
 
     private void PictureBoxClearAll_MouseClick(object sender, MouseEventArgs e) {
@@ -304,7 +315,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public void UpdateRelation(string name, RelationType relationType, Relation relation, bool withoutRPCSet = false) {
       if (!string.IsNullOrWhiteSpace(name)) {
-        if (IsRPCSync && !withoutRPCSet) {
+        if (IsRPCSync && !withoutRPCSet && Sync == SyncStatus.Connected) {
           RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, relationType, name, relation);
         }
         Control[] controls = PanelRelations.Controls.Find($"UserControlRelation_{relationType}_{name}", false);
@@ -355,9 +366,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public Relation GetOrganizationRelation(string sid) {
       Relation rtnVal = Relation.NotAssigned;
-      UserControlRelation control = UserControlRelations.Select(x => x.Value).FirstOrDefault(x => x.Type == RelationType.Organization && x.RelationName == sid);
-      if (control != null) {
-        rtnVal = control.Relation;
+      rtnVal = GetRPCRelation(RelationType.Organization, sid);
+      if (rtnVal == Relation.NotAssigned) {
+        UserControlRelation control = UserControlRelations.Select(x => x.Value).FirstOrDefault(x => x.Type == RelationType.Organization && x.RelationName == sid);
+        if (control != null) {
+          rtnVal = control.Relation;
+        }
       }
       return rtnVal;
     }
