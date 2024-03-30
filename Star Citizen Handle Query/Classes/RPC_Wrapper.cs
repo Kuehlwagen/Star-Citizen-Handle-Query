@@ -30,7 +30,7 @@ internal static class RPC_Wrapper {
         }
       }
     } catch (Exception ex) {
-      Log($"{nameof(RPC_Wrapper)}.{nameof(GetRelations)}", $"{_url} - GetRelations({channel}) Exception: {ex.Message}");
+      Log($"{_url} - GetRelations({channel}) Exception: {ex.Message}");
     }
     return rtnVal;
   }
@@ -52,7 +52,7 @@ internal static class RPC_Wrapper {
         rtnVal = result.Success;
       }
     } catch (Exception ex) {
-      Log($"{nameof(RPC_Wrapper)}.{nameof(GetRelations)}", $"{_url} - SetRelation({channel}, {type}, {relation}) Exception: {ex.Message}");
+      Log($"{_url} - SetRelation({channel}, {type}, {relation}) Exception: {ex.Message}");
     }
     return rtnVal;
   }
@@ -71,7 +71,7 @@ internal static class RPC_Wrapper {
         rtnVal = (Serialization.Relation)(result.Found ? result.Relation : gRPC.Relation.NotAssigned);
       }
     } catch (Exception ex) {
-      Log($"{nameof(RPC_Wrapper)}.{nameof(GetRelations)}", $"{_url} - GetRelation({channel}, {type}, {name}) Exception: {ex.Message}");
+      Log($"{_url} - GetRelation({channel}, {type}, {name}) Exception: {ex.Message}");
     }
     return rtnVal;
   }
@@ -88,7 +88,7 @@ internal static class RPC_Wrapper {
         rtnVal = result.Success;
       }
     } catch (Exception ex) {
-      Log($"{nameof(RPC_Wrapper)}.{nameof(GetRelations)}", $"{_url} - RemoveRelations({channel}) Exception: {ex.Message}");
+      Log($"{_url} - RemoveRelations({channel}) Exception: {ex.Message}");
     }
     return rtnVal;
   }
@@ -110,12 +110,12 @@ internal static class RPC_Wrapper {
           }
         } catch (RpcException ex) {
           if (ex.StatusCode != StatusCode.Cancelled) {
-            Log(nameof(SyncRelations), $"{_url} - SyncRelations(..., {channel}) RpcException: {ex.Message} [{ex.Status} / {ex.StatusCode}]");
+            Log($"{_url} - SyncRelations(..., {channel}) RpcException: {ex.Message} [{ex.Status} / {ex.StatusCode}]");
           }
         }
       }
     } catch (Exception ex) {
-      Log($"{nameof(RPC_Wrapper)}.{nameof(GetRelations)}", $"{_url} - SyncRelations(..., {channel}) Exception: {ex.Message}");
+      Log($"{_url} - SyncRelations(..., {channel}) Exception: {ex.Message}");
     }
     frm.ChangeSync(FormRelations.SyncStatus.Disconnected);
   }
