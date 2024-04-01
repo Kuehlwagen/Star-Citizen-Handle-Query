@@ -206,6 +206,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.Relations.ShowWindow = CheckBoxShowRelations.Checked;
       CheckBoxSortRelationsAlphabetically.Enabled = CheckBoxShowRelations.Checked;
       NumericUpDownRelationsEntriesMaximum.Enabled = CheckBoxShowRelations.Checked;
+      TextBoxGRPCURL.Enabled = CheckBoxShowRelations.Checked;
+      TextBoxGRPCChannel.Enabled = CheckBoxShowRelations.Checked;
+      CheckBoxRPCSyncOnStartup.Enabled = CheckBoxShowRelations.Checked;
     }
 
     private void CheckBoxSortRelationsAlphabetically_CheckedChanged(object sender, EventArgs e) {
