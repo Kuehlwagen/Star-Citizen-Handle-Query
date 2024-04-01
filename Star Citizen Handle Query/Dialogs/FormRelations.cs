@@ -223,10 +223,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           Task.Run(() => RPC_Wrapper.SyncRelations(this, ProgramSettings.Relations.RPC_Channel, CancelToken));
         } else {
           // Die gRPC-Liste leeren, wenn Strg- und Umschalt-Taste gedrückt sind
-          if (ModifierKeys == (Keys.Control | Keys.Shift) && IsRPCSync) {
+          if (ModifierKeys == (Keys.Control | Keys.Shift)) {
             if (RPC_Wrapper.RemoveRelations(ProgramSettings.Relations.RPC_Channel)) {
               ClearRelations();
             }
+          } else if (ModifierKeys == (Keys.Control | Keys.Shift | Keys.Alt)) {
+            RPC_Wrapper.RestoreRelations(ProgramSettings.Relations.RPC_Channel);
           } else {
             CancelToken.Cancel();
           }

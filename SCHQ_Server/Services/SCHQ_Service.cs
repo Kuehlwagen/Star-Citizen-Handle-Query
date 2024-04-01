@@ -23,14 +23,13 @@ public class SCHQ_Service : SCHQ_Relations.SCHQ_RelationsBase {
       request.Channel = request.Channel.Trim();
       request.Relation.Name = request.Relation.Name.Trim();
       try {
-        int count = _db.GetConnection().InsertOrReplace(new Models.Relation() {
+        rtnVal = _db.GetConnection().InsertOrReplace(new Models.Relation() {
           Timestamp = DateTime.UtcNow,
           Channel = request.Channel,
           Type = (int)request.Relation.Type,
           Name = request.Relation.Name,
           Value = (int)request.Relation.Relation
-        });
-        rtnVal = count == 1;
+        }) == 1;
       } catch (Exception ex) {
         _logger.LogInformation("[SetRelation Exception] Message: {Message}", ex.Message);
       }
@@ -100,14 +99,32 @@ public class SCHQ_Service : SCHQ_Relations.SCHQ_RelationsBase {
     if (!string.IsNullOrWhiteSpace(request.Channel)) {
       request.Channel = request.Channel.Trim();
       try {
-        int count = _db.GetConnection().Table<Models.Relation>().Delete(rel => rel.Channel == request.Channel);
-        rtnVal = count > 0;
+        rtnVal = _db.GetConnection().Execute("UPDATE [Relations] SET [Value]=?, [Timestamp]=?, [RemovedValue]=[Value] WHERE [Channel]=? AND [Value]>?",
+          (int)Relation.NotAssigned, DateTime.UtcNow, request.Channel, (int)Relation.NotAssigned) > 0;
       } catch (Exception ex) {
         _logger.LogInformation("[RemoveRelations Exception] Message: {Message}", ex.Message);
       }
     }
 
     _logger.LogInformation("[RemoveRelations Reply] Success: {Success}", rtnVal);
+    return Task.FromResult(new SuccessReply() { Success = rtnVal });
+  }
+
+  public override Task<SuccessReply> RestoreRelations(ChannelRequest request, ServerCallContext context) {
+    _logger.LogInformation("[RestoreRelations Request] Channel: {Channel}", request.Channel);
+    bool rtnVal = false;
+
+    if (!string.IsNullOrWhiteSpace(request.Channel)) {
+      request.Channel = request.Channel.Trim();
+      try {
+        rtnVal = _db.GetConnection().Execute("UPDATE [Relations] SET [Value]=[RemovedValue], [RemovedValue]=?, [Timestamp]=? WHERE [Channel]=? AND [RemovedValue]>?",
+          (int)Relation.NotAssigned, DateTime.UtcNow, request.Channel, (int)Relation.NotAssigned) > 0;
+      } catch (Exception ex) {
+        _logger.LogInformation("[RestoreRelations Exception] Message: {Message}", ex.Message);
+      }
+    }
+
+    _logger.LogInformation("[RestoreRelations Reply] Success: {Success}", rtnVal);
     return Task.FromResult(new SuccessReply() { Success = rtnVal });
   }
 

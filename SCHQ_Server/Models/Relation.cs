@@ -11,4 +11,5 @@ public class Relation {
   [Indexed(Name = "RelationID", Order = 3, Unique = true), Collation("NOCASE")]
   public string? Name { get; set; }
   public int Value { get; set; }
+  public int RemovedValue { get; set; }
 }

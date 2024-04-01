@@ -41,15 +41,14 @@ internal static class RPC_Wrapper {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel) && !string.IsNullOrWhiteSpace(name)) {
         using var gRPC_Channel = GrpcChannel.ForAddress(_url);
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
-        var result = Task.FromResult(gRPC_Client.SetRelation(new FullRelationInfo() {
+        rtnVal = Task.FromResult(gRPC_Client.SetRelation(new FullRelationInfo() {
           Channel = channel,
           Relation = new gRPC.RelationInfo() {
             Type = (gRPC.RelationType)type,
             Name = name,
             Relation = (gRPC.Relation)relation
           }
-        })).Result;
-        rtnVal = result.Success;
+        })).Result.Success;
       }
     } catch (Exception ex) {
       Log($"{_url} - SetRelation({channel}, {type}, {relation}) Exception: {ex.Message}");
@@ -82,10 +81,25 @@ internal static class RPC_Wrapper {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
         using var gRPC_Channel = GrpcChannel.ForAddress(_url);
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
-        var result = Task.FromResult(gRPC_Client.RemoveRelations(new ChannelRequest() {
+        rtnVal = Task.FromResult(gRPC_Client.RemoveRelations(new ChannelRequest() {
           Channel = channel
-        })).Result;
-        rtnVal = result.Success;
+        })).Result.Success;
+      }
+    } catch (Exception ex) {
+      Log($"{_url} - RemoveRelations({channel}) Exception: {ex.Message}");
+    }
+    return rtnVal;
+  }
+
+  public static bool RestoreRelations(string channel) {
+    bool rtnVal = false;
+    try {
+      if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
+        using var gRPC_Channel = GrpcChannel.ForAddress(_url);
+        var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
+       rtnVal = Task.FromResult(gRPC_Client.RestoreRelations(new ChannelRequest() {
+         Channel = channel
+       })).Result.Success;
       }
     } catch (Exception ex) {
       Log($"{_url} - RemoveRelations({channel}) Exception: {ex.Message}");
