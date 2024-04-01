@@ -53,6 +53,7 @@ https://discord.com/invite/WmzNY3mCm6
   - __Einträge Maximum:__ Angabe, wie viele Einträge maximal auf dem Beziehungen-Fenster dargestellt werden sollen (es werden unendlich viele Einträge im lokalen Cache gespeichert)
   - __gRPC Server-URL:__ Hier kann die vollständige URL eines gRPC-Servers (`SCHQ_Server`) angegeben werden, um die Beziehungen mit anderen Benutzern zu synchronisieren
   - __gRPC Server-Kanal:__ Hier kann der zu verwendende Kanal angegeben werden, welcher für den gRPC-Server verwendet werden soll. Alle Benutzer, die den gleichen Kanal verwenden, synchronisieren die Beziehungen untereinander.
+  - __gRPC-Synchronisierung bei Programmstart:__ Angabe, ob beim Programmstart die Synchronisierung automatisch gestartet werden soll
 ### Log-Monitor
 - __Log-Monitor anzeigen:__ Angabe, ob der Log-Monitor angezeigt werden soll
   - __Einträge Maximum:__ Angabe, wie viele Einträge maximal im Log-Monitor angezeigt werden sollen
@@ -154,7 +155,6 @@ Das Fenster enthält folgende Informationen:
     - `Kreuz`: Der Spieler ist gestorben und es wurde ein Leichnam erstellt
     - `Totenkopf mit Zielmarkierung`: Der Spieler ist gestorben und wurde zur Rehabilitation nach Klescher geschickt
     - `Information`: Es handelt sich um einen Info-Eintrag (z.B.: Ladezeit im Ladebildschirm)
-    - `Zahlenrad` (rot): Es werden zur Zeit von Star Citizen Shader kompiliert - Diese Info verschwindet, wenn fünf Sekunden lang keine weiteren Shader kompiliert werden
   - Rechts daneben werden Uhrzeit und weitere Informationen, welche zum Log-Typ passen, angezeigt
   - Wenn der Spieler in einer Zone gestorben ist, in der es ein lokales Inventar gibt, wird ganz rechts zusätzlich ein `Ressourcen`-Symbol dargestellt.
   - Ein Mauslinksklick auf eine der genannten Informationen trägt den Handle des Spielers in das Hauptfenster ein und startet direkt eine Handle-Abfrage. Wird dabei die `Strg`-Taste gedrückt gehalten, wird ein Auslesen der Handle-Informationen von der RSI-Webseite erzwungen.
