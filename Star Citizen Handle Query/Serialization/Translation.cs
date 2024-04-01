@@ -192,6 +192,8 @@
 
     public string RPC_Server_Channel { get; set; } = "gRPC Server-Kanal:";
 
+    public string RPC_Sync_On_Startup { get; set; } = "gRPC-Synchronisation bei Programmstart";
+
   }
 
   [Serializable()]

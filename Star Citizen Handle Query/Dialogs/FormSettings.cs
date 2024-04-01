@@ -85,6 +85,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       TextBoxRMB_URL.Text = ProgramSettings.Locations.RMB_URL;
       TextBoxGRPCURL.Text = ProgramSettings.Relations.RPC_URL;
       TextBoxGRPCChannel.Text = ProgramSettings.Relations.RPC_Channel;
+      CheckBoxRPCSyncOnStartup.Checked = ProgramSettings.Relations.RPC_Sync_On_Startup;
     }
 
     private void GetLocalizations() {
@@ -138,6 +139,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void CheckBoxUmschalt_CheckedChanged(object sender, EventArgs e) {
       ProgramSettings.GlobalHotkeyModifierShift = (sender as CheckBox).Checked;
+    }
+
+    private void CheckBoxRPCSyncOnStartup_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.Relations.RPC_Sync_On_Startup = (sender as CheckBox).Checked;
     }
 
     private void ComboBoxTaste_SelectedIndexChanged(object sender, EventArgs e) {
@@ -280,6 +285,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LabelRelationsEntriesMaximum.Text = CurrentLocalization.Settings.Relations.Relations_Entries_Max;
       LabelGRPCURL.Text = CurrentLocalization.Settings.Relations.RPC_Server_URL;
       LabelGRPCChannel.Text = CurrentLocalization.Settings.Relations.RPC_Server_Channel;
+      CheckBoxRPCSyncOnStartup.Text = CurrentLocalization.Settings.Relations.RPC_Sync_On_Startup;
 
       GroupBoxLogMonitor.Text = CurrentLocalization.Settings.Log_Monitor.Group_Title;
       CheckBoxShowLog.Text = CurrentLocalization.Settings.Log_Monitor.Show_Log_Monitor;

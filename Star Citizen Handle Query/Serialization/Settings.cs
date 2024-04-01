@@ -196,6 +196,9 @@
     /// <summary>Der zu verwendende Channel des gRPC-Servers</summary>
     public string RPC_Channel { get; set; } = string.Empty;
 
+    /// <summary>Angabe, ob die Synchronisierung mit dem gRPC-Server beim Programmstart automatisch erfolgen soll</summary>
+    public bool RPC_Sync_On_Startup { get; set; } = false;
+
     public object Clone() {
       return MemberwiseClone();
     }

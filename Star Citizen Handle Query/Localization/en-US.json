@@ -60,7 +60,8 @@
       "Sort_Relations_Alphabetically": "Sort alphabetically",
       "Relations_Entries_Max": "Maximum entries:",
       "RPC_Server_URL": "gRPC Server URL:",
-      "RPC_Server_Channel": "gRPC Server Channel:"
+      "RPC_Server_Channel": "gRPC Server Channel:",
+      "RPC_Sync_On_Startup": "gRPC Sync on Startup"
     },
     "Log_Monitor": {
       "Group_Title": "Log Monitor",

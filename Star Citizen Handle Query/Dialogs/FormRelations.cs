@@ -109,7 +109,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (IsRPCSync) {
         PictureBoxClearAll.MouseClick += PictureBoxClearAll_MouseClick;
         ChangeSync(SyncStatus.Disconnected);
-        StartStopSync();
+        StartStopSync(true);
       } else {
         ImportRelationInfos();
       }
@@ -215,9 +215,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private void StartStopSync() {
+    private void StartStopSync(bool startup = false) {
       if (IsRPCSync) {
-        if (Sync == SyncStatus.Disconnected) {
+        if (Sync == SyncStatus.Disconnected && (ProgramSettings.Relations.RPC_Sync_On_Startup || !startup)) {
           ImportRelationInfos();
           CancelToken = new CancellationTokenSource();
           Task.Run(() => RPC_Wrapper.SyncRelations(this, ProgramSettings.Relations.RPC_Channel, CancelToken));

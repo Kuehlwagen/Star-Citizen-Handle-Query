@@ -75,6 +75,7 @@
       LabelLMB_URL = new Label();
       GroupBoxLogMonitor = new GroupBox();
       GroupBoxBeziehungen = new GroupBox();
+      CheckBoxRPCSyncOnStartup = new CheckBox();
       TextBoxGRPCChannel = new TextBox();
       TextBoxGRPCURL = new TextBox();
       LabelGRPCURL = new Label();
@@ -129,7 +130,7 @@
       // ButtonSpeichern
       // 
       ButtonSpeichern.FlatStyle = FlatStyle.Flat;
-      ButtonSpeichern.Location = new Point(12, 543);
+      ButtonSpeichern.Location = new Point(12, 559);
       ButtonSpeichern.Name = "ButtonSpeichern";
       ButtonSpeichern.Size = new Size(75, 28);
       ButtonSpeichern.TabIndex = 6;
@@ -140,7 +141,7 @@
       // ButtonSchliessen
       // 
       ButtonSchliessen.FlatStyle = FlatStyle.Flat;
-      ButtonSchliessen.Location = new Point(93, 543);
+      ButtonSchliessen.Location = new Point(93, 559);
       ButtonSchliessen.Name = "ButtonSchliessen";
       ButtonSchliessen.Size = new Size(75, 28);
       ButtonSchliessen.TabIndex = 7;
@@ -183,7 +184,7 @@
       GroupBoxFenster.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxFenster.Location = new Point(12, 188);
       GroupBoxFenster.Name = "GroupBoxFenster";
-      GroupBoxFenster.Size = new Size(352, 182);
+      GroupBoxFenster.Size = new Size(352, 198);
       GroupBoxFenster.TabIndex = 1;
       GroupBoxFenster.TabStop = false;
       GroupBoxFenster.Text = "Fenster";
@@ -317,7 +318,7 @@
       GroupBoxLokalerCache.Controls.Add(LabelLokalerCacheAlter);
       GroupBoxLokalerCache.FlatStyle = FlatStyle.Flat;
       GroupBoxLokalerCache.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxLokalerCache.Location = new Point(12, 376);
+      GroupBoxLokalerCache.Location = new Point(12, 392);
       GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
       GroupBoxLokalerCache.Size = new Size(352, 161);
       GroupBoxLokalerCache.TabIndex = 2;
@@ -327,7 +328,7 @@
       // ButtonStandard
       // 
       ButtonStandard.FlatStyle = FlatStyle.Flat;
-      ButtonStandard.Location = new Point(711, 543);
+      ButtonStandard.Location = new Point(711, 559);
       ButtonStandard.Name = "ButtonStandard";
       ButtonStandard.Size = new Size(75, 28);
       ButtonStandard.TabIndex = 8;
@@ -670,7 +671,7 @@
       GroupBoxLogMonitor.Controls.Add(NumericUpDownLogEintragAnzeigedauer);
       GroupBoxLogMonitor.FlatStyle = FlatStyle.Flat;
       GroupBoxLogMonitor.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxLogMonitor.Location = new Point(370, 376);
+      GroupBoxLogMonitor.Location = new Point(370, 392);
       GroupBoxLogMonitor.Name = "GroupBoxLogMonitor";
       GroupBoxLogMonitor.Size = new Size(416, 161);
       GroupBoxLogMonitor.TabIndex = 5;
@@ -679,6 +680,7 @@
       // 
       // GroupBoxBeziehungen
       // 
+      GroupBoxBeziehungen.Controls.Add(CheckBoxRPCSyncOnStartup);
       GroupBoxBeziehungen.Controls.Add(NumericUpDownRelationsEntriesMaximum);
       GroupBoxBeziehungen.Controls.Add(CheckBoxShowRelations);
       GroupBoxBeziehungen.Controls.Add(LabelRelationsEntriesMaximum);
@@ -691,10 +693,21 @@
       GroupBoxBeziehungen.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxBeziehungen.Location = new Point(370, 188);
       GroupBoxBeziehungen.Name = "GroupBoxBeziehungen";
-      GroupBoxBeziehungen.Size = new Size(416, 182);
+      GroupBoxBeziehungen.Size = new Size(416, 198);
       GroupBoxBeziehungen.TabIndex = 4;
       GroupBoxBeziehungen.TabStop = false;
       GroupBoxBeziehungen.Text = "Beziehungen";
+      // 
+      // CheckBoxRPCSyncOnStartup
+      // 
+      CheckBoxRPCSyncOnStartup.AutoSize = true;
+      CheckBoxRPCSyncOnStartup.Location = new Point(32, 163);
+      CheckBoxRPCSyncOnStartup.Name = "CheckBoxRPCSyncOnStartup";
+      CheckBoxRPCSyncOnStartup.Size = new Size(254, 19);
+      CheckBoxRPCSyncOnStartup.TabIndex = 7;
+      CheckBoxRPCSyncOnStartup.Text = "gRPC-Synchronisierung bei Programmstart";
+      CheckBoxRPCSyncOnStartup.UseVisualStyleBackColor = true;
+      CheckBoxRPCSyncOnStartup.CheckedChanged += CheckBoxRPCSyncOnStartup_CheckedChanged;
       // 
       // TextBoxGRPCChannel
       // 
@@ -743,7 +756,7 @@
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.FromArgb(19, 26, 33);
       CancelButton = ButtonSchliessen;
-      ClientSize = new Size(798, 585);
+      ClientSize = new Size(798, 597);
       Controls.Add(GroupBoxAnzeige);
       Controls.Add(GroupBoxLocation);
       Controls.Add(GroupBoxLogMonitor);
@@ -755,7 +768,7 @@
       Controls.Add(ButtonSpeichern);
       ForeColor = Color.FromArgb(57, 206, 216);
       Icon = (Icon)resources.GetObject("$this.Icon");
-      MinimumSize = new Size(814, 624);
+      MinimumSize = new Size(814, 636);
       Name = "FormSettings";
       StartPosition = FormStartPosition.CenterScreen;
       Text = "Star Citizen Handle Query Einstellungen";
@@ -837,5 +850,6 @@
     private TextBox TextBoxGRPCURL;
     private Label LabelGRPCURL;
     private Label LabelGRPCChannel;
+    private CheckBox CheckBoxRPCSyncOnStartup;
   }
 }
