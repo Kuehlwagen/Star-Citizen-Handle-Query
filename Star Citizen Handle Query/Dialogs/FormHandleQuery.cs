@@ -608,12 +608,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         HandleInfo handleInfo = await GetHandleInfo(forceLive, TextBoxHandle.Text, ProgramSettings, CacheDirectoryType.Handle);
         // Ggf. Beziehung aktualisieren
         handleInfo.Relation = GetHandleRelation(handleInfo.Profile.Handle);
-        if (handleInfo.Relation == Relation.NotAssigned) {
-          handleInfo.Relation = RelationsForm?.GetRPCRelation(RelationType.Handle, handleInfo.Profile.Handle) ?? Relation.NotAssigned;
-          if (handleInfo.Relation != Relation.NotAssigned) {
-            RelationsForm?.UpdateRelation(handleInfo.Profile.Handle, RelationType.Handle, handleInfo.Relation);
-          }
-        }
 
         // Ggf. Cache-Verzeichnisse erstellen
         CreateDirectory(CacheDirectoryType.Handle);

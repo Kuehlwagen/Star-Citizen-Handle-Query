@@ -195,16 +195,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       } catch { }
     }
 
-    internal Relation GetRPCRelation(RelationType type, string name) {
-      Relation rtnVal = Relation.NotAssigned;
-
-      if (IsRPCSync && Sync == SyncStatus.Connected) {
-        rtnVal = RPC_Wrapper.GetRelation(ProgramSettings.Relations.RPC_Channel, type, name);
-      }
-
-      return rtnVal;
-    }
-
     private void PictureBoxClearAll_MouseClick(object sender, MouseEventArgs e) {
       if (e.Button == MouseButtons.Left) {
         if (IsRPCSync) {
@@ -368,12 +358,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public Relation GetOrganizationRelation(string sid) {
       Relation rtnVal = Relation.NotAssigned;
-      rtnVal = GetRPCRelation(RelationType.Organization, sid);
-      if (rtnVal == Relation.NotAssigned) {
-        UserControlRelation control = UserControlRelations.Select(x => x.Value).FirstOrDefault(x => x.Type == RelationType.Organization && x.RelationName == sid);
-        if (control != null) {
-          rtnVal = control.Relation;
-        }
+      UserControlRelation control = UserControlRelations.Select(x => x.Value).FirstOrDefault(x => x.Type == RelationType.Organization && x.RelationName == sid);
+      if (control != null) {
+        rtnVal = control.Relation;
       }
       return rtnVal;
     }
