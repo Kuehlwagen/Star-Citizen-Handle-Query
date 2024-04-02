@@ -4,6 +4,10 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Company>Kuehlwagen@GitHub</Company>
+    <AssemblyVersion>1.17.0</AssemblyVersion>
+    <FileVersion>$(Assemblyversion)</FileVersion>
+    <Version>$(Assemblyversion)</Version>
   </PropertyGroup>
 
   <ItemGroup>

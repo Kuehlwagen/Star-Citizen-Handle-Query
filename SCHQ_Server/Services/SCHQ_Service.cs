@@ -3,17 +3,13 @@ using SQLite;
 using System.Reflection;
 
 namespace SCHQ_Server.Services;
-public class SCHQ_Service : SCHQ_Relations.SCHQ_RelationsBase {
+public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_RelationsBase {
 
-  private readonly ILogger<SCHQ_Service> _logger;
-  private readonly SQLiteAsyncConnection _db = new(Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location) ?? string.Empty, "Relations.db"));
+  private readonly ILogger<SCHQ_Service> _logger = logger;
+  internal static readonly string _dbPath = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location) ?? string.Empty, "Relations.db");
+  private readonly SQLiteAsyncConnection _db = new(_dbPath);
+  private readonly Guid _syncId = Guid.NewGuid();
   private DateTime SyncTimestamp = DateTime.MinValue;
-
-  public SCHQ_Service(ILogger<SCHQ_Service> logger) {
-    _logger = logger;
-    CreateTableResult result = _db.CreateTableAsync<Models.Relation>().Result;
-    _logger.LogInformation("[SQLite CreateTable] Result: {Result}", result);
-  }
 
   public override Task<SuccessReply> SetRelation(FullRelationInfo request, ServerCallContext context) {
     _logger.LogInformation("[SetRelation Request] Channel: {Channel}, Type: {Type}, Name: {Name}, Relation: {Relation}", request.Channel, request.Relation.Type, request.Relation.Name, request.Relation.Relation);
@@ -129,7 +125,7 @@ public class SCHQ_Service : SCHQ_Relations.SCHQ_RelationsBase {
   }
 
   public override async Task SyncRelations(ChannelRequest request, IServerStreamWriter<FullRelationInfo> responseStream, ServerCallContext context) {
-    _logger.LogInformation("[SyncRelations Request] Channel: {Channel}", request.Channel);
+    _logger.LogInformation("[SyncRelations {Id} Request] Channel: {Channel}", _syncId, request.Channel);
 
     if (!string.IsNullOrWhiteSpace(request.Channel)) {
       request.Channel = request.Channel.Trim();
@@ -158,11 +154,11 @@ public class SCHQ_Service : SCHQ_Relations.SCHQ_RelationsBase {
           await Task.Delay(500);
         }
       } catch (Exception ex) {
-        _logger.LogInformation("[SyncRelations Exception] Message: {Message}", ex.Message);
+        _logger.LogInformation("[SyncRelations {Id} Exception] Message: {Message}", _syncId, ex.Message);
       }
     }
 
-    _logger.LogInformation("[SyncRelations End]");
+    _logger.LogInformation("[SyncRelations {Id} End]", _syncId);
   }
 
 }
