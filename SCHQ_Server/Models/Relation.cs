@@ -18,6 +18,9 @@ public class RelationsContext : DbContext {
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder.UseSqlite($"Data Source={DbPath}");
 
+  protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    => configurationBuilder.Properties<string>().UseCollation("NOCASE");
+
 }
 
 [Table("Relations"), Index("ChannelId", new string[] { "Type", "Name" }, IsUnique = true, Name = "RelationID")]
@@ -37,6 +40,5 @@ public class Relation {
 public class Channel {
   [SQLite.PrimaryKey, AutoIncrement]
   public int Id { get; set; }
-  [Collation("NOCASE")]
   public string? Name { get; set; }
 }
