@@ -124,7 +124,10 @@
     "Title": "Log Monitor"
   },
   "Relations": {
-    "Title": "Relations"
+    "Title": "Relations",
+    "RPC_Status_Disconnected": "Disconnected - click to connect",
+    "RPC_Status_Connecting": "Connecting...",
+    "RPC_Status_Connected": "Connected - click to disconnect"
   },
   "Locations": {
     "Title": "Locations",

@@ -124,7 +124,10 @@
     "Title": "Log-Monitor"
   },
   "Relations": {
-    "Title": "Beziehungen"
+    "Title": "Beziehungen",
+    "RPC_Status_Disconnected": "Getrennt - klicken, um zu verbinden",
+    "RPC_Status_Connecting": "Verbindung wird hergestellt...",
+    "RPC_Status_Connected": "Verbunden - klicken, um die Verbidung zu trennen"
   },
   "Locations": {
     "Title": "Orte",

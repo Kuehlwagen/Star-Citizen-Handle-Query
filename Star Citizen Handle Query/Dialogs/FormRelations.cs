@@ -21,7 +21,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private bool IsRPCSync {
       get {
-          return !string.IsNullOrWhiteSpace(ProgramSettings.Relations.RPC_URL) && !string.IsNullOrWhiteSpace(ProgramSettings.Relations.RPC_Channel);
+        return !string.IsNullOrWhiteSpace(ProgramSettings.Relations.RPC_URL) && !string.IsNullOrWhiteSpace(ProgramSettings.Relations.RPC_Channel);
       }
     }
 
@@ -212,12 +212,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           CancelToken = new CancellationTokenSource();
           Task.Run(() => RPC_Wrapper.SyncRelations(this, ProgramSettings.Relations.RPC_Channel, CancelToken));
         } else {
-          // Die gRPC-Liste leeren, wenn Strg- und Umschalt-Taste gedrückt sind
           if (ModifierKeys == (Keys.Control | Keys.Shift)) {
+            // Die gRPC-Liste leeren, wenn Strg- und Umschalt-Taste gedrückt sind
             if (RPC_Wrapper.RemoveRelations(ProgramSettings.Relations.RPC_Channel)) {
               ClearRelations();
             }
           } else if (ModifierKeys == (Keys.Control | Keys.Shift | Keys.Alt)) {
+            // Die gRPC-Liste wiederherstellen, wenn Strg-, Umschalt- und Alt-Taste gedrückt sind
             RPC_Wrapper.RestoreRelations(ProgramSettings.Relations.RPC_Channel);
           } else {
             CancelToken.Cancel();
@@ -230,10 +231,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (IsRPCSync) {
         if (InvokeRequired) {
           Invoke(() => PictureBoxClearAll.Cursor = Cursors.Hand);
-          Invoke(() => ToolTipRelations.SetToolTip(PictureBoxClearAll, ProgramSettings.Relations.RPC_Channel));
+          Invoke(() => ToolTipRelations.SetToolTip(PictureBoxClearAll, GetSyncStatusToolTip(status)));
         } else {
           PictureBoxClearAll.Cursor = Cursors.Hand;
-          ToolTipRelations.SetToolTip(PictureBoxClearAll, ProgramSettings.Relations.RPC_Channel);
+          ToolTipRelations.SetToolTip(PictureBoxClearAll, GetSyncStatusToolTip(status));
         }
         Sync = status;
         Image img = Resources.StatusRed;
@@ -251,6 +252,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           PictureBoxClearAll.Image = img;
         }
       }
+    }
+
+    internal string GetSyncStatusToolTip(SyncStatus status) {
+      string statusText = status switch {
+        SyncStatus.Disconnected => ProgramTranslation.Relations.RPC_Status_Disconnected,
+        SyncStatus.Connecting => ProgramTranslation.Relations.RPC_Status_Connecting,
+        SyncStatus.Connected => ProgramTranslation.Relations.RPC_Status_Connected,
+        _ => status.ToString()
+      };
+      return $"{ProgramTranslation.Settings.Relations.RPC_Server_Channel} {ProgramSettings.Relations.RPC_Channel} ({statusText})";
     }
 
     internal enum SyncStatus {
@@ -381,19 +392,28 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public void FilterRelations() {
       for (int i = PanelRelations.Controls.Count - 1; i >= 0; i--) {
         if (PanelRelations.Controls[i] is UserControlRelation control) {
-          switch (control.Relation) {
-            case Relation.Friendly:
-              control.Visible = (control.Type != RelationType.Organization || CheckBoxFilterOrganization.Checked) && CheckBoxFilterFriendly.Checked;
-              break;
-            case Relation.Neutral:
-              control.Visible = (control.Type != RelationType.Organization || CheckBoxFilterOrganization.Checked) && CheckBoxFilterNeutral.Checked;
-              break;
-            case Relation.Bogey:
-              control.Visible = (control.Type != RelationType.Organization || CheckBoxFilterOrganization.Checked) && CheckBoxFilterBogey.Checked;
-              break;
-            case Relation.Bandit:
-              control.Visible = (control.Type != RelationType.Organization || CheckBoxFilterOrganization.Checked) && CheckBoxFilterBandit.Checked;
-              break;
+          if (control.Type == RelationType.Organization &&
+            CheckBoxFilterOrganization.Checked &&
+            !CheckBoxFilterFriendly.Checked &&
+            !CheckBoxFilterNeutral.Checked &&
+            !CheckBoxFilterBogey.Checked &&
+            !CheckBoxFilterBandit.Checked) {
+            control.Visible = true;
+          } else {
+            switch (control.Relation) {
+              case Relation.Friendly:
+                control.Visible = (control.Type != RelationType.Organization || CheckBoxFilterOrganization.Checked) && CheckBoxFilterFriendly.Checked;
+                break;
+              case Relation.Neutral:
+                control.Visible = (control.Type != RelationType.Organization || CheckBoxFilterOrganization.Checked) && CheckBoxFilterNeutral.Checked;
+                break;
+              case Relation.Bogey:
+                control.Visible = (control.Type != RelationType.Organization || CheckBoxFilterOrganization.Checked) && CheckBoxFilterBogey.Checked;
+                break;
+              case Relation.Bandit:
+                control.Visible = (control.Type != RelationType.Organization || CheckBoxFilterOrganization.Checked) && CheckBoxFilterBandit.Checked;
+                break;
+            }
           }
         }
       }

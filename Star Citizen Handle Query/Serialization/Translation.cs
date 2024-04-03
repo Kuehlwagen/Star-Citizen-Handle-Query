@@ -331,6 +331,12 @@
 
     public string Title { get; set; } = "Beziehungen";
 
+    public string RPC_Status_Disconnected { get; set; } = "Getrennt - klicken, um zu verbinden";
+
+    public string RPC_Status_Connecting { get; set; } = "Verbindung wird hergestellt...";
+
+    public string RPC_Status_Connected { get; set; } = "Verbunden - klicken, um die Verbidung zu trennen";
+
   }
 
   public class Translation_Locations {
