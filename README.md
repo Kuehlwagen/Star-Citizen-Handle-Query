@@ -238,11 +238,11 @@ Um das Programm vollständig zu deinstallieren und alle vom Programm erstellten 
 
 
 
-## SCHQ_Server (gRPC-Server)
+# SCHQ_Server (gRPC-Server)
 
 Der Star Citizen Handle Query gRPC-Server ermöglicht die Synchronisierung von Beziehungen über mehrere Benutzer. Die Datei `SCHQ_Server.exe` kann direkt gestartet werden.
 
-### Konfiguration
+## Konfiguration
 - In der Datei `appsettings.json` können URL und Port des gRPC-Servers angepasst werden. Standardmäßig horcht der Server auf den Ports 5043 (HTTP) und 7085 (HTTPS):
   - `http://localhost:5043`
   - `https://localhost:7085`
@@ -257,7 +257,7 @@ Der Star Citizen Handle Query gRPC-Server ermöglicht die Synchronisierung von B
     }
 ```
 
-### Windows Dienst-Installation
+## Windows Dienst-Installation
 - Das Tool kann als Windows-Dienst installiert werden. Dafür kann beispielsweise die `Eingabeaufforderung` __als Administrator__ geöffnet werden und anschließend folgende Zeilen nacheinander eingetragen und ausgeführt werden, wobei bei `binPath` der komplette Pfad zur Datei `SCHQ_Server.exe` angegeben werden muss:
 ```CMD
 sc create SCHQ_Server binPath="c:\Path\To\SCHQ_Server.exe" displayName="SCHQ Server"
@@ -266,7 +266,7 @@ sc description SCHQ_Server "Star Citizen Handle Query gRPC-Server"
 - Der Dienst ist anschließend in der Windows Dienste-Übersicht mit dem Namen `SCHQ Server` zu finden.
 - Da das Konto `Lokales Systemkonto` voraussichtlich nicht genügend Rechte hat, um den Dienst auszuführen, sollte in den Eigenschaften des Dienstes die Anmeldung auf ein Windows-Konto mit genügend Rechten geändert werden.
 
-### Windows Dienst-Deinstallation
+## Windows Dienst-Deinstallation
 - Um das Tool als Windows-Dienst wieder zu deinstallieren, kann erneut die `Eingabeaufforderung` __als Administrator__ geöffnet werden und anschließend folgende Zeile eingetragen und ausgeführt werden:
 ```CMD
 sc delete SCHQ_Server
