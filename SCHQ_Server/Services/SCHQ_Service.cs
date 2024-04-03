@@ -166,10 +166,8 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
                   Relation = (Relation)rel.Value
                 }
               });
-              SyncTimestamp = DateTime.UtcNow;
+              SyncTimestamp = rel.Timestamp;
             }
-          } else {
-            SyncTimestamp = DateTime.UtcNow;
           }
           await Task.Delay(500);
         }
