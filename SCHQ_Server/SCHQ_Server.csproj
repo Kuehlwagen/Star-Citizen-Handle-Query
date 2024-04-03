@@ -8,6 +8,8 @@
     <AssemblyVersion>1.17.0</AssemblyVersion>
     <FileVersion>$(Assemblyversion)</FileVersion>
     <Version>$(Assemblyversion)</Version>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
   </PropertyGroup>
 
   <ItemGroup>

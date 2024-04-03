@@ -1,5 +1,5 @@
+using SCHQ_Server.Models;
 using SCHQ_Server.Services;
-using SQLite;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +20,7 @@ app.MapGrpcService<SCHQ_Service>();
 app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
 
 // Create / migrate SQLite database
-CreateTableResult result = new SQLiteAsyncConnection(SCHQ_Service._dbPath).CreateTableAsync<SCHQ_Server.Models.Relation>().Result;
+//new RelationsContext().Database.EnsureCreated();
+new RelationsContext().Database.EnsureCreated();
 
 app.Run();

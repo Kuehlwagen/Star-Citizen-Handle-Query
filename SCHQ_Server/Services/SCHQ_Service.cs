@@ -1,13 +1,12 @@
 using Grpc.Core;
-using SQLite;
-using System.Reflection;
+using Microsoft.EntityFrameworkCore;
+using SCHQ_Server.Models;
 
 namespace SCHQ_Server.Services;
 public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_RelationsBase {
 
   private readonly ILogger<SCHQ_Service> _logger = logger;
-  internal static readonly string _dbPath = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly()?.Location) ?? string.Empty, "Relations.db");
-  private readonly SQLiteAsyncConnection _db = new(_dbPath);
+  private readonly RelationsContext _db = new();
   private readonly Guid _syncId = Guid.NewGuid();
   private DateTime SyncTimestamp = DateTime.MinValue;
 
@@ -19,15 +18,18 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
       request.Channel = request.Channel.Trim();
       request.Relation.Name = request.Relation.Name.Trim();
       try {
-        rtnVal = _db.GetConnection().InsertOrReplace(new Models.Relation() {
-          Timestamp = DateTime.UtcNow,
-          Channel = request.Channel,
+        Models.Relation? relation = _db.Relations.FirstOrDefault(r => r.Type == (int)request.Relation.Type && r.Channel != null && r.Channel.Name == request.Channel && r.Name == request.Relation.Name);
+        relation ??= new Models.Relation() {
           Type = (int)request.Relation.Type,
+          Channel = _db.Channels.FirstOrDefault(c => c.Name ==  request.Channel) ?? new Channel() { Name = request.Channel },
           Name = request.Relation.Name,
-          Value = (int)request.Relation.Relation
-        }) == 1;
+        };
+        relation.Timestamp = DateTime.UtcNow;
+        relation.Value = (int)request.Relation.Relation;
+        _db.Update(relation);
+        rtnVal = _db.SaveChanges() > 0;
       } catch (Exception ex) {
-        _logger.LogInformation("[SetRelation Exception] Message: {Message}", ex.Message);
+        _logger.LogInformation("[SetRelation Exception] Message: {Message}, Inner Exception: {InnerExceptionMessage}", ex.Message, ex.InnerException?.Message ?? "Empty");
       }
     }
 
@@ -42,10 +44,10 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
     if (!string.IsNullOrWhiteSpace(request.Channel)) {
       request.Channel = request.Channel.Trim();
       try {
-        AsyncTableQuery<Models.Relation> results = from rel in _db.Table<Models.Relation>()
-                                                   where rel.Channel == request.Channel && rel.Value > 0
-                                                   orderby rel.Type descending, rel.Name
-                                                   select rel;
+        IOrderedQueryable<Models.Relation> results = from rel in _db.Relations
+                                                     where rel.Channel != null && rel.Channel.Name == request.Channel && rel.Value > 0
+                                                     orderby rel.Type descending, rel.Name
+                                                     select rel;
         foreach (Models.Relation rel in results.ToListAsync().Result) {
           rtnVal.Relations.Add(new RelationInfo() {
             Type = (RelationType)rel.Type,
@@ -54,7 +56,7 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
           });
         }
       } catch (Exception ex) {
-        _logger.LogInformation("[GetRelations Exception] Message: {Message}", ex.Message);
+        _logger.LogInformation("[GetRelations Exception] Message: {Message}, Inner Exception: {InnerExceptionMessage}", ex.Message, ex.InnerException?.Message ?? "Empty");
       }
     }
 
@@ -70,9 +72,9 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
       request.Channel = request.Channel.Trim();
       request.Name = request.Name.Trim();
       try {
-        AsyncTableQuery<Models.Relation> results = from rel in _db.Table<Models.Relation>()
-                                                   where rel.Type == (int)request.Type && rel.Channel == request.Channel && rel.Name == request.Name
-                                                   select rel;
+        IQueryable<Models.Relation> results = from rel in _db.Relations
+                                              where rel.Type == (int)request.Type && rel.Channel != null && rel.Channel.Name == request.Channel && rel.Name == request.Name
+                                              select rel;
         foreach (Models.Relation rel in results.ToListAsync().Result) {
           rtnVal = new RelationReply() {
             Found = true,
@@ -80,7 +82,7 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
           };
         }
       } catch (Exception ex) {
-        _logger.LogInformation("[GetRelation Exception] Message: {Message}", ex.Message);
+        _logger.LogInformation("[GetRelation Exception] Message: {Message}, Inner Exception: {InnerExceptionMessage}", ex.Message, ex.InnerException?.Message ?? "Empty");
       }
     }
 
@@ -95,10 +97,18 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
     if (!string.IsNullOrWhiteSpace(request.Channel)) {
       request.Channel = request.Channel.Trim();
       try {
-        rtnVal = _db.GetConnection().Execute("UPDATE [Relations] SET [Value]=?, [Timestamp]=?, [RemovedValue]=[Value] WHERE [Channel]=? AND [Value]>?",
-          (int)Relation.NotAssigned, DateTime.UtcNow, request.Channel, (int)Relation.NotAssigned) > 0;
+        (from r in _db.Relations
+         where r.Channel != null && r.Channel.Name == request.Channel && r.Value > (int)Relation.NotAssigned
+         select r)
+         .ToList()
+         .ForEach( r => {
+           r.Timestamp = DateTime.UtcNow;
+           r.RemovedValue = r.Value;
+           r.Value = (int)Relation.NotAssigned;
+         });
+        rtnVal = _db.SaveChanges() > 0;
       } catch (Exception ex) {
-        _logger.LogInformation("[RemoveRelations Exception] Message: {Message}", ex.Message);
+        _logger.LogInformation("[RemoveRelations Exception] Message: {Message}, Inner Exception: {InnerExceptionMessage}", ex.Message, ex.InnerException?.Message ?? "Empty");
       }
     }
 
@@ -113,10 +123,18 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
     if (!string.IsNullOrWhiteSpace(request.Channel)) {
       request.Channel = request.Channel.Trim();
       try {
-        rtnVal = _db.GetConnection().Execute("UPDATE [Relations] SET [Value]=[RemovedValue], [RemovedValue]=?, [Timestamp]=? WHERE [Channel]=? AND [RemovedValue]>?",
-          (int)Relation.NotAssigned, DateTime.UtcNow, request.Channel, (int)Relation.NotAssigned) > 0;
+        (from r in _db.Relations
+         where r.Channel != null && r.Channel.Name == request.Channel && r.RemovedValue > (int)Relation.NotAssigned
+         select r)
+         .ToList()
+         .ForEach(r => {
+           r.Timestamp = DateTime.UtcNow;
+           r.Value = r.RemovedValue;
+           r.RemovedValue = (int)Relation.NotAssigned;
+         });
+        rtnVal = _db.SaveChanges() > 0;
       } catch (Exception ex) {
-        _logger.LogInformation("[RestoreRelations Exception] Message: {Message}", ex.Message);
+        _logger.LogInformation("[RestoreRelations Exception] Message: {Message}, Inner Exception: {InnerExceptionMessage}", ex.Message, ex.InnerException?.Message ?? "Empty");
       }
     }
 
@@ -132,21 +150,23 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
       SyncTimestamp = DateTime.UtcNow;
       try {
         while (!context.CancellationToken.IsCancellationRequested) {
-          AsyncTableQuery<Models.Relation> results = from rel in _db.Table<Models.Relation>()
-                                                     where rel.Channel == request.Channel && rel.Timestamp > SyncTimestamp
-                                                     orderby rel.Timestamp
-                                                     select rel;
-          if (await results.CountAsync() > 0) {
+          IOrderedQueryable<Models.Relation> results = from rel in _db.Relations
+                                                       where rel.Channel != null && rel.Channel.Name == request.Channel && rel.Timestamp > SyncTimestamp
+                                                       orderby rel.Timestamp
+                                                       select rel;
+          if (await results.AnyAsync()) {
             foreach (Models.Relation rel in results.ToListAsync().Result) {
+              // Reload() scheint nötig zu sein, da der Timestamp ansonsten den alten Wert enthält
+              _db.Entry(rel).Reload();
               await responseStream.WriteAsync(new FullRelationInfo() {
-                Channel = rel.Channel,
+                Channel = request.Channel,
                 Relation = new RelationInfo() {
                   Type = (RelationType)rel.Type,
                   Name = rel.Name,
                   Relation = (Relation)rel.Value
                 }
               });
-              SyncTimestamp = rel.Timestamp;
+              SyncTimestamp = DateTime.UtcNow;
             }
           } else {
             SyncTimestamp = DateTime.UtcNow;
@@ -154,7 +174,7 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
           await Task.Delay(500);
         }
       } catch (Exception ex) {
-        _logger.LogInformation("[SyncRelations {Id} Exception] Message: {Message}", _syncId, ex.Message);
+        _logger.LogInformation("[SyncRelations {Id} Exception] Message: {Message}, Inner Exception: {InnerExceptionMessage}", _syncId, ex.Message, ex.InnerException?.Message ?? "Empty");
       }
     }
 
