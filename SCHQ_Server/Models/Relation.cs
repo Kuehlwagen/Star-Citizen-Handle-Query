@@ -30,10 +30,10 @@ public class Relation {
   public DateTime Timestamp { get; set; }
   public int ChannelId { get; set; }
   public Channel? Channel { get; set; }
-  public int Type { get; set; }
+  public RelationType Type { get; set; }
   public string? Name { get; set; }
-  public int Value { get; set; }
-  public int RemovedValue { get; set; }
+  public RelationValue Value { get; set; }
+  public bool Active { get; set; }
 }
 
 [Table("Channels"), Index("Name", new string[] {}, IsUnique = true, Name = "ChannelName")]

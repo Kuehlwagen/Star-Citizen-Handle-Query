@@ -1,4 +1,5 @@
 using Star_Citizen_Handle_Query.Classes;
+using Star_Citizen_Handle_Query.gRPC;
 using Star_Citizen_Handle_Query.Properties;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
@@ -477,16 +478,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    public Relation GetOrganizationRelation(string sid) {
-      Relation rtnVal = Relation.NotAssigned;
+    public RelationValue GetOrganizationRelation(string sid) {
+      RelationValue rtnVal = RelationValue.NotAssigned;
       if (RelationsForm != null) {
         rtnVal = RelationsForm.GetOrganizationRelation(sid);
       }
       return rtnVal;
     }
 
-    public Relation GetHandleRelation(string handle) {
-      Relation rtnVal = Relation.NotAssigned;
+    public RelationValue GetHandleRelation(string handle) {
+      RelationValue rtnVal = RelationValue.NotAssigned;
       if (RelationsForm != null) {
         rtnVal = RelationsForm.GetHandleRelation(handle);
       }
@@ -1299,23 +1300,23 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ToolTipHandleQuery.SetToolTip(control, text ?? control.Text);
     }
 
-    public static Color GetRelationColor(Relation relation) {
+    public static Color GetRelationColor(RelationValue relation) {
       var colorRelation = relation switch {
-        Relation.Friendly => Color.Green,
-        Relation.Neutral => Color.Gray,
-        Relation.Bogey => Color.Orange,
-        Relation.Bandit => Color.Red,
+        RelationValue.Friendly => Color.Green,
+        RelationValue.Neutral => Color.Gray,
+        RelationValue.Bogey => Color.Orange,
+        RelationValue.Bandit => Color.Red,
         _ => Color.FromArgb(19, 26, 33),
       };
       return colorRelation;
     }
 
-    public static Color GetRelationInactiveColor(Relation relation) {
+    public static Color GetRelationInactiveColor(RelationValue relation) {
       var colorRelation = relation switch {
-        Relation.Friendly => Color.FromArgb(0, 64, 0),
-        Relation.Neutral => Color.FromArgb(64, 64, 64),
-        Relation.Bogey => Color.FromArgb(127, 82, 0),
-        Relation.Bandit => Color.FromArgb(127, 0, 0),
+        RelationValue.Friendly => Color.FromArgb(0, 64, 0),
+        RelationValue.Neutral => Color.FromArgb(64, 64, 64),
+        RelationValue.Bogey => Color.FromArgb(127, 82, 0),
+        RelationValue.Bandit => Color.FromArgb(127, 0, 0),
         _ => Color.FromArgb(19, 26, 33),
       };
       return colorRelation;

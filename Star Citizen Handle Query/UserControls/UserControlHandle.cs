@@ -1,4 +1,5 @@
 ﻿using Star_Citizen_Handle_Query.Dialogs;
+using Star_Citizen_Handle_Query.gRPC;
 using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
 using System.Net;
@@ -18,7 +19,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private readonly bool DisplayOnly;
 
     public string HandleName { get { return Info.Profile.Handle; } }
-    public Relation HandleRelation { get { return Info.Relation; } }
+    public RelationValue HandleRelation { get { return Info.Relation; } }
 
     public UserControlHandle(HandleInfo handleInfo, Settings programSettings, Translation programTranslation, bool forceLive, bool displayOnly = false) {
       InitializeComponent();
@@ -61,7 +62,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelEnlistedDate.Text = Info?.Profile?.Enlisted.ToString("MMM d, yyyy", System.Globalization.CultureInfo.InvariantCulture);
         LabelAdditionalInformation.Text = GetString(Info?.Comment);
         SetToolTip(LabelAdditionalInformation);
-        if (Info?.Relation > Relation.NotAssigned) {
+        if (Info?.Relation > RelationValue.NotAssigned) {
           LabelRelation.BackColor = GetRelationColor(Info.Relation);
           SetToolTip(LabelRelation, FormLocalCache.GetTranslatedRelationText(ProgramTranslation, Info.Relation));
           LabelRelation.Visible = true;
@@ -184,28 +185,28 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     public void ChangeRelation(Keys keyCode) {
-      Relation relation = Relation.NotAssigned;
+      RelationValue relation = RelationValue.NotAssigned;
       switch (keyCode) {
         case Keys.D1:
         case Keys.NumPad1:
-          relation = Relation.Friendly;
+          relation = RelationValue.Friendly;
           break;
         case Keys.D2:
         case Keys.NumPad2:
-          relation = Relation.Neutral;
+          relation = RelationValue.Neutral;
           break;
         case Keys.D3:
         case Keys.NumPad3:
-          relation = Relation.Bogey;
+          relation = RelationValue.Bogey;
           break;
         case Keys.D4:
         case Keys.NumPad4:
-          relation = Relation.Bandit;
+          relation = RelationValue.Bandit;
           break;
       }
       Info.Relation = relation;
       CreateHandleJSON(Info, ProgramSettings, forceExport: true);
-      LabelRelation.Visible = relation > Relation.NotAssigned;
+      LabelRelation.Visible = relation > RelationValue.NotAssigned;
       LabelRelation.BackColor = GetRelationColor(Info.Relation);
       SetToolTip(LabelRelation, FormLocalCache.GetTranslatedRelationText(ProgramTranslation, Info.Relation));
       ActivateTextBoxHandle();

@@ -22,10 +22,10 @@ internal static class RPC_Wrapper {
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
         var result = Task.FromResult(gRPC_Client.GetRelations(new ChannelRequest() { Channel = channel })).Result;
         foreach (var relation in result.Relations) {
-          rtnVal.Relations.Add(new Serialization.RelationInfo() {
+          rtnVal.Relations.Add(new Serialization.RelationInformation() {
             Name = relation.Name,
-            Type = (Serialization.RelationType)relation.Type,
-            Relation = (Serialization.Relation)relation.Relation
+            Type = relation.Type,
+            Relation = relation.Relation
           });
         }
       }
@@ -35,7 +35,7 @@ internal static class RPC_Wrapper {
     return rtnVal;
   }
 
-  public static bool SetRelation(string channel, Serialization.RelationType type, string name, Serialization.Relation relation) {
+  public static bool SetRelation(string channel, RelationType type, string name, RelationValue relation) {
     bool rtnVal = false;
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel) && !string.IsNullOrWhiteSpace(name)) {
@@ -43,10 +43,10 @@ internal static class RPC_Wrapper {
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
         rtnVal = Task.FromResult(gRPC_Client.SetRelation(new FullRelationInfo() {
           Channel = channel,
-          Relation = new gRPC.RelationInfo() {
-            Type = (gRPC.RelationType)type,
+          Relation = new RelationInfo() {
+            Type = type,
             Name = name,
-            Relation = (gRPC.Relation)relation
+            Relation = relation
           }
         })).Result.Success;
       }
@@ -56,18 +56,18 @@ internal static class RPC_Wrapper {
     return rtnVal;
   }
 
-  public static Serialization.Relation GetRelation(string channel, Serialization.RelationType type, string name) {
-    Serialization.Relation rtnVal = Serialization.Relation.NotAssigned;
+  public static RelationValue GetRelation(string channel, RelationType type, string name) {
+    RelationValue rtnVal = RelationValue.NotAssigned;
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel) && !string.IsNullOrWhiteSpace(name)) {
         using var gRPC_Channel = GrpcChannel.ForAddress(_url);
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
         var result = Task.FromResult(gRPC_Client.GetRelation(new RelationRequest() {
           Channel = channel,
-          Type = (gRPC.RelationType)type,
+          Type = type,
           Name = name
         })).Result;
-        rtnVal = (Serialization.Relation)(result.Found ? result.Relation : gRPC.Relation.NotAssigned);
+        rtnVal = (RelationValue)(result.Found ? result.Relation : RelationValue.NotAssigned);
       }
     } catch (Exception ex) {
       Log($"{_url} - GetRelation({channel}, {type}, {name}) Exception: {ex.Message}");
@@ -119,7 +119,7 @@ internal static class RPC_Wrapper {
           if (gRPC_Channel.State == ConnectivityState.Ready || gRPC_Channel.State == ConnectivityState.Idle) {
             frm.ChangeSync(FormRelations.SyncStatus.Connected);
             await foreach (var rel in streamingCall.ResponseStream.ReadAllAsync(cancellationToken: cts.Token)) {
-              frm.UpdateRelation(rel.Relation.Name, (Serialization.RelationType)rel.Relation.Type, (Serialization.Relation)rel.Relation.Relation, true);
+              frm.UpdateRelation(rel.Relation.Name, rel.Relation.Type, rel.Relation.Relation, true);
             }
           }
         } catch (RpcException ex) {

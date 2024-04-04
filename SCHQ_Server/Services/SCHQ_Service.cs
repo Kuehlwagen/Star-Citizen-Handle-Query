@@ -18,14 +18,15 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
       request.Channel = request.Channel.Trim();
       request.Relation.Name = request.Relation.Name.Trim();
       try {
-        Models.Relation? relation = _db.Relations.FirstOrDefault(r => r.Type == (int)request.Relation.Type && r.Channel != null && r.Channel.Name == request.Channel && r.Name == request.Relation.Name);
-        relation ??= new Models.Relation() {
-          Type = (int)request.Relation.Type,
+        Relation? relation = _db.Relations.FirstOrDefault(r => r.Type == request.Relation.Type && r.Channel != null && r.Channel.Name == request.Channel && r.Name == request.Relation.Name);
+        relation ??= new Relation() {
+          Type = request.Relation.Type,
           Channel = _db.Channels.FirstOrDefault(c => c.Name ==  request.Channel) ?? new Channel() { Name = request.Channel },
           Name = request.Relation.Name,
         };
         relation.Timestamp = DateTime.UtcNow;
-        relation.Value = (int)request.Relation.Relation;
+        relation.Value = request.Relation.Relation;
+        relation.Active = true;
         _db.Update(relation);
         rtnVal = _db.SaveChanges() > 0;
       } catch (Exception ex) {
@@ -44,15 +45,15 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
     if (!string.IsNullOrWhiteSpace(request.Channel)) {
       request.Channel = request.Channel.Trim();
       try {
-        IOrderedQueryable<Models.Relation> results = from rel in _db.Relations
-                                                     where rel.Channel != null && rel.Channel.Name == request.Channel && rel.Value > 0
+        IOrderedQueryable<Relation> results = from rel in _db.Relations
+                                                     where rel.Channel != null && rel.Channel.Name == request.Channel && rel.Value > 0 && rel.Active
                                                      orderby rel.Type descending, rel.Name
                                                      select rel;
-        foreach (Models.Relation rel in results.ToListAsync().Result) {
+        foreach (Relation rel in results.ToListAsync().Result) {
           rtnVal.Relations.Add(new RelationInfo() {
-            Type = (RelationType)rel.Type,
+            Type = rel.Type,
             Name = rel.Name,
-            Relation = (Relation)rel.Value
+            Relation = rel.Value
           });
         }
       } catch (Exception ex) {
@@ -72,13 +73,13 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
       request.Channel = request.Channel.Trim();
       request.Name = request.Name.Trim();
       try {
-        IQueryable<Models.Relation> results = from rel in _db.Relations
-                                              where rel.Type == (int)request.Type && rel.Channel != null && rel.Channel.Name == request.Channel && rel.Name == request.Name
+        IQueryable<Relation> results = from rel in _db.Relations
+                                              where rel.Type == request.Type && rel.Channel != null && rel.Channel.Name == request.Channel && rel.Name == request.Name && rel.Active
                                               select rel;
-        foreach (Models.Relation rel in results.ToListAsync().Result) {
+        foreach (Relation rel in results.ToListAsync().Result) {
           rtnVal = new RelationReply() {
             Found = true,
-            Relation = (Relation)rel.Value
+            Relation = rel.Value
           };
         }
       } catch (Exception ex) {
@@ -98,13 +99,12 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
       request.Channel = request.Channel.Trim();
       try {
         (from r in _db.Relations
-         where r.Channel != null && r.Channel.Name == request.Channel && r.Value > (int)Relation.NotAssigned
+         where r.Channel != null && r.Channel.Name == request.Channel && r.Value > RelationValue.NotAssigned
          select r)
          .ToList()
          .ForEach( r => {
            r.Timestamp = DateTime.UtcNow;
-           r.RemovedValue = r.Value;
-           r.Value = (int)Relation.NotAssigned;
+           r.Active = false;
          });
         rtnVal = _db.SaveChanges() > 0;
       } catch (Exception ex) {
@@ -124,13 +124,12 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
       request.Channel = request.Channel.Trim();
       try {
         (from r in _db.Relations
-         where r.Channel != null && r.Channel.Name == request.Channel && r.RemovedValue > (int)Relation.NotAssigned
+         where r.Channel != null && r.Channel.Name == request.Channel && !r.Active
          select r)
          .ToList()
          .ForEach(r => {
            r.Timestamp = DateTime.UtcNow;
-           r.Value = r.RemovedValue;
-           r.RemovedValue = (int)Relation.NotAssigned;
+           r.Active = true;
          });
         rtnVal = _db.SaveChanges() > 0;
       } catch (Exception ex) {
@@ -150,20 +149,20 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
       SyncTimestamp = DateTime.UtcNow;
       try {
         while (!context.CancellationToken.IsCancellationRequested) {
-          IOrderedQueryable<Models.Relation> results = from rel in _db.Relations
-                                                       where rel.Channel != null && rel.Channel.Name == request.Channel && rel.Timestamp > SyncTimestamp
-                                                       orderby rel.Timestamp
-                                                       select rel;
+          IOrderedQueryable<Relation> results = from rel in _db.Relations
+                                                where rel.Channel != null && rel.Channel.Name == request.Channel && rel.Active && rel.Timestamp > SyncTimestamp
+                                                orderby rel.Timestamp
+                                                select rel;
           if (await results.AnyAsync()) {
-            foreach (Models.Relation rel in results.ToListAsync().Result) {
+            foreach (Relation rel in results.ToListAsync().Result) {
               // Reload() scheint nötig zu sein, da der Timestamp ansonsten den alten Wert enthält
               _db.Entry(rel).Reload();
               await responseStream.WriteAsync(new FullRelationInfo() {
                 Channel = request.Channel,
                 Relation = new RelationInfo() {
-                  Type = (RelationType)rel.Type,
+                  Type = rel.Type,
                   Name = rel.Name,
-                  Relation = (Relation)rel.Value
+                  Relation = rel.Value
                 }
               });
               SyncTimestamp = rel.Timestamp;

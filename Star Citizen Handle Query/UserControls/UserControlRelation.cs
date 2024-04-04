@@ -1,5 +1,5 @@
 ﻿using Star_Citizen_Handle_Query.Dialogs;
-using Star_Citizen_Handle_Query.Serialization;
+using Star_Citizen_Handle_Query.gRPC;
 
 namespace Star_Citizen_Handle_Query.UserControls {
 
@@ -7,9 +7,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     internal readonly RelationType Type;
     internal readonly string RelationName;
-    internal Relation Relation;
+    internal RelationValue Relation;
 
-    public UserControlRelation(string handle, RelationType relationType, Relation relation) {
+    public UserControlRelation(string handle, RelationType relationType, RelationValue relation) {
       InitializeComponent();
       RelationName = handle;
       Relation = relation;
@@ -38,7 +38,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
       }
     }
 
-    public void UpdateRelation(Relation relation) {
+    public void UpdateRelation(RelationValue relation) {
       Relation = relation;
       LabelRelation.BackColor = FormHandleQuery.GetRelationColor(relation);
     }

@@ -1,4 +1,5 @@
-﻿using Star_Citizen_Handle_Query.Serialization;
+﻿using Star_Citizen_Handle_Query.gRPC;
+using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -188,7 +189,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void DataGridViewLokalerCache_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
       if (e.RowIndex > -1 && e.ColumnIndex == 8) {
         string[] values = $"{e.Value}".Split("-");
-        if (values?.Length == 2 && Enum.TryParse(values[0], out Relation value)) {
+        if (values?.Length == 2 && Enum.TryParse(values[0], out RelationValue value)) {
           e.CellStyle.BackColor = FormHandleQuery.GetRelationColor(value);
           e.CellStyle.ForeColor = value > 0 ? Color.FromArgb(19, 26, 33) : ForeColor;
           e.Value = GetTranslatedRelationText(ProgramTranslation, value);
@@ -197,23 +198,23 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    public static string GetTranslatedRelationText(Translation translation, Relation relation) {
+    public static string GetTranslatedRelationText(Translation translation, RelationValue relation) {
       string translationText = $"{relation}";
 
       switch (relation) {
-        case Relation.NotAssigned:
+        case RelationValue.NotAssigned:
           translationText = translation.Local_Cache.Relation.Not_Assigned;
           break;
-        case Relation.Friendly:
+        case RelationValue.Friendly:
           translationText = translation.Local_Cache.Relation.Friendly;
           break;
-        case Relation.Neutral:
+        case RelationValue.Neutral:
           translationText = translation.Local_Cache.Relation.Neutral;
           break;
-        case Relation.Bogey:
+        case RelationValue.Bogey:
           translationText = translation.Local_Cache.Relation.Bogey;
           break;
-        case Relation.Bandit:
+        case RelationValue.Bandit:
           translationText = translation.Local_Cache.Relation.Bandit;
           break;
       }

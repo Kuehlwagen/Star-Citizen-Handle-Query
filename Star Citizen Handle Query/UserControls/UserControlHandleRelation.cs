@@ -1,4 +1,5 @@
 ﻿using Star_Citizen_Handle_Query.Dialogs;
+using Star_Citizen_Handle_Query.gRPC;
 using Star_Citizen_Handle_Query.Serialization;
 
 namespace Star_Citizen_Handle_Query.UserControls {
@@ -13,17 +14,17 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private void UserControlOrganization_Load(object sender, EventArgs e) {
-      LabelFriendly.BackColor = FormHandleQuery.GetRelationInactiveColor(Relation.Friendly);
-      LabelFriendly.ForeColor = FormHandleQuery.GetRelationColor(Relation.Friendly);
+      LabelFriendly.BackColor = FormHandleQuery.GetRelationInactiveColor(RelationValue.Friendly);
+      LabelFriendly.ForeColor = FormHandleQuery.GetRelationColor(RelationValue.Friendly);
       LabelFriendly.Text = ProgramTranslation.Local_Cache.Relation.Friendly;
-      LabelNeutral.BackColor = FormHandleQuery.GetRelationInactiveColor(Relation.Neutral);
-      LabelNeutral.ForeColor = FormHandleQuery.GetRelationColor(Relation.Neutral);
+      LabelNeutral.BackColor = FormHandleQuery.GetRelationInactiveColor(RelationValue.Neutral);
+      LabelNeutral.ForeColor = FormHandleQuery.GetRelationColor(RelationValue.Neutral);
       LabelNeutral.Text = ProgramTranslation.Local_Cache.Relation.Neutral;
-      LabelBogey.BackColor = FormHandleQuery.GetRelationInactiveColor(Relation.Bogey);
-      LabelBogey.ForeColor = FormHandleQuery.GetRelationColor(Relation.Bogey);
+      LabelBogey.BackColor = FormHandleQuery.GetRelationInactiveColor(RelationValue.Bogey);
+      LabelBogey.ForeColor = FormHandleQuery.GetRelationColor(RelationValue.Bogey);
       LabelBogey.Text = ProgramTranslation.Local_Cache.Relation.Bogey;
-      LabelBandit.BackColor = FormHandleQuery.GetRelationInactiveColor(Relation.Bandit);
-      LabelBandit.ForeColor = FormHandleQuery.GetRelationColor(Relation.Bandit);
+      LabelBandit.BackColor = FormHandleQuery.GetRelationInactiveColor(RelationValue.Bandit);
+      LabelBandit.ForeColor = FormHandleQuery.GetRelationColor(RelationValue.Bandit);
       LabelBandit.Text = ProgramTranslation.Local_Cache.Relation.Bandit;
     }
 

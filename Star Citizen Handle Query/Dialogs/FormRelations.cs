@@ -1,4 +1,5 @@
 using Star_Citizen_Handle_Query.Classes;
+using Star_Citizen_Handle_Query.gRPC;
 using Star_Citizen_Handle_Query.Properties;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
@@ -149,7 +150,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         }
       };
       foreach (KeyValuePair<string, UserControlRelation> kvp in UserControlRelations.OrderByDescending(x => x.Value.Type).ThenBy(x => x.Value.RelationName)) {
-        infos.Relations.Add(new RelationInfo() {
+        infos.Relations.Add(new RelationInformation() {
           Name = kvp.Value.RelationName,
           Relation = kvp.Value.Relation,
           Type = kvp.Value.Type
@@ -185,7 +186,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           }
           if (infos.Relations?.Count > 0) {
             PanelRelations.SuspendLayout();
-            foreach (RelationInfo info in infos.Relations) {
+            foreach (RelationInformation info in infos.Relations) {
               AddControl(info.Name, info.Type, info.Relation);
             }
             PanelRelations.ResumeLayout();
@@ -297,7 +298,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private void AddControl(string name, RelationType relationType, Relation relation) {
+    private void AddControl(string name, RelationType relationType, RelationValue relation) {
       string controlName = $"{relationType}.{name}";
       UserControlRelation control = new(name, relationType, relation) { Name = $"UserControlRelation_{relationType}_{name}", Visible = RelationIsVisible(relation) };
       UserControlRelations.Add(controlName, control);
@@ -316,14 +317,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       uc.Dispose();
     }
 
-    public void UpdateRelation(string name, RelationType relationType, Relation relation, bool withoutRPCSet = false) {
+    public void UpdateRelation(string name, RelationType relationType, RelationValue relation, bool withoutRPCSet = false) {
       if (!string.IsNullOrWhiteSpace(name)) {
         if (IsRPCSync && !withoutRPCSet && Sync == SyncStatus.Connected) {
           RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, relationType, name, relation);
         }
         Control[] controls = PanelRelations.Controls.Find($"UserControlRelation_{relationType}_{name}", false);
         if (controls?.Length == 1) {
-          if (relation == Relation.NotAssigned) {
+          if (relation == RelationValue.NotAssigned) {
             if (InvokeRequired) {
               Invoke(() => RemoveControl(controls[0] as UserControlRelation));
             } else {
@@ -338,7 +339,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               control.Visible = RelationIsVisible(relation);
             }
           }
-        } else if (relation > Relation.NotAssigned) {
+        } else if (relation > RelationValue.NotAssigned) {
           // Da gefiltert werden kann, die Daten nicht auf die maximale Anzahl von darzustellenden Einträgen begrenzen
           //if (PanelRelations.Controls.Count == ProgramSettings.Relations.EntriesMax) {
           //  RemoveControl(PanelRelations.Controls[0] as UserControlRelation);
@@ -357,18 +358,18 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private bool RelationIsVisible(Relation relation) {
+    private bool RelationIsVisible(RelationValue relation) {
       return relation switch {
-        Relation.Friendly => CheckBoxFilterFriendly.Checked,
-        Relation.Neutral => CheckBoxFilterNeutral.Checked,
-        Relation.Bogey => CheckBoxFilterBogey.Checked,
-        Relation.Bandit => CheckBoxFilterBandit.Checked,
+        RelationValue.Friendly => CheckBoxFilterFriendly.Checked,
+        RelationValue.Neutral => CheckBoxFilterNeutral.Checked,
+        RelationValue.Bogey => CheckBoxFilterBogey.Checked,
+        RelationValue.Bandit => CheckBoxFilterBandit.Checked,
         _ => false,
       };
     }
 
-    public Relation GetOrganizationRelation(string sid) {
-      Relation rtnVal = Relation.NotAssigned;
+    public RelationValue GetOrganizationRelation(string sid) {
+      RelationValue rtnVal = RelationValue.NotAssigned;
       UserControlRelation control = UserControlRelations.Select(x => x.Value).FirstOrDefault(x => x.Type == RelationType.Organization && x.RelationName == sid);
       if (control != null) {
         rtnVal = control.Relation;
@@ -376,8 +377,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return rtnVal;
     }
 
-    public Relation GetHandleRelation(string handle) {
-      Relation rtnVal = Relation.NotAssigned;
+    public RelationValue GetHandleRelation(string handle) {
+      RelationValue rtnVal = RelationValue.NotAssigned;
       UserControlRelation control = UserControlRelations.Select(x => x.Value).FirstOrDefault(x => x.Type == RelationType.Handle && x.RelationName == handle);
       if (control != null) {
         rtnVal = control.Relation;
@@ -401,16 +402,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             control.Visible = true;
           } else {
             switch (control.Relation) {
-              case Relation.Friendly:
+              case RelationValue.Friendly:
                 control.Visible = (control.Type != RelationType.Organization || CheckBoxFilterOrganization.Checked) && CheckBoxFilterFriendly.Checked;
                 break;
-              case Relation.Neutral:
+              case RelationValue.Neutral:
                 control.Visible = (control.Type != RelationType.Organization || CheckBoxFilterOrganization.Checked) && CheckBoxFilterNeutral.Checked;
                 break;
-              case Relation.Bogey:
+              case RelationValue.Bogey:
                 control.Visible = (control.Type != RelationType.Organization || CheckBoxFilterOrganization.Checked) && CheckBoxFilterBogey.Checked;
                 break;
-              case Relation.Bandit:
+              case RelationValue.Bandit:
                 control.Visible = (control.Type != RelationType.Organization || CheckBoxFilterOrganization.Checked) && CheckBoxFilterBandit.Checked;
                 break;
             }

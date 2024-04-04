@@ -1,11 +1,13 @@
-﻿namespace Star_Citizen_Handle_Query.Serialization {
+﻿using Star_Citizen_Handle_Query.gRPC;
+
+namespace Star_Citizen_Handle_Query.Serialization {
 
   [Serializable]
   public class RelationInfos {
 
     public Filter FilterVisibility { get; set; } = new();
 
-    public List<RelationInfo> Relations { get; set; } = new();
+    public List<RelationInformation> Relations { get; set; } = [];
 
   }
 
@@ -25,20 +27,14 @@
   }
 
   [Serializable]
-  public class RelationInfo {
+  public class RelationInformation {
 
     public RelationType Type { get; set; }
 
     public string Name { get; set; }
 
-    public Relation Relation { get; set; }
+    public RelationValue Relation { get; set; }
 
-  }
-
-  [Serializable]
-  public enum RelationType {
-    Handle,
-    Organization
   }
 
 }

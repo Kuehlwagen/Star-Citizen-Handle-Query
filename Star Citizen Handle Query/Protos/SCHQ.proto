@@ -21,7 +21,7 @@ message FullRelationInfo {
 message RelationInfo {
   RelationType type = 1;
   string name = 2;
-  Relation relation = 3;
+  RelationValue relation = 3;
 }
 
 message RelationsReply {
@@ -30,7 +30,7 @@ message RelationsReply {
 
 message RelationReply {
   bool found = 1;
-  Relation relation = 2; 
+  RelationValue relation = 2; 
 }
 
 message RelationRequest {
@@ -52,7 +52,7 @@ enum RelationType {
   Organization = 1;
 }
 
-enum Relation {
+enum RelationValue {
   NotAssigned = 0;
   Friendly = 1;
   Neutral = 2;

@@ -1,4 +1,5 @@
 ﻿using Star_Citizen_Handle_Query.Dialogs;
+using Star_Citizen_Handle_Query.gRPC;
 using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
 using static Star_Citizen_Handle_Query.Dialogs.FormHandleQuery;
@@ -11,7 +12,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private readonly Settings ProgramSettings;
     private readonly bool IsMainOrg;
     internal string SID;
-    internal Relation Relation;
+    internal RelationValue Relation;
     private readonly bool ForceLive;
     private readonly bool DisplayOnly;
 
@@ -54,7 +55,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
         }
         if (!DisplayOnly) {
           Relation = GetMainForm().GetOrganizationRelation(Info.Sid);
-          if (Relation > Relation.NotAssigned) {
+          if (Relation > RelationValue.NotAssigned) {
             LabelRelation.BackColor = GetRelationColor(Relation);
             LabelRelation.Visible = true;
           }
@@ -91,27 +92,27 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     public void ChangeRelation(Keys keyCode) {
-      Relation relation = Relation.NotAssigned;
+      RelationValue relation = RelationValue.NotAssigned;
       switch (keyCode) {
         case Keys.D1:
         case Keys.NumPad1:
-          relation = Relation.Friendly;
+          relation = RelationValue.Friendly;
           break;
         case Keys.D2:
         case Keys.NumPad2:
-          relation = Relation.Neutral;
+          relation = RelationValue.Neutral;
           break;
         case Keys.D3:
         case Keys.NumPad3:
-          relation = Relation.Bogey;
+          relation = RelationValue.Bogey;
           break;
         case Keys.D4:
         case Keys.NumPad4:
-          relation = Relation.Bandit;
+          relation = RelationValue.Bandit;
           break;
       }
       Relation = relation;
-      LabelRelation.Visible = relation > Relation.NotAssigned;
+      LabelRelation.Visible = relation > RelationValue.NotAssigned;
       LabelRelation.BackColor = GetRelationColor(Relation);
     }
 

@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using Star_Citizen_Handle_Query.gRPC;
+using System.Net;
 using System.Text.Json.Serialization;
 
 namespace Star_Citizen_Handle_Query.Serialization {
@@ -10,7 +11,7 @@ namespace Star_Citizen_Handle_Query.Serialization {
     public HandleProfileInfo Profile { get; set; }
     public OrganizationsInfo Organizations { get; set; }
     public string Comment { get; set; }
-    public Relation Relation { get; set; }
+    public RelationValue Relation { get; set; }
 
   }
 
@@ -34,7 +35,7 @@ namespace Star_Citizen_Handle_Query.Serialization {
     public string DisplayTitleAvatarUrl { get; set; }
     public string Country { get; set; }
     public string Region { get; set; }
-    public List<string> Fluency { get; set; } = new List<string>();
+    public List<string> Fluency { get; set; } = [];
 
   }
 
@@ -59,14 +60,6 @@ namespace Star_Citizen_Handle_Query.Serialization {
     public string SecondaryActivity { get; set; }
     public string Commitment { get; set; }
 
-  }
-
-  public enum Relation {
-    NotAssigned,
-    Friendly,
-    Neutral,
-    Bogey,
-    Bandit
   }
 
 }
