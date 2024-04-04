@@ -30,7 +30,7 @@ internal static class RPC_Wrapper {
         }
       }
     } catch (Exception ex) {
-      Log($"{_url} - GetRelations({channel}) Exception: {ex.Message}");
+      Log($"{_url} - GetRelations({channel}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
     }
     return rtnVal;
   }
@@ -51,7 +51,7 @@ internal static class RPC_Wrapper {
         })).Result.Success;
       }
     } catch (Exception ex) {
-      Log($"{_url} - SetRelation({channel}, {type}, {relation}) Exception: {ex.Message}");
+      Log($"{_url} - SetRelation({channel}, {type}, {relation}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
     }
     return rtnVal;
   }
@@ -70,7 +70,7 @@ internal static class RPC_Wrapper {
         rtnVal = (RelationValue)(result.Found ? result.Relation : RelationValue.NotAssigned);
       }
     } catch (Exception ex) {
-      Log($"{_url} - GetRelation({channel}, {type}, {name}) Exception: {ex.Message}");
+      Log($"{_url} - GetRelation({channel}, {type}, {name}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
     }
     return rtnVal;
   }
@@ -86,7 +86,7 @@ internal static class RPC_Wrapper {
         })).Result.Success;
       }
     } catch (Exception ex) {
-      Log($"{_url} - RemoveRelations({channel}) Exception: {ex.Message}");
+      Log($"{_url} - RemoveRelations({channel}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
     }
     return rtnVal;
   }
@@ -102,7 +102,7 @@ internal static class RPC_Wrapper {
        })).Result.Success;
       }
     } catch (Exception ex) {
-      Log($"{_url} - RemoveRelations({channel}) Exception: {ex.Message}");
+      Log($"{_url} - RemoveRelations({channel}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
     }
     return rtnVal;
   }
@@ -124,12 +124,12 @@ internal static class RPC_Wrapper {
           }
         } catch (RpcException ex) {
           if (ex.StatusCode != StatusCode.Cancelled) {
-            Log($"{_url} - SyncRelations(..., {channel}) RpcException: {ex.Message} [{ex.Status} / {ex.StatusCode}]");
+            Log($"{_url} - SyncRelations(..., {channel}) RpcException: {ex.Message} [{ex.Status} / {ex.StatusCode}], Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
           }
         }
       }
     } catch (Exception ex) {
-      Log($"{_url} - SyncRelations(..., {channel}) Exception: {ex.Message}");
+      Log($"{_url} - SyncRelations(..., {channel}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
     }
     frm.ChangeSync(FormRelations.SyncStatus.Disconnected);
   }
