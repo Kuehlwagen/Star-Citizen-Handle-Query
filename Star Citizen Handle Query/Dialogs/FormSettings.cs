@@ -32,6 +32,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings = settings != null ? (Settings)settings.Clone() : null;
       if (ProgramSettings != null) {
         ProgramSettings.LogMonitor = settings?.LogMonitor != null ? (LogMonitorSettings)settings.LogMonitor.Clone() : null;
+        ProgramSettings.Locations = settings?.Locations != null ? (LocationsSettings)settings.Locations.Clone() : null;
+        ProgramSettings.Relations = settings?.Locations != null ? (RelationsSettings)settings.Relations.Clone() : null;
       }
 
       if (ProgramSettings == null) {
