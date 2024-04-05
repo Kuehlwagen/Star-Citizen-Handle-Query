@@ -100,7 +100,7 @@
       DataGridViewChannels.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
       DataGridViewChannels.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
       DataGridViewChannels.ShowEditingIcon = false;
-      DataGridViewChannels.Size = new Size(410, 369);
+      DataGridViewChannels.Size = new Size(520, 369);
       DataGridViewChannels.TabIndex = 1;
       DataGridViewChannels.CellContentClick += DataGridViewChannels_CellContentClick;
       DataGridViewChannels.CellContentDoubleClick += DataGridViewChannels_CellContentDoubleClick;
@@ -165,14 +165,14 @@
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.FromArgb(19, 26, 33);
       CancelButton = ButtonClose;
-      ClientSize = new Size(434, 461);
+      ClientSize = new Size(544, 461);
       Controls.Add(DataGridViewChannels);
       Controls.Add(ButtonOK);
       Controls.Add(ButtonClose);
       Controls.Add(ButtonLoadChannels);
       ForeColor = Color.FromArgb(57, 206, 216);
       Icon = (Icon)resources.GetObject("$this.Icon");
-      MinimumSize = new Size(450, 500);
+      MinimumSize = new Size(560, 500);
       Name = "FormEditRpcChannels";
       StartPosition = FormStartPosition.CenterScreen;
       Text = "SCHQ_Server gRPC Kanalverwaltung";
