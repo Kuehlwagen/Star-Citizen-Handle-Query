@@ -89,6 +89,31 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
       guid, rtnVal.Found, rtnVal.Channel);
     return Task.FromResult(rtnVal);
   }
+
+  public override Task<SuccessReply> DeleteChannel(ChannelRequest request, ServerCallContext context) {
+    Guid guid = Guid.NewGuid();
+    _logger.LogInformation("[DeleteChannel {Guid} Request] Channel: {Channel}, Password: {Password}",
+      guid, request.Channel, !string.IsNullOrWhiteSpace(request.Password) ? "Yes" : "No");
+    bool rtnVal = false;
+
+    if (!string.IsNullOrWhiteSpace(request.Channel)) {
+      request.Channel = request.Channel.Trim();
+      request.Password = !string.IsNullOrWhiteSpace(request.Channel) ? Encryption.EncryptText(request.Password) : string.Empty;
+      try {
+        Channel? channel = _db.Channels.FirstOrDefault(c => c.Name == request.Channel && c.Password == request.Password);
+        if (channel != null) {
+          _db.Remove(channel);
+          rtnVal = _db.SaveChanges() > 0;
+        }
+      } catch (Exception ex) {
+        _logger.LogWarning("[DeleteChannel {Guid} Exception] Message: {Message}, Inner Exception: {InnerExceptionMessage}",
+          guid, ex.Message, ex.InnerException?.Message ?? "Empty");
+      }
+    }
+
+    _logger.LogInformation("[DeleteChannel {Guid} Reply] Success: {Success}", guid, rtnVal);
+    return Task.FromResult(new SuccessReply() { Success = rtnVal });
+  }
   #endregion
 
   #region Relations

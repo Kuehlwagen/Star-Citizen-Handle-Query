@@ -1,4 +1,5 @@
-﻿using Grpc.Core;
+﻿using Google.Protobuf.WellKnownTypes;
+using Grpc.Core;
 using Grpc.Net.Client;
 using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.gRPC;
@@ -12,6 +13,62 @@ internal static class RPC_Wrapper {
 
   public static void SetURL(string url) {
     _url = url;
+  }
+
+  public static bool CreateChannel(string channel, string password) {
+    bool rtnVal = false;
+    try {
+      if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
+        using var gRPC_Channel = GrpcChannel.ForAddress(_url);
+        var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
+        rtnVal = Task.FromResult(gRPC_Client.CreateChannel(new ChannelRequest() { Channel = channel, Password = password })).Result.Success;
+      }
+    } catch (Exception ex) {
+      Log($"{_url} - CreateChannel({channel}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
+    }
+    return rtnVal;
+  }
+
+  public static List<ChannelInfo> GetChannels() {
+    List<ChannelInfo> rtnVal = [];
+    try {
+      if (!string.IsNullOrWhiteSpace(_url)) {
+        using var gRPC_Channel = GrpcChannel.ForAddress(_url);
+        var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
+        rtnVal = [.. Task.FromResult(gRPC_Client.GetChannels(new Empty())).Result.Channels];
+      }
+    } catch (Exception ex) {
+      Log($"{_url} - GetChannels() Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
+    }
+    return rtnVal;
+  }
+
+  public static ChannelReply GetChannel(string channel) {
+    ChannelReply rtnVal = new();
+    try {
+      if (!string.IsNullOrWhiteSpace(_url)) {
+        using var gRPC_Channel = GrpcChannel.ForAddress(_url);
+        var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
+        rtnVal = Task.FromResult(gRPC_Client.GetChannel(new() { Channel = channel })).Result;
+      }
+    } catch (Exception ex) {
+      Log($"{_url} - GetChannels() Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
+    }
+    return rtnVal;
+  }
+
+  public static bool DeleteChannel(string channel, string password) {
+    bool rtnVal = false;
+    try {
+      if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
+        using var gRPC_Channel = GrpcChannel.ForAddress(_url);
+        var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
+        rtnVal = Task.FromResult(gRPC_Client.DeleteChannel(new ChannelRequest() { Channel = channel, Password = password })).Result.Success;
+      }
+    } catch (Exception ex) {
+      Log($"{_url} - DeleteChannel({channel}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
+    }
+    return rtnVal;
   }
 
   public static RelationInfos GetRelations(string channel, string password) {

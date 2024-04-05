@@ -10,6 +10,7 @@ service SCHQ_Relations {
   rpc CreateChannel(ChannelRequest) returns (SuccessReply);
   rpc GetChannels(google.protobuf.Empty) returns (ChannelsReply);
   rpc GetChannel(ChannelNameRequest) returns (ChannelReply);
+  rpc DeleteChannel (ChannelRequest) returns (SuccessReply);
   rpc SetRelation (SetRelationRequest) returns (SuccessReply);
   rpc GetRelations (ChannelRequest) returns (RelationsReply);
   rpc GetRelation (RelationRequest) returns (RelationReply);
