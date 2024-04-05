@@ -85,8 +85,8 @@ public partial class FormEditRpcChannels : Form {
   private void DataGridViewChannels_CellContentClick(object sender, DataGridViewCellEventArgs e) {
     var grid = (DataGridView)sender;
     if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex > -1) {
-      string channel = grid.Rows[e.RowIndex].Cells[0].Value.ToString();
-      string password = grid.Rows[e.RowIndex].Cells[2].Value.ToString();
+      string channel = grid.Rows[e.RowIndex].Cells[0].Value?.ToString() ?? string.Empty;
+      string password = grid.Rows[e.RowIndex].Cells[2].Value?.ToString() ?? string.Empty;
       EnableControls(false);
       var deleted = Task.Run(() => RPC_Wrapper.DeleteChannel(channel, password)).Result;
       if (deleted) {
@@ -122,14 +122,14 @@ public partial class FormEditRpcChannels : Form {
   private void DataGridViewChannels_SelectionChanged(object sender, EventArgs e) {
     DataGridView dgv = (DataGridView)sender;
     if (dgv.SelectedRows.Count > 0) {
-      SelectedChannel = dgv.SelectedRows[0].Cells[0].Value.ToString();
-      SelectedPassword = dgv.SelectedRows[0].Cells[2].Value.ToString();
+      SelectedChannel = dgv.SelectedRows[0].Cells[0].Value?.ToString() ?? string.Empty;
+      SelectedPassword = dgv.SelectedRows[0].Cells[2].Value?.ToString() ?? string.Empty;
     }
   }
 
   private void DataGridViewChannels_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
     if (e.RowIndex > -1 && e.ColumnIndex == 2) {
-      SelectedPassword = DataGridViewChannels.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+      SelectedPassword = DataGridViewChannels.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString() ?? string.Empty;
     }
   }
 
