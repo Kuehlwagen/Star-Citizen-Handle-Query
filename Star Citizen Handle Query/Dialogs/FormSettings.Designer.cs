@@ -75,7 +75,9 @@
       LabelLMB_URL = new Label();
       GroupBoxLogMonitor = new GroupBox();
       GroupBoxBeziehungen = new GroupBox();
+      LabelGRPCKanalPasswort = new Label();
       CheckBoxRPCSyncOnStartup = new CheckBox();
+      TextBoxGRPCChannelPassword = new TextBox();
       TextBoxGRPCChannel = new TextBox();
       TextBoxGRPCURL = new TextBox();
       LabelGRPCURL = new Label();
@@ -130,7 +132,7 @@
       // ButtonSpeichern
       // 
       ButtonSpeichern.FlatStyle = FlatStyle.Flat;
-      ButtonSpeichern.Location = new Point(12, 559);
+      ButtonSpeichern.Location = new Point(12, 582);
       ButtonSpeichern.Name = "ButtonSpeichern";
       ButtonSpeichern.Size = new Size(75, 28);
       ButtonSpeichern.TabIndex = 6;
@@ -141,7 +143,7 @@
       // ButtonSchliessen
       // 
       ButtonSchliessen.FlatStyle = FlatStyle.Flat;
-      ButtonSchliessen.Location = new Point(93, 559);
+      ButtonSchliessen.Location = new Point(93, 582);
       ButtonSchliessen.Name = "ButtonSchliessen";
       ButtonSchliessen.Size = new Size(75, 28);
       ButtonSchliessen.TabIndex = 7;
@@ -184,7 +186,7 @@
       GroupBoxFenster.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxFenster.Location = new Point(12, 188);
       GroupBoxFenster.Name = "GroupBoxFenster";
-      GroupBoxFenster.Size = new Size(352, 198);
+      GroupBoxFenster.Size = new Size(352, 221);
       GroupBoxFenster.TabIndex = 1;
       GroupBoxFenster.TabStop = false;
       GroupBoxFenster.Text = "Fenster";
@@ -318,7 +320,7 @@
       GroupBoxLokalerCache.Controls.Add(LabelLokalerCacheAlter);
       GroupBoxLokalerCache.FlatStyle = FlatStyle.Flat;
       GroupBoxLokalerCache.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxLokalerCache.Location = new Point(12, 392);
+      GroupBoxLokalerCache.Location = new Point(12, 415);
       GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
       GroupBoxLokalerCache.Size = new Size(352, 161);
       GroupBoxLokalerCache.TabIndex = 2;
@@ -328,7 +330,7 @@
       // ButtonStandard
       // 
       ButtonStandard.FlatStyle = FlatStyle.Flat;
-      ButtonStandard.Location = new Point(711, 559);
+      ButtonStandard.Location = new Point(711, 582);
       ButtonStandard.Name = "ButtonStandard";
       ButtonStandard.Size = new Size(75, 28);
       ButtonStandard.TabIndex = 8;
@@ -469,7 +471,7 @@
       LabelLogEintragAnzeigeDauer.Location = new Point(32, 83);
       LabelLogEintragAnzeigeDauer.Name = "LabelLogEintragAnzeigeDauer";
       LabelLogEintragAnzeigeDauer.Size = new Size(122, 15);
-      LabelLogEintragAnzeigeDauer.TabIndex = 3;
+      LabelLogEintragAnzeigeDauer.TabIndex = 0;
       LabelLogEintragAnzeigeDauer.Text = "Eintrag Anzeigedauer:";
       // 
       // NumericUpDownLogEintragAnzeigedauer
@@ -671,7 +673,7 @@
       GroupBoxLogMonitor.Controls.Add(NumericUpDownLogEintragAnzeigedauer);
       GroupBoxLogMonitor.FlatStyle = FlatStyle.Flat;
       GroupBoxLogMonitor.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxLogMonitor.Location = new Point(370, 392);
+      GroupBoxLogMonitor.Location = new Point(370, 415);
       GroupBoxLogMonitor.Name = "GroupBoxLogMonitor";
       GroupBoxLogMonitor.Size = new Size(416, 161);
       GroupBoxLogMonitor.TabIndex = 5;
@@ -680,11 +682,13 @@
       // 
       // GroupBoxBeziehungen
       // 
+      GroupBoxBeziehungen.Controls.Add(LabelGRPCKanalPasswort);
       GroupBoxBeziehungen.Controls.Add(CheckBoxRPCSyncOnStartup);
       GroupBoxBeziehungen.Controls.Add(NumericUpDownRelationsEntriesMaximum);
       GroupBoxBeziehungen.Controls.Add(CheckBoxShowRelations);
       GroupBoxBeziehungen.Controls.Add(LabelRelationsEntriesMaximum);
       GroupBoxBeziehungen.Controls.Add(CheckBoxSortRelationsAlphabetically);
+      GroupBoxBeziehungen.Controls.Add(TextBoxGRPCChannelPassword);
       GroupBoxBeziehungen.Controls.Add(TextBoxGRPCChannel);
       GroupBoxBeziehungen.Controls.Add(TextBoxGRPCURL);
       GroupBoxBeziehungen.Controls.Add(LabelGRPCURL);
@@ -693,21 +697,42 @@
       GroupBoxBeziehungen.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxBeziehungen.Location = new Point(370, 188);
       GroupBoxBeziehungen.Name = "GroupBoxBeziehungen";
-      GroupBoxBeziehungen.Size = new Size(416, 198);
+      GroupBoxBeziehungen.Size = new Size(416, 221);
       GroupBoxBeziehungen.TabIndex = 4;
       GroupBoxBeziehungen.TabStop = false;
       GroupBoxBeziehungen.Text = "Beziehungen";
       // 
+      // LabelGRPCKanalPasswort
+      // 
+      LabelGRPCKanalPasswort.AutoSize = true;
+      LabelGRPCKanalPasswort.Location = new Point(32, 165);
+      LabelGRPCKanalPasswort.Name = "LabelGRPCKanalPasswort";
+      LabelGRPCKanalPasswort.Size = new Size(123, 15);
+      LabelGRPCKanalPasswort.TabIndex = 8;
+      LabelGRPCKanalPasswort.Text = "gRPC Kanal-Passwort:";
+      // 
       // CheckBoxRPCSyncOnStartup
       // 
       CheckBoxRPCSyncOnStartup.AutoSize = true;
-      CheckBoxRPCSyncOnStartup.Location = new Point(32, 163);
+      CheckBoxRPCSyncOnStartup.Location = new Point(34, 192);
       CheckBoxRPCSyncOnStartup.Name = "CheckBoxRPCSyncOnStartup";
       CheckBoxRPCSyncOnStartup.Size = new Size(254, 19);
-      CheckBoxRPCSyncOnStartup.TabIndex = 7;
+      CheckBoxRPCSyncOnStartup.TabIndex = 10;
       CheckBoxRPCSyncOnStartup.Text = "gRPC-Synchronisierung bei Programmstart";
       CheckBoxRPCSyncOnStartup.UseVisualStyleBackColor = true;
       CheckBoxRPCSyncOnStartup.CheckedChanged += CheckBoxRPCSyncOnStartup_CheckedChanged;
+      // 
+      // TextBoxGRPCChannelPassword
+      // 
+      TextBoxGRPCChannelPassword.BackColor = Color.FromArgb(57, 206, 216);
+      TextBoxGRPCChannelPassword.BorderStyle = BorderStyle.FixedSingle;
+      TextBoxGRPCChannelPassword.ForeColor = Color.FromArgb(19, 26, 33);
+      TextBoxGRPCChannelPassword.Location = new Point(190, 163);
+      TextBoxGRPCChannelPassword.Name = "TextBoxGRPCChannelPassword";
+      TextBoxGRPCChannelPassword.PasswordChar = '*';
+      TextBoxGRPCChannelPassword.Size = new Size(213, 23);
+      TextBoxGRPCChannelPassword.TabIndex = 9;
+      TextBoxGRPCChannelPassword.TextChanged += MaskedTextBoxGRPCKanalPasswort_TextChanged;
       // 
       // TextBoxGRPCChannel
       // 
@@ -717,7 +742,7 @@
       TextBoxGRPCChannel.Location = new Point(190, 134);
       TextBoxGRPCChannel.Name = "TextBoxGRPCChannel";
       TextBoxGRPCChannel.Size = new Size(213, 23);
-      TextBoxGRPCChannel.TabIndex = 6;
+      TextBoxGRPCChannel.TabIndex = 7;
       TextBoxGRPCChannel.TextChanged += TextBoxGRPCChannel_TextChanged;
       // 
       // TextBoxGRPCURL
@@ -728,7 +753,7 @@
       TextBoxGRPCURL.Location = new Point(190, 105);
       TextBoxGRPCURL.Name = "TextBoxGRPCURL";
       TextBoxGRPCURL.Size = new Size(213, 23);
-      TextBoxGRPCURL.TabIndex = 4;
+      TextBoxGRPCURL.TabIndex = 5;
       TextBoxGRPCURL.TextChanged += TextBoxGRPCURL_TextChanged;
       // 
       // LabelGRPCURL
@@ -737,7 +762,7 @@
       LabelGRPCURL.Location = new Point(32, 107);
       LabelGRPCURL.Name = "LabelGRPCURL";
       LabelGRPCURL.Size = new Size(100, 15);
-      LabelGRPCURL.TabIndex = 3;
+      LabelGRPCURL.TabIndex = 4;
       LabelGRPCURL.Text = "gRPC Server-URL:";
       // 
       // LabelGRPCChannel
@@ -746,7 +771,7 @@
       LabelGRPCChannel.Location = new Point(32, 136);
       LabelGRPCChannel.Name = "LabelGRPCChannel";
       LabelGRPCChannel.Size = new Size(108, 15);
-      LabelGRPCChannel.TabIndex = 5;
+      LabelGRPCChannel.TabIndex = 6;
       LabelGRPCChannel.Text = "gRPC Server-Kanal:";
       // 
       // FormSettings
@@ -756,7 +781,7 @@
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.FromArgb(19, 26, 33);
       CancelButton = ButtonSchliessen;
-      ClientSize = new Size(798, 597);
+      ClientSize = new Size(798, 624);
       Controls.Add(GroupBoxAnzeige);
       Controls.Add(GroupBoxLocation);
       Controls.Add(GroupBoxLogMonitor);
@@ -851,5 +876,7 @@
     private Label LabelGRPCURL;
     private Label LabelGRPCChannel;
     private CheckBox CheckBoxRPCSyncOnStartup;
+    private Label LabelGRPCKanalPasswort;
+    private TextBox TextBoxGRPCChannelPassword;
   }
 }

@@ -196,6 +196,9 @@
     /// <summary>Der zu verwendende Channel des gRPC-Servers</summary>
     public string RPC_Channel { get; set; } = string.Empty;
 
+    /// <summary>Das Passwort für den zu verwendenden Channels des gRPC-Servers</summary>
+    public string RPC_Channel_Password { get; set; } = string.Empty;
+
     /// <summary>Angabe, ob die Synchronisierung mit dem gRPC-Server beim Programmstart automatisch erfolgen soll</summary>
     public bool RPC_Sync_On_Startup { get; set; } = false;
 

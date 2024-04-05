@@ -167,7 +167,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         RelationInfos infos = null;
         bool isRPC = IsRPCSync && importPath == null;
         if (isRPC) {
-          infos = RPC_Wrapper.GetRelations(ProgramSettings.Relations.RPC_Channel);
+          infos = RPC_Wrapper.GetRelations(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Channel_Password);
         } else {
           string jsonFilePath = importPath ?? FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.Root, "Relations");
           if (File.Exists(jsonFilePath)) {
@@ -211,19 +211,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         if (Sync == SyncStatus.Disconnected && (ProgramSettings.Relations.RPC_Sync_On_Startup || !startup)) {
           ImportRelationInfos();
           CancelToken = new CancellationTokenSource();
-          Task.Run(() => RPC_Wrapper.SyncRelations(this, ProgramSettings.Relations.RPC_Channel, CancelToken));
+          Task.Run(() => RPC_Wrapper.SyncRelations(this, ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Channel_Password, CancelToken));
         } else {
-          if (ModifierKeys == (Keys.Control | Keys.Shift)) {
-            // Die gRPC-Liste leeren, wenn Strg- und Umschalt-Taste gedrückt sind
-            if (RPC_Wrapper.RemoveRelations(ProgramSettings.Relations.RPC_Channel)) {
-              ClearRelations();
-            }
-          } else if (ModifierKeys == (Keys.Control | Keys.Shift | Keys.Alt)) {
-            // Die gRPC-Liste wiederherstellen, wenn Strg-, Umschalt- und Alt-Taste gedrückt sind
-            RPC_Wrapper.RestoreRelations(ProgramSettings.Relations.RPC_Channel);
-          } else {
-            CancelToken.Cancel();
-          }
+          CancelToken.Cancel();
         }
       }
     }
@@ -320,7 +310,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public void UpdateRelation(string name, RelationType relationType, RelationValue relation, bool withoutRPCSet = false) {
       if (!string.IsNullOrWhiteSpace(name)) {
         if (IsRPCSync && !withoutRPCSet && Sync == SyncStatus.Connected) {
-          RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, relationType, name, relation);
+          RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Channel_Password, relationType, name, relation);
         }
         Control[] controls = PanelRelations.Controls.Find($"UserControlRelation_{relationType}_{name}", false);
         if (controls?.Length == 1) {

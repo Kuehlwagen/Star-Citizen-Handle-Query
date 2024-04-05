@@ -88,6 +88,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       TextBoxGRPCURL.Text = ProgramSettings.Relations.RPC_URL;
       TextBoxGRPCChannel.Text = ProgramSettings.Relations.RPC_Channel;
       CheckBoxRPCSyncOnStartup.Checked = ProgramSettings.Relations.RPC_Sync_On_Startup;
+      TextBoxGRPCChannelPassword.Text = ProgramSettings.Relations.RPC_Channel_Password;
     }
 
     private void GetLocalizations() {
@@ -241,6 +242,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.Relations.RPC_Channel = TextBoxGRPCChannel.Text;
     }
 
+    private void MaskedTextBoxGRPCKanalPasswort_TextChanged(object sender, EventArgs e) {
+      ProgramSettings.Relations.RPC_Channel_Password = TextBoxGRPCChannelPassword.Text;
+    }
+
     private void ButtonStandard_Click(object sender, EventArgs e) {
       ProgramSettings = new() { Language = ProgramSettings.Language };
       SetDialogValues();
@@ -290,6 +295,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LabelRelationsEntriesMaximum.Text = CurrentLocalization.Settings.Relations.Relations_Entries_Max;
       LabelGRPCURL.Text = CurrentLocalization.Settings.Relations.RPC_Server_URL;
       LabelGRPCChannel.Text = CurrentLocalization.Settings.Relations.RPC_Server_Channel;
+      LabelGRPCKanalPasswort.Text = CurrentLocalization.Settings.Relations.RPC_Channel_Password;
       CheckBoxRPCSyncOnStartup.Text = CurrentLocalization.Settings.Relations.RPC_Sync_On_Startup;
 
       GroupBoxLogMonitor.Text = CurrentLocalization.Settings.Log_Monitor.Group_Title;

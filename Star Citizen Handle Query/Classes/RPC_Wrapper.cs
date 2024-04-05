@@ -14,15 +14,15 @@ internal static class RPC_Wrapper {
     _url = url;
   }
 
-  public static RelationInfos GetRelations(string channel) {
+  public static RelationInfos GetRelations(string channel, string password) {
     RelationInfos rtnVal = new();
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
         using var gRPC_Channel = GrpcChannel.ForAddress(_url);
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
-        var result = Task.FromResult(gRPC_Client.GetRelations(new ChannelRequest() { Channel = channel })).Result;
+        var result = Task.FromResult(gRPC_Client.GetRelations(new ChannelRequest() { Channel = channel, Password = password })).Result;
         foreach (var relation in result.Relations) {
-          rtnVal.Relations.Add(new Serialization.RelationInformation() {
+          rtnVal.Relations.Add(new RelationInformation() {
             Name = relation.Name,
             Type = relation.Type,
             Relation = relation.Relation
@@ -35,14 +35,15 @@ internal static class RPC_Wrapper {
     return rtnVal;
   }
 
-  public static bool SetRelation(string channel, RelationType type, string name, RelationValue relation) {
+  public static bool SetRelation(string channel, string password, RelationType type, string name, RelationValue relation) {
     bool rtnVal = false;
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel) && !string.IsNullOrWhiteSpace(name)) {
         using var gRPC_Channel = GrpcChannel.ForAddress(_url);
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
-        rtnVal = Task.FromResult(gRPC_Client.SetRelation(new FullRelationInfo() {
+        rtnVal = Task.FromResult(gRPC_Client.SetRelation(new() {
           Channel = channel,
+          Password = password,
           Relation = new RelationInfo() {
             Type = type,
             Name = name,
@@ -56,7 +57,7 @@ internal static class RPC_Wrapper {
     return rtnVal;
   }
 
-  public static RelationValue GetRelation(string channel, RelationType type, string name) {
+  public static RelationValue GetRelation(string channel, string password, RelationType type, string name) {
     RelationValue rtnVal = RelationValue.NotAssigned;
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel) && !string.IsNullOrWhiteSpace(name)) {
@@ -64,6 +65,7 @@ internal static class RPC_Wrapper {
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
         var result = Task.FromResult(gRPC_Client.GetRelation(new RelationRequest() {
           Channel = channel,
+          Password = password,
           Type = type,
           Name = name
         })).Result;
@@ -75,45 +77,13 @@ internal static class RPC_Wrapper {
     return rtnVal;
   }
 
-  public static bool RemoveRelations(string channel) {
-    bool rtnVal = false;
-    try {
-      if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
-        using var gRPC_Channel = GrpcChannel.ForAddress(_url);
-        var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
-        rtnVal = Task.FromResult(gRPC_Client.RemoveRelations(new ChannelRequest() {
-          Channel = channel
-        })).Result.Success;
-      }
-    } catch (Exception ex) {
-      Log($"{_url} - RemoveRelations({channel}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
-    }
-    return rtnVal;
-  }
-
-  public static bool RestoreRelations(string channel) {
-    bool rtnVal = false;
-    try {
-      if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
-        using var gRPC_Channel = GrpcChannel.ForAddress(_url);
-        var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
-       rtnVal = Task.FromResult(gRPC_Client.RestoreRelations(new ChannelRequest() {
-         Channel = channel
-       })).Result.Success;
-      }
-    } catch (Exception ex) {
-      Log($"{_url} - RemoveRelations({channel}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
-    }
-    return rtnVal;
-  }
-
-  public static async void SyncRelations(FormRelations frm, string channel, CancellationTokenSource cts) {
+  public static async void SyncRelations(FormRelations frm, string channel, string password, CancellationTokenSource cts) {
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
         frm.ChangeSync(FormRelations.SyncStatus.Connecting);
         using var gRPC_Channel = GrpcChannel.ForAddress(_url);
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
-        using var streamingCall = gRPC_Client.SyncRelations(new ChannelRequest() { Channel = channel }, cancellationToken: cts.Token);
+        using var streamingCall = gRPC_Client.SyncRelations(new ChannelRequest() { Channel = channel, Password = password }, cancellationToken: cts.Token);
         try {
           await Task.Run(() => gRPC_Channel.WaitForStateChangedAsync(gRPC_Channel.State, cts.Token));
           if (gRPC_Channel.State == ConnectivityState.Ready || gRPC_Channel.State == ConnectivityState.Idle) {

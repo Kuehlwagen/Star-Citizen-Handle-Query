@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SCHQ_Server.Classes;
 using SQLite;
 using System.Reflection;
+using DAS = System.ComponentModel.DataAnnotations.Schema;
 
 namespace SCHQ_Server.Models;
 
@@ -33,7 +35,6 @@ public class Relation {
   public RelationType Type { get; set; }
   public string? Name { get; set; }
   public RelationValue Value { get; set; }
-  public bool Active { get; set; }
 }
 
 [Table("Channels"), Index("Name", new string[] {}, IsUnique = true, Name = "ChannelName")]
@@ -41,4 +42,10 @@ public class Channel {
   [SQLite.PrimaryKey, AutoIncrement]
   public int Id { get; set; }
   public string? Name { get; set; }
+  [DAS.NotMapped]
+  public string? DecryptedPassword {
+    get { return Encryption.DecryptText(Password); }
+    set { Password = !string.IsNullOrEmpty(value) ? Encryption.EncryptText(value) : string.Empty; }
+  }
+  public string? Password { get; set; }
 }

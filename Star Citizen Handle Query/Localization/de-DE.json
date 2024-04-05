@@ -61,6 +61,7 @@
       "Relations_Entries_Max": "Eintr\u00E4ge Maximum:",
       "RPC_Server_URL": "gRPC Server-URL:",
       "RPC_Server_Channel": "gRPC Server-Kanal:",
+      "RPC_Channel_Password": "gRPC Kanal-Passwort:",
       "RPC_Sync_On_Startup": "gRPC-Synchronisierung bei Programmstart"
     },
     "Log_Monitor": {
