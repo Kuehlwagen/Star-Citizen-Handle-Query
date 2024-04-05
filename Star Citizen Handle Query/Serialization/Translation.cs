@@ -205,7 +205,7 @@
 
     public string Title { get; set; } = "gRPC-Kanalverwaltung";
 
-    public string Load_Channels { get; set; } = "Kanäle laden";
+    public string Button_Load_Channels { get; set; } = "Kanäle laden";
 
     public string Channel_Name { get; set; } = "Kanalname";
 
@@ -216,6 +216,18 @@
     public string Channel_Delete { get; set; } = "Löschen";
 
     public string Button_OK { get; set; } = "OK";
+
+    public string No_Channels_Found { get; set; } = "Es konnten keine Kanäle ermittelt werden.";
+
+    public string Channel_Not_Deleted { get; set; } = "Der Kanal konnte nicht gelöscht werden (ggf. falsches Passwort).";
+
+    public string New_Channel_Name_Placeholder { get; set; } = "Kanal-Name";
+
+    public string New_Channel_Password_Placeholder { get; set; } = "Kanal-Passwort";
+
+    public string Button_Create_Channel { get; set; } = "Kanal erstellen";
+
+    public string Channel_Not_Created { get; set; } = "Der Kanal konnte nicht erstellt werden.";
 
   }
 

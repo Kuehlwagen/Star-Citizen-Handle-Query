@@ -326,6 +326,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       frm.ShowDialog();
       if (frm.DialogResult == DialogResult.OK && !string.IsNullOrWhiteSpace(frm.SelectedChannel)) {
         TextBoxGRPCChannel.Text = frm.SelectedChannel;
+        TextBoxGRPCChannelPassword.Text = frm.SelectedPassword;
         TextBoxGRPCChannel.Focus();
         TextBoxGRPCChannel.SelectAll();
       }

@@ -65,12 +65,18 @@
       "RPC_Sync_On_Startup": "gRPC-Synchronisierung bei Programmstart",
       "RPC_Channels": {
         "Title": "gRPC-Kanalverwaltung",
-        "Load_Channels": "Kan\u00E4le laden",
+        "Button_Load_Channels": "Kan\u00E4le laden",
         "Channel_Name": "Kanalname",
         "Channel_Secured": "Gesichert",
         "Channel_Password": "Passwort",
         "Channel_Delete": "L\u00F6schen",
-        "Button_OK": "OK"
+        "Button_OK": "OK",
+        "No_Channels_Found": "Es konnten keine Kan\u00E4le ermittelt werden.",
+        "Channel_Not_Deleted": "Der Kanal konnte nicht gel\u00F6scht werden (ggf. falsches Passwort).",
+        "New_Channel_Name_Placeholder": "Kanal-Name",
+        "New_Channel_Password_Placeholder": "Kanal-Passwort",
+        "Button_Create_Channel": "Kanal erstellen",
+        "Channel_Not_Created": "Der Kanal konnte nicht erstellt werden."
       }
     },
     "Log_Monitor": {

@@ -65,12 +65,18 @@
       "RPC_Sync_On_Startup": "gRPC Sync on Startup",
       "RPC_Channels": {
         "Title": "gRPC Channel Management",
-        "Load_Channels": "Load Channels",
+        "Button_Load_Channels": "Load Channels",
         "Channel_Name": "Channel Name",
         "Channel_Secured": "Secured",
         "Channel_Password": "Password",
         "Channel_Delete": "Delete",
-        "Button_OK": "OK"
+        "Button_OK": "OK",
+        "No_Channels_Found": "No channels found",
+        "Channel_Not_Deleted": "Channel not deleted (wrong password?)",
+        "New_Channel_Name_Placeholder": "Channel Name",
+        "New_Channel_Password_Placeholder": "Channel Password",
+        "Button_Create_Channel": "Create Channel",
+        "Channel_Not_Created": "Channel not created"
       }
     },
     "Log_Monitor": {

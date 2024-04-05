@@ -10,6 +10,7 @@ public partial class FormEditRpcChannels : Form {
   private readonly Translation ProgramTranslation;
 
   public string SelectedChannel { get; set; } = string.Empty;
+  public string SelectedPassword { get; set; } = string.Empty;
 
   public FormEditRpcChannels(Settings settings, Translation translation) {
     InitializeComponent();
@@ -30,11 +31,15 @@ public partial class FormEditRpcChannels : Form {
       [true]);
   }
 
+  private void FormEditRpcChannels_Shown(object sender, EventArgs e) {
+    LoadChannels();
+  }
+
   private void UpdateLocalization() {
     PerformLayout();
 
     Text = $"SCHQ_Server {ProgramTranslation.Settings.Relations.RPC_Channels.Title} - {ProgramSettings.Relations.RPC_URL}";
-    ButtonLoadChannels.Text = ProgramTranslation.Settings.Relations.RPC_Channels.Load_Channels;
+    ButtonLoadChannels.Text = ProgramTranslation.Settings.Relations.RPC_Channels.Button_Load_Channels;
     ButtonClose.Text = ProgramTranslation.Settings.Buttons.Close;
     ColumnChannelName.HeaderText = ProgramTranslation.Settings.Relations.RPC_Channels.Channel_Name;
     ColumnHasPassword.HeaderText = ProgramTranslation.Settings.Relations.RPC_Channels.Channel_Secured;
@@ -42,11 +47,19 @@ public partial class FormEditRpcChannels : Form {
     ColumnDeleteChannel.HeaderText = ProgramTranslation.Settings.Relations.RPC_Channels.Channel_Delete;
     ColumnDeleteChannel.DefaultCellStyle.NullValue = ProgramTranslation.Settings.Relations.RPC_Channels.Channel_Delete;
     ButtonOK.Text = ProgramTranslation.Settings.Relations.RPC_Channels.Button_OK;
+    GroupBoxCreateChannel.Text = ProgramTranslation.Settings.Relations.RPC_Channels.Button_Create_Channel;
+    TextBoxNewChannelName.PlaceholderText = ProgramTranslation.Settings.Relations.RPC_Channels.New_Channel_Name_Placeholder;
+    TextBoxNewChannelPassword.PlaceholderText = ProgramTranslation.Settings.Relations.RPC_Channels.New_Channel_Password_Placeholder;
+    ButtonCreateChannel.Text = ProgramTranslation.Settings.Relations.RPC_Channels.Button_Create_Channel;
 
     ResumeLayout();
   }
 
   private void ButtonLoadChannels_Click(object sender, EventArgs e) {
+    LoadChannels(true);
+  }
+
+  private void LoadChannels(bool withMessageBox = false) {
     EnableControls(false);
     DataGridViewChannels.PerformLayout();
     DataGridViewChannels.Rows.Clear();
@@ -55,6 +68,8 @@ public partial class FormEditRpcChannels : Form {
       foreach (ChannelInfo channelInfo in channelInfos) {
         DataGridViewChannels.Rows.Add(channelInfo.Name, channelInfo.HasPassword ? CheckState.Checked : CheckState.Unchecked, string.Empty, null);
       }
+    } else if (withMessageBox) {
+      MessageBox.Show(ProgramTranslation.Settings.Relations.RPC_Channels.No_Channels_Found, Text);
     }
     DataGridViewChannels.ResumeLayout();
     EnableControls();
@@ -76,6 +91,8 @@ public partial class FormEditRpcChannels : Form {
       var deleted = Task.Run(() => RPC_Wrapper.DeleteChannel(channel, password)).Result;
       if (deleted) {
         DataGridViewChannels.Rows.RemoveAt(e.RowIndex);
+      } else {
+        MessageBox.Show(ProgramTranslation.Settings.Relations.RPC_Channels.Channel_Not_Deleted, Text);
       }
       EnableControls();
     }
@@ -90,15 +107,52 @@ public partial class FormEditRpcChannels : Form {
   private void EnableControls(bool enable = true) {
     ButtonLoadChannels.Enabled = enable;
     DataGridViewChannels.Enabled = enable;
+    ButtonCreateChannel.Enabled = enable && !string.IsNullOrWhiteSpace(TextBoxNewChannelName.Text);
     ButtonOK.Enabled = enable && DataGridViewChannels.SelectedRows?.Count > 0;
     ButtonClose.Enabled = enable;
+    if (enable && DataGridViewChannels.SelectedRows?.Count > 0) {
+      ButtonOK.Focus();
+      ButtonOK.Select();
+    } else {
+      ButtonLoadChannels.Focus();
+      ButtonLoadChannels.Select();
+    }
   }
 
   private void DataGridViewChannels_SelectionChanged(object sender, EventArgs e) {
     DataGridView dgv = (DataGridView)sender;
     if (dgv.SelectedRows.Count > 0) {
       SelectedChannel = dgv.SelectedRows[0].Cells[0].Value.ToString();
+      SelectedPassword = dgv.SelectedRows[0].Cells[2].Value.ToString();
     }
+  }
+
+  private void DataGridViewChannels_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
+    if (e.RowIndex > -1 && e.ColumnIndex == 2) {
+      SelectedPassword = DataGridViewChannels.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+    }
+  }
+
+  private void TextBoxNewChannelName_TextChanged(object sender, EventArgs e) {
+    ButtonCreateChannel.Enabled = !string.IsNullOrWhiteSpace(TextBoxNewChannelName.Text);
+  }
+
+  private void ButtonCreateChannel_Click(object sender, EventArgs e) {
+    EnableControls(false);
+    var created = Task.Run(() => RPC_Wrapper.CreateChannel(TextBoxNewChannelName.Text, TextBoxNewChannelPassword.Text)).Result;
+    if (created) {
+      DataGridViewChannels.PerformLayout();
+      int index = DataGridViewChannels.Rows.Add(TextBoxNewChannelName.Text, !string.IsNullOrWhiteSpace(TextBoxNewChannelPassword.Text) ? CheckState.Checked : CheckState.Unchecked,
+        TextBoxNewChannelPassword.Text, null);
+      TextBoxNewChannelName.Clear();
+      TextBoxNewChannelPassword.Clear();
+      DataGridViewChannels.Rows[index].Selected = true;
+      DataGridViewChannels.FirstDisplayedScrollingRowIndex = index;
+      DataGridViewChannels.ResumeLayout();
+    } else {
+      MessageBox.Show(ProgramTranslation.Settings.Relations.RPC_Channels.Channel_Not_Created);
+    }
+    EnableControls();
   }
 
   private void ButtonOK_Click(object sender, EventArgs e) {
