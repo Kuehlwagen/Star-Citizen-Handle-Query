@@ -1,4 +1,6 @@
-﻿namespace Star_Citizen_Handle_Query.Serialization {
+﻿using Star_Citizen_Handle_Query.Classes;
+
+namespace Star_Citizen_Handle_Query.Serialization {
 
   [Serializable()]
   public class Settings : ICloneable {
@@ -195,6 +197,12 @@
 
     /// <summary>Der zu verwendende Channel des gRPC-Servers</summary>
     public string RPC_Channel { get; set; } = string.Empty;
+
+    /// <summary>Enthält das unverschlüsselte Passwort</summary>
+    internal string RPC_Sync_Channel_Password_Decrypted {
+      get { return Encryption.DecryptText(RPC_Channel_Password); }
+      set { RPC_Channel_Password = !string.IsNullOrEmpty(value) ? Encryption.EncryptText(value) : string.Empty; }
+    }
 
     /// <summary>Das Passwort für den zu verwendenden Channels des gRPC-Servers</summary>
     public string RPC_Channel_Password { get; set; } = string.Empty;

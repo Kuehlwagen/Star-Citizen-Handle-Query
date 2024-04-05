@@ -190,11 +190,11 @@
 
     public string RPC_Server_URL { get; set; } = "gRPC Server-URL:";
 
-    public string RPC_Server_Channel { get; set; } = "gRPC Server-Kanal:";
+    public string RPC_Server_Channel { get; set; } = "gRPC Kanal:";
 
     public string RPC_Channel_Password { get; set; } = "gRPC Kanal-Passwort:";
 
-    public string RPC_Sync_On_Startup { get; set; } = "gRPC-Synchronisation bei Programmstart";
+    public string RPC_Sync_On_Startup { get; set; } = "gRPC-Synchronisierung bei Programmstart";
 
   }
 

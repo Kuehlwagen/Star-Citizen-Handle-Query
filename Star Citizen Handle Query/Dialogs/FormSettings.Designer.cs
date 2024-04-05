@@ -770,9 +770,9 @@
       LabelGRPCChannel.AutoSize = true;
       LabelGRPCChannel.Location = new Point(32, 136);
       LabelGRPCChannel.Name = "LabelGRPCChannel";
-      LabelGRPCChannel.Size = new Size(108, 15);
+      LabelGRPCChannel.Size = new Size(71, 15);
       LabelGRPCChannel.TabIndex = 6;
-      LabelGRPCChannel.Text = "gRPC Server-Kanal:";
+      LabelGRPCChannel.Text = "gRPC Kanal:";
       // 
       // FormSettings
       // 
@@ -793,7 +793,7 @@
       Controls.Add(ButtonSpeichern);
       ForeColor = Color.FromArgb(57, 206, 216);
       Icon = (Icon)resources.GetObject("$this.Icon");
-      MinimumSize = new Size(814, 636);
+      MinimumSize = new Size(814, 663);
       Name = "FormSettings";
       StartPosition = FormStartPosition.CenterScreen;
       Text = "Star Citizen Handle Query Einstellungen";

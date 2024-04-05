@@ -167,7 +167,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         RelationInfos infos = null;
         bool isRPC = IsRPCSync && importPath == null;
         if (isRPC) {
-          infos = RPC_Wrapper.GetRelations(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Channel_Password);
+          infos = RPC_Wrapper.GetRelations(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted);
         } else {
           string jsonFilePath = importPath ?? FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.Root, "Relations");
           if (File.Exists(jsonFilePath)) {
@@ -211,7 +211,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         if (Sync == SyncStatus.Disconnected && (ProgramSettings.Relations.RPC_Sync_On_Startup || !startup)) {
           ImportRelationInfos();
           CancelToken = new CancellationTokenSource();
-          Task.Run(() => RPC_Wrapper.SyncRelations(this, ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Channel_Password, CancelToken));
+          Task.Run(() => RPC_Wrapper.SyncRelations(this, ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, CancelToken));
         } else {
           CancelToken.Cancel();
         }
@@ -310,7 +310,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public void UpdateRelation(string name, RelationType relationType, RelationValue relation, bool withoutRPCSet = false) {
       if (!string.IsNullOrWhiteSpace(name)) {
         if (IsRPCSync && !withoutRPCSet && Sync == SyncStatus.Connected) {
-          RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Channel_Password, relationType, name, relation);
+          RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, relationType, name, relation);
         }
         Control[] controls = PanelRelations.Controls.Find($"UserControlRelation_{relationType}_{name}", false);
         if (controls?.Length == 1) {
