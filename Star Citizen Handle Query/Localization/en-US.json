@@ -62,7 +62,10 @@
       "RPC_Server_URL": "gRPC Server URL:",
       "RPC_Server_Channel": "gRPC Channel:",
       "RPC_Channel_Password": "gRPC Channel Password:",
-      "RPC_Sync_On_Startup": "gRPC Sync on Startup"
+      "RPC_Sync_On_Startup": "gRPC Sync on Startup",
+      "RPC_Channels": {
+        "Title": "gRPC Channel Management"
+      }
     },
     "Log_Monitor": {
       "Group_Title": "Log Monitor",

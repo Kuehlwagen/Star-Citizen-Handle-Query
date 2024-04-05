@@ -75,6 +75,7 @@
       LabelLMB_URL = new Label();
       GroupBoxLogMonitor = new GroupBox();
       GroupBoxBeziehungen = new GroupBox();
+      ButtonEditPrcChannels = new Button();
       LabelGRPCKanalPasswort = new Label();
       CheckBoxRPCSyncOnStartup = new CheckBox();
       TextBoxGRPCChannelPassword = new TextBox();
@@ -682,6 +683,7 @@
       // 
       // GroupBoxBeziehungen
       // 
+      GroupBoxBeziehungen.Controls.Add(ButtonEditPrcChannels);
       GroupBoxBeziehungen.Controls.Add(LabelGRPCKanalPasswort);
       GroupBoxBeziehungen.Controls.Add(CheckBoxRPCSyncOnStartup);
       GroupBoxBeziehungen.Controls.Add(NumericUpDownRelationsEntriesMaximum);
@@ -702,13 +704,25 @@
       GroupBoxBeziehungen.TabStop = false;
       GroupBoxBeziehungen.Text = "Beziehungen";
       // 
+      // ButtonEditPrcChannels
+      // 
+      ButtonEditPrcChannels.BackgroundImage = Properties.Resources.Settings;
+      ButtonEditPrcChannels.BackgroundImageLayout = ImageLayout.Center;
+      ButtonEditPrcChannels.FlatStyle = FlatStyle.Flat;
+      ButtonEditPrcChannels.Location = new Point(380, 134);
+      ButtonEditPrcChannels.Name = "ButtonEditPrcChannels";
+      ButtonEditPrcChannels.Size = new Size(23, 23);
+      ButtonEditPrcChannels.TabIndex = 8;
+      ButtonEditPrcChannels.UseVisualStyleBackColor = true;
+      ButtonEditPrcChannels.Click += ButtonEditPrcChannels_Click;
+      // 
       // LabelGRPCKanalPasswort
       // 
       LabelGRPCKanalPasswort.AutoSize = true;
       LabelGRPCKanalPasswort.Location = new Point(32, 165);
       LabelGRPCKanalPasswort.Name = "LabelGRPCKanalPasswort";
       LabelGRPCKanalPasswort.Size = new Size(123, 15);
-      LabelGRPCKanalPasswort.TabIndex = 8;
+      LabelGRPCKanalPasswort.TabIndex = 9;
       LabelGRPCKanalPasswort.Text = "gRPC Kanal-Passwort:";
       // 
       // CheckBoxRPCSyncOnStartup
@@ -717,7 +731,7 @@
       CheckBoxRPCSyncOnStartup.Location = new Point(34, 192);
       CheckBoxRPCSyncOnStartup.Name = "CheckBoxRPCSyncOnStartup";
       CheckBoxRPCSyncOnStartup.Size = new Size(254, 19);
-      CheckBoxRPCSyncOnStartup.TabIndex = 10;
+      CheckBoxRPCSyncOnStartup.TabIndex = 11;
       CheckBoxRPCSyncOnStartup.Text = "gRPC-Synchronisierung bei Programmstart";
       CheckBoxRPCSyncOnStartup.UseVisualStyleBackColor = true;
       CheckBoxRPCSyncOnStartup.CheckedChanged += CheckBoxRPCSyncOnStartup_CheckedChanged;
@@ -731,7 +745,7 @@
       TextBoxGRPCChannelPassword.Name = "TextBoxGRPCChannelPassword";
       TextBoxGRPCChannelPassword.PasswordChar = '*';
       TextBoxGRPCChannelPassword.Size = new Size(213, 23);
-      TextBoxGRPCChannelPassword.TabIndex = 9;
+      TextBoxGRPCChannelPassword.TabIndex = 10;
       TextBoxGRPCChannelPassword.TextChanged += MaskedTextBoxGRPCKanalPasswort_TextChanged;
       // 
       // TextBoxGRPCChannel
@@ -741,7 +755,7 @@
       TextBoxGRPCChannel.ForeColor = Color.FromArgb(19, 26, 33);
       TextBoxGRPCChannel.Location = new Point(190, 134);
       TextBoxGRPCChannel.Name = "TextBoxGRPCChannel";
-      TextBoxGRPCChannel.Size = new Size(213, 23);
+      TextBoxGRPCChannel.Size = new Size(188, 23);
       TextBoxGRPCChannel.TabIndex = 7;
       TextBoxGRPCChannel.TextChanged += TextBoxGRPCChannel_TextChanged;
       // 
@@ -878,5 +892,6 @@
     private CheckBox CheckBoxRPCSyncOnStartup;
     private Label LabelGRPCKanalPasswort;
     private TextBox TextBoxGRPCChannelPassword;
+    private Button ButtonEditPrcChannels;
   }
 }

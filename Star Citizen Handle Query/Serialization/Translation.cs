@@ -196,6 +196,15 @@
 
     public string RPC_Sync_On_Startup { get; set; } = "gRPC-Synchronisierung bei Programmstart";
 
+    public Translation_Settings_Relations_RPC_Channels RPC_Channels { get; set; } = new();
+
+  }
+
+  [Serializable()]
+  public class Translation_Settings_Relations_RPC_Channels {
+
+    public string Title { get; set; } = "gRPC-Kanalverwaltung";
+
   }
 
   [Serializable()]

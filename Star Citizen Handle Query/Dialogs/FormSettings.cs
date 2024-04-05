@@ -321,6 +321,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.Locations.EntriesMax = Convert.ToInt32((sender as NumericUpDown).Value);
     }
 
+    private void ButtonEditPrcChannels_Click(object sender, EventArgs e) {
+      using FormEditRpcChannels frm = new(ProgramSettings, CurrentLocalization);
+      frm.ShowDialog();
+    }
   }
 
 }
