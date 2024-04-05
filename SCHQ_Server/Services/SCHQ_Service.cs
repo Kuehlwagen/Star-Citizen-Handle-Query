@@ -231,9 +231,9 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
       try {
         Channel? channel = _db.Channels.FirstOrDefault(c => c.Name == request.Channel && c.Password == request.Password);
         if (channel != null) {
-          while (!context.CancellationToken.IsCancellationRequested) {
+          while (!context.CancellationToken.IsCancellationRequested && channel?.Id > 0) {
             IOrderedQueryable<Relation> results = from rel in _db.Relations
-                                                  where rel.Channel != null && rel.Channel.Name == request.Channel && rel.Timestamp > SyncTimestamp
+                                                  where rel.ChannelId == channel.Id && rel.Timestamp > SyncTimestamp
                                                   orderby rel.Timestamp
                                                   select rel;
             if (await results.AnyAsync()) {
@@ -252,6 +252,7 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
               }
             }
             await Task.Delay(500);
+            channel = _db.Channels.FirstOrDefault(c => c.Name == request.Channel);
           }
         }
       } catch (Exception ex) {
