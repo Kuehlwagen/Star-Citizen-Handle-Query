@@ -64,7 +64,13 @@
       "RPC_Channel_Password": "gRPC Kanal-Passwort:",
       "RPC_Sync_On_Startup": "gRPC-Synchronisierung bei Programmstart",
       "RPC_Channels": {
-        "Title": "gRPC-Kanalverwaltung"
+        "Title": "gRPC-Kanalverwaltung",
+        "Load_Channels": "Kan\u00E4le laden",
+        "Channel_Name": "Kanalname",
+        "Channel_Secured": "Gesichert",
+        "Channel_Password": "Passwort",
+        "Channel_Delete": "L\u00F6schen",
+        "Button_OK": "OK"
       }
     },
     "Log_Monitor": {

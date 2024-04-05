@@ -324,6 +324,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void ButtonEditPrcChannels_Click(object sender, EventArgs e) {
       using FormEditRpcChannels frm = new(ProgramSettings, CurrentLocalization);
       frm.ShowDialog();
+      if (frm.DialogResult == DialogResult.OK && !string.IsNullOrWhiteSpace(frm.SelectedChannel)) {
+        TextBoxGRPCChannel.Text = frm.SelectedChannel;
+        TextBoxGRPCChannel.Focus();
+        TextBoxGRPCChannel.SelectAll();
+      }
     }
   }
 

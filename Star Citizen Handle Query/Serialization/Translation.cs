@@ -205,6 +205,18 @@
 
     public string Title { get; set; } = "gRPC-Kanalverwaltung";
 
+    public string Load_Channels { get; set; } = "Kanäle laden";
+
+    public string Channel_Name { get; set; } = "Kanalname";
+
+    public string Channel_Secured { get; set; } = "Gesichert";
+
+    public string Channel_Password { get; set; } = "Passwort";
+
+    public string Channel_Delete { get; set; } = "Löschen";
+
+    public string Button_OK { get; set; } = "OK";
+
   }
 
   [Serializable()]
