@@ -80,8 +80,7 @@
         "Permissions": "Berechtigungen",
         "Permission_None": "Keine",
         "Permission_Read": "Lesen",
-        "Permission_Write": "Schreiben",
-        "Permission_Manage": "Verwalten"
+        "Permission_Write": "Schreiben"
       }
     },
     "Log_Monitor": {

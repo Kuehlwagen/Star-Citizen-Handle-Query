@@ -56,7 +56,7 @@ public partial class FormEditRpcChannels : Form {
     ButtonCreateChannel.Text = ProgramTranslation.Settings.Relations.RPC_Channels.Button_Create_Channel;
     LabelNewChannelPermissions.Text = $"{ProgramTranslation.Settings.Relations.RPC_Channels.Permissions}:";
     ComboBoxNewChannelPermissions.Items.AddRange([ProgramTranslation.Settings.Relations.RPC_Channels.Permission_None, ProgramTranslation.Settings.Relations.RPC_Channels.Permission_Read,
-      ProgramTranslation.Settings.Relations.RPC_Channels.Permission_Write, ProgramTranslation.Settings.Relations.RPC_Channels.Permission_Manage]);
+      ProgramTranslation.Settings.Relations.RPC_Channels.Permission_Write]);
 
     ResumeLayout();
   }

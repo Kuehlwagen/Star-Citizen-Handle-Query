@@ -237,8 +237,6 @@
 
     public string Permission_Write { get; set; } = "Schreiben";
 
-    public string Permission_Manage { get; set; } = "Verwalten";
-
   }
 
   [Serializable()]
