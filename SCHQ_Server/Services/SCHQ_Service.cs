@@ -24,7 +24,8 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
         if (!_db.Channels.Any(c => c.Name != null && c.Name == request.Channel)) {
           _db.Add(new Channel() {
             Name = request.Channel,
-            DecryptedPassword = request.Password
+            DecryptedPassword = request.Password,
+            Permissions = request.Permissons
           });
           rtnVal = _db.SaveChanges() > 0;
         }
@@ -50,7 +51,8 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
       foreach (Channel c in results.ToListAsync().Result) {
         rtnVal.Channels.Add(new ChannelInfo() {
           Name = c.Name,
-          HasPassword = c.Password?.Length > 0
+          HasPassword = c.Password?.Length > 0,
+          Permissions = c.Permissions
         });
       }
     } catch (Exception ex) {
@@ -75,7 +77,8 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
             Found = true,
             Channel = new() {
               Name = channel.Name,
-              HasPassword = channel.Password?.Length > 0
+              HasPassword = channel.Password?.Length > 0,
+              Permissions = channel.Permissions
             }
           };
         }

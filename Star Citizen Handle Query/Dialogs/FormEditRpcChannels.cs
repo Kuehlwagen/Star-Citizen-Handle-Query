@@ -29,6 +29,8 @@ public partial class FormEditRpcChannels : Form {
       null,
       DataGridViewChannels,
       [true]);
+
+    ComboBoxNewChannelPermissions.SelectedIndex = 0;
   }
 
   private void FormEditRpcChannels_Shown(object sender, EventArgs e) {
@@ -43,6 +45,7 @@ public partial class FormEditRpcChannels : Form {
     ButtonClose.Text = ProgramTranslation.Settings.Buttons.Close;
     ColumnChannelName.HeaderText = ProgramTranslation.Settings.Relations.RPC_Channels.Channel_Name;
     ColumnHasPassword.HeaderText = ProgramTranslation.Settings.Relations.RPC_Channels.Channel_Secured;
+    ColumnPermissions.HeaderText = ProgramTranslation.Settings.Relations.RPC_Channels.Permissions;
     ColumnPasswort.HeaderText = ProgramTranslation.Settings.Relations.RPC_Channels.Channel_Password;
     ColumnDeleteChannel.HeaderText = ProgramTranslation.Settings.Relations.RPC_Channels.Channel_Delete;
     ColumnDeleteChannel.DefaultCellStyle.NullValue = ProgramTranslation.Settings.Relations.RPC_Channels.Channel_Delete;
@@ -51,6 +54,9 @@ public partial class FormEditRpcChannels : Form {
     TextBoxNewChannelName.PlaceholderText = ProgramTranslation.Settings.Relations.RPC_Channels.New_Channel_Name_Placeholder;
     TextBoxNewChannelPassword.PlaceholderText = ProgramTranslation.Settings.Relations.RPC_Channels.New_Channel_Password_Placeholder;
     ButtonCreateChannel.Text = ProgramTranslation.Settings.Relations.RPC_Channels.Button_Create_Channel;
+    LabelNewChannelPermissions.Text = $"{ProgramTranslation.Settings.Relations.RPC_Channels.Permissions}:";
+    ComboBoxNewChannelPermissions.Items.AddRange([ProgramTranslation.Settings.Relations.RPC_Channels.Permission_None, ProgramTranslation.Settings.Relations.RPC_Channels.Permission_Read,
+      ProgramTranslation.Settings.Relations.RPC_Channels.Permission_Write, ProgramTranslation.Settings.Relations.RPC_Channels.Permission_Manage]);
 
     ResumeLayout();
   }
@@ -66,7 +72,8 @@ public partial class FormEditRpcChannels : Form {
     var channelInfos = Task.Run(RPC_Wrapper.GetChannels).Result;
     if (channelInfos?.Count > 0) {
       foreach (ChannelInfo channelInfo in channelInfos) {
-        DataGridViewChannels.Rows.Add(channelInfo.Name, channelInfo.HasPassword ? CheckState.Checked : CheckState.Unchecked, string.Empty, null);
+        DataGridViewChannels.Rows.Add(channelInfo.Name, channelInfo.HasPassword ? CheckState.Checked : CheckState.Unchecked,
+          $"{ComboBoxNewChannelPermissions.Items[(int)channelInfo.Permissions]}", string.Empty, null);
       }
     } else if (withMessageBox) {
       MessageBox.Show(ProgramTranslation.Settings.Relations.RPC_Channels.No_Channels_Found, Text);
@@ -76,7 +83,7 @@ public partial class FormEditRpcChannels : Form {
   }
 
   private void DataGridViewChannels_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
-    if (e.RowIndex > -1 && e.ColumnIndex == 2 && e.Value?.ToString().Length > 0) {
+    if (e.RowIndex > -1 && e.ColumnIndex == 3 && e.Value?.ToString().Length > 0) {
       e.Value = string.Empty.PadLeft(e.Value.ToString().Length, '*');
       e.FormattingApplied = true;
     }
@@ -86,7 +93,7 @@ public partial class FormEditRpcChannels : Form {
     var grid = (DataGridView)sender;
     if (grid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex > -1) {
       string channel = grid.Rows[e.RowIndex].Cells[0].Value?.ToString() ?? string.Empty;
-      string password = grid.Rows[e.RowIndex].Cells[2].Value?.ToString() ?? string.Empty;
+      string password = grid.Rows[e.RowIndex].Cells[3].Value?.ToString() ?? string.Empty;
       EnableControls(false);
       var deleted = Task.Run(() => RPC_Wrapper.DeleteChannel(channel, password)).Result;
       if (deleted) {
@@ -123,12 +130,12 @@ public partial class FormEditRpcChannels : Form {
     DataGridView dgv = (DataGridView)sender;
     if (dgv.SelectedRows.Count > 0) {
       SelectedChannel = dgv.SelectedRows[0].Cells[0].Value?.ToString() ?? string.Empty;
-      SelectedPassword = dgv.SelectedRows[0].Cells[2].Value?.ToString() ?? string.Empty;
+      SelectedPassword = dgv.SelectedRows[0].Cells[3].Value?.ToString() ?? string.Empty;
     }
   }
 
   private void DataGridViewChannels_CellEndEdit(object sender, DataGridViewCellEventArgs e) {
-    if (e.RowIndex > -1 && e.ColumnIndex == 2) {
+    if (e.RowIndex > -1 && e.ColumnIndex == 3) {
       SelectedPassword = DataGridViewChannels.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString() ?? string.Empty;
     }
   }
@@ -139,11 +146,11 @@ public partial class FormEditRpcChannels : Form {
 
   private void ButtonCreateChannel_Click(object sender, EventArgs e) {
     EnableControls(false);
-    var created = Task.Run(() => RPC_Wrapper.CreateChannel(TextBoxNewChannelName.Text, TextBoxNewChannelPassword.Text)).Result;
+    var created = Task.Run(() => RPC_Wrapper.CreateChannel(TextBoxNewChannelName.Text, TextBoxNewChannelPassword.Text, (ChannelPermissions)ComboBoxNewChannelPermissions.SelectedIndex)).Result;
     if (created) {
       DataGridViewChannels.PerformLayout();
       int index = DataGridViewChannels.Rows.Add(TextBoxNewChannelName.Text, !string.IsNullOrWhiteSpace(TextBoxNewChannelPassword.Text) ? CheckState.Checked : CheckState.Unchecked,
-        TextBoxNewChannelPassword.Text, null);
+        $"{ComboBoxNewChannelPermissions.Text}", TextBoxNewChannelPassword.Text, null);
       TextBoxNewChannelName.Clear();
       TextBoxNewChannelPassword.Clear();
       DataGridViewChannels.Rows[index].Selected = true;

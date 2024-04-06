@@ -76,7 +76,12 @@
         "New_Channel_Name_Placeholder": "Channel Name",
         "New_Channel_Password_Placeholder": "Channel Password",
         "Button_Create_Channel": "Create Channel",
-        "Channel_Not_Created": "Channel not created"
+        "Channel_Not_Created": "Channel not created",
+        "Permissions": "Permissions",
+        "Permission_None": "None",
+        "Permission_Read": "Read",
+        "Permission_Write": "Write",
+        "Permission_Manage": "Manage"
       }
     },
     "Log_Monitor": {

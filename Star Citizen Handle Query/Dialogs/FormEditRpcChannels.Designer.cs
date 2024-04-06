@@ -33,6 +33,7 @@
       DataGridViewChannels = new DataGridView();
       ColumnChannelName = new DataGridViewTextBoxColumn();
       ColumnHasPassword = new DataGridViewCheckBoxColumn();
+      ColumnPermissions = new DataGridViewTextBoxColumn();
       ColumnPasswort = new DataGridViewTextBoxColumn();
       ColumnDeleteChannel = new DataGridViewButtonColumn();
       ButtonOK = new Button();
@@ -40,6 +41,8 @@
       TextBoxNewChannelPassword = new TextBox();
       ButtonCreateChannel = new Button();
       GroupBoxCreateChannel = new GroupBox();
+      LabelNewChannelPermissions = new Label();
+      ComboBoxNewChannelPermissions = new ComboBox();
       ((System.ComponentModel.ISupportInitialize)DataGridViewChannels).BeginInit();
       GroupBoxCreateChannel.SuspendLayout();
       SuspendLayout();
@@ -58,7 +61,7 @@
       // ButtonClose
       // 
       ButtonClose.FlatStyle = FlatStyle.Flat;
-      ButtonClose.Location = new Point(93, 444);
+      ButtonClose.Location = new Point(94, 467);
       ButtonClose.Name = "ButtonClose";
       ButtonClose.Size = new Size(75, 28);
       ButtonClose.TabIndex = 4;
@@ -87,7 +90,7 @@
       dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
       DataGridViewChannels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
       DataGridViewChannels.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      DataGridViewChannels.Columns.AddRange(new DataGridViewColumn[] { ColumnChannelName, ColumnHasPassword, ColumnPasswort, ColumnDeleteChannel });
+      DataGridViewChannels.Columns.AddRange(new DataGridViewColumn[] { ColumnChannelName, ColumnHasPassword, ColumnPermissions, ColumnPasswort, ColumnDeleteChannel });
       dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
       dataGridViewCellStyle4.BackColor = Color.FromArgb(19, 26, 33);
       dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F);
@@ -123,6 +126,7 @@
       // 
       // ColumnHasPassword
       // 
+      ColumnHasPassword.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
       dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
       dataGridViewCellStyle2.ForeColor = Color.FromArgb(19, 26, 33);
       dataGridViewCellStyle2.NullValue = false;
@@ -135,6 +139,15 @@
       ColumnHasPassword.SortMode = DataGridViewColumnSortMode.Automatic;
       ColumnHasPassword.Width = 85;
       // 
+      // ColumnPermissions
+      // 
+      ColumnPermissions.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+      ColumnPermissions.HeaderText = "Berechtigungen";
+      ColumnPermissions.Name = "ColumnPermissions";
+      ColumnPermissions.ReadOnly = true;
+      ColumnPermissions.SortMode = DataGridViewColumnSortMode.NotSortable;
+      ColumnPermissions.Width = 102;
+      // 
       // ColumnPasswort
       // 
       ColumnPasswort.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
@@ -145,6 +158,7 @@
       // 
       // ColumnDeleteChannel
       // 
+      ColumnDeleteChannel.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
       dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleCenter;
       dataGridViewCellStyle3.BackColor = Color.FromArgb(19, 26, 33);
       dataGridViewCellStyle3.ForeColor = Color.FromArgb(57, 206, 216);
@@ -162,7 +176,7 @@
       // 
       ButtonOK.Enabled = false;
       ButtonOK.FlatStyle = FlatStyle.Flat;
-      ButtonOK.Location = new Point(12, 444);
+      ButtonOK.Location = new Point(13, 467);
       ButtonOK.Name = "ButtonOK";
       ButtonOK.Size = new Size(75, 28);
       ButtonOK.TabIndex = 3;
@@ -177,7 +191,7 @@
       TextBoxNewChannelName.Location = new Point(6, 26);
       TextBoxNewChannelName.Name = "TextBoxNewChannelName";
       TextBoxNewChannelName.PlaceholderText = "Kanal-Name";
-      TextBoxNewChannelName.Size = new Size(160, 23);
+      TextBoxNewChannelName.Size = new Size(210, 23);
       TextBoxNewChannelName.TabIndex = 0;
       TextBoxNewChannelName.TextChanged += TextBoxNewChannelName_TextChanged;
       // 
@@ -185,21 +199,21 @@
       // 
       TextBoxNewChannelPassword.BackColor = Color.FromArgb(57, 206, 216);
       TextBoxNewChannelPassword.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxNewChannelPassword.Location = new Point(172, 26);
+      TextBoxNewChannelPassword.Location = new Point(223, 26);
       TextBoxNewChannelPassword.Name = "TextBoxNewChannelPassword";
       TextBoxNewChannelPassword.PasswordChar = '*';
       TextBoxNewChannelPassword.PlaceholderText = "Kanal-Passwort";
-      TextBoxNewChannelPassword.Size = new Size(144, 23);
+      TextBoxNewChannelPassword.Size = new Size(210, 23);
       TextBoxNewChannelPassword.TabIndex = 1;
       // 
       // ButtonCreateChannel
       // 
       ButtonCreateChannel.Enabled = false;
       ButtonCreateChannel.FlatStyle = FlatStyle.Flat;
-      ButtonCreateChannel.Location = new Point(322, 22);
+      ButtonCreateChannel.Location = new Point(223, 55);
       ButtonCreateChannel.Name = "ButtonCreateChannel";
-      ButtonCreateChannel.Size = new Size(111, 28);
-      ButtonCreateChannel.TabIndex = 2;
+      ButtonCreateChannel.Size = new Size(210, 28);
+      ButtonCreateChannel.TabIndex = 4;
       ButtonCreateChannel.Text = "Kanal erstellen";
       ButtonCreateChannel.UseVisualStyleBackColor = true;
       ButtonCreateChannel.Click += ButtonCreateChannel_Click;
@@ -207,6 +221,8 @@
       // GroupBoxCreateChannel
       // 
       GroupBoxCreateChannel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+      GroupBoxCreateChannel.Controls.Add(LabelNewChannelPermissions);
+      GroupBoxCreateChannel.Controls.Add(ComboBoxNewChannelPermissions);
       GroupBoxCreateChannel.Controls.Add(TextBoxNewChannelName);
       GroupBoxCreateChannel.Controls.Add(TextBoxNewChannelPassword);
       GroupBoxCreateChannel.Controls.Add(ButtonCreateChannel);
@@ -214,10 +230,31 @@
       GroupBoxCreateChannel.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxCreateChannel.Location = new Point(13, 367);
       GroupBoxCreateChannel.Name = "GroupBoxCreateChannel";
-      GroupBoxCreateChannel.Size = new Size(439, 67);
+      GroupBoxCreateChannel.Size = new Size(439, 94);
       GroupBoxCreateChannel.TabIndex = 2;
       GroupBoxCreateChannel.TabStop = false;
       GroupBoxCreateChannel.Text = "Kanal erstellen";
+      // 
+      // LabelNewChannelPermissions
+      // 
+      LabelNewChannelPermissions.AutoSize = true;
+      LabelNewChannelPermissions.Location = new Point(6, 62);
+      LabelNewChannelPermissions.Name = "LabelNewChannelPermissions";
+      LabelNewChannelPermissions.Size = new Size(94, 15);
+      LabelNewChannelPermissions.TabIndex = 2;
+      LabelNewChannelPermissions.Text = "Berechtigungen:";
+      // 
+      // ComboBoxNewChannelPermissions
+      // 
+      ComboBoxNewChannelPermissions.BackColor = Color.FromArgb(57, 206, 216);
+      ComboBoxNewChannelPermissions.DropDownStyle = ComboBoxStyle.DropDownList;
+      ComboBoxNewChannelPermissions.FlatStyle = FlatStyle.Flat;
+      ComboBoxNewChannelPermissions.ForeColor = Color.FromArgb(19, 26, 33);
+      ComboBoxNewChannelPermissions.FormattingEnabled = true;
+      ComboBoxNewChannelPermissions.Location = new Point(106, 59);
+      ComboBoxNewChannelPermissions.Name = "ComboBoxNewChannelPermissions";
+      ComboBoxNewChannelPermissions.Size = new Size(110, 23);
+      ComboBoxNewChannelPermissions.TabIndex = 3;
       // 
       // FormEditRpcChannels
       // 
@@ -226,7 +263,7 @@
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.FromArgb(19, 26, 33);
       CancelButton = ButtonClose;
-      ClientSize = new Size(464, 484);
+      ClientSize = new Size(464, 506);
       Controls.Add(GroupBoxCreateChannel);
       Controls.Add(DataGridViewChannels);
       Controls.Add(ButtonOK);
@@ -234,7 +271,7 @@
       Controls.Add(ButtonLoadChannels);
       ForeColor = Color.FromArgb(57, 206, 216);
       Icon = (Icon)resources.GetObject("$this.Icon");
-      MinimumSize = new Size(480, 523);
+      MinimumSize = new Size(480, 545);
       Name = "FormEditRpcChannels";
       StartPosition = FormStartPosition.CenterScreen;
       Text = "SCHQ_Server gRPC Kanalverwaltung";
@@ -256,8 +293,11 @@
     private TextBox TextBoxNewChannelPassword;
     private Button ButtonCreateChannel;
     private GroupBox GroupBoxCreateChannel;
+    private ComboBox ComboBoxNewChannelPermissions;
+    private Label LabelNewChannelPermissions;
     private DataGridViewTextBoxColumn ColumnChannelName;
     private DataGridViewCheckBoxColumn ColumnHasPassword;
+    private DataGridViewTextBoxColumn ColumnPermissions;
     private DataGridViewTextBoxColumn ColumnPasswort;
     private DataGridViewButtonColumn ColumnDeleteChannel;
   }

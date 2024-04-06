@@ -229,6 +229,16 @@
 
     public string Channel_Not_Created { get; set; } = "Der Kanal konnte nicht erstellt werden.";
 
+    public string Permissions { get; set; } = "Berechtigungen";
+
+    public string Permission_None { get; set; } = "Keine";
+
+    public string Permission_Read { get; set; } = "Lesen";
+
+    public string Permission_Write { get; set; } = "Schreiben";
+
+    public string Permission_Manage { get; set; } = "Verwalten";
+
   }
 
   [Serializable()]

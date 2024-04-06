@@ -15,13 +15,13 @@ internal static class RPC_Wrapper {
     _url = url;
   }
 
-  public static bool CreateChannel(string channel, string password) {
+  public static bool CreateChannel(string channel, string password, ChannelPermissions permissions) {
     bool rtnVal = false;
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
         using var gRPC_Channel = GrpcChannel.ForAddress(_url);
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
-        rtnVal = Task.FromResult(gRPC_Client.CreateChannel(new ChannelRequest() { Channel = channel, Password = password })).Result.Success;
+        rtnVal = Task.FromResult(gRPC_Client.CreateChannel(new ChannelRequest() { Channel = channel, Password = password, Permissons = permissions })).Result.Success;
       }
     } catch (Exception ex) {
       Log($"{_url} - CreateChannel({channel}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");

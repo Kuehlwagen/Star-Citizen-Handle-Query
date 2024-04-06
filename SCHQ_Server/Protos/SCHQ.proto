@@ -32,6 +32,7 @@ message ChannelsReply {
 message ChannelRequest {
   string channel = 1;
   string password = 2;
+  ChannelPermissions permissons = 3;
 }
 
 message ChannelReply {
@@ -69,12 +70,20 @@ message SyncRelationsReply {
 message ChannelInfo {
   string name = 1;
   bool hasPassword = 2;
+  ChannelPermissions permissions = 3;
 }
 
 message RelationInfo {
   RelationType type = 1;
   string name = 2;
   RelationValue relation = 3;
+}
+
+enum ChannelPermissions {
+  None = 0;
+  Read = 1;
+  Write = 2;
+  Manage = 3;
 }
 
 enum RelationType {
