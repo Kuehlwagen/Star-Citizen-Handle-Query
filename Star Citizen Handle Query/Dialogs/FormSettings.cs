@@ -211,6 +211,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       NumericUpDownRelationsEntriesMaximum.Enabled = CheckBoxShowRelations.Checked;
       TextBoxGRPCURL.Enabled = CheckBoxShowRelations.Checked;
       TextBoxGRPCChannel.Enabled = CheckBoxShowRelations.Checked;
+      ButtonEditPrcChannels.Enabled = CheckBoxShowRelations.Checked;
+      TextBoxGRPCChannelPassword.Enabled = CheckBoxShowRelations.Checked;
       CheckBoxRPCSyncOnStartup.Enabled = CheckBoxShowRelations.Checked;
     }
 
