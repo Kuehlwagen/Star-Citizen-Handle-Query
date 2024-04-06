@@ -310,7 +310,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public void UpdateRelation(string name, RelationType relationType, RelationValue relation, bool withoutRPCSet = false) {
       if (!string.IsNullOrWhiteSpace(name)) {
         if (IsRPCSync && !withoutRPCSet && Sync == SyncStatus.Connected) {
-          RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, relationType, name, relation);
+          if (!RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, relationType, name, relation)) {
+            return;
+          }
         }
         Control[] controls = PanelRelations.Controls.Find($"UserControlRelation_{relationType}_{name}", false);
         if (controls?.Length == 1) {

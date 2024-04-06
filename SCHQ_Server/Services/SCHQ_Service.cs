@@ -131,7 +131,7 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
       request.Relation.Name = request.Relation.Name.Trim();
       request.Password = !string.IsNullOrWhiteSpace(request.Password) ? Encryption.EncryptText(request.Password) : string.Empty;
       try {
-        Channel? channel = _db.Channels.FirstOrDefault(c => c.Name == request.Channel && c.Password == request.Password);
+        Channel? channel = _db.Channels.FirstOrDefault(c => c.Name == request.Channel && (c.Permissions >= ChannelPermissions.Write || c.Password == request.Password));
         if (channel != null) {
           Relation? relation = _db.Relations.FirstOrDefault(r => r.Type == request.Relation.Type && r.ChannelId == channel.Id && r.Name == request.Relation.Name);
           relation ??= new() {
@@ -164,7 +164,7 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
       request.Channel = request.Channel.Trim();
       request.Password = !string.IsNullOrWhiteSpace(request.Password) ? Encryption.EncryptText(request.Password) : string.Empty;
       try {
-        Channel? channel = _db.Channels.FirstOrDefault(c => c.Name == request.Channel && c.Password == request.Password);
+        Channel? channel = _db.Channels.FirstOrDefault(c => c.Name == request.Channel && (c.Permissions >= ChannelPermissions.Read || c.Password == request.Password));
         if (channel != null) {
           IOrderedQueryable<Relation> results = from rel in _db.Relations
                                                 where rel.ChannelId == channel.Id
@@ -199,7 +199,7 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
       request.Name = request.Name.Trim();
       request.Password = !string.IsNullOrWhiteSpace(request.Password) ? Encryption.EncryptText(request.Password) : string.Empty;
       try {
-        Channel? channel = _db.Channels.FirstOrDefault(c => c.Name == request.Channel && c.Password == request.Password);
+        Channel? channel = _db.Channels.FirstOrDefault(c => c.Name == request.Channel && (c.Permissions >= ChannelPermissions.Read || c.Password == request.Password));
         if (channel != null) {
           IQueryable<Relation> results = from rel in _db.Relations
                                          where rel.ChannelId == channel.Id && rel.Type == request.Type && rel.Name == request.Name
@@ -232,7 +232,7 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
       request.Password = !string.IsNullOrWhiteSpace(request.Password) ? Encryption.EncryptText(request.Password) : string.Empty;
       SyncTimestamp = DateTime.UtcNow;
       try {
-        Channel? channel = _db.Channels.FirstOrDefault(c => c.Name == request.Channel && c.Password == request.Password);
+        Channel? channel = _db.Channels.FirstOrDefault(c => c.Name == request.Channel && (c.Permissions >= ChannelPermissions.Read || c.Password == request.Password));
         if (channel != null) {
           while (!context.CancellationToken.IsCancellationRequested && channel?.Id > 0) {
             IOrderedQueryable<Relation> results = from rel in _db.Relations
