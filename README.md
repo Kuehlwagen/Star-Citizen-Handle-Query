@@ -53,6 +53,7 @@ https://discord.com/invite/WmzNY3mCm6
   - __Einträge Maximum:__ Angabe, wie viele Einträge maximal auf dem Beziehungen-Fenster dargestellt werden sollen (es werden unendlich viele Einträge im lokalen Cache gespeichert)
   - __gRPC Server-URL:__ Hier kann die vollständige URL eines gRPC-Servers (`SCHQ_Server`) angegeben werden, um die Beziehungen mit anderen Benutzern zu synchronisieren
   - __gRPC Server-Kanal:__ Hier kann der zu verwendende Kanal angegeben werden, welcher für den gRPC-Server verwendet werden soll. Alle Benutzer, die den gleichen Kanal verwenden, synchronisieren die Beziehungen untereinander.
+  - __Zahnrad-Schaltfläche:__ Wenn eine `gRPC Server-URL` angegeben wurde, können bei Klick auf diese Schaltfläche die gRPC-Kanäle verwaltet werden (siehe SCHQ_Server gRPC-Kanalverwaltung).
   - __gRPC-Synchronisierung bei Programmstart:__ Angabe, ob beim Programmstart die Synchronisierung automatisch gestartet werden soll
 ### Log-Monitor
 - __Log-Monitor anzeigen:__ Angabe, ob der Log-Monitor angezeigt werden soll
@@ -64,6 +65,25 @@ https://discord.com/invite/WmzNY3mCm6
 - __Speichern:__ Speichert die vorgenommenen Einstellungen und schließt das Einstellungen-Fenster
 - __Schließen:__ Schließt das Einstellungen-Fenster, ohne die vorgenommenen Einstellungen zu speichern
 - __Standard:__ Stellt die Standard-Einstellungen wieder her, mit Ausnahme der Sprache
+
+## SCHQ_Server gRPC-Kanalverwaltung
+
+![Kanalverwaltung](/Star%20Citizen%20Handle%20Query/Screenshots/Settings_gRPC.png?raw=true "gRPC-Kanalverwaltung")
+
+Auf dem gRPC-Kanalverwaltung Fenster können die Kanäle eines gRPC-Servers verwaltet werden. Beim Öffnen des Fensters werden die Kanäle des gRPC-Servers initial geladen.
+
+- __Kanäle Laden Schaltfläche:__ Mit dieser Schaltfläche können die Kanäle des Servers erneut geladen werden.
+- __Kanäle-Tabelle:__ Hier werden die Kanäle des gRPC-Servers aufgelistet.
+  - __Kanalname:__ Name des Kanals
+  - __Gesichert:__ Angabe, ob bei der Erstellung des Kanals ein Passwort festgelegt wurde
+  - __Passwort:__ Hier kann via Mausdoppelklick oder durch Aktivierung via `F2`-Taste das Passwort des Kanals eingegeben werden, um einen gesicherten Kanal löschen zu können.
+  - __Löschen:__ Mit dieser Schaltfläche kann der Kanal gelöscht werden. Bei gesicherten Kanälen muss zuvor das Passwort eingegeben werden.
+- __Kanal erstellen:__ In diesem Bereich kann ein neuer Kanal erstellt werden.
+  - __Kanal-Name:__ Hier kann der Name des zu erstellenden Kanals eingegeben werden.
+  - __Kanal-Passwort:__ Hier kann das Passwort des zu erstellenden Kanals eingegeben werden. Wenn kein Passwort angegeben wird, ist der Kanal nicht gesichert.
+  - __Kanal erstellen Schaltfläche:__ Mit dieser Schaltfläche kann der Kanal erstellt werden.
+- __OK-Schaltfläche:__ Mit dieser Schaltfläche wird das Fenster geschlossen und der in der Tabelle ausgewählte Kanal auf das Einstellungen-Fenster übernommen.
+- __Schließen-Schaltfläche:__ Mit dieser Schaltfläche wird das Fenster geschlossen. Dabei wird der in der Tabelle ausgewählte Kanal nicht auf das Einstellungen-Fenster übernommen.
 
 ## Kontextmenü Taskleiste
 
