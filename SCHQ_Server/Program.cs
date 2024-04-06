@@ -1,6 +1,5 @@
 using SCHQ_Server.Models;
 using SCHQ_Server.Services;
-using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +20,6 @@ app.MapGrpcService<SCHQ_Service>();
 app.MapGet("/", () => Results.Redirect("https://github.com/Kuehlwagen/Star-Citizen-Handle-Query", true, true));
 
 // Create / migrate SQLite database
-//new RelationsContext().Database.EnsureCreated();
 new RelationsContext().Database.EnsureCreated();
 
 app.Run();
