@@ -33,6 +33,10 @@ namespace Star_Citizen_Handle_Query.UserControls {
             img = Properties.Resources.Dead;
           }
           PictureBoxLeft.Image = img;
+          if (LogInfoItem.RelationValue > gRPC.RelationValue.NotAssigned) {
+            LabelRelation.Visible = LogInfoItem.RelationValue > gRPC.RelationValue.NotAssigned;
+            LabelRelation.BackColor = FormHandleQuery.GetRelationColor(LogInfoItem.RelationValue);
+          }
           if (LogInfoItem.IsLocalInventoryAvailable) {
             PictureBoxRight.Image = Properties.Resources.Resource;
           }
@@ -50,6 +54,8 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private void AddMouseEvents() {
       PictureBoxLeft.MouseClick += Handle_MouseClick;
       PictureBoxLeft.Cursor = Cursors.Hand;
+      LabelRelation.MouseClick += Handle_MouseClick;
+      LabelRelation.Cursor = Cursors.Hand;
       LabelTime.MouseClick += Handle_MouseClick;
       LabelTime.Cursor = Cursors.Hand;
       LabelText.MouseClick += Handle_MouseClick;

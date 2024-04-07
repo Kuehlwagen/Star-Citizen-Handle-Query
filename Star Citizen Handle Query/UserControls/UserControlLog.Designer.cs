@@ -27,6 +27,7 @@
       LabelText = new Label();
       LabelTime = new Label();
       PictureBoxRight = new PictureBox();
+      LabelRelation = new Label();
       ((System.ComponentModel.ISupportInitialize)PictureBoxLeft).BeginInit();
       ((System.ComponentModel.ISupportInitialize)PictureBoxRight).BeginInit();
       SuspendLayout();
@@ -42,10 +43,10 @@
       // 
       // LabelText
       // 
-      LabelText.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-      LabelText.Location = new Point(55, 5);
+      LabelText.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+      LabelText.Location = new Point(60, 5);
       LabelText.Name = "LabelText";
-      LabelText.Size = new Size(160, 15);
+      LabelText.Size = new Size(155, 15);
       LabelText.TabIndex = 1;
       LabelText.Text = "Text";
       LabelText.TextAlign = ContentAlignment.MiddleLeft;
@@ -53,6 +54,7 @@
       // LabelTime
       // 
       LabelTime.AutoSize = true;
+      LabelTime.BackColor = Color.FromArgb(19, 26, 33);
       LabelTime.ForeColor = Color.FromArgb(46, 157, 158);
       LabelTime.Location = new Point(20, 5);
       LabelTime.Name = "LabelTime";
@@ -70,15 +72,26 @@
       PictureBoxRight.TabIndex = 0;
       PictureBoxRight.TabStop = false;
       // 
+      // LabelRelation
+      // 
+      LabelRelation.Cursor = Cursors.Hand;
+      LabelRelation.Location = new Point(55, 2);
+      LabelRelation.Margin = new Padding(0);
+      LabelRelation.Name = "LabelRelation";
+      LabelRelation.Size = new Size(4, 21);
+      LabelRelation.TabIndex = 15;
+      LabelRelation.Visible = false;
+      // 
       // UserControlLog
       // 
       AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.FromArgb(19, 26, 33);
-      Controls.Add(LabelTime);
-      Controls.Add(LabelText);
+      Controls.Add(LabelRelation);
       Controls.Add(PictureBoxRight);
       Controls.Add(PictureBoxLeft);
+      Controls.Add(LabelTime);
+      Controls.Add(LabelText);
       ForeColor = Color.FromArgb(57, 206, 216);
       Margin = new Padding(0, 1, 0, 0);
       Name = "UserControlLog";
@@ -96,5 +109,6 @@
     private Label LabelText;
     private Label LabelTime;
     private PictureBox PictureBoxRight;
+    private Label LabelRelation;
   }
 }

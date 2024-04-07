@@ -64,9 +64,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UserControls\UserControlRelation.cs" />
-    <Compile Update="UserControls\UserControlLog.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="UserControls\UserControlLog.cs" />
     <Compile Update="UserControls\UserControlOrganization.cs">
       <SubType>UserControl</SubType>
     </Compile>

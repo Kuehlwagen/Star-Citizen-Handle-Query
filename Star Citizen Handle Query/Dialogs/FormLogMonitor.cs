@@ -200,10 +200,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 #if DEBUG
       if (PanelLogInfo.Controls.Count == 0) {
         AddLogInfo([
-          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "there is a local inventory", "Yes"),
+          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "there is a local inventory", "Yes", relation: gRPC.RelationValue.Friendly),
           new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", additionalInfo: "Yes"),
-          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair"),
-          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "criminal arrest"),
+          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair", relation: gRPC.RelationValue.Bogey),
+          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "criminal arrest", relation: gRPC.RelationValue.Bandit),
           new(LogType.LoadingScreenDuration, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), info: "15")
         ]);
       }
@@ -251,7 +251,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                   match.Groups["Date"].Value,
                   match.Groups["Handle"].Value,
                   match.Groups["Info"].Value,
-                  match.Groups["Corpse"].Value));
+                  match.Groups["Corpse"].Value,
+                  relation: (Owner as FormHandleQuery).GetHandleRelation(match.Groups["Handle"].Value)));
                 continue;
               }
             }

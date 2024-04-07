@@ -1,30 +1,25 @@
-﻿using System.Globalization;
+﻿using Star_Citizen_Handle_Query.gRPC;
+using System.Globalization;
 
 namespace Star_Citizen_Handle_Query.Serialization {
 
   [Serializable()]
-  public class LogMonitorInfo : ICloneable {
+  public class LogMonitorInfo(LogType logType, string date, string handle = null, string info = null, string additionalInfo = null,
+    Bitmap icon = null, RelationValue relation = RelationValue.NotAssigned) : ICloneable {
 
-    public LogMonitorInfo(LogType logType, string date, string handle = null, string info = null, string additionalInfo = null, Bitmap icon = null) {
-      LogType = logType;
-      Date = DateTime.Parse(date, CultureInfo.InvariantCulture).ToLocalTime();
-      Handle = handle ?? string.Empty;
-      Info = info ?? string.Empty;
-      IsCorpseEnabled = logType == LogType.Corpse && additionalInfo?.ToLower() == "yes";
-      Icon = icon;
-    }
+    public Bitmap Icon { get; } = icon;
 
-    public Bitmap Icon { get; } = Properties.Resources.Info;
+    public LogType LogType { get; } = logType;
 
-    public LogType LogType { get; } = LogType.Corpse;
+    public DateTime Date { get; } = DateTime.Parse(date, CultureInfo.InvariantCulture).ToLocalTime();
 
-    public DateTime Date { get; } = DateTime.MinValue;
+    public string Handle { get; } = handle ?? string.Empty;
 
-    public string Handle { get; } = string.Empty;
+    public string Info { get; } = info ?? string.Empty;
 
-    public string Info { get; } = string.Empty;
+    public bool IsCorpseEnabled { get; } = logType == LogType.Corpse && additionalInfo?.ToLower() == "yes";
 
-    public bool IsCorpseEnabled { get; } = false;
+    public RelationValue RelationValue { get; } = relation;
 
     public bool IsCriminalArrest { get { return LogType == LogType.Corpse && Info.ToLower().Contains("criminal arrest"); } }
 
