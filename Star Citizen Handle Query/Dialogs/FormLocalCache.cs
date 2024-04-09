@@ -1,4 +1,4 @@
-﻿using Star_Citizen_Handle_Query.gRPC;
+﻿using SCHQ_Shared.Protos;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Text.Json;
 
 namespace Star_Citizen_Handle_Query.Dialogs {
 
-  public partial class FormLocalCache : Form {
+    public partial class FormLocalCache : Form {
 
     private readonly Settings ProgramSettings;
     private readonly Translation ProgramTranslation;

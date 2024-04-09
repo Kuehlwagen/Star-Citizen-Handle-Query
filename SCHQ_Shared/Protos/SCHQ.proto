@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "Star_Citizen_Handle_Query.gRPC";
+option csharp_namespace = "SCHQ_Shared.Protos";
 
 import "google/protobuf/empty.proto";
 

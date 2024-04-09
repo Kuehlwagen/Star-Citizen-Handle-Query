@@ -1,5 +1,5 @@
+using SCHQ_Shared.Protos;
 using Star_Citizen_Handle_Query.Classes;
-using Star_Citizen_Handle_Query.gRPC;
 using Star_Citizen_Handle_Query.Properties;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
@@ -17,7 +17,7 @@ using System.Web;
 
 namespace Star_Citizen_Handle_Query.Dialogs {
 
-  public partial class FormHandleQuery : Form {
+    public partial class FormHandleQuery : Form {
 
     internal const int SnapDistance = 10;
     private readonly int InitialWindowStyle = 0;

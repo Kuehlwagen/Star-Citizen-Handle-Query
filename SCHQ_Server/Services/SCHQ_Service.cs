@@ -1,8 +1,9 @@
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Microsoft.EntityFrameworkCore;
-using SCHQ_Server.Classes;
 using SCHQ_Server.Models;
+using SCHQ_Shared.Classes;
+using SCHQ_Shared.Protos;
 
 namespace SCHQ_Server.Services;
 public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_RelationsBase {

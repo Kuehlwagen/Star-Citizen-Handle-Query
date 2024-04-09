@@ -1,10 +1,10 @@
-﻿using Star_Citizen_Handle_Query.gRPC;
+﻿using SCHQ_Shared.Protos;
 using System.Net;
 using System.Text.Json.Serialization;
 
 namespace Star_Citizen_Handle_Query.Serialization {
 
-  public class HandleInfo {
+    public class HandleInfo {
 
     [JsonIgnore]
     public HttpInfo HttpResponse { get; set; }

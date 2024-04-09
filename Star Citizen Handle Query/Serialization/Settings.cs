@@ -1,8 +1,8 @@
-﻿using Star_Citizen_Handle_Query.Classes;
+﻿using SCHQ_Shared.Classes;
 
 namespace Star_Citizen_Handle_Query.Serialization {
 
-  [Serializable()]
+    [Serializable()]
   public class Settings : ICloneable {
 
     /// <summary>Sprache für die Oberfläche des Tools</summary>

@@ -1,14 +1,14 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace Star_Citizen_Handle_Query.Classes;
+namespace SCHQ_Shared.Classes;
 public static class Encryption {
 
   private static readonly byte[] _saltBytes = [6, 9, 4, 2, 0, 6, 6, 6];
-  private static readonly string _password = Encoding.UTF8.GetString([83, 116, 97, 114, 32, 67, 105, 116, 105, 122, 101, 110, 32, 72, 97, 110, 100, 108, 101, 32, 81, 117, 101, 114, 121]);
+  private static readonly string _password = Encoding.UTF8.GetString([83, 67, 72, 81, 95, 83, 101, 114, 118, 101, 114]);
 
   private static byte[] AES_Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes) {
-    byte[] encryptedBytes = null;
+    byte[]? encryptedBytes = null;
     using (MemoryStream ms = new()) {
       using Aes aes = Aes.Create();
       aes.KeySize = 256;
@@ -26,21 +26,25 @@ public static class Encryption {
     return encryptedBytes;
   }
 
-  public static string EncryptText(string input) {
+  public static string EncryptText(string? input) {
     return EncryptText(input, _password);
   }
 
-  public static string EncryptText(string input, string password) {
-    byte[] bytesToBeEncrypted = Encoding.UTF8.GetBytes(input ?? string.Empty);
-    byte[] passwordBytes = Encoding.UTF8.GetBytes(password ?? _password);
-    passwordBytes = SHA256.HashData(passwordBytes);
-    byte[] bytesEncrypted = AES_Encrypt(bytesToBeEncrypted, passwordBytes);
-    string result = Convert.ToBase64String(bytesEncrypted);
-    return result;
+  public static string EncryptText(string? input, string? password) {
+    try {
+      byte[] bytesToBeEncrypted = Encoding.UTF8.GetBytes(input ?? string.Empty);
+      byte[] passwordBytes = Encoding.UTF8.GetBytes(password ?? _password);
+      passwordBytes = SHA256.HashData(passwordBytes);
+      byte[] bytesEncrypted = AES_Encrypt(bytesToBeEncrypted, passwordBytes);
+      string result = Convert.ToBase64String(bytesEncrypted);
+      return result;
+    } catch {
+      return string.Empty;
+    }
   }
 
   private static byte[] AES_Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes) {
-    byte[] decryptedBytes = null;
+    byte[]? decryptedBytes = null;
     using (MemoryStream ms = new()) {
       using Aes aes = Aes.Create();
       aes.KeySize = 256;
@@ -58,17 +62,21 @@ public static class Encryption {
     return decryptedBytes;
   }
 
-  public static string DecryptText(string input) {
+  public static string DecryptText(string? input) {
     return DecryptText(input, _password);
   }
 
-  public static string DecryptText(string input, string password) {
-    byte[] bytesToBeDecrypted = Convert.FromBase64String(input ?? string.Empty);
-    byte[] passwordBytes = Encoding.UTF8.GetBytes(password ?? _password);
-    passwordBytes = SHA256.HashData(passwordBytes);
-    byte[] bytesDecrypted = AES_Decrypt(bytesToBeDecrypted, passwordBytes);
-    string result = Encoding.UTF8.GetString(bytesDecrypted);
-    return result;
+  public static string DecryptText(string? input, string? password) {
+    try {
+      byte[] bytesToBeDecrypted = Convert.FromBase64String(input ?? string.Empty);
+      byte[] passwordBytes = Encoding.UTF8.GetBytes(password ?? _password);
+      passwordBytes = SHA256.HashData(passwordBytes);
+      byte[] bytesDecrypted = AES_Decrypt(bytesToBeDecrypted, passwordBytes);
+      string result = Encoding.UTF8.GetString(bytesDecrypted);
+      return result;
+    } catch {
+      return string.Empty;
+    }
   }
 
 }

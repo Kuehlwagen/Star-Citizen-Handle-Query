@@ -1,12 +1,12 @@
-﻿using Star_Citizen_Handle_Query.Dialogs;
-using Star_Citizen_Handle_Query.gRPC;
+﻿using SCHQ_Shared.Protos;
+using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
 using static Star_Citizen_Handle_Query.Dialogs.FormHandleQuery;
 
 namespace Star_Citizen_Handle_Query.UserControls {
 
-  public partial class UserControlOrganization : UserControl {
+    public partial class UserControlOrganization : UserControl {
 
     private readonly OrganizationInfo Info;
     private readonly Settings ProgramSettings;

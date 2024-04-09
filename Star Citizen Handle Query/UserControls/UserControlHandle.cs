@@ -1,5 +1,5 @@
-﻿using Star_Citizen_Handle_Query.Dialogs;
-using Star_Citizen_Handle_Query.gRPC;
+﻿using SCHQ_Shared.Protos;
+using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
 using System.Net;
@@ -10,7 +10,7 @@ using static Star_Citizen_Handle_Query.Dialogs.FormHandleQuery;
 
 namespace Star_Citizen_Handle_Query.UserControls {
 
-  public partial class UserControlHandle : UserControl {
+    public partial class UserControlHandle : UserControl {
 
     private readonly HandleInfo Info;
     private readonly Settings ProgramSettings;
