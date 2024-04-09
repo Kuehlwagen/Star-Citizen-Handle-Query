@@ -179,6 +179,7 @@ Das Fenster enthält folgende Informationen:
     - `Totenkopf mit Zielmarkierung`: Der Spieler ist gestorben und wurde zur Rehabilitation nach Klescher geschickt
     - `Information`: Es handelt sich um einen Info-Eintrag (z.B.: Ladezeit im Ladebildschirm)
   - Rechts daneben werden Uhrzeit und weitere Informationen, welche zum Log-Typ passen, angezeigt
+  - Links neben dem Handle eines Spielers wird die Beziehung zum Spieler farblich dargestellt, sofern zum Zeitpunkt der Erstellung eines Log-Eintrags eine Beziehung festgelegt ist.
   - Wenn der Spieler in einer Zone gestorben ist, in der es ein lokales Inventar gibt, wird ganz rechts zusätzlich ein `Ressourcen`-Symbol dargestellt.
   - Ein Mauslinksklick auf eine der genannten Informationen trägt den Handle des Spielers in das Hauptfenster ein und startet direkt eine Handle-Abfrage. Wird dabei die `Strg`-Taste gedrückt gehalten, wird ein Auslesen der Handle-Informationen von der RSI-Webseite erzwungen.
 
