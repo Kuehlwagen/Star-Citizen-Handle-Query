@@ -1,8 +1,8 @@
 ﻿using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Grpc.Net.Client;
+using SCHQ_Protos;
 using Star_Citizen_Handle_Query.Dialogs;
-using Star_Citizen_Handle_Query.gRPC;
 using Star_Citizen_Handle_Query.Serialization;
 using static Star_Citizen_Handle_Query.Classes.Logging;
 

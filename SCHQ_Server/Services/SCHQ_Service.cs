@@ -1,6 +1,7 @@
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using Microsoft.EntityFrameworkCore;
+using SCHQ_Protos;
 using SCHQ_Server.Classes;
 using SCHQ_Server.Models;
 

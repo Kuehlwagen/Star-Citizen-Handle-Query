@@ -1,4 +1,4 @@
-﻿using Star_Citizen_Handle_Query.gRPC;
+﻿using SCHQ_Protos;
 
 namespace Star_Citizen_Handle_Query.Serialization {
 

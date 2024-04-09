@@ -1,4 +1,4 @@
-﻿using Star_Citizen_Handle_Query.gRPC;
+﻿using SCHQ_Protos;
 using System.Net;
 using System.Text.Json.Serialization;
 

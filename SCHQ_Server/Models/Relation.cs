@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SCHQ_Protos;
 using SCHQ_Server.Classes;
 using SQLite;
 using System.Reflection;

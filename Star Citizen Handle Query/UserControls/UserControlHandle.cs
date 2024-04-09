@@ -1,5 +1,5 @@
-﻿using Star_Citizen_Handle_Query.Dialogs;
-using Star_Citizen_Handle_Query.gRPC;
+﻿using SCHQ_Protos;
+using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
 using System.Net;
