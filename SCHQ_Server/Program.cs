@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using SCHQ_Server.Models;
 using SCHQ_Server.Services;
 
@@ -20,6 +21,16 @@ app.MapGrpcService<SCHQ_Service>();
 app.MapGet("/", () => Results.Redirect("https://github.com/Kuehlwagen/Star-Citizen-Handle-Query", true, true));
 
 // Create / migrate SQLite database
-new RelationsContext().Database.EnsureCreated();
+RelationsContext context = new();
+if (context.Database.GetPendingMigrations().Any()) {
+  /*
+    Developer-PowerShell:
+    dotnet tool update --global dotnet-ef
+    dotnet ef migrations add MigrationName
+    dotnet ef migrations remove
+  */
+  await context.Database.MigrateAsync();
+}
+await context.Database.EnsureCreatedAsync();
 
 app.Run();
