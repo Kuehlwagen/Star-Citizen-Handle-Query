@@ -25,6 +25,7 @@ RelationsContext context = new();
 if (context.Database.GetPendingMigrations().Any()) {
   /*
     Developer-PowerShell:
+    dotnet add package Microsoft.EntityFrameworkCore.Design
     dotnet tool update --global dotnet-ef
     dotnet ef migrations add MigrationName
     dotnet ef migrations remove
