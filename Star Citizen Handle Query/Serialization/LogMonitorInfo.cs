@@ -1,9 +1,9 @@
-﻿using SCHQ_Shared.Protos;
+﻿using Star_Citizen_Handle_Query.gRPC;
 using System.Globalization;
 
 namespace Star_Citizen_Handle_Query.Serialization {
 
-    [Serializable()]
+  [Serializable()]
   public class LogMonitorInfo(LogType logType, string date, string handle = null, string info = null, string additionalInfo = null,
     Bitmap icon = null, RelationValue relation = RelationValue.NotAssigned) : ICloneable {
 

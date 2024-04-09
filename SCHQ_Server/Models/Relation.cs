@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SCHQ_Shared.Classes;
-using SCHQ_Shared.Protos;
+using SCHQ_Server.Classes;
 using SQLite;
 using System.Reflection;
 using DAS = System.ComponentModel.DataAnnotations.Schema;

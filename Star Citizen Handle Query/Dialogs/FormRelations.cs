@@ -1,5 +1,5 @@
-using SCHQ_Shared.Protos;
 using Star_Citizen_Handle_Query.Classes;
+using Star_Citizen_Handle_Query.gRPC;
 using Star_Citizen_Handle_Query.Properties;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
@@ -10,7 +10,7 @@ using System.Text.Json.Serialization;
 
 namespace Star_Citizen_Handle_Query.Dialogs {
 
-    public partial class FormRelations : Form {
+  public partial class FormRelations : Form {
 
     private readonly int InitialWindowStyle = 0;
     private bool WindowLocked = true;

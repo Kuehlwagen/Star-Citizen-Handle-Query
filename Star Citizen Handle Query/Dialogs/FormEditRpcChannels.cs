@@ -1,5 +1,5 @@
-﻿using SCHQ_Shared.Protos;
-using Star_Citizen_Handle_Query.Classes;
+﻿using Star_Citizen_Handle_Query.Classes;
+using Star_Citizen_Handle_Query.gRPC;
 using Star_Citizen_Handle_Query.Serialization;
 using System.Reflection;
 

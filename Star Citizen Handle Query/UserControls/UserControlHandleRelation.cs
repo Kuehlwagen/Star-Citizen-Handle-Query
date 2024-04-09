@@ -1,10 +1,10 @@
-﻿using SCHQ_Shared.Protos;
-using Star_Citizen_Handle_Query.Dialogs;
+﻿using Star_Citizen_Handle_Query.Dialogs;
+using Star_Citizen_Handle_Query.gRPC;
 using Star_Citizen_Handle_Query.Serialization;
 
 namespace Star_Citizen_Handle_Query.UserControls {
 
-    public partial class UserControlHandleRelation : UserControl {
+  public partial class UserControlHandleRelation : UserControl {
 
     private readonly Translation ProgramTranslation;
 

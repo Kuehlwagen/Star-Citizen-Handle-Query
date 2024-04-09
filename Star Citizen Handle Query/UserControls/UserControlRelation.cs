@@ -1,9 +1,9 @@
-﻿using SCHQ_Shared.Protos;
-using Star_Citizen_Handle_Query.Dialogs;
+﻿using Star_Citizen_Handle_Query.Dialogs;
+using Star_Citizen_Handle_Query.gRPC;
 
 namespace Star_Citizen_Handle_Query.UserControls {
 
-    public partial class UserControlRelation : UserControl {
+  public partial class UserControlRelation : UserControl {
 
     internal readonly RelationType Type;
     internal readonly string RelationName;

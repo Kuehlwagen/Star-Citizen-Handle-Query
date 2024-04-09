@@ -4,13 +4,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Star Citizen Handle Query", "Star Citizen Handle Query\Star Citizen Handle Query.csproj", "{41DD3B95-EE8B-4619-AE68-B2C33462E299}"
-	ProjectSection(ProjectDependencies) = postProject
-		{EE1AE4F5-1585-434D-B8CE-6894C5A8A7AD} = {EE1AE4F5-1585-434D-B8CE-6894C5A8A7AD}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCHQ_Server", "SCHQ_Server\SCHQ_Server.csproj", "{EE1AE4F5-1585-434D-B8CE-6894C5A8A7AD}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SCHQ_Shared", "SCHQ_Shared\SCHQ_Shared.csproj", "{1BB91621-B828-49DC-AC60-78861C4F1F3D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,10 +21,6 @@ Global
 		{EE1AE4F5-1585-434D-B8CE-6894C5A8A7AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE1AE4F5-1585-434D-B8CE-6894C5A8A7AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE1AE4F5-1585-434D-B8CE-6894C5A8A7AD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1BB91621-B828-49DC-AC60-78861C4F1F3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1BB91621-B828-49DC-AC60-78861C4F1F3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1BB91621-B828-49DC-AC60-78861C4F1F3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1BB91621-B828-49DC-AC60-78861C4F1F3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

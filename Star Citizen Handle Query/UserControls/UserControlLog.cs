@@ -1,10 +1,9 @@
-﻿using SCHQ_Shared.Protos;
-using Star_Citizen_Handle_Query.Dialogs;
+﻿using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
 
 namespace Star_Citizen_Handle_Query.UserControls {
 
-    public partial class UserControlLog : UserControl {
+  public partial class UserControlLog : UserControl {
 
     internal readonly LogMonitorInfo LogInfoItem;
     private readonly System.Windows.Forms.Timer TimerRemoveControl = new();
@@ -34,8 +33,8 @@ namespace Star_Citizen_Handle_Query.UserControls {
             img = Properties.Resources.Dead;
           }
           PictureBoxLeft.Image = img;
-          if (LogInfoItem.RelationValue > RelationValue.NotAssigned) {
-            LabelRelation.Visible = LogInfoItem.RelationValue > RelationValue.NotAssigned;
+          if (LogInfoItem.RelationValue > gRPC.RelationValue.NotAssigned) {
+            LabelRelation.Visible = LogInfoItem.RelationValue > gRPC.RelationValue.NotAssigned;
             LabelRelation.BackColor = FormHandleQuery.GetRelationColor(LogInfoItem.RelationValue);
           }
           if (LogInfoItem.IsLocalInventoryAvailable) {
