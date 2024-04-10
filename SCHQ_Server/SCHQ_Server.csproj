@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <Company>Kuehlwagen@GitHub</Company>
-    <AssemblyVersion>1.17.0</AssemblyVersion>
+    <AssemblyVersion>1.17.1</AssemblyVersion>
     <FileVersion>$(Assemblyversion)</FileVersion>
     <Version>$(Assemblyversion)</Version>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
