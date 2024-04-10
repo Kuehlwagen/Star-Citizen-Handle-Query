@@ -10,6 +10,12 @@ namespace Star_Citizen_Handle_Query.Classes;
 internal static class RPC_Wrapper {
 
   private static string _url = string.Empty;
+  private static readonly SocketsHttpHandler SocketsHandler = new() {
+    PooledConnectionIdleTimeout = Timeout.InfiniteTimeSpan,
+    KeepAlivePingDelay = TimeSpan.FromSeconds(60),
+    KeepAlivePingTimeout = TimeSpan.FromSeconds(30),
+    EnableMultipleHttp2Connections = true
+  };
 
   public static void SetURL(string url) {
     _url = url;
@@ -19,7 +25,9 @@ internal static class RPC_Wrapper {
     bool rtnVal = false;
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
-        using var gRPC_Channel = GrpcChannel.ForAddress(_url);
+        using var gRPC_Channel = GrpcChannel.ForAddress(_url, new GrpcChannelOptions {
+          HttpHandler = SocketsHandler
+        });
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
         rtnVal = Task.FromResult(gRPC_Client.CreateChannel(new ChannelRequest() { Channel = channel, Password = password, Permissons = permissions })).Result.Success;
       }
@@ -33,7 +41,9 @@ internal static class RPC_Wrapper {
     List<ChannelInfo> rtnVal = [];
     try {
       if (!string.IsNullOrWhiteSpace(_url)) {
-        using var gRPC_Channel = GrpcChannel.ForAddress(_url);
+        using var gRPC_Channel = GrpcChannel.ForAddress(_url, new GrpcChannelOptions {
+          HttpHandler = SocketsHandler
+        });
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
         rtnVal = [.. Task.FromResult(gRPC_Client.GetChannels(new Empty())).Result.Channels];
       }
@@ -47,7 +57,9 @@ internal static class RPC_Wrapper {
     ChannelReply rtnVal = new();
     try {
       if (!string.IsNullOrWhiteSpace(_url)) {
-        using var gRPC_Channel = GrpcChannel.ForAddress(_url);
+        using var gRPC_Channel = GrpcChannel.ForAddress(_url, new GrpcChannelOptions {
+          HttpHandler = SocketsHandler
+        });
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
         rtnVal = Task.FromResult(gRPC_Client.GetChannel(new() { Channel = channel })).Result;
       }
@@ -61,7 +73,9 @@ internal static class RPC_Wrapper {
     bool rtnVal = false;
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
-        using var gRPC_Channel = GrpcChannel.ForAddress(_url);
+        using var gRPC_Channel = GrpcChannel.ForAddress(_url, new GrpcChannelOptions {
+          HttpHandler = SocketsHandler
+        });
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
         rtnVal = Task.FromResult(gRPC_Client.DeleteChannel(new ChannelRequest() { Channel = channel, Password = password })).Result.Success;
       }
@@ -75,7 +89,9 @@ internal static class RPC_Wrapper {
     RelationInfos rtnVal = new();
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
-        using var gRPC_Channel = GrpcChannel.ForAddress(_url);
+        using var gRPC_Channel = GrpcChannel.ForAddress(_url, new GrpcChannelOptions {
+          HttpHandler = SocketsHandler
+        });
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
         var result = Task.FromResult(gRPC_Client.GetRelations(new ChannelRequest() { Channel = channel, Password = password })).Result;
         foreach (var relation in result.Relations) {
@@ -96,7 +112,9 @@ internal static class RPC_Wrapper {
     bool rtnVal = false;
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel) && !string.IsNullOrWhiteSpace(name)) {
-        using var gRPC_Channel = GrpcChannel.ForAddress(_url);
+        using var gRPC_Channel = GrpcChannel.ForAddress(_url, new GrpcChannelOptions {
+          HttpHandler = SocketsHandler
+        });
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
         rtnVal = Task.FromResult(gRPC_Client.SetRelation(new() {
           Channel = channel,
@@ -118,7 +136,9 @@ internal static class RPC_Wrapper {
     RelationValue rtnVal = RelationValue.NotAssigned;
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel) && !string.IsNullOrWhiteSpace(name)) {
-        using var gRPC_Channel = GrpcChannel.ForAddress(_url);
+        using var gRPC_Channel = GrpcChannel.ForAddress(_url, new GrpcChannelOptions {
+          HttpHandler = SocketsHandler
+        });
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
         var result = Task.FromResult(gRPC_Client.GetRelation(new RelationRequest() {
           Channel = channel,
@@ -138,7 +158,9 @@ internal static class RPC_Wrapper {
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
         frm.ChangeSync(FormRelations.SyncStatus.Connecting);
-        using var gRPC_Channel = GrpcChannel.ForAddress(_url);
+        using var gRPC_Channel = GrpcChannel.ForAddress(_url, new GrpcChannelOptions {
+          HttpHandler = SocketsHandler
+        });
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
         using var streamingCall = gRPC_Client.SyncRelations(new ChannelRequest() { Channel = channel, Password = password }, cancellationToken: cts.Token);
         try {
