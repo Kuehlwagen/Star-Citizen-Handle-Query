@@ -11,6 +11,7 @@ service SCHQ_Relations {
   rpc GetChannels (google.protobuf.Empty) returns (ChannelsReply);
   rpc GetChannel (ChannelNameRequest) returns (ChannelReply);
   rpc DeleteChannel (ChannelRequest) returns (SuccessReply);
+  rpc SetRelations (SetRelationsRequest) returns (SuccessReply);
   rpc SetRelation (SetRelationRequest) returns (SuccessReply);
   rpc GetRelations (ChannelRequest) returns (RelationsReply);
   rpc GetRelation (RelationRequest) returns (RelationReply);
@@ -19,6 +20,7 @@ service SCHQ_Relations {
 
 message SuccessReply {
   bool success = 1;
+  string info = 2;
 }
 
 message ChannelNameRequest {
@@ -38,6 +40,12 @@ message ChannelRequest {
 message ChannelReply {
   bool found = 1;
   ChannelInfo channel = 2;
+}
+
+message SetRelationsRequest {
+  string channel = 1;
+  string password = 2;
+  repeated RelationInfo relations = 3;
 }
 
 message SetRelationRequest {

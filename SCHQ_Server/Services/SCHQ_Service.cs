@@ -17,7 +17,7 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
     Guid guid = Guid.NewGuid();
     _logger.LogInformation("[{Guid} CreateChannel Request] Channel: {Channel}, Password: {Password}",
       guid, request.Channel, !string.IsNullOrWhiteSpace(request.Password) ? "Yes" : "No");
-    bool rtnVal = false;
+    SuccessReply rtnVal = new();
 
     if (!string.IsNullOrWhiteSpace(request.Channel)) {
       request.Channel = request.Channel.Trim();
@@ -28,16 +28,22 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
             DecryptedPassword = request.Password,
             Permissions = request.Permissons
           });
-          rtnVal = _db.SaveChanges() > 0;
+          rtnVal.Success = _db.SaveChanges() > 0;
+          if (!rtnVal.Success) {
+            rtnVal.Info = "No entries written";
+          }
+        } else {
+          rtnVal.Info = "Channel already exists";
         }
       } catch (Exception ex) {
+        rtnVal.Info = $"Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}";
         _logger.LogWarning("[{Guid} CreateChannel Exception] Message: {Message}, Inner Exception: {InnerExceptionMessage}",
           guid, ex.Message, ex.InnerException?.Message ?? "Empty");
       }
     }
 
-    _logger.LogInformation("[{Guid} CreateChannel Reply] Success: {Success}", guid, rtnVal);
-    return Task.FromResult(new SuccessReply() { Success = rtnVal });
+    _logger.LogInformation("[{Guid} CreateChannel Reply] Success: {Success}, Info: {Info}", guid, rtnVal.Success, rtnVal.Info);
+    return Task.FromResult(rtnVal);
   }
 
   public override Task<ChannelsReply> GetChannels(Empty request, ServerCallContext context) {
@@ -98,61 +104,128 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
     Guid guid = Guid.NewGuid();
     _logger.LogInformation("[{Guid} DeleteChannel Request] Channel: {Channel}, Password: {Password}",
       guid, request.Channel, !string.IsNullOrWhiteSpace(request.Password) ? "Yes" : "No");
-    bool rtnVal = false;
+    SuccessReply rtnVal = new();
 
     if (!string.IsNullOrWhiteSpace(request.Channel)) {
       request.Channel = request.Channel.Trim();
       request.Password = !string.IsNullOrWhiteSpace(request.Password) ? Encryption.EncryptText(request.Password) : string.Empty;
       try {
-        Channel? channel = _db.Channels.FirstOrDefault(c => c.Name == request.Channel && c.Password == request.Password);
+        Channel? channel = _db.Channels.FirstOrDefault(c => c.Name == request.Channel);
         if (channel != null) {
-          _db.Remove(channel);
-          rtnVal = _db.SaveChanges() > 0;
+          if (channel.Password == request.Password) {
+            _db.Remove(channel);
+            rtnVal.Success = _db.SaveChanges() > 0;
+            if (!rtnVal.Success) {
+              rtnVal.Info = "No entries written";
+            }
+          } else {
+            rtnVal.Info = "Access denied";
+          }
+        } else {
+          rtnVal.Info = "Channel not found";
         }
       } catch (Exception ex) {
+        rtnVal.Info = $"Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}";
         _logger.LogWarning("[{Guid} DeleteChannel Exception] Message: {Message}, Inner Exception: {InnerExceptionMessage}",
           guid, ex.Message, ex.InnerException?.Message ?? "Empty");
       }
     }
 
-    _logger.LogInformation("[{Guid} DeleteChannel Reply] Success: {Success}", guid, rtnVal);
-    return Task.FromResult(new SuccessReply() { Success = rtnVal });
+    _logger.LogInformation("[{Guid} DeleteChannel Reply] Success: {Success}, Info: {Info}", guid, rtnVal.Success, rtnVal.Info);
+    return Task.FromResult(rtnVal);
   }
   #endregion
 
   #region Relations
+  public override Task<SuccessReply> SetRelations(SetRelationsRequest request, ServerCallContext context) {
+    Guid guid = Guid.NewGuid();
+    _logger.LogInformation("[{Guid} SetRelations Request] Channel: {Channel}, Password: {Password}, Relations: {Relations}",
+      guid, request.Channel, request.Password?.Length > 0 ? "Yes" : "No", request?.Relations?.Count);
+    SuccessReply rtnVal = new();
+
+    if (!string.IsNullOrWhiteSpace(request?.Channel) && request?.Relations?.Count > 0) {
+      request.Channel = request.Channel.Trim();
+      request.Password = !string.IsNullOrWhiteSpace(request.Password) ? Encryption.EncryptText(request.Password) : string.Empty;
+      try {
+        Channel? channel = _db.Channels.FirstOrDefault(c => c.Name == request.Channel);
+        if (channel != null) {
+          if (channel.Permissions >= ChannelPermissions.Write || channel.Password == request.Password) {
+            List<Relation?> relations = [];
+            foreach (RelationInfo relationInfo in request.Relations) {
+              Relation? relation = _db.Relations.FirstOrDefault(r => r.Type == relationInfo.Type && r.ChannelId == channel.Id && r.Name == relationInfo.Name);
+              relation ??= new() {
+                ChannelId = channel.Id,
+                Type = relationInfo.Type,
+                Name = relationInfo.Name,
+              };
+              relation.Timestamp = DateTime.UtcNow;
+              relation.Value = relationInfo.Relation;
+              relations.Add(relation);
+            }
+            _db.UpdateRange(relations!);
+            rtnVal.Success = _db.SaveChanges() > 0;
+            if (!rtnVal.Success) {
+              rtnVal.Info = "No entries written";
+            }
+          } else {
+            rtnVal.Info = "Access denied";
+          }
+        } else {
+          rtnVal.Info = "Channel not found";
+        }
+      } catch (Exception ex) {
+        rtnVal.Info = $"Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}";
+        _logger.LogWarning("[{Guid} SetRelations Exception] Message: {Message}, Inner Exception: {InnerExceptionMessage}",
+          guid, ex.Message, ex.InnerException?.Message ?? "Empty");
+      }
+    }
+
+    _logger.LogInformation("[{Guid} SetRelations Reply] Success: {Success}, Info: {Info}", guid, rtnVal.Success, rtnVal.Info);
+    return Task.FromResult(rtnVal);
+  }
+
   public override Task<SuccessReply> SetRelation(SetRelationRequest request, ServerCallContext context) {
     Guid guid = Guid.NewGuid();
     _logger.LogInformation("[{Guid} SetRelation Request] Channel: {Channel}, Password: {Password}, Type: {Type}, Name: {Name}, Relation: {Relation}",
       guid, request.Channel, request.Password?.Length > 0 ? "Yes" : "No", request.Relation.Type, request.Relation.Name, request.Relation.Relation);
-    bool rtnVal = false;
+    SuccessReply rtnVal = new();
 
     if (!string.IsNullOrWhiteSpace(request.Channel) && !string.IsNullOrWhiteSpace(request.Relation?.Name)) {
       request.Channel = request.Channel.Trim();
       request.Relation.Name = request.Relation.Name.Trim();
       request.Password = !string.IsNullOrWhiteSpace(request.Password) ? Encryption.EncryptText(request.Password) : string.Empty;
       try {
-        Channel? channel = _db.Channels.FirstOrDefault(c => c.Name == request.Channel && (c.Permissions >= ChannelPermissions.Write || c.Password == request.Password));
+        Channel? channel = _db.Channels.FirstOrDefault(c => c.Name == request.Channel);
         if (channel != null) {
-          Relation? relation = _db.Relations.FirstOrDefault(r => r.Type == request.Relation.Type && r.ChannelId == channel.Id && r.Name == request.Relation.Name);
-          relation ??= new() {
-            ChannelId = channel.Id,
-            Type = request.Relation.Type,
-            Name = request.Relation.Name,
-          };
-          relation.Timestamp = DateTime.UtcNow;
-          relation.Value = request.Relation.Relation;
-          _db.Update(relation);
-          rtnVal = _db.SaveChanges() > 0;
+          if (channel.Permissions >= ChannelPermissions.Write || channel.Password == request.Password) {
+            Relation? relation = _db.Relations.FirstOrDefault(r => r.Type == request.Relation.Type && r.ChannelId == channel.Id && r.Name == request.Relation.Name);
+            relation ??= new() {
+              ChannelId = channel.Id,
+              Type = request.Relation.Type,
+              Name = request.Relation.Name,
+            };
+            relation.Timestamp = DateTime.UtcNow;
+            relation.Value = request.Relation.Relation;
+            _db.Update(relation);
+            rtnVal.Success = _db.SaveChanges() > 0;
+            if (!rtnVal.Success) {
+              rtnVal.Info = "No entries written";
+            }
+          } else {
+            rtnVal.Info = "Access denied";
+          }
+        } else {
+          rtnVal.Info = "Channel not found";
         }
       } catch (Exception ex) {
+        rtnVal.Info = $"Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}";
         _logger.LogWarning("[{Guid} SetRelation Exception] Message: {Message}, Inner Exception: {InnerExceptionMessage}",
           guid, ex.Message, ex.InnerException?.Message ?? "Empty");
       }
     }
 
-    _logger.LogInformation("[{Guid} SetRelation Reply] Success: {Success}", guid, rtnVal);
-    return Task.FromResult(new SuccessReply() { Success = rtnVal });
+    _logger.LogInformation("[{Guid} SetRelation Reply] Success: {Success}, Info: {Info}", guid, rtnVal.Success, rtnVal.Info);
+    return Task.FromResult(rtnVal);
   }
 
   public override Task<RelationsReply> GetRelations(ChannelRequest request, ServerCallContext context) {
