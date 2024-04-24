@@ -67,7 +67,6 @@
         "Title": "gRPC Channel Selection",
         "Button_Load_Channels": "Load Channels",
         "Channel_Name": "Channel Name",
-        "Channel_Secured": "Secured",
         "Button_OK": "OK",
         "No_Channels_Found": "No channels found",
         "Permissions": "Permissions",

@@ -209,8 +209,6 @@
 
     public string Channel_Name { get; set; } = "Kanalname";
 
-    public string Channel_Secured { get; set; } = "Gesichert";
-
     public string Button_OK { get; set; } = "OK";
 
     public string No_Channels_Found { get; set; } = "Es konnten keine Kanäle ermittelt werden.";

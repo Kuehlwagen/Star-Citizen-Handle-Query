@@ -24,16 +24,14 @@
     /// </summary>
     private void InitializeComponent() {
       DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-      DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
       DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEditRpcChannels));
       ButtonLoadChannels = new Button();
       ButtonClose = new Button();
       DataGridViewChannels = new DataGridView();
-      ColumnChannelName = new DataGridViewTextBoxColumn();
-      ColumnHasPassword = new DataGridViewCheckBoxColumn();
-      ColumnPermissions = new DataGridViewTextBoxColumn();
       ButtonOK = new Button();
+      ColumnChannelName = new DataGridViewTextBoxColumn();
+      ColumnPermissions = new DataGridViewTextBoxColumn();
       ((System.ComponentModel.ISupportInitialize)DataGridViewChannels).BeginInit();
       SuspendLayout();
       // 
@@ -81,15 +79,15 @@
       dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
       DataGridViewChannels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
       DataGridViewChannels.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      DataGridViewChannels.Columns.AddRange(new DataGridViewColumn[] { ColumnChannelName, ColumnHasPassword, ColumnPermissions });
-      dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle3.BackColor = Color.FromArgb(19, 26, 33);
-      dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F);
-      dataGridViewCellStyle3.ForeColor = Color.FromArgb(57, 206, 216);
-      dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(57, 206, 216);
-      dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(19, 26, 33);
-      dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-      DataGridViewChannels.DefaultCellStyle = dataGridViewCellStyle3;
+      DataGridViewChannels.Columns.AddRange(new DataGridViewColumn[] { ColumnChannelName, ColumnPermissions });
+      dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = Color.FromArgb(19, 26, 33);
+      dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+      dataGridViewCellStyle2.ForeColor = Color.FromArgb(57, 206, 216);
+      dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(57, 206, 216);
+      dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(19, 26, 33);
+      dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+      DataGridViewChannels.DefaultCellStyle = dataGridViewCellStyle2;
       DataGridViewChannels.EnableHeadersVisualStyles = false;
       DataGridViewChannels.Location = new Point(12, 46);
       DataGridViewChannels.MultiSelect = false;
@@ -104,37 +102,6 @@
       DataGridViewChannels.CellContentDoubleClick += DataGridViewChannels_CellContentDoubleClick;
       DataGridViewChannels.SelectionChanged += DataGridViewChannels_SelectionChanged;
       // 
-      // ColumnChannelName
-      // 
-      ColumnChannelName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-      ColumnChannelName.HeaderText = "Kanalname";
-      ColumnChannelName.Name = "ColumnChannelName";
-      ColumnChannelName.ReadOnly = true;
-      ColumnChannelName.Width = 92;
-      // 
-      // ColumnHasPassword
-      // 
-      ColumnHasPassword.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-      dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-      dataGridViewCellStyle2.ForeColor = Color.FromArgb(19, 26, 33);
-      dataGridViewCellStyle2.NullValue = false;
-      dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(19, 26, 33);
-      ColumnHasPassword.DefaultCellStyle = dataGridViewCellStyle2;
-      ColumnHasPassword.FlatStyle = FlatStyle.Popup;
-      ColumnHasPassword.HeaderText = "Gesichert";
-      ColumnHasPassword.Name = "ColumnHasPassword";
-      ColumnHasPassword.ReadOnly = true;
-      ColumnHasPassword.SortMode = DataGridViewColumnSortMode.Automatic;
-      ColumnHasPassword.Width = 85;
-      // 
-      // ColumnPermissions
-      // 
-      ColumnPermissions.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-      ColumnPermissions.HeaderText = "Berechtigungen";
-      ColumnPermissions.Name = "ColumnPermissions";
-      ColumnPermissions.ReadOnly = true;
-      ColumnPermissions.SortMode = DataGridViewColumnSortMode.NotSortable;
-      // 
       // ButtonOK
       // 
       ButtonOK.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -147,6 +114,22 @@
       ButtonOK.Text = "OK";
       ButtonOK.UseVisualStyleBackColor = true;
       ButtonOK.Click += ButtonOK_Click;
+      // 
+      // ColumnChannelName
+      // 
+      ColumnChannelName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+      ColumnChannelName.HeaderText = "Kanalname";
+      ColumnChannelName.Name = "ColumnChannelName";
+      ColumnChannelName.ReadOnly = true;
+      ColumnChannelName.Width = 92;
+      // 
+      // ColumnPermissions
+      // 
+      ColumnPermissions.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+      ColumnPermissions.HeaderText = "Berechtigungen";
+      ColumnPermissions.Name = "ColumnPermissions";
+      ColumnPermissions.ReadOnly = true;
+      ColumnPermissions.SortMode = DataGridViewColumnSortMode.NotSortable;
       // 
       // FormEditRpcChannels
       // 
@@ -179,7 +162,6 @@
     private DataGridView DataGridViewChannels;
     private Button ButtonOK;
     private DataGridViewTextBoxColumn ColumnChannelName;
-    private DataGridViewCheckBoxColumn ColumnHasPassword;
     private DataGridViewTextBoxColumn ColumnPermissions;
   }
 }

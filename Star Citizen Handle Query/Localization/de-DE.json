@@ -67,7 +67,6 @@
         "Title": "gRPC-Kanalauswahl",
         "Button_Load_Channels": "Kan\u00E4le laden",
         "Channel_Name": "Kanalname",
-        "Channel_Secured": "Gesichert",
         "Button_OK": "OK",
         "No_Channels_Found": "Es konnten keine Kan\u00E4le ermittelt werden.",
         "Permissions": "Berechtigungen",

@@ -42,7 +42,6 @@ public partial class FormEditRpcChannels : Form {
     ButtonLoadChannels.Text = ProgramTranslation.Settings.Relations.RPC_Channels.Button_Load_Channels;
     ButtonClose.Text = ProgramTranslation.Settings.Buttons.Close;
     ColumnChannelName.HeaderText = ProgramTranslation.Settings.Relations.RPC_Channels.Channel_Name;
-    ColumnHasPassword.HeaderText = ProgramTranslation.Settings.Relations.RPC_Channels.Channel_Secured;
     ColumnPermissions.HeaderText = ProgramTranslation.Settings.Relations.RPC_Channels.Permissions;
     ButtonOK.Text = ProgramTranslation.Settings.Relations.RPC_Channels.Button_OK;
     ChannelPermissions.AddRange([ProgramTranslation.Settings.Relations.RPC_Channels.Permission_None, ProgramTranslation.Settings.Relations.RPC_Channels.Permission_Read,
@@ -62,8 +61,7 @@ public partial class FormEditRpcChannels : Form {
     var channelInfos = Task.Run(RPC_Wrapper.GetChannels).Result;
     if (channelInfos?.Count > 0) {
       foreach (ChannelInfo channelInfo in channelInfos) {
-        DataGridViewChannels.Rows.Add(channelInfo.Name, channelInfo.HasPassword ? CheckState.Checked : CheckState.Unchecked,
-          ChannelPermissions[(int)channelInfo.Permissions], string.Empty, null);
+        DataGridViewChannels.Rows.Add(channelInfo.Name, ChannelPermissions[(int)channelInfo.Permissions]);
       }
     } else if (withMessageBox) {
       MessageBox.Show(ProgramTranslation.Settings.Relations.RPC_Channels.No_Channels_Found, Text);
