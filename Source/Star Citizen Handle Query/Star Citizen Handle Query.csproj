@@ -93,9 +93,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Protobuf Include="..\SCHQ_Server\Protos\SCHQ.proto" GrpcServices="Client">
-      <Link>Protos\SCHQ.proto</Link>
-    </Protobuf>
+    <Protobuf Include="Protos\SCHQ.proto" GrpcServices="Client" />
   </ItemGroup>
 
 </Project>
