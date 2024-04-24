@@ -2,9 +2,13 @@
 
 Overlay zur Abfrage von Star Citizen Spielern und ihrer Organisationszugehörigkeiten
 
-![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/MainWindow.png?raw=true "Star Citizen Handle Query")
+![Handle Query](/Source/Star%20Citizen%20Handle%20Query/Screenshots/MainWindow.png?raw=true "Star Citizen Handle Query")
 
 Das Tool-Hauptfenster kann nur dann im Vordergrund des Spiels dargestellt werden, wenn das Star Citizen Fenster im (randlosen) Fenstermodus läuft.
+
+## SCHQ_Server
+
+Es existiert ein eigenständiges Repository für den gRPC-Server zwecks Benutzer übergreifender Synchronisation von Beziehungen: https://github.com/Kuehlwagen/SCHQ_Server
 
 ## SCHQ_Web
 
@@ -17,7 +21,7 @@ https://discord.com/invite/WmzNY3mCm6
 
 ## Einstellungen
 
-![Settings](/Star%20Citizen%20Handle%20Query/Screenshots/Settings.png?raw=true "Einstellungen")
+![Settings](/Source/Star%20Citizen%20Handle%20Query/Screenshots/Settings.png?raw=true "Einstellungen")
 
 ### Anzeige
 - __Sprache:__ Hier kann die Sprache für das Tool eingestellt werden. Standardmäßig stehen die Sprachen `Deutsch`, `Deutsch (Brevity Code)` und `English` zur Auswahl.
@@ -73,7 +77,7 @@ https://discord.com/invite/WmzNY3mCm6
 
 ## SCHQ_Server gRPC-Kanalauswahl
 
-![Kanalauswahl](/Star%20Citizen%20Handle%20Query/Screenshots/Settings_gRPC.png?raw=true "gRPC-Kanalauswahl")
+![Kanalauswahl](/Source/Star%20Citizen%20Handle%20Query/Screenshots/Settings_gRPC.png?raw=true "gRPC-Kanalauswahl")
 
 Auf dem gRPC-Kanalauswahl Fenster können die Kanäle eines gRPC-Servers ausgelesen werden. Beim Öffnen des Fensters werden die Kanäle des gRPC-Servers initial geladen.
 
@@ -88,7 +92,7 @@ Auf dem gRPC-Kanalauswahl Fenster können die Kanäle eines gRPC-Servers ausgele
 
 Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der Windows-Taskbar erreicht werden.
 
-![ContextMenu](/Star%20Citizen%20Handle%20Query/Screenshots/ContextMenu.png?raw=true "Kontextmenü")
+![ContextMenu](/Source/Star%20Citizen%20Handle%20Query/Screenshots/ContextMenu.png?raw=true "Kontextmenü")
 
 - __Anzeigen:__ Falls das Fenster nicht sichtbar ist, wird es angezeigt und die Handle-Eingabebox erhält den Eingabefokus
 - __Einstellungen:__ Öffnet das Einstellungen-Fenster
@@ -110,7 +114,7 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
 
 ## Hauptfenster
 
-![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/MainWindow.png?raw=true "Hauptfenster")
+![Handle Query](/Source/Star%20Citizen%20Handle%20Query/Screenshots/MainWindow.png?raw=true "Hauptfenster")
 - Hier kann der eindeutige Name eines Star Citizen Spielers in die Handle-Eingabebox eingegeben werden (maximal 60 Zeichen). Durch die Betätigung der Enter-Taste wird die Abfrage ausgelöst und kurze Zeit später das Ergebnis der Abfrage unter der Handle-Eingabebox dargestellt.
   - Wird währenddessen die `Strg`-Taste gedrückt gehalten, wird das Auslesen der Handle-Informationen inklusive Avatare (Handle, Organisation und Affiliationen) via Star Citizen Webseite erzwungen.
   - Wird währenddessen die `Alt`-Taste gedrückt gehalten, bekommt das Orte-Fenster den Fokus, sodass man direkt den Namen eines Ortes eintippen kann.
@@ -155,7 +159,7 @@ Das Kontextmenü kann via Mausrechtsklick auf das Tool-Icon unten rechts in der 
 
 ## Log-Monitor Fenster
 
-![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/LogMonitor.png?raw=true "Log-Monitor")
+![Handle Query](/Source/Star%20Citizen%20Handle%20Query/Screenshots/LogMonitor.png?raw=true "Log-Monitor")
 
 Wenn in den Einstellungen die Anzeige des Log-Monitors aktiviert ist, wird das Fenster angezeigt. Hier wird die Star Citizen `Games.log`-Datei in nahezu Echtzeit ausgelesen, um beispielsweise Informationen zu gestorbenen / getöteten Spielercharakteren auf dem eigenen Server darzustellen.
 - Wenn das Hauptfenster entsperrt ist, wird auch das Log-Monitor-Fenster entsperrt und kann durch Mauslinksklick und ziehen des `Log-Monitor`-Schriftzugs an eine andere Positon gezogen werden. Ist die Einstellung `Position merken` aktiviert, wird die Position des Fensters beim Beenden des Tools gespeichert und beim Start wieder an die gespeicherte Position gesetzt.
@@ -181,7 +185,7 @@ Das Fenster enthält folgende Informationen:
 
 ## Beziehungen Fenster
 
-![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/Relations.png?raw=true "Beziehungen")
+![Handle Query](/Source/Star%20Citizen%20Handle%20Query/Screenshots/Relations.png?raw=true "Beziehungen")
 
 Hier werden sämtliche Handles und Organisationen aufgelistet, denen eine Beziehung zugewiesen wurde. Dabei wird der Beziehungsstatus farblich vor dem Handle dargestellt:
 - `Grün`: Freundlich
@@ -209,7 +213,7 @@ Diese Liste wird beim Beenden des Tools gespeichert und beim erneuten Start des 
 
 ## Orte Fenster
 
-![Handle Query](/Star%20Citizen%20Handle%20Query/Screenshots/Locations.png?raw=true "Orte")
+![Handle Query](/Source/Star%20Citizen%20Handle%20Query/Screenshots/Locations.png?raw=true "Orte")
 
 Hier können Informationen zu Star Citizen Orten angezeigt werden.
 
@@ -255,40 +259,3 @@ Um das Programm vollständig zu deinstallieren und alle vom Programm erstellten 
   - `SC_Handle_Query.deps.json`
   - `SC_Handle_Query.runtimeconfig.json`
 - Das lokale App-Verzeichnis: `%LocalAppData%\Kuehlwagen@GitHub\SC_Handle_Query\` und ggf. auch das darüber liegende `Kuehlwagen@GitHub`-Verzeichnis
-
-
-
-# SCHQ_Server (gRPC-Server)
-
-Der Star Citizen Handle Query gRPC-Server ermöglicht die Synchronisierung von Beziehungen über mehrere Benutzer. Die Datei `SCHQ_Server.exe` kann direkt gestartet werden.
-
-## Konfiguration
-- In der Datei `appsettings.json` können URL und Port des gRPC-Servers angepasst werden. Standardmäßig horcht der Server auf den Ports 5043 (HTTP) und 7085 (HTTPS):
-  - `http://localhost:5043`
-  - `https://localhost:7085`
-```XML
-    "Endpoints": {
-      "Http": {
-        "Url": "https://localhost:7085"
-      },
-      "gRPC": {
-        "Url": "http://localhost:5043"
-      }
-    }
-```
-
-## Windows Dienst-Installation
-- Das Tool kann als Windows-Dienst installiert werden. Dafür kann beispielsweise die `Eingabeaufforderung` __als Administrator__ geöffnet werden und anschließend folgende Zeilen nacheinander eingetragen und ausgeführt werden, wobei bei `binPath` der komplette Pfad zur Datei `SCHQ_Server.exe` angegeben werden muss:
-```CMD
-sc create SCHQ_Server binPath="c:\Path\To\SCHQ_Server.exe" displayName="SCHQ Server"
-sc description SCHQ_Server "Star Citizen Handle Query gRPC-Server"
-```
-- Der Dienst ist anschließend in der Windows Dienste-Übersicht mit dem Namen `SCHQ Server` zu finden.
-- Da das Konto `Lokales Systemkonto` voraussichtlich nicht genügend Rechte hat, um den Dienst auszuführen, sollte in den Eigenschaften des Dienstes die Anmeldung auf ein Windows-Konto mit genügend Rechten geändert werden.
-
-## Windows Dienst-Deinstallation
-- Um das Tool als Windows-Dienst wieder zu deinstallieren, kann erneut die `Eingabeaufforderung` __als Administrator__ geöffnet werden und anschließend folgende Zeile eingetragen und ausgeführt werden:
-```CMD
-sc delete SCHQ_Server
-```
-  
