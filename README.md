@@ -6,13 +6,19 @@ Overlay zur Abfrage von Star Citizen Spielern und ihrer Organisationszugehörigk
 
 Das Tool-Hauptfenster kann nur dann im Vordergrund des Spiels dargestellt werden, wenn das Star Citizen Fenster im (randlosen) Fenstermodus läuft.
 
-## SCHQ_Server
+## Verwandte Projekte
 
-Es existiert ein eigenständiges Repository für den gRPC-Server zwecks Benutzer übergreifender Synchronisation von Beziehungen: https://github.com/Kuehlwagen/SCHQ_Server
+### SCHQ_Server
 
-## SCHQ_Web
+Der gRPC-Server wird für die Benutzer übergreifende Synchronisierung von Beziehungen vorausgesetzt.
 
-Es existiert ein eigenständiges Repository für eine Web-Version des Tools, spezialisiert auf die Synchronisierung von Beziehungen: https://github.com/Kuehlwagen/SCHQ_Web
+Repository-URL: https://github.com/Kuehlwagen/SCHQ_Server
+
+### SCHQ_Web
+
+Das Web-Interface `SCHQ_Web` ermöglicht die Konfiguration des gRPC-Servers. Außerdem ist es damit möglich, die Beziehungen der Kanäle zu synchronisieren.
+
+Repository-URL: https://github.com/Kuehlwagen/SCHQ_Web
 
 ## Discord Server
 
