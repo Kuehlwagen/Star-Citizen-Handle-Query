@@ -75,7 +75,7 @@ https://discord.com/invite/WmzNY3mCm6
 
 ![Kanalauswahl](/Star%20Citizen%20Handle%20Query/Screenshots/Settings_gRPC.png?raw=true "gRPC-Kanalauswahl")
 
-Auf dem gRPC-Kanalverwaltung Fenster können die Kanäle eines gRPC-Servers verwaltet werden. Beim Öffnen des Fensters werden die Kanäle des gRPC-Servers initial geladen.
+Auf dem gRPC-Kanalauswahl Fenster können die Kanäle eines gRPC-Servers ausgelesen werden. Beim Öffnen des Fensters werden die Kanäle des gRPC-Servers initial geladen.
 
 - __Kanäle Laden Schaltfläche:__ Mit dieser Schaltfläche können die Kanäle des Servers erneut geladen werden.
 - __Kanäle-Tabelle:__ Hier werden die Kanäle des gRPC-Servers aufgelistet.
