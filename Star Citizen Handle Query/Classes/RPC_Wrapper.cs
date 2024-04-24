@@ -21,22 +21,6 @@ internal static class RPC_Wrapper {
     _url = url;
   }
 
-  public static bool CreateChannel(string channel, string password, ChannelPermissions permissions) {
-    bool rtnVal = false;
-    try {
-      if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
-        using var gRPC_Channel = GrpcChannel.ForAddress(_url, new GrpcChannelOptions {
-          HttpHandler = SocketsHandler
-        });
-        var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
-        rtnVal = Task.FromResult(gRPC_Client.CreateChannel(new ChannelRequest() { Channel = channel, Password = password, Permissons = permissions })).Result.Success;
-      }
-    } catch (Exception ex) {
-      Log($"{_url} - CreateChannel({channel}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
-    }
-    return rtnVal;
-  }
-
   public static List<ChannelInfo> GetChannels() {
     List<ChannelInfo> rtnVal = [];
     try {
@@ -49,38 +33,6 @@ internal static class RPC_Wrapper {
       }
     } catch (Exception ex) {
       Log($"{_url} - GetChannels() Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
-    }
-    return rtnVal;
-  }
-
-  public static ChannelReply GetChannel(string channel) {
-    ChannelReply rtnVal = new();
-    try {
-      if (!string.IsNullOrWhiteSpace(_url)) {
-        using var gRPC_Channel = GrpcChannel.ForAddress(_url, new GrpcChannelOptions {
-          HttpHandler = SocketsHandler
-        });
-        var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
-        rtnVal = Task.FromResult(gRPC_Client.GetChannel(new() { Channel = channel })).Result;
-      }
-    } catch (Exception ex) {
-      Log($"{_url} - GetChannels() Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
-    }
-    return rtnVal;
-  }
-
-  public static bool DeleteChannel(string channel, string password) {
-    bool rtnVal = false;
-    try {
-      if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
-        using var gRPC_Channel = GrpcChannel.ForAddress(_url, new GrpcChannelOptions {
-          HttpHandler = SocketsHandler
-        });
-        var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
-        rtnVal = Task.FromResult(gRPC_Client.DeleteChannel(new ChannelRequest() { Channel = channel, Password = password })).Result.Success;
-      }
-    } catch (Exception ex) {
-      Log($"{_url} - DeleteChannel({channel}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
     }
     return rtnVal;
   }
@@ -128,28 +80,6 @@ internal static class RPC_Wrapper {
       }
     } catch (Exception ex) {
       Log($"{_url} - SetRelation({channel}, {type}, {relation}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
-    }
-    return rtnVal;
-  }
-
-  public static RelationValue GetRelation(string channel, string password, RelationType type, string name) {
-    RelationValue rtnVal = RelationValue.NotAssigned;
-    try {
-      if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel) && !string.IsNullOrWhiteSpace(name)) {
-        using var gRPC_Channel = GrpcChannel.ForAddress(_url, new GrpcChannelOptions {
-          HttpHandler = SocketsHandler
-        });
-        var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
-        var result = Task.FromResult(gRPC_Client.GetRelation(new RelationRequest() {
-          Channel = channel,
-          Password = password,
-          Type = type,
-          Name = name
-        })).Result;
-        rtnVal = (RelationValue)(result.Found ? result.Relation : RelationValue.NotAssigned);
-      }
-    } catch (Exception ex) {
-      Log($"{_url} - GetRelation({channel}, {type}, {name}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
     }
     return rtnVal;
   }
