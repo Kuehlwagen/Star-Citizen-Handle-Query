@@ -6,6 +6,10 @@ Overlay zur Abfrage von Star Citizen Spielern und ihrer Organisationszugehörigk
 
 Das Tool-Hauptfenster kann nur dann im Vordergrund des Spiels dargestellt werden, wenn das Star Citizen Fenster im (randlosen) Fenstermodus läuft.
 
+## SCHQ_Web
+
+Es existiert ein eigenständiges Repository für eine Web-Version des Tools, spezialisiert auf die Synchronisierung von Beziehungen: https://github.com/Kuehlwagen/SCHQ_Web
+
 ## Discord Server
 
 Für das Tool existiert ein Discord Server, auf dem man über das Tool diskutieren kann.
