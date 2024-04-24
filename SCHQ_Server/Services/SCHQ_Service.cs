@@ -13,9 +13,9 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
   private DateTime SyncTimestamp = DateTime.MinValue;
 
   #region Channels
-  public override Task<SuccessReply> CreateChannel(ChannelRequest request, ServerCallContext context) {
+  public override Task<SuccessReply> AddChannel(ChannelRequest request, ServerCallContext context) {
     Guid guid = Guid.NewGuid();
-    _logger.LogInformation("[{Guid} CreateChannel Request] Channel: {Channel}, Password: {Password}",
+    _logger.LogInformation("[{Guid} AddChannel Request] Channel: {Channel}, Password: {Password}",
       guid, request.Channel, !string.IsNullOrWhiteSpace(request.Password) ? "Yes" : "No");
     SuccessReply rtnVal = new();
 
@@ -37,12 +37,12 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
         }
       } catch (Exception ex) {
         rtnVal.Info = $"Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}";
-        _logger.LogWarning("[{Guid} CreateChannel Exception] Message: {Message}, Inner Exception: {InnerExceptionMessage}",
+        _logger.LogWarning("[{Guid} AddChannel Exception] Message: {Message}, Inner Exception: {InnerExceptionMessage}",
           guid, ex.Message, ex.InnerException?.Message ?? "Empty");
       }
     }
 
-    _logger.LogInformation("[{Guid} CreateChannel Reply] Success: {Success}, Info: {Info}", guid, rtnVal.Success, rtnVal.Info);
+    _logger.LogInformation("[{Guid} AddChannel Reply] Success: {Success}, Info: {Info}", guid, rtnVal.Success, rtnVal.Info);
     return Task.FromResult(rtnVal);
   }
 
@@ -100,9 +100,9 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
     return Task.FromResult(rtnVal);
   }
 
-  public override Task<SuccessReply> DeleteChannel(ChannelRequest request, ServerCallContext context) {
+  public override Task<SuccessReply> RemoveChannel(ChannelRequest request, ServerCallContext context) {
     Guid guid = Guid.NewGuid();
-    _logger.LogInformation("[{Guid} DeleteChannel Request] Channel: {Channel}, Password: {Password}",
+    _logger.LogInformation("[{Guid} RemoveChannel Request] Channel: {Channel}, Password: {Password}",
       guid, request.Channel, !string.IsNullOrWhiteSpace(request.Password) ? "Yes" : "No");
     SuccessReply rtnVal = new();
 
@@ -126,12 +126,12 @@ public class SCHQ_Service(ILogger<SCHQ_Service> logger) : SCHQ_Relations.SCHQ_Re
         }
       } catch (Exception ex) {
         rtnVal.Info = $"Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}";
-        _logger.LogWarning("[{Guid} DeleteChannel Exception] Message: {Message}, Inner Exception: {InnerExceptionMessage}",
+        _logger.LogWarning("[{Guid} RemoveChannel Exception] Message: {Message}, Inner Exception: {InnerExceptionMessage}",
           guid, ex.Message, ex.InnerException?.Message ?? "Empty");
       }
     }
 
-    _logger.LogInformation("[{Guid} DeleteChannel Reply] Success: {Success}, Info: {Info}", guid, rtnVal.Success, rtnVal.Info);
+    _logger.LogInformation("[{Guid} RemoveChannel Reply] Success: {Success}, Info: {Info}", guid, rtnVal.Success, rtnVal.Info);
     return Task.FromResult(rtnVal);
   }
   #endregion
