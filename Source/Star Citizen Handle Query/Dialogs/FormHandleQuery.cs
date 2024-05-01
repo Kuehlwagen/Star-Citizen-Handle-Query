@@ -626,8 +626,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           if (ProgramSettings.Relations.ShowWindow && !ProgramSettings.WindowIgnoreMouseInput) {
             var ucRelation = new UserControlHandleRelation(ProgramTranslation);
             PanelInfo.Controls.Add(ucRelation);
-            Height += ucRelation.Height + LogicalToDeviceUnits(2);
+            Height += ucRelation.Height;
           }
+          Height += LogicalToDeviceUnits(2);
 
           // Ggf. UserControl mit Organisation-Informationen hinzufügen
           if (handleInfo?.Organizations?.MainOrganization != null) {
