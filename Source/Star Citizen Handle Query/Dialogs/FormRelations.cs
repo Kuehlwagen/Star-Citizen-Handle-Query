@@ -187,7 +187,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           if (infos.Relations?.Count > 0) {
             PanelRelations.SuspendLayout();
             foreach (RelationInformation info in infos.Relations) {
-              AddControl(info.Name, info.Type, info.Relation);
+              AddControl(info.Name, info.Type, info.Relation, isRPC);
             }
             PanelRelations.ResumeLayout();
           }
@@ -288,9 +288,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private void AddControl(string name, RelationType relationType, RelationValue relation) {
+    private void AddControl(string name, RelationType relationType, RelationValue relation, bool hide = false) {
       string controlName = $"{relationType}.{name}";
-      UserControlRelation control = new(name, relationType, relation) { Name = $"UserControlRelation_{relationType}_{name}", Visible = RelationIsVisible(relation) };
+      UserControlRelation control = new(name, relationType, relation) { Name = $"UserControlRelation_{relationType}_{name}", Visible = RelationIsVisible(relation) && !hide, SyncHide = hide };
       UserControlRelations.Add(controlName, control);
       PanelRelations.Controls.Add(control);
       if (ProgramSettings.Relations.SortAlphabetically && UserControlRelations.ContainsKey(controlName)) {
@@ -323,6 +323,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               RemoveControl(controls[0] as UserControlRelation);
             }
           } else if (controls[0] is UserControlRelation control) {
+            control.SyncHide = false;
             if (InvokeRequired) {
               Invoke(() => control.UpdateRelation(relation));
               Invoke(() => control.Visible = RelationIsVisible(relation));
@@ -384,7 +385,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public void FilterRelations() {
       for (int i = PanelRelations.Controls.Count - 1; i >= 0; i--) {
-        if (PanelRelations.Controls[i] is UserControlRelation control) {
+        if (PanelRelations.Controls[i] is UserControlRelation control && !control.SyncHide) {
           if (control.Type == RelationType.Organization &&
             CheckBoxFilterOrganization.Checked &&
             !CheckBoxFilterFriendly.Checked &&
