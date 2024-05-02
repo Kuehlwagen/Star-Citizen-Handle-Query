@@ -139,7 +139,7 @@
     "Title": "Relations",
     "RPC_Status_Disconnected": "Disconnected - click to connect",
     "RPC_Status_Connecting": "Connecting...",
-    "RPC_Status_Connected": "Connected - click to disconnect"
+    "RPC_Status_Connected": "Connected - LMB to disconnect; MMB to load all relations"
   },
   "Locations": {
     "Title": "Locations",

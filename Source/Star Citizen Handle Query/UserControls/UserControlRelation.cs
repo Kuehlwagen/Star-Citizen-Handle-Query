@@ -8,7 +8,6 @@ namespace Star_Citizen_Handle_Query.UserControls {
     internal readonly RelationType Type;
     internal readonly string RelationName;
     internal RelationValue Relation;
-    internal bool SyncHide;
 
     public UserControlRelation(string handle, RelationType relationType, RelationValue relation) {
       InitializeComponent();

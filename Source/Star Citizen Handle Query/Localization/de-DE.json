@@ -139,7 +139,7 @@
     "Title": "Beziehungen",
     "RPC_Status_Disconnected": "Getrennt - klicken, um zu verbinden",
     "RPC_Status_Connecting": "Verbindung wird hergestellt...",
-    "RPC_Status_Connected": "Verbunden - klicken, um die Verbidung zu trennen"
+    "RPC_Status_Connected": "Verbunden - Linksklick, um die Verbidung zu trennen; Mittlere Maustaste, um alle Beziehungen zu laden"
   },
   "Locations": {
     "Title": "Orte",

@@ -197,12 +197,28 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void PictureBoxClearAll_MouseClick(object sender, MouseEventArgs e) {
-      if (e.Button == MouseButtons.Left) {
-        if (IsRPCSync) {
-          StartStopSync();
-        } else {
-          ClearRelations();
-        }
+      switch (e.Button) {
+        case MouseButtons.Left:
+          if (IsRPCSync) {
+            StartStopSync();
+          } else {
+            ClearRelations();
+          }
+          break;
+        case MouseButtons.Middle:
+          if (IsRPCSync && Sync == SyncStatus.Connected) {
+            RelationInfos infos = RPC_Wrapper.GetRelations(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted);
+            if (infos.Relations?.Count > 0) {
+              UserControlRelations.Clear();
+              PanelRelations.Controls.Clear();
+              PanelRelations.SuspendLayout();
+              foreach (RelationInformation info in infos.Relations) {
+                AddControl(info.Name, info.Type, info.Relation);
+              }
+              PanelRelations.ResumeLayout();
+            }
+          }
+          break;
       }
     }
 
@@ -290,11 +306,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void AddControl(string name, RelationType relationType, RelationValue relation, bool hide = false) {
       string controlName = $"{relationType}.{name}";
-      UserControlRelation control = new(name, relationType, relation) { Name = $"UserControlRelation_{relationType}_{name}", Visible = RelationIsVisible(relation) && !hide, SyncHide = hide };
-      UserControlRelations.Add(controlName, control);
-      PanelRelations.Controls.Add(control);
-      if (ProgramSettings.Relations.SortAlphabetically && UserControlRelations.ContainsKey(controlName)) {
-        PanelRelations.Controls.SetChildIndex(control, UserControlRelations.IndexOfKey(controlName));
+      UserControlRelation control = new(name, relationType, relation) { Name = $"UserControlRelation_{relationType}_{name}", Visible = RelationIsVisible(relation) };
+      if (!UserControlRelations.ContainsKey(controlName)) {
+        UserControlRelations.Add(controlName, control);
+      }
+      if (!hide && !PanelRelations.Controls.ContainsKey(controlName)) {
+        PanelRelations.Controls.Add(control);
+        if (ProgramSettings.Relations.SortAlphabetically && UserControlRelations.ContainsKey(controlName)) {
+          PanelRelations.Controls.SetChildIndex(control, UserControlRelations.IndexOfKey(controlName));
+        }
       }
     }
 
@@ -323,7 +343,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               RemoveControl(controls[0] as UserControlRelation);
             }
           } else if (controls[0] is UserControlRelation control) {
-            control.SyncHide = false;
             if (InvokeRequired) {
               Invoke(() => control.UpdateRelation(relation));
               Invoke(() => control.Visible = RelationIsVisible(relation));
@@ -385,7 +404,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public void FilterRelations() {
       for (int i = PanelRelations.Controls.Count - 1; i >= 0; i--) {
-        if (PanelRelations.Controls[i] is UserControlRelation control && !control.SyncHide) {
+        if (PanelRelations.Controls[i] is UserControlRelation control) {
           if (control.Type == RelationType.Organization &&
             CheckBoxFilterOrganization.Checked &&
             !CheckBoxFilterFriendly.Checked &&
