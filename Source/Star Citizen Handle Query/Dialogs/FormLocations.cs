@@ -3,7 +3,6 @@ using Star_Citizen_Handle_Query.Properties;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Net;
-using System.Windows.Forms;
 using static Star_Citizen_Handle_Query.Dialogs.FormHandleQuery;
 
 namespace Star_Citizen_Handle_Query.Dialogs {
@@ -65,7 +64,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
       foreach (string line in locationCsv.Split(Environment.NewLine)) {
         string[] v = line.Split(',');
-        Locations.Add(new LocationInfo() {
+        Locations.Add(new() {
           Name = v[0],
           Type = v[1],
           ParentBody = v[2],
@@ -74,7 +73,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           CoordinateY = v[5],
           CoordinateZ = v[6],
           ThemeImage = v[7],
-          WikiLink = v[8]
+          WikiLink = v[8],
+          Private = v[9] == "1",
+          Quantum = v[10] == "1",
+          Affiliation = v[11]
         });
       }
       Locations.RemoveAt(0);

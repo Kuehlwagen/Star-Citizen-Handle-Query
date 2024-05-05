@@ -1,4 +1,6 @@
-﻿namespace Star_Citizen_Handle_Query.Serialization {
+﻿using System.Security.Policy;
+
+namespace Star_Citizen_Handle_Query.Serialization {
 
   [Serializable]
   public class LocationInfo {
@@ -12,6 +14,9 @@
     public string CoordinateZ { get; set; }
     public string ThemeImage { get; set; }
     public string WikiLink { get; set; }
+    public bool Private { get; set; }
+    public bool Quantum { get; set; }
+    public string Affiliation { get; set; }
 
   }
 
