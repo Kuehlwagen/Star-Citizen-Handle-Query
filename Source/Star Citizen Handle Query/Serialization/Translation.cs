@@ -240,6 +240,8 @@
 
     public string Log_Entry_Display_Duration_Minutes { get; set; } = "Minute(n)";
 
+    public string Check_Complete_File { get; set; } = "Komplette Datei auswerten";
+
   }
 
   [Serializable()]

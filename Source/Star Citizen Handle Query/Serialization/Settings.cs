@@ -142,6 +142,9 @@ namespace Star_Citizen_Handle_Query.Serialization {
       }
     }
 
+    /// <summary>Angabe, ob die komplette Log-Datei ausgelesen werden soll</summary>
+    public bool LoadCompleteFile { get; set; } = false;
+
     /// <summary>Filter für den Log-Monitor</summary>
     public LogMonitorFilter Filter { get; set; } = new LogMonitorFilter();
 

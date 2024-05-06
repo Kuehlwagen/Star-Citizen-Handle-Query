@@ -134,7 +134,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
                 Encoding encoding = Encoding.UTF8;
                 StreamReader logReader = new(new FileStream(scLogPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite), encoding);
-                long currentPosition = logReader.BaseStream.Length;
+                long currentPosition = ProgramSettings.LogMonitor.LoadCompleteFile ? 0 : logReader.BaseStream.Length;
                 long lastMaxOffset = currentPosition;
 
                 while (!Cancel && processSC != null && !processSC.HasExited) {

@@ -74,6 +74,7 @@
       LabelMMB_URL = new Label();
       LabelLMB_URL = new Label();
       GroupBoxLogMonitor = new GroupBox();
+      CheckBoxCheckCompleteFile = new CheckBox();
       GroupBoxBeziehungen = new GroupBox();
       ButtonEditPrcChannels = new Button();
       LabelGRPCKanalPasswort = new Label();
@@ -515,7 +516,7 @@
       // 
       CheckBoxLogMonitorFilterLoadingScreenDuration.AutoSize = true;
       CheckBoxLogMonitorFilterLoadingScreenDuration.Enabled = false;
-      CheckBoxLogMonitorFilterLoadingScreenDuration.Location = new Point(34, 135);
+      CheckBoxLogMonitorFilterLoadingScreenDuration.Location = new Point(190, 110);
       CheckBoxLogMonitorFilterLoadingScreenDuration.Name = "CheckBoxLogMonitorFilterLoadingScreenDuration";
       CheckBoxLogMonitorFilterLoadingScreenDuration.Size = new Size(193, 19);
       CheckBoxLogMonitorFilterLoadingScreenDuration.TabIndex = 7;
@@ -667,6 +668,7 @@
       GroupBoxLogMonitor.Controls.Add(LabelLogEintragAnzeigedauerMinuten);
       GroupBoxLogMonitor.Controls.Add(CheckBoxShowLog);
       GroupBoxLogMonitor.Controls.Add(CheckBoxLogMonitorFilterCorpse);
+      GroupBoxLogMonitor.Controls.Add(CheckBoxCheckCompleteFile);
       GroupBoxLogMonitor.Controls.Add(CheckBoxLogMonitorFilterLoadingScreenDuration);
       GroupBoxLogMonitor.Controls.Add(LabelLogEintraegeMaximum);
       GroupBoxLogMonitor.Controls.Add(NumericUpDownLogEintraegeMaximum);
@@ -680,6 +682,18 @@
       GroupBoxLogMonitor.TabIndex = 5;
       GroupBoxLogMonitor.TabStop = false;
       GroupBoxLogMonitor.Text = "Log-Monitor";
+      // 
+      // CheckBoxCheckCompleteFile
+      // 
+      CheckBoxCheckCompleteFile.AutoSize = true;
+      CheckBoxCheckCompleteFile.Enabled = false;
+      CheckBoxCheckCompleteFile.Location = new Point(34, 135);
+      CheckBoxCheckCompleteFile.Name = "CheckBoxCheckCompleteFile";
+      CheckBoxCheckCompleteFile.Size = new Size(168, 19);
+      CheckBoxCheckCompleteFile.TabIndex = 8;
+      CheckBoxCheckCompleteFile.Text = "Komplette Datei auswerten";
+      CheckBoxCheckCompleteFile.UseVisualStyleBackColor = true;
+      CheckBoxCheckCompleteFile.CheckedChanged += CheckBoxCheckCompleteFile_CheckedChanged;
       // 
       // GroupBoxBeziehungen
       // 
@@ -893,5 +907,6 @@
     private Label LabelGRPCKanalPasswort;
     private TextBox TextBoxGRPCChannelPassword;
     private Button ButtonEditPrcChannels;
+    private CheckBox CheckBoxCheckCompleteFile;
   }
 }

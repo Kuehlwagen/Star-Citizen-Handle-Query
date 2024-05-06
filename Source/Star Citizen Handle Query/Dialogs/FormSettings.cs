@@ -77,6 +77,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       NumericUpDownLogEintragAnzeigedauer.Value = ProgramSettings.LogMonitor.EntryDisplayDurationInMinutes;
       CheckBoxLogMonitorFilterCorpse.Checked = ProgramSettings.LogMonitor.Filter.Corpse;
       CheckBoxLogMonitorFilterLoadingScreenDuration.Checked = ProgramSettings.LogMonitor.Filter.LoadingScreenDuration;
+      CheckBoxCheckCompleteFile.Checked = ProgramSettings.LogMonitor.LoadCompleteFile;
       CheckBoxShowRelations.Checked = ProgramSettings.Relations.ShowWindow;
       CheckBoxSortRelationsAlphabetically.Checked = ProgramSettings.Relations.SortAlphabetically;
       NumericUpDownRelationsEntriesMaximum.Value = ProgramSettings.Relations.EntriesMax;
@@ -187,6 +188,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       NumericUpDownLogEintragAnzeigedauer.Enabled = CheckBoxShowLog.Checked;
       CheckBoxLogMonitorFilterCorpse.Enabled = CheckBoxShowLog.Checked;
       CheckBoxLogMonitorFilterLoadingScreenDuration.Enabled = CheckBoxShowLog.Checked;
+      CheckBoxCheckCompleteFile.Enabled = CheckBoxShowLog.Checked;
     }
 
     private void NumericUpDownLogEintraegeMaximum_ValueChanged(object sender, EventArgs e) {
@@ -203,6 +205,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void CheckBoxLogMonitorFilterLoadingScreenDuration_CheckedChanged(object sender, EventArgs e) {
       ProgramSettings.LogMonitor.Filter.LoadingScreenDuration = CheckBoxLogMonitorFilterLoadingScreenDuration.Checked;
+    }
+
+    private void CheckBoxCheckCompleteFile_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.LogMonitor.LoadCompleteFile = CheckBoxCheckCompleteFile.Checked;
     }
 
     private void CheckBoxShowRelations_CheckedChanged(object sender, EventArgs e) {
@@ -332,6 +338,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         TextBoxGRPCChannel.SelectAll();
       }
     }
+
   }
 
 }

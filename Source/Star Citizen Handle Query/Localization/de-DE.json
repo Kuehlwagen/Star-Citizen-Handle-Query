@@ -82,7 +82,8 @@
       "Log_Entry_Display_Duration": "Eintrag Anzeigedauer:",
       "Log_Entry_Display_Duration_Minutes": "Minute(n)",
       "Log_Show_Corpse": "Spielertode anzeigen",
-      "Log_Show_Loading_Screen_Duration": "Ladebildschirm-Dauer anzeigen"
+      "Log_Show_Loading_Screen_Duration": "Ladebildschirm-Dauer anzeigen",
+      "Check_Complete_File": "Komplette Datei auswerten"
     },
     "Local_Cache": {
       "Group_Title": "Lokaler Cache",
