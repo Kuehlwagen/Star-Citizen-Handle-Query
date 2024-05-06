@@ -76,6 +76,7 @@ https://discord.com/invite/WmzNY3mCm6
   - __Eintrag Anzeigedauer:__ Anzeigedauer eines Logeintrags in Minuten (`0` = unendlich)
   - __Spielertode anzeigen:__ Angabe, ob Spielertode im Log-Monitor angezeigt werden sollen
   - __Ladebildschirm-Dauer anzeigen:__ Angabe, ob die Ladebildschirm-Dauer im Log-Monitor angezeigt werden sollen
+  - __Komplette Datei auswerten:__ Angabe, ob die komplette Log-Datei ausgewertet und die Ergebnisse dargestellt werden sollen. Wenn deaktiviert, wird ausschließlich der Dateiinhalt ab dem Start des Auslesens der Log-Datei berücksichtigt.
 ### Schaltflächen
 - __Speichern:__ Speichert die vorgenommenen Einstellungen und schließt das Einstellungen-Fenster
 - __Schließen:__ Schließt das Einstellungen-Fenster, ohne die vorgenommenen Einstellungen zu speichern
@@ -186,6 +187,7 @@ Das Fenster enthält folgende Informationen:
     - `Information`: Es handelt sich um einen Info-Eintrag (z.B.: Ladezeit im Ladebildschirm)
   - Rechts daneben werden Uhrzeit und weitere Informationen, welche zum Log-Typ passen, angezeigt
   - Links neben dem Handle eines Spielers wird die Beziehung zum Spieler farblich dargestellt, sofern zum Zeitpunkt der Erstellung eines Log-Eintrags eine Beziehung festgelegt ist.
+  - Wenn Informationen zum Ort des Todes eines Spielers vorliegen, wird vor dem Handle ein Stern dargestellt. Die Informationen werden als Tooltip bereitgestellt.
   - Wenn der Spieler in einer Zone gestorben ist, in der es ein lokales Inventar gibt, wird ganz rechts zusätzlich ein `Ressourcen`-Symbol dargestellt.
   - Ein Mauslinksklick auf eine der genannten Informationen trägt den Handle des Spielers in das Hauptfenster ein und startet direkt eine Handle-Abfrage. Wird dabei die `Strg`-Taste gedrückt gehalten, wird ein Auslesen der Handle-Informationen von der RSI-Webseite erzwungen.
 
