@@ -60,6 +60,9 @@ https://discord.com/invite/WmzNY3mCm6
   - `{CoordinateZ}`: Z-Koordinate
   - `{ThemeImage}`: URL zum Beispielbild aus dem Wiki
   - `{WikiLink}`: Link zum Wiki (starcitizen.tools)
+  - `Quantum`: Angabe, ob der Ort angesprungen werden kann
+  - `Private`: Angabe, ob der Ort privat ist
+  - `Affiliation`: Angabe, welche Gruppe den Ort bewacht
 - Mehrere Einträge können Pipe `|` getrennt angegeben werden. Sobald ein Eintrag nach der Ersetzung der Platzhalter mindestens ein Zeichen enthält, wird dieser Wert verwendet. Beispiel: `{WikiLink}|https://starcitizen.tools/{Name}` (wenn `{WikiLink}` keinen Text zurückgibt, wird stattdessen `https://starcitizen.tools/{Name}` verwendet)
 ### Beziehungen
 - __Beziehungen anzeigen:__ Angabe, ob das Beziehungen-Fenster angezeigt werden soll
