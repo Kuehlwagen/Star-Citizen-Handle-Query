@@ -4,7 +4,7 @@ using System.Globalization;
 namespace Star_Citizen_Handle_Query.Serialization {
 
   [Serializable()]
-  public class LogMonitorInfo(LogType logType, string date, string handle = null, string info = null, string additionalInfo = null,
+  public class LogMonitorInfo(LogType logType, string date, string handle = null, string key = null, string value = null,
     Bitmap icon = null, RelationValue relation = RelationValue.NotAssigned) : ICloneable {
 
     public Bitmap Icon { get; } = icon;
@@ -15,15 +15,27 @@ namespace Star_Citizen_Handle_Query.Serialization {
 
     public string Handle { get; } = handle ?? string.Empty;
 
-    public string Info { get; } = info ?? string.Empty;
+    public string Key { get; } = key ?? string.Empty;
 
-    public bool IsCorpseEnabled { get; } = logType == LogType.Corpse && additionalInfo?.ToLower() == "yes";
+    public string Value { get; } = value ?? string.Empty;
+
+    public bool IsCorpseEnabled { get; } = logType == LogType.Corpse &&
+      key != null && key.Equals("IsCorpseEnabled", StringComparison.CurrentCultureIgnoreCase) &&
+      value != null && value.StartsWith("Yes", StringComparison.CurrentCultureIgnoreCase);
 
     public RelationValue RelationValue { get; } = relation;
 
-    public bool IsCriminalArrest { get { return LogType == LogType.Corpse && Info.ToLower().Contains("criminal arrest"); } }
+    public bool IsCriminalArrest { get; } = logType == LogType.Corpse &&
+      key != null && key.Equals("IsCorpseEnabled", StringComparison.CurrentCultureIgnoreCase) &&
+      value != null && value.Contains("Criminal Arrest", StringComparison.CurrentCultureIgnoreCase);
 
-    public bool IsLocalInventoryAvailable { get { return LogType == LogType.Corpse && Info.ToLower().Contains("there is a local inventory"); } }
+    public bool IsLocalInventoryAvailable { get; } = logType == LogType.Corpse &&
+      key != null && key.Equals("IsCorpseEnabled", StringComparison.CurrentCultureIgnoreCase) &&
+      value != null && value.Contains("there is a local inventory", StringComparison.CurrentCultureIgnoreCase);
+
+    public bool IsLocationInfo { get; } = logType == LogType.Corpse &&
+      key != null && key.Equals("DoesLocationContainHospital", StringComparison.CurrentCultureIgnoreCase) &&
+      !string.IsNullOrWhiteSpace(value);
 
     public bool IsValid { get { return Date > DateTime.MinValue; } }
 
@@ -31,10 +43,6 @@ namespace Star_Citizen_Handle_Query.Serialization {
       if (obj != null && obj is LogMonitorInfo lmi) {
         return lmi.LogType == LogType &&
           lmi.Handle == Handle &&
-          lmi.Info == Info &&
-          lmi.IsCorpseEnabled == IsCorpseEnabled &&
-          lmi.IsCriminalArrest == IsCriminalArrest &&
-          lmi.IsLocalInventoryAvailable == IsLocalInventoryAvailable &&
           lmi.Date <= Date && lmi.Date.AddSeconds(5) >= Date;
       } else {
         return base.Equals(obj);

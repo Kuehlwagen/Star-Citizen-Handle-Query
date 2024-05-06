@@ -1298,7 +1298,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void ToolTipHandleQuery_Draw(object sender, DrawToolTipEventArgs e) {
       e.DrawBackground();
       e.DrawBorder();
-      e.DrawText();
+      e.DrawText(TextFormatFlags.TextBoxControl);
     }
 
     public void SetToolTip(Control control, string text = null) {

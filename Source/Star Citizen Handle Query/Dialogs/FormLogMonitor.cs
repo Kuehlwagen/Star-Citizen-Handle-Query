@@ -17,11 +17,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly Translation ProgramTranslation;
 
     private readonly Regex RgxCorpse = RegexCorpse();
-    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>.+<Corpse> Player '(?<Handle>[\w_\-]+)'.+IsCorpseEnabled: (?<Corpse>\w{2,3})[,\.] ?(?<Info>[\w\s]*)\.?.*$", RegexOptions.Compiled)]
+    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <Corpse> Player '(?<Handle>[\w_\-]+)' <remote client>: (?<Key>.+): (?<Value>.+) \[Team_ActorTech]\[Actor\]$", RegexOptions.Compiled)]
     private static partial Regex RegexCorpse();
 
     private readonly Regex RgxLoadingScreenDuration = RegexLoadingScreen();
-    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>\sLoading screen for.+closed after (?<Seconds>\d+\.\d+) seconds$", RegexOptions.Compiled)]
+    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>\sLoading screen for pu : SC_Frontend closed after (?<Value>\d+\.\d+) seconds$", RegexOptions.Compiled)]
     private static partial Regex RegexLoadingScreen();
 
     public FormLogMonitor(Settings programSettings, Translation translation) {
@@ -184,15 +184,23 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void AddLogInfo(List<LogMonitorInfo> logInfos) {
       foreach (LogMonitorInfo logInfo in logInfos) {
         if (logInfo.IsValid) {
-          if (PanelLogInfo.Controls.Count == 0 ||
-            (PanelLogInfo.Controls[PanelLogInfo.Controls.Count - 1] is UserControlLog ucl) && !logInfo.Equals(ucl.LogInfoItem)) {
-            UserControlLog uc = new(logInfo, ProgramSettings);
+          if (PanelLogInfo.Controls.Count == 0) {
             if (PanelLogInfo.Controls.Count == ProgramSettings.LogMonitor.EntriesMax) {
               RemoveControl(PanelLogInfo.Controls[0] as UserControlLog);
             }
-            PanelLogInfo.Controls.Add(uc);
-          }
+            PanelLogInfo.Controls.Add(new UserControlLog(logInfo, ProgramSettings));
+          } else if (PanelLogInfo.Controls[PanelLogInfo.Controls.Count - 1] is UserControlLog ucl) {
+            if (!logInfo.Equals(ucl.LogInfoItem)) {
+              if (PanelLogInfo.Controls.Count == ProgramSettings.LogMonitor.EntriesMax) {
+                RemoveControl(PanelLogInfo.Controls[0] as UserControlLog);
+              }
+              PanelLogInfo.Controls.Add(new UserControlLog(logInfo, ProgramSettings));
+            } else {
+              ucl.UpdateInfo(logInfo);
+            }
+          } else {
 
+          }
         }
       }
     }
@@ -201,11 +209,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 #if DEBUG
       if (PanelLogInfo.Controls.Count == 0) {
         AddLogInfo([
-          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "there is a local inventory", "Yes", relation: RelationValue.Friendly),
-          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", additionalInfo: "Yes"),
+          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "DoesLocationContainHospital", "Searching landing zone location \"@ui_pregame_port_GrimHex_name\" for the closest hospital.", relation: RelationValue.Friendly),
+          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "DoesLocationContainHospital", "Nearby hospital \"@Stanton2_Orison_Hospital\" IS NOT contained within landing zone \"@ui_pregame_port_GrimHex_name\".", relation: RelationValue.Friendly),
+          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "IsCorpseEnabled", "Yes, there is a local inventory but no hospital.", relation: RelationValue.Friendly),
+          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", "DoesLocationContainHospital", "Searching landing zone location \"@Stanton2_Transfer_Seraphim\" for the closest hospital."),
+          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", "DoesLocationContainHospital", "Nearby hospital \"@RR_Clinic\" IS contained within landing zone \"@Stanton2_Transfer_Seraphim\"."),
+          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", "IsCorpseEnabled", "Yes"),
           new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair", relation: RelationValue.Bogey),
-          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "criminal arrest", relation: RelationValue.Bandit),
-          new(LogType.LoadingScreenDuration, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), info: "15")
+          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "IsCorpseEnabled", "criminal arrest", relation: RelationValue.Bandit),
+          new(LogType.LoadingScreenDuration, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), value: "15")
         ]);
       }
 #else
@@ -251,8 +263,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                 rtnVal.Add(new LogMonitorInfo(LogType.Corpse,
                   match.Groups["Date"].Value,
                   match.Groups["Handle"].Value,
-                  match.Groups["Info"].Value,
-                  match.Groups["Corpse"].Value,
+                  match.Groups["Key"].Value,
+                  match.Groups["Value"].Value,
                   relation: (Owner as FormHandleQuery).GetHandleRelation(match.Groups["Handle"].Value)));
                 continue;
               }
@@ -262,7 +274,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               if (match != null && match.Success) {
                 rtnVal.Add(new LogMonitorInfo(LogType.LoadingScreenDuration,
                   match.Groups["Date"].Value,
-                  info: match.Groups["Seconds"].Value));
+                  value: match.Groups["Value"].Value));
                 continue;
               }
             }
@@ -326,6 +338,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       uc.StopTimer();
       PanelLogInfo.Controls.Remove(uc);
       uc.Dispose();
+    }
+
+    private void ToolTipLogMonitor_Draw(object sender, DrawToolTipEventArgs e) {
+      e.DrawBackground();
+      e.DrawBorder();
+      e.DrawText(TextFormatFlags.TextBoxControl);
+    }
+
+    internal void SetTooltip(Control control, string text) {
+      ToolTipLogMonitor.SetToolTip(control, text);
     }
 
   }

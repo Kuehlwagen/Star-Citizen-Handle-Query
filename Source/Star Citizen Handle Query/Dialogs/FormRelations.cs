@@ -268,7 +268,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         SyncStatus.Connected => ProgramTranslation.Relations.RPC_Status_Connected,
         _ => status.ToString()
       };
-      return $"{ProgramTranslation.Settings.Relations.RPC_Server_Channel} {ProgramSettings.Relations.RPC_Channel} ({statusText})";
+      return $"{ProgramTranslation.Settings.Relations.RPC_Server_Channel} {ProgramSettings.Relations.RPC_Channel}{Environment.NewLine}{statusText}";
     }
 
     internal enum SyncStatus {
@@ -479,7 +479,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void ToolTipHandleQuery_Draw(object sender, DrawToolTipEventArgs e) {
       e.DrawBackground();
       e.DrawBorder();
-      e.DrawText();
+      e.DrawText(TextFormatFlags.TextBoxControl);
     }
 
   }

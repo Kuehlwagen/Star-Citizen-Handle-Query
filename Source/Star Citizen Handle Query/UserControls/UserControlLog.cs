@@ -8,6 +8,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     internal readonly LogMonitorInfo LogInfoItem;
     private readonly System.Windows.Forms.Timer TimerRemoveControl = new();
+    private string ToolTipText = string.Empty;
 
     public UserControlLog(LogMonitorInfo logInfo, Settings programSettings) {
       InitializeComponent();
@@ -41,15 +42,46 @@ namespace Star_Citizen_Handle_Query.UserControls {
           if (LogInfoItem.IsLocalInventoryAvailable) {
             PictureBoxRight.Image = Properties.Resources.Resource;
           }
+          if (LogInfoItem.IsLocationInfo) {
+            SetToolTip(LogInfoItem.Value);
+          }
           AddMouseEvents();
           break;
         case LogType.LoadingScreenDuration:
           PictureBoxLeft.Image = Properties.Resources.Info;
-          LabelText.Text = $"Loading screen: {LogInfoItem.Info}s";
+          LabelText.Text = $"Loading screen: {LogInfoItem.Value}s";
           break;
       }
 
       TimerRemoveControl.Enabled = true;
+    }
+
+    public void UpdateInfo(LogMonitorInfo info) {
+      if (info != null && info.IsValid) {
+        switch (info.LogType) {
+          case LogType.Corpse:
+            Image img;
+            if (info.IsCriminalArrest) {
+              img = Properties.Resources.BountyHunting;
+            } else if (info.IsCorpseEnabled) {
+              img = Properties.Resources.Medical;
+            } else {
+              img = Properties.Resources.Dead;
+            }
+            PictureBoxLeft.Image = img;
+            if (info.RelationValue > RelationValue.NotAssigned) {
+              LabelRelation.Visible = info.RelationValue > RelationValue.NotAssigned;
+              LabelRelation.BackColor = FormHandleQuery.GetRelationColor(info.RelationValue);
+            }
+            if (info.IsLocalInventoryAvailable) {
+              PictureBoxRight.Image = Properties.Resources.Resource;
+            }
+            if (info.IsLocationInfo) {
+              SetToolTip(info.Value);
+            }
+            break;
+        }
+      }
     }
 
     private void AddMouseEvents() {
@@ -83,12 +115,16 @@ namespace Star_Citizen_Handle_Query.UserControls {
       TimerRemoveControl.Start();
     }
 
-    public void SetText(string info, bool resetTimer = false) {
-      LabelText.Text = info;
-      if (resetTimer) {
-        LabelTime.Text = DateTime.Now.ToString("HH:mm");
-        ResetTimer();
+    public void SetToolTip(string tooltip) {
+      if (!LabelText.Text.StartsWith('⭐')) {
+        LabelText.Text = $"⭐ {LabelText.Text}";
       }
+      ToolTipText = $"{ToolTipText}{Environment.NewLine}{tooltip}".Trim();
+      (Parent.Parent as FormLogMonitor).SetTooltip(PictureBoxLeft, ToolTipText);
+      (Parent.Parent as FormLogMonitor).SetTooltip(LabelTime, ToolTipText);
+      (Parent.Parent as FormLogMonitor).SetTooltip(LabelRelation, ToolTipText);
+      (Parent.Parent as FormLogMonitor).SetTooltip(LabelText, ToolTipText);
+      (Parent.Parent as FormLogMonitor).SetTooltip(PictureBoxRight, ToolTipText);
     }
 
   }

@@ -23,12 +23,14 @@
     ///  the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
+      components = new System.ComponentModel.Container();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLogMonitor));
       PanelHeader = new Panel();
       PictureBoxClearAll = new PictureBox();
       PictureBoxStatus = new PictureBox();
       LabelTitle = new Label();
       PanelLogInfo = new FlowLayoutPanel();
+      ToolTipLogMonitor = new ToolTip(components);
       PanelHeader.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)PictureBoxClearAll).BeginInit();
       ((System.ComponentModel.ISupportInitialize)PictureBoxStatus).BeginInit();
@@ -41,19 +43,17 @@
       PanelHeader.Controls.Add(PictureBoxClearAll);
       PanelHeader.Controls.Add(PictureBoxStatus);
       PanelHeader.Controls.Add(LabelTitle);
-      PanelHeader.Location = new Point(1, 2);
-      PanelHeader.Margin = new Padding(4, 5, 4, 5);
+      PanelHeader.Location = new Point(1, 1);
       PanelHeader.Name = "PanelHeader";
-      PanelHeader.Size = new Size(340, 48);
+      PanelHeader.Size = new Size(238, 29);
       PanelHeader.TabIndex = 0;
       // 
       // PictureBoxClearAll
       // 
       PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
-      PictureBoxClearAll.Location = new Point(313, 12);
-      PictureBoxClearAll.Margin = new Padding(4, 5, 4, 5);
+      PictureBoxClearAll.Location = new Point(219, 7);
       PictureBoxClearAll.Name = "PictureBoxClearAll";
-      PictureBoxClearAll.Size = new Size(17, 25);
+      PictureBoxClearAll.Size = new Size(12, 15);
       PictureBoxClearAll.SizeMode = PictureBoxSizeMode.Zoom;
       PictureBoxClearAll.TabIndex = 2;
       PictureBoxClearAll.TabStop = false;
@@ -61,21 +61,19 @@
       // PictureBoxStatus
       // 
       PictureBoxStatus.Image = Properties.Resources.StatusRed;
-      PictureBoxStatus.Location = new Point(6, 12);
-      PictureBoxStatus.Margin = new Padding(4, 5, 4, 5);
+      PictureBoxStatus.Location = new Point(4, 7);
       PictureBoxStatus.Name = "PictureBoxStatus";
-      PictureBoxStatus.Size = new Size(21, 25);
+      PictureBoxStatus.Size = new Size(15, 15);
       PictureBoxStatus.SizeMode = PictureBoxSizeMode.Zoom;
       PictureBoxStatus.TabIndex = 2;
       PictureBoxStatus.TabStop = false;
       // 
       // LabelTitle
       // 
-      LabelTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-      LabelTitle.Location = new Point(33, 12);
-      LabelTitle.Margin = new Padding(4, 0, 4, 0);
+      LabelTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+      LabelTitle.Location = new Point(23, 7);
       LabelTitle.Name = "LabelTitle";
-      LabelTitle.Size = new Size(277, 25);
+      LabelTitle.Size = new Size(194, 15);
       LabelTitle.TabIndex = 0;
       LabelTitle.Text = "Log-Monitor";
       LabelTitle.TextAlign = ContentAlignment.MiddleLeft;
@@ -88,26 +86,32 @@
       PanelLogInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
       PanelLogInfo.BackColor = Color.Lime;
       PanelLogInfo.FlowDirection = FlowDirection.TopDown;
-      PanelLogInfo.Location = new Point(1, 50);
+      PanelLogInfo.Location = new Point(1, 30);
       PanelLogInfo.Margin = new Padding(0);
       PanelLogInfo.Name = "PanelLogInfo";
-      PanelLogInfo.Size = new Size(340, 48);
+      PanelLogInfo.Size = new Size(238, 29);
       PanelLogInfo.TabIndex = 1;
       PanelLogInfo.ControlAdded += PanelLogInfo_ControlAdded;
       PanelLogInfo.ControlRemoved += PanelLogInfo_ControlRemoved;
       // 
+      // ToolTipLogMonitor
+      // 
+      ToolTipLogMonitor.BackColor = Color.FromArgb(19, 26, 33);
+      ToolTipLogMonitor.ForeColor = Color.FromArgb(57, 206, 216);
+      ToolTipLogMonitor.OwnerDraw = true;
+      ToolTipLogMonitor.Draw += ToolTipLogMonitor_Draw;
+      // 
       // FormLogMonitor
       // 
-      AutoScaleDimensions = new SizeF(10F, 25F);
+      AutoScaleDimensions = new SizeF(7F, 15F);
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.Lime;
-      ClientSize = new Size(343, 100);
+      ClientSize = new Size(240, 60);
       Controls.Add(PanelLogInfo);
       Controls.Add(PanelHeader);
       ForeColor = Color.FromArgb(57, 206, 216);
       FormBorderStyle = FormBorderStyle.None;
       Icon = (Icon)resources.GetObject("$this.Icon");
-      Margin = new Padding(4, 5, 4, 5);
       Name = "FormLogMonitor";
       ShowInTaskbar = false;
       Text = "Star Citizen Handle Query";
@@ -128,5 +132,6 @@
     private FlowLayoutPanel PanelLogInfo;
         private PictureBox PictureBoxStatus;
         private PictureBox PictureBoxClearAll;
-    }
+    private ToolTip ToolTipLogMonitor;
+  }
 }
