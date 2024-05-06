@@ -313,6 +313,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LabelLogEintragAnzeigedauerMinuten.Text = CurrentLocalization.Settings.Log_Monitor.Log_Entry_Display_Duration_Minutes;
       CheckBoxLogMonitorFilterCorpse.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Corpse;
       CheckBoxLogMonitorFilterLoadingScreenDuration.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Loading_Screen_Duration;
+      CheckBoxCheckCompleteFile.Text = CurrentLocalization.Settings.Log_Monitor.Check_Complete_File;
 
       ResumeLayout();
     }
