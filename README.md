@@ -204,6 +204,7 @@ Hier werden sämtliche Handles und Organisationen aufgelistet, denen eine Bezieh
 - `Orange`: Unbekannt
 - `Rot`: Feindlich
 
+Wenn Beziehungen synchronisiert werden und für einen Handle / eine Organisation ein Kommentar vorhanden ist, wird vor dem Namen ein Stern dargestellt. Der Kommentar wird als Tooltip bereitgestellt.
 Organisationen werden via Organisation-Symbol auf der rechten Seite dargestellt.
 Diese Liste wird beim Beenden des Tools gespeichert und beim erneuten Start des Tools wieder dargestellt.
 
