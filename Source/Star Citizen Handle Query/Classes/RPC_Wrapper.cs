@@ -50,7 +50,8 @@ internal static class RPC_Wrapper {
           rtnVal.Relations.Add(new RelationInformation() {
             Name = relation.Name,
             Type = relation.Type,
-            Relation = relation.Relation
+            Relation = relation.Relation,
+            Comment = relation.Comment
           });
         }
       }
@@ -60,7 +61,7 @@ internal static class RPC_Wrapper {
     return rtnVal;
   }
 
-  public static bool SetRelation(string channel, string password, RelationType type, string name, RelationValue relation) {
+  public static bool SetRelation(string channel, string password, RelationType type, string name, RelationValue relation, string comment = null) {
     bool rtnVal = false;
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel) && !string.IsNullOrWhiteSpace(name)) {
@@ -74,7 +75,8 @@ internal static class RPC_Wrapper {
           Relation = new RelationInfo() {
             Type = type,
             Name = name,
-            Relation = relation
+            Relation = relation,
+            Comment = comment
           }
         })).Result.Success;
       }
@@ -98,7 +100,7 @@ internal static class RPC_Wrapper {
           if (gRPC_Channel.State == ConnectivityState.Ready || gRPC_Channel.State == ConnectivityState.Idle) {
             frm.ChangeSync(FormRelations.SyncStatus.Connected);
             await foreach (var rel in streamingCall.ResponseStream.ReadAllAsync(cancellationToken: cts.Token)) {
-              frm.UpdateRelation(rel.Relation.Name, rel.Relation.Type, rel.Relation.Relation, true);
+              frm.UpdateRelation(rel.Relation.Name, rel.Relation.Type, rel.Relation.Relation, rel.Relation.Comment, true);
             }
           }
         } catch (RpcException ex) {

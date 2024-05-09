@@ -4,9 +4,11 @@ using Star_Citizen_Handle_Query.Properties;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Drawing.Drawing2D;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Xml.Linq;
 
 namespace Star_Citizen_Handle_Query.Dialogs {
 
@@ -52,11 +54,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (ProgramTranslation != null) {
         // Control-Texte setzen
         LabelTitle.Text = $"{ProgramTranslation.Relations.Title}";
-        ToolTipRelations.SetToolTip(CheckBoxFilterFriendly, ProgramTranslation.Local_Cache.Relation.Friendly);
-        ToolTipRelations.SetToolTip(CheckBoxFilterNeutral, ProgramTranslation.Local_Cache.Relation.Neutral);
-        ToolTipRelations.SetToolTip(CheckBoxFilterBogey, ProgramTranslation.Local_Cache.Relation.Bogey);
-        ToolTipRelations.SetToolTip(CheckBoxFilterBandit, ProgramTranslation.Local_Cache.Relation.Bandit);
-        ToolTipRelations.SetToolTip(CheckBoxFilterOrganization, ProgramTranslation.Local_Cache.Columns.Organization.ToUpper());
+        SetToolTip(CheckBoxFilterFriendly, ProgramTranslation.Local_Cache.Relation.Friendly);
+        SetToolTip(CheckBoxFilterNeutral, ProgramTranslation.Local_Cache.Relation.Neutral);
+        SetToolTip(CheckBoxFilterBogey, ProgramTranslation.Local_Cache.Relation.Bogey);
+        SetToolTip(CheckBoxFilterBandit, ProgramTranslation.Local_Cache.Relation.Bandit);
+        SetToolTip(CheckBoxFilterOrganization, ProgramTranslation.Local_Cache.Columns.Organization.ToUpper());
       }
     }
 
@@ -139,6 +141,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       WriteIndented = true,
       DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
     };
+
     internal void ExportRelationInfos(string exportPath = null) {
       RelationInfos infos = new() {
         FilterVisibility = new() {
@@ -153,7 +156,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         infos.Relations.Add(new RelationInformation() {
           Name = kvp.Value.RelationName,
           Relation = kvp.Value.Relation,
-          Type = kvp.Value.Type
+          Type = kvp.Value.Type,
+          Comment = kvp.Value.Comment
         });
       }
       try {
@@ -187,7 +191,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           if (infos.Relations?.Count > 0) {
             PanelRelations.SuspendLayout();
             foreach (RelationInformation info in infos.Relations) {
-              AddControl(info.Name, info.Type, info.Relation, isRPC);
+              AddControl(info.Name, info.Type, info.Relation, info.Comment, isRPC);
             }
             PanelRelations.ResumeLayout();
           }
@@ -213,7 +217,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               PanelRelations.Controls.Clear();
               PanelRelations.SuspendLayout();
               foreach (RelationInformation info in infos.Relations) {
-                AddControl(info.Name, info.Type, info.Relation);
+                AddControl(info.Name, info.Type, info.Relation, info.Comment);
               }
               PanelRelations.ResumeLayout();
             }
@@ -234,14 +238,18 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
+    public void SetToolTip(Control control, string tooltip) {
+      ToolTipRelations.SetToolTip(control, tooltip);
+    }
+
     internal void ChangeSync(SyncStatus status) {
       if (IsRPCSync) {
         if (InvokeRequired) {
           Invoke(() => PictureBoxClearAll.Cursor = Cursors.Hand);
-          Invoke(() => ToolTipRelations.SetToolTip(PictureBoxClearAll, GetSyncStatusToolTip(status)));
+          Invoke(() => SetToolTip(PictureBoxClearAll, GetSyncStatusToolTip(status)));
         } else {
           PictureBoxClearAll.Cursor = Cursors.Hand;
-          ToolTipRelations.SetToolTip(PictureBoxClearAll, GetSyncStatusToolTip(status));
+          SetToolTip(PictureBoxClearAll, GetSyncStatusToolTip(status));
         }
         Sync = status;
         Image img = Resources.StatusRed;
@@ -304,12 +312,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private void AddControl(string name, RelationType relationType, RelationValue relation, bool hide = false) {
+    private void AddControl(string name, RelationType relationType, RelationValue relation, string comment, bool hide = false) {
       string controlName = $"{relationType}.{name}";
-      UserControlRelation control = new(name, relationType, relation) { Name = $"UserControlRelation_{relationType}_{name}", Visible = RelationIsVisible(relation) };
-      if (!UserControlRelations.ContainsKey(controlName)) {
-        UserControlRelations.Add(controlName, control);
-      }
+      UserControlRelation control = new(name, relationType, relation, comment) { Name = $"UserControlRelation_{relationType}_{name}", Visible = RelationIsVisible(relation) };
+      UserControlRelations[controlName] = control;
       if (!hide && !PanelRelations.Controls.ContainsKey(controlName)) {
         PanelRelations.Controls.Add(control);
         if (ProgramSettings.Relations.SortAlphabetically && UserControlRelations.ContainsKey(controlName)) {
@@ -327,10 +333,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       uc.Dispose();
     }
 
-    public void UpdateRelation(string name, RelationType relationType, RelationValue relation, bool withoutRPCSet = false) {
+    public void UpdateRelation(string name, RelationType relationType, RelationValue relation, string comment = null, bool withoutRPCSet = false) {
       if (!string.IsNullOrWhiteSpace(name)) {
         if (IsRPCSync && !withoutRPCSet && Sync == SyncStatus.Connected) {
-          if (!RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, relationType, name, relation)) {
+          if (!RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, relationType, name, relation, comment)) {
             return;
           }
         }
@@ -345,9 +351,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           } else if (controls[0] is UserControlRelation control) {
             if (InvokeRequired) {
               Invoke(() => control.UpdateRelation(relation));
+              Invoke(() => control.UpdateComment(comment));
               Invoke(() => control.Visible = RelationIsVisible(relation));
             } else {
               control.UpdateRelation(relation);
+              control.UpdateComment(comment);
               control.Visible = RelationIsVisible(relation);
             }
           }
@@ -357,9 +365,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           //  RemoveControl(PanelRelations.Controls[0] as UserControlRelation);
           //}
           if (InvokeRequired) {
-            Invoke(() => AddControl(name, relationType, relation));
+            Invoke(() => AddControl(name, relationType, relation, comment));
           } else {
-            AddControl(name, relationType, relation);
+            AddControl(name, relationType, relation, comment);
           }
         }
         if (InvokeRequired) {
@@ -378,6 +386,26 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         RelationValue.Bandit => CheckBoxFilterBandit.Checked,
         _ => false,
       };
+    }
+
+    public void SetComment(string name, string comment, RelationType relationType = RelationType.Handle) {
+      if (IsRPCSync && Sync == SyncStatus.Connected && !string.IsNullOrWhiteSpace(name) && comment != null) {
+        RelationValue relation = GetHandleRelation(name);
+        if (RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, relationType, name, relation, comment)) {
+          UserControlRelation control = UserControlRelations.Select(x => x.Value).FirstOrDefault(x => x.Type == relationType && x.RelationName == name);
+          if (control != null) {
+            control.UpdateComment(comment);
+            Control[] controls = PanelRelations.Controls.Find($"UserControlRelation_{relationType}_{name}", false);
+            if (controls?.Length == 1) {
+              if (InvokeRequired) {
+                Invoke(() => (controls[0] as UserControlRelation).UpdateComment(comment));
+              } else {
+                (controls[0] as UserControlRelation).UpdateComment(comment);
+              }
+            }
+          }
+        }
+      }
     }
 
     public RelationValue GetOrganizationRelation(string sid) {

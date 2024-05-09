@@ -478,6 +478,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
+    public void ChangeComment(string handle, string comment) {
+      RelationsForm?.SetComment(handle, comment);
+    }
+
     public RelationValue GetOrganizationRelation(string sid) {
       RelationValue rtnVal = RelationValue.NotAssigned;
       if (RelationsForm != null) {

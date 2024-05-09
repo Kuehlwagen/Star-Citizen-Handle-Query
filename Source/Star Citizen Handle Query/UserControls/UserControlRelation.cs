@@ -8,18 +8,21 @@ namespace Star_Citizen_Handle_Query.UserControls {
     internal readonly RelationType Type;
     internal readonly string RelationName;
     internal RelationValue Relation;
+    internal string Comment;
 
-    public UserControlRelation(string handle, RelationType relationType, RelationValue relation) {
+    public UserControlRelation(string handle, RelationType relationType, RelationValue relation, string comment = null) {
       InitializeComponent();
       RelationName = handle;
       Relation = relation;
       Type = relationType;
       LabelOrganization.Visible = relationType == RelationType.Organization;
+      Comment = comment;
     }
 
     private void UserControlLog_Load(object sender, EventArgs e) {
       LabelHandle.Text = RelationName;
       UpdateRelation(Relation);
+      UpdateComment(Comment);
       AddMouseEvents();
     }
 
@@ -41,6 +44,14 @@ namespace Star_Citizen_Handle_Query.UserControls {
     public void UpdateRelation(RelationValue relation) {
       Relation = relation;
       LabelRelation.BackColor = FormHandleQuery.GetRelationColor(relation);
+    }
+
+    public void UpdateComment(string comment) {
+      Comment = comment;
+      if (Parent != null) {
+        LabelHandle.Text = string.IsNullOrWhiteSpace(comment) ? RelationName : $"⭐ {RelationName}";
+        (Parent.Parent as FormRelations).SetToolTip(LabelHandle, comment ?? string.Empty);
+      }
     }
 
   }

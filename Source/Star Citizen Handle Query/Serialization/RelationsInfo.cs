@@ -35,6 +35,8 @@ namespace Star_Citizen_Handle_Query.Serialization {
 
     public RelationValue Relation { get; set; }
 
+    public string Comment { get; set; }
+
   }
 
 }

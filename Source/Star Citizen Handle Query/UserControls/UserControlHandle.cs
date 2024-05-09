@@ -142,12 +142,13 @@ namespace Star_Citizen_Handle_Query.UserControls {
       switch (e.KeyCode) {
         case Keys.Enter:
           e.SuppressKeyPress = true;
-          Info.Comment = !string.IsNullOrWhiteSpace(textBox.Text) ? textBox.Text : null;
+          Info.Comment = TextBoxAdditionalInformation.Text;
           textBox.Tag = Info.Comment;
           LabelAdditionalInformation.Text = Info.Comment;
           SetToolTip(LabelAdditionalInformation);
           CreateHandleJSON(Info, ProgramSettings, forceExport: true);
           textBox.Visible = false;
+          GetMainForm().ChangeComment(HandleName, Info.Comment);
           ActivateTextBoxHandle();
           break;
         case Keys.Escape:

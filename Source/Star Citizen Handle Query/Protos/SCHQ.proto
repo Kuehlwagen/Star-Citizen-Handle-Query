@@ -3,6 +3,7 @@ syntax = "proto3";
 option csharp_namespace = "SCHQ_Protos";
 
 import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
 
 package schq;
 
@@ -85,6 +86,7 @@ message RelationInfo {
   RelationType type = 1;
   string name = 2;
   RelationValue relation = 3;
+  google.protobuf.StringValue comment = 4;
 }
 
 enum ChannelPermissions {
