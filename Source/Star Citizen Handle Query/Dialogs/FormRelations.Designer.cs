@@ -195,6 +195,7 @@
       ToolTipRelations.BackColor = Color.FromArgb(19, 26, 33);
       ToolTipRelations.ForeColor = Color.FromArgb(57, 206, 216);
       ToolTipRelations.OwnerDraw = true;
+      ToolTipRelations.ShowAlways = true;
       ToolTipRelations.Draw += ToolTipHandleQuery_Draw;
       // 
       // FormRelations

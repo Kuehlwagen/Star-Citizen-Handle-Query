@@ -81,7 +81,7 @@
       // LabelSettings
       // 
       LabelSettings.Cursor = Cursors.Hand;
-      LabelSettings.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelSettings.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelSettings.Image = Properties.Resources.Settings;
       LabelSettings.Location = new Point(350, 4);
       LabelSettings.Name = "LabelSettings";
@@ -92,7 +92,7 @@
       // LabelQuery
       // 
       LabelQuery.Cursor = Cursors.Hand;
-      LabelQuery.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelQuery.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelQuery.Image = Properties.Resources.Search;
       LabelQuery.Location = new Point(328, 4);
       LabelQuery.Name = "LabelQuery";
@@ -103,7 +103,7 @@
       // LabelLockUnlock
       // 
       LabelLockUnlock.Cursor = Cursors.Hand;
-      LabelLockUnlock.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelLockUnlock.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelLockUnlock.Image = Properties.Resources.WindowLocked;
       LabelLockUnlock.Location = new Point(3, 7);
       LabelLockUnlock.Name = "LabelLockUnlock";
@@ -114,7 +114,7 @@
       // LabelHandle
       // 
       LabelHandle.AutoSize = true;
-      LabelHandle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelHandle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelHandle.Location = new Point(14, 6);
       LabelHandle.Name = "LabelHandle";
       LabelHandle.Size = new Size(49, 15);
@@ -152,7 +152,7 @@
       // AnzeigenToolStripMenuItem
       // 
       AnzeigenToolStripMenuItem.Enabled = false;
-      AnzeigenToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      AnzeigenToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       AnzeigenToolStripMenuItem.Name = "AnzeigenToolStripMenuItem";
       AnzeigenToolStripMenuItem.Size = new Size(213, 22);
       AnzeigenToolStripMenuItem.Text = "&Anzeigen";
@@ -229,6 +229,7 @@
       ToolTipHandleQuery.BackColor = Color.FromArgb(19, 26, 33);
       ToolTipHandleQuery.ForeColor = Color.FromArgb(57, 206, 216);
       ToolTipHandleQuery.OwnerDraw = true;
+      ToolTipHandleQuery.ShowAlways = true;
       ToolTipHandleQuery.Draw += ToolTipHandleQuery_Draw;
       // 
       // FormHandleQuery

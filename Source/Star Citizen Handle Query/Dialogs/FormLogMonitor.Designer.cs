@@ -99,6 +99,7 @@
       ToolTipLogMonitor.BackColor = Color.FromArgb(19, 26, 33);
       ToolTipLogMonitor.ForeColor = Color.FromArgb(57, 206, 216);
       ToolTipLogMonitor.OwnerDraw = true;
+      ToolTipLogMonitor.ShowAlways = true;
       ToolTipLogMonitor.Draw += ToolTipLogMonitor_Draw;
       // 
       // FormLogMonitor
