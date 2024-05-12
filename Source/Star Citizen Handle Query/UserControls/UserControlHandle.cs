@@ -220,7 +220,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private FormHandleQuery GetMainForm() {
-      return Parent.Parent as FormHandleQuery;
+      return Parent?.Parent as FormHandleQuery;
     }
 
     private void SetToolTip(Control control, string text = null) {
