@@ -6,13 +6,7 @@ Overlay zur Abfrage von Star Citizen Spielern und ihrer Organisationszugehörigk
 
 Das Tool-Hauptfenster kann nur dann im Vordergrund des Spiels dargestellt werden, wenn das Star Citizen Fenster im (randlosen) Fenstermodus läuft.
 
-## Verwandte Projekte
-
-### SCHQ_Server
-
-Der gRPC-Server wird für die Benutzer übergreifende Synchronisierung von Beziehungen vorausgesetzt.
-
-Repository-URL: https://github.com/Kuehlwagen/SCHQ_Server
+## Verwandtes Projekt
 
 ### SCHQ_Web
 
@@ -68,9 +62,9 @@ https://discord.com/invite/WmzNY3mCm6
 - __Beziehungen anzeigen:__ Angabe, ob das Beziehungen-Fenster angezeigt werden soll
   - __Alphabetisch sortieren:__ Angabe, ob die Einträge auf dem Beziehungen-Fenster alphabetisch sortiert werden sollen (Standard: Reihenfolge, in welcher die Einträge hinzugefügt werden)
   - __Einträge Maximum:__ Angabe, wie viele Einträge maximal auf dem Beziehungen-Fenster dargestellt werden sollen (es werden unendlich viele Einträge im lokalen Cache gespeichert)
-  - __gRPC Server-URL:__ Hier kann die vollständige URL eines gRPC-Servers (`SCHQ_Server`) angegeben werden, um die Beziehungen mit anderen Benutzern zu synchronisieren
+  - __gRPC Server-URL:__ Hier kann die vollständige URL eines gRPC-Servers (`SCHQ_Web`) angegeben werden, um die Beziehungen mit anderen Benutzern zu synchronisieren
   - __gRPC Server-Kanal:__ Hier kann der zu verwendende Kanal angegeben werden, welcher für den gRPC-Server verwendet werden soll. Alle Benutzer, die den gleichen Kanal verwenden, synchronisieren die Beziehungen untereinander.
-  - __Zahnrad-Schaltfläche:__ Wenn eine `gRPC Server-URL` angegeben wurde, können bei Klick auf diese Schaltfläche die gRPC-Kanäle ausgelesen werden (siehe SCHQ_Server gRPC-Kanalauswahl).
+  - __Zahnrad-Schaltfläche:__ Wenn eine `gRPC Server-URL` angegeben wurde, können bei Klick auf diese Schaltfläche die gRPC-Kanäle ausgelesen werden (siehe SCHQ_Web gRPC-Kanalauswahl).
   - __gRPC Kanal-Passwort:__ Angabe des Kanalpassworts (nötig, wenn der Kanal so konfiguriert ist, dass man ohne Angabe des Passworts keine Berechtigungen hat)
   - __gRPC-Synchronisierung bei Programmstart:__ Angabe, ob beim Programmstart die Synchronisierung automatisch gestartet werden soll
 ### Log-Monitor
@@ -85,7 +79,7 @@ https://discord.com/invite/WmzNY3mCm6
 - __Schließen:__ Schließt das Einstellungen-Fenster, ohne die vorgenommenen Einstellungen zu speichern
 - __Standard:__ Stellt die Standard-Einstellungen wieder her, mit Ausnahme der Sprache
 
-## SCHQ_Server gRPC-Kanalauswahl
+## SCHQ_Web gRPC-Kanalauswahl
 
 ![Kanalauswahl](/Screenshots/Settings_gRPC.png?raw=true "gRPC-Kanalauswahl")
 
