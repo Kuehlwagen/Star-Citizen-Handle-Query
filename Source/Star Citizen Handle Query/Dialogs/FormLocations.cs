@@ -54,14 +54,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       TextBoxFilterLocations.Focus();
     }
 
-    private async void LoadLocations() {
+    private /*async*/ void LoadLocations() {
       // Orte initial aus Ressourcen auslesen
       string locationCsv = Resources.Locations;
       // Wenn Orte noch nicht ermittelt wurden, versuchen via GitHub auszulesen
-      HttpInfo httpInfo = await GetSource(LocationsCsvUrl, CancelToken);
-      if (httpInfo.StatusCode == HttpStatusCode.OK) {
-        locationCsv = httpInfo.Source;
-      }
+      //HttpInfo httpInfo = await GetSource(LocationsCsvUrl, CancelToken);
+      //if (httpInfo.StatusCode == HttpStatusCode.OK) {
+      //  locationCsv = httpInfo.Source;
+      //}
       foreach (string line in locationCsv.Split(Environment.NewLine)) {
         string[] v = line.Split(',');
         Locations.Add(new() {
@@ -72,11 +72,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           CoordinateX = v[4],
           CoordinateY = v[5],
           CoordinateZ = v[6],
-          ThemeImage = v[7],
-          WikiLink = v[8],
-          Private = v[9] == "1",
-          Quantum = v[10] == "1",
-          Affiliation = v[11]
+          WikiLink = v[7],
+          Private = v[8] == "1",
+          Quantum = v[9] == "1"
         });
       }
       Locations.RemoveAt(0);
