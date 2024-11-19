@@ -62,7 +62,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (httpInfo.StatusCode == HttpStatusCode.OK) {
         locationCsv = httpInfo.Source;
       }
-      foreach (string line in locationCsv.Split(['\n', '\r'])) {
+      foreach (string line in locationCsv.Split(['\n', '\r'], StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)) {
         string[] v = line.Split(',');
         Locations.Add(new() {
           Name = v[0],
@@ -77,7 +77,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           Quantum = v[9] == "1"
         });
       }
-      Locations.RemoveAt(0);
+      if (Locations.Count > 0) {
+        Locations.RemoveAt(0);
+      }
     }
 
     private void TextChangedAssistant_Idled(object sender, EventArgs e) {
