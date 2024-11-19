@@ -9,7 +9,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
   public partial class FormLocations : Form {
 
-    private const string LocationsCsvUrl = "https://raw.githubusercontent.com/dydrmr/VerseTime/main/data/locations.csv";
+    private const string LocationsCsvUrl = "https://raw.githubusercontent.com/Kuehlwagen/Star-Citizen-Handle-Query/refs/heads/master/Source/Star%20Citizen%20Handle%20Query/Resources/locations.csv";
     private readonly int InitialWindowStyle = 0;
     private bool WindowLocked = true;
     private readonly Settings ProgramSettings;
@@ -54,15 +54,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       TextBoxFilterLocations.Focus();
     }
 
-    private /*async*/ void LoadLocations() {
+    private async void LoadLocations() {
       // Orte initial aus Ressourcen auslesen
       string locationCsv = Resources.Locations;
       // Wenn Orte noch nicht ermittelt wurden, versuchen via GitHub auszulesen
-      //HttpInfo httpInfo = await GetSource(LocationsCsvUrl, CancelToken);
-      //if (httpInfo.StatusCode == HttpStatusCode.OK) {
-      //  locationCsv = httpInfo.Source;
-      //}
-      foreach (string line in locationCsv.Split(Environment.NewLine)) {
+      HttpInfo httpInfo = await GetSource(LocationsCsvUrl, CancelToken);
+      if (httpInfo.StatusCode == HttpStatusCode.OK) {
+        locationCsv = httpInfo.Source;
+      }
+      foreach (string line in locationCsv.Split(['\n', '\r'])) {
         string[] v = line.Split(',');
         Locations.Add(new() {
           Name = v[0],
