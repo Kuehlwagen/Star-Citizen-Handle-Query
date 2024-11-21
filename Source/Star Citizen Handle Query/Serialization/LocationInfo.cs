@@ -1,8 +1,9 @@
-﻿using System.Security.Policy;
+﻿using System.Diagnostics;
+using System.Security.Policy;
 
 namespace Star_Citizen_Handle_Query.Serialization {
 
-  [Serializable]
+  [Serializable, DebuggerDisplay("{Name} ({Type}, {ParentBody}, {ParentStar})")]
   public class LocationInfo {
 
     public string Name { get; set; }

@@ -9,7 +9,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
   public partial class FormLocations : Form {
 
-    private const string LocationsCsvUrl = "https://raw.githubusercontent.com/dydrmr/VerseTime/main/data/locations.csv";
+    private const string LocationsCsvUrl = "https://raw.githubusercontent.com/Kuehlwagen/Star-Citizen-Handle-Query/refs/heads/master/Source/Star%20Citizen%20Handle%20Query/Resources/locations.csv";
     private readonly int InitialWindowStyle = 0;
     private bool WindowLocked = true;
     private readonly Settings ProgramSettings;
@@ -62,7 +62,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (httpInfo.StatusCode == HttpStatusCode.OK) {
         locationCsv = httpInfo.Source;
       }
-      foreach (string line in locationCsv.Split(Environment.NewLine)) {
+      foreach (string line in locationCsv.Split(['\n', '\r'], StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries)) {
         string[] v = line.Split(',');
         Locations.Add(new() {
           Name = v[0],
@@ -72,14 +72,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           CoordinateX = v[4],
           CoordinateY = v[5],
           CoordinateZ = v[6],
-          ThemeImage = v[7],
-          WikiLink = v[8],
-          Private = v[9] == "1",
-          Quantum = v[10] == "1",
-          Affiliation = v[11]
+          WikiLink = v[7],
+          Private = v[8] == "1",
+          Quantum = v[9] == "1"
         });
       }
-      Locations.RemoveAt(0);
+      if (Locations.Count > 0) {
+        Locations.RemoveAt(0);
+      }
     }
 
     private void TextChangedAssistant_Idled(object sender, EventArgs e) {
