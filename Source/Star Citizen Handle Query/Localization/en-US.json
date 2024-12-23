@@ -44,7 +44,8 @@
       "Global_Hotkey_Shift": "Shift",
       "Ignore_Mouseinput": "Ignore mouse input",
       "Enable_Alt_Tab": "Enable Alt + Tab",
-      "RememberWindowLocation": "Remember location"
+      "RememberWindowLocation": "Remember location",
+      "HideWindowOnEscPress": "Hide window on ESC press"
     },
     "Locations": {
       "Group_Title": "Locations (Alt + Enter)",

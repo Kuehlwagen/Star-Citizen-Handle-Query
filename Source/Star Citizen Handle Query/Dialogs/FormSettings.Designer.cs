@@ -32,6 +32,7 @@
       LabelFensterDeckkraftProzent = new Label();
       LabelLokalerCacheAlterTage = new Label();
       GroupBoxFenster = new GroupBox();
+      CheckBoxEscAusblenden = new CheckBox();
       CheckBoxPositionMerken = new CheckBox();
       CheckBoxAltTabEnabled = new CheckBox();
       CheckBoxUmschalt = new CheckBox();
@@ -115,7 +116,7 @@
       LabelLokalerCacheAlter.AutoSize = true;
       LabelLokalerCacheAlter.Location = new Point(15, 24);
       LabelLokalerCacheAlter.Name = "LabelLokalerCacheAlter";
-      LabelLokalerCacheAlter.Size = new Size(95, 15);
+      LabelLokalerCacheAlter.Size = new Size(94, 15);
       LabelLokalerCacheAlter.TabIndex = 0;
       LabelLokalerCacheAlter.Text = "Maximales Alter:";
       // 
@@ -167,12 +168,13 @@
       LabelLokalerCacheAlterTage.AutoSize = true;
       LabelLokalerCacheAlterTage.Location = new Point(223, 24);
       LabelLokalerCacheAlterTage.Name = "LabelLokalerCacheAlterTage";
-      LabelLokalerCacheAlterTage.Size = new Size(39, 15);
+      LabelLokalerCacheAlterTage.Size = new Size(40, 15);
       LabelLokalerCacheAlterTage.TabIndex = 2;
       LabelLokalerCacheAlterTage.Text = "Tag(e)";
       // 
       // GroupBoxFenster
       // 
+      GroupBoxFenster.Controls.Add(CheckBoxEscAusblenden);
       GroupBoxFenster.Controls.Add(CheckBoxPositionMerken);
       GroupBoxFenster.Controls.Add(CheckBoxAltTabEnabled);
       GroupBoxFenster.Controls.Add(CheckBoxUmschalt);
@@ -193,6 +195,17 @@
       GroupBoxFenster.TabStop = false;
       GroupBoxFenster.Text = "Fenster";
       // 
+      // CheckBoxEscAusblenden
+      // 
+      CheckBoxEscAusblenden.AutoSize = true;
+      CheckBoxEscAusblenden.Location = new Point(15, 180);
+      CheckBoxEscAusblenden.Name = "CheckBoxEscAusblenden";
+      CheckBoxEscAusblenden.Size = new Size(172, 19);
+      CheckBoxEscAusblenden.TabIndex = 11;
+      CheckBoxEscAusblenden.Text = "ESC blendet das Fenster aus";
+      CheckBoxEscAusblenden.UseVisualStyleBackColor = true;
+      CheckBoxEscAusblenden.CheckedChanged += CheckBoxEscAusblenden_CheckedChanged;
+      // 
       // CheckBoxPositionMerken
       // 
       CheckBoxPositionMerken.AutoSize = true;
@@ -209,7 +222,7 @@
       CheckBoxAltTabEnabled.AutoSize = true;
       CheckBoxAltTabEnabled.Location = new Point(15, 130);
       CheckBoxAltTabEnabled.Name = "CheckBoxAltTabEnabled";
-      CheckBoxAltTabEnabled.Size = new Size(166, 19);
+      CheckBoxAltTabEnabled.Size = new Size(167, 19);
       CheckBoxAltTabEnabled.TabIndex = 9;
       CheckBoxAltTabEnabled.Text = "Erreichbarkeit via Alt + Tab";
       CheckBoxAltTabEnabled.UseVisualStyleBackColor = true;
@@ -267,7 +280,7 @@
       LabelTastenkombination.AutoSize = true;
       LabelTastenkombination.Location = new Point(15, 54);
       LabelTastenkombination.Name = "LabelTastenkombination";
-      LabelTastenkombination.Size = new Size(79, 15);
+      LabelTastenkombination.Size = new Size(80, 15);
       LabelTastenkombination.TabIndex = 3;
       LabelTastenkombination.Text = "Globale Taste:";
       // 
@@ -397,7 +410,7 @@
       LabelMaxAffiliationen.AutoSize = true;
       LabelMaxAffiliationen.Location = new Point(15, 53);
       LabelMaxAffiliationen.Name = "LabelMaxAffiliationen";
-      LabelMaxAffiliationen.Size = new Size(133, 15);
+      LabelMaxAffiliationen.Size = new Size(132, 15);
       LabelMaxAffiliationen.TabIndex = 2;
       LabelMaxAffiliationen.Text = "Affiliationen Maximum:";
       // 
@@ -431,7 +444,7 @@
       LabelRelationsEntriesMaximum.AutoSize = true;
       LabelRelationsEntriesMaximum.Location = new Point(34, 78);
       LabelRelationsEntriesMaximum.Name = "LabelRelationsEntriesMaximum";
-      LabelRelationsEntriesMaximum.Size = new Size(111, 15);
+      LabelRelationsEntriesMaximum.Size = new Size(110, 15);
       LabelRelationsEntriesMaximum.TabIndex = 2;
       LabelRelationsEntriesMaximum.Text = "Einträge Maximum:";
       // 
@@ -508,7 +521,7 @@
       LabelLogEintraegeMaximum.AutoSize = true;
       LabelLogEintraegeMaximum.Location = new Point(32, 54);
       LabelLogEintraegeMaximum.Name = "LabelLogEintraegeMaximum";
-      LabelLogEintraegeMaximum.Size = new Size(111, 15);
+      LabelLogEintraegeMaximum.Size = new Size(110, 15);
       LabelLogEintraegeMaximum.TabIndex = 1;
       LabelLogEintraegeMaximum.Text = "Einträge Maximum:";
       // 
@@ -586,7 +599,7 @@
       LabelOrteEintraegeMaximum.AutoSize = true;
       LabelOrteEintraegeMaximum.Location = new Point(32, 50);
       LabelOrteEintraegeMaximum.Name = "LabelOrteEintraegeMaximum";
-      LabelOrteEintraegeMaximum.Size = new Size(111, 15);
+      LabelOrteEintraegeMaximum.Size = new Size(110, 15);
       LabelOrteEintraegeMaximum.TabIndex = 1;
       LabelOrteEintraegeMaximum.Text = "Einträge Maximum:";
       // 
@@ -908,5 +921,6 @@
     private TextBox TextBoxGRPCChannelPassword;
     private Button ButtonEditPrcChannels;
     private CheckBox CheckBoxCheckCompleteFile;
+    private CheckBox CheckBoxEscAusblenden;
   }
 }

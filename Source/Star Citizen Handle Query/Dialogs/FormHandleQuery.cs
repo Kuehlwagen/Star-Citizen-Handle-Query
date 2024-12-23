@@ -585,18 +585,24 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             e.Handled = true;
             e.SuppressKeyPress = true;
             // Fenster verstecken
-            Visible = false;
-            if (LogMonitorForm != null) {
-              LogMonitorForm.Visible = false;
-            }
-            if (RelationsForm != null) {
-              RelationsForm.Visible = false;
-            }
-            if (LocationsForm != null) {
-              LocationsForm.Visible = false;
+            if (ProgramSettings.HideWindowOnEscPress) {
+              HideWindows();
             }
             break;
         }
+      }
+    }
+
+    public void HideWindows() {
+      Visible = false;
+      if (LogMonitorForm != null) {
+        LogMonitorForm.Visible = false;
+      }
+      if (RelationsForm != null) {
+        RelationsForm.Visible = false;
+      }
+      if (LocationsForm != null) {
+        LocationsForm.Visible = false;
       }
     }
 

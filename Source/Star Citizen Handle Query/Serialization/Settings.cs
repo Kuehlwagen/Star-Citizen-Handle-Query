@@ -79,6 +79,9 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>Angabe, ob sich die Position des Hauptfensters gemerkt werden soll</summary>
     public bool RememberWindowLocation { get; set; } = true;
 
+    /// <summary>Angabe, ob bei ESC das Fenster ausgeblendet werden soll</summary>
+    public bool HideWindowOnEscPress { get; set; } = true;
+
     /// <summary>Position des Hauptfensters</summary>
     public Point WindowLocation { get; set; } = Point.Empty;
 

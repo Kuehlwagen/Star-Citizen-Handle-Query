@@ -108,7 +108,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void TextBoxFilterLocations_KeyDown(object sender, KeyEventArgs e) {
       if (e.KeyCode == Keys.Enter) {
         e.SuppressKeyPress = true;
+        e.Handled = true;
         TextChangedAssistant.TextChanged(true);
+      } else if (e.KeyCode == Keys.Escape) {
+        e.SuppressKeyPress = true;
+        e.Handled = true;
+        if (ProgramSettings.HideWindowOnEscPress) {
+          (Owner as FormHandleQuery).HideWindows();
+        }
       }
     }
 

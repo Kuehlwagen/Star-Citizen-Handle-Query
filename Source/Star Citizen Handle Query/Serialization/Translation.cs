@@ -158,6 +158,8 @@
 
     public string RememberWindowLocation { get; set; } = "Position merken";
 
+    public string HideWindowOnEscPress { get; set; } = "ESC blendet das Fenster aus";
+
   }
 
   [Serializable()]

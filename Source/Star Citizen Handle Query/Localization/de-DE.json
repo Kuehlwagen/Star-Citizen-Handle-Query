@@ -44,7 +44,8 @@
       "Global_Hotkey_Shift": "Umschalt",
       "Ignore_Mouseinput": "Mauseingaben ignorieren",
       "Enable_Alt_Tab": "Erreichbarkeit via Alt \u002B Tab",
-      "RememberWindowLocation": "Position merken"
+      "RememberWindowLocation": "Position merken",
+      "HideWindowOnEscPress": "ESC blendet das Fenster aus"
     },
     "Locations": {
       "Group_Title": "Orte (Alt + Eingabe)",

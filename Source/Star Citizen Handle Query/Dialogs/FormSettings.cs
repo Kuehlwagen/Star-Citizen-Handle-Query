@@ -12,8 +12,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly List<Keys> KeyCollection = [
       Keys.None, Keys.A, Keys.B, Keys.C, Keys.D, Keys.D0, Keys.D1, Keys.D2, Keys.D3, Keys.D4, Keys.D5, Keys.D6, Keys.D7, Keys.D8, Keys.D9,
       Keys.Delete, Keys.E, Keys.End, Keys.F, Keys.F1, Keys.F2, Keys.F3, Keys.F4, Keys.F5, Keys.F6, Keys.F7, Keys.F8, Keys.F9, Keys.F10,
-      Keys.F11, Keys.F12, Keys.G, Keys.H, Keys.Home, Keys.I, Keys.Insert, Keys.J, Keys.K, Keys.L, Keys.M, Keys.N, Keys.O, Keys.P, Keys.Q,
-      Keys.R, Keys.S, Keys.T, Keys.U, Keys.V, Keys.W, Keys.X, Keys.Y, Keys.Z
+      Keys.F11, Keys.F12, Keys.F13, Keys.F15, Keys.F16, Keys.F17, Keys.F18, Keys.F19, Keys.F20, Keys.F21, Keys.F22, Keys.F23, Keys.F24, Keys.G,
+      Keys.H, Keys.Home, Keys.I, Keys.Insert, Keys.J, Keys.K, Keys.L, Keys.M, Keys.N, Keys.O, Keys.P, Keys.Q, Keys.R, Keys.S, Keys.T, Keys.U,
+      Keys.V, Keys.W, Keys.X, Keys.Y, Keys.Z
     ];
 
     public FormSettings(Settings settings = null) {
@@ -26,7 +27,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ComboBoxSprache.Items.AddRange(Localizations.Select(x => x.Language).ToArray());
 
       // Taste Werte hinzufügen
-      ComboBoxTaste.Items.AddRange(KeyCollection.ConvertAll(x => x.ToString()).ToArray());
+      ComboBoxTaste.Items.AddRange([.. KeyCollection.ConvertAll(x => x.ToString())]);
 
       // Kopie der Einstellungen erstellen
       ProgramSettings = settings != null ? (Settings)settings.Clone() : null;
@@ -68,6 +69,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxUmschalt.Checked = ProgramSettings.GlobalHotkeyModifierShift;
       CheckBoxAltTabEnabled.Checked = ProgramSettings.AltTabEnabled;
       CheckBoxPositionMerken.Checked = ProgramSettings.RememberWindowLocation;
+      CheckBoxEscAusblenden.Checked = ProgramSettings.HideWindowOnEscPress;
       NumericUpDownAffiliationenMaximum.Value = ProgramSettings.AffiliationsMax;
       CheckBoxUnkenntlicheAffiliationenAusblenden.Checked = ProgramSettings.HideRedactedAffiliations;
       CheckBoxAutoCheckForUpdate.Checked = ProgramSettings.AutoCheckForUpdate;
@@ -127,6 +129,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void CheckBoxPositionMerken_CheckedChanged(object sender, EventArgs e) {
       ProgramSettings.RememberWindowLocation = (sender as CheckBox).Checked;
+    }
+
+    private void CheckBoxEscAusblenden_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.HideWindowOnEscPress = (sender as CheckBox).Checked;
     }
 
     private void NumericUpDownLokalerCacheAlter_ValueChanged(object sender, EventArgs e) {
@@ -281,6 +287,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxFensterMauseingabenIgnorieren.Text = CurrentLocalization.Settings.Window.Ignore_Mouseinput;
       CheckBoxAltTabEnabled.Text = CurrentLocalization.Settings.Window.Enable_Alt_Tab;
       CheckBoxPositionMerken.Text = CurrentLocalization.Settings.Window.RememberWindowLocation;
+      CheckBoxEscAusblenden.Text = CurrentLocalization.Settings.Window.HideWindowOnEscPress;
 
       GroupBoxLokalerCache.Text = CurrentLocalization.Settings.Local_Cache.Group_Title;
       LabelLokalerCacheAlter.Text = CurrentLocalization.Settings.Local_Cache.Max_Age;
