@@ -282,7 +282,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                 if (m != null && m.Success &&
                   !V(m, "Handle").StartsWith("NPC_") &&
                   !V(m, "Handle").StartsWith("PU_") &&
-                  !V(m, "Handle").StartsWith("Kopion")) {
+                  !V(m, "Handle").StartsWith("Kopion_")) {
                   rtnVal.Add(new LogMonitorInfo(LogType.ActorDeath,
                     V(m, "Date"),
                     V(m, "Handle"),
