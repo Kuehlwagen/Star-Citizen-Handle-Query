@@ -214,6 +214,8 @@
       Text = "Star Citizen Handle Query";
       TopMost = true;
       TransparencyKey = Color.Lime;
+      Activated += FormRelations_Activated;
+      Deactivate += FormRelations_Deactivate;
       FormClosing += FormRelations_FormClosing;
       Shown += FormRelations_Shown;
       PanelHeader.ResumeLayout(false);

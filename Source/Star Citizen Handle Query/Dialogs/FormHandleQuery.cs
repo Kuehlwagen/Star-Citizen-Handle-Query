@@ -86,19 +86,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           ShowInTaskbar = true;
         }
 
-        if (ProgramSettings.WindowIgnoreMouseInput) {
-          // Durch das Fenster klicken lassen
-          InitialWindowStyle = User32Wrappers.GetWindowLongA(Handle, User32Wrappers.GWL.ExStyle);
-          _ = User32Wrappers.SetWindowLongA(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered | (int)User32Wrappers.WS_EX.Transparent);
-
-          // Controls verstecken, verschieben und vergrößern
-          LabelLockUnlock.Visible = false;
-          LabelQuery.Visible = false;
-          LabelSettings.Visible = false;
-          LabelHandle.Location = new Point(LabelLockUnlock.Left, LabelHandle.Top);
-          TextBoxHandle.Location = new Point(LabelHandle.Right + 2, TextBoxHandle.Top);
-          TextBoxHandle.Width += LabelQuery.Width + LabelSettings.Width + LabelLockUnlock.Width + 6;
-        }
+        InitialWindowStyle = User32Wrappers.GetWindowLongA(Handle, User32Wrappers.GWL.ExStyle);
 
         // Programm-Sprache auslesen
         ProgramTranslation = GetProgramLocalization();
@@ -1375,6 +1363,24 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       };
       if (ofd.ShowDialog() == DialogResult.OK) {
         RelationsForm?.ImportRelationInfos(ofd.FileName);
+      }
+    }
+
+    private void FormHandleQuery_Activated(object sender, EventArgs e) {
+      if (ProgramSettings.WindowIgnoreMouseInput) {
+        _ = User32Wrappers.SetWindowLongA(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered);
+        LogMonitorForm?.SetIgnoreMouseInput(false);
+        LocationsForm?.SetIgnoreMouseInput(false);
+        RelationsForm?.SetIgnoreMouseInput(false);
+      }
+    }
+
+    private void FormHandleQuery_Deactivate(object sender, EventArgs e) {
+      if (ProgramSettings.WindowIgnoreMouseInput) {
+        _ = User32Wrappers.SetWindowLongA(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered | (int)User32Wrappers.WS_EX.Transparent);
+        LogMonitorForm?.SetIgnoreMouseInput();
+        LocationsForm?.SetIgnoreMouseInput();
+        RelationsForm?.SetIgnoreMouseInput();
       }
     }
 

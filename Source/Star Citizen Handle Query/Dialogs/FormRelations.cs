@@ -38,15 +38,21 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         // Fenster-Deckkraft setzen
         Opacity = (double)ProgramSettings.WindowOpacity / 100.0;
 
-        if (ProgramSettings.WindowIgnoreMouseInput) {
-          // Durch das Fenster klicken lassen
-          InitialWindowStyle = User32Wrappers.GetWindowLongA(Handle, User32Wrappers.GWL.ExStyle);
-          _ = User32Wrappers.SetWindowLongA(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered | (int)User32Wrappers.WS_EX.Transparent);
-        }
+        InitialWindowStyle = User32Wrappers.GetWindowLongA(Handle, User32Wrappers.GWL.ExStyle);
       }
 
       // Übersetzung laden
       SetTranslation();
+    }
+
+    public void SetIgnoreMouseInput(bool ignoreMouseInput = true) {
+      try {
+        if (ignoreMouseInput) {
+          _ = User32Wrappers.SetWindowLongA(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered | (int)User32Wrappers.WS_EX.Transparent);
+        } else {
+          _ = User32Wrappers.SetWindowLongA(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered);
+        }
+      } catch { }
     }
 
     private void SetTranslation() {
@@ -508,6 +514,18 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       e.DrawBackground();
       e.DrawBorder();
       e.DrawText(TextFormatFlags.TextBoxControl);
+    }
+
+    private void FormRelations_Activated(object sender, EventArgs e) {
+      if (ProgramSettings != null && ProgramSettings.WindowIgnoreMouseInput) {
+        SetIgnoreMouseInput(false);
+      }
+    }
+
+    private void FormRelations_Deactivate(object sender, EventArgs e) {
+      if (ProgramSettings != null && ProgramSettings.WindowIgnoreMouseInput) {
+        SetIgnoreMouseInput();
+      }
     }
 
   }

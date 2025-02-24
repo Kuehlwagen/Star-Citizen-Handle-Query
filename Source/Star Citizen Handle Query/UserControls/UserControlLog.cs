@@ -51,6 +51,16 @@ namespace Star_Citizen_Handle_Query.UserControls {
           PictureBoxLeft.Image = Properties.Resources.Info;
           LabelText.Text = $"Loading screen: {LogInfoItem.Value}s";
           break;
+        case LogType.ActorDeath:
+          PictureBoxLeft.Image = Properties.Resources.Dead;
+          LabelText.Text = LogInfoItem.Handle;
+          SetToolTip(LogInfoItem.Value);
+          if (LogInfoItem.RelationValue > RelationValue.NotAssigned) {
+            LabelRelation.Visible = LogInfoItem.RelationValue > RelationValue.NotAssigned;
+            LabelRelation.BackColor = FormHandleQuery.GetRelationColor(LogInfoItem.RelationValue);
+          }
+          AddMouseEvents();
+          break;
       }
 
       TimerRemoveControl.Enabled = true;
@@ -80,6 +90,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
               SetToolTip(info.Value);
             }
             break;
+          case LogType.ActorDeath:
+            SetToolTip(info.Value);
+            break;
         }
       }
     }
@@ -98,7 +111,14 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private void Handle_MouseClick(object sender, MouseEventArgs e) {
-      ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(LogInfoItem.Handle);
+      switch (e.Button) {
+        case MouseButtons.Left:
+          ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(LogInfoItem.Handle);
+          break;
+        case MouseButtons.Right:
+          ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(LogInfoItem.LogType == LogType.ActorDeath ? LogInfoItem.Key : LogInfoItem.Handle);
+          break;
+      }
     }
 
     private void TimerRemoveControl_Tick(object sender, EventArgs e) {

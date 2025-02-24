@@ -15,6 +15,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private bool Cancel = false;
     private readonly Settings ProgramSettings;
     private readonly Translation ProgramTranslation;
+    private readonly string NL = Environment.NewLine;
 
     private readonly Regex RgxCorpse = RegexCorpse();
     [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <Corpse> Player '(?<Handle>[\w_\-]+)' <\w+ client>: (?<Key>.+): (?<Value>.+) \[Team_ActorTech]\[Actor\]$", RegexOptions.Compiled)]
@@ -23,6 +24,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly Regex RgxLoadingScreenDuration = RegexLoadingScreen();
     [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)>\sLoading screen for pu : SC_Frontend closed after (?<Value>\d+\.\d+) seconds$", RegexOptions.Compiled)]
     private static partial Regex RegexLoadingScreen();
+
+    private readonly Regex RgxActorDeath = RegexActorDeath();
+    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <Actor Death> CActor::Kill: '(?<Handle>[\w_\-]+)' \[\d+\] in zone '(?<Zone>.+)' killed by '(?<KilledBy>[\w_\-]+)' \[\d+\] using '(?<Using>.+)' \[(?<UsingClass>.+)\] with damage type '(?<DamageType>.+)'.+$", RegexOptions.Compiled)]
+    private static partial Regex RegexActorDeath();
 
     public FormLogMonitor(Settings programSettings, Translation translation) {
       InitializeComponent();
@@ -34,15 +39,21 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         // Fenster-Deckkraft setzen
         Opacity = (double)ProgramSettings.WindowOpacity / 100.0;
 
-        if (ProgramSettings.WindowIgnoreMouseInput) {
-          // Durch das Fenster klicken lassen
-          InitialWindowStyle = User32Wrappers.GetWindowLongA(Handle, User32Wrappers.GWL.ExStyle);
-          _ = User32Wrappers.SetWindowLongA(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered | (int)User32Wrappers.WS_EX.Transparent);
-        }
+        InitialWindowStyle = User32Wrappers.GetWindowLongA(Handle, User32Wrappers.GWL.ExStyle);
       }
 
       // Übersetzung laden
       SetTranslation();
+    }
+
+    public void SetIgnoreMouseInput(bool ignoreMouseInput = true) {
+      try {
+        if (ignoreMouseInput) {
+          _ = User32Wrappers.SetWindowLongA(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered | (int)User32Wrappers.WS_EX.Transparent);
+        } else {
+          _ = User32Wrappers.SetWindowLongA(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered);
+        }
+      } catch { }
     }
 
     private void SetTranslation() {
@@ -198,8 +209,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             } else {
               ucl.UpdateInfo(logInfo);
             }
-          } else {
-
           }
         }
       }
@@ -217,7 +226,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", "IsCorpseEnabled", "Yes"),
           new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair", relation: RelationValue.Bogey),
           new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "IsCorpseEnabled", "criminal arrest", relation: RelationValue.Bandit),
-          new(LogType.LoadingScreenDuration, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), value: "15")
+          new(LogType.LoadingScreenDuration, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), value: "15"),
+          new(LogType.ActorDeath, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "Churchtrill", $"Killed by: Churchtrill{NL}Using: unknown (Class unknown){NL}Zone: TransitCarriage_RSI_Polaris_Rear_Elevator_1604048788858{NL}Damage Type: Crash", relation: RelationValue.Bandit)
         ]);
       }
 #else
@@ -255,26 +265,40 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       if (rtnVal != null) {
         try {
-          Match match = null;
+          Match m = null;
           foreach (string line in input.Split(Environment.NewLine)) {
             if (ProgramSettings.LogMonitor.Filter.Corpse) {
-              match = RgxCorpse.Match(line);
-              if (match != null && match.Success) {
+              m = RgxCorpse.Match(line);
+              if (m != null && m.Success) {
                 rtnVal.Add(new LogMonitorInfo(LogType.Corpse,
-                  match.Groups["Date"].Value,
-                  match.Groups["Handle"].Value,
-                  match.Groups["Key"].Value,
-                  match.Groups["Value"].Value,
-                  relation: (Owner as FormHandleQuery).GetHandleRelation(match.Groups["Handle"].Value)));
+                  V(m, "Date"),
+                  V(m, "Handle"),
+                  V(m, "Key"),
+                  V(m, "Value"),
+                  relation: (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle"))));
                 continue;
+              } else {
+                m = RgxActorDeath.Match(line);
+                if (m != null && m.Success &&
+                  !V(m, "Handle").StartsWith("NPC_") &&
+                  !V(m, "Handle").StartsWith("PU_") &&
+                  !V(m, "Handle").StartsWith("Kopion")) {
+                  rtnVal.Add(new LogMonitorInfo(LogType.ActorDeath,
+                    V(m, "Date"),
+                    V(m, "Handle"),
+                    V(m, "KilledBy"),
+                    $"Killed by: {V(m, "KilledBy")}{NL}Using: {V(m, "Using")} ({V(m, "UsingClass")}){NL}Zone: {V(m, "Zone")}{NL}Damage Type: {V(m, "DamageType")}",
+                    Properties.Resources.Dead,
+                    (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle"))));
+                }
               }
             }
             if (ProgramSettings.LogMonitor.Filter.LoadingScreenDuration) {
-              match = RgxLoadingScreenDuration.Match(line);
-              if (match != null && match.Success) {
+              m = RgxLoadingScreenDuration.Match(line);
+              if (m != null && m.Success) {
                 rtnVal.Add(new LogMonitorInfo(LogType.LoadingScreenDuration,
-                  match.Groups["Date"].Value,
-                  value: match.Groups["Value"].Value));
+                  V(m, "Date"),
+                  value: V(m, "Value")));
                 continue;
               }
             }
@@ -283,6 +307,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       return rtnVal;
+    }
+
+    private static string V(Match match, string group) {
+      return match?.Groups[group].Value;
     }
 
     private void FormLogMonitor_FormClosing(object sender, FormClosingEventArgs e) {
@@ -348,6 +376,18 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     internal void SetTooltip(Control control, string text) {
       ToolTipLogMonitor.SetToolTip(control, text);
+    }
+
+    private void FormLogMonitor_Activated(object sender, EventArgs e) {
+      if (ProgramSettings != null && ProgramSettings.WindowIgnoreMouseInput) {
+        SetIgnoreMouseInput(false);
+      }
+    }
+
+    private void FormLogMonitor_Deactivate(object sender, EventArgs e) {
+      if (ProgramSettings != null && ProgramSettings.WindowIgnoreMouseInput) {
+        SetIgnoreMouseInput();
+      }
     }
 
   }

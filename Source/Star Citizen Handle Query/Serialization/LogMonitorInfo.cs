@@ -41,9 +41,8 @@ namespace Star_Citizen_Handle_Query.Serialization {
 
     public override bool Equals(object obj) {
       if (obj != null && obj is LogMonitorInfo lmi) {
-        return lmi.LogType == LogType &&
-          lmi.Handle == Handle &&
-          lmi.Date <= Date && lmi.Date.AddSeconds(5) >= Date;
+        return lmi.Handle == Handle &&
+          lmi.Date <= Date && lmi.Date.AddSeconds(10) >= Date;
       } else {
         return base.Equals(obj);
       }
@@ -61,7 +60,8 @@ namespace Star_Citizen_Handle_Query.Serialization {
 
   public enum LogType {
     Corpse,
-    LoadingScreenDuration
+    LoadingScreenDuration,
+    ActorDeath
   }
 
 }

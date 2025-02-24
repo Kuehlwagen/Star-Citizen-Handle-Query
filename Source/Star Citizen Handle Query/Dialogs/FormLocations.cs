@@ -30,11 +30,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         // Fenster-Deckkraft setzen
         Opacity = (double)ProgramSettings.WindowOpacity / 100.0;
 
-        if (ProgramSettings.WindowIgnoreMouseInput) {
-          // Durch das Fenster klicken lassen
-          InitialWindowStyle = User32Wrappers.GetWindowLongA(Handle, User32Wrappers.GWL.ExStyle);
-          _ = User32Wrappers.SetWindowLongA(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered | (int)User32Wrappers.WS_EX.Transparent);
-        }
+        // Durch das Fenster klicken lassen
+        InitialWindowStyle = User32Wrappers.GetWindowLongA(Handle, User32Wrappers.GWL.ExStyle);
       }
 
       // Übersetzung laden
@@ -45,6 +42,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       // Orte ermitteln
       Task.Run(LoadLocations);
+    }
+
+    public void SetIgnoreMouseInput(bool ignoreMouseInput = true) {
+      try {
+        if (ignoreMouseInput) {
+          _ = User32Wrappers.SetWindowLongA(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered | (int)User32Wrappers.WS_EX.Transparent);
+        } else {
+          _ = User32Wrappers.SetWindowLongA(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered);
+        }
+      } catch { }
     }
 
     internal void ShowWindow() {
@@ -192,12 +199,21 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private void FormLocations_Deactivate(object sender, EventArgs e) {
-      TextBoxFilterLocations.Clear();
-    }
-
     private void FormLocations_Shown(object sender, EventArgs e) {
       Height = LogicalToDeviceUnits(31);
+    }
+
+    private void FormLocations_Activated(object sender, EventArgs e) {
+      if (ProgramSettings != null && ProgramSettings.WindowIgnoreMouseInput) {
+        SetIgnoreMouseInput(false);
+      }
+    }
+
+    private void FormLocations_Deactivated(object sender, EventArgs e) {
+      TextBoxFilterLocations.Clear();
+      if (ProgramSettings != null && ProgramSettings.WindowIgnoreMouseInput) {
+        SetIgnoreMouseInput();
+      }
     }
 
   }
