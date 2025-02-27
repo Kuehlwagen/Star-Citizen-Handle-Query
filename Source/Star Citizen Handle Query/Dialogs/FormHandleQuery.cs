@@ -621,7 +621,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
         if (handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK) {
           // Ggf. Relations-Control hinzufügen
-          if (ProgramSettings.Relations.ShowWindow && !ProgramSettings.WindowIgnoreMouseInput) {
+          if (ProgramSettings.Relations.ShowWindow) {
             var ucRelation = new UserControlHandleRelation(ProgramTranslation);
             PanelInfo.Controls.Add(ucRelation);
             Height += ucRelation.Height;
