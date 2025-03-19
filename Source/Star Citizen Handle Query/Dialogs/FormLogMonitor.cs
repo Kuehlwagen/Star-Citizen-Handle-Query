@@ -283,7 +283,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                   !V(m, "Handle").StartsWith("NPC_") &&
                   !V(m, "Handle").StartsWith("PU_") &&
                   !V(m, "Handle").StartsWith("Kopion_") &&
-                  !V(m, "Handle").StartsWith("Quasigrazer_")) {
+                  !V(m, "Handle").StartsWith("Quasigrazer_") &&
+                  !V(m, "Handle").StartsWith("Shipjacker_")) {
                   rtnVal.Add(new LogMonitorInfo(LogType.ActorDeath,
                     V(m, "Date"),
                     V(m, "Handle"),
