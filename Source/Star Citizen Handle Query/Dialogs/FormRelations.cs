@@ -79,6 +79,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     public void MoveWindowToDefaultLocation() {
+      Width = 240;
       CenterToScreen();
       Location = new Point(0, 125);
     }
