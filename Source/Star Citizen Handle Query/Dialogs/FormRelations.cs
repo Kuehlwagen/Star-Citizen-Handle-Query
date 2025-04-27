@@ -111,8 +111,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public void LockUnlockWindow(bool locked) {
       WindowLocked = locked;
+      if (UcResize != null) {
+        UcResize.BackColor = locked ? Color.Transparent : Color.Yellow;
+        UcResize.Cursor = locked ? Cursors.Default : Cursors.SizeWE;
+      }
     }
 
+    private readonly int ResizeWidth = 4;
+    private bool IsDragging = false;
+    private Rectangle LastRectangle = new();
+    private UserControl UcResize = null;
     private void FormRelations_Shown(object sender, EventArgs e) {
       Height = LogicalToDeviceUnits(31);
       if (IsRPCSync) {
@@ -122,6 +130,45 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       } else {
         ImportRelationInfos();
       }
+
+      UcResize = new() {
+        Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom,
+        Height = DisplayRectangle.Height - (ResizeWidth * 2),
+        Width = ResizeWidth,
+        Left = DisplayRectangle.Width - ResizeWidth,
+        Top = ResizeWidth,
+        BackColor = Color.Transparent,
+        Cursor = Cursors.Default
+      };
+      UcResize.MouseDown += Form_MouseDown;
+      UcResize.MouseUp += Form_MouseUp;
+      UcResize.MouseMove += delegate (object sender, MouseEventArgs e) {
+        if (IsDragging) {
+          Size = new Size(e.X - LastRectangle.X + Width, LastRectangle.Height);
+        }
+      };
+      UcResize.BringToFront();
+      PanelHeader.Controls.Add(UcResize);
+    }
+
+    private void Form_MouseDown(object sender, MouseEventArgs e) {
+      if (e.Button == MouseButtons.Left && !WindowLocked) {
+        IsDragging = true;
+        LastRectangle = new Rectangle(e.Location.X, e.Location.Y, Width, Height);
+      }
+    }
+
+    private void Form_MouseMove(object sender, MouseEventArgs e) {
+      if (IsDragging && !WindowLocked) {
+        int x = (Location.X + (e.Location.X - LastRectangle.X));
+        int y = (Location.Y + (e.Location.Y - LastRectangle.Y));
+
+        Location = new Point(x, y);
+      }
+    }
+
+    private void Form_MouseUp(object sender, MouseEventArgs e) {
+      IsDragging = false;
     }
 
     public void ClearRelations() {
@@ -297,6 +344,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void PanelRelations_ControlAdded(object sender, ControlEventArgs e) {
+      e.Control.Width = PanelRelations.Width;
       if (PanelRelations.Controls.Count == 1 && !IsRPCSync) {
         PictureBoxClearAll.MouseClick += PictureBoxClearAll_MouseClick;
         PictureBoxClearAll.Image = Resources.ClearAll;
@@ -525,6 +573,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void FormRelations_Deactivate(object sender, EventArgs e) {
       if (ProgramSettings != null && ProgramSettings.WindowIgnoreMouseInput) {
         SetIgnoreMouseInput();
+      }
+    }
+
+    private void FormRelations_SizeChanged(object sender, EventArgs e) {
+      foreach (Control control in PanelRelations.Controls) {
+        control.Width = PanelRelations.Width;
       }
     }
 

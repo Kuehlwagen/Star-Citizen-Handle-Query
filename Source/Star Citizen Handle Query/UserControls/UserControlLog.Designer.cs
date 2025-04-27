@@ -43,6 +43,7 @@
       // 
       // LabelText
       // 
+      LabelText.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
       LabelText.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelText.Location = new Point(60, 5);
       LabelText.Name = "LabelText";
@@ -65,6 +66,7 @@
       // 
       // PictureBoxRight
       // 
+      PictureBoxRight.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       PictureBoxRight.Location = new Point(214, 2);
       PictureBoxRight.Name = "PictureBoxRight";
       PictureBoxRight.Size = new Size(21, 21);

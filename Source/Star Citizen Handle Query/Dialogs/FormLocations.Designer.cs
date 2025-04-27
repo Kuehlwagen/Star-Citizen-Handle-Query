@@ -93,15 +93,17 @@
       ForeColor = Color.FromArgb(57, 206, 216);
       FormBorderStyle = FormBorderStyle.None;
       Icon = (Icon)resources.GetObject("$this.Icon");
+      MinimumSize = new Size(329, 60);
       Name = "FormLocations";
       ShowInTaskbar = false;
-      Text = "Star Citizen Handle Query";
+      Text = "Star Citizen Handle Query - Locations";
       TopMost = true;
       TransparencyKey = Color.Lime;
       Activated += FormLocations_Activated;
       Deactivate += FormLocations_Deactivated;
       FormClosing += FormLocations_FormClosing;
       Shown += FormLocations_Shown;
+      SizeChanged += FormLocations_SizeChanged;
       PanelHeader.ResumeLayout(false);
       PanelHeader.PerformLayout();
       ResumeLayout(false);

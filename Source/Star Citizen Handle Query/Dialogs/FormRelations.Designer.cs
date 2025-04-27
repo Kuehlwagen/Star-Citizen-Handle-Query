@@ -57,6 +57,7 @@
       // 
       // CheckBoxFilterBandit
       // 
+      CheckBoxFilterBandit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       CheckBoxFilterBandit.Appearance = Appearance.Button;
       CheckBoxFilterBandit.BackColor = Color.Red;
       CheckBoxFilterBandit.BackgroundImageLayout = ImageLayout.Center;
@@ -77,6 +78,7 @@
       // 
       // CheckBoxFilterBogey
       // 
+      CheckBoxFilterBogey.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       CheckBoxFilterBogey.Appearance = Appearance.Button;
       CheckBoxFilterBogey.BackColor = Color.Orange;
       CheckBoxFilterBogey.BackgroundImageLayout = ImageLayout.Center;
@@ -97,6 +99,7 @@
       // 
       // CheckBoxFilterNeutral
       // 
+      CheckBoxFilterNeutral.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       CheckBoxFilterNeutral.Appearance = Appearance.Button;
       CheckBoxFilterNeutral.BackColor = Color.Gray;
       CheckBoxFilterNeutral.BackgroundImageLayout = ImageLayout.Center;
@@ -117,6 +120,7 @@
       // 
       // CheckBoxFilterOrganization
       // 
+      CheckBoxFilterOrganization.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       CheckBoxFilterOrganization.Appearance = Appearance.Button;
       CheckBoxFilterOrganization.BackColor = Color.FromArgb(57, 206, 216);
       CheckBoxFilterOrganization.Checked = true;
@@ -136,6 +140,7 @@
       // 
       // CheckBoxFilterFriendly
       // 
+      CheckBoxFilterFriendly.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       CheckBoxFilterFriendly.Appearance = Appearance.Button;
       CheckBoxFilterFriendly.BackColor = Color.Green;
       CheckBoxFilterFriendly.BackgroundImageLayout = ImageLayout.Center;
@@ -156,6 +161,7 @@
       // 
       // PictureBoxClearAll
       // 
+      PictureBoxClearAll.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
       PictureBoxClearAll.Location = new Point(219, 7);
       PictureBoxClearAll.Name = "PictureBoxClearAll";
@@ -166,6 +172,7 @@
       // 
       // LabelTitle
       // 
+      LabelTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
       LabelTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelTitle.Location = new Point(4, 7);
       LabelTitle.Name = "LabelTitle";
@@ -209,15 +216,17 @@
       ForeColor = Color.FromArgb(57, 206, 216);
       FormBorderStyle = FormBorderStyle.None;
       Icon = (Icon)resources.GetObject("$this.Icon");
+      MinimumSize = new Size(240, 60);
       Name = "FormRelations";
       ShowInTaskbar = false;
-      Text = "Star Citizen Handle Query";
+      Text = "Star Citizen Handle Query - Relations";
       TopMost = true;
       TransparencyKey = Color.Lime;
       Activated += FormRelations_Activated;
       Deactivate += FormRelations_Deactivate;
       FormClosing += FormRelations_FormClosing;
       Shown += FormRelations_Shown;
+      SizeChanged += FormRelations_SizeChanged;
       PanelHeader.ResumeLayout(false);
       ((System.ComponentModel.ISupportInitialize)PictureBoxClearAll).EndInit();
       ResumeLayout(false);

@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Net;
 using System.Net.Http.Headers;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
@@ -326,6 +327,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       TextBoxHandle.Focus();
     }
 
+    private readonly int ResizeWidth = 4;
+    private bool IsDragging = false;
+    private Rectangle LastRectangle = new();
+    private UserControl UcResize = null;
     private void FormHandleQuery_Shown(object sender, EventArgs e) {
       // Fenster-Größe initlal verkleinern
       Height = PanelHandleQuery.Height;
@@ -333,6 +338,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Fenster an die richtige Position bringen
       if (ProgramSettings?.RememberWindowLocation == true && ProgramSettings?.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
         Location = ProgramSettings.WindowLocation;
+        if (ProgramSettings.WindowSize != Size.Empty) {
+          Size = ProgramSettings.WindowSize;
+        }
       } else {
         MoveWindowToDefaultLocation();
       }
@@ -354,6 +362,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         LogMonitorForm.Show(this);
         if (ProgramSettings?.RememberWindowLocation == true && ProgramSettings?.LogMonitor?.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
           LogMonitorForm.Location = ProgramSettings.LogMonitor.WindowLocation;
+          if (ProgramSettings.LogMonitor.WindowSize != Size.Empty) {
+            LogMonitorForm.Size = ProgramSettings.LogMonitor.WindowSize;
+          }
         } else {
           LogMonitorForm.MoveWindowToDefaultLocation();
         }
@@ -366,6 +377,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         RelationsForm.Show(this);
         if (ProgramSettings?.RememberWindowLocation == true && ProgramSettings?.Relations.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
           RelationsForm.Location = ProgramSettings.Relations.WindowLocation;
+          if (ProgramSettings.Relations.WindowSize != Size.Empty) {
+            RelationsForm.Size = ProgramSettings.Relations.WindowSize;
+          }
         } else {
           RelationsForm.MoveWindowToDefaultLocation();
         }
@@ -377,13 +391,55 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         LocationsForm.Show(this);
         if (ProgramSettings?.RememberWindowLocation == true && ProgramSettings?.Locations?.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
           LocationsForm.Location = ProgramSettings.Locations.WindowLocation;
+          if (ProgramSettings.Locations.WindowSize != Size.Empty) {
+            LocationsForm.Size = ProgramSettings.Locations.WindowSize;
+          }
         } else {
           LocationsForm.MoveWindowToDefaultLocation();
         }
       }
 
+      UcResize = new() {
+        Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom,
+        Height = DisplayRectangle.Height - (ResizeWidth * 2),
+        Width = ResizeWidth,
+        Left = DisplayRectangle.Width - ResizeWidth,
+        Top = ResizeWidth,
+        BackColor = Color.Transparent,
+        Cursor = Cursors.Default
+      };
+      UcResize.MouseDown += Form_MouseDown;
+      UcResize.MouseUp += Form_MouseUp;
+      UcResize.MouseMove += delegate (object sender, MouseEventArgs e) {
+        if (IsDragging) {
+          Size = new Size(e.X - LastRectangle.X + Width, LastRectangle.Height);
+        }
+      };
+      UcResize.BringToFront();
+      PanelHandleQuery.Controls.Add(UcResize);
+
       // Fenster auf jeden Fall nochmal in den Vordergrund holen
       ShowWindow();
+    }
+
+    private void Form_MouseDown(object sender, MouseEventArgs e) {
+      if (e.Button == MouseButtons.Left && !WindowLocked) {
+        IsDragging = true;
+        LastRectangle = new Rectangle(e.Location.X, e.Location.Y, Width, Height);
+      }
+    }
+
+    private void Form_MouseMove(object sender, MouseEventArgs e) {
+      if (IsDragging && !WindowLocked) {
+        int x = (Location.X + (e.Location.X - LastRectangle.X));
+        int y = (Location.Y + (e.Location.Y - LastRectangle.Y));
+
+        Location = new Point(x, y);
+      }
+    }
+
+    private void Form_MouseUp(object sender, MouseEventArgs e) {
+      IsDragging = false;
     }
 
     private void MoveWindowToDefaultLocation() {
@@ -1132,11 +1188,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         HotKey = null;
       }
 
-      // Fensterposition merken
+      // Fensterposition und Fenstergröße merken
       ProgramSettings.WindowLocation = ProgramSettings.RememberWindowLocation ? Location : Point.Empty;
+      ProgramSettings.WindowSize = ProgramSettings.RememberWindowLocation ? Size : Size.Empty;
       ProgramSettings.LogMonitor.WindowLocation = LogMonitorForm != null && ProgramSettings.RememberWindowLocation ? LogMonitorForm.Location : Point.Empty;
+      ProgramSettings.LogMonitor.WindowSize = LogMonitorForm != null && ProgramSettings.RememberWindowLocation ? LogMonitorForm.Size : Size.Empty;
       ProgramSettings.Relations.WindowLocation = RelationsForm != null && ProgramSettings.RememberWindowLocation ? RelationsForm.Location : Point.Empty;
+      ProgramSettings.Relations.WindowSize = RelationsForm != null && ProgramSettings.RememberWindowLocation ? RelationsForm.Size : Size.Empty;
       ProgramSettings.Locations.WindowLocation = LocationsForm != null && ProgramSettings.RememberWindowLocation ? LocationsForm.Location : Point.Empty;
+      ProgramSettings.Locations.WindowSize = LocationsForm != null && ProgramSettings.RememberWindowLocation ? LocationsForm.Size : Size.Empty;
       string settingsFilePath = GetSettingsFilePath();
       try {
         File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, JsonSerOptions), Encoding.UTF8);
@@ -1269,6 +1329,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (e.Button == MouseButtons.Left) {
         WindowLocked = !WindowLocked;
         LabelLockUnlock.Image = WindowLocked ? Resources.WindowLocked : Resources.WindowUnlocked;
+        if (UcResize != null) {
+          UcResize.BackColor = WindowLocked ? Color.Transparent : Color.Yellow;
+          UcResize.Cursor = WindowLocked ? Cursors.Default : Cursors.SizeWE;
+        }
         LogMonitorForm?.LockUnlockWindow(WindowLocked);
         RelationsForm?.LockUnlockWindow(WindowLocked);
         LocationsForm?.LockUnlockWindow(WindowLocked);

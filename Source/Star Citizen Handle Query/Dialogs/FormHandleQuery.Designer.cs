@@ -80,6 +80,7 @@
       // 
       // LabelSettings
       // 
+      LabelSettings.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       LabelSettings.Cursor = Cursors.Hand;
       LabelSettings.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelSettings.Image = Properties.Resources.Settings;
@@ -91,6 +92,7 @@
       // 
       // LabelQuery
       // 
+      LabelQuery.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       LabelQuery.Cursor = Cursors.Hand;
       LabelQuery.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelQuery.Image = Properties.Resources.Search;
@@ -243,6 +245,7 @@
       ForeColor = Color.FromArgb(57, 206, 216);
       FormBorderStyle = FormBorderStyle.None;
       Icon = (Icon)resources.GetObject("$this.Icon");
+      MinimumSize = new Size(375, 29);
       Name = "FormHandleQuery";
       ShowInTaskbar = false;
       Text = "Star Citizen Handle Query";

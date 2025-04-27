@@ -50,6 +50,7 @@
       // 
       // PictureBoxClearAll
       // 
+      PictureBoxClearAll.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
       PictureBoxClearAll.Location = new Point(219, 7);
       PictureBoxClearAll.Name = "PictureBoxClearAll";
@@ -70,6 +71,7 @@
       // 
       // LabelTitle
       // 
+      LabelTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
       LabelTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelTitle.Location = new Point(23, 7);
       LabelTitle.Name = "LabelTitle";
@@ -91,6 +93,7 @@
       PanelLogInfo.Name = "PanelLogInfo";
       PanelLogInfo.Size = new Size(238, 29);
       PanelLogInfo.TabIndex = 1;
+      PanelLogInfo.SizeChanged += PanelLogInfo_SizeChanged;
       PanelLogInfo.ControlAdded += PanelLogInfo_ControlAdded;
       PanelLogInfo.ControlRemoved += PanelLogInfo_ControlRemoved;
       // 
@@ -108,14 +111,16 @@
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.Lime;
       ClientSize = new Size(240, 60);
+      ControlBox = false;
       Controls.Add(PanelLogInfo);
       Controls.Add(PanelHeader);
       ForeColor = Color.FromArgb(57, 206, 216);
       FormBorderStyle = FormBorderStyle.None;
       Icon = (Icon)resources.GetObject("$this.Icon");
+      MinimumSize = new Size(240, 60);
       Name = "FormLogMonitor";
       ShowInTaskbar = false;
-      Text = "Star Citizen Handle Query";
+      Text = "Star Citizen Handle Query - Log-Monitor";
       TopMost = true;
       TransparencyKey = Color.Lime;
       Activated += FormLogMonitor_Activated;

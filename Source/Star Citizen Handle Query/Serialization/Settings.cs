@@ -85,6 +85,9 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>Position des Hauptfensters</summary>
     public Point WindowLocation { get; set; } = Point.Empty;
 
+    /// <summary>Größe des Hauptfensters</summary>
+    public Size WindowSize { get; set; } = Size.Empty;
+
     /// <summary>Angabe, ob beim Programmstart nach einem Programm-Update gesucht werden soll</summary>
     public bool AutoCheckForUpdate { get; set; } = false;
 
@@ -112,6 +115,9 @@ namespace Star_Citizen_Handle_Query.Serialization {
 
     /// <summary>Position des LogFileWatcher-Fensters</summary>
     public Point WindowLocation { get; set; } = Point.Empty;
+
+    /// <summary>Größe des LogFileWatcher-Fensters</summary>
+    public Size WindowSize { get; set; } = Size.Empty;
 
     /// <summary>Maximal anzuzeigende Einträge</summary>
     private int _EntriesMax = 10;
@@ -179,6 +185,9 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>Position des Relation-Fensters</summary>
     public Point WindowLocation { get; set; } = Point.Empty;
 
+    /// <summary>Größe des Relation-Fensters</summary>
+    public Size WindowSize { get; set; } = Size.Empty;
+
     /// <summary>Maximal anzuzeigende Einträge</summary>
     private int _EntriesMax = 10;
     public int EntriesMax {
@@ -227,8 +236,11 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>Angabe, ob das Fenster angezeigt werden soll</summary>
     public bool ShowWindow { get; set; } = true;
 
-    /// <summary>Position des Relation-Fensters</summary>
+    /// <summary>Position des Location-Fensters</summary>
     public Point WindowLocation { get; set; } = Point.Empty;
+
+    /// <summary>Größe des Location-Fensters</summary>
+    public Size WindowSize { get; set; } = Size.Empty;
 
     /// <summary>Maximal anzuzeigende Einträge</summary>
     private int _EntriesMax = 10;
