@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Net;
 using System.Net.Http.Headers;
-using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
@@ -327,7 +326,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       TextBoxHandle.Focus();
     }
 
-    private readonly int ResizeWidth = 4;
+    private readonly int ResizeWidth = 2;
     private bool IsDragging = false;
     private Rectangle LastRectangle = new();
     private UserControl UcResize = null;
@@ -400,7 +399,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       UcResize = new() {
-        Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom,
+        Dock = DockStyle.Right,
         Height = DisplayRectangle.Height - (ResizeWidth * 2),
         Width = ResizeWidth,
         Left = DisplayRectangle.Width - ResizeWidth,
@@ -1446,6 +1445,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         LogMonitorForm?.SetIgnoreMouseInput();
         LocationsForm?.SetIgnoreMouseInput();
         RelationsForm?.SetIgnoreMouseInput();
+      }
+    }
+
+    private void PanelInfo_ControlAdded(object sender, ControlEventArgs e) {
+      e.Control.Width = PanelInfo.Width;
+    }
+
+    private void FormHandleQuery_SizeChanged(object sender, EventArgs e) {
+      foreach (Control control in PanelInfo.Controls) {
+        control.Width = PanelInfo.Width;
       }
     }
 

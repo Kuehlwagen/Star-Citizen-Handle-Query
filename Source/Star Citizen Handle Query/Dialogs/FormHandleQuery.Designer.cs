@@ -136,6 +136,7 @@
       PanelInfo.Name = "PanelInfo";
       PanelInfo.Size = new Size(373, 85);
       PanelInfo.TabIndex = 1;
+      PanelInfo.ControlAdded += PanelInfo_ControlAdded;
       // 
       // NotifyIconHandleQuery
       // 
@@ -255,6 +256,7 @@
       Deactivate += FormHandleQuery_Deactivate;
       FormClosing += FormHandleQuery_FormClosing;
       Shown += FormHandleQuery_Shown;
+      SizeChanged += FormHandleQuery_SizeChanged;
       PanelHandleQuery.ResumeLayout(false);
       PanelHandleQuery.PerformLayout();
       ContextMenuStripNotifyIcon.ResumeLayout(false);

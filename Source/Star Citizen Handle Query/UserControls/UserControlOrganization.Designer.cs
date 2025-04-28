@@ -39,7 +39,7 @@
       // LabelOrganizationName
       // 
       LabelOrganizationName.AutoSize = true;
-      LabelOrganizationName.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelOrganizationName.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
       LabelOrganizationName.Location = new Point(76, 1);
       LabelOrganizationName.Name = "LabelOrganizationName";
       LabelOrganizationName.Size = new Size(0, 21);
@@ -59,7 +59,7 @@
       // LabelOrganizationSID
       // 
       LabelOrganizationSID.AutoSize = true;
-      LabelOrganizationSID.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelOrganizationSID.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelOrganizationSID.Location = new Point(77, 22);
       LabelOrganizationSID.Name = "LabelOrganizationSID";
       LabelOrganizationSID.Size = new Size(0, 15);
@@ -85,7 +85,7 @@
       // 
       // LabelMainOrganizationAffiliate
       // 
-      LabelMainOrganizationAffiliate.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      LabelMainOrganizationAffiliate.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
       LabelMainOrganizationAffiliate.ForeColor = Color.FromArgb(46, 157, 158);
       LabelMainOrganizationAffiliate.Location = new Point(188, 59);
       LabelMainOrganizationAffiliate.Name = "LabelMainOrganizationAffiliate";
@@ -95,6 +95,7 @@
       // 
       // LabelFocusPrimary
       // 
+      LabelFocusPrimary.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
       LabelFocusPrimary.Location = new Point(252, 23);
       LabelFocusPrimary.Name = "LabelFocusPrimary";
       LabelFocusPrimary.RightToLeft = RightToLeft.Yes;
@@ -103,6 +104,7 @@
       // 
       // LabelFocusSecondary
       // 
+      LabelFocusSecondary.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
       LabelFocusSecondary.Location = new Point(252, 41);
       LabelFocusSecondary.Name = "LabelFocusSecondary";
       LabelFocusSecondary.RightToLeft = RightToLeft.Yes;

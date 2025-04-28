@@ -30,7 +30,8 @@
       // 
       // LabelHandle
       // 
-      LabelHandle.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelHandle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+      LabelHandle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelHandle.Location = new Point(14, 2);
       LabelHandle.Name = "LabelHandle";
       LabelHandle.Size = new Size(199, 21);
@@ -47,7 +48,8 @@
       // 
       // LabelOrganization
       // 
-      LabelOrganization.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelOrganization.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+      LabelOrganization.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelOrganization.Image = Properties.Resources.Organization_Small;
       LabelOrganization.Location = new Point(215, 2);
       LabelOrganization.Name = "LabelOrganization";

@@ -23,83 +23,84 @@
     /// Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
     /// </summary>
     private void InitializeComponent() {
-      this.LabelFriendly = new System.Windows.Forms.Label();
-      this.LabelNeutral = new System.Windows.Forms.Label();
-      this.LabelBogey = new System.Windows.Forms.Label();
-      this.LabelBandit = new System.Windows.Forms.Label();
-      this.SuspendLayout();
+      LabelFriendly = new Label();
+      LabelNeutral = new Label();
+      LabelBogey = new Label();
+      LabelBandit = new Label();
+      SuspendLayout();
       // 
       // LabelFriendly
       // 
-      this.LabelFriendly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-      this.LabelFriendly.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.LabelFriendly.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.LabelFriendly.ForeColor = System.Drawing.Color.Green;
-      this.LabelFriendly.Location = new System.Drawing.Point(3, 3);
-      this.LabelFriendly.Name = "LabelFriendly";
-      this.LabelFriendly.Size = new System.Drawing.Size(89, 15);
-      this.LabelFriendly.TabIndex = 0;
-      this.LabelFriendly.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.LabelFriendly.Paint += new System.Windows.Forms.PaintEventHandler(this.Label_Paint);
-      this.LabelFriendly.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LabelFriendly_MouseClick);
+      LabelFriendly.BackColor = Color.FromArgb(0, 64, 0);
+      LabelFriendly.Cursor = Cursors.Hand;
+      LabelFriendly.FlatStyle = FlatStyle.Flat;
+      LabelFriendly.ForeColor = Color.Green;
+      LabelFriendly.Location = new Point(3, 3);
+      LabelFriendly.Name = "LabelFriendly";
+      LabelFriendly.Size = new Size(89, 15);
+      LabelFriendly.TabIndex = 0;
+      LabelFriendly.TextAlign = ContentAlignment.MiddleCenter;
+      LabelFriendly.Paint += Label_Paint;
+      LabelFriendly.MouseClick += LabelFriendly_MouseClick;
       // 
       // LabelNeutral
       // 
-      this.LabelNeutral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-      this.LabelNeutral.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.LabelNeutral.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.LabelNeutral.ForeColor = System.Drawing.Color.Gray;
-      this.LabelNeutral.Location = new System.Drawing.Point(95, 3);
-      this.LabelNeutral.Name = "LabelNeutral";
-      this.LabelNeutral.Size = new System.Drawing.Size(89, 15);
-      this.LabelNeutral.TabIndex = 0;
-      this.LabelNeutral.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.LabelNeutral.Paint += new System.Windows.Forms.PaintEventHandler(this.Label_Paint);
-      this.LabelNeutral.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LabelFriendly_MouseClick);
+      LabelNeutral.BackColor = Color.FromArgb(64, 64, 64);
+      LabelNeutral.Cursor = Cursors.Hand;
+      LabelNeutral.FlatStyle = FlatStyle.Flat;
+      LabelNeutral.ForeColor = Color.Gray;
+      LabelNeutral.Location = new Point(95, 3);
+      LabelNeutral.Name = "LabelNeutral";
+      LabelNeutral.Size = new Size(89, 15);
+      LabelNeutral.TabIndex = 0;
+      LabelNeutral.TextAlign = ContentAlignment.MiddleCenter;
+      LabelNeutral.Paint += Label_Paint;
+      LabelNeutral.MouseClick += LabelFriendly_MouseClick;
       // 
       // LabelBogey
       // 
-      this.LabelBogey.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(82)))), ((int)(((byte)(0)))));
-      this.LabelBogey.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.LabelBogey.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.LabelBogey.ForeColor = System.Drawing.Color.Yellow;
-      this.LabelBogey.Location = new System.Drawing.Point(187, 3);
-      this.LabelBogey.Name = "LabelBogey";
-      this.LabelBogey.Size = new System.Drawing.Size(89, 15);
-      this.LabelBogey.TabIndex = 0;
-      this.LabelBogey.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.LabelBogey.Paint += new System.Windows.Forms.PaintEventHandler(this.Label_Paint);
-      this.LabelBogey.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LabelFriendly_MouseClick);
+      LabelBogey.BackColor = Color.FromArgb(127, 82, 0);
+      LabelBogey.Cursor = Cursors.Hand;
+      LabelBogey.FlatStyle = FlatStyle.Flat;
+      LabelBogey.ForeColor = Color.Yellow;
+      LabelBogey.Location = new Point(187, 3);
+      LabelBogey.Name = "LabelBogey";
+      LabelBogey.Size = new Size(89, 15);
+      LabelBogey.TabIndex = 0;
+      LabelBogey.TextAlign = ContentAlignment.MiddleCenter;
+      LabelBogey.Paint += Label_Paint;
+      LabelBogey.MouseClick += LabelFriendly_MouseClick;
       // 
       // LabelBandit
       // 
-      this.LabelBandit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-      this.LabelBandit.Cursor = System.Windows.Forms.Cursors.Hand;
-      this.LabelBandit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.LabelBandit.ForeColor = System.Drawing.Color.Red;
-      this.LabelBandit.Location = new System.Drawing.Point(279, 3);
-      this.LabelBandit.Name = "LabelBandit";
-      this.LabelBandit.Size = new System.Drawing.Size(89, 15);
-      this.LabelBandit.TabIndex = 0;
-      this.LabelBandit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-      this.LabelBandit.Paint += new System.Windows.Forms.PaintEventHandler(this.Label_Paint);
-      this.LabelBandit.MouseClick += new System.Windows.Forms.MouseEventHandler(this.LabelFriendly_MouseClick);
+      LabelBandit.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+      LabelBandit.BackColor = Color.FromArgb(127, 0, 0);
+      LabelBandit.Cursor = Cursors.Hand;
+      LabelBandit.FlatStyle = FlatStyle.Flat;
+      LabelBandit.ForeColor = Color.Red;
+      LabelBandit.Location = new Point(279, 3);
+      LabelBandit.Name = "LabelBandit";
+      LabelBandit.Size = new Size(89, 15);
+      LabelBandit.TabIndex = 0;
+      LabelBandit.TextAlign = ContentAlignment.MiddleCenter;
+      LabelBandit.Paint += Label_Paint;
+      LabelBandit.MouseClick += LabelFriendly_MouseClick;
       // 
       // UserControlHandleRelation
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.Controls.Add(this.LabelBandit);
-      this.Controls.Add(this.LabelBogey);
-      this.Controls.Add(this.LabelNeutral);
-      this.Controls.Add(this.LabelFriendly);
-      this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.Margin = new System.Windows.Forms.Padding(0, 1, 0, 0);
-      this.Name = "UserControlHandleRelation";
-      this.Size = new System.Drawing.Size(375, 21);
-      this.Load += new System.EventHandler(this.UserControlOrganization_Load);
-      this.ResumeLayout(false);
+      AutoScaleDimensions = new SizeF(7F, 15F);
+      AutoScaleMode = AutoScaleMode.Font;
+      BackColor = Color.FromArgb(19, 26, 33);
+      Controls.Add(LabelBandit);
+      Controls.Add(LabelBogey);
+      Controls.Add(LabelNeutral);
+      Controls.Add(LabelFriendly);
+      ForeColor = Color.FromArgb(57, 206, 216);
+      Margin = new Padding(0, 1, 0, 0);
+      Name = "UserControlHandleRelation";
+      Size = new Size(375, 21);
+      Load += UserControlOrganization_Load;
+      ResumeLayout(false);
 
     }
 

@@ -32,6 +32,7 @@
       // 
       // LabelLocationName
       // 
+      LabelLocationName.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
       LabelLocationName.Cursor = Cursors.Hand;
       LabelLocationName.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelLocationName.Location = new Point(6, 2);
@@ -44,6 +45,7 @@
       // 
       // LabelType
       // 
+      LabelType.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
       LabelType.Cursor = Cursors.Hand;
       LabelType.ForeColor = Color.FromArgb(46, 157, 158);
       LabelType.Location = new Point(6, 20);
@@ -56,6 +58,7 @@
       // 
       // LabelDescription
       // 
+      LabelDescription.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
       LabelDescription.Cursor = Cursors.Hand;
       LabelDescription.ForeColor = Color.FromArgb(46, 157, 158);
       LabelDescription.Location = new Point(6, 38);

@@ -114,7 +114,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private readonly int ResizeWidth = 4;
+    private readonly int ResizeWidth = 2;
     private bool IsDragging = false;
     private Rectangle LastRectangle = new();
     private UserControl UcResize = null;
@@ -122,7 +122,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Height = LogicalToDeviceUnits(31);
 
       UcResize = new() {
-        Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom,
+        Dock = DockStyle.Right,
         Height = DisplayRectangle.Height - (ResizeWidth * 2),
         Width = ResizeWidth,
         Left = DisplayRectangle.Width - ResizeWidth,

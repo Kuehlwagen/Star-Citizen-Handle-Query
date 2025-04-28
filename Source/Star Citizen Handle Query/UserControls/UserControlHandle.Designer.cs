@@ -43,7 +43,7 @@
       // LabelHandle
       // 
       LabelHandle.AutoSize = true;
-      LabelHandle.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelHandle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
       LabelHandle.Location = new Point(75, 1);
       LabelHandle.Name = "LabelHandle";
       LabelHandle.Size = new Size(0, 21);
@@ -52,7 +52,7 @@
       // LabelCommunityMoniker
       // 
       LabelCommunityMoniker.AutoSize = true;
-      LabelCommunityMoniker.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelCommunityMoniker.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelCommunityMoniker.Location = new Point(76, 22);
       LabelCommunityMoniker.Name = "LabelCommunityMoniker";
       LabelCommunityMoniker.Size = new Size(0, 15);
@@ -98,7 +98,7 @@
       // LabelUEECitizenRecord
       // 
       LabelUEECitizenRecord.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      LabelUEECitizenRecord.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelUEECitizenRecord.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
       LabelUEECitizenRecord.Location = new Point(281, 1);
       LabelUEECitizenRecord.Name = "LabelUEECitizenRecord";
       LabelUEECitizenRecord.Size = new Size(91, 19);
@@ -107,7 +107,8 @@
       // 
       // LabelEnlistedDate
       // 
-      LabelEnlistedDate.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+      LabelEnlistedDate.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+      LabelEnlistedDate.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelEnlistedDate.Location = new Point(281, 22);
       LabelEnlistedDate.Name = "LabelEnlistedDate";
       LabelEnlistedDate.Size = new Size(91, 19);
@@ -116,6 +117,7 @@
       // 
       // TextBoxAdditionalInformation
       // 
+      TextBoxAdditionalInformation.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       TextBoxAdditionalInformation.BackColor = Color.FromArgb(19, 26, 33);
       TextBoxAdditionalInformation.BorderStyle = BorderStyle.None;
       TextBoxAdditionalInformation.ForeColor = Color.Khaki;
@@ -131,6 +133,7 @@
       // 
       // LabelAdditionalInformation
       // 
+      LabelAdditionalInformation.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       LabelAdditionalInformation.Cursor = Cursors.IBeam;
       LabelAdditionalInformation.ForeColor = Color.Khaki;
       LabelAdditionalInformation.Location = new Point(230, 40);
@@ -142,6 +145,7 @@
       // 
       // PictureBoxLive
       // 
+      PictureBoxLive.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       PictureBoxLive.BackColor = Color.Transparent;
       PictureBoxLive.Cursor = Cursors.Hand;
       PictureBoxLive.Image = Properties.Resources.Check;
