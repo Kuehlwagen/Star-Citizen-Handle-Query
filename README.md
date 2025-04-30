@@ -25,22 +25,24 @@ https://discord.com/invite/WmzNY3mCm6
 
 ### Anzeige
 - __Sprache:__ Hier kann die Sprache für das Tool eingestellt werden. Standardmäßig stehen die Sprachen `Deutsch`, `Deutsch (Brevity Code)` und `English` zur Auswahl.
-- __Affiliationen Maximum:__ Hier kann angegeben werden, wie viele Affiliationen maximal dargestellt werden sollen.
+- __Affiliationen Maximum:__ Hier kann angegeben werden, wie viele Affiliationen maximal dargestellt werden sollen (Min. 0, Max. 9).
 - __Unkenntliche Affiliationen ausblenden:__ Hier kann angegeben werden, ob unkenntlich gemachte Affiliationen ausgeblendet werden sollen
 - __Stream Live-Status ausblenden:__ Angabe, ob der Twitch.tv Stream Live-Status eines Handles ausgeblendet werden soll
 - __Bei Programmstart nach Update suchen:__ Angabe, ob bei jedem Programmstart geprüft werden soll, ob ein Programmupdate zur Verfügung steht
   - Ausschließlich wenn ein Update zur Verfügung steht, wird eine Benachrichtigung angezeigt.
+- __Alternative DPI-Berechnung verwenden:__ Angabe, ob eine alternative DPI-Berechnung `DpiUnaware` verwendet werden soll. Das kann sinnvoll sein, wenn Monitore unterschiedliche Skalierungen verwenden und dadurch Fenster und/oder Kontrollelemente nicht korrekt dargestellt werden. Die Aktivierung dieser Einstellung kann dazu führen, dass Kontrollelemente verwaschen aussehen. Wenn diese Einstellung nicht aktiviert ist, wird die modernere DPI-Berechnung `PerMonitorV2` verwendet.
 ### Fenster
-- __Deckkraft:__ Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden.
+- __Deckkraft:__ Hier kann eingestellt werden, wie hoch die Deckkraft des Fensters sein soll. Es können Werte zwischen 50% (halb transparent) und 100% (nicht transparent) eingegeben werden (Min. 50, Max. 100).
 - __Globale Taste:__ Hier kann die Taste angegeben werden, welche global abgefangen wird, um das Programm in den Vordergrund zu holen. Zusätzlich können Modifikatoren (Strg, Alt und Umschalt) angegeben werden, um eine Tastenkombination angeben zu können.
 - __Mauseingaben ignorieren:__ Wird diese Einstellung aktiviert, gehen sämtliche Mausklicks durch das Fenster durch in das dahinter liegende Programm.
 - __Erreichbariekt via Alt + Tab:__ Wird diese Einstellung aktiviert, kann das Fenster via Tastenkobination `Alt` + `Tab` erreicht werden.
 - __Position merken:__ Ist diese Einstellung aktiviert, merkt sich das Programm beim Beenden die Position des Hauptfensters und stellt sie beim Start wieder her.
+- __ESC blendet das Fenster aus:__ Wird diese Einstellung aktiviert, werden alle Fenster ausgeblendet, wenn eines der SCHQ-Fenster den Fokus hat und die `ESC`-Taste gedrückt wird.
 ### Lokaler Cache
-- __Maximales Alter:__ Hier kann für den lokalen Cache das maximale Alter in Tagen angegeben werden, wann die Informationen eines bereits zuvor abgefragten Handles erneut via Star Citizen Webseite abgefragt werden sollen. Es können Werte zwischen 0 und 365 Tagen angegeben werden. Die Angabe von 0 Tagen wird die Handle-Informationen immer via Star Citizen Webseite abfragen.
+- __Maximales Alter:__ Hier kann für den lokalen Cache das maximale Alter in Tagen angegeben werden, wann die Informationen eines bereits zuvor abgefragten Handles erneut via Star Citizen Webseite abgefragt werden sollen (Min. 0, Max. 365). Es können Werte zwischen 0 und 365 Tagen angegeben werden. Die Angabe von 0 Tagen wird die Handle-Informationen immer via Star Citizen Webseite abfragen.
 ### Orte (Alt + Eingabe)
 - __Orte anzeigen:__ Angabe, ob das Orte-Fenster angezeigt werden soll
-- __Einträge Maximum:__ Angabe, wie viele Einträge maximal im Orte-Fenster angezeigt werden sollen
+- __Einträge Maximum:__ Angabe, wie viele Einträge maximal im Orte-Fenster angezeigt werden sollen (Min. 1, Max. 50)
 - __Linke Maustaste:__ URL, die bei der Betätigung der linken Maustaste geöffnet werden soll (inklusive Platzhalter)
 - __Mittlere Maustaste:__ URL, die bei der Betätigung der mittleren Maustaste geöffnet werden soll (inklusive Platzhalter)
 - __Rechte Maustaste:__ URL, die bei der Betätigung der rechten Maustaste geöffnet werden soll (inklusive Platzhalter)
@@ -61,7 +63,7 @@ https://discord.com/invite/WmzNY3mCm6
 ### Beziehungen
 - __Beziehungen anzeigen:__ Angabe, ob das Beziehungen-Fenster angezeigt werden soll
   - __Alphabetisch sortieren:__ Angabe, ob die Einträge auf dem Beziehungen-Fenster alphabetisch sortiert werden sollen (Standard: Reihenfolge, in welcher die Einträge hinzugefügt werden)
-  - __Einträge Maximum:__ Angabe, wie viele Einträge maximal auf dem Beziehungen-Fenster dargestellt werden sollen (es werden unendlich viele Einträge im lokalen Cache gespeichert)
+  - __Einträge Maximum:__ Angabe, wie viele Einträge maximal auf dem Beziehungen-Fenster dargestellt werden sollen (es werden unendlich viele Einträge im lokalen Cache gespeichert; Min. 1, Max. 50)
   - __gRPC Server-URL:__ Hier kann die vollständige URL eines gRPC-Servers (`SCHQ_Web`) angegeben werden, um die Beziehungen mit anderen Benutzern zu synchronisieren
   - __gRPC Server-Kanal:__ Hier kann der zu verwendende Kanal angegeben werden, welcher für den gRPC-Server verwendet werden soll. Alle Benutzer, die den gleichen Kanal verwenden, synchronisieren die Beziehungen untereinander.
   - __Zahnrad-Schaltfläche:__ Wenn eine `gRPC Server-URL` angegeben wurde, können bei Klick auf diese Schaltfläche die gRPC-Kanäle ausgelesen werden (siehe SCHQ_Web gRPC-Kanalauswahl).
@@ -69,8 +71,8 @@ https://discord.com/invite/WmzNY3mCm6
   - __gRPC-Synchronisierung bei Programmstart:__ Angabe, ob beim Programmstart die Synchronisierung automatisch gestartet werden soll
 ### Log-Monitor
 - __Log-Monitor anzeigen:__ Angabe, ob der Log-Monitor angezeigt werden soll
-  - __Einträge Maximum:__ Angabe, wie viele Einträge maximal im Log-Monitor angezeigt werden sollen
-  - __Eintrag Anzeigedauer:__ Anzeigedauer eines Logeintrags in Minuten (`0` = unendlich)
+  - __Einträge Maximum:__ Angabe, wie viele Einträge maximal im Log-Monitor angezeigt werden sollen (Min. 1, Max. 50)
+  - __Eintrag Anzeigedauer:__ Anzeigedauer eines Logeintrags in Minuten (Min. 0, Max. 60; `0` = unendlich)
   - __Spielertode anzeigen:__ Angabe, ob Spielertode im Log-Monitor angezeigt werden sollen
   - __Ladebildschirm-Dauer anzeigen:__ Angabe, ob die Ladebildschirm-Dauer im Log-Monitor angezeigt werden sollen
   - __Komplette Datei auswerten:__ Angabe, ob die komplette Log-Datei ausgewertet und die Ergebnisse dargestellt werden sollen. Wenn deaktiviert, wird ausschließlich der Dateiinhalt ab dem Start des Auslesens der Log-Datei berücksichtigt.
