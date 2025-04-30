@@ -1,4 +1,8 @@
 using Star_Citizen_Handle_Query.Dialogs;
+using System.Text.Json;
+using System.Text;
+using Star_Citizen_Handle_Query.Serialization;
+using static Star_Citizen_Handle_Query.Dialogs.FormHandleQuery;
 
 namespace Star_Citizen_Handle_Query {
 
@@ -12,7 +16,8 @@ namespace Star_Citizen_Handle_Query {
     /// </summary>
     [STAThread]
     static void Main() {
-      if (Environment.GetCommandLineArgs().Any(x => x.Equals("-DpiUnaware", StringComparison.InvariantCultureIgnoreCase))) {
+      Settings settings = GetProgramSettings();
+      if (settings?.DpiUnaware ?? false) {
         Application.SetHighDpiMode(HighDpiMode.DpiUnaware);
       } else {
         Application.SetHighDpiMode(HighDpiMode.PerMonitorV2);
@@ -22,7 +27,7 @@ namespace Star_Citizen_Handle_Query {
       bool restart = false;
       WaitHandle = new EventWaitHandle(false, EventResetMode.AutoReset, Application.ProductName, out bool isNew);
       if (isNew) {
-        FormMain = new();
+        FormMain = new(settings);
         Thread thread = new(BringThreadToFront);
         thread.Start();
         Application.Run(FormMain);
@@ -48,6 +53,78 @@ namespace Star_Citizen_Handle_Query {
 
     private static void BringToFront() {
       FormMain.ShowWindow();
+    }
+
+    private static Settings GetProgramSettings() {
+      Settings rtnVal = null;
+
+      // Einstellungen aus Datei lesen
+      string newPath = GetSettingsFilePath();
+      if (File.Exists(newPath)) {
+        rtnVal = JsonSerializer.Deserialize<Settings>(File.ReadAllText(newPath));
+      } else {
+        Version programVersion = FormHandleQuery.GetProgramVersion();
+        foreach (string directory in Directory.GetDirectories(Directory.GetParent(GetSaveFilesRootPath()).FullName).OrderByDescending(x => x).Select(x => x.Split('+')[0])) {
+          Version version = new(Path.GetFileName(directory) + ".0");
+          if (version < programVersion) {
+            string legacyPath = Path.Combine(directory, GetSettingsFileName());
+            if (File.Exists(legacyPath)) {
+              rtnVal = JsonSerializer.Deserialize<Settings>(File.ReadAllText(legacyPath));
+              if (rtnVal != null) {
+                try {
+                  File.Move(legacyPath, newPath);
+                } catch { }
+              }
+              legacyPath = Path.Combine(directory, "Relations.json");
+              if (File.Exists(legacyPath)) {
+                try {
+                  File.Move(legacyPath, GetCachePath(CacheDirectoryType.Root, "Relations"));
+                } catch { }
+              }
+              legacyPath = Path.Combine(directory, "Cache");
+              newPath = GetCachePath(CacheDirectoryType.Root);
+              if (Directory.Exists(legacyPath) && !Directory.Exists(newPath)) {
+                try {
+                  Directory.Move(legacyPath, newPath);
+                } catch { }
+              }
+              legacyPath = Path.Combine(directory, @"Localization\Templates");
+              if (Directory.Exists(legacyPath)) {
+                foreach (string file in Directory.GetFiles(legacyPath)) {
+                  try {
+                    File.Delete(file);
+                  } catch { }
+                }
+                try {
+                  Directory.Delete(legacyPath);
+                } catch { }
+              }
+              legacyPath = Path.Combine(legacyPath, @"..\");
+              newPath = FormSettings.GetLocalizationPath();
+              if (Directory.Exists(legacyPath) && Directory.Exists(newPath)) {
+                foreach (string file in Directory.GetFiles(legacyPath)) {
+                  try {
+                    File.Move(file, Path.Combine(newPath, Path.GetFileName(file)));
+                  } catch { }
+                }
+                try {
+                  Directory.Delete(legacyPath);
+                } catch { }
+              }
+              try {
+                Directory.Delete(directory);
+              } catch { }
+            }
+            break;
+          }
+        }
+      }
+
+      if (rtnVal != null && !rtnVal.DpiUnaware && Environment.GetCommandLineArgs().Any(x => x.Equals("-DpiUnaware", StringComparison.InvariantCultureIgnoreCase))) {
+        rtnVal.DpiUnaware = true;
+      }
+
+      return rtnVal;
     }
 
   }

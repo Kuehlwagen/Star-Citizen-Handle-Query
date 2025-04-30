@@ -48,6 +48,7 @@
       ButtonStandard = new Button();
       GroupBoxAnzeige = new GroupBox();
       CheckBoxHideStreamLiveStatus = new CheckBox();
+      CheckBoxDpiUnaware = new CheckBox();
       CheckBoxAutoCheckForUpdate = new CheckBox();
       NumericUpDownAffiliationenMaximum = new NumericUpDown();
       LabelMaxAffiliationen = new Label();
@@ -135,7 +136,7 @@
       // ButtonSpeichern
       // 
       ButtonSpeichern.FlatStyle = FlatStyle.Flat;
-      ButtonSpeichern.Location = new Point(12, 582);
+      ButtonSpeichern.Location = new Point(12, 604);
       ButtonSpeichern.Name = "ButtonSpeichern";
       ButtonSpeichern.Size = new Size(75, 28);
       ButtonSpeichern.TabIndex = 6;
@@ -146,7 +147,7 @@
       // ButtonSchliessen
       // 
       ButtonSchliessen.FlatStyle = FlatStyle.Flat;
-      ButtonSchliessen.Location = new Point(93, 582);
+      ButtonSchliessen.Location = new Point(93, 604);
       ButtonSchliessen.Name = "ButtonSchliessen";
       ButtonSchliessen.Size = new Size(75, 28);
       ButtonSchliessen.TabIndex = 7;
@@ -188,7 +189,7 @@
       GroupBoxFenster.Controls.Add(LabelFensterDeckkraftProzent);
       GroupBoxFenster.FlatStyle = FlatStyle.Flat;
       GroupBoxFenster.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxFenster.Location = new Point(12, 188);
+      GroupBoxFenster.Location = new Point(12, 207);
       GroupBoxFenster.Name = "GroupBoxFenster";
       GroupBoxFenster.Size = new Size(352, 221);
       GroupBoxFenster.TabIndex = 1;
@@ -335,7 +336,7 @@
       GroupBoxLokalerCache.Controls.Add(LabelLokalerCacheAlter);
       GroupBoxLokalerCache.FlatStyle = FlatStyle.Flat;
       GroupBoxLokalerCache.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxLokalerCache.Location = new Point(12, 415);
+      GroupBoxLokalerCache.Location = new Point(12, 434);
       GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
       GroupBoxLokalerCache.Size = new Size(352, 161);
       GroupBoxLokalerCache.TabIndex = 2;
@@ -345,7 +346,7 @@
       // ButtonStandard
       // 
       ButtonStandard.FlatStyle = FlatStyle.Flat;
-      ButtonStandard.Location = new Point(711, 582);
+      ButtonStandard.Location = new Point(711, 604);
       ButtonStandard.Name = "ButtonStandard";
       ButtonStandard.Size = new Size(75, 28);
       ButtonStandard.TabIndex = 8;
@@ -356,6 +357,7 @@
       // GroupBoxAnzeige
       // 
       GroupBoxAnzeige.Controls.Add(CheckBoxHideStreamLiveStatus);
+      GroupBoxAnzeige.Controls.Add(CheckBoxDpiUnaware);
       GroupBoxAnzeige.Controls.Add(CheckBoxAutoCheckForUpdate);
       GroupBoxAnzeige.Controls.Add(LabelSprache);
       GroupBoxAnzeige.Controls.Add(NumericUpDownAffiliationenMaximum);
@@ -366,7 +368,7 @@
       GroupBoxAnzeige.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxAnzeige.Location = new Point(12, 12);
       GroupBoxAnzeige.Name = "GroupBoxAnzeige";
-      GroupBoxAnzeige.Size = new Size(352, 170);
+      GroupBoxAnzeige.Size = new Size(352, 189);
       GroupBoxAnzeige.TabIndex = 0;
       GroupBoxAnzeige.TabStop = false;
       GroupBoxAnzeige.Text = "Anzeige";
@@ -381,6 +383,17 @@
       CheckBoxHideStreamLiveStatus.Text = "Stream Live-Status ausblenden";
       CheckBoxHideStreamLiveStatus.UseVisualStyleBackColor = true;
       CheckBoxHideStreamLiveStatus.CheckedChanged += CheckBoxHideStreamLiveStatus_CheckedChanged;
+      // 
+      // CheckBoxDpiUnaware
+      // 
+      CheckBoxDpiUnaware.AutoSize = true;
+      CheckBoxDpiUnaware.Location = new Point(15, 155);
+      CheckBoxDpiUnaware.Name = "CheckBoxDpiUnaware";
+      CheckBoxDpiUnaware.Size = new Size(234, 19);
+      CheckBoxDpiUnaware.TabIndex = 6;
+      CheckBoxDpiUnaware.Text = "Alternative DPI-Berechnung verwenden";
+      CheckBoxDpiUnaware.UseVisualStyleBackColor = true;
+      CheckBoxDpiUnaware.CheckedChanged += CheckBoxDpiUnaware_CheckedChanged;
       // 
       // CheckBoxAutoCheckForUpdate
       // 
@@ -575,7 +588,7 @@
       GroupBoxLocation.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxLocation.Location = new Point(370, 12);
       GroupBoxLocation.Name = "GroupBoxLocation";
-      GroupBoxLocation.Size = new Size(416, 170);
+      GroupBoxLocation.Size = new Size(416, 189);
       GroupBoxLocation.TabIndex = 3;
       GroupBoxLocation.TabStop = false;
       GroupBoxLocation.Text = "Orte (Alt + Eingabe)";
@@ -689,7 +702,7 @@
       GroupBoxLogMonitor.Controls.Add(NumericUpDownLogEintragAnzeigedauer);
       GroupBoxLogMonitor.FlatStyle = FlatStyle.Flat;
       GroupBoxLogMonitor.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxLogMonitor.Location = new Point(370, 415);
+      GroupBoxLogMonitor.Location = new Point(370, 434);
       GroupBoxLogMonitor.Name = "GroupBoxLogMonitor";
       GroupBoxLogMonitor.Size = new Size(416, 161);
       GroupBoxLogMonitor.TabIndex = 5;
@@ -724,7 +737,7 @@
       GroupBoxBeziehungen.Controls.Add(LabelGRPCChannel);
       GroupBoxBeziehungen.FlatStyle = FlatStyle.Flat;
       GroupBoxBeziehungen.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxBeziehungen.Location = new Point(370, 188);
+      GroupBoxBeziehungen.Location = new Point(370, 207);
       GroupBoxBeziehungen.Name = "GroupBoxBeziehungen";
       GroupBoxBeziehungen.Size = new Size(416, 221);
       GroupBoxBeziehungen.TabIndex = 4;
@@ -822,7 +835,7 @@
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.FromArgb(19, 26, 33);
       CancelButton = ButtonSchliessen;
-      ClientSize = new Size(798, 624);
+      ClientSize = new Size(798, 646);
       Controls.Add(GroupBoxAnzeige);
       Controls.Add(GroupBoxLocation);
       Controls.Add(GroupBoxLogMonitor);
@@ -922,5 +935,6 @@
     private Button ButtonEditPrcChannels;
     private CheckBox CheckBoxCheckCompleteFile;
     private CheckBox CheckBoxEscAusblenden;
+    private CheckBox CheckBoxDpiUnaware;
   }
 }

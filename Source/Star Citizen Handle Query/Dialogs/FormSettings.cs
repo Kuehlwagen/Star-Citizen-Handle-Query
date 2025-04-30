@@ -24,7 +24,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       GetLocalizations();
 
       // Sprachen hinzufügen
-      ComboBoxSprache.Items.AddRange(Localizations.Select(x => x.Language).ToArray());
+      ComboBoxSprache.Items.AddRange([.. Localizations.Select(x => x.Language)]);
 
       // Taste Werte hinzufügen
       ComboBoxTaste.Items.AddRange([.. KeyCollection.ConvertAll(x => x.ToString())]);
@@ -73,6 +73,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       NumericUpDownAffiliationenMaximum.Value = ProgramSettings.AffiliationsMax;
       CheckBoxUnkenntlicheAffiliationenAusblenden.Checked = ProgramSettings.HideRedactedAffiliations;
       CheckBoxAutoCheckForUpdate.Checked = ProgramSettings.AutoCheckForUpdate;
+      CheckBoxDpiUnaware.Checked = ProgramSettings.DpiUnaware;
       CheckBoxHideStreamLiveStatus.Checked = ProgramSettings.HideStreamLiveStatus;
       CheckBoxShowLog.Checked = ProgramSettings.LogMonitor.ShowWindow;
       NumericUpDownLogEintraegeMaximum.Value = ProgramSettings.LogMonitor.EntriesMax;
@@ -232,6 +233,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.Relations.SortAlphabetically = CheckBoxSortRelationsAlphabetically.Checked;
     }
 
+    private void CheckBoxDpiUnaware_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.DpiUnaware = CheckBoxDpiUnaware.Checked;
+    }
+
     private void NumericUpDownRelationsEntriesMaximum_ValueChanged(object sender, EventArgs e) {
       ProgramSettings.Relations.EntriesMax = Convert.ToInt32(NumericUpDownRelationsEntriesMaximum.Value);
     }
@@ -276,6 +281,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxUnkenntlicheAffiliationenAusblenden.Text = CurrentLocalization.Settings.Display.Hide_Redacted_Affiliations;
       CheckBoxHideStreamLiveStatus.Text = CurrentLocalization.Settings.Display.Hide_Stream_Live_Status;
       CheckBoxAutoCheckForUpdate.Text = CurrentLocalization.Settings.Display.Auto_Check_For_Update;
+      CheckBoxDpiUnaware.Text = CurrentLocalization.Settings.Display.Use_Alternative_DPI_Calculation;
 
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;
       LabelFensterDeckkraft.Text = CurrentLocalization.Settings.Window.Opacity;

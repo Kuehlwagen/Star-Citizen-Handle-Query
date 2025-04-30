@@ -94,6 +94,9 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>Angabe, ob die Stream Live-Anzeige ausgeblendet werden soll</summary>
     public bool HideStreamLiveStatus { get; set; } = false;
 
+    /// <summary>Angabe, ob HighDpiMode.DpiUnaware anstatt HighDpiMode.PerMonitorV2 verwendet werden soll</summary>
+    public bool DpiUnaware { get; set; } = false;
+
     /// <summary>LogFileWatcher relevante Einstellungen</summary>
     public LogMonitorSettings LogMonitor { get; set; } = new();
 

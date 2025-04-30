@@ -133,6 +133,8 @@
 
     public string Hide_Stream_Live_Status { get; set; } = "Stream Live-Status ausblenden";
 
+    public string Use_Alternative_DPI_Calculation { get; set; } = "Alternative DPI-Berechnung verwenden";
+
   }
 
   [Serializable()]

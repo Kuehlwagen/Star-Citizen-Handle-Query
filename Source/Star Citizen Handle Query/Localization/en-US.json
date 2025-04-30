@@ -32,7 +32,8 @@
       "Affiliations_Max": "Maximum affiliations:",
       "Hide_Redacted_Affiliations": "Hide redacted affiliations",
       "Auto_Check_For_Update": "Check for update when program starts",
-      "Hide_Stream_Live_Status": "Hide stream live status"
+      "Hide_Stream_Live_Status": "Hide stream live status",
+      "Use_Alternative_DPI_Calculation": "Use alternative DPI calculation"
     },
     "Window": {
       "Group_Title": "Window",

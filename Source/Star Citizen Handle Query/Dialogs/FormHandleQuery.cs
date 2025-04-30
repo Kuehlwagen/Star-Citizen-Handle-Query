@@ -59,7 +59,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private static partial Regex RgxLocalizationMethod();
     #endregion
 
-    public FormHandleQuery() {
+    public FormHandleQuery(Settings settings) {
       InitializeComponent();
 
 #if DEBUG
@@ -74,7 +74,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CreateDefaultLocalizations();
 
       // Programm-Einstellungen auslesen
-      ProgramSettings = GetProgramSettings();
+      ProgramSettings = settings;
+
+      // Wenn die Einstellungen nicht geladen werden konnten, Einstellungen-Fenster anzeigen
+      ProgramSettings ??= ShowProperties();
+
+      ProgramSettings ??= new();
 
       // Prüfen, ob die Programm-Einstellungen geladen werden konnten
       if (ProgramSettings != null) {
@@ -211,79 +216,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       SetToolTip(LabelLockUnlock, ProgramTranslation.Window.ToolTips.Lock_Unlock_Window);
       SetToolTip(LabelQuery, ProgramTranslation.Window.ToolTips.Query_Handle);
       SetToolTip(LabelSettings, ProgramTranslation.Window.ToolTips.Settings);
-    }
-
-    internal Settings GetProgramSettings() {
-      Settings rtnVal = null;
-
-      // Einstellungen aus Datei lesen
-      string newPath = GetSettingsFilePath();
-      if (File.Exists(newPath)) {
-        rtnVal = JsonSerializer.Deserialize<Settings>(File.ReadAllText(newPath));
-      } else {
-        Version programVersion = GetProgramVersion();
-        foreach (string directory in Directory.GetDirectories(Directory.GetParent(GetSaveFilesRootPath()).FullName).OrderByDescending(x => x).Select(x => x.Split('+')[0])) {
-          Version version = new(Path.GetFileName(directory) + ".0");
-          if (version < programVersion) {
-            string legacyPath = Path.Combine(directory, GetSettingsFileName());
-            if (File.Exists(legacyPath)) {
-              rtnVal = JsonSerializer.Deserialize<Settings>(File.ReadAllText(legacyPath));
-              if (rtnVal != null) {
-                try {
-                  File.Move(legacyPath, newPath);
-                } catch { }
-              }
-              legacyPath = Path.Combine(directory, "Relations.json");
-              if (File.Exists(legacyPath)) {
-                try {
-                  File.Move(legacyPath, GetCachePath(CacheDirectoryType.Root, "Relations"));
-                } catch { }
-              }
-              legacyPath = Path.Combine(directory, "Cache");
-              newPath = GetCachePath(CacheDirectoryType.Root);
-              if (Directory.Exists(legacyPath) && !Directory.Exists(newPath)) {
-                try {
-                  Directory.Move(legacyPath, newPath);
-                } catch { }
-              }
-              legacyPath = Path.Combine(directory, @"Localization\Templates");
-              if (Directory.Exists(legacyPath)) {
-                foreach (string file in Directory.GetFiles(legacyPath)) {
-                  try {
-                    File.Delete(file);
-                  } catch { }
-                }
-                try {
-                  Directory.Delete(legacyPath);
-                } catch { }
-              }
-              legacyPath = Path.Combine(legacyPath, @"..\");
-              newPath = FormSettings.GetLocalizationPath();
-              if (Directory.Exists(legacyPath) && Directory.Exists(newPath)) {
-                foreach (string file in Directory.GetFiles(legacyPath)) {
-                  try {
-                    File.Move(file, Path.Combine(newPath, Path.GetFileName(file)));
-                  } catch { }
-                }
-                try {
-                  Directory.Delete(legacyPath);
-                } catch { }
-              }
-              try {
-                Directory.Delete(directory);
-              } catch { }
-            }
-            break;
-          }
-        }
-      }
-
-      // Wenn die Einstellungen nicht geladen werden konnten, Einstellungen-Fenster anzeigen
-      rtnVal ??= ShowProperties();
-
-      rtnVal ??= new();
-
-      return rtnVal;
     }
 
     internal static string GetSettingsFilePath() {
@@ -1100,7 +1032,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       EnableContextMenu();
     }
 
-    private static Version GetProgramVersion() {
+    internal static Version GetProgramVersion() {
       // Programmversion ermitteln
       return Assembly.GetExecutingAssembly().GetName().Version;
     }

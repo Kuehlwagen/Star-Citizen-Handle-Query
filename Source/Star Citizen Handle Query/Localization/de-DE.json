@@ -32,7 +32,8 @@
       "Affiliations_Max": "Affiliationen Maximum:",
       "Hide_Redacted_Affiliations": "Unkenntliche Affiliationen ausblenden",
       "Auto_Check_For_Update": "Bei Programmstart nach Update suchen",
-      "Hide_Stream_Live_Status": "Stream Live-Status ausblenden"
+      "Hide_Stream_Live_Status": "Stream Live-Status ausblenden",
+      "Use_Alternative_DPI_Calculation": "Alternative DPI-Berechnung verwenden"
     },
     "Window": {
       "Group_Title": "Fenster",
