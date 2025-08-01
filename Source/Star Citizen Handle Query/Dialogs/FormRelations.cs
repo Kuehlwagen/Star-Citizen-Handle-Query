@@ -180,7 +180,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public void ClearRelations(bool force = false) {
       if (PanelRelations.Controls.Count > 0) {
-        if (MessageBox.Show(ProgramTranslation.Relations.Clear, ProgramTranslation.Relations.Title, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+        if (force || MessageBox.Show(ProgramTranslation.Relations.Clear, ProgramTranslation.Relations.Title, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
           UserControlRelations.Clear();
           List<UserControlRelation> ctrls = [.. PanelRelations.Controls.OfType<UserControlRelation>()];
           PanelRelations.Controls.Clear();
