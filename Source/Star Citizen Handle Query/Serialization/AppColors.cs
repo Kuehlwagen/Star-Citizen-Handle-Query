@@ -5,7 +5,9 @@ public class AppColors {
   public string ForeColor { get; set; } = "#39CED8";
   public string ForeColorInactive { get; set; } = "#2E9D9E";
   public string BackColor { get; set; } = "#131A21";
+  public string SplitterColor { get; set; } = "#FFFF00";
   internal Color AppForeColor => ColorTranslator.FromHtml(ForeColor);
   internal Color AppForeColorInactive => ColorTranslator.FromHtml(ForeColorInactive);
   internal Color AppBackColor => ColorTranslator.FromHtml(BackColor);
+  internal Color AppSplitterColor => ColorTranslator.FromHtml(SplitterColor);
 }

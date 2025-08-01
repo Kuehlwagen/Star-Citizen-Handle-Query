@@ -115,7 +115,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public void LockUnlockWindow(bool locked) {
       WindowLocked = locked;
       if (UcResize != null) {
-        UcResize.BackColor = locked ? Color.Transparent : Color.Yellow;
+        UcResize.BackColor = locked ? Color.Transparent : ProgramSettings.Colors.AppSplitterColor;
         UcResize.Cursor = locked ? Cursors.Default : Cursors.SizeWE;
       }
     }

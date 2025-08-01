@@ -1275,7 +1275,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         WindowLocked = !WindowLocked;
         LabelLockUnlock.Image = WindowLocked ? Resources.WindowLocked : Resources.WindowUnlocked;
         if (UcResize != null) {
-          UcResize.BackColor = WindowLocked ? Color.Transparent : Color.Yellow;
+          UcResize.BackColor = WindowLocked ? Color.Transparent : ProgramSettings.Colors.AppSplitterColor;
           UcResize.Cursor = WindowLocked ? Cursors.Default : Cursors.SizeWE;
         }
         LogMonitorForm?.LockUnlockWindow(WindowLocked);
