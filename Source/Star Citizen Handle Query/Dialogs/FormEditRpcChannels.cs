@@ -12,9 +12,26 @@ public partial class FormEditRpcChannels : Form {
 
   public string SelectedChannel { get; set; } = string.Empty;
 
-  public FormEditRpcChannels(Settings settings, Translation translation) {
+  public FormEditRpcChannels(Settings programSettings, Translation translation) {
     InitializeComponent();
-    ProgramSettings = settings;
+
+    // Farben setzen
+    if (programSettings.Colors != null) {
+      BackColor = programSettings.Colors.AppBackColor;
+      ForeColor = programSettings.Colors.AppForeColor;
+      DataGridViewChannels.BackgroundColor = programSettings.Colors.AppBackColor;
+      DataGridViewChannels.ForeColor = programSettings.Colors.AppForeColor;
+      DataGridViewChannels.DefaultCellStyle.BackColor = programSettings.Colors.AppBackColor;
+      DataGridViewChannels.DefaultCellStyle.ForeColor = programSettings.Colors.AppForeColor;
+      DataGridViewChannels.DefaultCellStyle.SelectionBackColor = programSettings.Colors.AppForeColor;
+      DataGridViewChannels.DefaultCellStyle.SelectionForeColor = programSettings.Colors.AppBackColor;
+      DataGridViewChannels.ColumnHeadersDefaultCellStyle.BackColor = programSettings.Colors.AppBackColor;
+      DataGridViewChannels.ColumnHeadersDefaultCellStyle.ForeColor = programSettings.Colors.AppForeColor;
+      DataGridViewChannels.ColumnHeadersDefaultCellStyle.SelectionBackColor = programSettings.Colors.AppForeColor;
+      DataGridViewChannels.ColumnHeadersDefaultCellStyle.SelectionForeColor = programSettings.Colors.AppBackColor;
+    }
+
+    ProgramSettings = programSettings;
     ProgramTranslation = translation;
   }
 
