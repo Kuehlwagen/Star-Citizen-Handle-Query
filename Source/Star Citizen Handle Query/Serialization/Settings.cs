@@ -44,6 +44,21 @@ namespace Star_Citizen_Handle_Query.Serialization {
       }
     }
 
+    private int _AutoCloseDuration = 0;
+    /// <summary>Fenster-Anzeigedauer in Sekunden (0 = dauerhaft, max. 600)</summary>
+    public int AutoCloseDuration {
+      get {
+        return _AutoCloseDuration;
+      } set {
+        if (value < 0) {
+          value = 0;
+        } else if (value > 600) {
+          value = 600;
+        }
+        _AutoCloseDuration = value;
+      }
+    }
+
     /// <summary>Globaler Hotkey</summary>
     public Keys GlobalHotkey { get; set; } = Keys.F3;
 

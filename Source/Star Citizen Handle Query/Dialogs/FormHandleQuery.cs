@@ -31,6 +31,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private bool ShowInitialBalloonTip = false;
     private static bool IsDebug = false;
     internal static CancellationTokenSource CancelToken = new();
+    private readonly TypeAssistant TextChangedAssistant;
 
     #region Regex
     private readonly Regex RgxIdCmHandleEnlistedFluency = RgxIdCmHandleEnlistedFluencyMethod();
@@ -95,6 +96,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         // Fenster-Deckkraft setzen
         Opacity = (double)ProgramSettings.WindowOpacity / 100.0;
 
+        if (ProgramSettings.AutoCloseDuration > 0) {
+          TextChangedAssistant = new(ProgramSettings.AutoCloseDuration * 1000);
+          TextChangedAssistant.Idled += TextChangedAssistant_Idled;
+        }
+
         // Ggf. Alt + Tab ermöglichen und Fenster in der Taskbar anzeigen
         if (ProgramSettings.AltTabEnabled) {
           ShowInTaskbar = true;
@@ -132,6 +138,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         }
       }
 
+    }
+
+    private void TextChangedAssistant_Idled(object sender, EventArgs e) {
+      Invoke(new System.Windows.Forms.MethodInvoker(HideWindows));
     }
 
     private void UpdateAutoComplete(string handle = null) {
@@ -464,6 +474,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             }
             break;
         }
+        TextChangedAssistant?.TextChanged();
       }
     }
 
@@ -563,6 +574,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             e.SuppressKeyPress = true;
             if (PanelInfo.Controls.Count > 0) {
               (PanelInfo.Controls[0] as UserControlHandle).ActivateComment();
+              TextChangedAssistant?.TextChanged();
             }
             break;
           case Keys.Enter:
@@ -575,7 +587,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             e.SuppressKeyPress = true;
             // Fenster verstecken
             if (ProgramSettings.HideWindowOnEscPress) {
-              HideWindows();
+              TextChangedAssistant?.TextChanged(true);
             }
             break;
         }
@@ -661,6 +673,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         TextBoxHandle.SelectAll();
         TextBoxHandle.Focus();
       }
+      TextChangedAssistant?.TextChanged();
     }
 
     public void SetAndQueryHandle(string handle) {
