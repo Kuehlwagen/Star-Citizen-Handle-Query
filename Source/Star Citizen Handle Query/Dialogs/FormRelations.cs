@@ -178,13 +178,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       IsDragging = false;
     }
 
-    public void ClearRelations() {
+    public void ClearRelations(bool force = false) {
       if (PanelRelations.Controls.Count > 0) {
-        UserControlRelations.Clear();
-        List<UserControlRelation> ctrls = [.. PanelRelations.Controls.OfType<UserControlRelation>()];
-        PanelRelations.Controls.Clear();
-        foreach (UserControlRelation c in ctrls) {
-          c.Dispose();
+        if (MessageBox.Show(ProgramTranslation.Relations.Clear, ProgramTranslation.Relations.Title, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes) {
+          UserControlRelations.Clear();
+          List<UserControlRelation> ctrls = [.. PanelRelations.Controls.OfType<UserControlRelation>()];
+          PanelRelations.Controls.Clear();
+          foreach (UserControlRelation c in ctrls) {
+            c.Dispose();
+          }
         }
       }
     }

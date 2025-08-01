@@ -142,7 +142,8 @@
     "Title": "Relations",
     "RPC_Status_Disconnected": "Disconnected - click to connect",
     "RPC_Status_Connecting": "Connecting...",
-    "RPC_Status_Connected": "Connected - LMB to disconnect; MMB to load all relations"
+    "RPC_Status_Connected": "Connected - LMB to disconnect; MMB to load all relations",
+    "Clear": "Do you really want to clear all relations?"
   },
   "Locations": {
     "Title": "Locations",

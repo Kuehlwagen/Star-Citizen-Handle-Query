@@ -1013,7 +1013,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           UpdateAutoComplete();
 
           // Ggf. Beziehungen-UserControls entfernen
-          RelationsForm?.ClearRelations();
+          RelationsForm?.ClearRelations(true);
 
           MessageBox.Show(ProgramTranslation.Window.MessageBoxes.Local_Cache_Cleared, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 

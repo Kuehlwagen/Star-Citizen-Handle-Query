@@ -370,6 +370,8 @@
 
     public string RPC_Status_Connected { get; set; } = "Verbunden - klicken, um die Verbidung zu trennen";
 
+    public string Clear { get; set; } = "Sollen wirklich alle Beziehungen gelöscht werden?";
+
   }
 
   public class Translation_Locations {
