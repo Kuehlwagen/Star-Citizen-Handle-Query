@@ -120,6 +120,16 @@ namespace Star_Citizen_Handle_Query {
         }
       }
 
+      if (rtnVal != null) {
+        // Ggf. abweichende Farben laden
+        string colorsFilePath = FormHandleQuery.GetAppColorsFilePath();
+        if (File.Exists(colorsFilePath)) {
+          string jsonColors = File.ReadAllText(colorsFilePath, Encoding.UTF8);
+          rtnVal.Colors = JsonSerializer.Deserialize<AppColors>(jsonColors);
+          rtnVal.Colors ??= new();
+        }
+      }
+
       if (rtnVal != null && !rtnVal.DpiUnaware && Environment.GetCommandLineArgs().Any(x => x.Equals("-DpiUnaware", StringComparison.InvariantCultureIgnoreCase))) {
         rtnVal.DpiUnaware = true;
       }

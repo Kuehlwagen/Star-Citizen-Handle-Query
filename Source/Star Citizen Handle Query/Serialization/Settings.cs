@@ -1,4 +1,5 @@
 ﻿using Star_Citizen_Handle_Query.Classes;
+using System.Text.Json.Serialization;
 
 namespace Star_Citizen_Handle_Query.Serialization {
 
@@ -105,6 +106,10 @@ namespace Star_Citizen_Handle_Query.Serialization {
 
     /// <summary>Orte relevante Einstellungen</summary>
     public LocationsSettings Locations { get; set; } = new();
+
+    /// <summary>App-Farben</summary>
+    [JsonIgnore]
+    public AppColors Colors { get; set; } = new();
 
     public object Clone() {
       return MemberwiseClone();

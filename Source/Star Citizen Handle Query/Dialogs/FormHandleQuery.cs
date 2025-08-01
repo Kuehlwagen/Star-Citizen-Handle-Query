@@ -62,6 +62,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public FormHandleQuery(Settings settings) {
       InitializeComponent();
 
+      // Farben setzen
+      if (settings.Colors != null) {
+        ForeColor = settings.Colors.AppForeColor;
+        PanelHandleQuery.BackColor = settings.Colors.AppBackColor;
+        PanelHandleQuery.ForeColor = settings.Colors.AppForeColor;
+        TextBoxHandle.BackColor = settings.Colors.AppForeColor;
+        TextBoxHandle.ForeColor = settings.Colors.AppBackColor;
+      }
+
 #if DEBUG
       IsDebug = true;
 #else
@@ -220,6 +229,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     internal static string GetSettingsFilePath() {
       return Path.Combine(GetSaveFilesRootPath(), GetSettingsFileName());
+    }
+
+    internal static string GetAppColorsFilePath() {
+      return Path.Combine(GetSaveFilesRootPath(), $@"..\{Application.ProductName}.colors.json");
     }
 
     internal static string GetSettingsFileName() {
@@ -610,7 +623,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         if (handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK) {
           // Ggf. Relations-Control hinzufügen
           if (ProgramSettings.Relations.ShowWindow) {
-            var ucRelation = new UserControlHandleRelation(ProgramTranslation);
+            var ucRelation = new UserControlHandleRelation(ProgramSettings, ProgramTranslation);
             PanelInfo.Controls.Add(ucRelation);
             Height += ucRelation.Height;
           }

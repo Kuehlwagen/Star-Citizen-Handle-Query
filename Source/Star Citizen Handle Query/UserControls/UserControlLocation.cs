@@ -12,6 +12,15 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     public UserControlLocation(LocationInfo info, Settings programSettings) {
       InitializeComponent();
+
+      // Farben setzen
+      if (programSettings.Colors != null) {
+        BackColor = programSettings.Colors.AppBackColor;
+        ForeColor = programSettings.Colors.AppForeColor;
+        LabelDescription.ForeColor = programSettings.Colors.AppForeColorInactive;
+        LabelType.ForeColor = programSettings.Colors.AppForeColorInactive;
+      }
+
       Info = info;
       ProgramSettings = programSettings;
     }

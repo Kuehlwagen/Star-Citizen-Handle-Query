@@ -40,6 +40,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         Opacity = (double)ProgramSettings.WindowOpacity / 100.0;
 
         InitialWindowStyle = User32Wrappers.GetWindowLongA(Handle, User32Wrappers.GWL.ExStyle);
+
+        // Farben setzen
+        if (programSettings.Colors != null) {
+          ForeColor = programSettings.Colors.AppForeColor;
+          PanelHeader.BackColor = programSettings.Colors.AppBackColor;
+        }
       }
 
       // Übersetzung laden

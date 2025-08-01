@@ -49,6 +49,47 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Fallback auf leeres Settings-Objekt
       ProgramSettings ??= new Settings();
 
+      if (ProgramSettings?.Colors != null) {
+        BackColor = ProgramSettings.Colors.AppBackColor;
+        ForeColor = ProgramSettings.Colors.AppForeColor;
+        GroupBoxAnzeige.ForeColor = ProgramSettings.Colors.AppForeColor;
+        GroupBoxFenster.ForeColor = ProgramSettings.Colors.AppForeColor;
+        GroupBoxBeziehungen.ForeColor = ProgramSettings.Colors.AppForeColor;
+        GroupBoxLocation.ForeColor = ProgramSettings.Colors.AppForeColor;
+        GroupBoxLogMonitor.ForeColor = ProgramSettings.Colors.AppForeColor;
+        GroupBoxLokalerCache.ForeColor = ProgramSettings.Colors.AppForeColor;
+        ComboBoxSprache.BackColor = ProgramSettings.Colors.AppBackColor;
+        ComboBoxSprache.ForeColor = ProgramSettings.Colors.AppForeColor;
+        NumericUpDownAffiliationenMaximum.BackColor = ProgramSettings.Colors.AppBackColor;
+        NumericUpDownAffiliationenMaximum.ForeColor = ProgramSettings.Colors.AppForeColor;
+        NumericUpDownFensterDeckkraft.BackColor = ProgramSettings.Colors.AppBackColor;
+        NumericUpDownFensterDeckkraft.ForeColor = ProgramSettings.Colors.AppForeColor;
+        ComboBoxTaste.BackColor = ProgramSettings.Colors.AppBackColor;
+        ComboBoxTaste.ForeColor = ProgramSettings.Colors.AppForeColor;
+        NumericUpDownLokalerCacheAlter.BackColor = ProgramSettings.Colors.AppBackColor;
+        NumericUpDownLokalerCacheAlter.ForeColor = ProgramSettings.Colors.AppForeColor;
+        NumericUpDownOrteEintraegeMaximum.BackColor = ProgramSettings.Colors.AppBackColor;
+        NumericUpDownOrteEintraegeMaximum.ForeColor = ProgramSettings.Colors.AppForeColor;
+        TextBoxLMB_URL.BackColor = ProgramSettings.Colors.AppForeColor;
+        TextBoxLMB_URL.ForeColor = ProgramSettings.Colors.AppBackColor;
+        TextBoxMMB_URL.BackColor = ProgramSettings.Colors.AppForeColor;
+        TextBoxMMB_URL.ForeColor = ProgramSettings.Colors.AppBackColor;
+        TextBoxRMB_URL.BackColor = ProgramSettings.Colors.AppForeColor;
+        TextBoxRMB_URL.ForeColor = ProgramSettings.Colors.AppBackColor;
+        NumericUpDownRelationsEntriesMaximum.BackColor = ProgramSettings.Colors.AppBackColor;
+        NumericUpDownRelationsEntriesMaximum.ForeColor = ProgramSettings.Colors.AppForeColor;
+        TextBoxGRPCURL.BackColor = ProgramSettings.Colors.AppForeColor;
+        TextBoxGRPCURL.ForeColor = ProgramSettings.Colors.AppBackColor;
+        TextBoxGRPCChannel.BackColor = ProgramSettings.Colors.AppForeColor;
+        TextBoxGRPCChannel.ForeColor = ProgramSettings.Colors.AppBackColor;
+        TextBoxGRPCChannelPassword.BackColor = ProgramSettings.Colors.AppForeColor;
+        TextBoxGRPCChannelPassword.ForeColor = ProgramSettings.Colors.AppBackColor;
+        NumericUpDownLogEintraegeMaximum.BackColor = ProgramSettings.Colors.AppBackColor;
+        NumericUpDownLogEintraegeMaximum.ForeColor = ProgramSettings.Colors.AppForeColor;
+        NumericUpDownLogEintragAnzeigedauer.BackColor = ProgramSettings.Colors.AppBackColor;
+        NumericUpDownLogEintragAnzeigedauer.ForeColor = ProgramSettings.Colors.AppForeColor;
+      }
+
       // Einstellungen auf den Dialog übernehmen
       SetDialogValues();
     }

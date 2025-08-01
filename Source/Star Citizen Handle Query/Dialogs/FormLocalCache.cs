@@ -15,9 +15,18 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly Settings ProgramSettings;
     private readonly Translation ProgramTranslation;
 
-    public FormLocalCache(Settings settings, Translation translation) {
+    public FormLocalCache(Settings programSettings, Translation translation) {
       InitializeComponent();
-      ProgramSettings = settings;
+
+      // Farben setzen
+      if (programSettings.Colors != null) {
+        BackColor = programSettings.Colors.AppBackColor;
+        ForeColor = programSettings.Colors.AppForeColor;
+        DataGridViewLokalerCache.DefaultCellStyle.SelectionBackColor = programSettings.Colors.AppForeColor;
+        DataGridViewLokalerCache.DefaultCellStyle.SelectionForeColor = programSettings.Colors.AppBackColor;
+      }
+
+      ProgramSettings = programSettings;
       ProgramTranslation = translation;
     }
 

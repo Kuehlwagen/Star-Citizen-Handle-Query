@@ -12,6 +12,14 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     public UserControlLog(LogMonitorInfo logInfo, Settings programSettings) {
       InitializeComponent();
+
+      // Farben setzen
+      if (programSettings.Colors != null) {
+        BackColor = programSettings.Colors.AppBackColor;
+        ForeColor = programSettings.Colors.AppForeColor;
+        LabelTime.ForeColor = programSettings.Colors.AppForeColorInactive;
+      }
+
       LogInfoItem = logInfo;
       if (programSettings.LogMonitor.EntryDisplayDurationInMinutes > 0) {
         TimerRemoveControl.Interval = programSettings.LogMonitor.EntryDisplayDurationInMinutes * 60000;

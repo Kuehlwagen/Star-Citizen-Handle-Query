@@ -18,6 +18,14 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     public UserControlOrganization(OrganizationInfo organizationInfo, Settings programSettings, bool isMainOrg, bool forceLive, bool displayOnly = false) {
       InitializeComponent();
+
+      // Farben setzen
+      if (programSettings.Colors != null) {
+        BackColor = programSettings.Colors.AppBackColor;
+        ForeColor = programSettings.Colors.AppForeColor;
+        LabelMainOrganizationAffiliate.ForeColor = programSettings.Colors.AppForeColorInactive;
+      }
+
       Info = organizationInfo;
       ProgramSettings = programSettings;
       IsMainOrg = isMainOrg;

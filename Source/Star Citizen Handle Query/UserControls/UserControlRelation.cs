@@ -1,5 +1,6 @@
 ﻿using SCHQ_Protos;
 using Star_Citizen_Handle_Query.Dialogs;
+using Star_Citizen_Handle_Query.Serialization;
 
 namespace Star_Citizen_Handle_Query.UserControls {
 
@@ -10,8 +11,15 @@ namespace Star_Citizen_Handle_Query.UserControls {
     internal RelationValue Relation;
     internal string Comment;
 
-    public UserControlRelation(string handle, RelationType relationType, RelationValue relation, string comment = null) {
+    public UserControlRelation(Settings programSettings, string handle, RelationType relationType, RelationValue relation, string comment = null) {
       InitializeComponent();
+
+      // Farben setzen
+      if (programSettings.Colors != null) {
+        BackColor = programSettings.Colors.AppBackColor;
+        ForeColor = programSettings.Colors.AppForeColor;
+      }
+
       RelationName = handle;
       Relation = relation;
       Type = relationType;

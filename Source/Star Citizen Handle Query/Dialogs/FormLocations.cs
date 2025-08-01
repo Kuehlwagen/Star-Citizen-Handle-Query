@@ -19,6 +19,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public FormLocations(Settings programSettings, Translation translation) {
       InitializeComponent();
+
+      // Farben setzen
+      if (programSettings.Colors != null) {
+        ForeColor = programSettings.Colors.AppForeColor;
+        PanelHeader.BackColor = programSettings.Colors.AppBackColor;
+        TextBoxFilterLocations.BackColor = programSettings.Colors.AppForeColor;
+        TextBoxFilterLocations.ForeColor = programSettings.Colors.AppBackColor;
+      }
+
       TextChangedAssistant = new();
       TextChangedAssistant.Idled += TextChangedAssistant_Idled;
 

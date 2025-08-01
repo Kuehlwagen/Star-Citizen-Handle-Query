@@ -39,6 +39,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         Opacity = (double)ProgramSettings.WindowOpacity / 100.0;
 
         InitialWindowStyle = User32Wrappers.GetWindowLongA(Handle, User32Wrappers.GWL.ExStyle);
+
+        // Farben setzen
+        if (programSettings.Colors != null) {
+          ForeColor = programSettings.Colors.AppForeColor;
+          PanelHeader.BackColor = programSettings.Colors.AppBackColor;
+        }
       }
 
       // Übersetzung laden
@@ -175,7 +181,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public void ClearRelations() {
       if (PanelRelations.Controls.Count > 0) {
         UserControlRelations.Clear();
-        List<UserControlRelation> ctrls = new(PanelRelations.Controls.OfType<UserControlRelation>());
+        List<UserControlRelation> ctrls = [.. PanelRelations.Controls.OfType<UserControlRelation>()];
         PanelRelations.Controls.Clear();
         foreach (UserControlRelation c in ctrls) {
           c.Dispose();
@@ -369,7 +375,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void AddControl(string name, RelationType relationType, RelationValue relation, string comment, bool hide = false) {
       string controlName = $"{relationType}.{name}";
-      UserControlRelation control = new(name, relationType, relation, comment) { Name = $"UserControlRelation_{relationType}_{name}", Visible = RelationIsVisible(relation) };
+      UserControlRelation control = new(ProgramSettings, name, relationType, relation, comment) { Name = $"UserControlRelation_{relationType}_{name}", Visible = RelationIsVisible(relation) };
       UserControlRelations[controlName] = control;
       if (!hide && !PanelRelations.Controls.ContainsKey(controlName)) {
         PanelRelations.Controls.Add(control);
@@ -381,9 +387,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public void RemoveControl(UserControlRelation uc) {
       string controlName = $"{uc.Type}.{uc.RelationName}";
-      if (UserControlRelations.ContainsKey(controlName)) {
-        UserControlRelations.Remove(controlName);
-      }
+      UserControlRelations.Remove(controlName);
       PanelRelations.Controls.Remove(uc);
       uc.Dispose();
     }

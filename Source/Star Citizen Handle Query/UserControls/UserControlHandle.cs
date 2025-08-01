@@ -23,6 +23,13 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     public UserControlHandle(HandleInfo handleInfo, Settings programSettings, Translation programTranslation, bool forceLive, bool displayOnly = false) {
       InitializeComponent();
+
+      // Farben setzen
+      if (programSettings.Colors != null) {
+        BackColor = programSettings.Colors.AppBackColor;
+        ForeColor = programSettings.Colors.AppForeColor;
+      }
+
       Info = handleInfo;
       ProgramSettings = programSettings;
       ProgramTranslation = programTranslation;

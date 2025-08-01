@@ -8,8 +8,15 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     private readonly Translation ProgramTranslation;
 
-    public UserControlHandleRelation(Translation programTranslations) {
+    public UserControlHandleRelation(Settings programSettings, Translation programTranslations) {
       InitializeComponent();
+
+      // Farben setzen
+      if (programSettings.Colors != null) {
+        BackColor = programSettings.Colors.AppBackColor;
+        ForeColor = programSettings.Colors.AppForeColor;
+      }
+
       ProgramTranslation = programTranslations;
     }
 
