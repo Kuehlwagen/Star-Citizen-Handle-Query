@@ -64,7 +64,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       InitializeComponent();
 
       // Farben setzen
-      if (settings.Colors != null) {
+      if (settings?.Colors != null) {
         ForeColor = settings.Colors.AppForeColor;
         PanelHandleQuery.BackColor = settings.Colors.AppBackColor;
         PanelHandleQuery.ForeColor = settings.Colors.AppForeColor;
