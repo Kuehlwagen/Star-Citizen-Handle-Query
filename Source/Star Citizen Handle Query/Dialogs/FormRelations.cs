@@ -4,11 +4,9 @@ using Star_Citizen_Handle_Query.Properties;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Drawing.Drawing2D;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Xml.Linq;
 
 namespace Star_Citizen_Handle_Query.Dialogs {
 
@@ -44,6 +42,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         if (programSettings.Colors != null) {
           ForeColor = programSettings.Colors.AppForeColor;
           PanelHeader.BackColor = programSettings.Colors.AppBackColor;
+          ToolTipRelations.BackColor = programSettings.Colors.AppBackColor;
+          ToolTipRelations.ForeColor = programSettings.Colors.AppForeColor;
         }
       }
 

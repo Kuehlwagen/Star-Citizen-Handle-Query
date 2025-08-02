@@ -45,6 +45,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         if (programSettings.Colors != null) {
           ForeColor = programSettings.Colors.AppForeColor;
           PanelHeader.BackColor = programSettings.Colors.AppBackColor;
+          ToolTipLogMonitor.BackColor = programSettings.Colors.AppBackColor;
+          ToolTipLogMonitor.ForeColor = programSettings.Colors.AppForeColor;
         }
       }
 

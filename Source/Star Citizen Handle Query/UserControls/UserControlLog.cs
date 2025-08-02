@@ -1,6 +1,7 @@
 ﻿using SCHQ_Protos;
 using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Star_Citizen_Handle_Query.UserControls {
 
@@ -17,6 +18,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
       if (programSettings.Colors != null) {
         BackColor = programSettings.Colors.AppBackColor;
         ForeColor = programSettings.Colors.AppForeColor;
+        LabelTime.BackColor = programSettings.Colors.AppBackColor;
         LabelTime.ForeColor = programSettings.Colors.AppForeColorInactive;
       }
 
@@ -61,12 +63,17 @@ namespace Star_Citizen_Handle_Query.UserControls {
           break;
         case LogType.ActorDeath:
           PictureBoxLeft.Image = Properties.Resources.Dead;
-          LabelText.Text = LogInfoItem.Handle;
+          LabelText.Text = $"{LogInfoItem.Handle}{Environment.NewLine}{LogInfoItem.Key}";
           SetToolTip(LogInfoItem.Value);
           if (LogInfoItem.RelationValue > RelationValue.NotAssigned) {
             LabelRelation.Visible = LogInfoItem.RelationValue > RelationValue.NotAssigned;
             LabelRelation.BackColor = FormHandleQuery.GetRelationColor(LogInfoItem.RelationValue);
           }
+          Height += LabelText.Height;
+          LabelRelation.Height += LabelText.Height;
+          LabelText.Height *= 2;
+          LabelTime.Text += $"{Environment.NewLine}❌";
+          LabelTime.Height *= 2;
           AddMouseEvents();
           break;
       }

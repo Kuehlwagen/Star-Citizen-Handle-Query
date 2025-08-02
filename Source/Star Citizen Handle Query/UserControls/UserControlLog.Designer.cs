@@ -62,7 +62,7 @@
       LabelTime.Size = new Size(34, 15);
       LabelTime.TabIndex = 0;
       LabelTime.Text = "00:00";
-      LabelTime.TextAlign = ContentAlignment.MiddleLeft;
+      LabelTime.TextAlign = ContentAlignment.MiddleRight;
       // 
       // PictureBoxRight
       // 
