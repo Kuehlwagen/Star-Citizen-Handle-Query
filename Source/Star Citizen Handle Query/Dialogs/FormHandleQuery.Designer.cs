@@ -69,7 +69,6 @@
       TextBoxHandle.AutoCompleteMode = AutoCompleteMode.Append;
       TextBoxHandle.AutoCompleteSource = AutoCompleteSource.CustomSource;
       TextBoxHandle.BackColor = Color.FromArgb(57, 206, 216);
-      TextBoxHandle.BorderStyle = BorderStyle.FixedSingle;
       TextBoxHandle.Location = new Point(69, 3);
       TextBoxHandle.MaxLength = 60;
       TextBoxHandle.Name = "TextBoxHandle";
