@@ -47,6 +47,7 @@
       GroupBoxLokalerCache = new GroupBox();
       ButtonStandard = new Button();
       GroupBoxAnzeige = new GroupBox();
+      LabelFarben = new Label();
       LabelErgebnisAutomatischLeerenSekunden = new Label();
       LabelErgebnisAutomatischLeeren = new Label();
       CheckBoxHideStreamLiveStatus = new CheckBox();
@@ -54,6 +55,10 @@
       CheckBoxAutoCheckForUpdate = new CheckBox();
       NumericUpDownErgebnisAutomatischLeeren = new NumericUpDown();
       NumericUpDownAffiliationenMaximum = new NumericUpDown();
+      ButtonSplitterColor = new Button();
+      ButtonBackColor = new Button();
+      ButtonForeColorInactive = new Button();
+      ButtonForeColor = new Button();
       LabelMaxAffiliationen = new Label();
       CheckBoxUnkenntlicheAffiliationenAusblenden = new CheckBox();
       NumericUpDownRelationsEntriesMaximum = new NumericUpDown();
@@ -360,6 +365,7 @@
       // 
       // GroupBoxAnzeige
       // 
+      GroupBoxAnzeige.Controls.Add(LabelFarben);
       GroupBoxAnzeige.Controls.Add(LabelErgebnisAutomatischLeerenSekunden);
       GroupBoxAnzeige.Controls.Add(LabelErgebnisAutomatischLeeren);
       GroupBoxAnzeige.Controls.Add(CheckBoxHideStreamLiveStatus);
@@ -368,6 +374,10 @@
       GroupBoxAnzeige.Controls.Add(LabelSprache);
       GroupBoxAnzeige.Controls.Add(NumericUpDownErgebnisAutomatischLeeren);
       GroupBoxAnzeige.Controls.Add(NumericUpDownAffiliationenMaximum);
+      GroupBoxAnzeige.Controls.Add(ButtonSplitterColor);
+      GroupBoxAnzeige.Controls.Add(ButtonBackColor);
+      GroupBoxAnzeige.Controls.Add(ButtonForeColorInactive);
+      GroupBoxAnzeige.Controls.Add(ButtonForeColor);
       GroupBoxAnzeige.Controls.Add(LabelMaxAffiliationen);
       GroupBoxAnzeige.Controls.Add(CheckBoxUnkenntlicheAffiliationenAusblenden);
       GroupBoxAnzeige.Controls.Add(ComboBoxSprache);
@@ -379,6 +389,15 @@
       GroupBoxAnzeige.TabIndex = 0;
       GroupBoxAnzeige.TabStop = false;
       GroupBoxAnzeige.Text = "Anzeige";
+      // 
+      // LabelFarben
+      // 
+      LabelFarben.AutoSize = true;
+      LabelFarben.Location = new Point(15, 206);
+      LabelFarben.Name = "LabelFarben";
+      LabelFarben.Size = new Size(46, 15);
+      LabelFarben.TabIndex = 11;
+      LabelFarben.Text = "Farben:";
       // 
       // LabelErgebnisAutomatischLeerenSekunden
       // 
@@ -453,6 +472,50 @@
       NumericUpDownAffiliationenMaximum.TabIndex = 3;
       NumericUpDownAffiliationenMaximum.Value = new decimal(new int[] { 3, 0, 0, 0 });
       NumericUpDownAffiliationenMaximum.ValueChanged += NumericUpDownAffiliationenMaximum_ValueChanged;
+      // 
+      // ButtonSplitterColor
+      // 
+      ButtonSplitterColor.FlatStyle = FlatStyle.Flat;
+      ButtonSplitterColor.Location = new Point(117, 224);
+      ButtonSplitterColor.Name = "ButtonSplitterColor";
+      ButtonSplitterColor.Size = new Size(28, 28);
+      ButtonSplitterColor.TabIndex = 13;
+      ButtonSplitterColor.UseVisualStyleBackColor = true;
+      ButtonSplitterColor.BackColorChanged += ButtonSplitterColor_BackColorChanged;
+      ButtonSplitterColor.Click += ButtonSplitterColor_Click;
+      // 
+      // ButtonBackColor
+      // 
+      ButtonBackColor.FlatStyle = FlatStyle.Flat;
+      ButtonBackColor.Location = new Point(83, 224);
+      ButtonBackColor.Name = "ButtonBackColor";
+      ButtonBackColor.Size = new Size(28, 28);
+      ButtonBackColor.TabIndex = 12;
+      ButtonBackColor.UseVisualStyleBackColor = true;
+      ButtonBackColor.BackColorChanged += ButtonBackColor_BackColorChanged;
+      ButtonBackColor.Click += ButtonBackColor_Click;
+      // 
+      // ButtonForeColorInactive
+      // 
+      ButtonForeColorInactive.FlatStyle = FlatStyle.Flat;
+      ButtonForeColorInactive.Location = new Point(49, 224);
+      ButtonForeColorInactive.Name = "ButtonForeColorInactive";
+      ButtonForeColorInactive.Size = new Size(28, 28);
+      ButtonForeColorInactive.TabIndex = 11;
+      ButtonForeColorInactive.UseVisualStyleBackColor = true;
+      ButtonForeColorInactive.BackColorChanged += ButtonForeColorInactive_BackColorChanged;
+      ButtonForeColorInactive.Click += ButtonForeColorInactive_Click;
+      // 
+      // ButtonForeColor
+      // 
+      ButtonForeColor.FlatStyle = FlatStyle.Flat;
+      ButtonForeColor.Location = new Point(15, 224);
+      ButtonForeColor.Name = "ButtonForeColor";
+      ButtonForeColor.Size = new Size(28, 28);
+      ButtonForeColor.TabIndex = 10;
+      ButtonForeColor.UseVisualStyleBackColor = true;
+      ButtonForeColor.BackColorChanged += ButtonForeColor_BackColorChanged;
+      ButtonForeColor.Click += ButtonForeColor_Click;
       // 
       // LabelMaxAffiliationen
       // 
@@ -976,5 +1039,10 @@
     private Label LabelErgebnisAutomatischLeeren;
     private NumericUpDown NumericUpDownErgebnisAutomatischLeeren;
     private Label LabelErgebnisAutomatischLeerenSekunden;
+    private Label LabelFarben;
+    private Button ButtonForeColor;
+    private Button ButtonForeColorInactive;
+    private Button ButtonSplitterColor;
+    private Button ButtonBackColor;
   }
 }

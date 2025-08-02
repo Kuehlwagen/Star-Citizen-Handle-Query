@@ -16,6 +16,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Keys.H, Keys.Home, Keys.I, Keys.Insert, Keys.J, Keys.K, Keys.L, Keys.M, Keys.N, Keys.O, Keys.P, Keys.Q, Keys.R, Keys.S, Keys.T, Keys.U,
       Keys.V, Keys.W, Keys.X, Keys.Y, Keys.Z
     ];
+    private bool LoadingFinished = false;
 
     public FormSettings(Settings settings = null) {
       InitializeComponent();
@@ -35,6 +36,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         ProgramSettings.LogMonitor = settings?.LogMonitor != null ? (LogMonitorSettings)settings.LogMonitor.Clone() : null;
         ProgramSettings.Locations = settings?.Locations != null ? (LocationsSettings)settings.Locations.Clone() : null;
         ProgramSettings.Relations = settings?.Locations != null ? (RelationsSettings)settings.Relations.Clone() : null;
+        ProgramSettings.Colors = settings?.Colors != null ? (AppColors)settings.Colors.Clone() : null;
       }
 
       if (ProgramSettings == null) {
@@ -49,6 +51,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Fallback auf leeres Settings-Objekt
       ProgramSettings ??= new Settings();
 
+      // Farben setzen
       if (ProgramSettings?.Colors != null) {
         BackColor = ProgramSettings.Colors.AppBackColor;
         ForeColor = ProgramSettings.Colors.AppForeColor;
@@ -90,10 +93,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         NumericUpDownLogEintragAnzeigedauer.ForeColor = ProgramSettings.Colors.AppForeColor;
         NumericUpDownErgebnisAutomatischLeeren.BackColor = ProgramSettings.Colors.AppBackColor;
         NumericUpDownErgebnisAutomatischLeeren.ForeColor = ProgramSettings.Colors.AppForeColor;
+        ButtonForeColor.BackColor = ProgramSettings.Colors.AppForeColor;
+        ButtonForeColorInactive.BackColor = ProgramSettings.Colors.AppForeColorInactive;
+        ButtonBackColor.BackColor = ProgramSettings.Colors.AppBackColor;
+        ButtonSplitterColor.BackColor = ProgramSettings.Colors.AppSplitterColor;
       }
 
       // Einstellungen auf den Dialog übernehmen
       SetDialogValues();
+
+      LoadingFinished = true;
     }
 
     private void SetDialogValues() {
@@ -137,6 +146,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       TextBoxGRPCChannel.Text = ProgramSettings.Relations.RPC_Channel;
       CheckBoxRPCSyncOnStartup.Checked = ProgramSettings.Relations.RPC_Sync_On_Startup;
       TextBoxGRPCChannelPassword.Text = ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted;
+      ButtonForeColor.BackColor = ProgramSettings.Colors.AppForeColor;
+      ButtonForeColorInactive.BackColor = ProgramSettings.Colors.AppForeColorInactive;
+      ButtonBackColor.BackColor = ProgramSettings.Colors.AppBackColor;
+      ButtonSplitterColor.BackColor = ProgramSettings.Colors.AppSplitterColor;
     }
 
     private void GetLocalizations() {
@@ -154,6 +167,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       string settingsFilePath = FormHandleQuery.GetSettingsFilePath();
       try {
         File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, JsonSerOptions), Encoding.UTF8);
+        File.WriteAllText(FormHandleQuery.GetAppColorsFilePath(), JsonSerializer.Serialize(ProgramSettings.Colors, JsonSerOptions), Encoding.UTF8);
         DialogResult = DialogResult.OK;
       } catch (Exception ex) {
         MessageBox.Show($"{CurrentLocalization.Settings.MessageBoxes.Save_Fail} {ex.Message}", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -333,6 +347,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LabelErgebnisAutomatischLeeren.Text = CurrentLocalization.Settings.Display.Auto_Close_Duration;
       LabelErgebnisAutomatischLeerenSekunden.Text = CurrentLocalization.Settings.Display.Auto_Close_Duration_Seconds;
 
+
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;
       LabelFensterDeckkraft.Text = CurrentLocalization.Settings.Window.Opacity;
       LabelFensterDeckkraftProzent.Text = CurrentLocalization.Settings.Window.Opacity_Percent;
@@ -400,6 +415,56 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         TextBoxGRPCChannel.Text = frm.SelectedChannel;
         TextBoxGRPCChannel.Focus();
         TextBoxGRPCChannel.SelectAll();
+      }
+    }
+
+    private void ButtonForeColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonForeColor);
+    }
+
+    private void ButtonForeColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.ForeColor = ColorTranslator.ToHtml(ButtonForeColor.BackColor);
+      }
+    }
+
+    private void ButtonForeColorInactive_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonForeColorInactive);
+    }
+
+    private void ButtonForeColorInactive_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.ForeColorInactive = ColorTranslator.ToHtml(ButtonForeColorInactive.BackColor);
+      }
+    }
+
+    private void ButtonBackColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonBackColor);
+    }
+
+    private void ButtonBackColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.BackColor = ColorTranslator.ToHtml(ButtonBackColor.BackColor);
+      }
+    }
+
+    private void ButtonSplitterColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonSplitterColor);
+    }
+
+    private void ButtonSplitterColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.SplitterColor = ColorTranslator.ToHtml(ButtonSplitterColor.BackColor);
+      }
+    }
+
+    private static void SetSelectedColor(Button btn) {
+      using ColorDialog colorDialog = new() {
+        Color = btn.BackColor,
+        AnyColor = true
+      };
+      if (colorDialog.ShowDialog() == DialogResult.OK) {
+        btn.BackColor = colorDialog.Color;
       }
     }
 
