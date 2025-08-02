@@ -22,8 +22,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (programSettings.Colors != null) {
         BackColor = programSettings.Colors.AppBackColor;
         ForeColor = programSettings.Colors.AppForeColor;
+        DataGridViewLokalerCache.BackgroundColor = programSettings.Colors.AppBackColor;
+        DataGridViewLokalerCache.ForeColor = programSettings.Colors.AppForeColor;
+        DataGridViewLokalerCache.DefaultCellStyle.BackColor = programSettings.Colors.AppBackColor;
         DataGridViewLokalerCache.DefaultCellStyle.SelectionBackColor = programSettings.Colors.AppForeColor;
         DataGridViewLokalerCache.DefaultCellStyle.SelectionForeColor = programSettings.Colors.AppBackColor;
+        DataGridViewLokalerCache.ColumnHeadersDefaultCellStyle.BackColor = programSettings.Colors.AppBackColor;
+        DataGridViewLokalerCache.ColumnHeadersDefaultCellStyle.ForeColor = programSettings.Colors.AppForeColor;
+        PanelInfo.BackColor = programSettings.Colors.AppBackColor;
       }
 
       ProgramSettings = programSettings;
