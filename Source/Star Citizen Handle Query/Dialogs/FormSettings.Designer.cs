@@ -488,6 +488,7 @@
       // 
       // ButtonSplitterColor
       // 
+      ButtonSplitterColor.Cursor = Cursors.Hand;
       ButtonSplitterColor.FlatStyle = FlatStyle.Flat;
       ButtonSplitterColor.Location = new Point(117, 249);
       ButtonSplitterColor.Name = "ButtonSplitterColor";
@@ -499,6 +500,7 @@
       // 
       // ButtonBackColor
       // 
+      ButtonBackColor.Cursor = Cursors.Hand;
       ButtonBackColor.FlatStyle = FlatStyle.Flat;
       ButtonBackColor.Location = new Point(83, 249);
       ButtonBackColor.Name = "ButtonBackColor";
@@ -510,6 +512,7 @@
       // 
       // ButtonForeColorInactive
       // 
+      ButtonForeColorInactive.Cursor = Cursors.Hand;
       ButtonForeColorInactive.FlatStyle = FlatStyle.Flat;
       ButtonForeColorInactive.Location = new Point(49, 249);
       ButtonForeColorInactive.Name = "ButtonForeColorInactive";
@@ -521,6 +524,7 @@
       // 
       // ButtonForeColor
       // 
+      ButtonForeColor.Cursor = Cursors.Hand;
       ButtonForeColor.FlatStyle = FlatStyle.Flat;
       ButtonForeColor.Location = new Point(15, 249);
       ButtonForeColor.Name = "ButtonForeColor";
