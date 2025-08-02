@@ -139,6 +139,8 @@
 
     public string Auto_Close_Duration_Seconds { get; set; } = "Sekunde(n)";
 
+    public string Colors { get; set; } = "Farben:";
+
   }
 
   [Serializable()]

@@ -35,7 +35,8 @@
       "Hide_Stream_Live_Status": "Hide stream live status",
       "Use_Alternative_DPI_Calculation": "Use alternative DPI calculation",
       "Auto_Close_Duration": "Clear result after:",
-      "Auto_Close_Duration_Seconds": "Second(s)"
+      "Auto_Close_Duration_Seconds": "Second(s)",
+      "Colors": "Colors:"
     },
     "Window": {
       "Group_Title": "Window",
