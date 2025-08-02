@@ -141,7 +141,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void TextChangedAssistant_Idled(object sender, EventArgs e) {
-      Invoke(new System.Windows.Forms.MethodInvoker(HideWindows));
+      Invoke(new System.Windows.Forms.MethodInvoker(ResetHandle));
     }
 
     private void UpdateAutoComplete(string handle = null) {
@@ -591,7 +591,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             e.SuppressKeyPress = true;
             // Fenster verstecken
             if (ProgramSettings.HideWindowOnEscPress) {
-              TextChangedAssistant?.TextChanged(true);
+              HideWindows();
             }
             break;
         }
