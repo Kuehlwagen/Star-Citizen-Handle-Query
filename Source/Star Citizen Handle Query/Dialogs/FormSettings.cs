@@ -127,6 +127,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxAutoCheckForUpdate.Checked = ProgramSettings.AutoCheckForUpdate;
       CheckBoxDpiUnaware.Checked = ProgramSettings.DpiUnaware;
       NumericUpDownErgebnisAutomatischLeeren.Value = ProgramSettings.AutoCloseDuration;
+      CheckBoxFensterAusblenden.Checked = ProgramSettings.AutoCloseHideWindows;
       CheckBoxHideStreamLiveStatus.Checked = ProgramSettings.HideStreamLiveStatus;
       CheckBoxShowLog.Checked = ProgramSettings.LogMonitor.ShowWindow;
       NumericUpDownLogEintraegeMaximum.Value = ProgramSettings.LogMonitor.EntriesMax;
@@ -299,6 +300,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.DpiUnaware = CheckBoxDpiUnaware.Checked;
     }
 
+    private void CheckBoxFensterAusblenden_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.AutoCloseHideWindows = CheckBoxFensterAusblenden.Checked;
+    }
+
     private void NumericUpDownRelationsEntriesMaximum_ValueChanged(object sender, EventArgs e) {
       ProgramSettings.Relations.EntriesMax = Convert.ToInt32(NumericUpDownRelationsEntriesMaximum.Value);
     }
@@ -346,6 +351,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxDpiUnaware.Text = CurrentLocalization.Settings.Display.Use_Alternative_DPI_Calculation;
       LabelErgebnisAutomatischLeeren.Text = CurrentLocalization.Settings.Display.Auto_Close_Duration;
       LabelErgebnisAutomatischLeerenSekunden.Text = CurrentLocalization.Settings.Display.Auto_Close_Duration_Seconds;
+      CheckBoxFensterAusblenden.Text = CurrentLocalization.Settings.Display.Auto_Close_Hide_Windows;
       LabelFarben.Text = CurrentLocalization.Settings.Display.Colors;
 
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;

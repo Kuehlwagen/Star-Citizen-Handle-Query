@@ -36,6 +36,7 @@
       "Use_Alternative_DPI_Calculation": "Alternative DPI-Berechnung verwenden",
       "Auto_Close_Duration": "Ergebnis leeren nach:",
       "Auto_Close_Duration_Seconds": "Sekunde(n)",
+      "Auto_Close_Hide_Windows": "Fenster ausblenden",
       "Colors": "Farben:"
     },
     "Window": {

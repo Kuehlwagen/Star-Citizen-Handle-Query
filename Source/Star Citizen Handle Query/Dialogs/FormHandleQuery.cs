@@ -141,7 +141,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void TextChangedAssistant_Idled(object sender, EventArgs e) {
-      Invoke(new System.Windows.Forms.MethodInvoker(ResetHandle));
+      Invoke(new System.Windows.Forms.MethodInvoker(() => {
+        //ProgramSettings.AutoCloseHideWindows? HideWindows : ResetHandle
+        if (ProgramSettings.AutoCloseHideWindows) {
+          HideWindows();
+        } else {
+          ResetHandle();
+        }
+      }));
     }
 
     private void UpdateAutoComplete(string handle = null) {

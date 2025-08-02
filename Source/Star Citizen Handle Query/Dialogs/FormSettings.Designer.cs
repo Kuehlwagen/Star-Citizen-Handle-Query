@@ -94,6 +94,7 @@
       TextBoxGRPCURL = new TextBox();
       LabelGRPCURL = new Label();
       LabelGRPCChannel = new Label();
+      CheckBoxFensterAusblenden = new CheckBox();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLokalerCacheAlter).BeginInit();
       GroupBoxFenster.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownFensterDeckkraft).BeginInit();
@@ -369,6 +370,7 @@
       GroupBoxAnzeige.Controls.Add(LabelErgebnisAutomatischLeerenSekunden);
       GroupBoxAnzeige.Controls.Add(LabelErgebnisAutomatischLeeren);
       GroupBoxAnzeige.Controls.Add(CheckBoxHideStreamLiveStatus);
+      GroupBoxAnzeige.Controls.Add(CheckBoxFensterAusblenden);
       GroupBoxAnzeige.Controls.Add(CheckBoxDpiUnaware);
       GroupBoxAnzeige.Controls.Add(CheckBoxAutoCheckForUpdate);
       GroupBoxAnzeige.Controls.Add(LabelSprache);
@@ -393,7 +395,7 @@
       // LabelFarben
       // 
       LabelFarben.AutoSize = true;
-      LabelFarben.Location = new Point(15, 206);
+      LabelFarben.Location = new Point(15, 231);
       LabelFarben.Name = "LabelFarben";
       LabelFarben.Size = new Size(46, 15);
       LabelFarben.TabIndex = 11;
@@ -476,10 +478,10 @@
       // ButtonSplitterColor
       // 
       ButtonSplitterColor.FlatStyle = FlatStyle.Flat;
-      ButtonSplitterColor.Location = new Point(117, 224);
+      ButtonSplitterColor.Location = new Point(117, 249);
       ButtonSplitterColor.Name = "ButtonSplitterColor";
       ButtonSplitterColor.Size = new Size(28, 28);
-      ButtonSplitterColor.TabIndex = 13;
+      ButtonSplitterColor.TabIndex = 15;
       ButtonSplitterColor.UseVisualStyleBackColor = true;
       ButtonSplitterColor.BackColorChanged += ButtonSplitterColor_BackColorChanged;
       ButtonSplitterColor.Click += ButtonSplitterColor_Click;
@@ -487,10 +489,10 @@
       // ButtonBackColor
       // 
       ButtonBackColor.FlatStyle = FlatStyle.Flat;
-      ButtonBackColor.Location = new Point(83, 224);
+      ButtonBackColor.Location = new Point(83, 249);
       ButtonBackColor.Name = "ButtonBackColor";
       ButtonBackColor.Size = new Size(28, 28);
-      ButtonBackColor.TabIndex = 12;
+      ButtonBackColor.TabIndex = 14;
       ButtonBackColor.UseVisualStyleBackColor = true;
       ButtonBackColor.BackColorChanged += ButtonBackColor_BackColorChanged;
       ButtonBackColor.Click += ButtonBackColor_Click;
@@ -498,10 +500,10 @@
       // ButtonForeColorInactive
       // 
       ButtonForeColorInactive.FlatStyle = FlatStyle.Flat;
-      ButtonForeColorInactive.Location = new Point(49, 224);
+      ButtonForeColorInactive.Location = new Point(49, 249);
       ButtonForeColorInactive.Name = "ButtonForeColorInactive";
       ButtonForeColorInactive.Size = new Size(28, 28);
-      ButtonForeColorInactive.TabIndex = 11;
+      ButtonForeColorInactive.TabIndex = 13;
       ButtonForeColorInactive.UseVisualStyleBackColor = true;
       ButtonForeColorInactive.BackColorChanged += ButtonForeColorInactive_BackColorChanged;
       ButtonForeColorInactive.Click += ButtonForeColorInactive_Click;
@@ -509,10 +511,10 @@
       // ButtonForeColor
       // 
       ButtonForeColor.FlatStyle = FlatStyle.Flat;
-      ButtonForeColor.Location = new Point(15, 224);
+      ButtonForeColor.Location = new Point(15, 249);
       ButtonForeColor.Name = "ButtonForeColor";
       ButtonForeColor.Size = new Size(28, 28);
-      ButtonForeColor.TabIndex = 10;
+      ButtonForeColor.TabIndex = 12;
       ButtonForeColor.UseVisualStyleBackColor = true;
       ButtonForeColor.BackColorChanged += ButtonForeColor_BackColorChanged;
       ButtonForeColor.Click += ButtonForeColor_Click;
@@ -927,6 +929,17 @@
       LabelGRPCChannel.TabIndex = 6;
       LabelGRPCChannel.Text = "gRPC Kanal:";
       // 
+      // CheckBoxFensterAusblenden
+      // 
+      CheckBoxFensterAusblenden.AutoSize = true;
+      CheckBoxFensterAusblenden.Location = new Point(191, 209);
+      CheckBoxFensterAusblenden.Name = "CheckBoxFensterAusblenden";
+      CheckBoxFensterAusblenden.Size = new Size(128, 19);
+      CheckBoxFensterAusblenden.TabIndex = 10;
+      CheckBoxFensterAusblenden.Text = "Fenster ausblenden";
+      CheckBoxFensterAusblenden.UseVisualStyleBackColor = true;
+      CheckBoxFensterAusblenden.CheckedChanged += CheckBoxFensterAusblenden_CheckedChanged;
+      // 
       // FormSettings
       // 
       AcceptButton = ButtonSpeichern;
@@ -1044,5 +1057,6 @@
     private Button ButtonForeColorInactive;
     private Button ButtonSplitterColor;
     private Button ButtonBackColor;
+    private CheckBox CheckBoxFensterAusblenden;
   }
 }

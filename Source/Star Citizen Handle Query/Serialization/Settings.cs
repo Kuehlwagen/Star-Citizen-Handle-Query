@@ -45,7 +45,7 @@ namespace Star_Citizen_Handle_Query.Serialization {
     }
 
     private int _AutoCloseDuration = 0;
-    /// <summary>Fenster-Anzeigedauer in Sekunden (0 = dauerhaft, max. 600)</summary>
+    /// <summary>Ergebnis nach x Sekunden ausblenden (0 = dauerhaft, max. 600)</summary>
     public int AutoCloseDuration {
       get {
         return _AutoCloseDuration;
@@ -58,6 +58,9 @@ namespace Star_Citizen_Handle_Query.Serialization {
         _AutoCloseDuration = value;
       }
     }
+
+    /// <summary>Angabe, ob wenn das Ergebnis ausgeblendet werden soll, zusätzlich die Fenster ausgeblendet werden sollen</summary>
+    public bool AutoCloseHideWindows { get; set; } = false;
 
     /// <summary>Globaler Hotkey</summary>
     public Keys GlobalHotkey { get; set; } = Keys.F3;
