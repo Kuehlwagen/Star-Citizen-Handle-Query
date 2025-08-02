@@ -242,11 +242,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     internal static string GetAppColorsFilePath() {
-      return Path.Combine(GetSaveFilesRootPath(), $@"..\{Application.ProductName}.colors.json");
+      return Path.Combine(GetSaveFilesRootPath(), GetAppColorsFileName());
     }
 
     internal static string GetSettingsFileName() {
       return $"{Application.ProductName}.settings.json";
+    }
+
+    internal static string GetAppColorsFileName() {
+      return $"{Application.ProductName}.colors.json";
     }
 
     protected override CreateParams CreateParams {

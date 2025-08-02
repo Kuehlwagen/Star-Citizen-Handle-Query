@@ -75,6 +75,12 @@ namespace Star_Citizen_Handle_Query {
                   File.Move(legacyPath, newPath);
                 } catch { }
               }
+              legacyPath = Path.Combine(directory, GetAppColorsFileName());
+              if (File.Exists(legacyPath)) {
+                try {
+                  File.Move(legacyPath, GetAppColorsFilePath());
+                } catch { }
+              }
               legacyPath = Path.Combine(directory, "Relations.json");
               if (File.Exists(legacyPath)) {
                 try {
