@@ -474,6 +474,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
+    private void ButtonEditPrcChannels_Paint(object sender, PaintEventArgs e) {
+      base.OnPaint(e);
+      FormHandleQuery.PaintSettingsIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive);
+    }
   }
 
 }

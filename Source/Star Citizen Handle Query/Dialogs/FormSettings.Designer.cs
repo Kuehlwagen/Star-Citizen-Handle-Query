@@ -51,6 +51,7 @@
       LabelErgebnisAutomatischLeerenSekunden = new Label();
       LabelErgebnisAutomatischLeeren = new Label();
       CheckBoxHideStreamLiveStatus = new CheckBox();
+      CheckBoxFensterAusblenden = new CheckBox();
       CheckBoxDpiUnaware = new CheckBox();
       CheckBoxAutoCheckForUpdate = new CheckBox();
       NumericUpDownErgebnisAutomatischLeeren = new NumericUpDown();
@@ -94,7 +95,6 @@
       TextBoxGRPCURL = new TextBox();
       LabelGRPCURL = new Label();
       LabelGRPCChannel = new Label();
-      CheckBoxFensterAusblenden = new CheckBox();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLokalerCacheAlter).BeginInit();
       GroupBoxFenster.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownFensterDeckkraft).BeginInit();
@@ -429,6 +429,17 @@
       CheckBoxHideStreamLiveStatus.Text = "Stream Live-Status ausblenden";
       CheckBoxHideStreamLiveStatus.UseVisualStyleBackColor = true;
       CheckBoxHideStreamLiveStatus.CheckedChanged += CheckBoxHideStreamLiveStatus_CheckedChanged;
+      // 
+      // CheckBoxFensterAusblenden
+      // 
+      CheckBoxFensterAusblenden.AutoSize = true;
+      CheckBoxFensterAusblenden.Location = new Point(191, 209);
+      CheckBoxFensterAusblenden.Name = "CheckBoxFensterAusblenden";
+      CheckBoxFensterAusblenden.Size = new Size(128, 19);
+      CheckBoxFensterAusblenden.TabIndex = 10;
+      CheckBoxFensterAusblenden.Text = "Fenster ausblenden";
+      CheckBoxFensterAusblenden.UseVisualStyleBackColor = true;
+      CheckBoxFensterAusblenden.CheckedChanged += CheckBoxFensterAusblenden_CheckedChanged;
       // 
       // CheckBoxDpiUnaware
       // 
@@ -847,7 +858,6 @@
       // 
       // ButtonEditPrcChannels
       // 
-      ButtonEditPrcChannels.BackgroundImage = Properties.Resources.Settings;
       ButtonEditPrcChannels.BackgroundImageLayout = ImageLayout.Center;
       ButtonEditPrcChannels.FlatStyle = FlatStyle.Flat;
       ButtonEditPrcChannels.Location = new Point(380, 134);
@@ -856,6 +866,7 @@
       ButtonEditPrcChannels.TabIndex = 8;
       ButtonEditPrcChannels.UseVisualStyleBackColor = true;
       ButtonEditPrcChannels.Click += ButtonEditPrcChannels_Click;
+      ButtonEditPrcChannels.Paint += ButtonEditPrcChannels_Paint;
       // 
       // LabelGRPCKanalPasswort
       // 
@@ -928,17 +939,6 @@
       LabelGRPCChannel.Size = new Size(71, 15);
       LabelGRPCChannel.TabIndex = 6;
       LabelGRPCChannel.Text = "gRPC Kanal:";
-      // 
-      // CheckBoxFensterAusblenden
-      // 
-      CheckBoxFensterAusblenden.AutoSize = true;
-      CheckBoxFensterAusblenden.Location = new Point(191, 209);
-      CheckBoxFensterAusblenden.Name = "CheckBoxFensterAusblenden";
-      CheckBoxFensterAusblenden.Size = new Size(128, 19);
-      CheckBoxFensterAusblenden.TabIndex = 10;
-      CheckBoxFensterAusblenden.Text = "Fenster ausblenden";
-      CheckBoxFensterAusblenden.UseVisualStyleBackColor = true;
-      CheckBoxFensterAusblenden.CheckedChanged += CheckBoxFensterAusblenden_CheckedChanged;
       // 
       // FormSettings
       // 

@@ -69,6 +69,7 @@
       TextBoxHandle.AutoCompleteMode = AutoCompleteMode.Append;
       TextBoxHandle.AutoCompleteSource = AutoCompleteSource.CustomSource;
       TextBoxHandle.BackColor = Color.FromArgb(57, 206, 216);
+      TextBoxHandle.BorderStyle = BorderStyle.FixedSingle;
       TextBoxHandle.Location = new Point(69, 3);
       TextBoxHandle.MaxLength = 60;
       TextBoxHandle.Name = "TextBoxHandle";
@@ -83,11 +84,11 @@
       LabelSettings.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       LabelSettings.Cursor = Cursors.Hand;
       LabelSettings.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-      LabelSettings.Image = Properties.Resources.Settings;
       LabelSettings.Location = new Point(350, 4);
       LabelSettings.Name = "LabelSettings";
       LabelSettings.Size = new Size(20, 20);
       LabelSettings.TabIndex = 3;
+      LabelSettings.Paint += LabelSettings_Paint;
       LabelSettings.MouseClick += LabelSettings_MouseClick;
       // 
       // LabelQuery
@@ -95,11 +96,11 @@
       LabelQuery.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       LabelQuery.Cursor = Cursors.Hand;
       LabelQuery.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-      LabelQuery.Image = Properties.Resources.Search;
       LabelQuery.Location = new Point(328, 4);
       LabelQuery.Name = "LabelQuery";
       LabelQuery.Size = new Size(20, 20);
       LabelQuery.TabIndex = 3;
+      LabelQuery.Paint += LabelQuery_Paint;
       LabelQuery.MouseClick += LabelQuery_MouseClick;
       // 
       // LabelLockUnlock

@@ -5,6 +5,7 @@ using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Collections;
 using System.Diagnostics;
+using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.Net;
 using System.Net.Http.Headers;
@@ -70,6 +71,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         PanelHandleQuery.ForeColor = settings.Colors.AppForeColor;
         TextBoxHandle.BackColor = settings.Colors.AppForeColor;
         TextBoxHandle.ForeColor = settings.Colors.AppBackColor;
+        ToolTipHandleQuery.BackColor = settings.Colors.AppBackColor;
+        ToolTipHandleQuery.ForeColor = settings.Colors.AppForeColor;
       }
 
 #if DEBUG
@@ -1425,6 +1428,54 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       foreach (Control control in PanelInfo.Controls) {
         control.Width = PanelInfo.Width;
       }
+    }
+
+    private void LabelQuery_Paint(object sender, PaintEventArgs e) {
+      base.OnPaint(e);
+      PaintSearchIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive);
+    }
+
+    private void LabelSettings_Paint(object sender, PaintEventArgs e) {
+      base.OnPaint(e);
+      PaintSettingsIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive);
+    }
+
+    internal static void PaintSettingsIcon(Graphics g, Color foreColor, Color foreColorInactive) {
+      using var bgPen = new Pen(foreColorInactive, 2.0F);
+      using var fgPen = new Pen(foreColor, 1.0F);
+
+      g.SmoothingMode = SmoothingMode.AntiAlias;
+      g.DrawLine(bgPen, 0.0F, 4.5F, 3.0F, 4.5F);
+      g.DrawLine(fgPen, 0.0F, 4.5F, 3.0F, 4.5F);
+      g.DrawEllipse(bgPen, 3.0F, 2.0F, 5.0F, 5.0F);
+      g.DrawEllipse(fgPen, 3.0F, 2.0F, 5.0F, 5.0F);
+      g.DrawLine(bgPen, 9, 4.5F, 20, 4.5F);
+      g.DrawLine(fgPen, 9, 4.5F, 20, 4.5F);
+
+      g.DrawLine(bgPen, 0.0F, 10.5F, 12.0F, 10.5F);
+      g.DrawLine(fgPen, 0.0F, 10.5F, 12.0F, 10.5F);
+      g.DrawEllipse(bgPen, 12.0F, 8.0F, 5.0F, 5.0F);
+      g.DrawEllipse(fgPen, 12.0F, 8.0F, 5.0F, 5.0F);
+      g.DrawLine(bgPen, 17F, 10.5F, 20, 10.5F);
+      g.DrawLine(fgPen, 17F, 10.5F, 20, 10.5F);
+
+      g.DrawLine(bgPen, 0.0F, 16.5F, 7.0F, 16.5F);
+      g.DrawLine(fgPen, 0.0F, 16.5F, 7.0F, 16.5F);
+      g.DrawEllipse(bgPen, 7.0F, 14.0F, 5.0F, 5.0F);
+      g.DrawEllipse(fgPen, 7.0F, 14.0F, 5.0F, 5.0F);
+      g.DrawLine(bgPen, 12F, 16.5F, 20, 16.5F);
+      g.DrawLine(fgPen, 12F, 16.5F, 20, 16.5F);
+    }
+
+    internal static void PaintSearchIcon(Graphics g, Color foreColor, Color foreColorInactive) {
+      using var bgPen = new Pen(foreColorInactive, 2.0F);
+      using var fgPen = new Pen(foreColor, 1.0F);
+
+      g.SmoothingMode = SmoothingMode.AntiAlias;
+      g.DrawEllipse(bgPen, new Rectangle(2, 1, 10, 10));
+      g.DrawLine(bgPen, 12, 12, 18, 18);
+      g.DrawEllipse(fgPen, new Rectangle(2, 2, 10, 10));
+      g.DrawLine(fgPen, 12, 12, 18, 18);
     }
 
     public enum CommunityHubLiveState {
