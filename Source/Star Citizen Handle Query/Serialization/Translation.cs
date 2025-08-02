@@ -135,6 +135,10 @@
 
     public string Use_Alternative_DPI_Calculation { get; set; } = "Alternative DPI-Berechnung verwenden";
 
+    public string Auto_Close_Duration { get; set; } = "Ergebnis leeren nach:";
+
+    public string Auto_Close_Duration_Seconds { get; set; } = "Sekunde(n)";
+
   }
 
   [Serializable()]

@@ -88,6 +88,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         NumericUpDownLogEintraegeMaximum.ForeColor = ProgramSettings.Colors.AppForeColor;
         NumericUpDownLogEintragAnzeigedauer.BackColor = ProgramSettings.Colors.AppBackColor;
         NumericUpDownLogEintragAnzeigedauer.ForeColor = ProgramSettings.Colors.AppForeColor;
+        NumericUpDownErgebnisAutomatischLeeren.BackColor = ProgramSettings.Colors.AppBackColor;
+        NumericUpDownErgebnisAutomatischLeeren.ForeColor = ProgramSettings.Colors.AppForeColor;
       }
 
       // Einstellungen auf den Dialog übernehmen
@@ -115,6 +117,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxUnkenntlicheAffiliationenAusblenden.Checked = ProgramSettings.HideRedactedAffiliations;
       CheckBoxAutoCheckForUpdate.Checked = ProgramSettings.AutoCheckForUpdate;
       CheckBoxDpiUnaware.Checked = ProgramSettings.DpiUnaware;
+      NumericUpDownErgebnisAutomatischLeeren.Value = ProgramSettings.AutoCloseDuration;
       CheckBoxHideStreamLiveStatus.Checked = ProgramSettings.HideStreamLiveStatus;
       CheckBoxShowLog.Checked = ProgramSettings.LogMonitor.ShowWindow;
       NumericUpDownLogEintraegeMaximum.Value = ProgramSettings.LogMonitor.EntriesMax;
@@ -212,6 +215,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.Language = (sender as ComboBox).SelectedItem.ToString();
       CurrentLocalization = Localizations.FirstOrDefault(x => x.Language == ProgramSettings.Language);
       UpdateLocalization();
+    }
+
+    private void NumericUpDownErgebnisAutomatischLeeren_ValueChanged(object sender, EventArgs e) {
+      ProgramSettings.AutoCloseDuration = Convert.ToInt32((sender as NumericUpDown).Value);
     }
 
     private void NumericUpDownAffiliationenMaximum_ValueChanged(object sender, EventArgs e) {
@@ -323,6 +330,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxHideStreamLiveStatus.Text = CurrentLocalization.Settings.Display.Hide_Stream_Live_Status;
       CheckBoxAutoCheckForUpdate.Text = CurrentLocalization.Settings.Display.Auto_Check_For_Update;
       CheckBoxDpiUnaware.Text = CurrentLocalization.Settings.Display.Use_Alternative_DPI_Calculation;
+      LabelErgebnisAutomatischLeeren.Text = CurrentLocalization.Settings.Display.Auto_Close_Duration;
+      LabelErgebnisAutomatischLeerenSekunden.Text = CurrentLocalization.Settings.Display.Auto_Close_Duration_Seconds;
 
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;
       LabelFensterDeckkraft.Text = CurrentLocalization.Settings.Window.Opacity;

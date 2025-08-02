@@ -47,9 +47,12 @@
       GroupBoxLokalerCache = new GroupBox();
       ButtonStandard = new Button();
       GroupBoxAnzeige = new GroupBox();
+      LabelErgebnisAutomatischLeerenSekunden = new Label();
+      LabelErgebnisAutomatischLeeren = new Label();
       CheckBoxHideStreamLiveStatus = new CheckBox();
       CheckBoxDpiUnaware = new CheckBox();
       CheckBoxAutoCheckForUpdate = new CheckBox();
+      NumericUpDownErgebnisAutomatischLeeren = new NumericUpDown();
       NumericUpDownAffiliationenMaximum = new NumericUpDown();
       LabelMaxAffiliationen = new Label();
       CheckBoxUnkenntlicheAffiliationenAusblenden = new CheckBox();
@@ -91,6 +94,7 @@
       ((System.ComponentModel.ISupportInitialize)NumericUpDownFensterDeckkraft).BeginInit();
       GroupBoxLokalerCache.SuspendLayout();
       GroupBoxAnzeige.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)NumericUpDownErgebnisAutomatischLeeren).BeginInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownAffiliationenMaximum).BeginInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownRelationsEntriesMaximum).BeginInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLogEintragAnzeigedauer).BeginInit();
@@ -189,7 +193,7 @@
       GroupBoxFenster.Controls.Add(LabelFensterDeckkraftProzent);
       GroupBoxFenster.FlatStyle = FlatStyle.Flat;
       GroupBoxFenster.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxFenster.Location = new Point(12, 207);
+      GroupBoxFenster.Location = new Point(12, 316);
       GroupBoxFenster.Name = "GroupBoxFenster";
       GroupBoxFenster.Size = new Size(352, 221);
       GroupBoxFenster.TabIndex = 1;
@@ -336,9 +340,9 @@
       GroupBoxLokalerCache.Controls.Add(LabelLokalerCacheAlter);
       GroupBoxLokalerCache.FlatStyle = FlatStyle.Flat;
       GroupBoxLokalerCache.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxLokalerCache.Location = new Point(12, 434);
+      GroupBoxLokalerCache.Location = new Point(12, 543);
       GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
-      GroupBoxLokalerCache.Size = new Size(352, 161);
+      GroupBoxLokalerCache.Size = new Size(352, 52);
       GroupBoxLokalerCache.TabIndex = 2;
       GroupBoxLokalerCache.TabStop = false;
       GroupBoxLokalerCache.Text = "Lokaler Cache";
@@ -356,10 +360,13 @@
       // 
       // GroupBoxAnzeige
       // 
+      GroupBoxAnzeige.Controls.Add(LabelErgebnisAutomatischLeerenSekunden);
+      GroupBoxAnzeige.Controls.Add(LabelErgebnisAutomatischLeeren);
       GroupBoxAnzeige.Controls.Add(CheckBoxHideStreamLiveStatus);
       GroupBoxAnzeige.Controls.Add(CheckBoxDpiUnaware);
       GroupBoxAnzeige.Controls.Add(CheckBoxAutoCheckForUpdate);
       GroupBoxAnzeige.Controls.Add(LabelSprache);
+      GroupBoxAnzeige.Controls.Add(NumericUpDownErgebnisAutomatischLeeren);
       GroupBoxAnzeige.Controls.Add(NumericUpDownAffiliationenMaximum);
       GroupBoxAnzeige.Controls.Add(LabelMaxAffiliationen);
       GroupBoxAnzeige.Controls.Add(CheckBoxUnkenntlicheAffiliationenAusblenden);
@@ -368,10 +375,28 @@
       GroupBoxAnzeige.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxAnzeige.Location = new Point(12, 12);
       GroupBoxAnzeige.Name = "GroupBoxAnzeige";
-      GroupBoxAnzeige.Size = new Size(352, 189);
+      GroupBoxAnzeige.Size = new Size(352, 298);
       GroupBoxAnzeige.TabIndex = 0;
       GroupBoxAnzeige.TabStop = false;
       GroupBoxAnzeige.Text = "Anzeige";
+      // 
+      // LabelErgebnisAutomatischLeerenSekunden
+      // 
+      LabelErgebnisAutomatischLeerenSekunden.AutoSize = true;
+      LabelErgebnisAutomatischLeerenSekunden.Location = new Point(241, 182);
+      LabelErgebnisAutomatischLeerenSekunden.Name = "LabelErgebnisAutomatischLeerenSekunden";
+      LabelErgebnisAutomatischLeerenSekunden.Size = new Size(67, 15);
+      LabelErgebnisAutomatischLeerenSekunden.TabIndex = 9;
+      LabelErgebnisAutomatischLeerenSekunden.Text = "Sekunde(n)";
+      // 
+      // LabelErgebnisAutomatischLeeren
+      // 
+      LabelErgebnisAutomatischLeeren.AutoSize = true;
+      LabelErgebnisAutomatischLeeren.Location = new Point(15, 182);
+      LabelErgebnisAutomatischLeeren.Name = "LabelErgebnisAutomatischLeeren";
+      LabelErgebnisAutomatischLeeren.Size = new Size(119, 15);
+      LabelErgebnisAutomatischLeeren.TabIndex = 7;
+      LabelErgebnisAutomatischLeeren.Text = "Ergebnis leeren nach:";
       // 
       // CheckBoxHideStreamLiveStatus
       // 
@@ -405,6 +430,17 @@
       CheckBoxAutoCheckForUpdate.Text = "Bei Programmstart nach Update suchen";
       CheckBoxAutoCheckForUpdate.UseVisualStyleBackColor = true;
       CheckBoxAutoCheckForUpdate.CheckedChanged += CheckBoxAutoCheckForUpdate_CheckedChanged;
+      // 
+      // NumericUpDownErgebnisAutomatischLeeren
+      // 
+      NumericUpDownErgebnisAutomatischLeeren.BackColor = Color.FromArgb(19, 26, 33);
+      NumericUpDownErgebnisAutomatischLeeren.ForeColor = Color.FromArgb(57, 206, 216);
+      NumericUpDownErgebnisAutomatischLeeren.Location = new Point(191, 180);
+      NumericUpDownErgebnisAutomatischLeeren.Maximum = new decimal(new int[] { 600, 0, 0, 0 });
+      NumericUpDownErgebnisAutomatischLeeren.Name = "NumericUpDownErgebnisAutomatischLeeren";
+      NumericUpDownErgebnisAutomatischLeeren.Size = new Size(44, 23);
+      NumericUpDownErgebnisAutomatischLeeren.TabIndex = 8;
+      NumericUpDownErgebnisAutomatischLeeren.ValueChanged += NumericUpDownErgebnisAutomatischLeeren_ValueChanged;
       // 
       // NumericUpDownAffiliationenMaximum
       // 
@@ -859,6 +895,7 @@
       GroupBoxLokalerCache.PerformLayout();
       GroupBoxAnzeige.ResumeLayout(false);
       GroupBoxAnzeige.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)NumericUpDownErgebnisAutomatischLeeren).EndInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownAffiliationenMaximum).EndInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownRelationsEntriesMaximum).EndInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLogEintragAnzeigedauer).EndInit();
@@ -936,5 +973,8 @@
     private CheckBox CheckBoxCheckCompleteFile;
     private CheckBox CheckBoxEscAusblenden;
     private CheckBox CheckBoxDpiUnaware;
+    private Label LabelErgebnisAutomatischLeeren;
+    private NumericUpDown NumericUpDownErgebnisAutomatischLeeren;
+    private Label LabelErgebnisAutomatischLeerenSekunden;
   }
 }
