@@ -357,6 +357,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LabelErgebnisAutomatischLeerenSekunden.Text = CurrentLocalization.Settings.Display.Auto_Close_Duration_Seconds;
       CheckBoxFensterAusblenden.Text = CurrentLocalization.Settings.Display.Auto_Close_Hide_Windows;
       LabelFarben.Text = CurrentLocalization.Settings.Display.Colors;
+      ButtonFarbenStandard.Text = CurrentLocalization.Settings.Buttons.Standard;
 
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;
       LabelFensterDeckkraft.Text = CurrentLocalization.Settings.Window.Opacity;
