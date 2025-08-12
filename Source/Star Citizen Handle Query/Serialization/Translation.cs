@@ -254,6 +254,8 @@
 
     public string Check_Complete_File { get; set; } = "Komplette Datei auswerten";
 
+    public string Handle_Filter { get; set; } = "Handle-Filter:";
+
   }
 
   [Serializable()]

@@ -97,6 +97,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         ButtonForeColorInactive.BackColor = ProgramSettings.Colors.AppForeColorInactive;
         ButtonBackColor.BackColor = ProgramSettings.Colors.AppBackColor;
         ButtonSplitterColor.BackColor = ProgramSettings.Colors.AppSplitterColor;
+        TextBoxLogMonitorHandleFilter.BackColor = ProgramSettings.Colors.AppForeColor;
+        TextBoxLogMonitorHandleFilter.ForeColor = ProgramSettings.Colors.AppBackColor;
       }
 
       // Einstellungen auf den Dialog übernehmen
@@ -151,6 +153,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ButtonForeColorInactive.BackColor = ProgramSettings.Colors.AppForeColorInactive;
       ButtonBackColor.BackColor = ProgramSettings.Colors.AppBackColor;
       ButtonSplitterColor.BackColor = ProgramSettings.Colors.AppSplitterColor;
+      TextBoxLogMonitorHandleFilter.Text = string.Join(',', ProgramSettings.LogMonitor.HandleFilter);
     }
 
     private void GetLocalizations() {
@@ -259,6 +262,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxLogMonitorFilterCorpse.Enabled = CheckBoxShowLog.Checked;
       CheckBoxLogMonitorFilterLoadingScreenDuration.Enabled = CheckBoxShowLog.Checked;
       CheckBoxCheckCompleteFile.Enabled = CheckBoxShowLog.Checked;
+      TextBoxLogMonitorHandleFilter.Enabled = CheckBoxShowLog.Checked;
     }
 
     private void NumericUpDownLogEintraegeMaximum_ValueChanged(object sender, EventArgs e) {
@@ -398,6 +402,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxLogMonitorFilterCorpse.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Corpse;
       CheckBoxLogMonitorFilterLoadingScreenDuration.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Loading_Screen_Duration;
       CheckBoxCheckCompleteFile.Text = CurrentLocalization.Settings.Log_Monitor.Check_Complete_File;
+      LabelLogMonitorHandleFilter.Text = CurrentLocalization.Settings.Log_Monitor.Handle_Filter;
 
       ResumeLayout();
     }
@@ -478,6 +483,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       base.OnPaint(e);
       FormHandleQuery.PaintSettingsIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive);
     }
+
+    private void TextBoxLogMonitorHandleFilter_TextChanged(object sender, EventArgs e) {
+      ProgramSettings.LogMonitor.HandleFilter = [.. TextBoxLogMonitorHandleFilter.Text.Split([',', ';', '|', ' '], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)];
+    }
+
   }
 
 }

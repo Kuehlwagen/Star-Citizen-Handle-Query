@@ -199,6 +199,9 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>Filter für den Log-Monitor</summary>
     public LogMonitorFilter Filter { get; set; } = new LogMonitorFilter();
 
+    /// <summary>Handle-Filter</summary>
+    public List<string> HandleFilter { get; set; } = [];
+
     public object Clone() {
       return MemberwiseClone();
     }

@@ -256,19 +256,38 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             if (PanelLogInfo.Controls.Count == ProgramSettings.LogMonitor.EntriesMax) {
               RemoveControl(PanelLogInfo.Controls[0] as UserControlLog);
             }
-            PanelLogInfo.Controls.Add(new UserControlLog(logInfo, ProgramSettings));
+            if (CheckAddLogInfo(logInfo)) {
+              PanelLogInfo.Controls.Add(new UserControlLog(logInfo, ProgramSettings));
+            }
           } else if (PanelLogInfo.Controls[PanelLogInfo.Controls.Count - 1] is UserControlLog ucl) {
             if (!logInfo.Equals(ucl.LogInfoItem)) {
               if (PanelLogInfo.Controls.Count == ProgramSettings.LogMonitor.EntriesMax) {
                 RemoveControl(PanelLogInfo.Controls[0] as UserControlLog);
               }
-              PanelLogInfo.Controls.Add(new UserControlLog(logInfo, ProgramSettings));
+              if (CheckAddLogInfo(logInfo)) {
+                PanelLogInfo.Controls.Add(new UserControlLog(logInfo, ProgramSettings));
+              }
             } else {
               ucl.UpdateInfo(logInfo);
             }
           }
         }
       }
+    }
+
+    private bool CheckAddLogInfo(LogMonitorInfo logInfo) {
+      bool rtnVal = false;
+
+      List<string> filter = ProgramSettings.LogMonitor.HandleFilter;
+      if (logInfo != null && logInfo.IsValid) {
+        rtnVal = logInfo.LogType switch {
+          LogType.Corpse => filter == null || filter.Count == 0 || filter.Contains(logInfo.Handle, StringComparer.CurrentCultureIgnoreCase),
+          LogType.ActorDeath => filter == null || filter.Count == 0 || filter.Contains(logInfo.Handle, StringComparer.CurrentCultureIgnoreCase) || filter.Contains(logInfo.Key, StringComparer.CurrentCultureIgnoreCase),
+          _ => true,
+        };
+      }
+
+      return rtnVal;
     }
 
     private void ClearLogInfos() {

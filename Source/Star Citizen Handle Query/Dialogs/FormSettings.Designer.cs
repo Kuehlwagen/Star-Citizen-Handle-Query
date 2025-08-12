@@ -85,6 +85,8 @@
       LabelMMB_URL = new Label();
       LabelLMB_URL = new Label();
       GroupBoxLogMonitor = new GroupBox();
+      TextBoxLogMonitorHandleFilter = new TextBox();
+      LabelLogMonitorHandleFilter = new Label();
       CheckBoxCheckCompleteFile = new CheckBox();
       GroupBoxBeziehungen = new GroupBox();
       ButtonEditPrcChannels = new Button();
@@ -145,8 +147,9 @@
       // 
       // ButtonSpeichern
       // 
+      ButtonSpeichern.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
       ButtonSpeichern.FlatStyle = FlatStyle.Flat;
-      ButtonSpeichern.Location = new Point(12, 604);
+      ButtonSpeichern.Location = new Point(12, 621);
       ButtonSpeichern.Name = "ButtonSpeichern";
       ButtonSpeichern.Size = new Size(75, 28);
       ButtonSpeichern.TabIndex = 6;
@@ -156,8 +159,9 @@
       // 
       // ButtonSchliessen
       // 
+      ButtonSchliessen.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
       ButtonSchliessen.FlatStyle = FlatStyle.Flat;
-      ButtonSchliessen.Location = new Point(93, 604);
+      ButtonSchliessen.Location = new Point(93, 621);
       ButtonSchliessen.Name = "ButtonSchliessen";
       ButtonSchliessen.Size = new Size(75, 28);
       ButtonSchliessen.TabIndex = 7;
@@ -348,15 +352,16 @@
       GroupBoxLokalerCache.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxLokalerCache.Location = new Point(12, 543);
       GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
-      GroupBoxLokalerCache.Size = new Size(352, 52);
+      GroupBoxLokalerCache.Size = new Size(352, 67);
       GroupBoxLokalerCache.TabIndex = 2;
       GroupBoxLokalerCache.TabStop = false;
       GroupBoxLokalerCache.Text = "Lokaler Cache";
       // 
       // ButtonStandard
       // 
+      ButtonStandard.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
       ButtonStandard.FlatStyle = FlatStyle.Flat;
-      ButtonStandard.Location = new Point(711, 604);
+      ButtonStandard.Location = new Point(711, 621);
       ButtonStandard.Name = "ButtonStandard";
       ButtonStandard.Size = new Size(75, 28);
       ButtonStandard.TabIndex = 8;
@@ -704,7 +709,7 @@
       GroupBoxLocation.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxLocation.Location = new Point(370, 12);
       GroupBoxLocation.Name = "GroupBoxLocation";
-      GroupBoxLocation.Size = new Size(416, 189);
+      GroupBoxLocation.Size = new Size(416, 170);
       GroupBoxLocation.TabIndex = 3;
       GroupBoxLocation.TabStop = false;
       GroupBoxLocation.Text = "Orte (Alt + Eingabe)";
@@ -807,6 +812,8 @@
       // 
       // GroupBoxLogMonitor
       // 
+      GroupBoxLogMonitor.Controls.Add(TextBoxLogMonitorHandleFilter);
+      GroupBoxLogMonitor.Controls.Add(LabelLogMonitorHandleFilter);
       GroupBoxLogMonitor.Controls.Add(LabelLogEintragAnzeigedauerMinuten);
       GroupBoxLogMonitor.Controls.Add(CheckBoxShowLog);
       GroupBoxLogMonitor.Controls.Add(CheckBoxLogMonitorFilterCorpse);
@@ -818,12 +825,33 @@
       GroupBoxLogMonitor.Controls.Add(NumericUpDownLogEintragAnzeigedauer);
       GroupBoxLogMonitor.FlatStyle = FlatStyle.Flat;
       GroupBoxLogMonitor.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxLogMonitor.Location = new Point(370, 434);
+      GroupBoxLogMonitor.Location = new Point(370, 415);
       GroupBoxLogMonitor.Name = "GroupBoxLogMonitor";
-      GroupBoxLogMonitor.Size = new Size(416, 161);
+      GroupBoxLogMonitor.Size = new Size(416, 195);
       GroupBoxLogMonitor.TabIndex = 5;
       GroupBoxLogMonitor.TabStop = false;
       GroupBoxLogMonitor.Text = "Log-Monitor";
+      // 
+      // TextBoxLogMonitorHandleFilter
+      // 
+      TextBoxLogMonitorHandleFilter.BackColor = Color.FromArgb(57, 206, 216);
+      TextBoxLogMonitorHandleFilter.BorderStyle = BorderStyle.FixedSingle;
+      TextBoxLogMonitorHandleFilter.Enabled = false;
+      TextBoxLogMonitorHandleFilter.ForeColor = Color.FromArgb(19, 26, 33);
+      TextBoxLogMonitorHandleFilter.Location = new Point(190, 154);
+      TextBoxLogMonitorHandleFilter.Name = "TextBoxLogMonitorHandleFilter";
+      TextBoxLogMonitorHandleFilter.Size = new Size(213, 23);
+      TextBoxLogMonitorHandleFilter.TabIndex = 10;
+      TextBoxLogMonitorHandleFilter.TextChanged += TextBoxLogMonitorHandleFilter_TextChanged;
+      // 
+      // LabelLogMonitorHandleFilter
+      // 
+      LabelLogMonitorHandleFilter.AutoSize = true;
+      LabelLogMonitorHandleFilter.Location = new Point(32, 157);
+      LabelLogMonitorHandleFilter.Name = "LabelLogMonitorHandleFilter";
+      LabelLogMonitorHandleFilter.Size = new Size(79, 15);
+      LabelLogMonitorHandleFilter.TabIndex = 9;
+      LabelLogMonitorHandleFilter.Text = "Handle-Filter:";
       // 
       // CheckBoxCheckCompleteFile
       // 
@@ -853,7 +881,7 @@
       GroupBoxBeziehungen.Controls.Add(LabelGRPCChannel);
       GroupBoxBeziehungen.FlatStyle = FlatStyle.Flat;
       GroupBoxBeziehungen.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxBeziehungen.Location = new Point(370, 207);
+      GroupBoxBeziehungen.Location = new Point(370, 188);
       GroupBoxBeziehungen.Name = "GroupBoxBeziehungen";
       GroupBoxBeziehungen.Size = new Size(416, 221);
       GroupBoxBeziehungen.TabIndex = 4;
@@ -951,7 +979,7 @@
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.FromArgb(19, 26, 33);
       CancelButton = ButtonSchliessen;
-      ClientSize = new Size(798, 646);
+      ClientSize = new Size(798, 663);
       Controls.Add(GroupBoxAnzeige);
       Controls.Add(GroupBoxLocation);
       Controls.Add(GroupBoxLogMonitor);
@@ -963,7 +991,7 @@
       Controls.Add(ButtonSpeichern);
       ForeColor = Color.FromArgb(57, 206, 216);
       Icon = (Icon)resources.GetObject("$this.Icon");
-      MinimumSize = new Size(814, 663);
+      MinimumSize = new Size(814, 702);
       Name = "FormSettings";
       StartPosition = FormStartPosition.CenterScreen;
       Text = "Star Citizen Handle Query Einstellungen";
@@ -1062,5 +1090,7 @@
     private Button ButtonSplitterColor;
     private Button ButtonBackColor;
     private CheckBox CheckBoxFensterAusblenden;
+    private TextBox TextBoxLogMonitorHandleFilter;
+    private Label LabelLogMonitorHandleFilter;
   }
 }

@@ -89,7 +89,8 @@
       "Log_Entry_Display_Duration_Minutes": "Minute(n)",
       "Log_Show_Corpse": "Spielertode anzeigen",
       "Log_Show_Loading_Screen_Duration": "Ladebildschirm-Dauer anzeigen",
-      "Check_Complete_File": "Komplette Datei auswerten"
+      "Check_Complete_File": "Komplette Datei auswerten",
+      "Handle_Filter": "Handle-Filter:"
     },
     "Local_Cache": {
       "Group_Title": "Lokaler Cache",

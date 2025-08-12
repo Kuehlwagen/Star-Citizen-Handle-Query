@@ -89,7 +89,8 @@
       "Log_Entry_Display_Duration_Minutes": "Minute(s)",
       "Log_Show_Corpse": "Show player deaths",
       "Log_Show_Loading_Screen_Duration": "Show loading screen duration",
-      "Check_Complete_File":  "Check complete file"
+      "Check_Complete_File": "Check complete file",
+      "Handle_Filter": "Handle filter:"
     },
     "Local_Cache": {
       "Group_Title": "Local cache",
