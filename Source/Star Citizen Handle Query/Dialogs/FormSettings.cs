@@ -488,6 +488,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.LogMonitor.HandleFilter = [.. TextBoxLogMonitorHandleFilter.Text.Split([',', ';', '|', ' '], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)];
     }
 
+    private void ButtonFarbenStandard_Click(object sender, EventArgs e) {
+      ProgramSettings.Colors = new Settings().Colors;
+      SetDialogValues();
+    }
+
   }
 
 }

@@ -97,6 +97,7 @@
       TextBoxGRPCURL = new TextBox();
       LabelGRPCURL = new Label();
       LabelGRPCChannel = new Label();
+      ButtonFarbenStandard = new Button();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLokalerCacheAlter).BeginInit();
       GroupBoxFenster.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownFensterDeckkraft).BeginInit();
@@ -371,6 +372,7 @@
       // 
       // GroupBoxAnzeige
       // 
+      GroupBoxAnzeige.Controls.Add(ButtonFarbenStandard);
       GroupBoxAnzeige.Controls.Add(LabelFarben);
       GroupBoxAnzeige.Controls.Add(LabelErgebnisAutomatischLeerenSekunden);
       GroupBoxAnzeige.Controls.Add(LabelErgebnisAutomatischLeeren);
@@ -972,6 +974,18 @@
       LabelGRPCChannel.TabIndex = 6;
       LabelGRPCChannel.Text = "gRPC Kanal:";
       // 
+      // ButtonFarbenStandard
+      // 
+      ButtonFarbenStandard.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      ButtonFarbenStandard.FlatStyle = FlatStyle.Flat;
+      ButtonFarbenStandard.Location = new Point(151, 249);
+      ButtonFarbenStandard.Name = "ButtonFarbenStandard";
+      ButtonFarbenStandard.Size = new Size(75, 28);
+      ButtonFarbenStandard.TabIndex = 16;
+      ButtonFarbenStandard.Text = "Standard";
+      ButtonFarbenStandard.UseVisualStyleBackColor = true;
+      ButtonFarbenStandard.Click += ButtonFarbenStandard_Click;
+      // 
       // FormSettings
       // 
       AcceptButton = ButtonSpeichern;
@@ -1092,5 +1106,6 @@
     private CheckBox CheckBoxFensterAusblenden;
     private TextBox TextBoxLogMonitorHandleFilter;
     private Label LabelLogMonitorHandleFilter;
+    private Button ButtonFarbenStandard;
   }
 }
