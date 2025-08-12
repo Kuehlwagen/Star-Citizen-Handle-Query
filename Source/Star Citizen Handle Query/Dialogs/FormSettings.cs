@@ -1,4 +1,8 @@
-﻿using Star_Citizen_Handle_Query.Serialization;
+﻿using Star_Citizen_Handle_Query.Properties;
+using Star_Citizen_Handle_Query.Serialization;
+using System.Collections;
+using System.Globalization;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 
@@ -16,7 +20,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Keys.H, Keys.Home, Keys.I, Keys.Insert, Keys.J, Keys.K, Keys.L, Keys.M, Keys.N, Keys.O, Keys.P, Keys.Q, Keys.R, Keys.S, Keys.T, Keys.U,
       Keys.V, Keys.W, Keys.X, Keys.Y, Keys.Z
     ];
-    private bool LoadingFinished = false;
+    private readonly bool LoadingFinished = false;
+    private const string ThemesResourcePrefix = "Star_Citizen_Handle_Query.Themes.";
+    private readonly Dictionary<string, AppColors> AppColorThemes = [];
 
     public FormSettings(Settings settings = null) {
       InitializeComponent();
@@ -29,6 +35,20 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       // Taste Werte hinzufügen
       ComboBoxTaste.Items.AddRange([.. KeyCollection.ConvertAll(x => x.ToString())]);
+
+      string themeName;
+      string themeResourceString;
+      foreach (string themeResourcePath in Assembly.GetEntryAssembly().GetManifestResourceNames()
+        .Where(r => r.StartsWith(ThemesResourcePrefix, StringComparison.CurrentCultureIgnoreCase))
+        .Order()) {
+        themeName = themeResourcePath[ThemesResourcePrefix.Length..themeResourcePath.IndexOf('.', ThemesResourcePrefix.Length)];
+        using (Stream stream = Assembly.GetEntryAssembly().GetManifestResourceStream(themeResourcePath))
+        using (StreamReader reader = new(stream)) {
+          themeResourceString = reader.ReadToEnd();
+        }
+        AppColorThemes.Add(themeName, JsonSerializer.Deserialize<AppColors>(themeResourceString));
+      }
+      ComboBoxColorThemes.Items.AddRange([.. AppColorThemes.Keys]);
 
       // Kopie der Einstellungen erstellen
       ProgramSettings = settings != null ? (Settings)settings.Clone() : null;
@@ -99,6 +119,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         ButtonSplitterColor.BackColor = ProgramSettings.Colors.AppSplitterColor;
         TextBoxLogMonitorHandleFilter.BackColor = ProgramSettings.Colors.AppForeColor;
         TextBoxLogMonitorHandleFilter.ForeColor = ProgramSettings.Colors.AppBackColor;
+        ComboBoxColorThemes.BackColor = ProgramSettings.Colors.AppBackColor;
+        ComboBoxColorThemes.ForeColor = ProgramSettings.Colors.AppForeColor;
       }
 
       // Einstellungen auf den Dialog übernehmen
@@ -491,6 +513,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void ButtonFarbenStandard_Click(object sender, EventArgs e) {
       ProgramSettings.Colors = new Settings().Colors;
+      SetDialogValues();
+    }
+
+    private void ComboBoxColorThemes_SelectedIndexChanged(object sender, EventArgs e) {
+      ProgramSettings.Colors = AppColorThemes[(sender as ComboBox).SelectedItem.ToString()];
       SetDialogValues();
     }
 

@@ -47,6 +47,8 @@
       GroupBoxLokalerCache = new GroupBox();
       ButtonStandard = new Button();
       GroupBoxAnzeige = new GroupBox();
+      ComboBoxColorThemes = new ComboBox();
+      ButtonFarbenStandard = new Button();
       LabelFarben = new Label();
       LabelErgebnisAutomatischLeerenSekunden = new Label();
       LabelErgebnisAutomatischLeeren = new Label();
@@ -97,7 +99,6 @@
       TextBoxGRPCURL = new TextBox();
       LabelGRPCURL = new Label();
       LabelGRPCChannel = new Label();
-      ButtonFarbenStandard = new Button();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLokalerCacheAlter).BeginInit();
       GroupBoxFenster.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownFensterDeckkraft).BeginInit();
@@ -372,6 +373,7 @@
       // 
       // GroupBoxAnzeige
       // 
+      GroupBoxAnzeige.Controls.Add(ComboBoxColorThemes);
       GroupBoxAnzeige.Controls.Add(ButtonFarbenStandard);
       GroupBoxAnzeige.Controls.Add(LabelFarben);
       GroupBoxAnzeige.Controls.Add(LabelErgebnisAutomatischLeerenSekunden);
@@ -398,6 +400,32 @@
       GroupBoxAnzeige.TabIndex = 0;
       GroupBoxAnzeige.TabStop = false;
       GroupBoxAnzeige.Text = "Anzeige";
+      // 
+      // ComboBoxColorThemes
+      // 
+      ComboBoxColorThemes.BackColor = Color.FromArgb(19, 26, 33);
+      ComboBoxColorThemes.DropDownStyle = ComboBoxStyle.DropDownList;
+      ComboBoxColorThemes.FlatStyle = FlatStyle.Flat;
+      ComboBoxColorThemes.ForeColor = Color.FromArgb(57, 206, 216);
+      ComboBoxColorThemes.FormattingEnabled = true;
+      ComboBoxColorThemes.Location = new Point(151, 252);
+      ComboBoxColorThemes.MaxDropDownItems = 5;
+      ComboBoxColorThemes.Name = "ComboBoxColorThemes";
+      ComboBoxColorThemes.Size = new Size(106, 23);
+      ComboBoxColorThemes.TabIndex = 16;
+      ComboBoxColorThemes.SelectedIndexChanged += ComboBoxColorThemes_SelectedIndexChanged;
+      // 
+      // ButtonFarbenStandard
+      // 
+      ButtonFarbenStandard.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      ButtonFarbenStandard.FlatStyle = FlatStyle.Flat;
+      ButtonFarbenStandard.Location = new Point(263, 249);
+      ButtonFarbenStandard.Name = "ButtonFarbenStandard";
+      ButtonFarbenStandard.Size = new Size(75, 28);
+      ButtonFarbenStandard.TabIndex = 17;
+      ButtonFarbenStandard.Text = "Standard";
+      ButtonFarbenStandard.UseVisualStyleBackColor = true;
+      ButtonFarbenStandard.Click += ButtonFarbenStandard_Click;
       // 
       // LabelFarben
       // 
@@ -974,18 +1002,6 @@
       LabelGRPCChannel.TabIndex = 6;
       LabelGRPCChannel.Text = "gRPC Kanal:";
       // 
-      // ButtonFarbenStandard
-      // 
-      ButtonFarbenStandard.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-      ButtonFarbenStandard.FlatStyle = FlatStyle.Flat;
-      ButtonFarbenStandard.Location = new Point(151, 249);
-      ButtonFarbenStandard.Name = "ButtonFarbenStandard";
-      ButtonFarbenStandard.Size = new Size(75, 28);
-      ButtonFarbenStandard.TabIndex = 16;
-      ButtonFarbenStandard.Text = "Standard";
-      ButtonFarbenStandard.UseVisualStyleBackColor = true;
-      ButtonFarbenStandard.Click += ButtonFarbenStandard_Click;
-      // 
       // FormSettings
       // 
       AcceptButton = ButtonSpeichern;
@@ -1107,5 +1123,6 @@
     private TextBox TextBoxLogMonitorHandleFilter;
     private Label LabelLogMonitorHandleFilter;
     private Button ButtonFarbenStandard;
+    private ComboBox ComboBoxColorThemes;
   }
 }

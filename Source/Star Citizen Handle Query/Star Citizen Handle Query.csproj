@@ -27,6 +27,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Themes\ANVIL.SC_Handle_Query.colors.json" />
+    <None Remove="Themes\DARK.SC_Handle_Query.colors.json" />
+    <None Remove="Themes\DRAKE.SC_Handle_Query.colors.json" />
+    <None Remove="Themes\IAE2949.SC_Handle_Query.colors.json" />
+    <None Remove="Themes\IAE2954.SC_Handle_Query.colors.json" />
+    <None Remove="Themes\LIGHT.SC_Handle_Query.colors.json" />
+    <None Remove="Themes\ORANGE.SC_Handle_Query.colors.json" />
+    <None Remove="Themes\VANDUUL.SC_Handle_Query.colors.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Resources\SCHQ.ico" />
   </ItemGroup>
 
@@ -89,6 +100,17 @@
 
   <ItemGroup>
     <Protobuf Include="Protos\SCHQ.proto" GrpcServices="Client" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Themes\ANVIL.SC_Handle_Query.colors.json" />
+    <EmbeddedResource Include="Themes\DARK.SC_Handle_Query.colors.json" />
+    <EmbeddedResource Include="Themes\DRAKE.SC_Handle_Query.colors.json" />
+    <EmbeddedResource Include="Themes\IAE2949.SC_Handle_Query.colors.json" />
+    <EmbeddedResource Include="Themes\IAE2954.SC_Handle_Query.colors.json" />
+    <EmbeddedResource Include="Themes\LIGHT.SC_Handle_Query.colors.json" />
+    <EmbeddedResource Include="Themes\ORANGE.SC_Handle_Query.colors.json" />
+    <EmbeddedResource Include="Themes\VANDUUL.SC_Handle_Query.colors.json" />
   </ItemGroup>
 
 </Project>
