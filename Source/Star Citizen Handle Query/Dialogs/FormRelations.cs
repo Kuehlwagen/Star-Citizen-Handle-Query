@@ -324,9 +324,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             break;
         }
         if (InvokeRequired) {
-          Invoke(() => PictureBoxClearAll.Image = img);
+          Invoke(() => PictureBoxClearAll.BackgroundImage = img);
         } else {
-          PictureBoxClearAll.Image = img;
+          PictureBoxClearAll.BackgroundImage = img;
         }
       }
     }
@@ -590,7 +590,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void PictureBoxClearAll_Paint(object sender, PaintEventArgs e) {
-      FormHandleQuery.PaintTrashIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive, PanelRelations.Controls.Count > 0);
+      if (!IsRPCSync) {
+        FormHandleQuery.PaintTrashIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive, PanelRelations.Controls.Count > 0);
+      }
     }
 
   }

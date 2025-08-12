@@ -162,6 +162,7 @@
       // PictureBoxClearAll
       // 
       PictureBoxClearAll.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+      PictureBoxClearAll.BackgroundImageLayout = ImageLayout.Center;
       PictureBoxClearAll.Location = new Point(215, 4);
       PictureBoxClearAll.Name = "PictureBoxClearAll";
       PictureBoxClearAll.Size = new Size(20, 20);
