@@ -181,9 +181,11 @@ namespace Star_Citizen_Handle_Query.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die name,type,parentBody,parentStar,coordinateX,coordinateY,coordinateZ,themeImage
-        ///Abandoned Outpost (Cellin),Ruins,Cellin,Stanton,130.062,184.915,130.356,https://starcitizen.tools/images/thumb/4/43/Abandoned_outpost%2C_Cellin_%28Alpha_3.17.1%29.jpg/300px-Abandoned_outpost%2C_Cellin_%28Alpha_3.17.1%29.jpg
-        ///Abandoned Outpost (Daymar),Ruins,Daymar,Stanton,73.139,285.904,1.906,https://starcitizen.tools/images/thumb/1/13/Abandoned_outpost%2C_Daymar_%28Alpha_3.17%29.png/300px-Abandoned_outpost%2C_Daymar_%28Alpha_3. [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die name,type,parentBody,parentStar,coordinateX,coordinateY,coordinateZ,wikiLink,private,quantum
+        ///Abandoned Outpost (Cellin),Ruins,Cellin,Stanton,130.062,184.915,130.356,https://starcitizen.tools/Unnamed_abandoned_outpost_(Cellin),0,0
+        ///Abandoned Outpost (Daymar),Ruins,Daymar,Stanton,73.139,285.904,1.906,https://starcitizen.tools/Unnamed_abandoned_outpost_(Daymar),0,0
+        ///Abandoned Outpost (Yela),Ruins,Yela,Stanton,-45.303,308.850,28.948,https://starcitizen.tools/Unnamed_abandoned_outpost_(Yela),0,0
+        ///Afterlife,Unde [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
         internal static string Locations {
             get {
@@ -304,26 +306,6 @@ namespace Star_Citizen_Handle_Query.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Search {
-            get {
-                object obj = ResourceManager.GetObject("Search", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Settings {
-            get {
-                object obj = ResourceManager.GetObject("Settings", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap StatusGreen {
             get {
                 object obj = ResourceManager.GetObject("StatusGreen", resourceCulture);
@@ -347,26 +329,6 @@ namespace Star_Citizen_Handle_Query.Properties {
         internal static System.Drawing.Bitmap StatusRed {
             get {
                 object obj = ResourceManager.GetObject("StatusRed", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap WindowLocked {
-            get {
-                object obj = ResourceManager.GetObject("WindowLocked", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap WindowUnlocked {
-            get {
-                object obj = ResourceManager.GetObject("WindowUnlocked", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

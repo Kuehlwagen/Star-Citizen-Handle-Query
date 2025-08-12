@@ -69,11 +69,11 @@
       TextBoxHandle.AutoCompleteMode = AutoCompleteMode.Append;
       TextBoxHandle.AutoCompleteSource = AutoCompleteSource.CustomSource;
       TextBoxHandle.BackColor = Color.FromArgb(57, 206, 216);
-      TextBoxHandle.Location = new Point(69, 3);
+      TextBoxHandle.Location = new Point(71, 3);
       TextBoxHandle.MaxLength = 60;
       TextBoxHandle.Name = "TextBoxHandle";
       TextBoxHandle.PlaceholderText = "Handle eingeben...";
-      TextBoxHandle.Size = new Size(253, 23);
+      TextBoxHandle.Size = new Size(251, 23);
       TextBoxHandle.TabIndex = 2;
       TextBoxHandle.TextChanged += TextBoxHandle_TextChanged;
       TextBoxHandle.KeyDown += TextBoxHandle_KeyDown;
@@ -106,18 +106,19 @@
       // 
       LabelLockUnlock.Cursor = Cursors.Hand;
       LabelLockUnlock.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-      LabelLockUnlock.Image = Properties.Resources.WindowLocked;
-      LabelLockUnlock.Location = new Point(3, 7);
+      LabelLockUnlock.Image = Properties.Resources.StatusGreen;
+      LabelLockUnlock.Location = new Point(3, 4);
       LabelLockUnlock.Name = "LabelLockUnlock";
-      LabelLockUnlock.Size = new Size(12, 12);
+      LabelLockUnlock.Size = new Size(20, 20);
       LabelLockUnlock.TabIndex = 0;
+      LabelLockUnlock.Paint += LabelLockUnlock_Paint;
       LabelLockUnlock.MouseClick += LabelLockUnlock_MouseClick;
       // 
       // LabelHandle
       // 
       LabelHandle.AutoSize = true;
       LabelHandle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-      LabelHandle.Location = new Point(14, 6);
+      LabelHandle.Location = new Point(20, 6);
       LabelHandle.Name = "LabelHandle";
       LabelHandle.Size = new Size(49, 15);
       LabelHandle.TabIndex = 1;

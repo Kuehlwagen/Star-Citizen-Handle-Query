@@ -124,9 +124,6 @@
   <data name="Avatar_Default" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Avatar_Default.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="WindowUnlocked" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WindowUnlocked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="en-US" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\localization\en-us.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
@@ -145,17 +142,8 @@
   <data name="OrganizationRank3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OrganizationRank3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Search" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="WindowLocked" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\WindowLocked.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="OrganizationRank1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OrganizationRank1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Settings.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="OrganizationRank4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\OrganizationRank4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -174,12 +162,6 @@
   </data>
   <data name="StatusGreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\StatusGreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="StatusOrange" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StatusOrange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="StatusRed" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\StatusRed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BountyHunting" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\BountyHunting.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -210,5 +192,11 @@
   </data>
   <data name="Locations" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\locations.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="StatusOrange" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StatusOrange.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StatusRed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\StatusRed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

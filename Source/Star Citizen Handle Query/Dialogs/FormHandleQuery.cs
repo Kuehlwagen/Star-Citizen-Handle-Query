@@ -64,6 +64,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public FormHandleQuery(Settings settings) {
       InitializeComponent();
 
+      LabelLockUnlock.Image = null;
+
       // Farben setzen
       if (settings?.Colors != null) {
         ForeColor = settings.Colors.AppForeColor;
@@ -399,8 +401,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void Form_MouseMove(object sender, MouseEventArgs e) {
       if (IsDragging && !WindowLocked) {
-        int x = (Location.X + (e.Location.X - LastRectangle.X));
-        int y = (Location.Y + (e.Location.Y - LastRectangle.Y));
+        int x = Location.X + (e.Location.X - LastRectangle.X);
+        int y = Location.Y + (e.Location.Y - LastRectangle.Y);
 
         Location = new Point(x, y);
       }
@@ -1300,7 +1302,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void LabelLockUnlock_MouseClick(object sender, MouseEventArgs e) {
       if (e.Button == MouseButtons.Left) {
         WindowLocked = !WindowLocked;
-        LabelLockUnlock.Image = WindowLocked ? Resources.WindowLocked : Resources.WindowUnlocked;
+        LabelLockUnlock.Invalidate();
         if (UcResize != null) {
           UcResize.BackColor = WindowLocked ? Color.Transparent : ProgramSettings.Colors.AppSplitterColor;
           UcResize.Cursor = WindowLocked ? Cursors.Default : Cursors.SizeWE;
@@ -1440,6 +1442,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       PaintSettingsIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive);
     }
 
+    private void LabelLockUnlock_Paint(object sender, PaintEventArgs e) {
+      base.OnPaint(e);
+      PaintLockIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive);
+    }
+
     internal static void PaintSettingsIcon(Graphics g, Color foreColor, Color foreColorInactive) {
       using var bgPen = new Pen(foreColorInactive, 2.0F);
       using var fgPen = new Pen(foreColor, 1.0F);
@@ -1476,6 +1483,21 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       g.DrawLine(bgPen, 12, 12, 18, 18);
       g.DrawEllipse(fgPen, new Rectangle(2, 2, 10, 10));
       g.DrawLine(fgPen, 12, 12, 18, 18);
+    }
+
+    internal void PaintLockIcon(Graphics g, Color foreColor, Color foreColorInactive) {
+      using var bgPen = new Pen(foreColorInactive, 2.0F);
+      using var fgPen = new Pen(foreColor, 1.0F);
+
+      g.SmoothingMode = SmoothingMode.AntiAlias;
+      g.FillRectangle(bgPen.Brush, 5.0F, 7.0F, 10.0F, 8.0F);
+      if (WindowLocked) {
+        g.DrawArc(bgPen, 6.0F, 3.0F, 8.0F, 10.0F, 180, 180);
+      } else {
+        g.FillRectangle(fgPen.Brush, 5.0F, 7.0F, 10.0F, 8.0F);
+        g.DrawArc(bgPen, 6.0F, 3.0F, 8.0F, 10.0F, 180, 120);
+        g.DrawArc(fgPen, 6.0F, 3.0F, 8.0F, 10.0F, 180, 120);
+      }
     }
 
     public enum CommunityHubLiveState {
