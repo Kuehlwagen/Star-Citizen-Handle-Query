@@ -2,6 +2,7 @@
 using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
+using System.Drawing.Drawing2D;
 using static Star_Citizen_Handle_Query.Dialogs.FormHandleQuery;
 
 namespace Star_Citizen_Handle_Query.UserControls {
@@ -58,9 +59,10 @@ namespace Star_Citizen_Handle_Query.UserControls {
             PictureBoxOrganization.MouseClick -= PictureBoxOrganization_MouseClick;
           }
         }
-        if (Info?.Sid != null && Info?.RankStars >= 0 && Info.RankStars <= 5) {
-          PictureBoxOrganizationRank.Image = Properties.Resources.ResourceManager.GetObject($"OrganizationRank{Info.RankStars}") as Image;
-        }
+        //if (Info?.Sid != null && Info?.RankStars >= 0 && Info.RankStars <= 5) {
+        //  PictureBoxOrganizationRank.Image = Properties.Resources.ResourceManager.GetObject($"OrganizationRank{Info.RankStars}") as Image;
+        //}
+        PictureBoxOrganizationRank.Invalidate();
         if (!DisplayOnly) {
           Relation = GetMainForm().GetOrganizationRelation(Info.Sid);
           if (Relation > RelationValue.NotAssigned) {
@@ -126,6 +128,25 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     private void LabelRelation_Paint(object sender, PaintEventArgs e) {
       ControlPaint.DrawBorder(e.Graphics, LabelRelation.ClientRectangle, BackColor, ButtonBorderStyle.Solid);
+    }
+
+    private void PictureBoxOrganizationRank_Paint(object sender, PaintEventArgs e) {
+      PaintOrganizationRanksIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive);
+    }
+
+    internal void PaintOrganizationRanksIcon(Graphics g, Color foreColor, Color foreColorInactive) {
+      if (Info.RankStars != null && Info.RankStars.Value >= 0 && Info.RankStars <= 5) {
+        using var bgPen = new Pen(foreColorInactive, 2.0F);
+        using var fgPen = new Pen(foreColor, 1.0F);
+
+        g.SmoothingMode = SmoothingMode.AntiAlias;
+        for (int i = 0; i < 5; i++) {
+          g.DrawEllipse(bgPen, new Rectangle(i * 20, 1, 16, 16));
+          if (Info.RankStars > i) {
+            g.FillEllipse(fgPen.Brush, new Rectangle(i * 20, 1, 16, 16));
+          }
+        }
+      }
     }
 
   }

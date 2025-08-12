@@ -82,6 +82,7 @@
       PictureBoxOrganizationRank.TabIndex = 3;
       PictureBoxOrganizationRank.TabStop = false;
       PictureBoxOrganizationRank.WaitOnLoad = true;
+      PictureBoxOrganizationRank.Paint += PictureBoxOrganizationRank_Paint;
       // 
       // LabelMainOrganizationAffiliate
       // 
