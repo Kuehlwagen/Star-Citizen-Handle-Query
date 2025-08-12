@@ -366,7 +366,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                     V(m, "Handle"),
                     V(m, "KilledBy"),
                     $"Killed by: {V(m, "KilledBy")}{NL}Using: {V(m, "Using")} ({V(m, "UsingClass")}){NL}Zone: {V(m, "Zone")}{NL}Damage Type: {V(m, "DamageType")}",
-                    Properties.Resources.Dead,
                     (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle"))));
                 }
               }

@@ -40,6 +40,7 @@
       PictureBoxLeft.SizeMode = PictureBoxSizeMode.Zoom;
       PictureBoxLeft.TabIndex = 0;
       PictureBoxLeft.TabStop = false;
+      PictureBoxLeft.Paint += PictureBoxLeft_Paint;
       // 
       // LabelText
       // 

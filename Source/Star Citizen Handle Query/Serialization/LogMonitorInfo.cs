@@ -5,9 +5,7 @@ namespace Star_Citizen_Handle_Query.Serialization {
 
   [Serializable()]
   public class LogMonitorInfo(LogType logType, string date, string handle = null, string key = null, string value = null,
-    Bitmap icon = null, RelationValue relation = RelationValue.NotAssigned) : ICloneable {
-
-    public Bitmap Icon { get; } = icon;
+    RelationValue relation = RelationValue.NotAssigned) : ICloneable {
 
     public LogType LogType { get; } = logType;
 

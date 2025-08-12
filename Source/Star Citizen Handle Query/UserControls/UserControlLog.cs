@@ -1,30 +1,34 @@
 ﻿using SCHQ_Protos;
 using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
-using System.Reflection.Metadata.Ecma335;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace Star_Citizen_Handle_Query.UserControls {
 
   public partial class UserControlLog : UserControl {
 
-    internal readonly LogMonitorInfo LogInfoItem;
+    internal LogMonitorInfo LogInfoItem;
     private readonly System.Windows.Forms.Timer TimerRemoveControl = new();
     private string ToolTipText = string.Empty;
+    private readonly Settings ProgramSettings;
 
     public UserControlLog(LogMonitorInfo logInfo, Settings programSettings) {
       InitializeComponent();
 
+      ProgramSettings = programSettings;
+
       // Farben setzen
-      if (programSettings.Colors != null) {
-        BackColor = programSettings.Colors.AppBackColor;
-        ForeColor = programSettings.Colors.AppForeColor;
-        LabelTime.BackColor = programSettings.Colors.AppBackColor;
-        LabelTime.ForeColor = programSettings.Colors.AppForeColorInactive;
+      if (ProgramSettings.Colors != null) {
+        BackColor = ProgramSettings.Colors.AppBackColor;
+        ForeColor = ProgramSettings.Colors.AppForeColor;
+        LabelTime.BackColor = ProgramSettings.Colors.AppBackColor;
+        LabelTime.ForeColor = ProgramSettings.Colors.AppForeColorInactive;
       }
 
       LogInfoItem = logInfo;
-      if (programSettings.LogMonitor.EntryDisplayDurationInMinutes > 0) {
-        TimerRemoveControl.Interval = programSettings.LogMonitor.EntryDisplayDurationInMinutes * 60000;
+      if (ProgramSettings.LogMonitor.EntryDisplayDurationInMinutes > 0) {
+        TimerRemoveControl.Interval = ProgramSettings.LogMonitor.EntryDisplayDurationInMinutes * 60000;
         TimerRemoveControl.Tick += TimerRemoveControl_Tick;
         TimerRemoveControl.Start();
       }
@@ -36,15 +40,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
       switch (LogInfoItem.LogType) {
         case LogType.Corpse:
           LabelText.Text = LogInfoItem.Handle;
-          Image img;
-          if (LogInfoItem.IsCriminalArrest) {
-            img = Properties.Resources.BountyHunting;
-          } else if (LogInfoItem.IsCorpseEnabled) {
-            img = Properties.Resources.Medical;
-          } else {
-            img = Properties.Resources.Dead;
-          }
-          PictureBoxLeft.Image = img;
+          PictureBoxLeft.Invalidate();
           if (LogInfoItem.RelationValue > RelationValue.NotAssigned) {
             LabelRelation.Visible = LogInfoItem.RelationValue > RelationValue.NotAssigned;
             LabelRelation.BackColor = FormHandleQuery.GetRelationColor(LogInfoItem.RelationValue);
@@ -58,11 +54,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
           AddMouseEvents();
           break;
         case LogType.LoadingScreenDuration:
-          PictureBoxLeft.Image = Properties.Resources.Info;
           LabelText.Text = $"Loading screen: {LogInfoItem.Value}s";
           break;
         case LogType.ActorDeath:
-          PictureBoxLeft.Image = Properties.Resources.Dead;
           LabelText.Text = $"{LogInfoItem.Handle}{Environment.NewLine}{LogInfoItem.Key}";
           SetToolTip(LogInfoItem.Value);
           if (LogInfoItem.RelationValue > RelationValue.NotAssigned) {
@@ -85,15 +79,8 @@ namespace Star_Citizen_Handle_Query.UserControls {
       if (info != null && info.IsValid) {
         switch (info.LogType) {
           case LogType.Corpse:
-            Image img;
-            if (info.IsCriminalArrest) {
-              img = Properties.Resources.BountyHunting;
-            } else if (info.IsCorpseEnabled) {
-              img = Properties.Resources.Medical;
-            } else {
-              img = Properties.Resources.Dead;
-            }
-            PictureBoxLeft.Image = img;
+            LogInfoItem = info;
+            PictureBoxLeft.Invalidate();
             if (info.RelationValue > RelationValue.NotAssigned) {
               LabelRelation.Visible = info.RelationValue > RelationValue.NotAssigned;
               LabelRelation.BackColor = FormHandleQuery.GetRelationColor(info.RelationValue);
@@ -160,6 +147,65 @@ namespace Star_Citizen_Handle_Query.UserControls {
       (Parent.Parent as FormLogMonitor).SetTooltip(LabelRelation, ToolTipText);
       (Parent.Parent as FormLogMonitor).SetTooltip(LabelText, ToolTipText);
       (Parent.Parent as FormLogMonitor).SetTooltip(PictureBoxRight, ToolTipText);
+    }
+
+    private void PictureBoxLeft_Paint(object sender, PaintEventArgs e) {
+      PaintLeftIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive);
+    }
+
+    private void PaintLeftIcon(Graphics g, Color foreColor, Color foreColorInactive) {
+      using var bgPen = new Pen(foreColorInactive, 2.0F);
+      using var fgPen = new Pen(foreColor, 1.0F);
+
+      g.SmoothingMode = SmoothingMode.AntiAlias;
+      g.DrawEllipse(bgPen, 2, 2, 16, 16);
+      g.DrawEllipse(fgPen, 2, 2, 16, 16);
+
+      switch (LogInfoItem.LogType) {
+        case LogType.Corpse:
+          if (LogInfoItem.IsCorpseEnabled) {
+            g.DrawLine(bgPen, 10.25F, 6, 10.25F, 14);
+            g.DrawLine(fgPen, 10.25F, 6, 10.25F, 14);
+            g.DrawLine(bgPen, 6, 10.25F, 14, 10.25F);
+            g.DrawLine(fgPen, 6, 10.25F, 14, 10.25F);
+          } else if (LogInfoItem.IsCriminalArrest) {
+            g.DrawLine(bgPen, 10.25F, 3, 10.25F, 6);
+            g.DrawLine(fgPen, 10.25F, 3, 10.25F, 6);
+            g.DrawLine(bgPen, 10.25F, 14, 10.25F, 17);
+            g.DrawLine(fgPen, 10.25F, 14, 10.25F, 17);
+            g.DrawLine(bgPen, 2, 10.25F, 5, 10.25F);
+            g.DrawLine(fgPen, 2, 10.25F, 5, 10.25F);
+            g.DrawLine(bgPen, 14, 10.25F, 17, 10.25F);
+            g.DrawLine(fgPen, 14, 10.25F, 17, 10.25F);
+            g.DrawEllipse(bgPen, 8.25F, 8.25F, 3.5F, 3.5F);
+            g.DrawEllipse(fgPen, 8.25F, 8.25F, 3.5F, 3.5F);
+          } else {
+            DrawDeath(g, fgPen, bgPen);
+          }
+          break;
+        case LogType.ActorDeath:
+          DrawDeath(g, fgPen, bgPen);
+          break;
+        case LogType.LoadingScreenDuration:
+          g.FillEllipse(bgPen.Brush, 9, 5, 2.25F, 2.25F);
+          g.FillEllipse(fgPen.Brush, 9, 5, 2.25F, 2.25F);
+          g.DrawLine(bgPen, 10.25F, 9.25F, 10.25F, 15);
+          g.DrawLine(fgPen, 10.25F, 9.25F, 10.25F, 15);
+          break;
+      }
+    }
+
+    private static void DrawDeath(Graphics g, Pen fgPen, Pen bgPen) {
+      g.DrawLine(bgPen, 6.5F, 6.5F, 9, 9);
+      g.DrawLine(fgPen, 6.5F, 6.5F, 9, 9);
+      g.DrawLine(bgPen, 6.5F, 9, 9, 6.5F);
+      g.DrawLine(fgPen, 6.5F, 9, 9, 6.5F);
+      g.DrawLine(bgPen, 11.5F, 6.5F, 14, 9);
+      g.DrawLine(fgPen, 11.5F, 6.5F, 14, 9);
+      g.DrawLine(bgPen, 11.5F, 9, 14, 6.5F);
+      g.DrawLine(fgPen, 11.5F, 9, 14, 6.5F);
+      g.DrawEllipse(bgPen, 8.25F, 11, 3.5F, 3.5F);
+      g.DrawEllipse(fgPen, 8.25F, 11, 3.5F, 3.5F);
     }
 
   }
