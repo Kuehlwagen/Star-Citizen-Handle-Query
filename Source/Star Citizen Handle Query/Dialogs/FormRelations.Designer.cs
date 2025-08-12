@@ -162,13 +162,13 @@
       // PictureBoxClearAll
       // 
       PictureBoxClearAll.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
-      PictureBoxClearAll.Location = new Point(219, 7);
+      PictureBoxClearAll.Location = new Point(215, 4);
       PictureBoxClearAll.Name = "PictureBoxClearAll";
-      PictureBoxClearAll.Size = new Size(12, 15);
+      PictureBoxClearAll.Size = new Size(20, 20);
       PictureBoxClearAll.SizeMode = PictureBoxSizeMode.Zoom;
       PictureBoxClearAll.TabIndex = 2;
       PictureBoxClearAll.TabStop = false;
+      PictureBoxClearAll.Paint += PictureBoxClearAll_Paint;
       // 
       // LabelTitle
       // 
