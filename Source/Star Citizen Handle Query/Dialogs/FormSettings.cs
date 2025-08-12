@@ -36,20 +36,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Taste Werte hinzufügen
       ComboBoxTaste.Items.AddRange([.. KeyCollection.ConvertAll(x => x.ToString())]);
 
-      string themeName;
-      string themeResourceString;
-      foreach (string themeResourcePath in Assembly.GetEntryAssembly().GetManifestResourceNames()
-        .Where(r => r.StartsWith(ThemesResourcePrefix, StringComparison.CurrentCultureIgnoreCase))
-        .Order()) {
-        themeName = themeResourcePath[ThemesResourcePrefix.Length..themeResourcePath.IndexOf('.', ThemesResourcePrefix.Length)];
-        using (Stream stream = Assembly.GetEntryAssembly().GetManifestResourceStream(themeResourcePath))
-        using (StreamReader reader = new(stream)) {
-          themeResourceString = reader.ReadToEnd();
-        }
-        AppColorThemes.Add(themeName, JsonSerializer.Deserialize<AppColors>(themeResourceString));
-      }
-      ComboBoxColorThemes.Items.AddRange([.. AppColorThemes.Keys]);
-
       // Kopie der Einstellungen erstellen
       ProgramSettings = settings != null ? (Settings)settings.Clone() : null;
       if (ProgramSettings != null) {
@@ -122,6 +108,23 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         ComboBoxColorThemes.BackColor = ProgramSettings.Colors.AppBackColor;
         ComboBoxColorThemes.ForeColor = ProgramSettings.Colors.AppForeColor;
       }
+
+      // Farb-Themen hinzufügen
+      string themeName;
+      string themeResourceString;
+      foreach (string themeResourcePath in Assembly.GetEntryAssembly().GetManifestResourceNames()
+        .Where(r => r.StartsWith(ThemesResourcePrefix, StringComparison.CurrentCultureIgnoreCase))
+        .Order()) {
+        themeName = themeResourcePath[ThemesResourcePrefix.Length..themeResourcePath.IndexOf('.', ThemesResourcePrefix.Length)].Replace('_', ' ');
+        using (Stream stream = Assembly.GetEntryAssembly().GetManifestResourceStream(themeResourcePath))
+        using (StreamReader reader = new(stream)) {
+          themeResourceString = reader.ReadToEnd();
+        }
+        AppColorThemes.Add(themeName, JsonSerializer.Deserialize<AppColors>(themeResourceString));
+      }
+      ComboBoxColorThemes.Items.Add("Thema...");
+      ComboBoxColorThemes.Items.AddRange([.. AppColorThemes.Keys]);
+      ComboBoxColorThemes.SelectedIndex = 0;
 
       // Einstellungen auf den Dialog übernehmen
       SetDialogValues();
@@ -380,6 +383,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxFensterAusblenden.Text = CurrentLocalization.Settings.Display.Auto_Close_Hide_Windows;
       LabelFarben.Text = CurrentLocalization.Settings.Display.Colors;
       ButtonFarbenStandard.Text = CurrentLocalization.Settings.Buttons.Standard;
+      ComboBoxColorThemes.Items[0] = CurrentLocalization.Settings.Display.Theme;
 
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;
       LabelFensterDeckkraft.Text = CurrentLocalization.Settings.Window.Opacity;
@@ -492,7 +496,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private static void SetSelectedColor(Button btn) {
+    private void SetSelectedColor(Button btn) {
       using ColorDialog colorDialog = new() {
         Color = btn.BackColor,
         AnyColor = true
@@ -500,6 +504,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (colorDialog.ShowDialog() == DialogResult.OK) {
         btn.BackColor = colorDialog.Color;
       }
+      ComboBoxColorThemes.SelectedIndex = 0;
     }
 
     private void ButtonEditPrcChannels_Paint(object sender, PaintEventArgs e) {
@@ -517,7 +522,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void ComboBoxColorThemes_SelectedIndexChanged(object sender, EventArgs e) {
-      ProgramSettings.Colors = AppColorThemes[(sender as ComboBox).SelectedItem.ToString()];
+      ComboBox cb = sender as ComboBox;
+      if (cb.SelectedIndex > 0) {
+        ProgramSettings.Colors = AppColorThemes[cb.SelectedItem.ToString()];
+      }
       SetDialogValues();
     }
 

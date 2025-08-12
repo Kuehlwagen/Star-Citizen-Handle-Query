@@ -143,6 +143,8 @@
 
     public string Colors { get; set; } = "Farben:";
 
+    public string Theme { get; set; } = "Thema...";
+
   }
 
   [Serializable()]

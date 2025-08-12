@@ -37,7 +37,8 @@
       "Auto_Close_Duration": "Clear result after:",
       "Auto_Close_Duration_Seconds": "Second(s)",
       "Auto_Close_Hide_Windows": "Hide windows",
-      "Colors": "Colors:"
+      "Colors": "Colors:",
+      "Theme": "Theme..."
     },
     "Window": {
       "Group_Title": "Window",
