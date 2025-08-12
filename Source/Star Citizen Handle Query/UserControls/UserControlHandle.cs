@@ -28,6 +28,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
       if (programSettings.Colors != null) {
         BackColor = programSettings.Colors.AppBackColor;
         ForeColor = programSettings.Colors.AppForeColor;
+        LabelAdditionalInformation.ForeColor = programSettings.Colors.AppSplitterColor;
       }
 
       Info = handleInfo;
