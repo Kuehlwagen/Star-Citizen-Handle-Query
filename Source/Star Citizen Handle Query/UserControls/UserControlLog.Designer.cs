@@ -74,6 +74,7 @@
       PictureBoxRight.SizeMode = PictureBoxSizeMode.Zoom;
       PictureBoxRight.TabIndex = 0;
       PictureBoxRight.TabStop = false;
+      PictureBoxRight.Paint += PictureBoxRight_Paint;
       // 
       // LabelRelation
       // 

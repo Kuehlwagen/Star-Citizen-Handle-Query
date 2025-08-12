@@ -45,9 +45,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
             LabelRelation.Visible = LogInfoItem.RelationValue > RelationValue.NotAssigned;
             LabelRelation.BackColor = FormHandleQuery.GetRelationColor(LogInfoItem.RelationValue);
           }
-          if (LogInfoItem.IsLocalInventoryAvailable) {
-            PictureBoxRight.Image = Properties.Resources.Resource;
-          }
+          //if (LogInfoItem.IsLocalInventoryAvailable) {
+          //  PictureBoxRight.Image = Properties.Resources.Resource;
+          //}
           if (LogInfoItem.IsLocationInfo) {
             SetToolTip(LogInfoItem.Value);
           }
@@ -85,9 +85,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
               LabelRelation.Visible = info.RelationValue > RelationValue.NotAssigned;
               LabelRelation.BackColor = FormHandleQuery.GetRelationColor(info.RelationValue);
             }
-            if (info.IsLocalInventoryAvailable) {
-              PictureBoxRight.Image = Properties.Resources.Resource;
-            }
+            //if (info.IsLocalInventoryAvailable) {
+            //  PictureBoxRight.Image = Properties.Resources.Resource;
+            //}
             if (info.IsLocationInfo) {
               SetToolTip(info.Value);
             }
@@ -180,11 +180,11 @@ namespace Star_Citizen_Handle_Query.UserControls {
             g.DrawEllipse(bgPen, 8.25F, 8.25F, 3.5F, 3.5F);
             g.DrawEllipse(fgPen, 8.25F, 8.25F, 3.5F, 3.5F);
           } else {
-            DrawDeath(g, fgPen, bgPen);
+            DrawDeathIcon(g, fgPen, bgPen);
           }
           break;
         case LogType.ActorDeath:
-          DrawDeath(g, fgPen, bgPen);
+          DrawDeathIcon(g, fgPen, bgPen);
           break;
         case LogType.LoadingScreenDuration:
           g.FillEllipse(bgPen.Brush, 9, 5, 2.25F, 2.25F);
@@ -195,7 +195,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
       }
     }
 
-    private static void DrawDeath(Graphics g, Pen fgPen, Pen bgPen) {
+    private static void DrawDeathIcon(Graphics g, Pen fgPen, Pen bgPen) {
       g.DrawLine(bgPen, 6.5F, 6.5F, 9, 9);
       g.DrawLine(fgPen, 6.5F, 6.5F, 9, 9);
       g.DrawLine(bgPen, 6.5F, 9, 9, 6.5F);
@@ -206,6 +206,37 @@ namespace Star_Citizen_Handle_Query.UserControls {
       g.DrawLine(fgPen, 11.5F, 9, 14, 6.5F);
       g.DrawEllipse(bgPen, 8.25F, 11, 3.5F, 3.5F);
       g.DrawEllipse(fgPen, 8.25F, 11, 3.5F, 3.5F);
+    }
+
+    private void PictureBoxRight_Paint(object sender, PaintEventArgs e) {
+      PaintRightIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive);
+    }
+
+    private void PaintRightIcon(Graphics g, Color foreColor, Color foreColorInactive) {
+      if (LogInfoItem.IsLocalInventoryAvailable) {
+        using var bgPen = new Pen(foreColorInactive, 2.0F);
+        using var fgPen = new Pen(foreColor, 1.0F);
+
+        g.SmoothingMode = SmoothingMode.AntiAlias;
+        g.DrawRectangle(bgPen, 2, 8, 10, 10);
+        g.DrawLine(bgPen, 12, 8, 16, 3);
+        g.DrawLines(bgPen, [
+          new PointF(2, 8),
+          new PointF(6, 3),
+          new PointF(16, 3),
+          new PointF(16, 13),
+          new PointF(12, 18)
+        ]);
+        g.DrawRectangle(fgPen, 2, 8, 10, 10);
+        g.DrawLines(fgPen, [
+          new PointF(2, 8),
+          new PointF(6, 3),
+          new PointF(16, 3),
+          new PointF(16, 13),
+          new PointF(12, 18)
+        ]);
+        g.DrawLine(fgPen, 12, 8, 16, 3);
+      }
     }
 
   }
