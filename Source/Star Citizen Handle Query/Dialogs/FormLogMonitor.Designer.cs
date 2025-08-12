@@ -51,13 +51,13 @@
       // PictureBoxClearAll
       // 
       PictureBoxClearAll.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
-      PictureBoxClearAll.Location = new Point(219, 7);
+      PictureBoxClearAll.Location = new Point(215, 5);
       PictureBoxClearAll.Name = "PictureBoxClearAll";
-      PictureBoxClearAll.Size = new Size(12, 15);
+      PictureBoxClearAll.Size = new Size(20, 20);
       PictureBoxClearAll.SizeMode = PictureBoxSizeMode.Zoom;
       PictureBoxClearAll.TabIndex = 2;
       PictureBoxClearAll.TabStop = false;
+      PictureBoxClearAll.Paint += PictureBoxClearAll_Paint;
       // 
       // PictureBoxStatus
       // 
@@ -75,7 +75,7 @@
       LabelTitle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelTitle.Location = new Point(23, 7);
       LabelTitle.Name = "LabelTitle";
-      LabelTitle.Size = new Size(194, 15);
+      LabelTitle.Size = new Size(191, 15);
       LabelTitle.TabIndex = 0;
       LabelTitle.Text = "Log-Monitor";
       LabelTitle.TextAlign = ContentAlignment.MiddleLeft;

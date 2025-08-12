@@ -424,7 +424,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       e.Control.Width = PanelLogInfo.Width;
       if (PanelLogInfo.Controls.Count == 1) {
         PictureBoxClearAll.MouseClick += PictureBoxClearAll_MouseClick;
-        PictureBoxClearAll.Image = Properties.Resources.ClearAll;
+        PictureBoxClearAll.Invalidate();
         PictureBoxClearAll.Cursor = Cursors.Hand;
       }
       if (PanelLogInfo.Controls.Count <= ProgramSettings.LogMonitor.EntriesMax) {
@@ -436,7 +436,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Height -= LogicalToDeviceUnits(e.Control.Height + 2);
       if (PanelLogInfo.Controls.Count == 0) {
         PictureBoxClearAll.MouseClick -= PictureBoxClearAll_MouseClick;
-        PictureBoxClearAll.Image = Properties.Resources.ClearAll_Deactivated;
+        PictureBoxClearAll.Invalidate();
         PictureBoxClearAll.Cursor = Cursors.Default;
       }
     }
@@ -473,6 +473,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       foreach (Control control in PanelLogInfo.Controls) {
         control.Width = PanelLogInfo.Width;
       }
+    }
+
+    private void PictureBoxClearAll_Paint(object sender, PaintEventArgs e) {
+      FormHandleQuery.PaintTrashIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive, PanelLogInfo.Controls.Count > 0);
     }
 
   }

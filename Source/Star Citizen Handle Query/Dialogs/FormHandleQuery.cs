@@ -1444,7 +1444,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void LabelLockUnlock_Paint(object sender, PaintEventArgs e) {
       base.OnPaint(e);
-      PaintLockIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive);
+      PaintLockIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive, !WindowLocked);
     }
 
     internal static void PaintSettingsIcon(Graphics g, Color foreColor, Color foreColorInactive) {
@@ -1485,18 +1485,39 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       g.DrawLine(fgPen, 12, 12, 18, 18);
     }
 
-    internal void PaintLockIcon(Graphics g, Color foreColor, Color foreColorInactive) {
+    internal static void PaintLockIcon(Graphics g, Color foreColor, Color foreColorInactive, bool active) {
       using var bgPen = new Pen(foreColorInactive, 2.0F);
       using var fgPen = new Pen(foreColor, 1.0F);
 
       g.SmoothingMode = SmoothingMode.AntiAlias;
       g.FillRectangle(bgPen.Brush, 5.0F, 7.0F, 10.0F, 8.0F);
-      if (WindowLocked) {
+      if (!active) {
         g.DrawArc(bgPen, 6.0F, 3.0F, 8.0F, 10.0F, 180, 180);
       } else {
         g.FillRectangle(fgPen.Brush, 5.0F, 7.0F, 10.0F, 8.0F);
         g.DrawArc(bgPen, 6.0F, 3.0F, 8.0F, 10.0F, 180, 120);
         g.DrawArc(fgPen, 6.0F, 3.0F, 8.0F, 10.0F, 180, 120);
+      }
+    }
+
+    internal static void PaintTrashIcon(Graphics g, Color foreColor, Color foreColorInactive, bool active) {
+      using var bgPen = new Pen(foreColorInactive, 2.0F);
+      using var fgPen = new Pen(foreColor, 1.0F);
+
+      g.SmoothingMode = SmoothingMode.AntiAlias;
+      g.DrawLine(bgPen, 9.0F, 1.5F, 13.0F, 1.5F);
+      g.DrawLine(bgPen, 5.0F, 2.5F, 17.0F, 2.5F);
+      g.DrawRectangle(bgPen, 6.0F, 5.0F, 10.0F, 13.0F);
+      g.DrawLine(bgPen, 9.5F, 7.0F, 9.5F, 16.0F);
+      g.DrawLine(bgPen, 12.5F, 7.0F, 12.5F, 16.0F);
+
+      if (active) {
+        g.SmoothingMode = SmoothingMode.AntiAlias;
+        g.DrawLine(fgPen, 9.0F, 1.5F, 13.0F, 1.5F);
+        g.DrawLine(fgPen, 5.0F, 2.5F, 17.0F, 2.5F);
+        g.DrawRectangle(fgPen, 6.0F, 5.0F, 10.0F, 13.0F);
+        g.DrawLine(fgPen, 9.5F, 7.0F, 9.5F, 16.0F);
+        g.DrawLine(fgPen, 12.5F, 7.0F, 12.5F, 16.0F);
       }
     }
 
