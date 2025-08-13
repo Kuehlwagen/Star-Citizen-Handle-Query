@@ -1,7 +1,6 @@
 ﻿using SCHQ_Protos;
 using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
-using System.Drawing;
 using System.Drawing.Drawing2D;
 
 namespace Star_Citizen_Handle_Query.UserControls {
@@ -45,9 +44,6 @@ namespace Star_Citizen_Handle_Query.UserControls {
             LabelRelation.Visible = LogInfoItem.RelationValue > RelationValue.NotAssigned;
             LabelRelation.BackColor = FormHandleQuery.GetRelationColor(LogInfoItem.RelationValue);
           }
-          //if (LogInfoItem.IsLocalInventoryAvailable) {
-          //  PictureBoxRight.Image = Properties.Resources.Resource;
-          //}
           if (LogInfoItem.IsLocationInfo) {
             SetToolTip(LogInfoItem.Value);
           }
@@ -85,9 +81,6 @@ namespace Star_Citizen_Handle_Query.UserControls {
               LabelRelation.Visible = info.RelationValue > RelationValue.NotAssigned;
               LabelRelation.BackColor = FormHandleQuery.GetRelationColor(info.RelationValue);
             }
-            //if (info.IsLocalInventoryAvailable) {
-            //  PictureBoxRight.Image = Properties.Resources.Resource;
-            //}
             if (info.IsLocationInfo) {
               SetToolTip(info.Value);
             }
