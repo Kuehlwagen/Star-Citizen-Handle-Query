@@ -1,7 +1,4 @@
-﻿using Star_Citizen_Handle_Query.Properties;
-using Star_Citizen_Handle_Query.Serialization;
-using System.Collections;
-using System.Globalization;
+﻿using Star_Citizen_Handle_Query.Serialization;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
@@ -499,7 +496,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void SetSelectedColor(Button btn) {
       using ColorDialog colorDialog = new() {
         Color = btn.BackColor,
-        AnyColor = true
+        AnyColor = true,
+        FullOpen = true,
+        CustomColors = [
+          ColorTranslator.ToOle(ProgramSettings.Colors.AppForeColor),
+          ColorTranslator.ToOle(ProgramSettings.Colors.AppForeColorInactive),
+          ColorTranslator.ToOle(ProgramSettings.Colors.AppBackColor),
+          ColorTranslator.ToOle(ProgramSettings.Colors.AppSplitterColor)
+        ]
       };
       if (colorDialog.ShowDialog() == DialogResult.OK) {
         btn.BackColor = colorDialog.Color;
