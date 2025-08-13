@@ -30,6 +30,7 @@
     <None Remove="Resources\SCHQ.ico" />
     <None Remove="Resources\SCHQ.png" />
     <None Remove="Themes\DARK.SC_Handle_Query.colors.json" />
+    <None Remove="Themes\Dark_Red.SC_Handle_Query.colors.json" />
     <None Remove="Themes\IAE_2950.SC_Handle_Query.colors.json" />
     <None Remove="Themes\IAE_2951.SC_Handle_Query.colors.json" />
     <None Remove="Themes\IAE_2952.SC_Handle_Query.colors.json" />
@@ -90,6 +91,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Themes\Anvil_Hud.SC_Handle_Query.colors.json" />
     <EmbeddedResource Include="Themes\Dark.SC_Handle_Query.colors.json" />
+    <EmbeddedResource Include="Themes\Dark_Red.SC_Handle_Query.colors.json" />
     <EmbeddedResource Include="Themes\Drake_Hud.SC_Handle_Query.colors.json" />
     <EmbeddedResource Include="Themes\IAE_2949.SC_Handle_Query.colors.json" />
     <EmbeddedResource Include="Themes\IAE_2950.SC_Handle_Query.colors.json" />
