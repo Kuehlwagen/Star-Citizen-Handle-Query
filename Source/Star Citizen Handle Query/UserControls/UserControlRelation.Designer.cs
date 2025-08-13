@@ -50,12 +50,11 @@
       // 
       LabelOrganization.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       LabelOrganization.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-      LabelOrganization.Image = Properties.Resources.Organization_Small;
       LabelOrganization.Location = new Point(215, 2);
       LabelOrganization.Name = "LabelOrganization";
       LabelOrganization.Size = new Size(20, 20);
       LabelOrganization.TabIndex = 4;
-      LabelOrganization.Visible = false;
+      LabelOrganization.Paint += LabelOrganization_Paint;
       // 
       // UserControlRelation
       // 

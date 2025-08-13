@@ -156,16 +156,6 @@ namespace Star_Citizen_Handle_Query.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Organization_Small {
-            get {
-                object obj = ResourceManager.GetObject("Organization_Small", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Redacted_Small {
             get {
                 object obj = ResourceManager.GetObject("Redacted_Small", resourceCulture);
