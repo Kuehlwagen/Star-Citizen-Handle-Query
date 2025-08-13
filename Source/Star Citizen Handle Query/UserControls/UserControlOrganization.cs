@@ -59,9 +59,6 @@ namespace Star_Citizen_Handle_Query.UserControls {
             PictureBoxOrganization.MouseClick -= PictureBoxOrganization_MouseClick;
           }
         }
-        //if (Info?.Sid != null && Info?.RankStars >= 0 && Info.RankStars <= 5) {
-        //  PictureBoxOrganizationRank.Image = Properties.Resources.ResourceManager.GetObject($"OrganizationRank{Info.RankStars}") as Image;
-        //}
         PictureBoxOrganizationRank.Invalidate();
         if (!DisplayOnly) {
           Relation = GetMainForm().GetOrganizationRelation(Info.Sid);
@@ -71,12 +68,10 @@ namespace Star_Citizen_Handle_Query.UserControls {
           }
         }
       } else {
-        BackColor = Color.FromArgb(33, 26, 19);
         PictureBoxOrganization.Size = new Size(PictureBoxOrganization.Width, LogicalToDeviceUnits(19));
         PictureBoxOrganization.Image = Properties.Resources.Redacted_Small;
-        LabelOrganizationName.ForeColor = Color.FromArgb(255, 57, 57);
+        LabelOrganizationName.ForeColor = ProgramSettings.Colors.AppForeColorInactive;
         LabelOrganizationName.Text = "REDACTED";
-        LabelMainOrganizationAffiliate.ForeColor = Color.FromArgb(173, 39, 39);
         PictureBoxOrganization.MouseClick -= PictureBoxOrganization_MouseClick;
         LabelMainOrganizationAffiliate.Location = new Point(LabelMainOrganizationAffiliate.Left, LabelMainOrganizationAffiliate.Top - 3);
         Size = new Size(Size.Width, LogicalToDeviceUnits(25));
