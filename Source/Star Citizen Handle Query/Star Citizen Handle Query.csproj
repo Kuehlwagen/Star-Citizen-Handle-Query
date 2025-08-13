@@ -27,13 +27,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\SCHQ.ico" />
+    <None Remove="Resources\SCHQ.png" />
     <None Remove="Themes\DARK.SC_Handle_Query.colors.json" />
     <None Remove="Themes\LIGHT.SC_Handle_Query.colors.json" />
     <None Remove="Themes\ORANGE.SC_Handle_Query.colors.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Resources\SCHQ.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -76,17 +74,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Resources\SCHQ.ico">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-    <None Update="Resources\SCHQ.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
   </ItemGroup>
 
   <ItemGroup>
