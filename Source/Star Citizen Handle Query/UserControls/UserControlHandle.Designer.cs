@@ -148,7 +148,6 @@
       PictureBoxLive.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       PictureBoxLive.BackColor = Color.Transparent;
       PictureBoxLive.Cursor = Cursors.Hand;
-      PictureBoxLive.Image = Properties.Resources.Check;
       PictureBoxLive.InitialImage = null;
       PictureBoxLive.Location = new Point(336, 57);
       PictureBoxLive.Name = "PictureBoxLive";
@@ -156,7 +155,7 @@
       PictureBoxLive.SizeMode = PictureBoxSizeMode.Zoom;
       PictureBoxLive.TabIndex = 13;
       PictureBoxLive.TabStop = false;
-      PictureBoxLive.Visible = false;
+      PictureBoxLive.Paint += PictureBoxLive_Paint;
       PictureBoxLive.MouseClick += PictureBoxLive_MouseClick;
       // 
       // LabelRelation

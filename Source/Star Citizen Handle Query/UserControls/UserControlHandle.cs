@@ -2,6 +2,7 @@
 using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
+using System.Drawing.Drawing2D;
 using System.Net;
 using System.Text;
 using System.Text.Json;
@@ -17,6 +18,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private readonly Translation ProgramTranslation;
     private readonly bool ForceLive;
     private readonly bool DisplayOnly;
+    private CommunityHubLiveState LiveState = CommunityHubLiveState.Initializing;
 
     public string HandleName { get { return Info.Profile.Handle; } }
     public RelationValue HandleRelation { get { return Info.Relation; } }
@@ -82,18 +84,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
           LabelRelation.Cursor = Cursors.Default;
           LabelRelation.MouseClick -= LabelRelation_MouseClick;
         } else if (!ProgramSettings.HideStreamLiveStatus) {
-          PictureBoxLive.Visible = true;
-          CommunityHubLiveState liveState = await CheckCommunityHubIsLive(handle);
-          Image imageLiveState = Properties.Resources.Offline;
-          switch (liveState) {
-            case CommunityHubLiveState.Live:
-              imageLiveState = Properties.Resources.Live;
-              break;
-            case CommunityHubLiveState.Error:
-              imageLiveState = Properties.Resources.Error;
-              break;
-          }
-          PictureBoxLive.Image = imageLiveState;
+          PictureBoxLive.Invalidate();
+          LiveState = await CheckCommunityHubIsLive(handle);
+          PictureBoxLive.Invalidate();
         }
       } else {
         LabelCommunityMoniker.Text = Info?.HttpResponse?.StatusCode == HttpStatusCode.NotFound ? ProgramTranslation.Window.Handle_Not_Found : Info?.HttpResponse?.ErrorText;
@@ -239,6 +232,42 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     private void LabelRelation_Paint(object sender, PaintEventArgs e) {
       ControlPaint.DrawBorder(e.Graphics, LabelRelation.ClientRectangle, BackColor, ButtonBorderStyle.Solid);
+    }
+
+    private void PictureBoxLive_Paint(object sender, PaintEventArgs e) {
+      DrawLiveState(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive, ProgramSettings.Colors.AppBackColor);
+    }
+
+    private void DrawLiveState(Graphics g, Color foreColor, Color foreColorInactive, Color backColor) {
+      // Size: 32; 16
+      if (!ProgramSettings.HideStreamLiveStatus) {
+        using var fgiPen = new Pen(foreColorInactive, 2.0F);
+        using var fgPen = new Pen(foreColor, 1.0F);
+        using var bgPen = new Pen(backColor, 1.0F);
+
+        g.SmoothingMode = SmoothingMode.AntiAlias;
+        g.DrawRectangle(fgiPen, 0, 0, 30, 14);
+        g.FillRectangle(fgPen.Brush, 0, 0, 30, 14);
+        switch (LiveState) {
+          case CommunityHubLiveState.Initializing:
+            g.FillEllipse(fgiPen.Brush, 6, 5, 4, 4);
+            g.FillEllipse(bgPen.Brush, 6, 5, 4, 4);
+            g.FillEllipse(fgiPen.Brush, 13, 5, 4, 4);
+            g.FillEllipse(bgPen.Brush, 13, 5, 4, 4);
+            g.FillEllipse(fgiPen.Brush, 20, 5, 4, 4);
+            g.FillEllipse(bgPen.Brush, 20, 5, 4, 4);
+            break;
+          case CommunityHubLiveState.Offline:
+            g.DrawString("OFF", new Font("Consolas", 8, FontStyle.Bold), bgPen.Brush, new PointF(5, 2));
+            break;
+          case CommunityHubLiveState.Live:
+            g.DrawString("LIVE", new Font("Consolas", 7, FontStyle.Bold), bgPen.Brush, new PointF(4, 2));
+            break;
+          case CommunityHubLiveState.Error:
+            g.DrawString("ERR", new Font("Consolas", 8, FontStyle.Bold), bgPen.Brush, new PointF(5, 2));
+            break;
+        }
+      }
     }
 
   }

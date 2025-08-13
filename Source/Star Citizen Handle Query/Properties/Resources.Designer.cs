@@ -71,16 +71,6 @@ namespace Star_Citizen_Handle_Query.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Check {
-            get {
-                object obj = ResourceManager.GetObject("Check", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
         /// </summary>
         internal static byte[] de_DE {
@@ -111,26 +101,6 @@ namespace Star_Citizen_Handle_Query.Properties {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Error {
-            get {
-                object obj = ResourceManager.GetObject("Error", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Live {
-            get {
-                object obj = ResourceManager.GetObject("Live", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die name,type,parentBody,parentStar,coordinateX,coordinateY,coordinateZ,wikiLink,private,quantum
         ///Abandoned Outpost (Cellin),Ruins,Cellin,Stanton,130.062,184.915,130.356,https://starcitizen.tools/Unnamed_abandoned_outpost_(Cellin),0,0
         ///Abandoned Outpost (Daymar),Ruins,Daymar,Stanton,73.139,285.904,1.906,https://starcitizen.tools/Unnamed_abandoned_outpost_(Daymar),0,0
@@ -140,16 +110,6 @@ namespace Star_Citizen_Handle_Query.Properties {
         internal static string Locations {
             get {
                 return ResourceManager.GetString("Locations", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Offline {
-            get {
-                object obj = ResourceManager.GetObject("Offline", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

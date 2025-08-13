@@ -1522,6 +1522,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     public enum CommunityHubLiveState {
+      Initializing,
       Offline,
       Live,
       Error
