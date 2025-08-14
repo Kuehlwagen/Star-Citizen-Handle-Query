@@ -140,10 +140,28 @@ namespace Star_Citizen_Handle_Query.Serialization {
     public string ForeColorInactive { get; set; } = "#2E9D9E";
     public string BackColor { get; set; } = "#131A21";
     public string SplitterColor { get; set; } = "#FFFF00";
+    [JsonIgnore]
+    public string StatusInactiveForeColor { get; set; } = "#FF0000";
+    [JsonIgnore]
+    public string StatusInactiveBackColor { get; set; } = "#7F0000";
+    [JsonIgnore]
+    public string StatusInitializingForeColor { get; set; } = "#FF7A00";
+    [JsonIgnore]
+    public string StatusInitializingBackColor { get; set; } = "#CC4500";
+    [JsonIgnore]
+    public string StatusActiveForeColor { get; set; } = "#10AA00";
+    [JsonIgnore]
+    public string StatusActiveBackColor { get; set; } = "#105500";
     internal Color AppForeColor => ColorTranslator.FromHtml(ForeColor);
     internal Color AppForeColorInactive => ColorTranslator.FromHtml(ForeColorInactive);
     internal Color AppBackColor => ColorTranslator.FromHtml(BackColor);
     internal Color AppSplitterColor => ColorTranslator.FromHtml(SplitterColor);
+    internal Color AppStatusInactiveForeColor => ColorTranslator.FromHtml(StatusInactiveForeColor);
+    internal Color AppStatusInactiveBackColor => ColorTranslator.FromHtml(StatusInactiveBackColor);
+    internal Color AppStatusInitializingForeColor => ColorTranslator.FromHtml(StatusInitializingForeColor);
+    internal Color AppStatusInitializingBackColor => ColorTranslator.FromHtml(StatusInitializingBackColor);
+    internal Color AppStatusActiveForeColor => ColorTranslator.FromHtml(StatusActiveForeColor);
+    internal Color AppStatusActiveBackColor => ColorTranslator.FromHtml(StatusActiveBackColor);
 
     public object Clone() {
       return MemberwiseClone();

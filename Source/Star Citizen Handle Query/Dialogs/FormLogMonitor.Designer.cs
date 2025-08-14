@@ -61,13 +61,13 @@
       // 
       // PictureBoxStatus
       // 
-      PictureBoxStatus.Image = Properties.Resources.StatusRed;
-      PictureBoxStatus.Location = new Point(4, 7);
+      PictureBoxStatus.Location = new Point(1, 5);
       PictureBoxStatus.Name = "PictureBoxStatus";
-      PictureBoxStatus.Size = new Size(15, 15);
+      PictureBoxStatus.Size = new Size(20, 20);
       PictureBoxStatus.SizeMode = PictureBoxSizeMode.Zoom;
       PictureBoxStatus.TabIndex = 2;
       PictureBoxStatus.TabStop = false;
+      PictureBoxStatus.Paint += PictureBoxStatus_Paint;
       // 
       // LabelTitle
       // 

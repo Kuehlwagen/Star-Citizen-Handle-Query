@@ -1,6 +1,5 @@
 using SCHQ_Protos;
 using Star_Citizen_Handle_Query.Classes;
-using Star_Citizen_Handle_Query.Properties;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Drawing.Drawing2D;
@@ -314,20 +313,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           SetToolTip(PictureBoxClearAll, GetSyncStatusToolTip(status));
         }
         Sync = status;
-        Image img = Resources.StatusRed;
-        switch (Sync) {
-          case SyncStatus.Connecting:
-            img = Resources.StatusOrange;
-            break;
-          case SyncStatus.Connected:
-            img = Resources.StatusGreen;
-            break;
-        }
-        if (InvokeRequired) {
-          Invoke(() => PictureBoxClearAll.BackgroundImage = img);
-        } else {
-          PictureBoxClearAll.BackgroundImage = img;
-        }
+        PictureBoxClearAll.Invalidate();
       }
     }
 
@@ -590,8 +576,34 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void PictureBoxClearAll_Paint(object sender, PaintEventArgs e) {
+      var g = e.Graphics;
       if (!IsRPCSync) {
-        FormHandleQuery.PaintTrashIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive, PanelRelations.Controls.Count > 0);
+        FormHandleQuery.PaintTrashIcon(g, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive, PanelRelations.Controls.Count > 0);
+      } else {
+        Rectangle r = new(2, 2, 16, 16);
+        switch (Sync) {
+          case SyncStatus.Disconnected: {
+              using var bgPen = new Pen(ProgramSettings.Colors.AppStatusInactiveBackColor, 2.0F);
+              using var fgPen = new Pen(ProgramSettings.Colors.AppStatusInactiveForeColor, 1.0F);
+              g.DrawEllipse(bgPen, r);
+              g.FillEllipse(fgPen.Brush, r);
+            }
+            break;
+          case SyncStatus.Connecting: {
+              using var bgPen = new Pen(ProgramSettings.Colors.AppStatusInitializingBackColor, 2.0F);
+              using var fgPen = new Pen(ProgramSettings.Colors.AppStatusInitializingForeColor, 1.0F);
+              g.DrawEllipse(bgPen, r);
+              g.FillEllipse(fgPen.Brush, r);
+            }
+            break;
+          case SyncStatus.Connected: {
+              using var bgPen = new Pen(ProgramSettings.Colors.AppStatusActiveBackColor, 2.0F);
+              using var fgPen = new Pen(ProgramSettings.Colors.AppStatusActiveForeColor, 1.0F);
+              g.DrawEllipse(bgPen, r);
+              g.FillEllipse(fgPen.Brush, r);
+            }
+            break;
+        }
       }
     }
 

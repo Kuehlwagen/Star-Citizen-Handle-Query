@@ -64,8 +64,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public FormHandleQuery(Settings settings) {
       InitializeComponent();
 
-      LabelLockUnlock.Image = null;
-
       // Farben setzen
       if (settings?.Colors != null) {
         ForeColor = settings.Colors.AppForeColor;
@@ -208,7 +206,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     internal static Dictionary<string, Translation> GetAllTranslations() {
       // Ressourcenmanager nach Sprachen durchsuchen
       Dictionary<string, Translation> rtnVal = Resources.ResourceManager
-        .GetResourceSet(CultureInfo.CurrentCulture, false, true)
+        .GetResourceSet(CultureInfo.CurrentCulture, true, true)
         .Cast<DictionaryEntry>()
         .Where(x => x.Value.GetType() == typeof(byte[]) && RgxLocalizationMethod().IsMatch(x.Key.ToString()))
         .Select(x => new KeyValuePair<string, Translation>(x.Key.ToString(), JsonSerializer.Deserialize<Translation>(Encoding.UTF8.GetString(x.Value as byte[]))))

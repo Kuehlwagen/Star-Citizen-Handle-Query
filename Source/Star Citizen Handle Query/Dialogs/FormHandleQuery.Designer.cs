@@ -106,7 +106,6 @@
       // 
       LabelLockUnlock.Cursor = Cursors.Hand;
       LabelLockUnlock.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-      LabelLockUnlock.Image = Properties.Resources.StatusGreen;
       LabelLockUnlock.Location = new Point(3, 4);
       LabelLockUnlock.Name = "LabelLockUnlock";
       LabelLockUnlock.Size = new Size(20, 20);

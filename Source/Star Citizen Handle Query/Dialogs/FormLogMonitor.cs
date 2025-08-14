@@ -3,6 +3,7 @@ using Star_Citizen_Handle_Query.Classes;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Diagnostics;
+using System.Drawing.Drawing2D;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -16,6 +17,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly Settings ProgramSettings;
     private readonly Translation ProgramTranslation;
     private readonly string NL = Environment.NewLine;
+    private Status LogStatus = Status.Inactive;
 
     private readonly Regex RgxCorpse = RegexCorpse();
     [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <\[ActorState\] Corpse> \[ACTOR STATE\]\[SSCActorStateCVars::LogCorpse\] Player '(?<Handle>[\w_\-]+)' <\w+ client>: (?<Key>.+): (?<Value>.+) \[Team_ActorTech]\[Actor\]$", RegexOptions.Compiled)]
@@ -320,19 +322,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void ChangeStatus(Status status) {
-      Image imgStatus = Properties.Resources.StatusRed;
-
-      switch (status) {
-        case Status.Initializing:
-          imgStatus = Properties.Resources.StatusOrange;
-          break;
-        case Status.Monitoring:
-          imgStatus = Properties.Resources.StatusGreen;
-          break;
-      }
-
-      if (PictureBoxStatus.Image != imgStatus) {
-        PictureBoxStatus.Image = imgStatus;
+      if (LogStatus != status) {
+        LogStatus = status;
+        PictureBoxStatus.Invalidate();
       }
     }
 
@@ -476,6 +468,36 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void PictureBoxClearAll_Paint(object sender, PaintEventArgs e) {
       FormHandleQuery.PaintTrashIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive, PanelLogInfo.Controls.Count > 0);
+    }
+
+    private void PictureBoxStatus_Paint(object sender, PaintEventArgs e) {
+      var g = e.Graphics;
+
+      g.SmoothingMode = SmoothingMode.AntiAlias;
+      Rectangle r = new(2, 2, 16, 16);
+      switch (LogStatus) {
+        case Status.Inactive: {
+            using var bgPen = new Pen(ProgramSettings.Colors.AppStatusInactiveBackColor, 2.0F);
+            using var fgPen = new Pen(ProgramSettings.Colors.AppStatusInactiveForeColor, 1.0F);
+            g.DrawEllipse(bgPen, r);
+            g.FillEllipse(fgPen.Brush, r);
+          }
+          break;
+        case Status.Initializing: {
+            using var bgPen = new Pen(ProgramSettings.Colors.AppStatusInitializingBackColor, 2.0F);
+            using var fgPen = new Pen(ProgramSettings.Colors.AppStatusInitializingForeColor, 1.0F);
+            g.DrawEllipse(bgPen, r);
+            g.FillEllipse(fgPen.Brush, r);
+          }
+          break;
+        case Status.Monitoring: {
+            using var bgPen = new Pen(ProgramSettings.Colors.AppStatusActiveBackColor, 2.0F);
+            using var fgPen = new Pen(ProgramSettings.Colors.AppStatusActiveForeColor, 1.0F);
+            g.DrawEllipse(bgPen, r);
+            g.FillEllipse(fgPen.Brush, r);
+          }
+          break;
+      }
     }
 
   }
