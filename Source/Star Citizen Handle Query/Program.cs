@@ -107,7 +107,10 @@ namespace Star_Citizen_Handle_Query {
               }
               legacyPath = Path.Combine(legacyPath, @"..\");
               newPath = FormSettings.GetLocalizationPath();
-              if (Directory.Exists(legacyPath) && Directory.Exists(newPath)) {
+              if (Directory.Exists(legacyPath)) {
+                if (!Directory.Exists(newPath)) {
+                  Directory.CreateDirectory(newPath);
+                }
                 foreach (string file in Directory.GetFiles(legacyPath)) {
                   try {
                     File.Move(file, Path.Combine(newPath, Path.GetFileName(file)));
