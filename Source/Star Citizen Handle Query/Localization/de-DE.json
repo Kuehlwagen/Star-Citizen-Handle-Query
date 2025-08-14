@@ -38,7 +38,15 @@
       "Auto_Close_Duration_Seconds": "Sekunde(n)",
       "Auto_Close_Hide_Windows": "Fenster ausblenden",
       "Colors": "Farben:",
-      "Theme":  "Thema..."
+      "Select_Theme": "Thema ausw\u00E4hlen...",
+      "Fore_Color": "Vordergrundfarbe",
+      "Fore_Color_Inactive": "Vordergrundfarbe inaktiv",
+      "Back_Color": "Hintergrundfarbe",
+      "Splitter_Color": "Trenner-Farbe",
+      "Advanced": "Fortgeschritten",
+      "Status_Inactive": "Status inaktiv",
+      "Status_Initializing": "Status Initialisierung",
+      "Status_Active": "Status aktiv"
     },
     "Window": {
       "Group_Title": "Fenster",

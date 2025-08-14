@@ -38,7 +38,21 @@
       "Auto_Close_Duration_Seconds": "Second(s)",
       "Auto_Close_Hide_Windows": "Hide windows",
       "Colors": "Colors:",
-      "Theme": "Theme..."
+      "Select_Theme": "Select theme...",
+      "Fore_Color": "Foreground color",
+      "Fore_Color_Inactive": "Foreground color inactive",
+      "Back_Color": "Background color",
+      "Splitter_Color": "Splitter color",
+      "Advanced": "Advanced",
+      "Status_Inactive": "Status inactive",
+      "Status_Initializing": "Status initializing",
+      "Status_Active": "Status active",
+      "Theme_Translations": {
+        "Nachmittag": "Afternoon",
+        "Nacht": "Night",
+        "Strand": "Beach",
+        "Tag": "Day"
+      }
     },
     "Window": {
       "Group_Title": "Window",

@@ -580,7 +580,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void ToolTipHandleQuery_Draw(object sender, DrawToolTipEventArgs e) {
       e.DrawBackground();
       e.DrawBorder();
-      e.DrawText(TextFormatFlags.TextBoxControl);
+      e.DrawText(TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
     }
 
     private void FormRelations_Activated(object sender, EventArgs e) {

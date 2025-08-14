@@ -58,6 +58,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (ProgramSettings?.Colors != null) {
         BackColor = ProgramSettings.Colors.AppBackColor;
         ForeColor = ProgramSettings.Colors.AppForeColor;
+        ToolTipSettings.BackColor = ProgramSettings.Colors.AppBackColor;
+        ToolTipSettings.ForeColor = ProgramSettings.Colors.AppForeColor;
         GroupBoxAnzeige.ForeColor = ProgramSettings.Colors.AppForeColor;
         GroupBoxFenster.ForeColor = ProgramSettings.Colors.AppForeColor;
         GroupBoxBeziehungen.ForeColor = ProgramSettings.Colors.AppForeColor;
@@ -122,6 +124,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         ComboBoxColorThemes.ForeColor = ProgramSettings.Colors.AppForeColor;
       }
 
+      // Einstellungen auf den Dialog übernehmen
+      SetDialogValues();
+
+      LoadingFinished = true;
+    }
+
+    private void AddThemes() {
+      // Farb-Themen leeren
+      AppColorThemes.Clear();
+      ComboBoxColorThemes.Items.Clear();
       // Farb-Themen hinzufügen
       string themeName;
       string themeResourceString;
@@ -131,6 +143,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         using (Stream stream = Assembly.GetEntryAssembly().GetManifestResourceStream(themeResourcePath))
         using (StreamReader reader = new(stream)) {
           themeResourceString = reader.ReadToEnd();
+        }
+        if (CurrentLocalization.Settings.Display.Theme_Translations?.Count > 0) {
+          if (CurrentLocalization.Settings.Display.Theme_Translations.TryGetValue(themeName, out string themeNameTranslation)) {
+            themeName = themeNameTranslation;
+          }
         }
         AppColorThemes.Add(themeName, JsonSerializer.Deserialize<AppColors>(themeResourceString));
       }
@@ -150,11 +167,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ComboBoxColorThemes.Items.Add("Thema...");
       ComboBoxColorThemes.Items.AddRange([.. AppColorThemes.Keys]);
       ComboBoxColorThemes.SelectedIndex = 0;
-
-      // Einstellungen auf den Dialog übernehmen
-      SetDialogValues();
-
-      LoadingFinished = true;
+      ComboBoxColorThemes.Items[0] = CurrentLocalization.Settings.Display.Select_Theme;
     }
 
     private void SetDialogValues() {
@@ -303,6 +316,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.Language = (sender as ComboBox).SelectedItem.ToString();
       CurrentLocalization = Localizations.FirstOrDefault(x => x.Language == ProgramSettings.Language);
       UpdateLocalization();
+      AddThemes();
     }
 
     private void NumericUpDownErgebnisAutomatischLeeren_ValueChanged(object sender, EventArgs e) {
@@ -428,7 +442,27 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxFensterAusblenden.Text = CurrentLocalization.Settings.Display.Auto_Close_Hide_Windows;
       LabelFarben.Text = CurrentLocalization.Settings.Display.Colors;
       ButtonFarbenStandard.Text = CurrentLocalization.Settings.Buttons.Standard;
-      ComboBoxColorThemes.Items[0] = CurrentLocalization.Settings.Display.Theme;
+      CheckBoxErweitert.Text = CurrentLocalization.Settings.Display.Advanced;
+      SetToolTip(ButtonForeColor, CurrentLocalization.Settings.Display.Fore_Color);
+      SetToolTip(ButtonForeColorInactive, CurrentLocalization.Settings.Display.Fore_Color_Inactive);
+      SetToolTip(ButtonBackColor, CurrentLocalization.Settings.Display.Back_Color);
+      SetToolTip(ButtonSplitterColor, CurrentLocalization.Settings.Display.Splitter_Color);
+      SetToolTip(ButtonStatusInactiveForeColor, $"{CurrentLocalization.Settings.Display.Status_Inactive} ({CurrentLocalization.Settings.Display.Fore_Color})");
+      SetToolTip(ButtonStatusInactiveBackColor, $"{CurrentLocalization.Settings.Display.Status_Inactive} ({CurrentLocalization.Settings.Display.Back_Color})");
+      SetToolTip(ButtonStatusInitializingForeColor, $"{CurrentLocalization.Settings.Display.Status_Initializing} ({CurrentLocalization.Settings.Display.Fore_Color})");
+      SetToolTip(ButtonStatusInitializingBackColor, $"{CurrentLocalization.Settings.Display.Status_Initializing} ({CurrentLocalization.Settings.Display.Back_Color})");
+      SetToolTip(ButtonStatusActiveForeColor, $"{CurrentLocalization.Settings.Display.Status_Active} ({CurrentLocalization.Settings.Display.Fore_Color})");
+      SetToolTip(ButtonStatusActiveBackColor, $"{CurrentLocalization.Settings.Display.Status_Active} ({CurrentLocalization.Settings.Display.Back_Color})");
+      SetToolTip(ButtonRelationFriendlyForeColor, $"{CurrentLocalization.Local_Cache.Relation.Friendly} ({CurrentLocalization.Settings.Display.Fore_Color})");
+      SetToolTip(ButtonRelationFriendlyBackColor, $"{CurrentLocalization.Local_Cache.Relation.Friendly} ({CurrentLocalization.Settings.Display.Back_Color})");
+      SetToolTip(ButtonRelationNeutralForeColor, $"{CurrentLocalization.Local_Cache.Relation.Neutral} ({CurrentLocalization.Settings.Display.Fore_Color})");
+      SetToolTip(ButtonRelationNeutralBackColor, $"{CurrentLocalization.Local_Cache.Relation.Neutral} ({CurrentLocalization.Settings.Display.Back_Color})");
+      SetToolTip(ButtonRelationBogeyForeColor, $"{CurrentLocalization.Local_Cache.Relation.Bogey} ({CurrentLocalization.Settings.Display.Fore_Color})");
+      SetToolTip(ButtonRelationBogeyBackColor, $"{CurrentLocalization.Local_Cache.Relation.Bogey} ({CurrentLocalization.Settings.Display.Back_Color})");
+      SetToolTip(ButtonRelationBanditForeColor, $"{CurrentLocalization.Local_Cache.Relation.Bandit} ({CurrentLocalization.Settings.Display.Fore_Color})");
+      SetToolTip(ButtonRelationBanditBackColor, $"{CurrentLocalization.Local_Cache.Relation.Bandit} ({CurrentLocalization.Settings.Display.Back_Color})");
+      SetToolTip(ButtonRelationOrganizationForeColor, $"{CurrentLocalization.Local_Cache.Columns.Organization.ToUpper()} ({CurrentLocalization.Settings.Display.Fore_Color})");
+      SetToolTip(ButtonRelationOrganizationBackColor, $"{CurrentLocalization.Local_Cache.Columns.Organization.ToUpper()} ({CurrentLocalization.Settings.Display.Back_Color})");
 
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;
       LabelFensterDeckkraft.Text = CurrentLocalization.Settings.Window.Opacity;
@@ -741,6 +775,40 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
+    private void ToolTipHandleQuery_Draw(object sender, DrawToolTipEventArgs e) {
+      e.DrawBackground();
+      e.DrawBorder();
+      e.DrawText(TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
+    }
+
+    public void SetToolTip(Control control, string text = null) {
+      ToolTipSettings.SetToolTip(control, text ?? control.Text);
+    }
+
+    private void CheckBoxErweitert_CheckedChanged(object sender, EventArgs e) {
+      bool visible = !ButtonStatusInactiveForeColor.Visible;
+      int buttonHeight = visible ? 12 : 20;
+      ButtonForeColor.Height = buttonHeight;
+      ButtonForeColorInactive.Height = buttonHeight;
+      ButtonBackColor.Height = buttonHeight;
+      ButtonSplitterColor.Height = buttonHeight;
+      ButtonStatusInactiveForeColor.Visible = visible;
+      ButtonStatusInactiveBackColor.Visible = visible;
+      ButtonStatusInitializingForeColor.Visible = visible;
+      ButtonStatusInitializingBackColor.Visible = visible;
+      ButtonStatusActiveForeColor.Visible = visible;
+      ButtonStatusActiveBackColor.Visible = visible;
+      ButtonRelationFriendlyForeColor.Visible = visible;
+      ButtonRelationFriendlyBackColor.Visible = visible;
+      ButtonRelationNeutralForeColor.Visible = visible;
+      ButtonRelationNeutralBackColor.Visible = visible;
+      ButtonRelationBogeyForeColor.Visible = visible;
+      ButtonRelationBogeyBackColor.Visible = visible;
+      ButtonRelationBanditForeColor.Visible = visible;
+      ButtonRelationBanditBackColor.Visible = visible;
+      ButtonRelationOrganizationForeColor.Visible = visible;
+      ButtonRelationOrganizationBackColor.Visible = visible;
+    }
   }
 
 }

@@ -143,7 +143,25 @@
 
     public string Colors { get; set; } = "Farben:";
 
-    public string Theme { get; set; } = "Thema...";
+    public string Select_Theme { get; set; } = "Thema auswählen...";
+
+    public string Fore_Color { get; set; } = "Vordergrundfarbe";
+
+    public string Fore_Color_Inactive { get; set; } = "Vordergrundfarbe inaktiv";
+
+    public string Back_Color { get; set; } = "Hintergrundfarbe";
+
+    public string Splitter_Color { get; set; } = "Trenner-Farbe";
+
+    public string Advanced { get; set; } = "Fortgeschritten";
+
+    public string Status_Inactive { get; set; } = "Status inaktiv";
+
+    public string Status_Initializing { get; set; } = "Status Initialisierung";
+
+    public string Status_Active { get; set; } = "Status aktiv";
+
+    public Dictionary<string, string> Theme_Translations { get; set; } = [];
 
   }
 

@@ -441,7 +441,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void ToolTipLogMonitor_Draw(object sender, DrawToolTipEventArgs e) {
       e.DrawBackground();
       e.DrawBorder();
-      e.DrawText(TextFormatFlags.TextBoxControl);
+      e.DrawText(TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
     }
 
     internal void SetTooltip(Control control, string text) {
