@@ -63,7 +63,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
         if (!DisplayOnly) {
           Relation = GetMainForm().GetOrganizationRelation(Info.Sid);
           if (Relation > RelationValue.NotAssigned) {
-            LabelRelation.BackColor = GetRelationColor(Relation);
+            LabelRelation.BackColor = GetRelationColor(ProgramSettings, Relation);
             LabelRelation.Visible = true;
           }
         }
@@ -92,7 +92,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
       return Parent.Parent as FormHandleQuery;
     }
 
-    private void SetToolTip(Control control, string text = null) {
+    private void SetToolTip(Label control, string text = null) {
       GetMainForm()?.SetToolTip(control, text ?? control.Text);
     }
 
@@ -118,7 +118,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
       }
       Relation = relation;
       LabelRelation.Visible = relation > RelationValue.NotAssigned;
-      LabelRelation.BackColor = GetRelationColor(Relation);
+      LabelRelation.BackColor = GetRelationColor(ProgramSettings, Relation);
     }
 
     private void LabelRelation_Paint(object sender, PaintEventArgs e) {

@@ -55,7 +55,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     public void UpdateRelation(RelationValue relation) {
       Relation = relation;
-      LabelRelation.BackColor = FormHandleQuery.GetRelationColor(relation);
+      LabelRelation.BackColor = FormHandleQuery.GetRelationColor(ProgramSettings, relation);
     }
 
     public void UpdateComment(string comment) {
@@ -68,7 +68,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     private void LabelOrganization_Paint(object sender, PaintEventArgs e) {
       if (Type == RelationType.Organization) {
-        PaintOrgIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive);
+        PaintOrgIcon(e.Graphics, ProgramSettings.Colors.AppOrganizationForeColor, ProgramSettings.Colors.AppForeColorInactive);
       }
     }
 

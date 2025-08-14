@@ -42,7 +42,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           PictureBoxLeft.Invalidate();
           if (LogInfoItem.RelationValue > RelationValue.NotAssigned) {
             LabelRelation.Visible = LogInfoItem.RelationValue > RelationValue.NotAssigned;
-            LabelRelation.BackColor = FormHandleQuery.GetRelationColor(LogInfoItem.RelationValue);
+            LabelRelation.BackColor = FormHandleQuery.GetRelationColor(ProgramSettings, LogInfoItem.RelationValue);
           }
           if (LogInfoItem.IsLocationInfo) {
             SetToolTip(LogInfoItem.Value);
@@ -57,7 +57,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           SetToolTip(LogInfoItem.Value);
           if (LogInfoItem.RelationValue > RelationValue.NotAssigned) {
             LabelRelation.Visible = LogInfoItem.RelationValue > RelationValue.NotAssigned;
-            LabelRelation.BackColor = FormHandleQuery.GetRelationColor(LogInfoItem.RelationValue);
+            LabelRelation.BackColor = FormHandleQuery.GetRelationColor(ProgramSettings,LogInfoItem.RelationValue);
           }
           Height += LabelText.Height;
           LabelRelation.Height += LabelText.Height;
@@ -79,7 +79,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
             PictureBoxLeft.Invalidate();
             if (info.RelationValue > RelationValue.NotAssigned) {
               LabelRelation.Visible = info.RelationValue > RelationValue.NotAssigned;
-              LabelRelation.BackColor = FormHandleQuery.GetRelationColor(info.RelationValue);
+              LabelRelation.BackColor = FormHandleQuery.GetRelationColor(ProgramSettings, info.RelationValue);
             }
             if (info.IsLocationInfo) {
               SetToolTip(info.Value);

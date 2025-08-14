@@ -75,7 +75,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelAdditionalInformation.Text = GetString(Info?.Comment);
         SetToolTip(LabelAdditionalInformation);
         if (Info?.Relation > RelationValue.NotAssigned) {
-          LabelRelation.BackColor = GetRelationColor(Info.Relation);
+          LabelRelation.BackColor = GetRelationColor(ProgramSettings, Info.Relation);
           SetToolTip(LabelRelation, FormLocalCache.GetTranslatedRelationText(ProgramTranslation, Info.Relation));
           LabelRelation.Visible = true;
         }
@@ -211,7 +211,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
       Info.Relation = relation;
       CreateHandleJSON(Info, ProgramSettings, forceExport: true);
       LabelRelation.Visible = relation > RelationValue.NotAssigned;
-      LabelRelation.BackColor = GetRelationColor(Info.Relation);
+      LabelRelation.BackColor = GetRelationColor(ProgramSettings, Info.Relation);
       SetToolTip(LabelRelation, FormLocalCache.GetTranslatedRelationText(ProgramTranslation, Info.Relation));
       ActivateTextBoxHandle();
     }

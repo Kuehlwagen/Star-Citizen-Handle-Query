@@ -1343,24 +1343,24 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ToolTipHandleQuery.SetToolTip(control, text ?? control.Text);
     }
 
-    public static Color GetRelationColor(RelationValue relation) {
+    public static Color GetRelationColor(Settings programSettings, RelationValue relation) {
       var colorRelation = relation switch {
-        RelationValue.Friendly => Color.Green,
-        RelationValue.Neutral => Color.Gray,
-        RelationValue.Bogey => Color.Orange,
-        RelationValue.Bandit => Color.Red,
-        _ => Color.FromArgb(19, 26, 33),
+        RelationValue.Friendly => programSettings.Colors.AppFriendlyForeColor,
+        RelationValue.Neutral => programSettings.Colors.AppNeutralForeColor,
+        RelationValue.Bogey => programSettings.Colors.AppBogeyForeColor,
+        RelationValue.Bandit => programSettings.Colors.AppBanditForeColor,
+        _ => programSettings.Colors.AppBackColor,
       };
       return colorRelation;
     }
 
-    public static Color GetRelationInactiveColor(RelationValue relation) {
+    public static Color GetRelationInactiveColor(Settings programSettings, RelationValue relation) {
       var colorRelation = relation switch {
-        RelationValue.Friendly => Color.FromArgb(0, 64, 0),
-        RelationValue.Neutral => Color.FromArgb(64, 64, 64),
-        RelationValue.Bogey => Color.FromArgb(127, 82, 0),
-        RelationValue.Bandit => Color.FromArgb(127, 0, 0),
-        _ => Color.FromArgb(19, 26, 33),
+        RelationValue.Friendly => programSettings.Colors.AppFriendlyBackColor,
+        RelationValue.Neutral => programSettings.Colors.AppNeutralBackColor,
+        RelationValue.Bogey => programSettings.Colors.AppBogeyBackColor,
+        RelationValue.Bandit => programSettings.Colors.AppBanditBackColor,
+        _ => programSettings.Colors.AppBackColor,
       };
       return colorRelation;
     }

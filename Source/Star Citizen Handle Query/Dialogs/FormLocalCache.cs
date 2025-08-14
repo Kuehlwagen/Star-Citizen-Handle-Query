@@ -205,7 +205,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (e.RowIndex > -1 && e.ColumnIndex == 8) {
         string[] values = $"{e.Value}".Split("-");
         if (values?.Length == 2 && Enum.TryParse(values[0], out RelationValue value)) {
-          e.CellStyle.BackColor = FormHandleQuery.GetRelationColor(value);
+          e.CellStyle.BackColor = FormHandleQuery.GetRelationColor(ProgramSettings, value);
           e.CellStyle.ForeColor = value > 0 ? Color.FromArgb(19, 26, 33) : ForeColor;
           e.Value = GetTranslatedRelationText(ProgramTranslation, value);
           e.FormattingApplied = true;

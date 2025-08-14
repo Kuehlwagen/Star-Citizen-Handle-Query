@@ -43,6 +43,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           PanelHeader.BackColor = programSettings.Colors.AppBackColor;
           ToolTipRelations.BackColor = programSettings.Colors.AppBackColor;
           ToolTipRelations.ForeColor = programSettings.Colors.AppForeColor;
+          CheckBoxFilterFriendly.BackColor = programSettings.Colors.AppFriendlyForeColor;
+          CheckBoxFilterNeutral.BackColor = programSettings.Colors.AppNeutralForeColor;
+          CheckBoxFilterBogey.BackColor = programSettings.Colors.AppBogeyForeColor;
+          CheckBoxFilterBandit.BackColor = programSettings.Colors.AppBanditForeColor;
+          CheckBoxFilterOrganization.BackColor = programSettings.Colors.AppOrganizationForeColor;
         }
       }
 
@@ -547,7 +552,28 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         int width = LogicalToDeviceUnits(6);
         int height = LogicalToDeviceUnits(6);
         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-        e.Graphics.FillEllipse(new SolidBrush(Color.FromArgb(19, 26, 33)), x, y, width, height);
+        switch ((sender as CheckBox).Name) {
+          case nameof(CheckBoxFilterFriendly):
+            e.Graphics.Clear(ProgramSettings.Colors.AppFriendlyForeColor);
+            e.Graphics.FillEllipse(new SolidBrush(ProgramSettings.Colors.AppFriendlyBackColor), x, y, width, height);
+            break;
+          case nameof(CheckBoxFilterNeutral):
+            e.Graphics.Clear(ProgramSettings.Colors.AppNeutralForeColor);
+            e.Graphics.FillEllipse(new SolidBrush(ProgramSettings.Colors.AppNeutralBackColor), x, y, width, height);
+            break;
+          case nameof(CheckBoxFilterBogey):
+            e.Graphics.Clear(ProgramSettings.Colors.AppBogeyForeColor);
+            e.Graphics.FillEllipse(new SolidBrush(ProgramSettings.Colors.AppBogeyBackColor), x, y, width, height);
+            break;
+          case nameof(CheckBoxFilterBandit):
+            e.Graphics.Clear(ProgramSettings.Colors.AppBanditForeColor);
+            e.Graphics.FillEllipse(new SolidBrush(ProgramSettings.Colors.AppBanditBackColor), x, y, width, height);
+            break;
+          case nameof(CheckBoxFilterOrganization):
+            e.Graphics.Clear(ProgramSettings.Colors.AppOrganizationForeColor);
+            e.Graphics.FillEllipse(new SolidBrush(ProgramSettings.Colors.AppOrganizationBackColor), x, y, width, height);
+            break;
+        }
       }
     }
 
