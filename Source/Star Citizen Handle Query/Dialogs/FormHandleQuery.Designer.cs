@@ -69,11 +69,11 @@
       TextBoxHandle.AutoCompleteMode = AutoCompleteMode.Append;
       TextBoxHandle.AutoCompleteSource = AutoCompleteSource.CustomSource;
       TextBoxHandle.BackColor = Color.FromArgb(57, 206, 216);
-      TextBoxHandle.Location = new Point(71, 3);
+      TextBoxHandle.Location = new Point(79, 3);
       TextBoxHandle.MaxLength = 60;
       TextBoxHandle.Name = "TextBoxHandle";
       TextBoxHandle.PlaceholderText = "Handle eingeben...";
-      TextBoxHandle.Size = new Size(251, 23);
+      TextBoxHandle.Size = new Size(243, 23);
       TextBoxHandle.TabIndex = 2;
       TextBoxHandle.TextChanged += TextBoxHandle_TextChanged;
       TextBoxHandle.KeyDown += TextBoxHandle_KeyDown;
