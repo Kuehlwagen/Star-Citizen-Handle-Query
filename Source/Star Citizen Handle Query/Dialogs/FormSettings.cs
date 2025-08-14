@@ -19,7 +19,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     ];
     private readonly bool LoadingFinished = false;
     private const string ThemesResourcePrefix = "Star_Citizen_Handle_Query.Themes.";
-    private readonly Dictionary<string, AppColors> AppColorThemes = [];
+    private readonly SortedDictionary<string, AppColors> AppColorThemes = [];
 
     public FormSettings(Settings settings = null) {
       InitializeComponent();
@@ -110,14 +110,26 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       string themeName;
       string themeResourceString;
       foreach (string themeResourcePath in Assembly.GetEntryAssembly().GetManifestResourceNames()
-        .Where(r => r.StartsWith(ThemesResourcePrefix, StringComparison.CurrentCultureIgnoreCase))
-        .Order()) {
+        .Where(r => r.StartsWith(ThemesResourcePrefix, StringComparison.CurrentCultureIgnoreCase))) {
         themeName = themeResourcePath[ThemesResourcePrefix.Length..themeResourcePath.IndexOf('.', ThemesResourcePrefix.Length)].Replace('_', ' ');
         using (Stream stream = Assembly.GetEntryAssembly().GetManifestResourceStream(themeResourcePath))
         using (StreamReader reader = new(stream)) {
           themeResourceString = reader.ReadToEnd();
         }
         AppColorThemes.Add(themeName, JsonSerializer.Deserialize<AppColors>(themeResourceString));
+      }
+      string templatesDirectoryPath = GetTemplatesPath();
+      if (Directory.Exists(templatesDirectoryPath)) {
+        AppColors templateColors;
+        string templateName;
+        foreach (string templateFilePath in Directory.GetFiles(templatesDirectoryPath, "*.SC_Handle_Query.colors.json")) {
+          templateColors = JsonSerializer.Deserialize<AppColors>(File.ReadAllText(templateFilePath, Encoding.UTF8));
+          templateName = Path.GetFileName(templateFilePath);
+          templateName = templateName[..templateName.IndexOf('.')];
+          if (templateColors != null && !AppColorThemes.ContainsKey(templateName)) {
+            AppColorThemes.Add(templateName, templateColors);
+          }
+        }
       }
       ComboBoxColorThemes.Items.Add("Thema...");
       ComboBoxColorThemes.Items.AddRange([.. AppColorThemes.Keys]);
@@ -185,6 +197,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public static string GetLocalizationPath() {
       return Path.Combine(FormHandleQuery.GetSaveFilesRootPath(), "Localization");
+    }
+
+    public static string GetTemplatesPath() {
+      return Path.Combine(FormHandleQuery.GetSaveFilesRootPath(), "Templates");
     }
 
     private readonly JsonSerializerOptions JsonSerOptions = new() { WriteIndented = true };

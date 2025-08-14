@@ -1125,6 +1125,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         case CacheDirectoryType.Location:
           rtnVal = Path.Combine(GetSaveFilesRootPath(), @"Cache\Images\Location");
           break;
+        case CacheDirectoryType.Templates:
+          rtnVal = Path.Combine(GetSaveFilesRootPath(), "Templates");
+          break;
       }
 
       return rtnVal;
@@ -1142,7 +1145,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       HandleDisplayTitle,
       OrganizationAvatar,
       Source,
-      Location
+      Location,
+      Templates
     }
 
     private void RestartProgram() {

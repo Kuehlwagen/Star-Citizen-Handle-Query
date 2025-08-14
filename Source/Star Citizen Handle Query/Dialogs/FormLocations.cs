@@ -49,6 +49,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Ggf. Cache-Verzeichnis für Ort-Bilder erstellen
       CreateDirectory(CacheDirectoryType.Location);
 
+      // Ggf. Template-Verzeichnis erstellen
+      CreateDirectory(CacheDirectoryType.Templates);
+
       // Orte ermitteln
       Task.Run(LoadLocations);
     }

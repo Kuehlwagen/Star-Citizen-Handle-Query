@@ -120,6 +120,21 @@ namespace Star_Citizen_Handle_Query {
                   Directory.Delete(legacyPath);
                 } catch { }
               }
+              legacyPath = Path.Combine(directory, "Templates");
+              newPath = FormSettings.GetTemplatesPath();
+              if (Directory.Exists(legacyPath)) {
+                if (!Directory.Exists(newPath)) {
+                  Directory.CreateDirectory(newPath);
+                }
+                foreach (string file in Directory.GetFiles(legacyPath)) {
+                  try {
+                    File.Move(file, Path.Combine(newPath, Path.GetFileName(file)));
+                  } catch { }
+                }
+                try {
+                  Directory.Delete(legacyPath);
+                } catch { }
+              }
               try {
                 Directory.Delete(directory);
               } catch { }
