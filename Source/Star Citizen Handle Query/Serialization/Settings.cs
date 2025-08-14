@@ -140,37 +140,21 @@ namespace Star_Citizen_Handle_Query.Serialization {
     public string ForeColorInactive { get; set; } = "#2E9D9E";
     public string BackColor { get; set; } = "#131A21";
     public string SplitterColor { get; set; } = "#FFFF00";
-    [JsonIgnore]
     public string StatusInactiveForeColor { get; set; } = "#FF0000";
-    [JsonIgnore]
     public string StatusInactiveBackColor { get; set; } = "#7F0000";
-    [JsonIgnore]
     public string StatusInitializingForeColor { get; set; } = "#FF7A00";
-    [JsonIgnore]
     public string StatusInitializingBackColor { get; set; } = "#CC4500";
-    [JsonIgnore]
     public string StatusActiveForeColor { get; set; } = "#10AA00";
-    [JsonIgnore]
     public string StatusActiveBackColor { get; set; } = "#105500";
-    [JsonIgnore]
     public string RelationFriendlyForeColor { get; set; } = "#008000";
-    [JsonIgnore]
     public string RelationFriendlyBackColor { get; set; } = "#004000";
-    [JsonIgnore]
     public string RelationNeutralForeColor { get; set; } = "#827D78";
-    [JsonIgnore]
     public string RelationNeutralBackColor { get; set; } = "#3C3732";
-    [JsonIgnore]
     public string RelationBogeyForeColor { get; set; } = "#FFA500";
-    [JsonIgnore]
     public string RelationBogeyBackColor { get; set; } = "#6F4200";
-    [JsonIgnore]
     public string RelationBanditForeColor { get; set; } = "#FF0000";
-    [JsonIgnore]
     public string RelationBanditBackColor { get; set; } = "#7F0000";
-    [JsonIgnore]
     public string RelationOrganizationForeColor { get; set; } = "#39CED8";
-    [JsonIgnore]
     public string RelationOrganizationBackColor { get; set; } = "#214E4F";
     internal Color AppForeColor => ColorTranslator.FromHtml(ForeColor);
     internal Color AppForeColorInactive => ColorTranslator.FromHtml(ForeColorInactive);

@@ -61,6 +61,22 @@
       ButtonSplitterColor = new Button();
       ButtonBackColor = new Button();
       ButtonForeColorInactive = new Button();
+      ButtonRelationBogeyBackColor = new Button();
+      ButtonStatusActiveBackColor = new Button();
+      ButtonRelationBogeyForeColor = new Button();
+      ButtonStatusActiveForeColor = new Button();
+      ButtonRelationOrganizationBackColor = new Button();
+      ButtonRelationNeutralBackColor = new Button();
+      ButtonStatusInitializingBackColor = new Button();
+      ButtonRelationOrganizationForeColor = new Button();
+      ButtonRelationNeutralForeColor = new Button();
+      ButtonStatusInitializingForeColor = new Button();
+      ButtonRelationBanditBackColor = new Button();
+      ButtonRelationFriendlyBackColor = new Button();
+      ButtonStatusInactiveBackColor = new Button();
+      ButtonRelationBanditForeColor = new Button();
+      ButtonRelationFriendlyForeColor = new Button();
+      ButtonStatusInactiveForeColor = new Button();
       ButtonForeColor = new Button();
       LabelMaxAffiliationen = new Label();
       CheckBoxUnkenntlicheAffiliationenAusblenden = new CheckBox();
@@ -205,9 +221,9 @@
       GroupBoxFenster.Controls.Add(LabelFensterDeckkraftProzent);
       GroupBoxFenster.FlatStyle = FlatStyle.Flat;
       GroupBoxFenster.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxFenster.Location = new Point(12, 316);
+      GroupBoxFenster.Location = new Point(12, 344);
       GroupBoxFenster.Name = "GroupBoxFenster";
-      GroupBoxFenster.Size = new Size(352, 221);
+      GroupBoxFenster.Size = new Size(352, 207);
       GroupBoxFenster.TabIndex = 1;
       GroupBoxFenster.TabStop = false;
       GroupBoxFenster.Text = "Fenster";
@@ -352,9 +368,9 @@
       GroupBoxLokalerCache.Controls.Add(LabelLokalerCacheAlter);
       GroupBoxLokalerCache.FlatStyle = FlatStyle.Flat;
       GroupBoxLokalerCache.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxLokalerCache.Location = new Point(12, 543);
+      GroupBoxLokalerCache.Location = new Point(12, 557);
       GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
-      GroupBoxLokalerCache.Size = new Size(352, 67);
+      GroupBoxLokalerCache.Size = new Size(352, 53);
       GroupBoxLokalerCache.TabIndex = 2;
       GroupBoxLokalerCache.TabStop = false;
       GroupBoxLokalerCache.Text = "Lokaler Cache";
@@ -388,6 +404,22 @@
       GroupBoxAnzeige.Controls.Add(ButtonSplitterColor);
       GroupBoxAnzeige.Controls.Add(ButtonBackColor);
       GroupBoxAnzeige.Controls.Add(ButtonForeColorInactive);
+      GroupBoxAnzeige.Controls.Add(ButtonRelationBogeyBackColor);
+      GroupBoxAnzeige.Controls.Add(ButtonStatusActiveBackColor);
+      GroupBoxAnzeige.Controls.Add(ButtonRelationBogeyForeColor);
+      GroupBoxAnzeige.Controls.Add(ButtonStatusActiveForeColor);
+      GroupBoxAnzeige.Controls.Add(ButtonRelationOrganizationBackColor);
+      GroupBoxAnzeige.Controls.Add(ButtonRelationNeutralBackColor);
+      GroupBoxAnzeige.Controls.Add(ButtonStatusInitializingBackColor);
+      GroupBoxAnzeige.Controls.Add(ButtonRelationOrganizationForeColor);
+      GroupBoxAnzeige.Controls.Add(ButtonRelationNeutralForeColor);
+      GroupBoxAnzeige.Controls.Add(ButtonStatusInitializingForeColor);
+      GroupBoxAnzeige.Controls.Add(ButtonRelationBanditBackColor);
+      GroupBoxAnzeige.Controls.Add(ButtonRelationFriendlyBackColor);
+      GroupBoxAnzeige.Controls.Add(ButtonStatusInactiveBackColor);
+      GroupBoxAnzeige.Controls.Add(ButtonRelationBanditForeColor);
+      GroupBoxAnzeige.Controls.Add(ButtonRelationFriendlyForeColor);
+      GroupBoxAnzeige.Controls.Add(ButtonStatusInactiveForeColor);
       GroupBoxAnzeige.Controls.Add(ButtonForeColor);
       GroupBoxAnzeige.Controls.Add(LabelMaxAffiliationen);
       GroupBoxAnzeige.Controls.Add(CheckBoxUnkenntlicheAffiliationenAusblenden);
@@ -396,7 +428,7 @@
       GroupBoxAnzeige.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxAnzeige.Location = new Point(12, 12);
       GroupBoxAnzeige.Name = "GroupBoxAnzeige";
-      GroupBoxAnzeige.Size = new Size(352, 298);
+      GroupBoxAnzeige.Size = new Size(352, 326);
       GroupBoxAnzeige.TabIndex = 0;
       GroupBoxAnzeige.TabStop = false;
       GroupBoxAnzeige.Text = "Anzeige";
@@ -408,21 +440,21 @@
       ComboBoxColorThemes.FlatStyle = FlatStyle.Flat;
       ComboBoxColorThemes.ForeColor = Color.FromArgb(57, 206, 216);
       ComboBoxColorThemes.FormattingEnabled = true;
-      ComboBoxColorThemes.Location = new Point(151, 252);
+      ComboBoxColorThemes.Location = new Point(191, 245);
       ComboBoxColorThemes.MaxDropDownItems = 5;
       ComboBoxColorThemes.Name = "ComboBoxColorThemes";
-      ComboBoxColorThemes.Size = new Size(106, 23);
-      ComboBoxColorThemes.TabIndex = 16;
+      ComboBoxColorThemes.Size = new Size(147, 23);
+      ComboBoxColorThemes.TabIndex = 33;
       ComboBoxColorThemes.SelectedIndexChanged += ComboBoxColorThemes_SelectedIndexChanged;
       // 
       // ButtonFarbenStandard
       // 
-      ButtonFarbenStandard.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      ButtonFarbenStandard.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       ButtonFarbenStandard.FlatStyle = FlatStyle.Flat;
-      ButtonFarbenStandard.Location = new Point(263, 249);
+      ButtonFarbenStandard.Location = new Point(191, 274);
       ButtonFarbenStandard.Name = "ButtonFarbenStandard";
       ButtonFarbenStandard.Size = new Size(75, 28);
-      ButtonFarbenStandard.TabIndex = 17;
+      ButtonFarbenStandard.TabIndex = 34;
       ButtonFarbenStandard.Text = "Standard";
       ButtonFarbenStandard.UseVisualStyleBackColor = true;
       ButtonFarbenStandard.Click += ButtonFarbenStandard_Click;
@@ -433,7 +465,7 @@
       LabelFarben.Location = new Point(15, 231);
       LabelFarben.Name = "LabelFarben";
       LabelFarben.Size = new Size(46, 15);
-      LabelFarben.TabIndex = 11;
+      LabelFarben.TabIndex = 12;
       LabelFarben.Text = "Farben:";
       // 
       // LabelErgebnisAutomatischLeerenSekunden
@@ -442,7 +474,7 @@
       LabelErgebnisAutomatischLeerenSekunden.Location = new Point(241, 182);
       LabelErgebnisAutomatischLeerenSekunden.Name = "LabelErgebnisAutomatischLeerenSekunden";
       LabelErgebnisAutomatischLeerenSekunden.Size = new Size(67, 15);
-      LabelErgebnisAutomatischLeerenSekunden.TabIndex = 9;
+      LabelErgebnisAutomatischLeerenSekunden.TabIndex = 10;
       LabelErgebnisAutomatischLeerenSekunden.Text = "Sekunde(n)";
       // 
       // LabelErgebnisAutomatischLeeren
@@ -451,7 +483,7 @@
       LabelErgebnisAutomatischLeeren.Location = new Point(15, 182);
       LabelErgebnisAutomatischLeeren.Name = "LabelErgebnisAutomatischLeeren";
       LabelErgebnisAutomatischLeeren.Size = new Size(119, 15);
-      LabelErgebnisAutomatischLeeren.TabIndex = 7;
+      LabelErgebnisAutomatischLeeren.TabIndex = 8;
       LabelErgebnisAutomatischLeeren.Text = "Ergebnis leeren nach:";
       // 
       // CheckBoxHideStreamLiveStatus
@@ -471,7 +503,7 @@
       CheckBoxFensterAusblenden.Location = new Point(191, 209);
       CheckBoxFensterAusblenden.Name = "CheckBoxFensterAusblenden";
       CheckBoxFensterAusblenden.Size = new Size(128, 19);
-      CheckBoxFensterAusblenden.TabIndex = 10;
+      CheckBoxFensterAusblenden.TabIndex = 11;
       CheckBoxFensterAusblenden.Text = "Fenster ausblenden";
       CheckBoxFensterAusblenden.UseVisualStyleBackColor = true;
       CheckBoxFensterAusblenden.CheckedChanged += CheckBoxFensterAusblenden_CheckedChanged;
@@ -482,7 +514,7 @@
       CheckBoxDpiUnaware.Location = new Point(15, 155);
       CheckBoxDpiUnaware.Name = "CheckBoxDpiUnaware";
       CheckBoxDpiUnaware.Size = new Size(234, 19);
-      CheckBoxDpiUnaware.TabIndex = 6;
+      CheckBoxDpiUnaware.TabIndex = 7;
       CheckBoxDpiUnaware.Text = "Alternative DPI-Berechnung verwenden";
       CheckBoxDpiUnaware.UseVisualStyleBackColor = true;
       CheckBoxDpiUnaware.CheckedChanged += CheckBoxDpiUnaware_CheckedChanged;
@@ -506,7 +538,7 @@
       NumericUpDownErgebnisAutomatischLeeren.Maximum = new decimal(new int[] { 600, 0, 0, 0 });
       NumericUpDownErgebnisAutomatischLeeren.Name = "NumericUpDownErgebnisAutomatischLeeren";
       NumericUpDownErgebnisAutomatischLeeren.Size = new Size(44, 23);
-      NumericUpDownErgebnisAutomatischLeeren.TabIndex = 8;
+      NumericUpDownErgebnisAutomatischLeeren.TabIndex = 9;
       NumericUpDownErgebnisAutomatischLeeren.ValueChanged += NumericUpDownErgebnisAutomatischLeeren_ValueChanged;
       // 
       // NumericUpDownAffiliationenMaximum
@@ -525,10 +557,10 @@
       // 
       ButtonSplitterColor.Cursor = Cursors.Hand;
       ButtonSplitterColor.FlatStyle = FlatStyle.Flat;
-      ButtonSplitterColor.Location = new Point(117, 249);
+      ButtonSplitterColor.Location = new Point(93, 249);
       ButtonSplitterColor.Name = "ButtonSplitterColor";
-      ButtonSplitterColor.Size = new Size(28, 28);
-      ButtonSplitterColor.TabIndex = 15;
+      ButtonSplitterColor.Size = new Size(20, 12);
+      ButtonSplitterColor.TabIndex = 16;
       ButtonSplitterColor.UseVisualStyleBackColor = true;
       ButtonSplitterColor.BackColorChanged += ButtonSplitterColor_BackColorChanged;
       ButtonSplitterColor.Click += ButtonSplitterColor_Click;
@@ -537,10 +569,10 @@
       // 
       ButtonBackColor.Cursor = Cursors.Hand;
       ButtonBackColor.FlatStyle = FlatStyle.Flat;
-      ButtonBackColor.Location = new Point(83, 249);
+      ButtonBackColor.Location = new Point(67, 249);
       ButtonBackColor.Name = "ButtonBackColor";
-      ButtonBackColor.Size = new Size(28, 28);
-      ButtonBackColor.TabIndex = 14;
+      ButtonBackColor.Size = new Size(20, 12);
+      ButtonBackColor.TabIndex = 15;
       ButtonBackColor.UseVisualStyleBackColor = true;
       ButtonBackColor.BackColorChanged += ButtonBackColor_BackColorChanged;
       ButtonBackColor.Click += ButtonBackColor_Click;
@@ -549,13 +581,205 @@
       // 
       ButtonForeColorInactive.Cursor = Cursors.Hand;
       ButtonForeColorInactive.FlatStyle = FlatStyle.Flat;
-      ButtonForeColorInactive.Location = new Point(49, 249);
+      ButtonForeColorInactive.Location = new Point(41, 249);
       ButtonForeColorInactive.Name = "ButtonForeColorInactive";
-      ButtonForeColorInactive.Size = new Size(28, 28);
-      ButtonForeColorInactive.TabIndex = 13;
+      ButtonForeColorInactive.Size = new Size(20, 12);
+      ButtonForeColorInactive.TabIndex = 14;
       ButtonForeColorInactive.UseVisualStyleBackColor = true;
       ButtonForeColorInactive.BackColorChanged += ButtonForeColorInactive_BackColorChanged;
       ButtonForeColorInactive.Click += ButtonForeColorInactive_Click;
+      // 
+      // ButtonRelationBogeyBackColor
+      // 
+      ButtonRelationBogeyBackColor.Cursor = Cursors.Hand;
+      ButtonRelationBogeyBackColor.FlatStyle = FlatStyle.Flat;
+      ButtonRelationBogeyBackColor.Location = new Point(145, 285);
+      ButtonRelationBogeyBackColor.Name = "ButtonRelationBogeyBackColor";
+      ButtonRelationBogeyBackColor.Size = new Size(20, 12);
+      ButtonRelationBogeyBackColor.TabIndex = 28;
+      ButtonRelationBogeyBackColor.UseVisualStyleBackColor = true;
+      ButtonRelationBogeyBackColor.BackColorChanged += ButtonRelationBogeyBackColor_BackColorChanged;
+      ButtonRelationBogeyBackColor.Click += ButtonRelationBogeyBackColor_Click;
+      // 
+      // ButtonStatusActiveBackColor
+      // 
+      ButtonStatusActiveBackColor.Cursor = Cursors.Hand;
+      ButtonStatusActiveBackColor.FlatStyle = FlatStyle.Flat;
+      ButtonStatusActiveBackColor.Location = new Point(145, 267);
+      ButtonStatusActiveBackColor.Name = "ButtonStatusActiveBackColor";
+      ButtonStatusActiveBackColor.Size = new Size(20, 12);
+      ButtonStatusActiveBackColor.TabIndex = 22;
+      ButtonStatusActiveBackColor.UseVisualStyleBackColor = true;
+      ButtonStatusActiveBackColor.BackColorChanged += ButtonStatusActiveBackColor_BackColorChanged;
+      ButtonStatusActiveBackColor.Click += ButtonStatusActiveBackColor_Click;
+      // 
+      // ButtonRelationBogeyForeColor
+      // 
+      ButtonRelationBogeyForeColor.Cursor = Cursors.Hand;
+      ButtonRelationBogeyForeColor.FlatStyle = FlatStyle.Flat;
+      ButtonRelationBogeyForeColor.Location = new Point(119, 285);
+      ButtonRelationBogeyForeColor.Name = "ButtonRelationBogeyForeColor";
+      ButtonRelationBogeyForeColor.Size = new Size(20, 12);
+      ButtonRelationBogeyForeColor.TabIndex = 27;
+      ButtonRelationBogeyForeColor.UseVisualStyleBackColor = true;
+      ButtonRelationBogeyForeColor.BackColorChanged += ButtonRelationBogeyForeColor_BackColorChanged;
+      ButtonRelationBogeyForeColor.Click += ButtonRelationBogeyForeColor_Click;
+      // 
+      // ButtonStatusActiveForeColor
+      // 
+      ButtonStatusActiveForeColor.Cursor = Cursors.Hand;
+      ButtonStatusActiveForeColor.FlatStyle = FlatStyle.Flat;
+      ButtonStatusActiveForeColor.Location = new Point(119, 267);
+      ButtonStatusActiveForeColor.Name = "ButtonStatusActiveForeColor";
+      ButtonStatusActiveForeColor.Size = new Size(20, 12);
+      ButtonStatusActiveForeColor.TabIndex = 21;
+      ButtonStatusActiveForeColor.UseVisualStyleBackColor = true;
+      ButtonStatusActiveForeColor.BackColorChanged += ButtonStatusActiveForeColor_BackColorChanged;
+      ButtonStatusActiveForeColor.Click += ButtonStatusActiveForeColor_Click;
+      // 
+      // ButtonRelationOrganizationBackColor
+      // 
+      ButtonRelationOrganizationBackColor.Cursor = Cursors.Hand;
+      ButtonRelationOrganizationBackColor.FlatStyle = FlatStyle.Flat;
+      ButtonRelationOrganizationBackColor.Location = new Point(93, 303);
+      ButtonRelationOrganizationBackColor.Name = "ButtonRelationOrganizationBackColor";
+      ButtonRelationOrganizationBackColor.Size = new Size(20, 12);
+      ButtonRelationOrganizationBackColor.TabIndex = 32;
+      ButtonRelationOrganizationBackColor.UseVisualStyleBackColor = true;
+      ButtonRelationOrganizationBackColor.BackColorChanged += ButtonRelationOrganizationBackColor_BackColorChanged;
+      ButtonRelationOrganizationBackColor.Click += ButtonRelationOrganizationBackColor_Click;
+      // 
+      // ButtonRelationNeutralBackColor
+      // 
+      ButtonRelationNeutralBackColor.Cursor = Cursors.Hand;
+      ButtonRelationNeutralBackColor.FlatStyle = FlatStyle.Flat;
+      ButtonRelationNeutralBackColor.Location = new Point(93, 285);
+      ButtonRelationNeutralBackColor.Name = "ButtonRelationNeutralBackColor";
+      ButtonRelationNeutralBackColor.Size = new Size(20, 12);
+      ButtonRelationNeutralBackColor.TabIndex = 26;
+      ButtonRelationNeutralBackColor.UseVisualStyleBackColor = true;
+      ButtonRelationNeutralBackColor.BackColorChanged += ButtonRelationNeutralBackColor_BackColorChanged;
+      ButtonRelationNeutralBackColor.Click += ButtonRelationNeutralBackColor_Click;
+      // 
+      // ButtonStatusInitializingBackColor
+      // 
+      ButtonStatusInitializingBackColor.Cursor = Cursors.Hand;
+      ButtonStatusInitializingBackColor.FlatStyle = FlatStyle.Flat;
+      ButtonStatusInitializingBackColor.Location = new Point(93, 267);
+      ButtonStatusInitializingBackColor.Name = "ButtonStatusInitializingBackColor";
+      ButtonStatusInitializingBackColor.Size = new Size(20, 12);
+      ButtonStatusInitializingBackColor.TabIndex = 20;
+      ButtonStatusInitializingBackColor.UseVisualStyleBackColor = true;
+      ButtonStatusInitializingBackColor.BackColorChanged += ButtonStatusInitializingBackColor_BackColorChanged;
+      ButtonStatusInitializingBackColor.Click += ButtonStatusInitializingBackColor_Click;
+      // 
+      // ButtonRelationOrganizationForeColor
+      // 
+      ButtonRelationOrganizationForeColor.Cursor = Cursors.Hand;
+      ButtonRelationOrganizationForeColor.FlatStyle = FlatStyle.Flat;
+      ButtonRelationOrganizationForeColor.Location = new Point(67, 303);
+      ButtonRelationOrganizationForeColor.Name = "ButtonRelationOrganizationForeColor";
+      ButtonRelationOrganizationForeColor.Size = new Size(20, 12);
+      ButtonRelationOrganizationForeColor.TabIndex = 31;
+      ButtonRelationOrganizationForeColor.UseVisualStyleBackColor = true;
+      ButtonRelationOrganizationForeColor.BackColorChanged += ButtonRelationOrganizationForeColor_BackColorChanged;
+      ButtonRelationOrganizationForeColor.Click += ButtonRelationOrganizationForeColor_Click;
+      // 
+      // ButtonRelationNeutralForeColor
+      // 
+      ButtonRelationNeutralForeColor.Cursor = Cursors.Hand;
+      ButtonRelationNeutralForeColor.FlatStyle = FlatStyle.Flat;
+      ButtonRelationNeutralForeColor.Location = new Point(67, 285);
+      ButtonRelationNeutralForeColor.Name = "ButtonRelationNeutralForeColor";
+      ButtonRelationNeutralForeColor.Size = new Size(20, 12);
+      ButtonRelationNeutralForeColor.TabIndex = 25;
+      ButtonRelationNeutralForeColor.UseVisualStyleBackColor = true;
+      ButtonRelationNeutralForeColor.BackColorChanged += ButtonRelationNeutralForeColor_BackColorChanged;
+      ButtonRelationNeutralForeColor.Click += ButtonRelationNeutralForeColor_Click;
+      // 
+      // ButtonStatusInitializingForeColor
+      // 
+      ButtonStatusInitializingForeColor.Cursor = Cursors.Hand;
+      ButtonStatusInitializingForeColor.FlatStyle = FlatStyle.Flat;
+      ButtonStatusInitializingForeColor.Location = new Point(67, 267);
+      ButtonStatusInitializingForeColor.Name = "ButtonStatusInitializingForeColor";
+      ButtonStatusInitializingForeColor.Size = new Size(20, 12);
+      ButtonStatusInitializingForeColor.TabIndex = 19;
+      ButtonStatusInitializingForeColor.UseVisualStyleBackColor = true;
+      ButtonStatusInitializingForeColor.BackColorChanged += ButtonStatusInitializingForeColor_BackColorChanged;
+      ButtonStatusInitializingForeColor.Click += ButtonStatusInitializingForeColor_Click;
+      // 
+      // ButtonRelationBanditBackColor
+      // 
+      ButtonRelationBanditBackColor.Cursor = Cursors.Hand;
+      ButtonRelationBanditBackColor.FlatStyle = FlatStyle.Flat;
+      ButtonRelationBanditBackColor.Location = new Point(41, 303);
+      ButtonRelationBanditBackColor.Name = "ButtonRelationBanditBackColor";
+      ButtonRelationBanditBackColor.Size = new Size(20, 12);
+      ButtonRelationBanditBackColor.TabIndex = 30;
+      ButtonRelationBanditBackColor.UseVisualStyleBackColor = true;
+      ButtonRelationBanditBackColor.BackColorChanged += ButtonRelationBanditBackColor_BackColorChanged;
+      ButtonRelationBanditBackColor.Click += ButtonRelationBanditBackColor_Click;
+      // 
+      // ButtonRelationFriendlyBackColor
+      // 
+      ButtonRelationFriendlyBackColor.Cursor = Cursors.Hand;
+      ButtonRelationFriendlyBackColor.FlatStyle = FlatStyle.Flat;
+      ButtonRelationFriendlyBackColor.Location = new Point(41, 285);
+      ButtonRelationFriendlyBackColor.Name = "ButtonRelationFriendlyBackColor";
+      ButtonRelationFriendlyBackColor.Size = new Size(20, 12);
+      ButtonRelationFriendlyBackColor.TabIndex = 24;
+      ButtonRelationFriendlyBackColor.UseVisualStyleBackColor = true;
+      ButtonRelationFriendlyBackColor.BackColorChanged += ButtonRelationFriendlyBackColor_BackColorChanged;
+      ButtonRelationFriendlyBackColor.Click += ButtonRelationFriendlyBackColor_Click;
+      // 
+      // ButtonStatusInactiveBackColor
+      // 
+      ButtonStatusInactiveBackColor.Cursor = Cursors.Hand;
+      ButtonStatusInactiveBackColor.FlatStyle = FlatStyle.Flat;
+      ButtonStatusInactiveBackColor.Location = new Point(41, 267);
+      ButtonStatusInactiveBackColor.Name = "ButtonStatusInactiveBackColor";
+      ButtonStatusInactiveBackColor.Size = new Size(20, 12);
+      ButtonStatusInactiveBackColor.TabIndex = 18;
+      ButtonStatusInactiveBackColor.UseVisualStyleBackColor = true;
+      ButtonStatusInactiveBackColor.BackColorChanged += ButtonStatusInactiveBackColor_BackColorChanged;
+      ButtonStatusInactiveBackColor.Click += ButtonStatusInactiveBackColor_Click;
+      // 
+      // ButtonRelationBanditForeColor
+      // 
+      ButtonRelationBanditForeColor.Cursor = Cursors.Hand;
+      ButtonRelationBanditForeColor.FlatStyle = FlatStyle.Flat;
+      ButtonRelationBanditForeColor.Location = new Point(15, 303);
+      ButtonRelationBanditForeColor.Name = "ButtonRelationBanditForeColor";
+      ButtonRelationBanditForeColor.Size = new Size(20, 12);
+      ButtonRelationBanditForeColor.TabIndex = 29;
+      ButtonRelationBanditForeColor.UseVisualStyleBackColor = true;
+      ButtonRelationBanditForeColor.BackColorChanged += ButtonRelationBanditForeColor_BackColorChanged;
+      ButtonRelationBanditForeColor.Click += ButtonRelationBanditForeColor_Click;
+      // 
+      // ButtonRelationFriendlyForeColor
+      // 
+      ButtonRelationFriendlyForeColor.Cursor = Cursors.Hand;
+      ButtonRelationFriendlyForeColor.FlatStyle = FlatStyle.Flat;
+      ButtonRelationFriendlyForeColor.Location = new Point(15, 285);
+      ButtonRelationFriendlyForeColor.Name = "ButtonRelationFriendlyForeColor";
+      ButtonRelationFriendlyForeColor.Size = new Size(20, 12);
+      ButtonRelationFriendlyForeColor.TabIndex = 23;
+      ButtonRelationFriendlyForeColor.UseVisualStyleBackColor = true;
+      ButtonRelationFriendlyForeColor.BackColorChanged += ButtonRelationFriendlyForeColor_BackColorChanged;
+      ButtonRelationFriendlyForeColor.Click += ButtonRelationFriendlyForeColor_Click;
+      // 
+      // ButtonStatusInactiveForeColor
+      // 
+      ButtonStatusInactiveForeColor.Cursor = Cursors.Hand;
+      ButtonStatusInactiveForeColor.FlatStyle = FlatStyle.Flat;
+      ButtonStatusInactiveForeColor.Location = new Point(15, 267);
+      ButtonStatusInactiveForeColor.Name = "ButtonStatusInactiveForeColor";
+      ButtonStatusInactiveForeColor.Size = new Size(20, 12);
+      ButtonStatusInactiveForeColor.TabIndex = 17;
+      ButtonStatusInactiveForeColor.UseVisualStyleBackColor = true;
+      ButtonStatusInactiveForeColor.BackColorChanged += ButtonStatusInactiveForeColor_BackColorChanged;
+      ButtonStatusInactiveForeColor.Click += ButtonStatusInactiveForeColor_Click;
       // 
       // ButtonForeColor
       // 
@@ -563,8 +787,8 @@
       ButtonForeColor.FlatStyle = FlatStyle.Flat;
       ButtonForeColor.Location = new Point(15, 249);
       ButtonForeColor.Name = "ButtonForeColor";
-      ButtonForeColor.Size = new Size(28, 28);
-      ButtonForeColor.TabIndex = 12;
+      ButtonForeColor.Size = new Size(20, 12);
+      ButtonForeColor.TabIndex = 13;
       ButtonForeColor.UseVisualStyleBackColor = true;
       ButtonForeColor.BackColorChanged += ButtonForeColor_BackColorChanged;
       ButtonForeColor.Click += ButtonForeColor_Click;
@@ -1124,5 +1348,21 @@
     private Label LabelLogMonitorHandleFilter;
     private Button ButtonFarbenStandard;
     private ComboBox ComboBoxColorThemes;
+    private Button ButtonStatusInactiveForeColor;
+    private Button ButtonStatusActiveBackColor;
+    private Button ButtonStatusActiveForeColor;
+    private Button ButtonStatusInitializingBackColor;
+    private Button ButtonStatusInitializingForeColor;
+    private Button ButtonStatusInactiveBackColor;
+    private Button ButtonRelationBogeyBackColor;
+    private Button ButtonRelationBogeyForeColor;
+    private Button ButtonRelationOrganizationBackColor;
+    private Button ButtonRelationNeutralBackColor;
+    private Button ButtonRelationOrganizationForeColor;
+    private Button ButtonRelationNeutralForeColor;
+    private Button ButtonRelationBanditBackColor;
+    private Button ButtonRelationFriendlyBackColor;
+    private Button ButtonRelationBanditForeColor;
+    private Button ButtonRelationFriendlyForeColor;
   }
 }

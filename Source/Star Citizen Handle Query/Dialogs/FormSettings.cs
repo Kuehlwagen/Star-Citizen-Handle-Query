@@ -100,6 +100,22 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         ButtonForeColorInactive.BackColor = ProgramSettings.Colors.AppForeColorInactive;
         ButtonBackColor.BackColor = ProgramSettings.Colors.AppBackColor;
         ButtonSplitterColor.BackColor = ProgramSettings.Colors.AppSplitterColor;
+        ButtonStatusInactiveForeColor.BackColor = ProgramSettings.Colors.AppStatusInactiveForeColor;
+        ButtonStatusInactiveBackColor.BackColor = ProgramSettings.Colors.AppStatusInactiveBackColor;
+        ButtonStatusInitializingForeColor.BackColor = ProgramSettings.Colors.AppStatusInitializingForeColor;
+        ButtonStatusInitializingBackColor.BackColor = ProgramSettings.Colors.AppStatusInitializingBackColor;
+        ButtonStatusActiveForeColor.BackColor = ProgramSettings.Colors.AppStatusActiveForeColor;
+        ButtonStatusActiveBackColor.BackColor = ProgramSettings.Colors.AppStatusActiveBackColor;
+        ButtonRelationFriendlyForeColor.BackColor = ProgramSettings.Colors.AppRelationFriendlyForeColor;
+        ButtonRelationFriendlyBackColor.BackColor = ProgramSettings.Colors.AppRelationFriendlyBackColor;
+        ButtonRelationNeutralForeColor.BackColor = ProgramSettings.Colors.AppRelationNeutralForeColor;
+        ButtonRelationNeutralBackColor.BackColor = ProgramSettings.Colors.AppRelationNeutralBackColor;
+        ButtonRelationBogeyForeColor.BackColor = ProgramSettings.Colors.AppRelationBogeyForeColor;
+        ButtonRelationBogeyBackColor.BackColor = ProgramSettings.Colors.AppRelationBogeyBackColor;
+        ButtonRelationBanditForeColor.BackColor = ProgramSettings.Colors.AppRelationBanditForeColor;
+        ButtonRelationBanditBackColor.BackColor = ProgramSettings.Colors.AppRelationBanditBackColor;
+        ButtonRelationOrganizationForeColor.BackColor = ProgramSettings.Colors.AppRelationOrganizationForeColor;
+        ButtonRelationOrganizationBackColor.BackColor = ProgramSettings.Colors.AppRelationOrganizationBackColor;
         TextBoxLogMonitorHandleFilter.BackColor = ProgramSettings.Colors.AppForeColor;
         TextBoxLogMonitorHandleFilter.ForeColor = ProgramSettings.Colors.AppBackColor;
         ComboBoxColorThemes.BackColor = ProgramSettings.Colors.AppBackColor;
@@ -187,6 +203,22 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ButtonForeColorInactive.BackColor = ProgramSettings.Colors.AppForeColorInactive;
       ButtonBackColor.BackColor = ProgramSettings.Colors.AppBackColor;
       ButtonSplitterColor.BackColor = ProgramSettings.Colors.AppSplitterColor;
+      ButtonStatusInactiveForeColor.BackColor = ProgramSettings.Colors.AppStatusInactiveForeColor;
+      ButtonStatusInactiveBackColor.BackColor = ProgramSettings.Colors.AppStatusInactiveBackColor;
+      ButtonStatusInitializingForeColor.BackColor = ProgramSettings.Colors.AppStatusInitializingForeColor;
+      ButtonStatusInitializingBackColor.BackColor = ProgramSettings.Colors.AppStatusInitializingBackColor;
+      ButtonStatusActiveForeColor.BackColor = ProgramSettings.Colors.AppStatusActiveForeColor;
+      ButtonStatusActiveBackColor.BackColor = ProgramSettings.Colors.AppStatusActiveBackColor;
+      ButtonRelationFriendlyForeColor.BackColor = ProgramSettings.Colors.AppRelationFriendlyForeColor;
+      ButtonRelationFriendlyBackColor.BackColor = ProgramSettings.Colors.AppRelationFriendlyBackColor;
+      ButtonRelationNeutralForeColor.BackColor = ProgramSettings.Colors.AppRelationNeutralForeColor;
+      ButtonRelationNeutralBackColor.BackColor = ProgramSettings.Colors.AppRelationNeutralBackColor;
+      ButtonRelationBogeyForeColor.BackColor = ProgramSettings.Colors.AppRelationBogeyForeColor;
+      ButtonRelationBogeyBackColor.BackColor = ProgramSettings.Colors.AppRelationBogeyBackColor;
+      ButtonRelationBanditForeColor.BackColor = ProgramSettings.Colors.AppRelationBanditForeColor;
+      ButtonRelationBanditBackColor.BackColor = ProgramSettings.Colors.AppRelationBanditBackColor;
+      ButtonRelationOrganizationForeColor.BackColor = ProgramSettings.Colors.AppRelationOrganizationForeColor;
+      ButtonRelationOrganizationBackColor.BackColor = ProgramSettings.Colors.AppRelationOrganizationBackColor;
       TextBoxLogMonitorHandleFilter.Text = string.Join(',', ProgramSettings.LogMonitor.HandleFilter);
     }
 
@@ -475,7 +507,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void ButtonForeColor_BackColorChanged(object sender, EventArgs e) {
       if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.ForeColor = ColorTranslator.ToHtml(ButtonForeColor.BackColor);
+        ProgramSettings.Colors.ForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
       }
     }
 
@@ -485,7 +517,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void ButtonForeColorInactive_BackColorChanged(object sender, EventArgs e) {
       if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.ForeColorInactive = ColorTranslator.ToHtml(ButtonForeColorInactive.BackColor);
+        ProgramSettings.Colors.ForeColorInactive = ColorTranslator.ToHtml((sender as Button).BackColor);
       }
     }
 
@@ -495,8 +527,72 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void ButtonBackColor_BackColorChanged(object sender, EventArgs e) {
       if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.BackColor = ColorTranslator.ToHtml(ButtonBackColor.BackColor);
+        ProgramSettings.Colors.BackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
       }
+    }
+
+    private void ButtonStatusInactiveForeColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonStatusInactiveForeColor);
+    }
+
+    private void ButtonStatusInactiveBackColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonStatusInactiveBackColor);
+    }
+
+    private void ButtonStatusInitializingForeColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonStatusInitializingForeColor);
+    }
+
+    private void ButtonStatusInitializingBackColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonStatusInitializingBackColor);
+    }
+
+    private void ButtonStatusActiveForeColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonStatusActiveForeColor);
+    }
+
+    private void ButtonStatusActiveBackColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonStatusActiveBackColor);
+    }
+
+    private void ButtonRelationFriendlyForeColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonRelationFriendlyForeColor);
+    }
+
+    private void ButtonRelationFriendlyBackColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonRelationFriendlyBackColor);
+    }
+
+    private void ButtonRelationNeutralForeColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonRelationNeutralForeColor);
+    }
+
+    private void ButtonRelationNeutralBackColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonRelationNeutralBackColor);
+    }
+
+    private void ButtonRelationBogeyForeColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonRelationBogeyForeColor);
+    }
+
+    private void ButtonRelationBogeyBackColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonRelationBogeyBackColor);
+    }
+
+    private void ButtonRelationBanditForeColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonRelationBanditForeColor);
+    }
+
+    private void ButtonRelationBanditBackColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonRelationBanditBackColor);
+    }
+
+    private void ButtonRelationOrganizationForeColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonRelationOrganizationForeColor);
+    }
+
+    private void ButtonRelationOrganizationBackColor_Click(object sender, EventArgs e) {
+      SetSelectedColor(ButtonRelationOrganizationBackColor);
     }
 
     private void ButtonSplitterColor_Click(object sender, EventArgs e) {
@@ -505,7 +601,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void ButtonSplitterColor_BackColorChanged(object sender, EventArgs e) {
       if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.SplitterColor = ColorTranslator.ToHtml(ButtonSplitterColor.BackColor);
+        ProgramSettings.Colors.SplitterColor = ColorTranslator.ToHtml((sender as Button).BackColor);
       }
     }
 
@@ -547,6 +643,102 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         ProgramSettings.Colors = AppColorThemes[cb.SelectedItem.ToString()];
       }
       SetDialogValues();
+    }
+
+    private void ButtonStatusInactiveForeColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.StatusInactiveForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
+      }
+    }
+
+    private void ButtonStatusInactiveBackColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.StatusInactiveBackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
+      }
+    }
+
+    private void ButtonStatusInitializingForeColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.StatusInitializingForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
+      }
+    }
+
+    private void ButtonStatusInitializingBackColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.StatusInitializingBackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
+      }
+    }
+
+    private void ButtonStatusActiveForeColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.StatusActiveForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
+      }
+    }
+
+    private void ButtonStatusActiveBackColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.StatusActiveBackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
+      }
+    }
+
+    private void ButtonRelationFriendlyForeColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.RelationFriendlyForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
+      }
+    }
+
+    private void ButtonRelationFriendlyBackColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.RelationFriendlyBackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
+      }
+    }
+
+    private void ButtonRelationNeutralForeColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.RelationNeutralForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
+      }
+    }
+
+    private void ButtonRelationNeutralBackColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.RelationNeutralBackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
+      }
+    }
+
+    private void ButtonRelationBogeyForeColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.RelationBogeyForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
+      }
+    }
+
+    private void ButtonRelationBogeyBackColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.RelationBogeyBackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
+      }
+    }
+
+    private void ButtonRelationBanditForeColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.RelationBanditForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
+      }
+    }
+
+    private void ButtonRelationBanditBackColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.RelationBanditBackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
+      }
+    }
+
+    private void ButtonRelationOrganizationForeColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.RelationOrganizationForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
+      }
+    }
+
+    private void ButtonRelationOrganizationBackColor_BackColorChanged(object sender, EventArgs e) {
+      if (LoadingFinished && ProgramSettings?.Colors != null) {
+        ProgramSettings.Colors.RelationOrganizationBackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
+      }
     }
 
   }
