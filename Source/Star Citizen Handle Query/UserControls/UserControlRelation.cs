@@ -68,7 +68,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     private void LabelOrganization_Paint(object sender, PaintEventArgs e) {
       if (Type == RelationType.Organization) {
-        PaintOrgIcon(e.Graphics, ProgramSettings.Colors.AppOrganizationForeColor, ProgramSettings.Colors.AppForeColorInactive);
+        PaintOrgIcon(e.Graphics, ProgramSettings.Colors.AppRelationOrganizationForeColor, ProgramSettings.Colors.AppRelationOrganizationBackColor);
       }
     }
 

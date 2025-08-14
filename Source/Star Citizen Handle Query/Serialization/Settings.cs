@@ -153,25 +153,25 @@ namespace Star_Citizen_Handle_Query.Serialization {
     [JsonIgnore]
     public string StatusActiveBackColor { get; set; } = "#105500";
     [JsonIgnore]
-    public string FriendlyForeColor { get; set; } = "#008000";
+    public string RelationFriendlyForeColor { get; set; } = "#008000";
     [JsonIgnore]
-    public string FriendlyBackColor { get; set; } = "#004000";
+    public string RelationFriendlyBackColor { get; set; } = "#004000";
     [JsonIgnore]
-    public string NeutralForeColor { get; set; } = "#827D78";
+    public string RelationNeutralForeColor { get; set; } = "#827D78";
     [JsonIgnore]
-    public string NeutralBackColor { get; set; } = "#3C3732";
+    public string RelationNeutralBackColor { get; set; } = "#3C3732";
     [JsonIgnore]
-    public string BogeyForeColor { get; set; } = "#FFA500";
+    public string RelationBogeyForeColor { get; set; } = "#FFA500";
     [JsonIgnore]
-    public string BogeyBackColor { get; set; } = "#6F4200";
+    public string RelationBogeyBackColor { get; set; } = "#6F4200";
     [JsonIgnore]
-    public string BanditForeColor { get; set; } = "#FF0000";
+    public string RelationBanditForeColor { get; set; } = "#FF0000";
     [JsonIgnore]
-    public string BanditBackColor { get; set; } = "#7F0000";
+    public string RelationBanditBackColor { get; set; } = "#7F0000";
     [JsonIgnore]
-    public string OrganizationForeColor { get; set; } = "#39CED8";
+    public string RelationOrganizationForeColor { get; set; } = "#39CED8";
     [JsonIgnore]
-    public string OrganizationBackColor { get; set; } = "#214E4F";
+    public string RelationOrganizationBackColor { get; set; } = "#214E4F";
     internal Color AppForeColor => ColorTranslator.FromHtml(ForeColor);
     internal Color AppForeColorInactive => ColorTranslator.FromHtml(ForeColorInactive);
     internal Color AppBackColor => ColorTranslator.FromHtml(BackColor);
@@ -182,16 +182,16 @@ namespace Star_Citizen_Handle_Query.Serialization {
     internal Color AppStatusInitializingBackColor => ColorTranslator.FromHtml(StatusInitializingBackColor);
     internal Color AppStatusActiveForeColor => ColorTranslator.FromHtml(StatusActiveForeColor);
     internal Color AppStatusActiveBackColor => ColorTranslator.FromHtml(StatusActiveBackColor);
-    internal Color AppFriendlyForeColor => ColorTranslator.FromHtml(FriendlyForeColor);
-    internal Color AppFriendlyBackColor => ColorTranslator.FromHtml(FriendlyBackColor);
-    internal Color AppNeutralForeColor => ColorTranslator.FromHtml(NeutralForeColor);
-    internal Color AppNeutralBackColor => ColorTranslator.FromHtml(NeutralBackColor);
-    internal Color AppBogeyForeColor => ColorTranslator.FromHtml(BogeyForeColor);
-    internal Color AppBogeyBackColor => ColorTranslator.FromHtml(BogeyBackColor);
-    internal Color AppBanditForeColor => ColorTranslator.FromHtml(BanditForeColor);
-    internal Color AppBanditBackColor => ColorTranslator.FromHtml(BanditBackColor);
-    internal Color AppOrganizationForeColor => ColorTranslator.FromHtml(OrganizationForeColor);
-    internal Color AppOrganizationBackColor => ColorTranslator.FromHtml(OrganizationBackColor);
+    internal Color AppRelationFriendlyForeColor => ColorTranslator.FromHtml(RelationFriendlyForeColor);
+    internal Color AppRelationFriendlyBackColor => ColorTranslator.FromHtml(RelationFriendlyBackColor);
+    internal Color AppRelationNeutralForeColor => ColorTranslator.FromHtml(RelationNeutralForeColor);
+    internal Color AppRelationNeutralBackColor => ColorTranslator.FromHtml(RelationNeutralBackColor);
+    internal Color AppRelationBogeyForeColor => ColorTranslator.FromHtml(RelationBogeyForeColor);
+    internal Color AppRelationBogeyBackColor => ColorTranslator.FromHtml(RelationBogeyBackColor);
+    internal Color AppRelationBanditForeColor => ColorTranslator.FromHtml(RelationBanditForeColor);
+    internal Color AppRelationBanditBackColor => ColorTranslator.FromHtml(RelationBanditBackColor);
+    internal Color AppRelationOrganizationForeColor => ColorTranslator.FromHtml(RelationOrganizationForeColor);
+    internal Color AppRelationOrganizationBackColor => ColorTranslator.FromHtml(RelationOrganizationBackColor);
 
     public object Clone() {
       return MemberwiseClone();

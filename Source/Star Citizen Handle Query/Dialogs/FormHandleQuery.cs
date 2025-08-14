@@ -1345,10 +1345,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public static Color GetRelationColor(Settings programSettings, RelationValue relation) {
       var colorRelation = relation switch {
-        RelationValue.Friendly => programSettings.Colors.AppFriendlyForeColor,
-        RelationValue.Neutral => programSettings.Colors.AppNeutralForeColor,
-        RelationValue.Bogey => programSettings.Colors.AppBogeyForeColor,
-        RelationValue.Bandit => programSettings.Colors.AppBanditForeColor,
+        RelationValue.Friendly => programSettings.Colors.AppRelationFriendlyForeColor,
+        RelationValue.Neutral => programSettings.Colors.AppRelationNeutralForeColor,
+        RelationValue.Bogey => programSettings.Colors.AppRelationBogeyForeColor,
+        RelationValue.Bandit => programSettings.Colors.AppRelationBanditForeColor,
         _ => programSettings.Colors.AppBackColor,
       };
       return colorRelation;
@@ -1356,10 +1356,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public static Color GetRelationInactiveColor(Settings programSettings, RelationValue relation) {
       var colorRelation = relation switch {
-        RelationValue.Friendly => programSettings.Colors.AppFriendlyBackColor,
-        RelationValue.Neutral => programSettings.Colors.AppNeutralBackColor,
-        RelationValue.Bogey => programSettings.Colors.AppBogeyBackColor,
-        RelationValue.Bandit => programSettings.Colors.AppBanditBackColor,
+        RelationValue.Friendly => programSettings.Colors.AppRelationFriendlyBackColor,
+        RelationValue.Neutral => programSettings.Colors.AppRelationNeutralBackColor,
+        RelationValue.Bogey => programSettings.Colors.AppRelationBogeyBackColor,
+        RelationValue.Bandit => programSettings.Colors.AppRelationBanditBackColor,
         _ => programSettings.Colors.AppBackColor,
       };
       return colorRelation;
