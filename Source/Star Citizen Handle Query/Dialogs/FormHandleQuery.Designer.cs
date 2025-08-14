@@ -73,7 +73,7 @@
       TextBoxHandle.MaxLength = 60;
       TextBoxHandle.Name = "TextBoxHandle";
       TextBoxHandle.PlaceholderText = "Handle eingeben...";
-      TextBoxHandle.Size = new Size(243, 23);
+      TextBoxHandle.Size = new Size(237, 23);
       TextBoxHandle.TabIndex = 2;
       TextBoxHandle.TextChanged += TextBoxHandle_TextChanged;
       TextBoxHandle.KeyDown += TextBoxHandle_KeyDown;
@@ -83,7 +83,7 @@
       LabelSettings.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       LabelSettings.Cursor = Cursors.Hand;
       LabelSettings.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-      LabelSettings.Location = new Point(350, 4);
+      LabelSettings.Location = new Point(344, 4);
       LabelSettings.Name = "LabelSettings";
       LabelSettings.Size = new Size(20, 20);
       LabelSettings.TabIndex = 3;
@@ -95,7 +95,7 @@
       LabelQuery.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       LabelQuery.Cursor = Cursors.Hand;
       LabelQuery.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-      LabelQuery.Location = new Point(328, 4);
+      LabelQuery.Location = new Point(322, 4);
       LabelQuery.Name = "LabelQuery";
       LabelQuery.Size = new Size(20, 20);
       LabelQuery.TabIndex = 3;
@@ -106,7 +106,7 @@
       // 
       LabelLockUnlock.Cursor = Cursors.Hand;
       LabelLockUnlock.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-      LabelLockUnlock.Location = new Point(3, 4);
+      LabelLockUnlock.Location = new Point(-1, 4);
       LabelLockUnlock.Name = "LabelLockUnlock";
       LabelLockUnlock.Size = new Size(20, 20);
       LabelLockUnlock.TabIndex = 0;
@@ -117,7 +117,7 @@
       // 
       LabelHandle.AutoSize = true;
       LabelHandle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-      LabelHandle.Location = new Point(20, 6);
+      LabelHandle.Location = new Point(16, 6);
       LabelHandle.Name = "LabelHandle";
       LabelHandle.Size = new Size(49, 15);
       LabelHandle.TabIndex = 1;
