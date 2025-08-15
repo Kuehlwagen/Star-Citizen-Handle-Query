@@ -37,6 +37,7 @@
     <None Remove="Themes\IAE_2952.SC_Handle_Query.colors.json" />
     <None Remove="Themes\IAE_2953.SC_Handle_Query.colors.json" />
     <None Remove="Themes\Microtech.SC_Handle_Query.colors.json" />
+    <None Remove="Themes\Schwarz_&amp;_Weiß.SC_Handle_Query.colors.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -93,6 +94,7 @@
     <EmbeddedResource Include="Themes\Nachmittag.SC_Handle_Query.colors.json" />
     <EmbeddedResource Include="Themes\Anvil_Hud.SC_Handle_Query.colors.json" />
     <EmbeddedResource Include="Themes\ArcCorp.SC_Handle_Query.colors.json" />
+    <EmbeddedResource Include="Themes\Schwarz_&amp;_Weiß.SC_Handle_Query.colors.json" />
     <EmbeddedResource Include="Themes\Strand.SC_Handle_Query.colors.json" />
     <EmbeddedResource Include="Themes\Crusader.SC_Handle_Query.colors.json" />
     <EmbeddedResource Include="Themes\Hurston.SC_Handle_Query.colors.json" />

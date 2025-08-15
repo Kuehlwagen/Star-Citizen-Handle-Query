@@ -1,0 +1,22 @@
+﻿{
+  "ForeColor": "#E0FCFB",
+  "ForeColorInactive": "#7A7A7A",
+  "BackColor": "Black",
+  "SplitterColor": "#E9C46A",
+  "StatusInactiveForeColor": "#FF0000",
+  "StatusInactiveBackColor": "Black",
+  "StatusInitializingForeColor": "#FF7A00",
+  "StatusInitializingBackColor": "Black",
+  "StatusActiveForeColor": "#10AA00",
+  "StatusActiveBackColor": "Black",
+  "RelationFriendlyForeColor": "#008000",
+  "RelationFriendlyBackColor": "Black",
+  "RelationNeutralForeColor": "#827D78",
+  "RelationNeutralBackColor": "Black",
+  "RelationBogeyForeColor": "#FFA500",
+  "RelationBogeyBackColor": "Black",
+  "RelationBanditForeColor": "#FF0000",
+  "RelationBanditBackColor": "Black",
+  "RelationOrganizationForeColor": "#39CED8",
+  "RelationOrganizationBackColor": "Black"
+}

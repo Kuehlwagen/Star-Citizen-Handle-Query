@@ -158,7 +158,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         foreach (string templateFilePath in Directory.GetFiles(templatesDirectoryPath, "*.SC_Handle_Query.colors.json")) {
           templateColors = JsonSerializer.Deserialize<AppColors>(File.ReadAllText(templateFilePath, Encoding.UTF8));
           templateName = Path.GetFileName(templateFilePath);
-          templateName = templateName[..templateName.IndexOf('.')];
+          templateName = templateName[..templateName.IndexOf('.')].Replace('_', ' ');
           if (templateColors != null && !AppColorThemes.ContainsKey(templateName)) {
             AppColorThemes.Add(templateName, templateColors);
           }
