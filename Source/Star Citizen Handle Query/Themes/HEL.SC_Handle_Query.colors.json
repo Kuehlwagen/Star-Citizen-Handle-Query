@@ -2,5 +2,21 @@
   "ForeColor": "#BA0F21",
   "ForeColorInactive": "#8B0E1C",
   "BackColor": "#0F0D10",
-  "SplitterColor": "#FFFF80"
+  "SplitterColor": "#FFFF80",
+  "StatusInactiveForeColor": "#BA0F21",
+  "StatusInactiveBackColor": "#0F0D10",
+  "StatusInitializingForeColor": "#FF7A00",
+  "StatusInitializingBackColor": "#0F0D10",
+  "StatusActiveForeColor": "#00A452",
+  "StatusActiveBackColor": "#0F0D10",
+  "RelationFriendlyForeColor": "#00A452",
+  "RelationFriendlyBackColor": "#0F0D10",
+  "RelationNeutralForeColor": "#827D78",
+  "RelationNeutralBackColor": "#0F0D10",
+  "RelationBogeyForeColor": "#FF7A00",
+  "RelationBogeyBackColor": "#0F0D10",
+  "RelationBanditForeColor": "#BA0F21",
+  "RelationBanditBackColor": "#0F0D10",
+  "RelationOrganizationForeColor": "#1E8C95",
+  "RelationOrganizationBackColor": "#0F0D10"
 }
