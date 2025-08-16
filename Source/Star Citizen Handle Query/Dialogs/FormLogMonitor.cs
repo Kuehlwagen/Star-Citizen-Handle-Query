@@ -306,16 +306,17 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             new() {
               title = "Killer",
               url = $"https://robertsspaceindustries.com/en/citizens/{logInfo.Key}",
-              description = logInfo.Key
+              description = logInfo.Key,
+              color = logInfo.RelationValue switch {
+                RelationValue.Friendly => 5763719,
+                RelationValue.Neutral => 9807270,
+                RelationValue.Bogey => 15105570,
+                RelationValue.Bandit => 15548997,
+                _ => null
+              }
             }
           ]
         };
-        if (logInfo.RelationValue != RelationValue.NotAssigned) {
-          webhook.embeds.Add(new() {
-            title = "Killer Relation",
-            description = logInfo.RelationValue.ToString()
-          });
-        }
         Match m = RgxActorDeathInfo.Match(logInfo.Value);
         if (m != null && m.Success) {
           webhook.embeds.AddRange([

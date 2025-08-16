@@ -11,5 +11,6 @@ public class DiscordEmbed {
   public string type { get; set; } = "rich";
   public string description { get; set; }
   public string url { get; set; }
+  public int? color { get; set; }
 }
 #pragma warning restore IDE1006 // Benennungsstile
