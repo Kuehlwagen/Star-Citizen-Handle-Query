@@ -301,19 +301,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             new() {
               title = "Actor Death",
               url = $"https://robertsspaceindustries.com/en/citizens/{logInfo.Handle}",
-              description = logInfo.Handle
+              description = logInfo.Handle,
+              color = GetWebhookRelationColor(logInfo.RelationValue)
             },
             new() {
               title = "Killer",
               url = $"https://robertsspaceindustries.com/en/citizens/{logInfo.Key}",
               description = logInfo.Key,
-              color = logInfo.RelationValue switch {
-                RelationValue.Friendly => 5763719,
-                RelationValue.Neutral => 9807270,
-                RelationValue.Bogey => 15105570,
-                RelationValue.Bandit => 15548997,
-                _ => null
-              }
+              color = GetWebhookRelationColor(logInfo.RelationValue2)
             }
           ]
         };
@@ -341,6 +336,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return rtnVal;
     }
 
+    private static int? GetWebhookRelationColor(RelationValue relation) {
+      return relation switch {
+        RelationValue.Friendly => 5763719,
+        RelationValue.Neutral => 9807270,
+        RelationValue.Bogey => 15105570,
+        RelationValue.Bandit => 15548997,
+        _ => null
+      };
+    }
+
     private void ClearLogInfos() {
 #if DEBUG
       if (PanelLogInfo.Controls.Count == 0) {
@@ -354,7 +359,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair", relation: RelationValue.Bogey),
           new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "IsCorpseEnabled", "criminal arrest", relation: RelationValue.Bandit),
           new(LogType.LoadingScreenDuration, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), value: "15"),
-          new(LogType.ActorDeath, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "Churchtrill", $"Killed by: Churchtrill{NL}Using: unknown (Class unknown){NL}Zone: TransitCarriage_RSI_Polaris_Rear_Elevator_1604048788858{NL}Damage Type: Crash", relation: RelationValue.Bandit)
+          new(LogType.ActorDeath, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "Churchtrill", $"Killed by: Churchtrill{NL}Using: unknown (Class unknown){NL}Zone: TransitCarriage_RSI_Polaris_Rear_Elevator_1604048788858{NL}Damage Type: Crash", relation: RelationValue.Friendly, RelationValue.Bandit)
         ]);
       }
 #else
@@ -407,7 +412,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                     V(m, "Handle"),
                     V(m, "KilledBy"),
                     $"Killed by: {V(m, "KilledBy")}{NL}Using: {V(m, "Using")} ({V(m, "UsingClass")}){NL}Zone: {V(m, "Zone")}{NL}Damage Type: {V(m, "DamageType")}",
-                    (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle"))));
+                    (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle")),
+                    (Owner as FormHandleQuery).GetHandleRelation(V(m, "KilledBy"))));
                 }
               }
             }

@@ -5,7 +5,7 @@ namespace Star_Citizen_Handle_Query.Serialization {
 
   [Serializable()]
   public class LogMonitorInfo(LogType logType, string date, string handle = null, string key = null, string value = null,
-    RelationValue relation = RelationValue.NotAssigned) : ICloneable {
+    RelationValue relation = RelationValue.NotAssigned, RelationValue relation2 = RelationValue.NotAssigned) : ICloneable {
 
     public LogType LogType { get; } = logType;
 
@@ -22,6 +22,8 @@ namespace Star_Citizen_Handle_Query.Serialization {
       value != null && value.StartsWith("Yes", StringComparison.CurrentCultureIgnoreCase);
 
     public RelationValue RelationValue { get; } = relation;
+
+    public RelationValue RelationValue2 { get; } = relation2;
 
     public bool IsCriminalArrest { get; } = logType == LogType.Corpse &&
       key != null && key.Equals("IsCorpseEnabled", StringComparison.CurrentCultureIgnoreCase) &&
