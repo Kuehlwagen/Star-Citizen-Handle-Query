@@ -106,7 +106,8 @@
       "Log_Show_Corpse": "Show player deaths",
       "Log_Show_Loading_Screen_Duration": "Show loading screen duration",
       "Check_Complete_File": "Check complete file",
-      "Handle_Filter": "Handle filter:"
+      "Handle_Filter": "Handle filter:",
+      "Webhook_URL": "Webhook URL:"
     },
     "Local_Cache": {
       "Group_Title": "Local cache",

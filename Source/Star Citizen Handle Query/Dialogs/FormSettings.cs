@@ -122,6 +122,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         TextBoxLogMonitorHandleFilter.ForeColor = ProgramSettings.Colors.AppBackColor;
         ComboBoxColorThemes.BackColor = ProgramSettings.Colors.AppBackColor;
         ComboBoxColorThemes.ForeColor = ProgramSettings.Colors.AppForeColor;
+        TextBoxWebhookURL.BackColor = ProgramSettings.Colors.AppForeColor;
+        TextBoxWebhookURL.ForeColor = ProgramSettings.Colors.AppBackColor;
       }
 
       // Einstellungen auf den Dialog übernehmen
@@ -233,6 +235,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ButtonRelationOrganizationForeColor.BackColor = ProgramSettings.Colors.AppRelationOrganizationForeColor;
       ButtonRelationOrganizationBackColor.BackColor = ProgramSettings.Colors.AppRelationOrganizationBackColor;
       TextBoxLogMonitorHandleFilter.Text = string.Join(',', ProgramSettings.LogMonitor.HandleFilter);
+      TextBoxWebhookURL.Text = ProgramSettings.LogMonitor.WebhookURL;
     }
 
     private void GetLocalizations() {
@@ -347,6 +350,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxLogMonitorFilterLoadingScreenDuration.Enabled = CheckBoxShowLog.Checked;
       CheckBoxCheckCompleteFile.Enabled = CheckBoxShowLog.Checked;
       TextBoxLogMonitorHandleFilter.Enabled = CheckBoxShowLog.Checked;
+      TextBoxWebhookURL.Enabled = CheckBoxShowLog.Checked;
     }
 
     private void NumericUpDownLogEintraegeMaximum_ValueChanged(object sender, EventArgs e) {
@@ -509,6 +513,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxLogMonitorFilterLoadingScreenDuration.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Loading_Screen_Duration;
       CheckBoxCheckCompleteFile.Text = CurrentLocalization.Settings.Log_Monitor.Check_Complete_File;
       LabelLogMonitorHandleFilter.Text = CurrentLocalization.Settings.Log_Monitor.Handle_Filter;
+      LabelWebhookURL.Text = CurrentLocalization.Settings.Log_Monitor.Webhook_URL;
 
       ResumeLayout();
     }
@@ -666,6 +671,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.LogMonitor.HandleFilter = [.. TextBoxLogMonitorHandleFilter.Text.Split([',', ';', '|', ' '], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)];
     }
 
+    private void TextBoxWebhookURL_TextChanged(object sender, EventArgs e) {
+      ProgramSettings.LogMonitor.WebhookURL = TextBoxWebhookURL.Text;
+    }
+
     private void ButtonFarbenStandard_Click(object sender, EventArgs e) {
       ProgramSettings.Colors = new Settings().Colors;
       SetDialogValues();
@@ -809,6 +818,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ButtonRelationOrganizationForeColor.Visible = visible;
       ButtonRelationOrganizationBackColor.Visible = visible;
     }
+
   }
 
 }

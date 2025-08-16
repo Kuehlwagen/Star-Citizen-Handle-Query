@@ -99,7 +99,8 @@
       "Log_Show_Corpse": "Spielertode anzeigen",
       "Log_Show_Loading_Screen_Duration": "Ladebildschirm-Dauer anzeigen",
       "Check_Complete_File": "Komplette Datei auswerten",
-      "Handle_Filter": "Handle-Filter:"
+      "Handle_Filter": "Handle-Filter:",
+      "Webhook_URL": "Webhook-URL:"
     },
     "Local_Cache": {
       "Group_Title": "Lokaler Cache",

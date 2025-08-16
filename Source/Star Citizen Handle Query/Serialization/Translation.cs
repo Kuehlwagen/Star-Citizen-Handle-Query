@@ -276,6 +276,8 @@
 
     public string Handle_Filter { get; set; } = "Handle-Filter:";
 
+    public string Webhook_URL { get; set; } = "Webhook-URL:";
+
   }
 
   [Serializable()]

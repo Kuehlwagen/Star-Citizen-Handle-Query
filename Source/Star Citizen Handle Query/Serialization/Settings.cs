@@ -234,6 +234,9 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>Handle-Filter</summary>
     public List<string> HandleFilter { get; set; } = [];
 
+    /// <summary>Webhook-URL</summary>
+    public string WebhookURL { get; set; } = string.Empty;
+
     public object Clone() {
       return MemberwiseClone();
     }

@@ -4,6 +4,7 @@ using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.Diagnostics;
 using System.Drawing.Drawing2D;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -30,6 +31,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly Regex RgxActorDeath = RegexActorDeath();
     [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <Actor Death> CActor::Kill: '(?<Handle>[\w_\-]+)' \[\d+\] in zone '(?<Zone>.+)' killed by '(?<KilledBy>[\w_\-]+)' \[\d+\] using '(?<Using>.+)' \[(?<UsingClass>.+)\] with damage type '(?<DamageType>.+)'.+$", RegexOptions.Compiled)]
     private static partial Regex RegexActorDeath();
+
+    private readonly Regex RgxActorDeathInfo = RegexActorDeathInfo();
+    [GeneratedRegex(@"Using: (?<Using>.+)\nZone: (?<Zone>.+)\nDamage Type: (?<Type>.+)", RegexOptions.Compiled)]
+    private static partial Regex RegexActorDeathInfo();
 
     public FormLogMonitor(Settings programSettings, Translation translation) {
       InitializeComponent();
@@ -287,6 +292,49 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           LogType.ActorDeath => filter == null || filter.Count == 0 || filter.Contains(logInfo.Handle, StringComparer.CurrentCultureIgnoreCase) || filter.Contains(logInfo.Key, StringComparer.CurrentCultureIgnoreCase),
           _ => true,
         };
+      }
+
+      if (rtnVal && logInfo.LogType == LogType.ActorDeath && !string.IsNullOrWhiteSpace(ProgramSettings.LogMonitor.WebhookURL)) {
+        DiscordWebhook webhook = new() {
+          content = "SCHQ Log Monitor",
+          embeds = [
+            new() {
+              title = "Actor Death",
+              url = $"https://robertsspaceindustries.com/en/citizens/{logInfo.Handle}",
+              description = logInfo.Handle
+            },
+            new() {
+              title = "Killer",
+              url = $"https://robertsspaceindustries.com/en/citizens/{logInfo.Key}",
+              description = logInfo.Key
+            }
+          ]
+        };
+        if (logInfo.RelationValue != RelationValue.NotAssigned) {
+          webhook.embeds.Add(new() {
+            title = "Killer Relation",
+            description = logInfo.RelationValue.ToString()
+          });
+        }
+        Match m = RgxActorDeathInfo.Match(logInfo.Value);
+        if (m != null && m.Success) {
+          webhook.embeds.AddRange([
+            new() {
+              title = "Using",
+              description = V(m, "Using")
+            }, new() {
+              title = "Zone",
+              description = V(m, "Zone")
+            }, new() {
+              title = "Damage Type",
+              description = V(m, "Type")
+            }
+          ]);
+        }
+        try {
+          using HttpClient client = new();
+          HttpResponseMessage result = client.PostAsJsonAsync(ProgramSettings.LogMonitor.WebhookURL, webhook).Result;
+        } catch { }
       }
 
       return rtnVal;
