@@ -151,7 +151,12 @@
     "Update_Error": "Update-Informationen konnten nicht ausgelesen werden"
   },
   "Log_Monitor": {
-    "Title": "Log-Monitor"
+    "Title": "Log-Monitor",
+    "Webhook_Actor_Death": "Spielertod",
+    "Webhook_Killer": "Killer",
+    "Webhook_Using": "Mit",
+    "Webhook_Damage_Type": "Schadensart",
+    "Webhook_Zone": "Zone"
   },
   "Relations": {
     "Title": "Beziehungen",

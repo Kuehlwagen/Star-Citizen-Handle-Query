@@ -158,7 +158,12 @@
     "Update_Error": "Error requesting update information"
   },
   "Log_Monitor": {
-    "Title": "Log Monitor"
+    "Title": "Log Monitor",
+    "Webhook_Actor_Death": "Actor Death",
+    "Webhook_Killer": "Killer",
+    "Webhook_Using": "Using",
+    "Webhook_Damage_Type": "Damage Type",
+    "Webhook_Zone": "Zone"
   },
   "Relations": {
     "Title": "Relations",

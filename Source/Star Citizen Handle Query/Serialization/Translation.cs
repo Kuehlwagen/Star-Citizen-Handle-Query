@@ -389,6 +389,16 @@
 
     public string Title { get; set; } = "Log-Monitor";
 
+    public string Webhook_Actor_Death { get; set; } = "Spielertod";
+
+    public string Webhook_Killer { get; set; } = "Killer";
+
+    public string Webhook_Using { get; set; } = "Mit";
+
+    public string Webhook_Damage_Type { get; set; } = "Schadensart";
+
+    public string Webhook_Zone { get; set; } = "Zone";
+
   }
 
   [Serializable]

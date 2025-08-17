@@ -307,20 +307,20 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       Match m = RgxActorDeathInfo.Match(logInfo.Value);
       if (m != null && m.Success) {
         killerFields.AddRange([
-          new() { name = "Using", value = V(m, "Using")},
-            new() { name = "Damage Type", value = V(m, "Type")},
-            new() { name = "Zone", value = V(m, "Zone")}
+          new() { name = ProgramTranslation.Log_Monitor.Webhook_Using, value = V(m, "Using")},
+            new() { name = ProgramTranslation.Log_Monitor.Webhook_Damage_Type, value = V(m, "Type")},
+            new() { name = ProgramTranslation.Log_Monitor.Webhook_Zone, value = V(m, "Zone")}
         ]);
       }
       DiscordWebhook webhook = new() {
         embeds = [
           new() {
-              title = "Actor Death",
+              title = ProgramTranslation.Log_Monitor.Webhook_Actor_Death,
               description = $"**[{logInfo.Handle}](https://robertsspaceindustries.com/en/citizens/{logInfo.Handle})**",
               color = GetWebhookRelationColor(logInfo.RelationValue)
             },
             new() {
-              title = "Killer",
+              title = ProgramTranslation.Log_Monitor.Webhook_Killer,
               description = $"**[{logInfo.Key}](https://robertsspaceindustries.com/en/citizens/{logInfo.Key})**",
               color = GetWebhookRelationColor(logInfo.RelationValue2),
               fields = killerFields
