@@ -29,7 +29,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         DataGridViewLokalerCache.DefaultCellStyle.SelectionForeColor = programSettings.Colors.AppBackColor;
         DataGridViewLokalerCache.ColumnHeadersDefaultCellStyle.BackColor = programSettings.Colors.AppBackColor;
         DataGridViewLokalerCache.ColumnHeadersDefaultCellStyle.ForeColor = programSettings.Colors.AppForeColor;
+        DataGridViewLokalerCache.ColumnHeadersDefaultCellStyle.SelectionBackColor = programSettings.Colors.AppForeColorInactive;
         PanelInfo.BackColor = programSettings.Colors.AppBackColor;
+        ButtonCacheLeeren.BackColor = programSettings.Colors.AppBackColor;
+        ButtonOrdnerOeffnen.BackColor = programSettings.Colors.AppBackColor;
+        ButtonSchliessen.BackColor = programSettings.Colors.AppBackColor;
       }
 
       ProgramSettings = programSettings;

@@ -83,6 +83,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           LabelAdditionalInformation.Cursor = Cursors.Default;
           LabelRelation.Cursor = Cursors.Default;
           LabelRelation.MouseClick -= LabelRelation_MouseClick;
+          PictureBoxLive.Visible = false;
         } else if (!ProgramSettings.HideStreamLiveStatus) {
           PictureBoxLive.Invalidate();
           LiveState = await CheckCommunityHubIsLive(handle);
