@@ -295,45 +295,42 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       if (rtnVal && logInfo.LogType == LogType.ActorDeath && !string.IsNullOrWhiteSpace(ProgramSettings.LogMonitor.WebhookURL)) {
-        DiscordWebhook webhook = new() {
-          content = "SCHQ Log Monitor",
-          embeds = [
-            new() {
+        Thread thread = new(() => PushWebhook(logInfo));
+        thread.Start();
+      }
+
+      return rtnVal;
+    }
+
+    private void PushWebhook(LogMonitorInfo logInfo) {
+      List<DiscordField> killerFields = [];
+      Match m = RgxActorDeathInfo.Match(logInfo.Value);
+      if (m != null && m.Success) {
+        killerFields.AddRange([
+          new() { name = "Using", value = V(m, "Using")},
+            new() { name = "Damage Type", value = V(m, "Type")},
+            new() { name = "Zone", value = V(m, "Zone")}
+        ]);
+      }
+      DiscordWebhook webhook = new() {
+        embeds = [
+          new() {
               title = "Actor Death",
-              url = $"https://robertsspaceindustries.com/en/citizens/{logInfo.Handle}",
-              description = logInfo.Handle,
+              description = $"**[{logInfo.Handle}](https://robertsspaceindustries.com/en/citizens/{logInfo.Handle})**",
               color = GetWebhookRelationColor(logInfo.RelationValue)
             },
             new() {
               title = "Killer",
-              url = $"https://robertsspaceindustries.com/en/citizens/{logInfo.Key}",
-              description = logInfo.Key,
-              color = GetWebhookRelationColor(logInfo.RelationValue2)
+              description = $"**[{logInfo.Key}](https://robertsspaceindustries.com/en/citizens/{logInfo.Key})**",
+              color = GetWebhookRelationColor(logInfo.RelationValue2),
+              fields = killerFields
             }
-          ]
-        };
-        Match m = RgxActorDeathInfo.Match(logInfo.Value);
-        if (m != null && m.Success) {
-          webhook.embeds.AddRange([
-            new() {
-              title = "Using",
-              description = V(m, "Using")
-            }, new() {
-              title = "Zone",
-              description = V(m, "Zone")
-            }, new() {
-              title = "Damage Type",
-              description = V(m, "Type")
-            }
-          ]);
-        }
-        try {
-          using HttpClient client = new();
-          HttpResponseMessage result = client.PostAsJsonAsync(ProgramSettings.LogMonitor.WebhookURL, webhook).Result;
-        } catch { }
-      }
-
-      return rtnVal;
+        ]
+      };
+      try {
+        using HttpClient client = new();
+        _ = client.PostAsJsonAsync(ProgramSettings.LogMonitor.WebhookURL, webhook).Result;
+      } catch { }
     }
 
     private static int? GetWebhookRelationColor(RelationValue relation) {
