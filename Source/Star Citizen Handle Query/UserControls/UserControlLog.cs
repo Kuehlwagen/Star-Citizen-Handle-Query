@@ -185,6 +185,12 @@ namespace Star_Citizen_Handle_Query.UserControls {
           g.DrawLine(bgPen, 10.25F, 9.25F, 10.25F, 15);
           g.DrawLine(fgPen, 10.25F, 9.25F, 10.25F, 15);
           break;
+        //case LogType.Eye:
+        //  g.DrawEllipse(bgPen, 5, 6.5F, 10, 7);
+        //  g.DrawEllipse(fgPen, 5, 6.5F, 10, 7);
+        //  g.DrawEllipse(bgPen, 8, 8, 4, 4);
+        //  g.DrawEllipse(fgPen, 8, 8, 4, 4);
+        //  break;
       }
     }
 
