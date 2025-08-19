@@ -399,11 +399,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               } else {
                 m = RgxActorDeath.Match(line);
                 if (m != null && m.Success &&
-                  !V(m, "Handle").StartsWith("NPC_") &&
-                  !V(m, "Handle").StartsWith("PU_") &&
-                  !V(m, "Handle").StartsWith("Kopion_") &&
-                  !V(m, "Handle").StartsWith("Quasigrazer_") &&
-                  !V(m, "Handle").StartsWith("Shipjacker_")) {
+                  !FilterNPC(V(m, "Handle"))) {
                   rtnVal.Add(new LogMonitorInfo(LogType.ActorDeath,
                     V(m, "Date"),
                     V(m, "Handle"),
@@ -428,6 +424,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       return rtnVal;
+    }
+
+    private bool FilterNPC(string handle) {
+      return ProgramSettings.LogMonitor.NPC_Filter != null &&
+        ProgramSettings.LogMonitor.NPC_Filter.Count > 0 &&
+        ProgramSettings.LogMonitor.NPC_Filter.Any(h => handle.StartsWith(h, StringComparison.CurrentCultureIgnoreCase));
     }
 
     private static string V(Match match, string group) {

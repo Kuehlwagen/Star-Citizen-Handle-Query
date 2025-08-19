@@ -237,6 +237,16 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>Webhook-URL</summary>
     public string WebhookURL { get; set; } = string.Empty;
 
+    /// <summary>NPC-Filter (StartsWith)</summary>
+    public List<string> NPC_Filter { get; set; } = [
+      "NPC_",
+      "PU_",
+      "Kopion_",
+      "Quasigrazer_",
+      "Shipjacker_",
+      "vlk_adult_"
+    ];
+
     public object Clone() {
       return MemberwiseClone();
     }
