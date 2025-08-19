@@ -289,7 +289,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (logInfo != null && logInfo.IsValid) {
         rtnVal = logInfo.LogType switch {
           LogType.Corpse => filter == null || filter.Count == 0 || filter.Contains(logInfo.Handle, StringComparer.CurrentCultureIgnoreCase),
-          LogType.ActorDeath => filter == null || filter.Count == 0 || filter.Contains(logInfo.Handle, StringComparer.CurrentCultureIgnoreCase) || filter.Contains(logInfo.Key, StringComparer.CurrentCultureIgnoreCase),
+          LogType.ActorDeath => !FilterNPC(logInfo.Handle) && (filter == null || filter.Count == 0 || filter.Contains(logInfo.Handle, StringComparer.CurrentCultureIgnoreCase) || filter.Contains(logInfo.Key, StringComparer.CurrentCultureIgnoreCase)),
           _ => true,
         };
       }
@@ -398,8 +398,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                 continue;
               } else {
                 m = RgxActorDeath.Match(line);
-                if (m != null && m.Success &&
-                  !FilterNPC(V(m, "Handle"))) {
+                if (m != null && m.Success) {
                   rtnVal.Add(new LogMonitorInfo(LogType.ActorDeath,
                     V(m, "Date"),
                     V(m, "Handle"),
