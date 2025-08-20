@@ -33,7 +33,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <Actor Death> CActor::Kill: '(?<Handle>[\w_\-]+)' \[\d+\] in zone '(?<Zone>.+)' killed by '(?<KilledBy>[\w_\-]+)' \[\d+\] using '(?<Using>.+)' \[(?<UsingClass>.+)\] with damage type '(?<DamageType>.+)'.+$", RegexOptions.Compiled)]
     private static partial Regex RegexActorDeath();
 
-    private readonly Regex RgxActorDeathInfo = RegexActorDeathInfo();
+    private static readonly Regex RgxActorDeathInfo = RegexActorDeathInfo();
     [GeneratedRegex(@"Using: (?<Using>.+)\nZone: (?<Zone>.+)\nDamage Type: (?<Type>.+)", RegexOptions.Compiled)]
     private static partial Regex RegexActorDeathInfo();
 
@@ -296,32 +296,36 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       if (rtnVal && logInfo.LogType == LogType.ActorDeath && !string.IsNullOrWhiteSpace(ProgramSettings.LogMonitor.WebhookURL)) {
-        Thread thread = new(() => PushWebhook(logInfo));
-        thread.Start();
+        PushDiscordWebhook(logInfo, ProgramSettings.LogMonitor.WebhookURL, ProgramTranslation);
       }
 
       return rtnVal;
     }
 
-    private void PushWebhook(LogMonitorInfo logInfo) {
+    public static void PushDiscordWebhook(LogMonitorInfo logInfo, string url, Translation translation) {
+      Thread thread = new(() => PushWebhook(logInfo, url, translation));
+      thread.Start();
+    }
+
+    private static void PushWebhook(LogMonitorInfo logInfo, string url, Translation translation) {
       List<DiscordField> killerFields = [];
       Match m = RgxActorDeathInfo.Match(logInfo.Value);
       if (m != null && m.Success) {
         killerFields.AddRange([
-          new() { name = ProgramTranslation.Log_Monitor.Webhook_Using, value = V(m, "Using")},
-            new() { name = ProgramTranslation.Log_Monitor.Webhook_Damage_Type, value = V(m, "Type")},
-            new() { name = ProgramTranslation.Log_Monitor.Webhook_Zone, value = V(m, "Zone")}
+          new() { name = translation.Log_Monitor.Webhook_Using, value = V(m, "Using")},
+            new() { name = translation.Log_Monitor.Webhook_Damage_Type, value = V(m, "Type")},
+            new() { name = translation.Log_Monitor.Webhook_Zone, value = V(m, "Zone")}
         ]);
       }
       DiscordWebhook webhook = new() {
         embeds = [
           new() {
-              title = ProgramTranslation.Log_Monitor.Webhook_Actor_Death,
+              title = translation.Log_Monitor.Webhook_Actor_Death,
               description = $"**[{logInfo.Handle}](https://robertsspaceindustries.com/en/citizens/{logInfo.Handle})**",
               color = GetWebhookRelationColor(logInfo.RelationValue)
             },
             new() {
-              title = ProgramTranslation.Log_Monitor.Webhook_Killer,
+              title = translation.Log_Monitor.Webhook_Killer,
               description = $"**[{logInfo.Key}](https://robertsspaceindustries.com/en/citizens/{logInfo.Key})**",
               color = GetWebhookRelationColor(logInfo.RelationValue2),
               fields = killerFields
@@ -330,7 +334,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       };
       try {
         using HttpClient client = new();
-        _ = client.PostAsJsonAsync(ProgramSettings.LogMonitor.WebhookURL, webhook).Result;
+        _ = client.PostAsJsonAsync(url, webhook).Result;
       } catch { }
     }
 

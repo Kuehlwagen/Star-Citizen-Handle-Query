@@ -286,6 +286,8 @@
 
     public string Global_NPC_Names { get; set; } = "Globale NPC-Namen";
 
+    public string Test_Webhook_URL { get; set; } = "Test";
+
   }
 
   [Serializable()]

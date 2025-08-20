@@ -111,6 +111,7 @@
       LabelWebhookURL = new Label();
       TextBoxNPCNamen = new TextBox();
       TextBoxLogMonitorHandleFilter = new TextBox();
+      ButtonWebhookTest = new Button();
       LabelLogMonitorHandleFilter = new Label();
       CheckBoxCheckCompleteFile = new CheckBox();
       GroupBoxBeziehungen = new GroupBox();
@@ -1108,6 +1109,7 @@
       GroupBoxLogMonitor.Controls.Add(LabelWebhookURL);
       GroupBoxLogMonitor.Controls.Add(TextBoxNPCNamen);
       GroupBoxLogMonitor.Controls.Add(TextBoxLogMonitorHandleFilter);
+      GroupBoxLogMonitor.Controls.Add(ButtonWebhookTest);
       GroupBoxLogMonitor.Controls.Add(LabelLogMonitorHandleFilter);
       GroupBoxLogMonitor.Controls.Add(LabelLogEintragAnzeigedauerMinuten);
       GroupBoxLogMonitor.Controls.Add(CheckBoxShowLog);
@@ -1155,7 +1157,7 @@
       TextBoxWebhookURL.ForeColor = Color.FromArgb(19, 26, 33);
       TextBoxWebhookURL.Location = new Point(190, 218);
       TextBoxWebhookURL.Name = "TextBoxWebhookURL";
-      TextBoxWebhookURL.Size = new Size(213, 23);
+      TextBoxWebhookURL.Size = new Size(162, 23);
       TextBoxWebhookURL.TabIndex = 15;
       TextBoxWebhookURL.TextChanged += TextBoxWebhookURL_TextChanged;
       // 
@@ -1191,6 +1193,20 @@
       TextBoxLogMonitorHandleFilter.Size = new Size(213, 23);
       TextBoxLogMonitorHandleFilter.TabIndex = 11;
       TextBoxLogMonitorHandleFilter.TextChanged += TextBoxLogMonitorHandleFilter_TextChanged;
+      // 
+      // ButtonWebhookTest
+      // 
+      ButtonWebhookTest.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+      ButtonWebhookTest.Enabled = false;
+      ButtonWebhookTest.FlatStyle = FlatStyle.Flat;
+      ButtonWebhookTest.Location = new Point(354, 218);
+      ButtonWebhookTest.Name = "ButtonWebhookTest";
+      ButtonWebhookTest.Size = new Size(49, 23);
+      ButtonWebhookTest.TabIndex = 16;
+      ButtonWebhookTest.Text = "Test";
+      ButtonWebhookTest.TextAlign = ContentAlignment.TopCenter;
+      ButtonWebhookTest.UseVisualStyleBackColor = true;
+      ButtonWebhookTest.Click += ButtonWebhookTest_Click;
       // 
       // LabelLogMonitorHandleFilter
       // 
@@ -1473,5 +1489,6 @@
     private CheckBox CheckBoxNPCTodeAnzeigen;
     private Label LabelNPCNamen;
     private TextBox TextBoxNPCNamen;
+    private Button ButtonWebhookTest;
   }
 }
