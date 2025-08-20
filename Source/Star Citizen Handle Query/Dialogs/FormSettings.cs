@@ -124,6 +124,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         ComboBoxColorThemes.ForeColor = ProgramSettings.Colors.AppForeColor;
         TextBoxWebhookURL.BackColor = ProgramSettings.Colors.AppForeColor;
         TextBoxWebhookURL.ForeColor = ProgramSettings.Colors.AppBackColor;
+        TextBoxNPCNamen.BackColor = ProgramSettings.Colors.AppForeColor;
+        TextBoxNPCNamen.ForeColor = ProgramSettings.Colors.AppBackColor;
       }
 
       // Einstellungen auf den Dialog übernehmen
@@ -236,6 +238,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ButtonRelationOrganizationBackColor.BackColor = ProgramSettings.Colors.AppRelationOrganizationBackColor;
       TextBoxLogMonitorHandleFilter.Text = string.Join(',', ProgramSettings.LogMonitor.HandleFilter);
       TextBoxWebhookURL.Text = ProgramSettings.LogMonitor.WebhookURL;
+      CheckBoxNPCTodeAnzeigen.Checked = ProgramSettings.LogMonitor.Show_NPC_Deaths;
+      TextBoxNPCNamen.Text = string.Join(',', ProgramSettings.LogMonitor.NPC_Filter);
     }
 
     private void GetLocalizations() {
@@ -351,6 +355,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxCheckCompleteFile.Enabled = CheckBoxShowLog.Checked;
       TextBoxLogMonitorHandleFilter.Enabled = CheckBoxShowLog.Checked;
       TextBoxWebhookURL.Enabled = CheckBoxShowLog.Checked;
+      CheckBoxNPCTodeAnzeigen.Enabled = CheckBoxShowLog.Checked;
+      TextBoxNPCNamen.Enabled = CheckBoxShowLog.Checked;
     }
 
     private void NumericUpDownLogEintraegeMaximum_ValueChanged(object sender, EventArgs e) {
@@ -394,6 +400,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void CheckBoxFensterAusblenden_CheckedChanged(object sender, EventArgs e) {
       ProgramSettings.AutoCloseHideWindows = CheckBoxFensterAusblenden.Checked;
+    }
+
+    private void CheckBoxNPCTodeAnzeigen_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.LogMonitor.Show_NPC_Deaths = CheckBoxNPCTodeAnzeigen.Checked;
     }
 
     private void NumericUpDownRelationsEntriesMaximum_ValueChanged(object sender, EventArgs e) {
@@ -447,6 +457,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LabelFarben.Text = CurrentLocalization.Settings.Display.Colors;
       ButtonFarbenStandard.Text = CurrentLocalization.Settings.Buttons.Standard;
       CheckBoxErweitert.Text = CurrentLocalization.Settings.Display.Advanced;
+      ButtonFarbenStandard.Text = CurrentLocalization.Settings.Display.Default_Colors;
       SetToolTip(ButtonForeColor, CurrentLocalization.Settings.Display.Fore_Color);
       SetToolTip(ButtonForeColorInactive, CurrentLocalization.Settings.Display.Fore_Color_Inactive);
       SetToolTip(ButtonBackColor, CurrentLocalization.Settings.Display.Back_Color);
@@ -514,6 +525,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxCheckCompleteFile.Text = CurrentLocalization.Settings.Log_Monitor.Check_Complete_File;
       LabelLogMonitorHandleFilter.Text = CurrentLocalization.Settings.Log_Monitor.Handle_Filter;
       LabelWebhookURL.Text = CurrentLocalization.Settings.Log_Monitor.Webhook_URL;
+      CheckBoxNPCTodeAnzeigen.Text = CurrentLocalization.Settings.Log_Monitor.Show_NPC_Deaths;
+      LabelNPCNamen.Text = CurrentLocalization.Settings.Log_Monitor.NPC_Filter;
+      SetToolTip(TextBoxNPCNamen, $"{CurrentLocalization.Settings.Log_Monitor.Global_NPC_Names}:{Environment.NewLine}{string.Join(Environment.NewLine, ProgramSettings.LogMonitor.Global_NPC_Filter)}");
 
       ResumeLayout();
     }
@@ -669,6 +683,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void TextBoxLogMonitorHandleFilter_TextChanged(object sender, EventArgs e) {
       ProgramSettings.LogMonitor.HandleFilter = [.. TextBoxLogMonitorHandleFilter.Text.Split([',', ';', '|', ' '], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)];
+    }
+
+    private void TextBoxNPCNamen_TextChanged(object sender, EventArgs e) {
+      ProgramSettings.LogMonitor.NPC_Filter = [.. TextBoxNPCNamen.Text.Split([',', ';', '|', ' '], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)];
     }
 
     private void TextBoxWebhookURL_TextChanged(object sender, EventArgs e) {

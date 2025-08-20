@@ -19,6 +19,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly Translation ProgramTranslation;
     private readonly string NL = Environment.NewLine;
     private Status LogStatus = Status.Inactive;
+    private List<string> NPC_Filter = null;
 
     private readonly Regex RgxCorpse = RegexCorpse();
     [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <\[ActorState\] Corpse> \[ACTOR STATE\]\[SSCActorStateCVars::LogCorpse\] Player '(?<Handle>[\w_\-]+)' <\w+ client>: (?<Key>.+): (?<Value>.+) \[Team_ActorTech]\[Actor\]$", RegexOptions.Compiled)]
@@ -426,9 +427,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private bool FilterNPC(string handle) {
-      return ProgramSettings.LogMonitor.NPC_Filter != null &&
-        ProgramSettings.LogMonitor.NPC_Filter.Count > 0 &&
-        ProgramSettings.LogMonitor.NPC_Filter.Any(h => handle.StartsWith(h, StringComparison.CurrentCultureIgnoreCase));
+      NPC_Filter ??= [.. ProgramSettings.LogMonitor.Global_NPC_Filter.Union(ProgramSettings.LogMonitor.NPC_Filter, StringComparer.CurrentCultureIgnoreCase)];
+      return !ProgramSettings.LogMonitor.Show_NPC_Deaths && NPC_Filter.Any(h => handle.StartsWith(h, StringComparison.CurrentCultureIgnoreCase));
     }
 
     private static string V(Match match, string group) {

@@ -163,6 +163,8 @@
 
     public Dictionary<string, string> Theme_Translations { get; set; } = [];
 
+    public string Default_Colors { get; set; } = "Standardfarben";
+
   }
 
   [Serializable()]
@@ -272,11 +274,17 @@
 
     public string Log_Entry_Display_Duration_Minutes { get; set; } = "Minute(n)";
 
-    public string Check_Complete_File { get; set; } = "Komplette Datei auswerten";
+    public string Check_Complete_File { get; set; } = "Komplette Datei";
 
     public string Handle_Filter { get; set; } = "Handle-Filter:";
 
     public string Webhook_URL { get; set; } = "Webhook-URL:";
+
+    public string Show_NPC_Deaths { get; set; } = "NPC-Tode anzeigen";
+
+    public string NPC_Filter { get; set; } = "NPC-Namen:";
+
+    public string Global_NPC_Names { get; set; } = "Globale NPC-Namen";
 
   }
 

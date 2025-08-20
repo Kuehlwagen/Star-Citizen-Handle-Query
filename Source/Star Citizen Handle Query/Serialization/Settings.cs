@@ -237,7 +237,8 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>Webhook-URL</summary>
     public string WebhookURL { get; set; } = string.Empty;
 
-    private readonly List<string> Global_NPC_Filter = [
+    /// <summary>Globale NPC-Namen</summary>
+    public readonly List<string> Global_NPC_Filter = [
       "NPC_",
       "PU_",
       "Kopion_",
@@ -245,18 +246,12 @@ namespace Star_Citizen_Handle_Query.Serialization {
       "Shipjacker_",
       "vlk_adult_"
     ];
-    private List<string> _NPC_Filter = [];
+
     /// <summary>NPC-Filter (StartsWith)</summary>
-    public List<string> NPC_Filter {
-      get {
-        _NPC_Filter ??= [];
-        _NPC_Filter = [.. Global_NPC_Filter.Union(_NPC_Filter)];
-        return _NPC_Filter;
-      }
-      set {
-        _NPC_Filter = value;
-      }
-    }
+    public List<string> NPC_Filter { get; set; } = [];
+
+    /// <summary>NPC-Tode anzeigen</summary>
+    public bool Show_NPC_Deaths { get; set; } = false;
 
     public object Clone() {
       return MemberwiseClone();

@@ -46,7 +46,8 @@
       "Advanced": "Fortgeschritten",
       "Status_Inactive": "Status inaktiv",
       "Status_Initializing": "Status Initialisierung",
-      "Status_Active": "Status aktiv"
+      "Status_Active": "Status aktiv",
+      "Default_Colors": "Standardfarben"
     },
     "Window": {
       "Group_Title": "Fenster",
@@ -98,9 +99,12 @@
       "Log_Entry_Display_Duration_Minutes": "Minute(n)",
       "Log_Show_Corpse": "Spielertode anzeigen",
       "Log_Show_Loading_Screen_Duration": "Ladebildschirm-Dauer anzeigen",
-      "Check_Complete_File": "Komplette Datei auswerten",
+      "Check_Complete_File": "Komplette Datei",
       "Handle_Filter": "Handle-Filter:",
-      "Webhook_URL": "Webhook-URL:"
+      "Webhook_URL": "Webhook-URL:",
+      "Show_NPC_Deaths": "NPC-Tode anzeigen",
+      "NPC_Filter": "NPC-Namen",
+      "Global_NPC_Names": "Globale NPC-Namen"
     },
     "Local_Cache": {
       "Group_Title": "Lokaler Cache",

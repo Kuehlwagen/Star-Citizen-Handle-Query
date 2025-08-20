@@ -53,7 +53,8 @@
         "Schwarz \u0026 Wei\u00DF": "Black \u0026 White",
         "Strand": "Beach",
         "Tag": "Day"
-      }
+      },
+      "Default_Colors": "Default colors"
     },
     "Window": {
       "Group_Title": "Window",
@@ -107,7 +108,10 @@
       "Log_Show_Loading_Screen_Duration": "Show loading screen duration",
       "Check_Complete_File": "Check complete file",
       "Handle_Filter": "Handle filter:",
-      "Webhook_URL": "Webhook URL:"
+      "Webhook_URL": "Webhook URL:",
+      "Show_NPC_Deaths": "Show NPC deaths",
+      "NPC_Filter": "NPC names:",
+      "Global_NPC_Names": "Global NPC names"
     },
     "Local_Cache": {
       "Group_Title": "Local cache",
