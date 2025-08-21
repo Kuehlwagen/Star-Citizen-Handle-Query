@@ -12,7 +12,7 @@
     <DebugType>embedded</DebugType>
     <PackageIcon>SCHQ.png</PackageIcon>
     <ApplicationIcon>Resources\SCHQ.ico</ApplicationIcon>
-    <AssemblyVersion>1.19.5</AssemblyVersion>
+    <AssemblyVersion>1.19.6</AssemblyVersion>
     <FileVersion>$(Assemblyversion)</FileVersion>
     <Company>Kuehlwagen@GitHub</Company>
     <Version>$(Assemblyversion)</Version>
