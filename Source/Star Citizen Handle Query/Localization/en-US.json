@@ -167,7 +167,10 @@
     "Webhook_Killer": "Killer",
     "Webhook_Using": "Using",
     "Webhook_Damage_Type": "Damage Type",
-    "Webhook_Zone": "Zone"
+    "Webhook_Zone": "Zone",
+    "Webhook_Hostility_Event": "Hostility Event",
+    "Webhook_Hostility_Event_Ship": "Ship",
+    "Webhook_Hostility_Event_Attacker": "Attacker"
   },
   "Relations": {
     "Title": "Relations",

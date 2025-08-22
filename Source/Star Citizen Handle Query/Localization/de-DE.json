@@ -160,7 +160,10 @@
     "Webhook_Killer": "Killer",
     "Webhook_Using": "Mit",
     "Webhook_Damage_Type": "Schadensart",
-    "Webhook_Zone": "Zone"
+    "Webhook_Zone": "Zone",
+    "Webhook_Hostility_Event": "Feindseligkeitsereignis",
+    "Webhook_Hostility_Event_Ship": "Schiff",
+    "Webhook_Hostility_Event_Attacker": "Angreifer"
   },
   "Relations": {
     "Title": "Beziehungen",

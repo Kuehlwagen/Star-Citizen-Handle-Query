@@ -53,6 +53,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           LabelText.Text = $"Loading screen: {LogInfoItem.Value}s";
           break;
         case LogType.ActorDeath:
+        case LogType.HostilityEvent:
           LabelText.Text = $"{LogInfoItem.Handle}{Environment.NewLine}{LogInfoItem.Key}";
           SetToolTip(LogInfoItem.Value);
           if (LogInfoItem.RelationValue > RelationValue.NotAssigned) {
@@ -111,7 +112,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(LogInfoItem.Handle);
           break;
         case MouseButtons.Right:
-          ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(LogInfoItem.LogType == LogType.ActorDeath ? LogInfoItem.Key : LogInfoItem.Handle);
+          ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(LogInfoItem.LogType == LogType.ActorDeath || LogInfoItem.LogType == LogType.HostilityEvent ? LogInfoItem.Key : LogInfoItem.Handle);
           break;
       }
     }
@@ -185,12 +186,12 @@ namespace Star_Citizen_Handle_Query.UserControls {
           g.DrawLine(bgPen, 10.25F, 9.25F, 10.25F, 15);
           g.DrawLine(fgPen, 10.25F, 9.25F, 10.25F, 15);
           break;
-        //case LogType.Eye:
-        //  g.DrawEllipse(bgPen, 5, 6.5F, 10, 7);
-        //  g.DrawEllipse(fgPen, 5, 6.5F, 10, 7);
-        //  g.DrawEllipse(bgPen, 8, 8, 4, 4);
-        //  g.DrawEllipse(fgPen, 8, 8, 4, 4);
-        //  break;
+        case LogType.HostilityEvent:
+          g.DrawEllipse(bgPen, 5, 6.5F, 10, 7);
+          g.DrawEllipse(fgPen, 5, 6.5F, 10, 7);
+          g.DrawEllipse(bgPen, 8, 8, 4, 4);
+          g.DrawEllipse(fgPen, 8, 8, 4, 4);
+          break;
       }
     }
 

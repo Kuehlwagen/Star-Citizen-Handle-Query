@@ -407,6 +407,12 @@
 
     public string Webhook_Zone { get; set; } = "Zone";
 
+    public string Webhook_Hostility_Event { get; set; } = "Feindseligkeitsereignis";
+
+    public string Webhook_Hostility_Event_Ship { get; set; } = "Schiff";
+
+    public string Webhook_Hostility_Event_Attacker { get; set; } = "Angreifer";
+
   }
 
   [Serializable]
