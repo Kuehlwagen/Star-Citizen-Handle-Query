@@ -111,7 +111,8 @@
       "Webhook_URL": "Webhook URL:",
       "Show_NPC_Deaths": "Show NPC deaths",
       "NPC_Filter": "NPC names:",
-      "Global_NPC_Names": "Global NPC names"
+      "Global_NPC_Names": "Global NPC names",
+      "Test_Webhook_URL": "Test"
     },
     "Local_Cache": {
       "Group_Title": "Local cache",

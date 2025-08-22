@@ -33,13 +33,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <Actor Death> CActor::Kill: '(?<Handle>[\w_\-]+)' \[\d+\] in zone '(?<Zone>.+)' killed by '(?<KilledBy>[\w_\-]+)' \[\d+\] using '(?<Using>.+)' \[(?<UsingClass>.+)\] with damage type '(?<DamageType>.+)'.+$", RegexOptions.Compiled)]
     private static partial Regex RegexActorDeath();
 
-    private readonly Regex RgxActorDeathInfo = RegexActorDeathInfo();
+    private static readonly Regex RgxActorDeathInfo = RegexActorDeathInfo();
     [GeneratedRegex(@"Using: (?<Using>.+)\nZone: (?<Zone>.+)\nDamage Type: (?<Type>.+)", RegexOptions.Compiled)]
     private static partial Regex RegexActorDeathInfo();
-
-    private readonly Regex RgxHostilityEvent = RegexHostilityEvent();
-    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <Debug Hostility Events> \[OnHandleHit\] Fake hit FROM (?<Handle_Attacker>[\w_\-]+) TO (?<Vehicle>[\w_\-]+). Being sent to child (?<Handle_Victim>[\w_\-]+) \[Team_MissionFeatures\]\[HitInfo\]$", RegexOptions.Compiled)]
-    private static partial Regex RegexHostilityEvent();
 
     public FormLogMonitor(Settings programSettings, Translation translation) {
       InitializeComponent();
@@ -294,78 +290,52 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (logInfo != null && logInfo.IsValid) {
         rtnVal = logInfo.LogType switch {
           LogType.Corpse => filter == null || filter.Count == 0 || filter.Contains(logInfo.Handle, StringComparer.CurrentCultureIgnoreCase),
-          LogType.ActorDeath | LogType.ActorDeath => !FilterNPC(logInfo.Handle) && (filter == null || filter.Count == 0 || filter.Contains(logInfo.Handle, StringComparer.CurrentCultureIgnoreCase) || filter.Contains(logInfo.Key, StringComparer.CurrentCultureIgnoreCase)),
+          LogType.ActorDeath => !FilterNPC(logInfo.Handle) && (filter == null || filter.Count == 0 || filter.Contains(logInfo.Handle, StringComparer.CurrentCultureIgnoreCase) || filter.Contains(logInfo.Key, StringComparer.CurrentCultureIgnoreCase)),
           _ => true,
         };
       }
 
-      if (rtnVal && (logInfo.LogType == LogType.ActorDeath ||logInfo.LogType == LogType.HostilityEvent) && !string.IsNullOrWhiteSpace(ProgramSettings.LogMonitor.WebhookURL)) {
-        Thread thread = new(() => PushWebhook(logInfo));
-        thread.Start();
+      if (rtnVal && logInfo.LogType == LogType.ActorDeath && !string.IsNullOrWhiteSpace(ProgramSettings.LogMonitor.WebhookURL)) {
+        PushDiscordWebhook(logInfo, ProgramSettings.LogMonitor.WebhookURL, ProgramTranslation);
       }
 
       return rtnVal;
     }
 
-    private void PushWebhook(LogMonitorInfo logInfo) {
-      DiscordWebhook webhook = null;
-      switch (logInfo.LogType) {
-        case LogType.ActorDeath: {
-            List<DiscordField> killerFields = [];
-            Match m = RgxActorDeathInfo.Match(logInfo.Value);
-            if (m != null && m.Success) {
-              killerFields.AddRange([
-                new() { name = ProgramTranslation.Log_Monitor.Webhook_Using, value = V(m, "Using")},
-                new() { name = ProgramTranslation.Log_Monitor.Webhook_Damage_Type, value = V(m, "Type")},
-                new() { name = ProgramTranslation.Log_Monitor.Webhook_Zone, value = V(m, "Zone")}
-              ]);
+    public static void PushDiscordWebhook(LogMonitorInfo logInfo, string url, Translation translation) {
+      Thread thread = new(() => PushWebhook(logInfo, url, translation));
+      thread.Start();
+    }
+
+    private static void PushWebhook(LogMonitorInfo logInfo, string url, Translation translation) {
+      List<DiscordField> killerFields = [];
+      Match m = RgxActorDeathInfo.Match(logInfo.Value);
+      if (m != null && m.Success) {
+        killerFields.AddRange([
+          new() { name = translation.Log_Monitor.Webhook_Using, value = V(m, "Using")},
+            new() { name = translation.Log_Monitor.Webhook_Damage_Type, value = V(m, "Type")},
+            new() { name = translation.Log_Monitor.Webhook_Zone, value = V(m, "Zone")}
+        ]);
+      }
+      DiscordWebhook webhook = new() {
+        embeds = [
+          new() {
+              title = translation.Log_Monitor.Webhook_Actor_Death,
+              description = $"**[{logInfo.Handle}](https://robertsspaceindustries.com/en/citizens/{logInfo.Handle})**",
+              color = GetWebhookRelationColor(logInfo.RelationValue)
+            },
+            new() {
+              title = translation.Log_Monitor.Webhook_Killer,
+              description = $"**[{logInfo.Key}](https://robertsspaceindustries.com/en/citizens/{logInfo.Key})**",
+              color = GetWebhookRelationColor(logInfo.RelationValue2),
+              fields = killerFields
             }
-            webhook = new() {
-              embeds = [
-                new() {
-                  title = ProgramTranslation.Log_Monitor.Webhook_Actor_Death,
-                  description = $"**[{logInfo.Handle}](https://robertsspaceindustries.com/en/citizens/{logInfo.Handle})**",
-                  color = GetWebhookRelationColor(logInfo.RelationValue)
-                },
-                new() {
-                  title = ProgramTranslation.Log_Monitor.Webhook_Killer,
-                  description = $"**[{logInfo.Key}](https://robertsspaceindustries.com/en/citizens/{logInfo.Key})**",
-                  color = GetWebhookRelationColor(logInfo.RelationValue2),
-                  fields = killerFields
-                }
-              ]
-            };
-          }
-          break;
-        case LogType.HostilityEvent:
-          webhook = new() {
-            embeds = [
-              new() {
-                title = ProgramTranslation.Log_Monitor.Webhook_Hostility_Event,
-                description = $"**[{logInfo.Handle}](https://robertsspaceindustries.com/en/citizens/{logInfo.Handle})**",
-                color = GetWebhookRelationColor(logInfo.RelationValue),
-                fields = [
-                  new() {
-                    name = ProgramTranslation.Log_Monitor.Webhook_Hostility_Event_Ship,
-                    value = logInfo.Value
-                  }
-                ]
-              },
-              new() {
-                title = ProgramTranslation.Log_Monitor.Webhook_Hostility_Event_Attacker,
-                description = $"**[{logInfo.Key}](https://robertsspaceindustries.com/en/citizens/{logInfo.Key})**",
-                color = GetWebhookRelationColor(logInfo.RelationValue2)
-              }
-            ]
-          };
-          break;
-      }
-      if (webhook != null) {
-        try {
-          using HttpClient client = new();
-          _ = client.PostAsJsonAsync(ProgramSettings.LogMonitor.WebhookURL, webhook).Result;
-        } catch { }
-      }
+        ]
+      };
+      try {
+        using HttpClient client = new();
+        _ = client.PostAsJsonAsync(url, webhook).Result;
+      } catch { }
     }
 
     private static int? GetWebhookRelationColor(RelationValue relation) {
@@ -391,8 +361,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair", relation: RelationValue.Bogey),
           new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "IsCorpseEnabled", "criminal arrest", relation: RelationValue.Bandit),
           new(LogType.LoadingScreenDuration, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), value: "15"),
-          new(LogType.ActorDeath, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "Churchtrill", $"Killed by: Churchtrill{NL}Using: unknown (Class unknown){NL}Zone: TransitCarriage_RSI_Polaris_Rear_Elevator_1604048788858{NL}Damage Type: Crash", relation: RelationValue.Friendly, RelationValue.Bandit),
-          new(LogType.HostilityEvent, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "M4Z3", "MRAI_Guardian_5662046311400", RelationValue.Friendly, RelationValue.Neutral)
+          new(LogType.ActorDeath, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "Churchtrill", $"Killed by: Churchtrill{NL}Using: unknown (Class unknown){NL}Zone: TransitCarriage_RSI_Polaris_Rear_Elevator_1604048788858{NL}Damage Type: Crash", relation: RelationValue.Friendly, RelationValue.Bandit)
         ]);
       }
 #else
@@ -442,15 +411,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                     $"Killed by: {V(m, "KilledBy")}{NL}Using: {V(m, "Using")} ({V(m, "UsingClass")}){NL}Zone: {V(m, "Zone")}{NL}Damage Type: {V(m, "DamageType")}",
                     (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle")),
                     (Owner as FormHandleQuery).GetHandleRelation(V(m, "KilledBy"))));
-                } else {
-                  m = RgxHostilityEvent.Match(line);
-                  if (m != null && m.Success) {
-                    rtnVal.Add(new LogMonitorInfo(LogType.HostilityEvent,
-                      V(m, "Date"),
-                      V(m, "Handle_Victim"),
-                      V(m, "Handle_Attacker"),
-                      V(m, "Vehicle")));
-                  }
                 }
               }
             }

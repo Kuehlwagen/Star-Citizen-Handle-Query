@@ -2,6 +2,7 @@
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace Star_Citizen_Handle_Query.Dialogs {
 
@@ -20,6 +21,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly bool LoadingFinished = false;
     private const string ThemesResourcePrefix = "Star_Citizen_Handle_Query.Themes.";
     private readonly SortedDictionary<string, AppColors> AppColorThemes = [];
+    private readonly Regex RgxDiscordWebhookUrl = RegexDiscordWebhookUrl();
+    [GeneratedRegex(@"^https:\/\/discord.com\/api\/webhooks\/\d+\/[a-zA-Z0-9_]+$", RegexOptions.Compiled)]
+    private static partial Regex RegexDiscordWebhookUrl();
 
     public FormSettings(Settings settings = null) {
       InitializeComponent();
@@ -357,6 +361,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       TextBoxWebhookURL.Enabled = CheckBoxShowLog.Checked;
       CheckBoxNPCTodeAnzeigen.Enabled = CheckBoxShowLog.Checked;
       TextBoxNPCNamen.Enabled = CheckBoxShowLog.Checked;
+      ButtonWebhookTest.Enabled = CheckBoxShowLog.Checked && IsValidDiscordWebhookUrl(ProgramSettings.LogMonitor.WebhookURL);
     }
 
     private void NumericUpDownLogEintraegeMaximum_ValueChanged(object sender, EventArgs e) {
@@ -527,6 +532,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LabelWebhookURL.Text = CurrentLocalization.Settings.Log_Monitor.Webhook_URL;
       CheckBoxNPCTodeAnzeigen.Text = CurrentLocalization.Settings.Log_Monitor.Show_NPC_Deaths;
       LabelNPCNamen.Text = CurrentLocalization.Settings.Log_Monitor.NPC_Filter;
+      ButtonWebhookTest.Text = CurrentLocalization.Settings.Log_Monitor.Test_Webhook_URL;
       SetToolTip(TextBoxNPCNamen, $"{CurrentLocalization.Settings.Log_Monitor.Global_NPC_Names}:{Environment.NewLine}{string.Join(Environment.NewLine, ProgramSettings.LogMonitor.Global_NPC_Filter)}");
 
       ResumeLayout();
@@ -691,6 +697,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void TextBoxWebhookURL_TextChanged(object sender, EventArgs e) {
       ProgramSettings.LogMonitor.WebhookURL = TextBoxWebhookURL.Text;
+      ButtonWebhookTest.Enabled = IsValidDiscordWebhookUrl(TextBoxWebhookURL.Text);
     }
 
     private void ButtonFarbenStandard_Click(object sender, EventArgs e) {
@@ -835,6 +842,20 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ButtonRelationBanditBackColor.Visible = visible;
       ButtonRelationOrganizationForeColor.Visible = visible;
       ButtonRelationOrganizationBackColor.Visible = visible;
+    }
+
+    private static bool IsValidDiscordWebhookUrl(string url) => RegexDiscordWebhookUrl().IsMatch(url);
+
+    private void ButtonWebhookTest_Click(object sender, EventArgs e) {
+      if (IsValidDiscordWebhookUrl(ProgramSettings.LogMonitor.WebhookURL)) {
+        FormLogMonitor.PushDiscordWebhook(new(LogType.ActorDeath, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"),
+          "Kuehlwagen",
+          "Gentle81",
+          $"Killed by: Gentle81{Environment.NewLine}Using: unknown (Class unknown){Environment.NewLine}Zone: TransitCarriage_RSI_Polaris_Rear_Elevator_1604048788858{Environment.NewLine}Damage Type: Crash",
+          SCHQ_Protos.RelationValue.Friendly,
+          SCHQ_Protos.RelationValue.Bandit),
+          ProgramSettings.LogMonitor.WebhookURL,CurrentLocalization);
+      }
     }
 
   }
