@@ -21,7 +21,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly bool LoadingFinished = false;
     private const string ThemesResourcePrefix = "Star_Citizen_Handle_Query.Themes.";
     private readonly SortedDictionary<string, AppColors> AppColorThemes = [];
-    private readonly Regex RgxDiscordWebhookUrl = RegexDiscordWebhookUrl();
+    public static readonly Regex RgxDiscordWebhookUrl = RegexDiscordWebhookUrl();
     [GeneratedRegex(@"^https:\/\/discord.com\/api\/webhooks\/\d+\/[a-zA-Z0-9_]+$", RegexOptions.Compiled)]
     private static partial Regex RegexDiscordWebhookUrl();
 
@@ -844,7 +844,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ButtonRelationOrganizationBackColor.Visible = visible;
     }
 
-    private static bool IsValidDiscordWebhookUrl(string url) => RegexDiscordWebhookUrl().IsMatch(url);
+    public static bool IsValidDiscordWebhookUrl(string url) => RgxDiscordWebhookUrl.IsMatch(url);
 
     private void ButtonWebhookTest_Click(object sender, EventArgs e) {
       if (IsValidDiscordWebhookUrl(ProgramSettings.LogMonitor.WebhookURL)) {

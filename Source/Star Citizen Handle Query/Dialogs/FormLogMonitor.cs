@@ -299,7 +299,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         };
       }
 
-      if (rtnVal && (logInfo.LogType == LogType.ActorDeath || logInfo.LogType == LogType.HostilityEvent) && !string.IsNullOrWhiteSpace(ProgramSettings.LogMonitor.WebhookURL)) {
+      if (rtnVal && (logInfo.LogType == LogType.ActorDeath || logInfo.LogType == LogType.HostilityEvent) && FormSettings.IsValidDiscordWebhookUrl(ProgramSettings.LogMonitor.WebhookURL)) {
         PushDiscordWebhook(logInfo, ProgramSettings.LogMonitor.WebhookURL, ProgramTranslation);
       }
 
