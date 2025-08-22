@@ -446,6 +446,17 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                     $"Killed by: {V(m, "KilledBy")}{NL}Using: {V(m, "Using")} ({V(m, "UsingClass")}){NL}Zone: {V(m, "Zone")}{NL}Damage Type: {V(m, "DamageType")}",
                     (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle")),
                     (Owner as FormHandleQuery).GetHandleRelation(V(m, "KilledBy"))));
+                } else {
+                  m = RgxHostilityEvent.Match(line);
+                  if (m != null && m.Success) {
+                    rtnVal.Add(new LogMonitorInfo(LogType.HostilityEvent,
+                      V(m, "Date"),
+                      V(m, "Handle_Victim"),
+                      V(m, "Handle_Attacker"),
+                      V(m, "Vehicle"),
+                      (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle_Victim")),
+                      (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle_Attacker"))));
+                  }
                 }
               }
             }
