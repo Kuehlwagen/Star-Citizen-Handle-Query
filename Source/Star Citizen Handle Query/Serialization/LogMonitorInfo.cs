@@ -43,7 +43,10 @@ namespace Star_Citizen_Handle_Query.Serialization {
       if (obj != null && obj is LogMonitorInfo lmi) {
         return lmi.Handle == Handle &&
           lmi.Date <= Date && lmi.Date.AddSeconds(10) >= Date &&
-          lmi.LogType != LogType.HostilityEvent && LogType != LogType.HostilityEvent;
+          (lmi.LogType == LogType ||
+          (lmi.LogType == LogType.ActorDeath && LogType == LogType.Corpse) ||
+          (lmi.LogType == LogType.Corpse && LogType == LogType.ActorDeath)) &&
+          (lmi.LogType != LogType.HostilityEvent || lmi.Key == Key);
       } else {
         return base.Equals(obj);
       }

@@ -396,7 +396,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "IsCorpseEnabled", "criminal arrest", relation: RelationValue.Bandit),
           new(LogType.LoadingScreenDuration, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), value: "15"),
           new(LogType.ActorDeath, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "Churchtrill", $"Killed by: Churchtrill{NL}Using: unknown (Class unknown){NL}Zone: TransitCarriage_RSI_Polaris_Rear_Elevator_1604048788858{NL}Damage Type: Crash", relation: RelationValue.Friendly, RelationValue.Bandit),
-          new(LogType.HostilityEvent, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "M4Z3", "MRAI_Guardian_5662046311400", RelationValue.Friendly, RelationValue.Neutral)
+          new(LogType.HostilityEvent, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "M4Z3", "MRAI_Guardian_5662046311400", RelationValue.Friendly, RelationValue.Neutral),
+          new(LogType.HostilityEvent, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "M4Z3", "MRAI_Guardian_5662046311400", RelationValue.Friendly, RelationValue.Neutral),
+          new(LogType.HostilityEvent, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "Gentle81", "MRAI_Guardian_5662046311400", RelationValue.Friendly, RelationValue.Bogey)
         ]);
       }
 #else
