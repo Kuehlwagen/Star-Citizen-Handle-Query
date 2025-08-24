@@ -46,7 +46,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings = programSettings;
       ProgramTranslation = translation;
 
-      // Prüfen, ob die Programm-Einstellungen valide sind
+      // Prï¿½fen, ob die Programm-Einstellungen valide sind
       if (ProgramSettings != null) {
         // Fenster-Deckkraft setzen
         Opacity = (double)ProgramSettings.WindowOpacity / 100.0;
@@ -62,7 +62,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         }
       }
 
-      // Übersetzung laden
+      // ï¿½bersetzung laden
       SetTranslation();
     }
 
@@ -77,7 +77,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void SetTranslation() {
-      // Prüfen, ob die Übersetzung valide ist
+      // Prï¿½fen, ob die ï¿½bersetzung valide ist
       if (ProgramTranslation != null) {
         // Control-Texte setzen
         SetTitle();
@@ -295,6 +295,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         rtnVal = logInfo.LogType switch {
           LogType.Corpse => filter == null || filter.Count == 0 || filter.Contains(logInfo.Handle, StringComparer.CurrentCultureIgnoreCase),
           LogType.ActorDeath => !FilterNPC(logInfo.Handle) && (filter == null || filter.Count == 0 || filter.Contains(logInfo.Handle, StringComparer.CurrentCultureIgnoreCase) || filter.Contains(logInfo.Key, StringComparer.CurrentCultureIgnoreCase)),
+          LogType.HostilityEvent => !(FilterNPC(logInfo.Handle) || FilterNPC(logInfo.Key)),
           _ => true,
         };
       }
