@@ -244,6 +244,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       TextBoxWebhookURL.Text = ProgramSettings.LogMonitor.WebhookURL;
       CheckBoxNPCTodeAnzeigen.Checked = ProgramSettings.LogMonitor.Show_NPC_Deaths;
       TextBoxNPCNamen.Text = string.Join(',', ProgramSettings.LogMonitor.NPC_Filter);
+      CheckBoxLogMonitorShowHostilityEvents.Checked = ProgramSettings.LogMonitor.Filter.Hostility_Events;
     }
 
     private void GetLocalizations() {
@@ -362,6 +363,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxNPCTodeAnzeigen.Enabled = CheckBoxShowLog.Checked;
       TextBoxNPCNamen.Enabled = CheckBoxShowLog.Checked;
       ButtonWebhookTest.Enabled = CheckBoxShowLog.Checked && IsValidDiscordWebhookUrl(ProgramSettings.LogMonitor.WebhookURL);
+      CheckBoxLogMonitorShowHostilityEvents.Enabled = CheckBoxShowLog.Checked;
     }
 
     private void NumericUpDownLogEintraegeMaximum_ValueChanged(object sender, EventArgs e) {
@@ -409,6 +411,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void CheckBoxNPCTodeAnzeigen_CheckedChanged(object sender, EventArgs e) {
       ProgramSettings.LogMonitor.Show_NPC_Deaths = CheckBoxNPCTodeAnzeigen.Checked;
+    }
+
+    private void CheckBoxLogMonitorShowHostilityEvents_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.LogMonitor.Filter.Hostility_Events = CheckBoxLogMonitorShowHostilityEvents.Checked;
     }
 
     private void NumericUpDownRelationsEntriesMaximum_ValueChanged(object sender, EventArgs e) {
@@ -533,6 +539,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxNPCTodeAnzeigen.Text = CurrentLocalization.Settings.Log_Monitor.Show_NPC_Deaths;
       LabelNPCNamen.Text = CurrentLocalization.Settings.Log_Monitor.NPC_Filter;
       ButtonWebhookTest.Text = CurrentLocalization.Settings.Log_Monitor.Test_Webhook_URL;
+      CheckBoxLogMonitorShowHostilityEvents.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Hostility_Events;
       SetToolTip(TextBoxNPCNamen, $"{CurrentLocalization.Settings.Log_Monitor.Global_NPC_Names}:{Environment.NewLine}{string.Join(Environment.NewLine, ProgramSettings.LogMonitor.Global_NPC_Filter)}");
 
       ResumeLayout();
@@ -854,7 +861,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           $"Killed by: Gentle81{Environment.NewLine}Using: unknown (Class unknown){Environment.NewLine}Zone: TransitCarriage_RSI_Polaris_Rear_Elevator_1604048788858{Environment.NewLine}Damage Type: Crash",
           SCHQ_Protos.RelationValue.Friendly,
           SCHQ_Protos.RelationValue.Bandit),
-          ProgramSettings.LogMonitor.WebhookURL,CurrentLocalization);
+          ProgramSettings.LogMonitor.WebhookURL, CurrentLocalization);
       }
     }
 

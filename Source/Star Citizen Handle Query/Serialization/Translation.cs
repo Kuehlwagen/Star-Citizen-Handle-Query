@@ -288,6 +288,8 @@
 
     public string Test_Webhook_URL { get; set; } = "Test";
 
+    public string Log_Show_Hostility_Events { get; set; } = "Feindseligkeitsereignisse anzeigen";
+
   }
 
   [Serializable()]

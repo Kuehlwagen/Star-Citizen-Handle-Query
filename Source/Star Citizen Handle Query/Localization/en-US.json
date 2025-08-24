@@ -112,7 +112,8 @@
       "Show_NPC_Deaths": "Show NPC deaths",
       "NPC_Filter": "NPC names:",
       "Global_NPC_Names": "Global NPC names",
-      "Test_Webhook_URL": "Test"
+      "Test_Webhook_URL": "Test",
+      "Log_Show_Hostility_Events": "Show hostility events"
     },
     "Local_Cache": {
       "Group_Title": "Local cache",

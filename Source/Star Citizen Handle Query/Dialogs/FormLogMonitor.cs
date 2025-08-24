@@ -185,6 +185,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void StartMonitor() {
       Task.Run(() => {
+
+#if DEBUG
+        Invoke(new Action(() => ClearLogInfos()));
+#endif
+
         while (!Cancel) {
 
           try {
@@ -197,12 +202,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             if (processes?.Length > 0) {
               processSC = Process.GetProcessesByName(processName)[0];
             }
-
-#if DEBUG
-            if (processSC == null) {
-              Invoke(new Action(() => ClearLogInfos()));
-            }
-#endif
 
             if (processSC != null) {
 
@@ -461,18 +460,21 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                     $"Killed by: {V(m, "KilledBy")}{NL}Using: {V(m, "Using")} ({V(m, "UsingClass")}){NL}Zone: {V(m, "Zone")}{NL}Damage Type: {V(m, "DamageType")}",
                     (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle")),
                     (Owner as FormHandleQuery).GetHandleRelation(V(m, "KilledBy"))));
-                } else {
-                  m = RgxHostilityEvent.Match(line);
-                  if (m != null && m.Success) {
-                    rtnVal.Add(new LogMonitorInfo(LogType.HostilityEvent,
-                      V(m, "Date"),
-                      V(m, "Handle_Victim"),
-                      V(m, "Handle_Attacker"),
-                      V(m, "Vehicle"),
-                      (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle_Victim")),
-                      (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle_Attacker"))));
-                  }
+                  continue;
                 }
+              }
+            }
+            if (ProgramSettings.LogMonitor.Filter.Hostility_Events) {
+              m = RgxHostilityEvent.Match(line);
+              if (m != null && m.Success) {
+                rtnVal.Add(new LogMonitorInfo(LogType.HostilityEvent,
+                  V(m, "Date"),
+                  V(m, "Handle_Victim"),
+                  V(m, "Handle_Attacker"),
+                  V(m, "Vehicle"),
+                  (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle_Victim")),
+                  (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle_Attacker"))));
+                continue;
               }
             }
             if (ProgramSettings.LogMonitor.Filter.LoadingScreenDuration) {

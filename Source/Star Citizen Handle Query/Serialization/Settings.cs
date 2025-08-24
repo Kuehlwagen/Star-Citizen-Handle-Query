@@ -268,6 +268,9 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>Angabe, ob Ladezeiten angezeigt werden sollen</summary>
     public bool LoadingScreenDuration { get; set; } = false;
 
+    /// <summary>Angabe, ob Feindseligkeitsereignisse angezeigt werden sollen</summary>
+    public bool Hostility_Events { get; set; } = true;
+
     public object Clone() {
       return MemberwiseClone();
     }
