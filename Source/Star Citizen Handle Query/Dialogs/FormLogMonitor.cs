@@ -209,7 +209,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               Invoke(new Action(() => ClearLogInfos()));
               Invoke(new Action(() => ChangeStatus(Status.Initializing)));
 
-              string scLogPath = Path.Combine(Path.GetDirectoryName(processSC.Modules[0].FileName), $@"Game.log");
+              string scLogPath = Path.Combine(Path.GetDirectoryName(processSC.Modules[0].FileName), "Game.log");
               if (File.Exists(scLogPath)) {
 
                 Encoding encoding = Encoding.UTF8;
@@ -217,13 +217,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                 long currentPosition = ProgramSettings.LogMonitor.LoadCompleteFile ? 0 : logReader.BaseStream.Length;
                 long lastMaxOffset = currentPosition;
 
+                string livePtuFolder = Path.GetFileName(Path.GetDirectoryName(scLogPath));
+                Invoke(new Action(() => SetTitle(livePtuFolder)));
+
                 while (!Cancel && processSC != null && !processSC.HasExited) {
 
                   Application.DoEvents();
                   Thread.Sleep(100);
-
-                  string livePtuFolder = Path.GetFileName(Path.GetDirectoryName(scLogPath));
-                  Invoke(new Action(() => SetTitle(livePtuFolder)));
 
                   Invoke(new Action(() => ChangeStatus(Status.Monitoring)));
 
@@ -386,21 +386,33 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void ClearLogInfos() {
 #if DEBUG
       if (PanelLogInfo.Controls.Count == 0) {
-        AddLogInfo([
-          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "DoesLocationContainHospital", "Searching landing zone location \"@ui_pregame_port_GrimHex_name\" for the closest hospital.", relation: RelationValue.Friendly),
-          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "DoesLocationContainHospital", "Nearby hospital \"@Stanton2_Orison_Hospital\" IS NOT contained within landing zone \"@ui_pregame_port_GrimHex_name\".", relation: RelationValue.Friendly),
-          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "IsCorpseEnabled", "Yes, there is a local inventory but no hospital.", relation: RelationValue.Friendly),
-          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", "DoesLocationContainHospital", "Searching landing zone location \"@Stanton2_Transfer_Seraphim\" for the closest hospital."),
-          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", "DoesLocationContainHospital", "Nearby hospital \"@RR_Clinic\" IS contained within landing zone \"@Stanton2_Transfer_Seraphim\"."),
-          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", "IsCorpseEnabled", "Yes"),
-          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair", relation: RelationValue.Bogey),
-          new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "IsCorpseEnabled", "criminal arrest", relation: RelationValue.Bandit),
-          new(LogType.LoadingScreenDuration, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), value: "15"),
-          new(LogType.ActorDeath, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "Churchtrill", $"Killed by: Churchtrill{NL}Using: unknown (Class unknown){NL}Zone: TransitCarriage_RSI_Polaris_Rear_Elevator_1604048788858{NL}Damage Type: Crash", relation: RelationValue.Friendly, RelationValue.Bandit),
-          new(LogType.HostilityEvent, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "M4Z3", "MRAI_Guardian_5662046311400", RelationValue.Friendly, RelationValue.Neutral),
-          new(LogType.HostilityEvent, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "M4Z3", "MRAI_Guardian_5662046311400", RelationValue.Friendly, RelationValue.Neutral),
-          new(LogType.HostilityEvent, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "Gentle81", "MRAI_Guardian_5662046311400", RelationValue.Friendly, RelationValue.Bogey)
-        ]);
+        string debugGameLogPath = Path.Combine(FormHandleQuery.GetSaveFilesRootPath(), @"..\Game.log");
+        if (File.Exists(debugGameLogPath)) {
+          Encoding encoding = Encoding.UTF8;
+          using StreamReader logReader = new(new FileStream(debugGameLogPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite), encoding);
+          Invoke(new Action(() => SetTitle("DEBUG")));
+          string line;
+          while (!logReader.EndOfStream) {
+            line = logReader.ReadLine();
+            Invoke(new Action(() => AddLogInfo(CheckRegEx(line))));
+          }
+        } else {
+          AddLogInfo([
+            new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "DoesLocationContainHospital", "Searching landing zone location \"@ui_pregame_port_GrimHex_name\" for the closest hospital.", relation: RelationValue.Friendly),
+            new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "DoesLocationContainHospital", "Nearby hospital \"@Stanton2_Orison_Hospital\" IS NOT contained within landing zone \"@ui_pregame_port_GrimHex_name\".", relation: RelationValue.Friendly),
+            new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "IsCorpseEnabled", "Yes, there is a local inventory but no hospital.", relation: RelationValue.Friendly),
+            new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", "DoesLocationContainHospital", "Searching landing zone location \"@Stanton2_Transfer_Seraphim\" for the closest hospital."),
+            new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", "DoesLocationContainHospital", "Nearby hospital \"@RR_Clinic\" IS contained within landing zone \"@Stanton2_Transfer_Seraphim\"."),
+            new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "DudeCrocker", "IsCorpseEnabled", "Yes"),
+            new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "LanceFlair", relation: RelationValue.Bogey),
+            new(LogType.Corpse, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Gentle81", "IsCorpseEnabled", "criminal arrest", relation: RelationValue.Bandit),
+            new(LogType.LoadingScreenDuration, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), value: "15"),
+            new(LogType.ActorDeath, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "Churchtrill", $"Killed by: Churchtrill{NL}Using: unknown (Class unknown){NL}Zone: TransitCarriage_RSI_Polaris_Rear_Elevator_1604048788858{NL}Damage Type: Crash", relation: RelationValue.Friendly, RelationValue.Bandit),
+            new(LogType.HostilityEvent, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "M4Z3", "MRAI_Guardian_5662046311400", RelationValue.Friendly, RelationValue.Neutral),
+            new(LogType.HostilityEvent, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "M4Z3", "MRAI_Guardian_5662046311400", RelationValue.Friendly, RelationValue.Neutral),
+            new(LogType.HostilityEvent, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "Gentle81", "MRAI_Guardian_5662046311400", RelationValue.Friendly, RelationValue.Bogey)
+          ]);
+        }
       }
 #else
       SetTitle();
