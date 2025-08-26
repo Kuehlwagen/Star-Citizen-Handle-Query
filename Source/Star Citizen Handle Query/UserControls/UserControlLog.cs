@@ -51,37 +51,43 @@ namespace Star_Citizen_Handle_Query.UserControls {
           break;
         case LogType.LoadingScreenDuration:
           LabelText.Text = $"Loading screen: {LogInfoItem.Value}s";
+          break;    
+        case LogType.OwnHandleInfo:
+          InitLogItemLayout();
+          LabelText.Text = $"Own handle is: {Environment.NewLine}{LogInfoItem.Handle}";
           break;
         case LogType.ActorDeath:
+          InitLogItemLayout();
+          SetAndQueryHandle(LogInfoItem.Handle);
+          break;
         case LogType.HostilityEvent:
-          LabelText.Text = $"{LogInfoItem.Handle}{Environment.NewLine}{LogInfoItem.Key}";
-          SetToolTip(LogInfoItem.Value);
-          if (LogInfoItem.RelationValue > RelationValue.NotAssigned) {
-            LabelRelation.Visible = LogInfoItem.RelationValue > RelationValue.NotAssigned;
-            LabelRelation.BackColor = FormHandleQuery.GetRelationColor(ProgramSettings, LogInfoItem.RelationValue);
-          }
-          Height += LabelText.Height;
-          LabelRelation.Height += LabelText.Height;
-          LabelText.Height *= 2;
-          LabelTime.Text += $"{Environment.NewLine}❌";
-          LabelTime.Height *= 2;
-          AddMouseEvents();
-
-          // Ggf. Handle-Suche direkt durchführen
-          if (ProgramSettings.LogMonitor.HandleFilter != null && ProgramSettings.LogMonitor.HandleFilter.Count > 0) {
-            if (ProgramSettings.LogMonitor.HandleFilter.Any(h => h.Equals(LogInfoItem.Handle, StringComparison.CurrentCultureIgnoreCase))) {
+          InitLogItemLayout();
+          // Handle-Suche direkt durchführen
+          // hostility events handles nur suchen, wenn man selbst betroffen ist; da diese events auch von anderen spielern geloggt werden
+          if (ProgramSettings.LogMonitor.Filter.OwnHandle.Equals(LogInfoItem.Handle)) {
               SetAndQueryHandle(LogInfoItem.Key);
-            } else if (ProgramSettings.LogMonitor.HandleFilter.Any(h => h.Equals(LogInfoItem.Key, StringComparison.CurrentCultureIgnoreCase))) {
+          } else if (ProgramSettings.LogMonitor.Filter.OwnHandle.Equals(LogInfoItem.Key)) {
               SetAndQueryHandle(LogInfoItem.Handle);
-            }
-          } else {
-            SetAndQueryHandle(LogInfoItem.Handle);
           }
-
           break;
       }
 
       TimerRemoveControl.Enabled = true;
+    }
+
+    private void InitLogItemLayout() {
+      LabelText.Text = $"{LogInfoItem.Handle}{Environment.NewLine}{LogInfoItem.Key}";
+      Height += LabelText.Height;
+      LabelRelation.Height += LabelText.Height;
+      LabelText.Height *= 2;
+      LabelTime.Text += $"{Environment.NewLine}❌";
+      LabelTime.Height *= 2;
+      SetToolTip(LogInfoItem.Value);
+      if (LogInfoItem.RelationValue > RelationValue.NotAssigned) {
+        LabelRelation.Visible = LogInfoItem.RelationValue > RelationValue.NotAssigned;
+        LabelRelation.BackColor = FormHandleQuery.GetRelationColor(ProgramSettings, LogInfoItem.RelationValue);
+      }
+      AddMouseEvents();
     }
 
     public void UpdateInfo(LogMonitorInfo info) {
