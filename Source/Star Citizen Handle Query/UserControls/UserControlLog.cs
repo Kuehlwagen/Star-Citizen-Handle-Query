@@ -58,7 +58,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           SetToolTip(LogInfoItem.Value);
           if (LogInfoItem.RelationValue > RelationValue.NotAssigned) {
             LabelRelation.Visible = LogInfoItem.RelationValue > RelationValue.NotAssigned;
-            LabelRelation.BackColor = FormHandleQuery.GetRelationColor(ProgramSettings,LogInfoItem.RelationValue);
+            LabelRelation.BackColor = FormHandleQuery.GetRelationColor(ProgramSettings, LogInfoItem.RelationValue);
           }
           Height += LabelText.Height;
           LabelRelation.Height += LabelText.Height;
@@ -66,6 +66,18 @@ namespace Star_Citizen_Handle_Query.UserControls {
           LabelTime.Text += $"{Environment.NewLine}❌";
           LabelTime.Height *= 2;
           AddMouseEvents();
+
+          // Ggf. Handle-Suche direkt durchführen
+          if (ProgramSettings.LogMonitor.HandleFilter != null && ProgramSettings.LogMonitor.HandleFilter.Count > 0) {
+            if (ProgramSettings.LogMonitor.HandleFilter.Any(h => h.Equals(LogInfoItem.Handle, StringComparison.CurrentCultureIgnoreCase))) {
+              SetAndQueryHandle(LogInfoItem.Key);
+            } else if (ProgramSettings.LogMonitor.HandleFilter.Any(h => h.Equals(LogInfoItem.Key, StringComparison.CurrentCultureIgnoreCase))) {
+              SetAndQueryHandle(LogInfoItem.Handle);
+            }
+          } else {
+            SetAndQueryHandle(LogInfoItem.Handle);
+          }
+
           break;
       }
 
@@ -109,12 +121,16 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private void Handle_MouseClick(object sender, MouseEventArgs e) {
       switch (e.Button) {
         case MouseButtons.Left:
-          ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(LogInfoItem.Handle);
+          SetAndQueryHandle(LogInfoItem.Handle);
           break;
         case MouseButtons.Right:
-          ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(LogInfoItem.LogType == LogType.ActorDeath || LogInfoItem.LogType == LogType.HostilityEvent ? LogInfoItem.Key : LogInfoItem.Handle);
+          SetAndQueryHandle(LogInfoItem.LogType == LogType.ActorDeath || LogInfoItem.LogType == LogType.HostilityEvent ? LogInfoItem.Key : LogInfoItem.Handle);
           break;
       }
+    }
+
+    private void SetAndQueryHandle(string handle) {
+      ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(handle);
     }
 
     private void TimerRemoveControl_Tick(object sender, EventArgs e) {
