@@ -492,11 +492,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                 continue;
               }
             }
-            if (string.IsNullOrEmpty(ProgramSettings.LogMonitor.Filter.OwnHandle)) {
+            if (string.IsNullOrEmpty(ProgramSettings.LogMonitor.OwnHandle)) {
               m = RgxOwnHandle.Match(line);
               if (m != null && m.Success) {
                 var ownHandle = V(m, "Own_Handle");
-                ProgramSettings.LogMonitor.Filter.OwnHandle = ownHandle;
+                ProgramSettings.LogMonitor.OwnHandle = ownHandle;
                 rtnVal.Add(new LogMonitorInfo(LogType.OwnHandleInfo,
                   V(m, "Date"),
                   handle: ownHandle));

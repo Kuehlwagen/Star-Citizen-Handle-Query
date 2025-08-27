@@ -55,6 +55,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
           LabelText.Text = $"{ProgramTranslation.Log_Monitor.Loading_Screen}: {LogInfoItem.Value}s";
           break;
         case LogType.OwnHandleInfo:
+#if DEBUG
+          ProgramSettings.LogMonitor.OwnHandle = LogInfoItem.Handle;
+#endif
           InitLogItemLayout();
           LabelText.Text = $"{ProgramTranslation.Log_Monitor.Own_Handle_Is}: {Environment.NewLine}{LogInfoItem.Handle}";
           break;
@@ -66,9 +69,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
           InitLogItemLayout();
           // Handle-Suche direkt durchführen
           // hostility events handles nur suchen, wenn man selbst betroffen ist; da diese events auch von anderen spielern geloggt werden
-          if (ProgramSettings.LogMonitor.Filter.OwnHandle.Equals(LogInfoItem.Handle)) {
+          if (ProgramSettings.LogMonitor.OwnHandle.Equals(LogInfoItem.Handle)) {
             SetAndQueryHandle(LogInfoItem.Key);
-          } else if (ProgramSettings.LogMonitor.Filter.OwnHandle.Equals(LogInfoItem.Key)) {
+          } else if (ProgramSettings.LogMonitor.OwnHandle.Equals(LogInfoItem.Key)) {
             SetAndQueryHandle(LogInfoItem.Handle);
           }
           break;
@@ -205,6 +208,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           DrawDeathIcon(g, fgPen, bgPen);
           break;
         case LogType.LoadingScreenDuration:
+        case LogType.OwnHandleInfo:
           g.FillEllipse(bgPen.Brush, 9, 5, 2.25F, 2.25F);
           g.FillEllipse(fgPen.Brush, 9, 5, 2.25F, 2.25F);
           g.DrawLine(bgPen, 10.25F, 9.25F, 10.25F, 15);

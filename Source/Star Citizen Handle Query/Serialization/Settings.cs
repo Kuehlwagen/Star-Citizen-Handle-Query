@@ -255,6 +255,10 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>NPC-Tode anzeigen</summary>
     public bool Show_NPC_Deaths { get; set; } = false;
 
+    /// <summary>Eigener Handle</summary>
+    [JsonIgnore]
+    public string OwnHandle { get; set; } = string.Empty;
+
     public object Clone() {
       return MemberwiseClone();
     }
@@ -268,9 +272,6 @@ namespace Star_Citizen_Handle_Query.Serialization {
 
     /// <summary>Angabe, ob Ladezeiten angezeigt werden sollen</summary>
     public bool LoadingScreenDuration { get; set; } = false;
-
-    /// <summary>Eigener Handle</summary>
-    public string OwnHandle { get; set; } = "";
     
     /// <summary>Angabe, ob Feindseligkeitsereignisse angezeigt werden sollen</summary>
     public bool Hostility_Events { get; set; } = true;
