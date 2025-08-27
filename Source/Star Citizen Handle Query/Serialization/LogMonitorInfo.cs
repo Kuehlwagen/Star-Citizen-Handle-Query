@@ -40,13 +40,19 @@ namespace Star_Citizen_Handle_Query.Serialization {
     public bool IsValid { get { return Date > DateTime.MinValue; } }
 
     public override bool Equals(object obj) {
-      if (obj != null && obj is LogMonitorInfo lmi) {
+      if (obj != null && obj is LogMonitorInfo lmi)
+      {
+        // zwei events gleichen sich, obwohl der handle unterschiedlich ist
+        // -> multicrewschiffe haben mehrere handles, aber das selbe schiff (value) und den selben attacker (key)
+        var areEqualHostilityEvents = lmi.LogType == LogType.HostilityEvent && lmi.LogType == LogType && lmi.Value == Value && lmi.Key == Key &&
+                                  lmi.Date <= Date && lmi.Date.AddSeconds(10) >= Date;
         return lmi.Handle == Handle &&
-          lmi.Date <= Date && lmi.Date.AddSeconds(10) >= Date &&
-          (lmi.LogType == LogType ||
-          (lmi.LogType == LogType.ActorDeath && LogType == LogType.Corpse) ||
-          (lmi.LogType == LogType.Corpse && LogType == LogType.ActorDeath)) &&
-          (lmi.LogType != LogType.HostilityEvent || lmi.Key == Key);
+               lmi.Date <= Date && lmi.Date.AddSeconds(10) >= Date &&
+               (lmi.LogType == LogType ||
+                (lmi.LogType == LogType.ActorDeath && LogType == LogType.Corpse) ||
+                (lmi.LogType == LogType.Corpse && LogType == LogType.ActorDeath) ||
+                lmi.LogType == LogType.ActorDeath && LogType == LogType.Corpse) ||
+               areEqualHostilityEvents;
       } else {
         return base.Equals(obj);
       }
@@ -65,6 +71,7 @@ namespace Star_Citizen_Handle_Query.Serialization {
   public enum LogType {
     Corpse,
     LoadingScreenDuration,
+    OwnHandleInfo,
     ActorDeath,
     HostilityEvent
   }
