@@ -603,6 +603,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void PictureBoxClearAll_Paint(object sender, PaintEventArgs e) {
       var g = e.Graphics;
+      g.SmoothingMode = SmoothingMode.AntiAlias;
       if (!IsRPCSync) {
         FormHandleQuery.PaintTrashIcon(g, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive, PanelRelations.Controls.Count > 0);
       } else {
