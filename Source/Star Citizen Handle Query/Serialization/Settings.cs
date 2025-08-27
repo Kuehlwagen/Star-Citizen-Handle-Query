@@ -255,9 +255,8 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>NPC-Tode anzeigen</summary>
     public bool Show_NPC_Deaths { get; set; } = false;
 
-    /// <summary>Eigener Handle</summary>
-    [JsonIgnore]
-    public string OwnHandle { get; set; } = string.Empty;
+    /// <summary>Eigene Handles</summary>
+    public List<string> OwnHandles { get; set; } = [];
 
     public object Clone() {
       return MemberwiseClone();

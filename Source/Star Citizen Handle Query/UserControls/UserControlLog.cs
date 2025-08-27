@@ -56,22 +56,17 @@ namespace Star_Citizen_Handle_Query.UserControls {
           break;
         case LogType.OwnHandleInfo:
 #if DEBUG
-          ProgramSettings.LogMonitor.OwnHandle = LogInfoItem.Handle;
+          AddOwnHandle(LogInfoItem.Handle);
 #endif
           InitLogItemLayout();
           LabelText.Text = $"{ProgramTranslation.Log_Monitor.Own_Handle_Is}: {Environment.NewLine}{LogInfoItem.Handle}";
           break;
         case LogType.ActorDeath:
-          InitLogItemLayout();
-          SetAndQueryHandle(LogInfoItem.Handle);
-          break;
         case LogType.HostilityEvent:
           InitLogItemLayout();
-          // Handle-Suche direkt durchführen
-          // hostility events handles nur suchen, wenn man selbst betroffen ist; da diese events auch von anderen spielern geloggt werden
-          if (ProgramSettings.LogMonitor.OwnHandle.Equals(LogInfoItem.Handle)) {
+          if (IsOwnHandle(LogInfoItem.Handle)) {
             SetAndQueryHandle(LogInfoItem.Key);
-          } else if (ProgramSettings.LogMonitor.OwnHandle.Equals(LogInfoItem.Key)) {
+          } else if (IsOwnHandle(LogInfoItem.Key)) {
             SetAndQueryHandle(LogInfoItem.Handle);
           }
           break;
@@ -79,6 +74,12 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
       TimerRemoveControl.Enabled = true;
     }
+
+    public void AddOwnHandle(string ownHandle) {
+      (Parent.Parent as FormLogMonitor).AddOwnHandle(ownHandle);
+    }
+
+    public bool IsOwnHandle(string ownHandle) => (Parent.Parent as FormLogMonitor).IsOwnHandle(ownHandle);
 
     private void InitLogItemLayout() {
       LabelText.Text = $"{LogInfoItem.Handle}{Environment.NewLine}{LogInfoItem.Key}";

@@ -492,16 +492,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                 continue;
               }
             }
-            if (string.IsNullOrEmpty(ProgramSettings.LogMonitor.OwnHandle)) {
-              m = RgxOwnHandle.Match(line);
-              if (m != null && m.Success) {
-                var ownHandle = V(m, "Own_Handle");
-                ProgramSettings.LogMonitor.OwnHandle = ownHandle;
-                rtnVal.Add(new LogMonitorInfo(LogType.OwnHandleInfo,
-                  V(m, "Date"),
-                  handle: ownHandle));
-                continue;
-              }
+            m = RgxOwnHandle.Match(line);
+            if (m != null && m.Success) {
+              var ownHandle = V(m, "Own_Handle");
+              AddOwnHandle(ownHandle);
+              rtnVal.Add(new LogMonitorInfo(LogType.OwnHandleInfo,
+                V(m, "Date"),
+                handle: ownHandle));
+              continue;
             }
           }
         } catch { }
@@ -509,6 +507,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       return rtnVal;
     }
+
+    public void AddOwnHandle(string ownHandle) {
+      ProgramSettings.LogMonitor.OwnHandles ??= [];
+      if (!ProgramSettings.LogMonitor.OwnHandles.Any(h => h.Equals(ownHandle, StringComparison.CurrentCultureIgnoreCase))) {
+        ProgramSettings.LogMonitor.OwnHandles.Add(ownHandle);
+      }
+    }
+
+    public bool IsOwnHandle(string ownHandle) => ProgramSettings.LogMonitor.OwnHandles?.Any(h => h.Equals(ownHandle, StringComparison.CurrentCultureIgnoreCase)) ?? false;
 
     private bool IsNpc(string handle) {
       NPC_Filter ??= [.. ProgramSettings.LogMonitor.Global_NPC_Filter.Union(ProgramSettings.LogMonitor.NPC_Filter, StringComparer.CurrentCultureIgnoreCase)];
