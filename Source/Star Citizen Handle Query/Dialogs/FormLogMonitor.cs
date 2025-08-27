@@ -40,7 +40,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly Regex RgxHostilityEvent = RegexHostilityEvent();
     [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <Debug Hostility Events> \[OnHandleHit\] Fake hit FROM (?<Handle_Attacker>[\w_\-]+) TO (?<Vehicle>[\w_\-]+). Being sent to child (?<Handle_Victim>[\w_\-]+) \[Team_MissionFeatures\]\[HitInfo\]$", RegexOptions.Compiled)]
     private static partial Regex RegexHostilityEvent();
-    
+
     private readonly Regex RgxOwnHandle = RegexOwnHandle();
     [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <AccountLoginCharacterStatus_Character> Character: createdAt \d+ - updatedAt \d+ - geid \d+ - accountId \d+ - name (?<Own_Handle>[\w\-]+) - state [A-Z_]+ \[Team_GameServices\]\[Login\]$", RegexOptions.Compiled)]
     private static partial Regex RegexOwnHandle();
@@ -272,7 +272,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               RemoveControl(PanelLogInfo.Controls[0] as UserControlLog);
             }
             if (CheckAddLogInfo(logInfo)) {
-              PanelLogInfo.Controls.Add(new UserControlLog(logInfo, ProgramSettings));
+              PanelLogInfo.Controls.Add(new UserControlLog(logInfo, ProgramSettings, ProgramTranslation));
             }
           } else if (PanelLogInfo.Controls[PanelLogInfo.Controls.Count - 1] is UserControlLog ucl) {
             if (!logInfo.Equals(ucl.LogInfoItem)) {
@@ -280,7 +280,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                 RemoveControl(PanelLogInfo.Controls[0] as UserControlLog);
               }
               if (CheckAddLogInfo(logInfo)) {
-                PanelLogInfo.Controls.Add(new UserControlLog(logInfo, ProgramSettings));
+                PanelLogInfo.Controls.Add(new UserControlLog(logInfo, ProgramSettings, ProgramTranslation));
               }
             } else {
               ucl.UpdateInfo(logInfo);
@@ -414,7 +414,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             new(LogType.ActorDeath, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "Churchtrill", $"Killed by: Churchtrill{NL}Using: unknown (Class unknown){NL}Zone: TransitCarriage_RSI_Polaris_Rear_Elevator_1604048788858{NL}Damage Type: Crash", relation: RelationValue.Friendly, RelationValue.Bandit),
             new(LogType.HostilityEvent, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Avenger1", "Mike100", "AEGS_Gladius_5745680356430", RelationValue.Friendly, RelationValue.Neutral),
             new(LogType.HostilityEvent, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "The_M4Z3", "Kuehlwagen", "MRAI_Guardian_5662046311400", RelationValue.Friendly, RelationValue.Neutral),
-            new(LogType.HostilityEvent, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "The_M4Z3", "Kuehlwagen", "MRAI_Guardian_5662046311400", RelationValue.Friendly, RelationValue.Neutral), 
+            new(LogType.HostilityEvent, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "The_M4Z3", "Kuehlwagen", "MRAI_Guardian_5662046311400", RelationValue.Friendly, RelationValue.Neutral),
             new(LogType.HostilityEvent, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"), "Kuehlwagen", "Gentle81", "ANVL_Carrack_5745063752623", RelationValue.Friendly, RelationValue.Bogey)
           ]);
         }
@@ -514,7 +514,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       NPC_Filter ??= [.. ProgramSettings.LogMonitor.Global_NPC_Filter.Union(ProgramSettings.LogMonitor.NPC_Filter, StringComparer.CurrentCultureIgnoreCase)];
       return NPC_Filter.Any(h => handle.StartsWith(h, StringComparison.CurrentCultureIgnoreCase));
     }
-    
+
     private bool FilterNPC(string handle) {
       return !ProgramSettings.LogMonitor.Show_NPC_Deaths && IsNpc(handle);
     }

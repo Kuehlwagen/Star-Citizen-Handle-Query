@@ -417,6 +417,10 @@
 
     public string Webhook_Hostility_Event_Attacker { get; set; } = "Angreifer";
 
+    public string Loading_Screen { get; set; } = "Ladebildschirm";
+
+    public string Own_Handle_Is { get; set; } = "Eigener Handle lautet";
+
   }
 
   [Serializable]

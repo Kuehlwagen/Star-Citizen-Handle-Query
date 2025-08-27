@@ -165,7 +165,9 @@
     "Webhook_Zone": "Zone",
     "Webhook_Hostility_Event": "Feindseligkeitsereignis",
     "Webhook_Hostility_Event_Ship": "Schiff",
-    "Webhook_Hostility_Event_Attacker": "Angreifer"
+    "Webhook_Hostility_Event_Attacker": "Angreifer",
+    "Loading_Screen": "Ladebildschirm",
+    "Own_Handle_Is": "Eigener Handle lautet"
   },
   "Relations": {
     "Title": "Beziehungen",

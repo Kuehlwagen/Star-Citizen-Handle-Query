@@ -172,7 +172,9 @@
     "Webhook_Zone": "Zone",
     "Webhook_Hostility_Event": "Hostility Event",
     "Webhook_Hostility_Event_Ship": "Ship",
-    "Webhook_Hostility_Event_Attacker": "Attacker"
+    "Webhook_Hostility_Event_Attacker": "Attacker",
+    "Loading_Screen": "Loading screen",
+    "Own_Handle_Is": "Own handle is"
   },
   "Relations": {
     "Title": "Relations",

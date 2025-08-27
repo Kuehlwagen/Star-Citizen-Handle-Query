@@ -11,11 +11,13 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private readonly System.Windows.Forms.Timer TimerRemoveControl = new();
     private string ToolTipText = string.Empty;
     private readonly Settings ProgramSettings;
+    private readonly Translation ProgramTranslation;
 
-    public UserControlLog(LogMonitorInfo logInfo, Settings programSettings) {
+    public UserControlLog(LogMonitorInfo logInfo, Settings programSettings, Translation programTranslation) {
       InitializeComponent();
 
       ProgramSettings = programSettings;
+      ProgramTranslation = programTranslation;
 
       // Farben setzen
       if (ProgramSettings.Colors != null) {
@@ -50,11 +52,11 @@ namespace Star_Citizen_Handle_Query.UserControls {
           AddMouseEvents();
           break;
         case LogType.LoadingScreenDuration:
-          LabelText.Text = $"Loading screen: {LogInfoItem.Value}s";
-          break;    
+          LabelText.Text = $"{ProgramTranslation.Log_Monitor.Loading_Screen}: {LogInfoItem.Value}s";
+          break;
         case LogType.OwnHandleInfo:
           InitLogItemLayout();
-          LabelText.Text = $"Own handle is: {Environment.NewLine}{LogInfoItem.Handle}";
+          LabelText.Text = $"{ProgramTranslation.Log_Monitor.Own_Handle_Is}: {Environment.NewLine}{LogInfoItem.Handle}";
           break;
         case LogType.ActorDeath:
           InitLogItemLayout();
@@ -65,9 +67,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
           // Handle-Suche direkt durchführen
           // hostility events handles nur suchen, wenn man selbst betroffen ist; da diese events auch von anderen spielern geloggt werden
           if (ProgramSettings.LogMonitor.Filter.OwnHandle.Equals(LogInfoItem.Handle)) {
-              SetAndQueryHandle(LogInfoItem.Key);
+            SetAndQueryHandle(LogInfoItem.Key);
           } else if (ProgramSettings.LogMonitor.Filter.OwnHandle.Equals(LogInfoItem.Key)) {
-              SetAndQueryHandle(LogInfoItem.Handle);
+            SetAndQueryHandle(LogInfoItem.Handle);
           }
           break;
       }
