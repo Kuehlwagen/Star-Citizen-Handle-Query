@@ -29,7 +29,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
       LogInfoItem = logInfo;
       if (ProgramSettings.LogMonitor.EntryDisplayDurationInMinutes > 0) {
-        TimerRemoveControl.Interval = ProgramSettings.LogMonitor.EntryDisplayDurationInMinutes * 60000;
+        TimerRemoveControl.Interval = ProgramSettings.LogMonitor.EntryDisplayDurationInMinutes * 60_000;
         TimerRemoveControl.Tick += TimerRemoveControl_Tick;
         TimerRemoveControl.Start();
       }

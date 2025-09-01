@@ -245,6 +245,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxNPCTodeAnzeigen.Checked = ProgramSettings.LogMonitor.Show_NPC_Deaths;
       TextBoxNPCNamen.Text = string.Join(',', ProgramSettings.LogMonitor.NPC_Filter);
       CheckBoxLogMonitorShowHostilityEvents.Checked = ProgramSettings.LogMonitor.Filter.Hostility_Events;
+      CheckBoxOwnHandle.Checked = ProgramSettings.LogMonitor.Filter.Own_Handle;
     }
 
     private void GetLocalizations() {
@@ -364,6 +365,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       TextBoxNPCNamen.Enabled = CheckBoxShowLog.Checked;
       ButtonWebhookTest.Enabled = CheckBoxShowLog.Checked && IsValidDiscordWebhookUrl(ProgramSettings.LogMonitor.WebhookURL);
       CheckBoxLogMonitorShowHostilityEvents.Enabled = CheckBoxShowLog.Checked;
+      CheckBoxOwnHandle.Enabled = CheckBoxShowLog.Checked;
     }
 
     private void NumericUpDownLogEintraegeMaximum_ValueChanged(object sender, EventArgs e) {
@@ -415,6 +417,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void CheckBoxLogMonitorShowHostilityEvents_CheckedChanged(object sender, EventArgs e) {
       ProgramSettings.LogMonitor.Filter.Hostility_Events = CheckBoxLogMonitorShowHostilityEvents.Checked;
+    }
+
+    private void CheckBoxOwnHandle_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.LogMonitor.Filter.Own_Handle = CheckBoxOwnHandle.Checked;
     }
 
     private void NumericUpDownRelationsEntriesMaximum_ValueChanged(object sender, EventArgs e) {
@@ -540,6 +546,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LabelNPCNamen.Text = CurrentLocalization.Settings.Log_Monitor.NPC_Filter;
       ButtonWebhookTest.Text = CurrentLocalization.Settings.Log_Monitor.Test_Webhook_URL;
       CheckBoxLogMonitorShowHostilityEvents.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Hostility_Events;
+      CheckBoxOwnHandle.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Own_Handle;
       SetToolTip(TextBoxNPCNamen, $"{CurrentLocalization.Settings.Log_Monitor.Global_NPC_Names}:{Environment.NewLine}{string.Join(Environment.NewLine, ProgramSettings.LogMonitor.Global_NPC_Filter)}");
 
       ResumeLayout();

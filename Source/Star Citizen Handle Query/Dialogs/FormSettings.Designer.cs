@@ -105,6 +105,7 @@
       LabelMMB_URL = new Label();
       LabelLMB_URL = new Label();
       GroupBoxLogMonitor = new GroupBox();
+      CheckBoxOwnHandle = new CheckBox();
       CheckBoxLogMonitorShowHostilityEvents = new CheckBox();
       LabelNPCNamen = new Label();
       CheckBoxNPCTodeAnzeigen = new CheckBox();
@@ -1104,6 +1105,7 @@
       // 
       // GroupBoxLogMonitor
       // 
+      GroupBoxLogMonitor.Controls.Add(CheckBoxOwnHandle);
       GroupBoxLogMonitor.Controls.Add(CheckBoxLogMonitorShowHostilityEvents);
       GroupBoxLogMonitor.Controls.Add(LabelNPCNamen);
       GroupBoxLogMonitor.Controls.Add(CheckBoxNPCTodeAnzeigen);
@@ -1131,6 +1133,18 @@
       GroupBoxLogMonitor.TabStop = false;
       GroupBoxLogMonitor.Text = "Log-Monitor";
       // 
+      // CheckBoxOwnHandle
+      // 
+      CheckBoxOwnHandle.AutoSize = true;
+      CheckBoxOwnHandle.Enabled = false;
+      CheckBoxOwnHandle.Location = new Point(34, 160);
+      CheckBoxOwnHandle.Name = "CheckBoxOwnHandle";
+      CheckBoxOwnHandle.Size = new Size(106, 19);
+      CheckBoxOwnHandle.TabIndex = 10;
+      CheckBoxOwnHandle.Text = "Eigener Handle";
+      CheckBoxOwnHandle.UseVisualStyleBackColor = true;
+      CheckBoxOwnHandle.CheckedChanged += CheckBoxOwnHandle_CheckedChanged;
+      // 
       // CheckBoxLogMonitorShowHostilityEvents
       // 
       CheckBoxLogMonitorShowHostilityEvents.AutoSize = true;
@@ -1138,7 +1152,7 @@
       CheckBoxLogMonitorShowHostilityEvents.Location = new Point(190, 160);
       CheckBoxLogMonitorShowHostilityEvents.Name = "CheckBoxLogMonitorShowHostilityEvents";
       CheckBoxLogMonitorShowHostilityEvents.Size = new Size(205, 19);
-      CheckBoxLogMonitorShowHostilityEvents.TabIndex = 10;
+      CheckBoxLogMonitorShowHostilityEvents.TabIndex = 11;
       CheckBoxLogMonitorShowHostilityEvents.Text = "Feindseligkeitsereignisse anzeigen";
       CheckBoxLogMonitorShowHostilityEvents.UseVisualStyleBackColor = true;
       CheckBoxLogMonitorShowHostilityEvents.CheckedChanged += CheckBoxLogMonitorShowHostilityEvents_CheckedChanged;
@@ -1149,7 +1163,7 @@
       LabelNPCNamen.Location = new Point(32, 216);
       LabelNPCNamen.Name = "LabelNPCNamen";
       LabelNPCNamen.Size = new Size(78, 15);
-      LabelNPCNamen.TabIndex = 13;
+      LabelNPCNamen.TabIndex = 14;
       LabelNPCNamen.Text = "NPC-Namen:";
       // 
       // CheckBoxNPCTodeAnzeigen
@@ -1172,16 +1186,16 @@
       TextBoxWebhookURL.Location = new Point(190, 243);
       TextBoxWebhookURL.Name = "TextBoxWebhookURL";
       TextBoxWebhookURL.Size = new Size(162, 23);
-      TextBoxWebhookURL.TabIndex = 16;
+      TextBoxWebhookURL.TabIndex = 17;
       TextBoxWebhookURL.TextChanged += TextBoxWebhookURL_TextChanged;
       // 
       // LabelWebhookURL
       // 
       LabelWebhookURL.AutoSize = true;
-      LabelWebhookURL.Location = new Point(34, 245);
+      LabelWebhookURL.Location = new Point(32, 245);
       LabelWebhookURL.Name = "LabelWebhookURL";
       LabelWebhookURL.Size = new Size(87, 15);
-      LabelWebhookURL.TabIndex = 15;
+      LabelWebhookURL.TabIndex = 16;
       LabelWebhookURL.Text = "Webhook-URL:";
       // 
       // TextBoxNPCNamen
@@ -1193,7 +1207,7 @@
       TextBoxNPCNamen.Location = new Point(190, 214);
       TextBoxNPCNamen.Name = "TextBoxNPCNamen";
       TextBoxNPCNamen.Size = new Size(213, 23);
-      TextBoxNPCNamen.TabIndex = 14;
+      TextBoxNPCNamen.TabIndex = 15;
       TextBoxNPCNamen.TextChanged += TextBoxNPCNamen_TextChanged;
       // 
       // TextBoxLogMonitorHandleFilter
@@ -1205,7 +1219,7 @@
       TextBoxLogMonitorHandleFilter.Location = new Point(190, 185);
       TextBoxLogMonitorHandleFilter.Name = "TextBoxLogMonitorHandleFilter";
       TextBoxLogMonitorHandleFilter.Size = new Size(213, 23);
-      TextBoxLogMonitorHandleFilter.TabIndex = 12;
+      TextBoxLogMonitorHandleFilter.TabIndex = 13;
       TextBoxLogMonitorHandleFilter.TextChanged += TextBoxLogMonitorHandleFilter_TextChanged;
       // 
       // ButtonWebhookTest
@@ -1216,7 +1230,7 @@
       ButtonWebhookTest.Location = new Point(354, 243);
       ButtonWebhookTest.Name = "ButtonWebhookTest";
       ButtonWebhookTest.Size = new Size(49, 23);
-      ButtonWebhookTest.TabIndex = 17;
+      ButtonWebhookTest.TabIndex = 18;
       ButtonWebhookTest.Text = "Test";
       ButtonWebhookTest.TextAlign = ContentAlignment.TopCenter;
       ButtonWebhookTest.UseVisualStyleBackColor = true;
@@ -1228,7 +1242,7 @@
       LabelLogMonitorHandleFilter.Location = new Point(32, 188);
       LabelLogMonitorHandleFilter.Name = "LabelLogMonitorHandleFilter";
       LabelLogMonitorHandleFilter.Size = new Size(79, 15);
-      LabelLogMonitorHandleFilter.TabIndex = 11;
+      LabelLogMonitorHandleFilter.TabIndex = 12;
       LabelLogMonitorHandleFilter.Text = "Handle-Filter:";
       // 
       // CheckBoxCheckCompleteFile
@@ -1505,5 +1519,6 @@
     private TextBox TextBoxNPCNamen;
     private Button ButtonWebhookTest;
     private CheckBox CheckBoxLogMonitorShowHostilityEvents;
+    private CheckBox CheckBoxOwnHandle;
   }
 }

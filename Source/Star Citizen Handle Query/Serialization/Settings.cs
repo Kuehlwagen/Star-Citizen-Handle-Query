@@ -275,6 +275,9 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>Angabe, ob Feindseligkeitsereignisse angezeigt werden sollen</summary>
     public bool Hostility_Events { get; set; } = true;
 
+    /// <summary>Angabe, ob der eigene Handle angezeigt werden soll</summary>
+    public bool Own_Handle { get; set; } = true;
+
     public object Clone() {
       return MemberwiseClone();
     }

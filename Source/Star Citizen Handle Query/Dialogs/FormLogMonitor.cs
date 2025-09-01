@@ -1,4 +1,4 @@
-using SCHQ_Protos;
+﻿using SCHQ_Protos;
 using Star_Citizen_Handle_Query.Classes;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
@@ -20,6 +20,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly string NL = Environment.NewLine;
     private Status LogStatus = Status.Inactive;
     private List<string> NPC_Filter = null;
+    private string LivePtuName = string.Empty;
 
     private readonly Regex RgxCorpse = RegexCorpse();
     [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <\[ActorState\] Corpse> \[ACTOR STATE\]\[SSCActorStateCVars::LogCorpse\] Player '(?<Handle>[\w_\-]+)' <\w+ client>: (?<Key>.+): (?<Value>.+) \[Team_ActorTech]\[Actor\]$", RegexOptions.Compiled)]
@@ -50,7 +51,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings = programSettings;
       ProgramTranslation = translation;
 
-      // Pr�fen, ob die Programm-Einstellungen valide sind
+      // Prüfen, ob die Programm-Einstellungen valide sind
       if (ProgramSettings != null) {
         // Fenster-Deckkraft setzen
         Opacity = (double)ProgramSettings.WindowOpacity / 100.0;
@@ -66,7 +67,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         }
       }
 
-      // �bersetzung laden
+      // Übersetzung laden
       SetTranslation();
     }
 
@@ -81,7 +82,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void SetTranslation() {
-      // Pr�fen, ob die �bersetzung valide ist
+      // Prüfen, ob die Übersetzung valide ist
       if (ProgramTranslation != null) {
         // Control-Texte setzen
         SetTitle();
@@ -220,8 +221,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                 long currentPosition = ProgramSettings.LogMonitor.LoadCompleteFile ? 0 : logReader.BaseStream.Length;
                 long lastMaxOffset = currentPosition;
 
-                string livePtuFolder = Path.GetFileName(Path.GetDirectoryName(scLogPath));
-                Invoke(new Action(() => SetTitle(livePtuFolder)));
+                Invoke(new Action(() => SetTitle(Path.GetFileName(Path.GetDirectoryName(scLogPath)))));
 
                 while (!Cancel && processSC != null && !processSC.HasExited) {
 
@@ -250,7 +250,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
                 }
 
-                SetTitle();
+                SetTitle(string.Empty);
 
               }
 
@@ -496,9 +496,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             if (m != null && m.Success) {
               var ownHandle = V(m, "Own_Handle");
               AddOwnHandle(ownHandle);
-              rtnVal.Add(new LogMonitorInfo(LogType.OwnHandleInfo,
-                V(m, "Date"),
-                handle: ownHandle));
+              if (ProgramSettings.LogMonitor.Filter.Own_Handle) {
+                rtnVal.Add(new LogMonitorInfo(LogType.OwnHandleInfo,
+                  V(m, "Date"),
+                  handle: ownHandle));
+              }
               continue;
             }
           }
@@ -550,8 +552,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private void SetTitle(string livePtu = null) {
-      LabelTitle.Text = $"{ProgramTranslation.Log_Monitor.Title}{(livePtu != null ? $" - {livePtu}" : string.Empty)}";
+    private void SetTitle(string ptuLive = null) {
+      if (ptuLive != null) {
+        LivePtuName = ptuLive;
+      }
+      LabelTitle.Text = $"{ProgramTranslation.Log_Monitor.Title}{(!string.IsNullOrWhiteSpace(LivePtuName) ? $" - {LivePtuName}" : string.Empty)}";
     }
 
     protected override void OnResizeEnd(EventArgs e) {

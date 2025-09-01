@@ -290,6 +290,8 @@
 
     public string Log_Show_Hostility_Events { get; set; } = "Feindseligkeitsereignisse anzeigen";
 
+    public string Log_Show_Own_Handle { get; set; } = "Eigener Handle";
+
   }
 
   [Serializable()]
