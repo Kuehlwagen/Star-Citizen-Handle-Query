@@ -868,7 +868,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           $"Killed by: Gentle81{Environment.NewLine}Using: unknown (Class unknown){Environment.NewLine}Zone: TransitCarriage_RSI_Polaris_Rear_Elevator_1604048788858{Environment.NewLine}Damage Type: Crash",
           SCHQ_Protos.RelationValue.Friendly,
           SCHQ_Protos.RelationValue.Bandit),
-          ProgramSettings.LogMonitor.WebhookURL, CurrentLocalization);
+          ProgramSettings.LogMonitor.WebhookURL, CurrentLocalization, true);
       }
     }
 

@@ -310,12 +310,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       return rtnVal;
     }
 
-    public static void PushDiscordWebhook(LogMonitorInfo logInfo, string url, Translation translation) {
-      Thread thread = new(() => PushWebhook(logInfo, url, translation));
+    public static void PushDiscordWebhook(LogMonitorInfo logInfo, string url, Translation translation, bool withMessage = false) {
+      Thread thread = new(() => PushWebhook(logInfo, url, translation, withMessage));
       thread.Start();
     }
 
-    private static void PushWebhook(LogMonitorInfo logInfo, string url, Translation translation) {
+    private static void PushWebhook(LogMonitorInfo logInfo, string url, Translation translation, bool withMessage = false) {
       DiscordWebhook webhook = null;
 
       switch (logInfo.LogType) {
@@ -372,8 +372,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
       try {
         using HttpClient client = new();
-        _ = client.PostAsJsonAsync(url, webhook).Result;
-      } catch { }
+        HttpResponseMessage response = client.PostAsJsonAsync(url, webhook).Result;
+        if (withMessage) {
+          MessageBox.Show(response.IsSuccessStatusCode ? $"Success ({(int)response.StatusCode})" : $"{response.StatusCode} ({(int)response.StatusCode}):{Environment.NewLine}{response.Content.ReadAsStringAsync().Result}",
+            translation.Log_Monitor.Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+      } catch (Exception ex) {
+        if (withMessage) {
+          MessageBox.Show(ex.Message, translation.Log_Monitor.Title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+      }
     }
 
     private static int? GetWebhookRelationColor(RelationValue relation) {
