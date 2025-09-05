@@ -22,7 +22,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private const string ThemesResourcePrefix = "Star_Citizen_Handle_Query.Themes.";
     private readonly SortedDictionary<string, AppColors> AppColorThemes = [];
     private static readonly Regex RgxDiscordWebhookUrl = RegexDiscordWebhookUrl();
-    [GeneratedRegex(@"^https:\/\/discord.com\/api\/webhooks\/\d+\/[a-zA-Z0-9_]+$", RegexOptions.Compiled)]
+    [GeneratedRegex(@"^https:\/\/discord.com\/api\/webhooks\/\d+\/[a-zA-Z0-9_-]+$", RegexOptions.Compiled)]
     private static partial Regex RegexDiscordWebhookUrl();
 
     public FormSettings(Settings settings = null) {
