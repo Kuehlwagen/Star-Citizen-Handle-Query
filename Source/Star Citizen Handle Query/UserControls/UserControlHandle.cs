@@ -19,6 +19,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private readonly bool ForceLive;
     private readonly bool DisplayOnly;
     private CommunityHubLiveState LiveState = CommunityHubLiveState.Initializing;
+    private bool IsCompact = false;
 
     public string HandleName { get { return Info.Profile.Handle; } }
     public RelationValue HandleRelation { get { return Info.Relation; } }
@@ -42,18 +43,39 @@ namespace Star_Citizen_Handle_Query.UserControls {
       DisplayOnly = displayOnly;
     }
 
+    private void ChangeCompactMode() {
+      if (IsCompact) {
+        PictureBoxHandleAvatar.Size = new Size(LogicalToDeviceUnits(70), LogicalToDeviceUnits(70));
+        LabelRelation.Location = new Point(LogicalToDeviceUnits(68), LogicalToDeviceUnits(2));
+        LabelRelation.Height = LogicalToDeviceUnits(72);
+        LabelHandle.Location = new Point(LabelRelation.Location.X + LabelRelation.Size.Width, LabelHandle.Location.Y);
+        Size = new(Size.Width, LogicalToDeviceUnits(76));
+        SetToolTip(LabelHandle, string.Empty);
+        LabelUEECitizenRecord.Visible = true;
+        LabelEnlistedDate.Location = new Point(LogicalToDeviceUnits(281), LogicalToDeviceUnits(22));
+        SetToolTip(LabelEnlistedDate, string.Empty);
+        AdjustMainFormHeight(LogicalToDeviceUnits(51));
+      } else {
+        PictureBoxHandleAvatar.Size = new Size(LogicalToDeviceUnits(19), LogicalToDeviceUnits(19));
+        LabelRelation.Location = new Point(PictureBoxHandleAvatar.Location.X + PictureBoxHandleAvatar.Size.Width, LabelRelation.Location.Y);
+        LabelRelation.Height = LogicalToDeviceUnits(21);
+        LabelHandle.Location = new Point(LabelRelation.Location.X + LabelRelation.Size.Width, LabelHandle.Location.Y);
+        Size = new Size(Size.Width, LogicalToDeviceUnits(25));
+        SetToolTip(LabelHandle, GetString(Info?.Profile?.CommunityMonicker, "CM: "));
+        LabelUEECitizenRecord.Visible = false;
+        LabelEnlistedDate.Location = new Point(LabelEnlistedDate.Location.X, LabelRelation.Location.Y + LogicalToDeviceUnits(3));
+        SetToolTip(LabelEnlistedDate, GetString(Info?.Profile?.UeeCitizenRecord));
+        AdjustMainFormHeight(LogicalToDeviceUnits(-51));
+      }
+      IsCompact = !IsCompact;
+    }
+
     private async void UserControlHandle_Load(object sender, EventArgs e) {
       if (Info?.HttpResponse?.StatusCode == HttpStatusCode.OK && Info?.Profile != null) {
         if (ProgramSettings.CompactMode) {
-          PictureBoxHandleAvatar.Size = new Size(LogicalToDeviceUnits(19), LogicalToDeviceUnits(19));
-          LabelRelation.Location = new Point(PictureBoxHandleAvatar.Location.X + PictureBoxHandleAvatar.Size.Width, LabelRelation.Location.Y);
-          LabelRelation.Height = LogicalToDeviceUnits(21);
-          LabelHandle.Location = new Point(LabelRelation.Location.X + LabelRelation.Size.Width, LabelHandle.Location.Y);
-          Size = new Size(Size.Width, LogicalToDeviceUnits(25));
-          SetToolTip(LabelHandle, GetString(Info?.Profile?.CommunityMonicker, "CM: "));
-          LabelUEECitizenRecord.Visible = false;
-          LabelEnlistedDate.Location = new Point(LabelEnlistedDate.Location.X, LabelRelation.Location.Y + LogicalToDeviceUnits(3));
-          SetToolTip(LabelEnlistedDate, GetString(Info?.Profile?.UeeCitizenRecord));
+          LabelHandle.MouseClick += LabelHandle_MouseClick;
+          LabelHandle.Cursor = Cursors.Hand;
+          ChangeCompactMode();
         }
         string handle = GetString(Info?.Profile?.Handle);
         CreateHandleJSON(Info, forceLive: ForceLive, programSettings: ProgramSettings);
@@ -97,7 +119,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           LabelRelation.Cursor = Cursors.Default;
           LabelRelation.MouseClick -= LabelRelation_MouseClick;
           PictureBoxLive.Visible = false;
-        } else if (!ProgramSettings.HideStreamLiveStatus && !ProgramSettings.CompactMode) {
+        } else if (!ProgramSettings.HideStreamLiveStatus) {
           PictureBoxLive.Invalidate();
           LiveState = await CheckCommunityHubIsLive(handle);
           PictureBoxLive.Invalidate();
@@ -108,6 +130,12 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelCommunityMoniker.BringToFront();
         SetToolTip(LabelCommunityMoniker);
         Size = new Size(Size.Width, LogicalToDeviceUnits(25));
+      }
+    }
+
+    private void LabelHandle_MouseClick(object sender, MouseEventArgs e) {
+      if (e.Button == MouseButtons.Left) {
+        ChangeCompactMode();
       }
     }
 
@@ -238,6 +266,10 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     private FormHandleQuery GetMainForm() {
       return Parent?.Parent as FormHandleQuery;
+    }
+
+    private void AdjustMainFormHeight(int difference) {
+      GetMainForm().Height += difference;
     }
 
     private void SetToolTip(Control control, string text = null) {
