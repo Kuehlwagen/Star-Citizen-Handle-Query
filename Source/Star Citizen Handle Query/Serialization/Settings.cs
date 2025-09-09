@@ -116,6 +116,9 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>Angabe, ob HighDpiMode.DpiUnaware anstatt HighDpiMode.PerMonitorV2 verwendet werden soll</summary>
     public bool DpiUnaware { get; set; } = false;
 
+    /// <summary>Angabe, ob Handle- und Organisationsinfos kompakt dargestellt werden sollen</summary>
+    public bool CompactMode { get; set; } = false;
+
     /// <summary>LogFileWatcher relevante Einstellungen</summary>
     public LogMonitorSettings LogMonitor { get; set; } = new();
 

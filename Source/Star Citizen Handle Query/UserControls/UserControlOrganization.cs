@@ -3,6 +3,7 @@ using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
 using System.Drawing.Drawing2D;
+using System.Reflection.Metadata.Ecma335;
 using static Star_Citizen_Handle_Query.Dialogs.FormHandleQuery;
 
 namespace Star_Citizen_Handle_Query.UserControls {
@@ -35,12 +36,25 @@ namespace Star_Citizen_Handle_Query.UserControls {
     }
 
     private async void UserControlOrganization_Load(object sender, EventArgs e) {
+      if (ProgramSettings.CompactMode) {
+        PictureBoxOrganization.Size = new Size(LogicalToDeviceUnits(19), LogicalToDeviceUnits(19));
+        LabelRelation.Location = new Point(PictureBoxOrganization.Location.X + PictureBoxOrganization.Size.Width, LabelRelation.Location.Y);
+        LabelRelation.Height = LogicalToDeviceUnits(21);
+        LabelOrganizationName.Location = new Point(LabelRelation.Location.X + LabelRelation.Size.Width, LabelOrganizationName.Location.Y);
+        Size = new Size(Size.Width, LogicalToDeviceUnits(25));
+        LabelMainOrganizationAffiliate.Visible = false;
+        PictureBoxOrganizationRank.Location = new Point(Width - PictureBoxOrganizationRank.Width - LogicalToDeviceUnits(3), LogicalToDeviceUnits(3));
+        SetToolTip(PictureBoxOrganizationRank, GetString(Info?.RankName));
+        SetToolTip(LabelOrganizationName, GetString(Info?.Name));
+      }
       LabelMainOrganizationAffiliate.Text = IsMainOrg ? "Main Organization" : "Affiliation";
       string organizationSid = GetString(Info?.Sid);
       SID = organizationSid;
       if (Info?.Redacted == false) {
-        LabelOrganizationName.Text = GetString(Info?.Name);
-        SetToolTip(LabelOrganizationName);
+        LabelOrganizationName.Text = GetString(!ProgramSettings.CompactMode ? Info?.Name : Info?.Sid);
+        if (!ProgramSettings.CompactMode) {
+          SetToolTip(LabelOrganizationName);
+        }
         LabelOrganizationSID.Text = GetString(organizationSid, "SID: ");
         LabelOrganizationRank.Text = GetString(Info?.RankName);
         SetToolTip(LabelOrganizationRank);
@@ -92,7 +106,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
       return Parent.Parent as FormHandleQuery;
     }
 
-    private void SetToolTip(Label control, string text = null) {
+    private void SetToolTip(Control control, string text = null) {
       GetMainForm()?.SetToolTip(control, text ?? control.Text);
     }
 
@@ -136,9 +150,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
         g.SmoothingMode = SmoothingMode.AntiAlias;
         for (int i = 0; i < 5; i++) {
-          g.DrawEllipse(bgPen, new Rectangle(i * 20, 1, 16, 16));
+          g.DrawEllipse(bgPen, new Rectangle((i * 20) + 1, 1, 16, 16));
           if (Info.RankStars > i) {
-            g.FillEllipse(fgPen.Brush, new Rectangle(i * 20, 1, 16, 16));
+            g.FillEllipse(fgPen.Brush, new Rectangle((i * 20) + 1, 1, 16, 16));
           }
         }
       }

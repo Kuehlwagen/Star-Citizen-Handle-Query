@@ -44,6 +44,17 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     private async void UserControlHandle_Load(object sender, EventArgs e) {
       if (Info?.HttpResponse?.StatusCode == HttpStatusCode.OK && Info?.Profile != null) {
+        if (ProgramSettings.CompactMode) {
+          PictureBoxHandleAvatar.Size = new Size(LogicalToDeviceUnits(19), LogicalToDeviceUnits(19));
+          LabelRelation.Location = new Point(PictureBoxHandleAvatar.Location.X + PictureBoxHandleAvatar.Size.Width, LabelRelation.Location.Y);
+          LabelRelation.Height = LogicalToDeviceUnits(21);
+          LabelHandle.Location = new Point(LabelRelation.Location.X + LabelRelation.Size.Width, LabelHandle.Location.Y);
+          Size = new Size(Size.Width, LogicalToDeviceUnits(25));
+          SetToolTip(LabelHandle, GetString(Info?.Profile?.CommunityMonicker, "CM: "));
+          LabelUEECitizenRecord.Visible = false;
+          LabelEnlistedDate.Location = new Point(LabelEnlistedDate.Location.X, LabelRelation.Location.Y + LogicalToDeviceUnits(3));
+          SetToolTip(LabelEnlistedDate, GetString(Info?.Profile?.UeeCitizenRecord));
+        }
         string handle = GetString(Info?.Profile?.Handle);
         CreateHandleJSON(Info, forceLive: ForceLive, programSettings: ProgramSettings);
         PictureBoxHandleAvatar.Image = await GetImage(CacheDirectoryType.HandleAvatar, Info.Profile?.AvatarUrl, handle, ProgramSettings.LocalCacheMaxAge, ForceLive);
@@ -56,7 +67,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
           PictureBoxDisplayTitle.Image = await GetImage(CacheDirectoryType.HandleDisplayTitle, Info.Profile.DisplayTitleAvatarUrl, Info?.Profile?.DisplayTitle, ProgramSettings.LocalCacheMaxAge);
         }
         LabelHandle.Text = handle;
-        SetToolTip(LabelHandle);
+        if (!ProgramSettings.CompactMode) {
+          SetToolTip(LabelHandle);
+        }
         LabelCommunityMoniker.Text = GetString(Info?.Profile?.CommunityMonicker, "CM: ");
         SetToolTip(LabelCommunityMoniker);
         LabelDisplayTitle.Text = GetString(Info?.Profile?.DisplayTitle);
@@ -84,7 +97,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
           LabelRelation.Cursor = Cursors.Default;
           LabelRelation.MouseClick -= LabelRelation_MouseClick;
           PictureBoxLive.Visible = false;
-        } else if (!ProgramSettings.HideStreamLiveStatus) {
+        } else if (!ProgramSettings.HideStreamLiveStatus && !ProgramSettings.CompactMode) {
           PictureBoxLive.Invalidate();
           LiveState = await CheckCommunityHubIsLive(handle);
           PictureBoxLive.Invalidate();

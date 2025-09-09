@@ -54,7 +54,8 @@
         "Strand": "Beach",
         "Tag": "Day"
       },
-      "Default_Colors": "Default colors"
+      "Default_Colors": "Default colors",
+      "Compact_Mode": "Compact mode"
     },
     "Window": {
       "Group_Title": "Window",

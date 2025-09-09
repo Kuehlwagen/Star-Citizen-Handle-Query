@@ -47,7 +47,8 @@
       "Status_Inactive": "Status inaktiv",
       "Status_Initializing": "Status Initialisierung",
       "Status_Active": "Status aktiv",
-      "Default_Colors": "Standardfarben"
+      "Default_Colors": "Standardfarben",
+      "Compact_Mode": "Kompaktmodus"
     },
     "Window": {
       "Group_Title": "Fenster",

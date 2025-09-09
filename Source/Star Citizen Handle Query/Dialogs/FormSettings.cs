@@ -246,6 +246,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       TextBoxNPCNamen.Text = string.Join(',', ProgramSettings.LogMonitor.NPC_Filter);
       CheckBoxLogMonitorShowHostilityEvents.Checked = ProgramSettings.LogMonitor.Filter.Hostility_Events;
       CheckBoxOwnHandle.Checked = ProgramSettings.LogMonitor.Filter.Own_Handle;
+      CheckBoxCompactMode.Checked = ProgramSettings.CompactMode;
     }
 
     private void GetLocalizations() {
@@ -423,6 +424,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.LogMonitor.Filter.Own_Handle = CheckBoxOwnHandle.Checked;
     }
 
+    private void CheckBoxCompactMode_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.CompactMode = CheckBoxCompactMode.Checked;
+    }
+
     private void NumericUpDownRelationsEntriesMaximum_ValueChanged(object sender, EventArgs e) {
       ProgramSettings.Relations.EntriesMax = Convert.ToInt32(NumericUpDownRelationsEntriesMaximum.Value);
     }
@@ -471,6 +476,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       LabelErgebnisAutomatischLeeren.Text = CurrentLocalization.Settings.Display.Auto_Close_Duration;
       LabelErgebnisAutomatischLeerenSekunden.Text = CurrentLocalization.Settings.Display.Auto_Close_Duration_Seconds;
       CheckBoxFensterAusblenden.Text = CurrentLocalization.Settings.Display.Auto_Close_Hide_Windows;
+      CheckBoxCompactMode.Text = CurrentLocalization.Settings.Display.Compact_Mode;
       LabelFarben.Text = CurrentLocalization.Settings.Display.Colors;
       ButtonFarbenStandard.Text = CurrentLocalization.Settings.Buttons.Standard;
       CheckBoxErweitert.Text = CurrentLocalization.Settings.Display.Advanced;

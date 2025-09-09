@@ -165,6 +165,8 @@
 
     public string Default_Colors { get; set; } = "Standardfarben";
 
+    public string Compact_Mode { get; set; } = "Kompaktmodus";
+
   }
 
   [Serializable()]
