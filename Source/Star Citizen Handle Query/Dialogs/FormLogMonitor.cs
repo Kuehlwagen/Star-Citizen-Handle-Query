@@ -23,7 +23,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private string LivePtuName = string.Empty;
 
     private readonly Regex RgxCorpse = RegexCorpse();
-    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <\[ActorState\] Corpse> \[ACTOR STATE\]\[SSCActorStateCVars::LogCorpse\] Player '(?<Handle>[\w_\-]+)' <\w+ client>: (?<Key>.+): (?<Value>.+) \[Team_ActorTech]\[Actor\]$", RegexOptions.Compiled)]
+    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <\[ActorState\] Corpse> \[ACTOR STATE\]\[SSCActorStateCVars::LogCorpse\] Player '(?<Handle>[\w_\-]+)' <\w+ client>: (?<Key>.+): (?<Value>.+) \[Team_Actor(Tech|Features)]\[Actor\]$", RegexOptions.Compiled)]
     private static partial Regex RegexCorpse();
 
     private readonly Regex RgxLoadingScreenDuration = RegexLoadingScreen();
