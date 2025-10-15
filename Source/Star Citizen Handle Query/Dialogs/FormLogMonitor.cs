@@ -298,7 +298,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         rtnVal = logInfo.LogType switch {
           LogType.Corpse => filter == null || filter.Count == 0 || filter.Contains(logInfo.Handle, StringComparer.CurrentCultureIgnoreCase),
           LogType.ActorDeath => !FilterNPC(logInfo.Handle) && (filter == null || filter.Count == 0 || filter.Contains(logInfo.Handle, StringComparer.CurrentCultureIgnoreCase) || filter.Contains(logInfo.Key, StringComparer.CurrentCultureIgnoreCase)),
-          LogType.HostilityEvent => !(IsNpc(logInfo.Handle) || IsNpc(logInfo.Key)),
+          LogType.HostilityEvent => !(IsNpc(logInfo.Handle) || IsNpc(logInfo.Key)) && (filter == null || filter.Count == 0 || filter.Contains(logInfo.Handle, StringComparer.CurrentCultureIgnoreCase) || filter.Contains(logInfo.Key, StringComparer.CurrentCultureIgnoreCase)),
           _ => true,
         };
       }
