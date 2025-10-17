@@ -64,9 +64,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
         case LogType.ActorDeath:
         case LogType.HostilityEvent:
           InitLogItemLayout();
-          if (IsOwnHandle(LogInfoItem.Handle)) {
+          if (IsOwnHandle(LogInfoItem.Handle) && LogInfoItem.Handle != LogInfoItem.Key) {
             SetAndQueryHandle(LogInfoItem.Key);
-          } else if (IsOwnHandle(LogInfoItem.Key)) {
+          } else if (IsOwnHandle(LogInfoItem.Key) && LogInfoItem.Key != LogInfoItem.Handle) {
             SetAndQueryHandle(LogInfoItem.Handle);
           }
           break;
