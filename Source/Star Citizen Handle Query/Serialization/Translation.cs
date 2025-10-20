@@ -1,6 +1,4 @@
-﻿using System.Security.Policy;
-
-namespace Star_Citizen_Handle_Query.Serialization {
+﻿namespace Star_Citizen_Handle_Query.Serialization {
 
   [Serializable()]
   public class Translation(string language = null) : IEquatable<Translation> {

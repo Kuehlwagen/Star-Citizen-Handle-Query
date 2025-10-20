@@ -84,11 +84,15 @@ namespace Star_Citizen_Handle_Query.UserControls {
           SetToolTip($"Type: {LogInfoItem.Key}{Environment.NewLine}{LogInfoItem.Value}");
           bool isSelfDestruct = LogInfoItem.Key.Equals("SelfDestruct", StringComparison.OrdinalIgnoreCase);
           bool isHandleUnknown = LogInfoItem.Handle.Equals("unknown", StringComparison.OrdinalIgnoreCase);
+          bool isNPC = IsNpc(LogInfoItem.Handle);
           if (isSelfDestruct) {
             LabelText.Text = ProgramTranslation.Log_Monitor.SELF_DESTRUCT;
             LabelText.ForeColor = ProgramSettings.Colors.AppForeColorInactive;
           } else if (isHandleUnknown) {
             LabelText.Text = ProgramTranslation.Log_Monitor.UNKNOWN;
+            LabelText.ForeColor = ProgramSettings.Colors.AppForeColorInactive;
+          } else if (isNPC) {
+            LabelText.Text = "NPC";
             LabelText.ForeColor = ProgramSettings.Colors.AppForeColorInactive;
           } else {
             AddMouseEvents();
@@ -174,6 +178,10 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private bool IsNpcOrOwnHandle(string handle) {
       FormLogMonitor frm = Parent.Parent as FormLogMonitor;
       return frm.IsNpc(LogInfoItem.Handle) || frm.IsOwnHandle(LogInfoItem.Handle);
+    }
+
+    private bool IsNpc(string handle) {
+      return (Parent.Parent as FormLogMonitor).IsNpc(handle);
     }
 
     private void TimerRemoveControl_Tick(object sender, EventArgs e) {

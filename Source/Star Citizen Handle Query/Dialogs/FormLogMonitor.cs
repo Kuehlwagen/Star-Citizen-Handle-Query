@@ -47,7 +47,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private static partial Regex RegexOwnHandle();
 
     private readonly Regex RgxVehicleDestruction = RegexVehicleDestruction();
-    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <Vehicle Destruction> .+: Vehicle '(?<Vehicle>\w+)'.+in zone '(?<Zone>\w+)'.+caused by '(?<CausedBy>\w+)'.+\] with '(?<Type>\w+)' \[\w+\]\[\w+\]$", RegexOptions.Compiled)]
+    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <Vehicle Destruction> .+: Vehicle '(?<Vehicle>[\w-]+)'.+in zone '(?<Zone>[\w-]+)'.+caused by '(?<CausedBy>[\w-]+)'.+\] with '(?<Type>[\w-]+)' \[\w+\]\[\w+\]$", RegexOptions.Compiled)]
     private static partial Regex RegexVehicleDestruction();
 
     public FormLogMonitor(Settings programSettings, Translation translation) {
