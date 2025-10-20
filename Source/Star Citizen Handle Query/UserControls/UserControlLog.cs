@@ -48,6 +48,8 @@ namespace Star_Citizen_Handle_Query.UserControls {
           }
           if (LogInfoItem.IsLocationInfo) {
             SetToolTip(LogInfoItem.Value);
+          } else {
+            SetToolTip();
           }
           AddMouseEvents();
           break;
@@ -60,6 +62,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
 #endif
           InitLogItemLayout();
           LabelText.Text = $"{ProgramTranslation.Log_Monitor.Own_Handle_Is}: {Environment.NewLine}{LogInfoItem.Handle}";
+          SetToolTip();
           break;
         case LogType.ActorDeath:
         case LogType.HostilityEvent:
@@ -68,6 +71,27 @@ namespace Star_Citizen_Handle_Query.UserControls {
             SetAndQueryHandle(LogInfoItem.Key);
           } else if (IsOwnHandle(LogInfoItem.Key) && LogInfoItem.Key != LogInfoItem.Handle) {
             SetAndQueryHandle(LogInfoItem.Handle);
+          }
+          SetToolTip();
+          break;
+        case LogType.VehicleDestruction:
+          LabelText.Text = LogInfoItem.Handle;
+          PictureBoxLeft.Invalidate();
+          if (LogInfoItem.RelationValue > RelationValue.NotAssigned) {
+            LabelRelation.Visible = LogInfoItem.RelationValue > RelationValue.NotAssigned;
+            LabelRelation.BackColor = FormHandleQuery.GetRelationColor(ProgramSettings, LogInfoItem.RelationValue);
+          }
+          SetToolTip($"Type: {LogInfoItem.Key}{Environment.NewLine}{LogInfoItem.Value}");
+          bool isSelfDestruct = LogInfoItem.Key.Equals("SelfDestruct", StringComparison.OrdinalIgnoreCase);
+          bool isHandleUnknown = LogInfoItem.Handle.Equals("unknown", StringComparison.OrdinalIgnoreCase);
+          if (isSelfDestruct) {
+            LabelText.Text = ProgramTranslation.Log_Monitor.SELF_DESTRUCT;
+            LabelText.ForeColor = ProgramSettings.Colors.AppForeColorInactive;
+          } else if (isHandleUnknown) {
+            LabelText.Text = ProgramTranslation.Log_Monitor.UNKNOWN;
+            LabelText.ForeColor = ProgramSettings.Colors.AppForeColorInactive;
+          } else {
+            AddMouseEvents();
           }
           break;
       }
@@ -133,16 +157,23 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private void Handle_MouseClick(object sender, MouseEventArgs e) {
       switch (e.Button) {
         case MouseButtons.Left:
-          SetAndQueryHandle(LogInfoItem.Handle);
+          SetAndQueryHandle(LogInfoItem.Handle, true);
           break;
         case MouseButtons.Right:
-          SetAndQueryHandle(LogInfoItem.LogType == LogType.ActorDeath || LogInfoItem.LogType == LogType.HostilityEvent ? LogInfoItem.Key : LogInfoItem.Handle);
+          SetAndQueryHandle(LogInfoItem.LogType == LogType.ActorDeath || LogInfoItem.LogType == LogType.HostilityEvent ? LogInfoItem.Key : LogInfoItem.Handle, true);
           break;
       }
     }
 
-    private void SetAndQueryHandle(string handle) {
-      ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(handle);
+    private void SetAndQueryHandle(string handle, bool force = false) {
+      if (force || !IsNpcOrOwnHandle(handle)) {
+        ((Parent.Parent as FormLogMonitor).Owner as FormHandleQuery).SetAndQueryHandle(handle);
+      }
+    }
+
+    private bool IsNpcOrOwnHandle(string handle) {
+      FormLogMonitor frm = Parent.Parent as FormLogMonitor;
+      return frm.IsNpc(LogInfoItem.Handle) || frm.IsOwnHandle(LogInfoItem.Handle);
     }
 
     private void TimerRemoveControl_Tick(object sender, EventArgs e) {
@@ -159,16 +190,31 @@ namespace Star_Citizen_Handle_Query.UserControls {
       TimerRemoveControl.Start();
     }
 
-    public void SetToolTip(string tooltip) {
-      if (!LabelText.Text.StartsWith('⭐')) {
-        LabelText.Text = $"⭐ {LabelText.Text}";
+    public void SetToolTip(string tooltip = null) {
+      FormLogMonitor frm = Parent.Parent as FormLogMonitor;
+      frm.SetTooltip(PictureBoxLeft, GetLogTypeText());
+      if (!string.IsNullOrWhiteSpace(tooltip)) {
+        if (!LabelText.Text.StartsWith('⭐')) {
+          LabelText.Text = $"⭐ {LabelText.Text}";
+        }
+        ToolTipText = $"{ToolTipText}{Environment.NewLine}{tooltip}".Trim();
+        frm.SetTooltip(LabelTime, ToolTipText);
+        frm.SetTooltip(LabelRelation, ToolTipText);
+        frm.SetTooltip(LabelText, ToolTipText);
+        frm.SetTooltip(PictureBoxRight, ToolTipText);
       }
-      ToolTipText = $"{ToolTipText}{Environment.NewLine}{tooltip}".Trim();
-      (Parent.Parent as FormLogMonitor).SetTooltip(PictureBoxLeft, ToolTipText);
-      (Parent.Parent as FormLogMonitor).SetTooltip(LabelTime, ToolTipText);
-      (Parent.Parent as FormLogMonitor).SetTooltip(LabelRelation, ToolTipText);
-      (Parent.Parent as FormLogMonitor).SetTooltip(LabelText, ToolTipText);
-      (Parent.Parent as FormLogMonitor).SetTooltip(PictureBoxRight, ToolTipText);
+    }
+
+    private string GetLogTypeText() {
+      return LogInfoItem.LogType switch {
+        LogType.ActorDeath => ProgramTranslation.Log_Monitor.Actor_Death,
+        LogType.Corpse => LogInfoItem.IsCorpseEnabled ? ProgramTranslation.Log_Monitor.Corpse : ProgramTranslation.Log_Monitor.No_Corpse,
+        LogType.HostilityEvent => ProgramTranslation.Log_Monitor.Hostility_Event,
+        LogType.LoadingScreenDuration => ProgramTranslation.Log_Monitor.Loading_Screen_Duration,
+        LogType.OwnHandleInfo => ProgramTranslation.Log_Monitor.Own_Handle,
+        LogType.VehicleDestruction => ProgramTranslation.Log_Monitor.Vehicle_Destruction,
+        _ => string.Empty
+      };
     }
 
     private void PictureBoxLeft_Paint(object sender, PaintEventArgs e) {
@@ -220,6 +266,12 @@ namespace Star_Citizen_Handle_Query.UserControls {
           g.DrawEllipse(fgPen, 5, 6.5F, 10, 7);
           g.DrawEllipse(bgPen, 8, 8, 4, 4);
           g.DrawEllipse(fgPen, 8, 8, 4, 4);
+          break;
+        case LogType.VehicleDestruction:
+          g.DrawEllipse(bgPen, 6, 6, 8, 8);
+          g.DrawEllipse(fgPen, 6, 6, 8, 8);
+          g.FillEllipse(bgPen.Brush, 8.5F, 8.5F, 3, 3);
+          g.FillEllipse(fgPen.Brush, 8.5F, 8.5F, 3, 3);
           break;
       }
     }

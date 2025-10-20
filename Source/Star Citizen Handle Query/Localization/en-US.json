@@ -115,7 +115,8 @@
       "Global_NPC_Names": "Global NPC names",
       "Test_Webhook_URL": "Test",
       "Log_Show_Hostility_Events": "Show hostility events",
-      "Log_Show_Own_Handle": "Own Handle"
+      "Log_Show_Own_Handle": "Own Handle",
+      "Log_Show_Vehicle_Destructions": "Show vehicle destructions"
     },
     "Local_Cache": {
       "Group_Title": "Local cache",
@@ -172,11 +173,17 @@
     "Webhook_Using": "Using",
     "Webhook_Damage_Type": "Damage Type",
     "Webhook_Zone": "Zone",
-    "Webhook_Hostility_Event": "Hostility Event",
-    "Webhook_Hostility_Event_Ship": "Ship",
-    "Webhook_Hostility_Event_Attacker": "Attacker",
     "Loading_Screen": "Loading screen",
-    "Own_Handle_Is": "Own handle is"
+    "Own_Handle_Is": "Own handle is",
+    "Actor_Death": "Actor death",
+    "Corpse": "Corpse",
+    "No_Corpse": "No Corpse",
+    "Hostility_Event": "Hostility event",
+    "Loading_Screen_Duration": "Loading screen duration",
+    "Own_Handle": "Own handle",
+    "Vehicle_Destruction": "Vehicle destruction",
+    "SELF_DESTRUCT": "SELF DESTRUCT",
+    "UNKNOWN": "UNKNOWN"
   },
   "Relations": {
     "Title": "Relations",

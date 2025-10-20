@@ -106,6 +106,7 @@
       LabelMMB_URL = new Label();
       LabelLMB_URL = new Label();
       GroupBoxLogMonitor = new GroupBox();
+      CheckBoxVehicleDestruction = new CheckBox();
       CheckBoxOwnHandle = new CheckBox();
       CheckBoxLogMonitorShowHostilityEvents = new CheckBox();
       LabelNPCNamen = new Label();
@@ -179,7 +180,7 @@
       // 
       ButtonSpeichern.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
       ButtonSpeichern.FlatStyle = FlatStyle.Flat;
-      ButtonSpeichern.Location = new Point(12, 702);
+      ButtonSpeichern.Location = new Point(12, 727);
       ButtonSpeichern.Name = "ButtonSpeichern";
       ButtonSpeichern.Size = new Size(75, 28);
       ButtonSpeichern.TabIndex = 6;
@@ -191,7 +192,7 @@
       // 
       ButtonSchliessen.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
       ButtonSchliessen.FlatStyle = FlatStyle.Flat;
-      ButtonSchliessen.Location = new Point(93, 702);
+      ButtonSchliessen.Location = new Point(93, 727);
       ButtonSchliessen.Name = "ButtonSchliessen";
       ButtonSchliessen.Size = new Size(75, 28);
       ButtonSchliessen.TabIndex = 7;
@@ -375,6 +376,7 @@
       // 
       // GroupBoxLokalerCache
       // 
+      GroupBoxLokalerCache.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
       GroupBoxLokalerCache.Controls.Add(LabelLokalerCacheAlterTage);
       GroupBoxLokalerCache.Controls.Add(NumericUpDownLokalerCacheAlter);
       GroupBoxLokalerCache.Controls.Add(LabelLokalerCacheAlter);
@@ -382,7 +384,7 @@
       GroupBoxLokalerCache.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxLokalerCache.Location = new Point(12, 578);
       GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
-      GroupBoxLokalerCache.Size = new Size(352, 115);
+      GroupBoxLokalerCache.Size = new Size(352, 140);
       GroupBoxLokalerCache.TabIndex = 2;
       GroupBoxLokalerCache.TabStop = false;
       GroupBoxLokalerCache.Text = "Lokaler Cache";
@@ -391,7 +393,7 @@
       // 
       ButtonStandard.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
       ButtonStandard.FlatStyle = FlatStyle.Flat;
-      ButtonStandard.Location = new Point(711, 702);
+      ButtonStandard.Location = new Point(711, 727);
       ButtonStandard.Name = "ButtonStandard";
       ButtonStandard.Size = new Size(75, 28);
       ButtonStandard.TabIndex = 8;
@@ -1118,6 +1120,8 @@
       // 
       // GroupBoxLogMonitor
       // 
+      GroupBoxLogMonitor.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+      GroupBoxLogMonitor.Controls.Add(CheckBoxVehicleDestruction);
       GroupBoxLogMonitor.Controls.Add(CheckBoxOwnHandle);
       GroupBoxLogMonitor.Controls.Add(CheckBoxLogMonitorShowHostilityEvents);
       GroupBoxLogMonitor.Controls.Add(LabelNPCNamen);
@@ -1141,10 +1145,21 @@
       GroupBoxLogMonitor.ForeColor = Color.FromArgb(57, 206, 216);
       GroupBoxLogMonitor.Location = new Point(370, 415);
       GroupBoxLogMonitor.Name = "GroupBoxLogMonitor";
-      GroupBoxLogMonitor.Size = new Size(416, 278);
+      GroupBoxLogMonitor.Size = new Size(416, 303);
       GroupBoxLogMonitor.TabIndex = 5;
       GroupBoxLogMonitor.TabStop = false;
       GroupBoxLogMonitor.Text = "Log-Monitor";
+      // 
+      // CheckBoxVehicleDestruction
+      // 
+      CheckBoxVehicleDestruction.AutoSize = true;
+      CheckBoxVehicleDestruction.Location = new Point(190, 185);
+      CheckBoxVehicleDestruction.Name = "CheckBoxVehicleDestruction";
+      CheckBoxVehicleDestruction.Size = new Size(193, 19);
+      CheckBoxVehicleDestruction.TabIndex = 12;
+      CheckBoxVehicleDestruction.Text = "Fahrzeugzerstörungen anzeigen";
+      CheckBoxVehicleDestruction.UseVisualStyleBackColor = true;
+      CheckBoxVehicleDestruction.CheckedChanged += CheckBoxVehicleDestruction_CheckedChanged;
       // 
       // CheckBoxOwnHandle
       // 
@@ -1173,10 +1188,10 @@
       // LabelNPCNamen
       // 
       LabelNPCNamen.AutoSize = true;
-      LabelNPCNamen.Location = new Point(32, 216);
+      LabelNPCNamen.Location = new Point(32, 241);
       LabelNPCNamen.Name = "LabelNPCNamen";
       LabelNPCNamen.Size = new Size(78, 15);
-      LabelNPCNamen.TabIndex = 14;
+      LabelNPCNamen.TabIndex = 15;
       LabelNPCNamen.Text = "NPC-Namen:";
       // 
       // CheckBoxNPCTodeAnzeigen
@@ -1196,19 +1211,19 @@
       TextBoxWebhookURL.BorderStyle = BorderStyle.FixedSingle;
       TextBoxWebhookURL.Enabled = false;
       TextBoxWebhookURL.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxWebhookURL.Location = new Point(190, 243);
+      TextBoxWebhookURL.Location = new Point(190, 268);
       TextBoxWebhookURL.Name = "TextBoxWebhookURL";
       TextBoxWebhookURL.Size = new Size(162, 23);
-      TextBoxWebhookURL.TabIndex = 17;
+      TextBoxWebhookURL.TabIndex = 18;
       TextBoxWebhookURL.TextChanged += TextBoxWebhookURL_TextChanged;
       // 
       // LabelWebhookURL
       // 
       LabelWebhookURL.AutoSize = true;
-      LabelWebhookURL.Location = new Point(32, 245);
+      LabelWebhookURL.Location = new Point(32, 270);
       LabelWebhookURL.Name = "LabelWebhookURL";
       LabelWebhookURL.Size = new Size(87, 15);
-      LabelWebhookURL.TabIndex = 16;
+      LabelWebhookURL.TabIndex = 17;
       LabelWebhookURL.Text = "Webhook-URL:";
       // 
       // TextBoxNPCNamen
@@ -1217,10 +1232,10 @@
       TextBoxNPCNamen.BorderStyle = BorderStyle.FixedSingle;
       TextBoxNPCNamen.Enabled = false;
       TextBoxNPCNamen.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxNPCNamen.Location = new Point(190, 214);
+      TextBoxNPCNamen.Location = new Point(190, 239);
       TextBoxNPCNamen.Name = "TextBoxNPCNamen";
       TextBoxNPCNamen.Size = new Size(213, 23);
-      TextBoxNPCNamen.TabIndex = 15;
+      TextBoxNPCNamen.TabIndex = 16;
       TextBoxNPCNamen.TextChanged += TextBoxNPCNamen_TextChanged;
       // 
       // TextBoxLogMonitorHandleFilter
@@ -1229,10 +1244,10 @@
       TextBoxLogMonitorHandleFilter.BorderStyle = BorderStyle.FixedSingle;
       TextBoxLogMonitorHandleFilter.Enabled = false;
       TextBoxLogMonitorHandleFilter.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxLogMonitorHandleFilter.Location = new Point(190, 185);
+      TextBoxLogMonitorHandleFilter.Location = new Point(190, 210);
       TextBoxLogMonitorHandleFilter.Name = "TextBoxLogMonitorHandleFilter";
       TextBoxLogMonitorHandleFilter.Size = new Size(213, 23);
-      TextBoxLogMonitorHandleFilter.TabIndex = 13;
+      TextBoxLogMonitorHandleFilter.TabIndex = 14;
       TextBoxLogMonitorHandleFilter.TextChanged += TextBoxLogMonitorHandleFilter_TextChanged;
       // 
       // ButtonWebhookTest
@@ -1240,10 +1255,10 @@
       ButtonWebhookTest.Anchor = AnchorStyles.Top | AnchorStyles.Right;
       ButtonWebhookTest.Enabled = false;
       ButtonWebhookTest.FlatStyle = FlatStyle.Flat;
-      ButtonWebhookTest.Location = new Point(354, 243);
+      ButtonWebhookTest.Location = new Point(354, 268);
       ButtonWebhookTest.Name = "ButtonWebhookTest";
       ButtonWebhookTest.Size = new Size(49, 23);
-      ButtonWebhookTest.TabIndex = 18;
+      ButtonWebhookTest.TabIndex = 19;
       ButtonWebhookTest.Text = "Test";
       ButtonWebhookTest.TextAlign = ContentAlignment.TopCenter;
       ButtonWebhookTest.UseVisualStyleBackColor = true;
@@ -1252,10 +1267,10 @@
       // LabelLogMonitorHandleFilter
       // 
       LabelLogMonitorHandleFilter.AutoSize = true;
-      LabelLogMonitorHandleFilter.Location = new Point(32, 188);
+      LabelLogMonitorHandleFilter.Location = new Point(32, 213);
       LabelLogMonitorHandleFilter.Name = "LabelLogMonitorHandleFilter";
       LabelLogMonitorHandleFilter.Size = new Size(79, 15);
-      LabelLogMonitorHandleFilter.TabIndex = 12;
+      LabelLogMonitorHandleFilter.TabIndex = 13;
       LabelLogMonitorHandleFilter.Text = "Handle-Filter:";
       // 
       // CheckBoxCheckCompleteFile
@@ -1392,7 +1407,7 @@
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.FromArgb(19, 26, 33);
       CancelButton = ButtonSchliessen;
-      ClientSize = new Size(798, 744);
+      ClientSize = new Size(798, 769);
       Controls.Add(GroupBoxAnzeige);
       Controls.Add(GroupBoxLocation);
       Controls.Add(GroupBoxLogMonitor);
@@ -1404,7 +1419,7 @@
       Controls.Add(ButtonSpeichern);
       ForeColor = Color.FromArgb(57, 206, 216);
       Icon = (Icon)resources.GetObject("$this.Icon");
-      MinimumSize = new Size(814, 783);
+      MinimumSize = new Size(814, 808);
       Name = "FormSettings";
       StartPosition = FormStartPosition.CenterScreen;
       Text = "Star Citizen Handle Query Einstellungen";
@@ -1534,5 +1549,6 @@
     private CheckBox CheckBoxLogMonitorShowHostilityEvents;
     private CheckBox CheckBoxOwnHandle;
     private CheckBox CheckBoxCompactMode;
+    private CheckBox CheckBoxVehicleDestruction;
   }
 }

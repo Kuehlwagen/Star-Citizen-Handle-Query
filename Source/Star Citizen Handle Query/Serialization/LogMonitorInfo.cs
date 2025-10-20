@@ -51,7 +51,7 @@ namespace Star_Citizen_Handle_Query.Serialization {
                (lmi.LogType == LogType ||
                 (lmi.LogType == LogType.ActorDeath && LogType == LogType.Corpse) ||
                 (lmi.LogType == LogType.Corpse && LogType == LogType.ActorDeath) ||
-                lmi.LogType == LogType.ActorDeath && LogType == LogType.Corpse) ||
+                (lmi.LogType == LogType.ActorDeath && LogType == LogType.Corpse)) ||
                areEqualHostilityEvents;
       } else {
         return base.Equals(obj);
@@ -73,7 +73,8 @@ namespace Star_Citizen_Handle_Query.Serialization {
     LoadingScreenDuration,
     OwnHandleInfo,
     ActorDeath,
-    HostilityEvent
+    HostilityEvent,
+    VehicleDestruction
   }
 
 }

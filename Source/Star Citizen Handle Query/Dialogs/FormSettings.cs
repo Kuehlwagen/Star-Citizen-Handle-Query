@@ -247,6 +247,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxLogMonitorShowHostilityEvents.Checked = ProgramSettings.LogMonitor.Filter.Hostility_Events;
       CheckBoxOwnHandle.Checked = ProgramSettings.LogMonitor.Filter.Own_Handle;
       CheckBoxCompactMode.Checked = ProgramSettings.CompactMode;
+      CheckBoxVehicleDestruction.Checked = ProgramSettings.LogMonitor.Filter.Vehicle_Destruction;
     }
 
     private void GetLocalizations() {
@@ -428,6 +429,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.CompactMode = CheckBoxCompactMode.Checked;
     }
 
+    private void CheckBoxVehicleDestruction_CheckedChanged(object sender, EventArgs e) {
+      ProgramSettings.LogMonitor.Filter.Vehicle_Destruction = CheckBoxVehicleDestruction.Checked;
+    }
+
     private void NumericUpDownRelationsEntriesMaximum_ValueChanged(object sender, EventArgs e) {
       ProgramSettings.Relations.EntriesMax = Convert.ToInt32(NumericUpDownRelationsEntriesMaximum.Value);
     }
@@ -553,6 +558,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ButtonWebhookTest.Text = CurrentLocalization.Settings.Log_Monitor.Test_Webhook_URL;
       CheckBoxLogMonitorShowHostilityEvents.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Hostility_Events;
       CheckBoxOwnHandle.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Own_Handle;
+      CheckBoxVehicleDestruction.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Vehicle_Destructions;
       SetToolTip(TextBoxNPCNamen, $"{CurrentLocalization.Settings.Log_Monitor.Global_NPC_Names}:{Environment.NewLine}{string.Join(Environment.NewLine, ProgramSettings.LogMonitor.Global_NPC_Filter)}");
 
       ResumeLayout();

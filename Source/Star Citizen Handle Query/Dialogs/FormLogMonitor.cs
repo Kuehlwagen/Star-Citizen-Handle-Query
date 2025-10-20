@@ -46,6 +46,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <AccountLoginCharacterStatus_Character> Character: createdAt \d+ - updatedAt \d+ - geid \d+ - accountId \d+ - name (?<Own_Handle>[\w\-]+) - state [A-Z_]+ \[Team_GameServices\]\[Login\]$", RegexOptions.Compiled)]
     private static partial Regex RegexOwnHandle();
 
+    private readonly Regex RgxVehicleDestruction = RegexVehicleDestruction();
+    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <Vehicle Destruction> .+: Vehicle '(?<Vehicle>\w+)'.+in zone '(?<Zone>\w+)'.+caused by '(?<CausedBy>\w+)'.+\] with '(?<Type>\w+)' \[\w+\]\[\w+\]$", RegexOptions.Compiled)]
+    private static partial Regex RegexVehicleDestruction();
+
     public FormLogMonitor(Settings programSettings, Translation translation) {
       InitializeComponent();
       ProgramSettings = programSettings;
@@ -303,7 +307,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         };
       }
 
-      if (rtnVal && (logInfo.LogType == LogType.ActorDeath || logInfo.LogType == LogType.HostilityEvent) && FormSettings.IsValidDiscordWebhookUrl(ProgramSettings.LogMonitor.WebhookURL)) {
+      if (rtnVal && logInfo.LogType == LogType.ActorDeath && FormSettings.IsValidDiscordWebhookUrl(ProgramSettings.LogMonitor.WebhookURL)) {
         PushDiscordWebhook(logInfo, ProgramSettings.LogMonitor.WebhookURL, ProgramTranslation);
       }
 
@@ -342,29 +346,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                   color = GetWebhookRelationColor(logInfo.RelationValue2),
                   fields = killerFields
                 }
-              ]
-            };
-          }
-          break;
-        case LogType.HostilityEvent: {
-            webhook = new() {
-              embeds = [
-                new() {
-                  title = translation.Log_Monitor.Webhook_Hostility_Event,
-                  description = $"**[{logInfo.Handle}](https://robertsspaceindustries.com/en/citizens/{logInfo.Handle})**",
-                  color = GetWebhookRelationColor(logInfo.RelationValue),
-                  fields = [
-                    new() {
-                      name = translation.Log_Monitor.Webhook_Hostility_Event_Ship,
-                      value = logInfo.Value
-                    }
-                  ]
-                },
-                new() {
-                  title = translation.Log_Monitor.Webhook_Hostility_Event_Attacker,
-                  description = $"**[{logInfo.Key}](https://robertsspaceindustries.com/en/citizens/{logInfo.Key})**",
-                  color = GetWebhookRelationColor(logInfo.RelationValue2)
-              }
               ]
             };
           }
@@ -491,6 +472,18 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                 continue;
               }
             }
+            if (ProgramSettings.LogMonitor.Filter.Vehicle_Destruction) {
+              m = RgxVehicleDestruction.Match(line);
+              if (m != null && m.Success) {
+                rtnVal.Add(new LogMonitorInfo(LogType.VehicleDestruction,
+                  V(m, "Date"),
+                  V(m, "CausedBy"),
+                  V(m, "Type"),
+                  $"Vehicle: {V(m, "Vehicle")}{Environment.NewLine}Zone: {V(m, "Zone")}",
+                  (Owner as FormHandleQuery).GetHandleRelation(V(m, "CausedBy"))));
+                continue;
+              }
+            }
             if (ProgramSettings.LogMonitor.Filter.LoadingScreenDuration) {
               m = RgxLoadingScreenDuration.Match(line);
               if (m != null && m.Success) {
@@ -527,7 +520,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public bool IsOwnHandle(string ownHandle) => ProgramSettings.LogMonitor.OwnHandles?.Any(h => h.Equals(ownHandle, StringComparison.CurrentCultureIgnoreCase)) ?? false;
 
-    private bool IsNpc(string handle) {
+    internal bool IsNpc(string handle) {
       NPC_Filter ??= [.. ProgramSettings.LogMonitor.Global_NPC_Filter.Union(ProgramSettings.LogMonitor.NPC_Filter, StringComparer.CurrentCultureIgnoreCase)];
       return NPC_Filter.Any(h => handle.StartsWith(h, StringComparison.CurrentCultureIgnoreCase));
     }

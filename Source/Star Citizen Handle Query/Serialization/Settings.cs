@@ -282,6 +282,9 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>Angabe, ob der eigene Handle angezeigt werden soll</summary>
     public bool Own_Handle { get; set; } = true;
 
+    /// <summary>Angabe, ob Fahrzeugzerstörungen angezeigt werden sollen</summary>
+    public bool Vehicle_Destruction { get; set; } = true;
+
     public object Clone() {
       return MemberwiseClone();
     }

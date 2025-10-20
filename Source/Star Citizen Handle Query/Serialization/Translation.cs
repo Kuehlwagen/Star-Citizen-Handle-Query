@@ -1,4 +1,6 @@
-﻿namespace Star_Citizen_Handle_Query.Serialization {
+﻿using System.Security.Policy;
+
+namespace Star_Citizen_Handle_Query.Serialization {
 
   [Serializable()]
   public class Translation(string language = null) : IEquatable<Translation> {
@@ -294,6 +296,8 @@
 
     public string Log_Show_Own_Handle { get; set; } = "Eigener Handle";
 
+    public string Log_Show_Vehicle_Destructions { get; set; } = "Fahrzeugzerstörungen anzeigen";
+
   }
 
   [Serializable()]
@@ -415,15 +419,27 @@
 
     public string Webhook_Zone { get; set; } = "Zone";
 
-    public string Webhook_Hostility_Event { get; set; } = "Feindseligkeitsereignis";
-
-    public string Webhook_Hostility_Event_Ship { get; set; } = "Schiff";
-
-    public string Webhook_Hostility_Event_Attacker { get; set; } = "Angreifer";
-
     public string Loading_Screen { get; set; } = "Ladebildschirm";
 
     public string Own_Handle_Is { get; set; } = "Eigener Handle lautet";
+
+    public string Actor_Death { get; set; } = "Spielertod";
+
+    public string Corpse { get; set; } = "Leiche";
+
+    public string No_Corpse { get; set; } = "Keine Leiche";
+
+    public string Hostility_Event { get; set; } = "Feindseligkeitsereignis";
+
+    public string Loading_Screen_Duration { get; set; } = "Ladebildschirm-Dauer";
+
+    public string Own_Handle { get; set; } = "Eigener Handle";
+
+    public string Vehicle_Destruction { get; set; } = "Fahrzeugzerstörung";
+
+    public string SELF_DESTRUCT { get; set; } = "SELBSTZERSTÖRUNG";
+
+    public string UNKNOWN { get; set; } = "UNBEKANNT";
 
   }
 

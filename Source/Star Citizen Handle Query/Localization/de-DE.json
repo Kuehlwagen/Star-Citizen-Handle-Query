@@ -108,7 +108,8 @@
       "Global_NPC_Names": "Globale NPC-Namen",
       "Test_Webhook_URL": "Test",
       "Log_Show_Hostility_Events": "Feindseligkeitsereignisse anzeigen",
-      "Log_Show_Own_Handle": "Eigener Handle"
+      "Log_Show_Own_Handle": "Eigener Handle",
+      "Log_Show_Vehicle_Destructions": "Fahrzeugzerst\u00F6rungen anzeigen"
     },
     "Local_Cache": {
       "Group_Title": "Lokaler Cache",
@@ -165,11 +166,17 @@
     "Webhook_Using": "Mit",
     "Webhook_Damage_Type": "Schadensart",
     "Webhook_Zone": "Zone",
-    "Webhook_Hostility_Event": "Feindseligkeitsereignis",
-    "Webhook_Hostility_Event_Ship": "Schiff",
-    "Webhook_Hostility_Event_Attacker": "Angreifer",
     "Loading_Screen": "Ladebildschirm",
-    "Own_Handle_Is": "Eigener Handle lautet"
+    "Own_Handle_Is": "Eigener Handle lautet",
+    "Actor_Death": "Spielertod",
+    "Corpse": "Leiche",
+    "No_Corpse": "Keine Leiche",
+    "Hostility_Event": "Feindseligkeitsereignis",
+    "Loading_Screen_Duration": "Ladebildschirm-Dauer",
+    "Own_Handle": "Eigener Handle",
+    "Vehicle_Destruction": "Fahrzeugzerst\u00F6rung",
+    "SELF_DESTRUCT": "SELBSTZERST\u00D6RUNG",
+    "UNKNOWN": "UNBEKANNT"
   },
   "Relations": {
     "Title": "Beziehungen",
