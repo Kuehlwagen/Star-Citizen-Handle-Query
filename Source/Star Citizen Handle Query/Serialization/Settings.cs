@@ -263,6 +263,9 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>Eigene Handles</summary>
     public List<string> OwnHandles { get; set; } = [];
 
+    /// <summary>Angabe, ob alle Game.log-Zeilen, die durch den Log-Monitor verarbeitet werden, in eine separate Log-Datei geschrieben werden sollen</summary>
+    public bool Write_Log { get; set; } = false;
+
     public object Clone() {
       return MemberwiseClone();
     }

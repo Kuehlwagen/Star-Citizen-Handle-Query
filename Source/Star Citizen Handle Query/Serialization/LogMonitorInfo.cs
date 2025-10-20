@@ -5,7 +5,7 @@ namespace Star_Citizen_Handle_Query.Serialization {
 
   [Serializable()]
   public class LogMonitorInfo(LogType logType, string date, string handle = null, string key = null, string value = null,
-    RelationValue relation = RelationValue.NotAssigned, RelationValue relation2 = RelationValue.NotAssigned) : ICloneable {
+    RelationValue relation = RelationValue.NotAssigned, RelationValue relation2 = RelationValue.NotAssigned, string log_source = null) : ICloneable {
 
     public LogType LogType { get; } = logType;
 
@@ -38,6 +38,8 @@ namespace Star_Citizen_Handle_Query.Serialization {
       !string.IsNullOrWhiteSpace(value);
 
     public bool IsValid { get { return Date > DateTime.MinValue; } }
+
+    public string Log_Source { get { return log_source; } }
 
     public override bool Equals(object obj) {
       if (obj != null && obj is LogMonitorInfo lmi)

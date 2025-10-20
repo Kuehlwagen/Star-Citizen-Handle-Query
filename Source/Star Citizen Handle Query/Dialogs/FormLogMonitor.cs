@@ -1,4 +1,5 @@
-﻿using SCHQ_Protos;
+﻿using Microsoft.Extensions.Logging;
+using SCHQ_Protos;
 using Star_Citizen_Handle_Query.Classes;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
@@ -192,6 +193,20 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       IsDragging = false;
     }
 
+    private Queue<string> LogQueue = null;
+    private StreamWriter LogWriter = null;
+
+    private void DequeueLogQueue() {
+      if (ProgramSettings.LogMonitor.Write_Log && LogQueue != null && LogWriter != null) {
+        while (!Cancel) {
+          if (LogQueue.TryDequeue(out string log) && log != null) {
+            LogWriter.WriteLine(log);
+          }
+          Thread.Sleep(100);
+        }
+      }
+    }
+
     private void StartMonitor() {
       Task.Run(() => {
 
@@ -227,6 +242,32 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
                 Invoke(new Action(() => SetTitle(Path.GetFileName(Path.GetDirectoryName(scLogPath)))));
 
+                if (ProgramSettings.LogMonitor.Write_Log && !Cancel && processSC != null && !processSC.HasExited) {
+                  LogQueue = new();
+                  LogWriter = new(Path.Combine(FormHandleQuery.GetSaveFilesRootPath(), $@"..\Log_Monitor_{LivePtuName}_{DateTime.Now:yyyy_MM_dd_HH_mm_ss}.log"),
+                    Encoding.UTF8, new FileStreamOptions() { Mode = FileMode.OpenOrCreate, Access = FileAccess.Write }) {
+                    AutoFlush = true
+                  };
+                  if (ProgramSettings.LogMonitor.Filter.Corpse) {
+                    LogWriter.WriteLine($"Regex Actor Death            : {RgxActorDeath}");
+                    LogWriter.WriteLine($"Regex Corpse                 : {RgxCorpse}");
+                  }
+                  if (ProgramSettings.LogMonitor.Filter.LoadingScreenDuration) {
+                    LogWriter.WriteLine($"Regex Loading Screen Duration: {RgxLoadingScreenDuration}");
+                  }
+                  if (ProgramSettings.LogMonitor.Filter.Hostility_Events) {
+                    LogWriter.WriteLine($"Regex Hostility Event        : {RgxHostilityEvent}");
+                  }
+                  if (ProgramSettings.LogMonitor.Filter.Own_Handle) {
+                    LogWriter.WriteLine($"Regex Own Handle             : {RgxOwnHandle}");
+                  }
+                  if (ProgramSettings.LogMonitor.Filter.Vehicle_Destruction) {
+                    LogWriter.WriteLine($"Regex Vehicle Destruction    : {RgxVehicleDestruction}");
+                  }
+                  Thread t = new(DequeueLogQueue);
+                  t.Start();
+                }
+
                 while (!Cancel && processSC != null && !processSC.HasExited) {
 
                   Application.DoEvents();
@@ -254,6 +295,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
                 }
 
+                LogWriter?.Flush();
+                LogWriter?.Close();
+                LogWriter?.Dispose();
+                LogWriter = null;
+
                 SetTitle(string.Empty);
 
               }
@@ -270,6 +316,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void AddLogInfo(List<LogMonitorInfo> logInfos) {
       foreach (LogMonitorInfo logInfo in logInfos) {
+        if (ProgramSettings.LogMonitor.Write_Log && LogQueue != null) {
+          LogQueue.Enqueue(logInfo.Log_Source);
+        }
         if (logInfo.IsValid) {
           if (PanelLogInfo.Controls.Count == 0) {
             if (PanelLogInfo.Controls.Count == ProgramSettings.LogMonitor.EntriesMax) {
@@ -443,7 +492,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                   V(m, "Handle"),
                   V(m, "Key"),
                   V(m, "Value"),
-                  relation: (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle"))));
+                  relation: (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle")),
+                  log_source: line));
                 continue;
               } else {
                 m = RgxActorDeath.Match(line);
@@ -454,7 +504,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                     V(m, "KilledBy"),
                     $"Killed by: {V(m, "KilledBy")}{NL}Using: {V(m, "Using")} ({V(m, "UsingClass")}){NL}Zone: {V(m, "Zone")}{NL}Damage Type: {V(m, "DamageType")}",
                     (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle")),
-                    (Owner as FormHandleQuery).GetHandleRelation(V(m, "KilledBy"))));
+                    (Owner as FormHandleQuery).GetHandleRelation(V(m, "KilledBy")),
+                    line));
                   continue;
                 }
               }
@@ -468,7 +519,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                   V(m, "Handle_Attacker"),
                   V(m, "Vehicle"),
                   (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle_Victim")),
-                  (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle_Attacker"))));
+                  (Owner as FormHandleQuery).GetHandleRelation(V(m, "Handle_Attacker")),
+                  line));
                 continue;
               }
             }
@@ -480,7 +532,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                   V(m, "CausedBy"),
                   V(m, "Type"),
                   $"Vehicle: {V(m, "Vehicle")}{Environment.NewLine}Zone: {V(m, "Zone")}",
-                  (Owner as FormHandleQuery).GetHandleRelation(V(m, "CausedBy"))));
+                  (Owner as FormHandleQuery).GetHandleRelation(V(m, "CausedBy")),
+                  log_source: line));
                 continue;
               }
             }
@@ -489,7 +542,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               if (m != null && m.Success) {
                 rtnVal.Add(new LogMonitorInfo(LogType.LoadingScreenDuration,
                   V(m, "Date"),
-                  value: V(m, "Value")));
+                  value: V(m, "Value"),
+                  log_source: line));
                 continue;
               }
             }
@@ -500,7 +554,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
               if (ProgramSettings.LogMonitor.Filter.Own_Handle) {
                 rtnVal.Add(new LogMonitorInfo(LogType.OwnHandleInfo,
                   V(m, "Date"),
-                  handle: ownHandle));
+                  ownHandle,
+                  log_source: line));
               }
               continue;
             }
