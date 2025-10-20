@@ -249,7 +249,8 @@ namespace Star_Citizen_Handle_Query.Serialization {
       "Quasigrazer_",
       "Shipjacker_",
       "vlk_adult_",
-      "vlk_juvenile_"
+      "vlk_juvenile_",
+      "unknown"
     ];
 
     /// <summary>NPC-Filter (StartsWith)</summary>
