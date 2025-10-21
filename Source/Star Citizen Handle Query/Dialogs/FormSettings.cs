@@ -874,7 +874,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void ButtonWebhookTest_Click(object sender, EventArgs e) {
       if (IsValidDiscordWebhookUrl(ProgramSettings.LogMonitor.WebhookURL)) {
-        FormLogMonitor.PushDiscordWebhook(new(LogType.ActorDeath, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"),
+        FormLogMonitor.PushDiscordWebhook(ProgramSettings, new(LogType.ActorDeath, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"),
           "Kuehlwagen",
           "Gentle81",
           $"Killed by: Gentle81{Environment.NewLine}Using: unknown (Class unknown){Environment.NewLine}Zone: TransitCarriage_RSI_Polaris_Rear_Elevator_1604048788858{Environment.NewLine}Damage Type: Crash",

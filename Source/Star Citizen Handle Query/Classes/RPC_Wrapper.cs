@@ -4,6 +4,9 @@ using Grpc.Net.Client;
 using SCHQ_Protos;
 using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
+using System.Text.Json;
+using System.Threading.Channels;
+using System.Xml.Linq;
 using static Star_Citizen_Handle_Query.Classes.Logging;
 
 namespace Star_Citizen_Handle_Query.Classes;
@@ -113,6 +116,28 @@ internal static class RPC_Wrapper {
       Log($"{_url} - SyncRelations(..., {channel}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
     }
     frm.ChangeSync(FormRelations.SyncStatus.Disconnected);
+  }
+
+  public static (bool Success, string Info) PushWebhook(string url, DiscordWebhook webhook) {
+    (bool Success, string Info) rtnVal = new();
+    if (!string.IsNullOrWhiteSpace(url) && webhook != null) {
+      string body = JsonSerializer.Serialize(webhook);
+      try {
+        using var gRPC_Channel = GrpcChannel.ForAddress(_url, new GrpcChannelOptions {
+          HttpHandler = SocketsHandler
+        });
+        var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
+        var result = Task.FromResult(gRPC_Client.PushWebhook(new() {
+          Url = url,
+          Body = body
+        })).Result;
+        rtnVal.Success = result.Success;
+        rtnVal.Info = result.Info;
+      } catch (Exception ex) {
+        Log($"{_url} - PushWebhook({url}, {body}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
+      }
+    }
+    return rtnVal;
   }
 
 }

@@ -357,18 +357,18 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
 
       if (rtnVal && logInfo.LogType == LogType.ActorDeath && FormSettings.IsValidDiscordWebhookUrl(ProgramSettings.LogMonitor.WebhookURL)) {
-        PushDiscordWebhook(logInfo, ProgramSettings.LogMonitor.WebhookURL, ProgramTranslation);
+        PushDiscordWebhook(ProgramSettings, logInfo, ProgramSettings.LogMonitor.WebhookURL, ProgramTranslation);
       }
 
       return rtnVal;
     }
 
-    public static void PushDiscordWebhook(LogMonitorInfo logInfo, string url, Translation translation, bool withMessage = false) {
-      Thread thread = new(() => PushWebhook(logInfo, url, translation, withMessage));
+    public static void PushDiscordWebhook(Settings programSettings, LogMonitorInfo logInfo, string url, Translation translation, bool withMessage = false) {
+      Thread thread = new(() => PushWebhook(programSettings, logInfo, url, translation, withMessage));
       thread.Start();
     }
 
-    private static void PushWebhook(LogMonitorInfo logInfo, string url, Translation translation, bool withMessage = false) {
+    private static void PushWebhook(Settings programSettings, LogMonitorInfo logInfo, string url, Translation translation, bool withMessage = false) {
       DiscordWebhook webhook = null;
 
       switch (logInfo.LogType) {
@@ -401,11 +401,19 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           break;
       }
       try {
-        using HttpClient client = new();
-        HttpResponseMessage response = client.PostAsJsonAsync(url, webhook).Result;
-        if (withMessage) {
-          MessageBox.Show(response.IsSuccessStatusCode ? $"Success ({(int)response.StatusCode})" : $"{response.StatusCode} ({(int)response.StatusCode}):{Environment.NewLine}{response.Content.ReadAsStringAsync().Result}",
-            translation.Log_Monitor.Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        if(IsRPCUrlProvided(programSettings)) {
+          (bool Success, string Info) = RPC_Wrapper.PushWebhook(programSettings.LogMonitor.WebhookURL, webhook);
+          if (withMessage) {
+            MessageBox.Show(Success ? "Success (gRPC)" : $"Failed (gRPC): {Info}",
+              translation.Log_Monitor.Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+          }
+        } else {
+          using HttpClient client = new();
+          HttpResponseMessage response = client.PostAsJsonAsync(url, webhook).Result;
+          if (withMessage) {
+            MessageBox.Show(response.IsSuccessStatusCode ? $"Success ({(int)response.StatusCode})" : $"{response.StatusCode} ({(int)response.StatusCode}):{Environment.NewLine}{response.Content.ReadAsStringAsync().Result}",
+              translation.Log_Monitor.Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+          }
         }
       } catch (Exception ex) {
         if (withMessage) {
@@ -423,6 +431,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         _ => null
       };
     }
+
+    private static bool IsRPCUrlProvided (Settings programSettings) => !string.IsNullOrWhiteSpace(programSettings.Relations.RPC_URL);
 
     private void ClearLogInfos() {
 #if DEBUG
