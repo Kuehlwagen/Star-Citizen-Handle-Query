@@ -22,6 +22,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private Status LogStatus = Status.Inactive;
     private List<string> NPC_Filter = null;
     private string LivePtuName = string.Empty;
+    private string ShardName = string.Empty;
 
     private readonly Regex RgxCorpse = RegexCorpse();
     [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <\[ActorState\] Corpse> \[ACTOR STATE\]\[SSCActorStateCVars::LogCorpse\] Player '(?<Handle>[\w_\-]+)' <\w+ client>: (?<Key>.+): (?<Value>.+) \[Team_Actor(Tech|Features)]\[Actor\]$", RegexOptions.Compiled)]
@@ -48,8 +49,16 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private static partial Regex RegexOwnHandle();
 
     private readonly Regex RgxVehicleDestruction = RegexVehicleDestruction();
-    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <Vehicle Destruction> .+: Vehicle '(?<Vehicle>[\w-]+)'.+in zone '(?<Zone>[\w-]+)'.+caused by '(?<CausedBy>[\w-]+)'.+\] with '(?<Type>[\w-]+)' \[\w+\]\[\w+\]$", RegexOptions.Compiled)]
+    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <Vehicle Destruction> .+: Vehicle '(?<Vehicle>[\w_\-]+)'.+in zone '(?<Zone>[\w_\-]+)'.+caused by '(?<CausedBy>[\w_\-]+)'.+\] with '(?<Type>[\w_\-]+)' \[\w+\]\[\w+\]$", RegexOptions.Compiled)]
     private static partial Regex RegexVehicleDestruction();
+
+    private readonly Regex RgxShard = RegexShard();
+    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <Join PU> .+ shard\[pub_(?<Region>[a-z]+)[a-z0-9]+_[0-9]+_(?<Shard>[0-9]{3})\].+$", RegexOptions.Compiled)]
+    private static partial Regex RegexShard();
+
+    private readonly Regex RgxLobbyQuit = RegexLobbyQuit();
+    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <\[EALobby] EALobbyQuit> \[EALobby]\[CEALobby::RequestQuitLobby\].+$", RegexOptions.Compiled)]
+    private static partial Regex RegexLobbyQuit();
 
     public FormLogMonitor(Settings programSettings, Translation translation) {
       InitializeComponent();
@@ -562,6 +571,28 @@ namespace Star_Citizen_Handle_Query.Dialogs {
                 continue;
               }
             }
+            if (string.IsNullOrWhiteSpace(ShardName)) {
+              m = RgxShard.Match(line);
+              if (m != null && m.Success) {
+                string regionName = V(m, "Region") switch {
+                  "euw" => "EU",
+                  "ape" => "ASIA",
+                  "apse" => "AUS",
+                  "use" => "USA",
+                  _ => string.Empty
+                };
+                ShardName = $"{regionName} {V(m, "Shard")}".Trim();
+                SetTitle();
+                continue;
+              }
+            } else {
+              m = RgxLobbyQuit.Match(line);
+              if (m != null && m.Success) {
+                ShardName = string.Empty;
+                SetTitle();
+                continue;
+              }
+            }
             m = RgxOwnHandle.Match(line);
             if (m != null && m.Success) {
               var ownHandle = V(m, "Own_Handle");
@@ -626,8 +657,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private void SetTitle(string ptuLive = null) {
       if (ptuLive != null) {
         LivePtuName = ptuLive;
+        ShardName = string.Empty;
       }
-      LabelTitle.Text = $"{ProgramTranslation.Log_Monitor.Title}{(!string.IsNullOrWhiteSpace(LivePtuName) ? $" - {LivePtuName}" : string.Empty)}";
+      if (string.IsNullOrWhiteSpace(ShardName)) {
+        LabelTitle.Text = $"{ProgramTranslation.Log_Monitor.Title}{(!string.IsNullOrWhiteSpace(LivePtuName) ? $" - {LivePtuName}" : string.Empty)}";
+        SetTooltip(LabelTitle, string.Empty);
+      } else {
+        LabelTitle.Text = $"{ProgramTranslation.Log_Monitor.Title}{(!string.IsNullOrWhiteSpace(ShardName) ? $" - {ShardName}" : string.Empty)}";
+        SetTooltip(LabelTitle, LivePtuName);
+      }
     }
 
     protected override void OnResizeEnd(EventArgs e) {
