@@ -24,6 +24,8 @@ internal static class RPC_Wrapper {
     _url = url;
   }
 
+  public static string GetURL() => $"{_url}";
+
   public static List<ChannelInfo> GetChannels() {
     List<ChannelInfo> rtnVal = [];
     try {
@@ -134,7 +136,8 @@ internal static class RPC_Wrapper {
         rtnVal.Success = result.Success;
         rtnVal.Info = result.Info;
       } catch (Exception ex) {
-        Log($"{_url} - PushWebhook({url}, {body}) Exception: {ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}");
+        rtnVal.Info = $"{ex.Message}, Inner Exception: {ex.InnerException?.Message ?? "Empty"}";
+        Log($"{_url} - PushWebhook({url}, {body}) Exception: {rtnVal.Info}");
       }
     }
     return rtnVal;

@@ -400,8 +400,12 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           }
           break;
       }
+      string lockedUrl = RPC_Wrapper.GetURL();
       try {
         if(IsRPCUrlProvided(programSettings)) {
+          if (withMessage) {
+            RPC_Wrapper.SetURL(programSettings.Relations.RPC_URL);
+          }
           (bool Success, string Info) = RPC_Wrapper.PushWebhook(programSettings.LogMonitor.WebhookURL, webhook);
           if (withMessage) {
             MessageBox.Show(Success ? "Success (gRPC)" : $"Failed (gRPC): {Info}",
@@ -419,6 +423,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         if (withMessage) {
           MessageBox.Show(ex.Message, translation.Log_Monitor.Title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+        RPC_Wrapper.SetURL(lockedUrl);
       }
     }
 
