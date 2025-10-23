@@ -252,7 +252,8 @@ namespace Star_Citizen_Handle_Query.Serialization {
       "vlk_juvenile_",
       "unknown",
       "AIModule_",
-      "InvisibleItemPort_"
+      "InvisibleItemPort_",
+      "SCItem_"
     ];
 
     /// <summary>NPC-Filter (StartsWith)</summary>
