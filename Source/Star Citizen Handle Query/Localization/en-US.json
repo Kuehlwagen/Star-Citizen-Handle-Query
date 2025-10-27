@@ -183,7 +183,11 @@
     "Own_Handle": "Own handle",
     "Vehicle_Destruction": "Vehicle destruction",
     "SELF_DESTRUCT": "SELF DESTRUCT",
-    "UNKNOWN": "UNKNOWN"
+    "UNKNOWN": "UNKNOWN",
+    "NPC": "NPC",
+    "TURRET": "TURRET",
+    "HANGAR": "HANGAR",
+    "ITEM": "ITEM"
   },
   "Relations": {
     "Title": "Relations",

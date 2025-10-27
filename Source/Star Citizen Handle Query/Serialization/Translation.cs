@@ -439,6 +439,14 @@
 
     public string UNKNOWN { get; set; } = "UNBEKANNT";
 
+    public string NPC { get; set; } = "NPC";
+
+    public string TURRET { get; set; } = "TURM";
+
+    public string ITEM { get; set; } = "GEGENSTAND";
+
+    public string HANGAR { get; set; } = "HANGAR";
+
   }
 
   [Serializable]

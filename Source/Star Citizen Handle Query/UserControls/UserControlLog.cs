@@ -85,15 +85,33 @@ namespace Star_Citizen_Handle_Query.UserControls {
           bool isSelfDestruct = LogInfoItem.Key.Equals("SelfDestruct", StringComparison.OrdinalIgnoreCase);
           bool isHandleUnknown = LogInfoItem.Handle.Equals("unknown", StringComparison.OrdinalIgnoreCase);
           bool isNPC = IsNpc(LogInfoItem.Handle);
+          bool isItem = LogInfoItem.Handle.StartsWith("SCItem_", StringComparison.OrdinalIgnoreCase);
+          bool isHangar = LogInfoItem.Handle.StartsWith("HangarDoor_", StringComparison.OrdinalIgnoreCase);
+          bool isTurret = LogInfoItem.Handle.StartsWith("InvisibleItemPort_", StringComparison.OrdinalIgnoreCase);
           if (isSelfDestruct) {
             LabelText.Text = ProgramTranslation.Log_Monitor.SELF_DESTRUCT;
             LabelText.ForeColor = ProgramSettings.Colors.AppForeColorInactive;
+            SetToolTip(LogInfoItem.Handle);
           } else if (isHandleUnknown) {
             LabelText.Text = ProgramTranslation.Log_Monitor.UNKNOWN;
             LabelText.ForeColor = ProgramSettings.Colors.AppForeColorInactive;
-          } else if (isNPC) {
-            LabelText.Text = "NPC";
+            SetToolTip(LogInfoItem.Handle);
+          } else if (isItem) {
+            LabelText.Text = ProgramTranslation.Log_Monitor.ITEM;
             LabelText.ForeColor = ProgramSettings.Colors.AppForeColorInactive;
+            SetToolTip(LogInfoItem.Handle);
+          } else if (isHangar) {
+            LabelText.Text = ProgramTranslation.Log_Monitor.HANGAR;
+            LabelText.ForeColor = ProgramSettings.Colors.AppForeColorInactive;
+            SetToolTip(LogInfoItem.Handle);
+          } else if (isTurret) {
+            LabelText.Text = ProgramTranslation.Log_Monitor.TURRET;
+            LabelText.ForeColor = ProgramSettings.Colors.AppForeColorInactive;
+            SetToolTip(LogInfoItem.Handle);
+          } else if (isNPC) {
+            LabelText.Text = ProgramTranslation.Log_Monitor.NPC;
+            LabelText.ForeColor = ProgramSettings.Colors.AppForeColorInactive;
+            SetToolTip(LogInfoItem.Handle);
           } else {
             AddMouseEvents();
           }
