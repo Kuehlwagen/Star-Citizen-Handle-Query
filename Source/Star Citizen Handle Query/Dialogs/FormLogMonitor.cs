@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using SCHQ_Protos;
+﻿using SCHQ_Protos;
 using Star_Citizen_Handle_Query.Classes;
 using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
@@ -25,7 +24,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private string ShardName = string.Empty;
 
     private readonly Regex RgxCorpse = RegexCorpse();
-    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <\[ActorState\] Corpse> \[ACTOR STATE\]\[SSCActorStateCVars::LogCorpse\] Player '(?<Handle>[\w_\-]+)' <\w+ client>: (?<Key>.+): (?<Value>.+) \[Team_Actor(Tech|Features)]\[Actor\]$", RegexOptions.Compiled)]
+    [GeneratedRegex(@"^<(?<Date>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)> \[Notice\] <\[ActorState\] Corpse> \[ACTOR STATE\]\[SSCActorStateCVars::LogCorpse\] Player '(?<Handle>[\w_\-]+)' <\w+ client>: ((?<Key>.+): (?<Value>.+)|Running corpsify for corpse.) \[Team_Actor(Tech|Features)]\[Actor\]$", RegexOptions.Compiled)]
     private static partial Regex RegexCorpse();
 
     private readonly Regex RgxLoadingScreenDuration = RegexLoadingScreen();
