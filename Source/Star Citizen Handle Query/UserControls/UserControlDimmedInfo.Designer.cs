@@ -29,6 +29,7 @@
       // LabelInfo
       // 
       LabelInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      LabelInfo.AutoEllipsis = true;
       LabelInfo.ForeColor = Color.FromArgb(46, 157, 158);
       LabelInfo.Location = new Point(6, 2);
       LabelInfo.Name = "LabelInfo";
@@ -36,6 +37,7 @@
       LabelInfo.TabIndex = 1;
       LabelInfo.Text = "Info";
       LabelInfo.TextAlign = ContentAlignment.MiddleLeft;
+      LabelInfo.UseCompatibleTextRendering = true;
       // 
       // UserControlDimmedInfo
       // 

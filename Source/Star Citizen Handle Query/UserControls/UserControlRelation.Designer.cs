@@ -31,6 +31,7 @@
       // LabelHandle
       // 
       LabelHandle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+      LabelHandle.AutoEllipsis = true;
       LabelHandle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelHandle.Location = new Point(14, 2);
       LabelHandle.Name = "LabelHandle";
@@ -38,6 +39,7 @@
       LabelHandle.TabIndex = 1;
       LabelHandle.Text = "Handle";
       LabelHandle.TextAlign = ContentAlignment.MiddleLeft;
+      LabelHandle.UseCompatibleTextRendering = true;
       // 
       // LabelRelation
       // 

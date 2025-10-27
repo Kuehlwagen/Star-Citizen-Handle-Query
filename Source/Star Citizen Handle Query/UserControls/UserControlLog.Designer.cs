@@ -45,6 +45,7 @@
       // LabelText
       // 
       LabelText.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+      LabelText.AutoEllipsis = true;
       LabelText.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       LabelText.Location = new Point(60, 5);
       LabelText.Name = "LabelText";
@@ -52,6 +53,7 @@
       LabelText.TabIndex = 1;
       LabelText.Text = "Text";
       LabelText.TextAlign = ContentAlignment.MiddleLeft;
+      LabelText.UseCompatibleTextRendering = true;
       // 
       // LabelTime
       // 
