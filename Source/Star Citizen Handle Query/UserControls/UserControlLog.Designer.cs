@@ -53,7 +53,6 @@
       LabelText.TabIndex = 1;
       LabelText.Text = "Text";
       LabelText.TextAlign = ContentAlignment.MiddleLeft;
-      LabelText.UseCompatibleTextRendering = true;
       // 
       // LabelTime
       // 
