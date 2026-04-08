@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows7.0</TargetFramework>
+    <TargetFramework>net10.0-windows7.0</TargetFramework>
     <RootNamespace>Star_Citizen_Handle_Query</RootNamespace>
     <Nullable>disable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
@@ -12,7 +12,7 @@
     <DebugType>embedded</DebugType>
     <PackageIcon>SCHQ.png</PackageIcon>
     <ApplicationIcon>Resources\SCHQ.ico</ApplicationIcon>
-    <AssemblyVersion>1.21.1</AssemblyVersion>
+    <AssemblyVersion>1.22.0</AssemblyVersion>
     <FileVersion>$(Assemblyversion)</FileVersion>
     <Company>Kuehlwagen@GitHub</Company>
     <Version>$(Assemblyversion)</Version>
@@ -41,9 +41,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.28.0" />
-    <PackageReference Include="Grpc.Net.Client" Version="2.65.0" />
-    <PackageReference Include="Grpc.Tools" Version="2.66.0">
+    <PackageReference Include="Google.Protobuf" Version="3.34.1" />
+    <PackageReference Include="Grpc.Net.Client" Version="2.76.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.80.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

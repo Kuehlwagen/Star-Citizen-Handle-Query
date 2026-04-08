@@ -3,19 +3,15 @@ syntax = "proto3";
 option csharp_namespace = "SCHQ_Protos";
 
 import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
 package schq;
 
 service SCHQ_Relations {
-  rpc AddChannel (ChannelRequest) returns (SuccessReply);
   rpc GetChannels (google.protobuf.Empty) returns (ChannelsReply);
-  rpc GetChannel (ChannelNameRequest) returns (ChannelReply);
-  rpc RemoveChannel (ChannelRequest) returns (SuccessReply);
-  rpc SetRelations (SetRelationsRequest) returns (SuccessReply);
   rpc SetRelation (SetRelationRequest) returns (SuccessReply);
   rpc GetRelations (ChannelRequest) returns (RelationsReply);
-  rpc GetRelation (RelationRequest) returns (RelationReply);
   rpc SyncRelations (ChannelRequest) returns (stream SyncRelationsReply);
   rpc PushWebhook(WebhookRequest) returns (SuccessReply);
 }
@@ -25,51 +21,30 @@ message SuccessReply {
   string info = 2;
 }
 
-message ChannelNameRequest {
-  string channel = 1;
-}
-
 message ChannelsReply {
   repeated ChannelInfo channels = 1;
 }
 
 message ChannelRequest {
   string channel = 1;
-  string password = 2;
-  ChannelPermissions permissons = 3;
-}
-
-message ChannelReply {
-  bool found = 1;
-  ChannelInfo channel = 2;
-}
-
-message SetRelationsRequest {
-  string channel = 1;
-  string password = 2;
-  repeated RelationInfo relations = 3;
+  string username = 2;
+  string password = 3;
+  string adminPassword = 4;
+  google.protobuf.StringValue description = 5;
+  bool private = 6;
+  string discordWebhookUrl = 7;
 }
 
 message SetRelationRequest {
   string channel = 1;
   string password = 2;
   RelationInfo relation = 3;
+  string username = 4;
 }
 
 message RelationsReply {
   repeated RelationInfo relations = 1;
-}
-
-message RelationRequest {
-  string channel = 1;
-  string password = 2;
-  RelationType type = 3;
-  string name = 4;
-}
-
-message RelationReply {
-  bool found = 1;
-  RelationValue relation = 2; 
+  string info = 2;
 }
 
 message SyncRelationsReply {
@@ -79,8 +54,10 @@ message SyncRelationsReply {
 
 message ChannelInfo {
   string name = 1;
-  bool hasPassword = 2;
-  ChannelPermissions permissions = 3;
+  google.protobuf.StringValue description = 2;
+  bool private = 3;
+  string discordWebhookUrl = 4;
+  bool hasUsers = 5;
 }
 
 message RelationInfo {
@@ -88,17 +65,14 @@ message RelationInfo {
   string name = 2;
   RelationValue relation = 3;
   google.protobuf.StringValue comment = 4;
+  google.protobuf.Timestamp timestamp = 5;
+  optional int32 tagId = 6;
+  bool tagAdded = 7;
 }
 
 message WebhookRequest {
   string url = 1;
   string body = 2;
-}
-
-enum ChannelPermissions {
-  None = 0;
-  Read = 1;
-  Write = 2;
 }
 
 enum RelationType {

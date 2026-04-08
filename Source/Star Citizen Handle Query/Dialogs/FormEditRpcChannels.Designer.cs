@@ -31,7 +31,6 @@
       DataGridViewChannels = new DataGridView();
       ButtonOK = new Button();
       ColumnChannelName = new DataGridViewTextBoxColumn();
-      ColumnPermissions = new DataGridViewTextBoxColumn();
       ((System.ComponentModel.ISupportInitialize)DataGridViewChannels).BeginInit();
       SuspendLayout();
       // 
@@ -79,7 +78,7 @@
       dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
       DataGridViewChannels.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
       DataGridViewChannels.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      DataGridViewChannels.Columns.AddRange(new DataGridViewColumn[] { ColumnChannelName, ColumnPermissions });
+      DataGridViewChannels.Columns.AddRange(new DataGridViewColumn[] { ColumnChannelName });
       dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
       dataGridViewCellStyle2.BackColor = Color.FromArgb(19, 26, 33);
       dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
@@ -117,19 +116,10 @@
       // 
       // ColumnChannelName
       // 
-      ColumnChannelName.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+      ColumnChannelName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
       ColumnChannelName.HeaderText = "Kanalname";
       ColumnChannelName.Name = "ColumnChannelName";
       ColumnChannelName.ReadOnly = true;
-      ColumnChannelName.Width = 92;
-      // 
-      // ColumnPermissions
-      // 
-      ColumnPermissions.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-      ColumnPermissions.HeaderText = "Berechtigungen";
-      ColumnPermissions.Name = "ColumnPermissions";
-      ColumnPermissions.ReadOnly = true;
-      ColumnPermissions.SortMode = DataGridViewColumnSortMode.NotSortable;
       // 
       // FormEditRpcChannels
       // 
@@ -162,6 +152,5 @@
     private DataGridView DataGridViewChannels;
     private Button ButtonOK;
     private DataGridViewTextBoxColumn ColumnChannelName;
-    private DataGridViewTextBoxColumn ColumnPermissions;
   }
 }

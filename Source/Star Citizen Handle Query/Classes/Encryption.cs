@@ -13,9 +13,9 @@ public static class Encryption {
       using Aes aes = Aes.Create();
       aes.KeySize = 256;
       aes.BlockSize = 128;
-      var key = new Rfc2898DeriveBytes(passwordBytes, _saltBytes, 1000, HashAlgorithmName.SHA256);
-      aes.Key = key.GetBytes(aes.KeySize / 8);
-      aes.IV = key.GetBytes(aes.BlockSize / 8);
+      byte[] keyAndIv = Rfc2898DeriveBytes.Pbkdf2(passwordBytes, _saltBytes, 1000, HashAlgorithmName.SHA256, (aes.KeySize / 8) + (aes.BlockSize / 8));
+      aes.Key = keyAndIv[0..(aes.KeySize / 8)];
+      aes.IV = keyAndIv[(aes.KeySize / 8)..];
       aes.Mode = CipherMode.CBC;
       using (var cs = new CryptoStream(ms, aes.CreateEncryptor(), CryptoStreamMode.Write)) {
         cs.Write(bytesToBeEncrypted, 0, bytesToBeEncrypted.Length);
@@ -45,9 +45,9 @@ public static class Encryption {
       using Aes aes = Aes.Create();
       aes.KeySize = 256;
       aes.BlockSize = 128;
-      var key = new Rfc2898DeriveBytes(passwordBytes, _saltBytes, 1000, HashAlgorithmName.SHA256);
-      aes.Key = key.GetBytes(aes.KeySize / 8);
-      aes.IV = key.GetBytes(aes.BlockSize / 8);
+      byte[] keyAndIv = Rfc2898DeriveBytes.Pbkdf2(passwordBytes, _saltBytes, 1000, HashAlgorithmName.SHA256, (aes.KeySize / 8) + (aes.BlockSize / 8));
+      aes.Key = keyAndIv[0..(aes.KeySize / 8)];
+      aes.IV = keyAndIv[(aes.KeySize / 8)..];
       aes.Mode = CipherMode.CBC;
       using (var cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Write)) {
         cs.Write(bytesToBeDecrypted, 0, bytesToBeDecrypted.Length);

@@ -5,8 +5,6 @@ using SCHQ_Protos;
 using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
 using System.Text.Json;
-using System.Threading.Channels;
-using System.Xml.Linq;
 using static Star_Citizen_Handle_Query.Classes.Logging;
 
 namespace Star_Citizen_Handle_Query.Classes;
@@ -42,7 +40,7 @@ internal static class RPC_Wrapper {
     return rtnVal;
   }
 
-  public static RelationInfos GetRelations(string channel, string password) {
+  public static RelationInfos GetRelations(string channel, string username, string password) {
     RelationInfos rtnVal = new();
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
@@ -50,7 +48,7 @@ internal static class RPC_Wrapper {
           HttpHandler = SocketsHandler
         });
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
-        var result = Task.FromResult(gRPC_Client.GetRelations(new ChannelRequest() { Channel = channel, Password = password })).Result;
+        var result = Task.FromResult(gRPC_Client.GetRelations(new ChannelRequest() { Channel = channel, Username = username, Password = password })).Result;
         foreach (var relation in result.Relations) {
           rtnVal.Relations.Add(new RelationInformation() {
             Name = relation.Name,
@@ -66,7 +64,7 @@ internal static class RPC_Wrapper {
     return rtnVal;
   }
 
-  public static bool SetRelation(string channel, string password, RelationType type, string name, RelationValue relation, string comment = null) {
+  public static bool SetRelation(string channel, string username, string password, RelationType type, string name, RelationValue relation, string comment = null) {
     bool rtnVal = false;
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel) && !string.IsNullOrWhiteSpace(name)) {
@@ -76,6 +74,7 @@ internal static class RPC_Wrapper {
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
         rtnVal = Task.FromResult(gRPC_Client.SetRelation(new() {
           Channel = channel,
+          Username = username,
           Password = password,
           Relation = new RelationInfo() {
             Type = type,
@@ -91,7 +90,7 @@ internal static class RPC_Wrapper {
     return rtnVal;
   }
 
-  public static async void SyncRelations(FormRelations frm, string channel, string password, CancellationTokenSource cts) {
+  public static async void SyncRelations(FormRelations frm, string channel, string username, string password, CancellationTokenSource cts) {
     try {
       if (!string.IsNullOrWhiteSpace(_url) && !string.IsNullOrWhiteSpace(channel)) {
         frm.ChangeSync(FormRelations.SyncStatus.Connecting);
@@ -99,7 +98,7 @@ internal static class RPC_Wrapper {
           HttpHandler = SocketsHandler
         });
         var gRPC_Client = new SCHQ_Relations.SCHQ_RelationsClient(gRPC_Channel);
-        using var streamingCall = gRPC_Client.SyncRelations(new ChannelRequest() { Channel = channel, Password = password }, cancellationToken: cts.Token);
+        using var streamingCall = gRPC_Client.SyncRelations(new ChannelRequest() { Channel = channel, Username = username, Password = password }, cancellationToken: cts.Token);
         try {
           await Task.Run(() => gRPC_Channel.WaitForStateChangedAsync(gRPC_Channel.State, cts.Token));
           if (gRPC_Channel.State == ConnectivityState.Ready || gRPC_Channel.State == ConnectivityState.Idle) {

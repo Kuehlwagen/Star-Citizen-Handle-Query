@@ -237,7 +237,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         RelationInfos infos = null;
         bool isRPC = IsRPCSync && importPath == null;
         if (isRPC) {
-          infos = RPC_Wrapper.GetRelations(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted);
+          infos = RPC_Wrapper.GetRelations(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Channel_Username, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted);
         } else {
           string jsonFilePath = importPath ?? FormHandleQuery.GetCachePath(FormHandleQuery.CacheDirectoryType.Root, "Relations");
           if (File.Exists(jsonFilePath)) {
@@ -277,7 +277,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           break;
         case MouseButtons.Middle:
           if (IsRPCSync && Sync == SyncStatus.Connected) {
-            RelationInfos infos = RPC_Wrapper.GetRelations(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted);
+            RelationInfos infos = RPC_Wrapper.GetRelations(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Channel_Username, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted);
             if (infos.Relations?.Count > 0) {
               UserControlRelations.Clear();
               PanelRelations.Controls.Clear();
@@ -297,7 +297,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         if (Sync == SyncStatus.Disconnected && (ProgramSettings.Relations.RPC_Sync_On_Startup || !startup)) {
           ImportRelationInfos();
           CancelToken = new CancellationTokenSource();
-          Task.Run(() => RPC_Wrapper.SyncRelations(this, ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, CancelToken));
+          Task.Run(() => RPC_Wrapper.SyncRelations(this, ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Channel_Username, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, CancelToken));
         } else {
           CancelToken.Cancel();
         }
@@ -388,7 +388,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public void UpdateRelation(string name, RelationType relationType, RelationValue relation, string comment = null, bool withoutRPCSet = false) {
       if (!string.IsNullOrWhiteSpace(name)) {
         if (IsRPCSync && !withoutRPCSet && Sync == SyncStatus.Connected) {
-          if (!RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, relationType, name, relation, comment)) {
+          if (!RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Channel_Username, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, relationType, name, relation, comment)) {
             return;
           }
         }
@@ -443,7 +443,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     public void SetComment(string name, string comment, RelationType relationType = RelationType.Handle) {
       if (IsRPCSync && Sync == SyncStatus.Connected && !string.IsNullOrWhiteSpace(name) && comment != null) {
         RelationValue relation = GetHandleRelation(name);
-        if (RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, relationType, name, relation, comment)) {
+        if (RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Channel_Username, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, relationType, name, relation, comment)) {
           UserControlRelation control = UserControlRelations.Select(x => x.Value).FirstOrDefault(x => x.Type == relationType && x.RelationName == name);
           if (control != null) {
             control.UpdateComment(comment);

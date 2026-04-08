@@ -281,15 +281,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       User32Wrappers.ShowWindow(Handle, User32Wrappers.SW_RESTORE);
       User32Wrappers.SetForegroundWindow(Handle);
       Visible = true;
-      if (LogMonitorForm != null) {
-        LogMonitorForm.Visible = true;
-      }
-      if (RelationsForm != null) {
-        RelationsForm.Visible = true;
-      }
-      if (LocationsForm != null) {
-        LocationsForm.Visible = true;
-      }
+      LogMonitorForm?.Visible = true;
+      RelationsForm?.Visible = true;
+      LocationsForm?.Visible = true;
       Activate();
       TextBoxHandle.SelectAll();
       TextBoxHandle.Focus();
@@ -610,15 +604,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public void HideWindows() {
       Visible = false;
-      if (LogMonitorForm != null) {
-        LogMonitorForm.Visible = false;
-      }
-      if (RelationsForm != null) {
-        RelationsForm.Visible = false;
-      }
-      if (LocationsForm != null) {
-        LocationsForm.Visible = false;
-      }
+      LogMonitorForm?.Visible = false;
+      RelationsForm?.Visible = false;
+      LocationsForm?.Visible = false;
     }
 
     private async void QueryHandle(bool forceLive) {
@@ -736,11 +724,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       string infoJsonPath = GetCachePath(infoType, name);
       if (File.Exists(infoJsonPath) && new FileInfo(infoJsonPath).LastWriteTime > DateTime.Now.AddDays(programSettings.LocalCacheMaxAge * -1)) {
         rtnVal = JsonSerializer.Deserialize<HandleInfo>(File.ReadAllText(infoJsonPath, Encoding.UTF8));
-        if (rtnVal != null) {
-          rtnVal.HttpResponse = new() {
-            StatusCode = HttpStatusCode.OK
-          };
-        }
+        rtnVal?.HttpResponse = new() {
+          StatusCode = HttpStatusCode.OK
+        };
       }
 
       // Informationen live auslesen, wenn die Datei nicht gelesen werden konnte

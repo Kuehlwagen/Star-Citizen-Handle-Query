@@ -333,6 +333,9 @@ namespace Star_Citizen_Handle_Query.Serialization {
     /// <summary>Der zu verwendende Channel des gRPC-Servers</summary>
     public string RPC_Channel { get; set; } = string.Empty;
 
+    /// <summary>Der Benutzername für den zu verwendenden Channels des gRPC-Servers</summary>
+    public string RPC_Channel_Username { get; set; } = string.Empty;
+
     /// <summary>Enthält das unverschlüsselte Passwort</summary>
     internal string RPC_Sync_Channel_Password_Decrypted {
       get { return Encryption.DecryptText(RPC_Channel_Password); }

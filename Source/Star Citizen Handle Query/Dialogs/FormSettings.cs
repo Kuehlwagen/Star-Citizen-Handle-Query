@@ -317,7 +317,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     private void ComboBoxTaste_SelectedIndexChanged(object sender, EventArgs e) {
-      ProgramSettings.GlobalHotkey = (Keys)Enum.Parse(typeof(Keys), $"{(sender as ComboBox).SelectedItem}");
+      ProgramSettings.GlobalHotkey = Enum.Parse<Keys>($"{(sender as ComboBox).SelectedItem}");
       CheckBoxStrg.Enabled = ProgramSettings.GlobalHotkey != Keys.None;
       CheckBoxAlt.Enabled = CheckBoxStrg.Enabled;
       CheckBoxUmschalt.Enabled = CheckBoxStrg.Enabled;
