@@ -253,7 +253,8 @@ namespace Star_Citizen_Handle_Query.Serialization {
       "unknown",
       "AIModule_",
       "InvisibleItemPort_",
-      "SCItem_"
+      "SCItem_",
+      "HangarDoor_"
     ];
 
     /// <summary>NPC-Filter (StartsWith)</summary>

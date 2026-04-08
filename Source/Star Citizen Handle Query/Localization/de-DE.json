@@ -176,7 +176,11 @@
     "Own_Handle": "Eigener Handle",
     "Vehicle_Destruction": "Fahrzeugzerst\u00F6rung",
     "SELF_DESTRUCT": "SELBSTZERST\u00D6RUNG",
-    "UNKNOWN": "UNBEKANNT"
+    "UNKNOWN": "UNBEKANNT",
+    "NPC": "NPC",
+    "TURRET": "TURM",
+    "HANGAR": "HANGAR",
+    "ITEM": "GEGENSTAND"
   },
   "Relations": {
     "Title": "Beziehungen",
