@@ -122,6 +122,7 @@
       ButtonEditPrcChannels = new Button();
       LabelGRPCKanalPasswort = new Label();
       CheckBoxRPCSyncOnStartup = new CheckBox();
+      TextBoxGRPCChannelUser = new TextBox();
       TextBoxGRPCChannelPassword = new TextBox();
       TextBoxGRPCChannel = new TextBox();
       TextBoxGRPCURL = new TextBox();
@@ -1294,6 +1295,7 @@
       GroupBoxBeziehungen.Controls.Add(CheckBoxShowRelations);
       GroupBoxBeziehungen.Controls.Add(LabelRelationsEntriesMaximum);
       GroupBoxBeziehungen.Controls.Add(CheckBoxSortRelationsAlphabetically);
+      GroupBoxBeziehungen.Controls.Add(TextBoxGRPCChannelUser);
       GroupBoxBeziehungen.Controls.Add(TextBoxGRPCChannelPassword);
       GroupBoxBeziehungen.Controls.Add(TextBoxGRPCChannel);
       GroupBoxBeziehungen.Controls.Add(TextBoxGRPCURL);
@@ -1325,9 +1327,9 @@
       LabelGRPCKanalPasswort.AutoSize = true;
       LabelGRPCKanalPasswort.Location = new Point(32, 165);
       LabelGRPCKanalPasswort.Name = "LabelGRPCKanalPasswort";
-      LabelGRPCKanalPasswort.Size = new Size(123, 15);
+      LabelGRPCKanalPasswort.Size = new Size(140, 15);
       LabelGRPCKanalPasswort.TabIndex = 9;
-      LabelGRPCKanalPasswort.Text = "gRPC Kanal-Passwort:";
+      LabelGRPCKanalPasswort.Text = "gRPC Benutzer/Passwort:";
       // 
       // CheckBoxRPCSyncOnStartup
       // 
@@ -1335,21 +1337,32 @@
       CheckBoxRPCSyncOnStartup.Location = new Point(34, 192);
       CheckBoxRPCSyncOnStartup.Name = "CheckBoxRPCSyncOnStartup";
       CheckBoxRPCSyncOnStartup.Size = new Size(254, 19);
-      CheckBoxRPCSyncOnStartup.TabIndex = 11;
+      CheckBoxRPCSyncOnStartup.TabIndex = 12;
       CheckBoxRPCSyncOnStartup.Text = "gRPC-Synchronisierung bei Programmstart";
       CheckBoxRPCSyncOnStartup.UseVisualStyleBackColor = true;
       CheckBoxRPCSyncOnStartup.CheckedChanged += CheckBoxRPCSyncOnStartup_CheckedChanged;
+      // 
+      // TextBoxGRPCChannelUser
+      // 
+      TextBoxGRPCChannelUser.BackColor = Color.FromArgb(57, 206, 216);
+      TextBoxGRPCChannelUser.BorderStyle = BorderStyle.FixedSingle;
+      TextBoxGRPCChannelUser.ForeColor = Color.FromArgb(19, 26, 33);
+      TextBoxGRPCChannelUser.Location = new Point(190, 163);
+      TextBoxGRPCChannelUser.Name = "TextBoxGRPCChannelUser";
+      TextBoxGRPCChannelUser.Size = new Size(104, 23);
+      TextBoxGRPCChannelUser.TabIndex = 10;
+      TextBoxGRPCChannelUser.TextChanged += MaskedTextBoxGRPCKanalBenutzer_TextChanged;
       // 
       // TextBoxGRPCChannelPassword
       // 
       TextBoxGRPCChannelPassword.BackColor = Color.FromArgb(57, 206, 216);
       TextBoxGRPCChannelPassword.BorderStyle = BorderStyle.FixedSingle;
       TextBoxGRPCChannelPassword.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxGRPCChannelPassword.Location = new Point(190, 163);
+      TextBoxGRPCChannelPassword.Location = new Point(299, 163);
       TextBoxGRPCChannelPassword.Name = "TextBoxGRPCChannelPassword";
       TextBoxGRPCChannelPassword.PasswordChar = '*';
-      TextBoxGRPCChannelPassword.Size = new Size(213, 23);
-      TextBoxGRPCChannelPassword.TabIndex = 10;
+      TextBoxGRPCChannelPassword.Size = new Size(104, 23);
+      TextBoxGRPCChannelPassword.TabIndex = 11;
       TextBoxGRPCChannelPassword.TextChanged += MaskedTextBoxGRPCKanalPasswort_TextChanged;
       // 
       // TextBoxGRPCChannel
@@ -1550,5 +1563,6 @@
     private CheckBox CheckBoxOwnHandle;
     private CheckBox CheckBoxCompactMode;
     private CheckBox CheckBoxVehicleDestruction;
+    private TextBox TextBoxGRPCChannelUser;
   }
 }

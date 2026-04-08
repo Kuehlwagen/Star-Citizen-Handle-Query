@@ -94,6 +94,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         TextBoxGRPCURL.ForeColor = ProgramSettings.Colors.AppBackColor;
         TextBoxGRPCChannel.BackColor = ProgramSettings.Colors.AppForeColor;
         TextBoxGRPCChannel.ForeColor = ProgramSettings.Colors.AppBackColor;
+        TextBoxGRPCChannelUser.BackColor = ProgramSettings.Colors.AppForeColor;
+        TextBoxGRPCChannelUser.ForeColor = ProgramSettings.Colors.AppBackColor;
         TextBoxGRPCChannelPassword.BackColor = ProgramSettings.Colors.AppForeColor;
         TextBoxGRPCChannelPassword.ForeColor = ProgramSettings.Colors.AppBackColor;
         NumericUpDownLogEintraegeMaximum.BackColor = ProgramSettings.Colors.AppBackColor;
@@ -219,6 +221,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       TextBoxGRPCURL.Text = ProgramSettings.Relations.RPC_URL;
       TextBoxGRPCChannel.Text = ProgramSettings.Relations.RPC_Channel;
       CheckBoxRPCSyncOnStartup.Checked = ProgramSettings.Relations.RPC_Sync_On_Startup;
+      TextBoxGRPCChannelUser.Text = ProgramSettings.Relations.RPC_Channel_Username;
       TextBoxGRPCChannelPassword.Text = ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted;
       ButtonForeColor.BackColor = ProgramSettings.Colors.AppForeColor;
       ButtonForeColorInactive.BackColor = ProgramSettings.Colors.AppForeColorInactive;
@@ -455,6 +458,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void TextBoxGRPCChannel_TextChanged(object sender, EventArgs e) {
       ProgramSettings.Relations.RPC_Channel = TextBoxGRPCChannel.Text;
+    }
+
+    private void MaskedTextBoxGRPCKanalBenutzer_TextChanged(object sender, EventArgs e) {
+      ProgramSettings.Relations.RPC_Channel_Username = TextBoxGRPCChannelUser.Text;
     }
 
     private void MaskedTextBoxGRPCKanalPasswort_TextChanged(object sender, EventArgs e) {
