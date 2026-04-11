@@ -109,6 +109,8 @@ namespace Star_Citizen_Handle_Query.UserControls {
         LabelEnlistedDate.Text = Info?.Profile?.Enlisted.ToString("MMM d, yyyy", System.Globalization.CultureInfo.InvariantCulture);
         LabelAdditionalInformation.Text = GetString(Info?.Comment);
         SetToolTip(LabelAdditionalInformation);
+        TextBoxAdditionalInformation.Text = Info?.Comment ?? string.Empty;
+        TextBoxAdditionalInformation.Tag = TextBoxAdditionalInformation.Text;
         if (Info?.Relation > RelationValue.NotAssigned) {
           LabelRelation.BackColor = GetRelationColor(ProgramSettings, Info.Relation);
           SetToolTip(LabelRelation, FormLocalCache.GetTranslatedRelationText(ProgramTranslation, Info.Relation));

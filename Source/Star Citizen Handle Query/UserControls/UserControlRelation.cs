@@ -62,7 +62,9 @@ namespace Star_Citizen_Handle_Query.UserControls {
       Comment = comment;
       if (Parent != null) {
         LabelHandle.Text = string.IsNullOrWhiteSpace(comment) ? RelationName : $"⭐ {RelationName}";
-        (Parent.Parent as FormRelations).SetToolTip(LabelHandle, comment ?? string.Empty);
+        if (Parent.Parent is FormRelations relationsForm) {
+          relationsForm.SetToolTip(LabelHandle, comment ?? string.Empty);
+        }
       }
     }
 

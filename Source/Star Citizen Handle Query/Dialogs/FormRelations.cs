@@ -387,8 +387,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public void UpdateRelation(string name, RelationType relationType, RelationValue relation, string comment = null, bool withoutRPCSet = false) {
       if (!string.IsNullOrWhiteSpace(name)) {
+        string effectiveComment = comment ?? (UserControlRelations.TryGetValue($"{relationType}.{name}", out UserControlRelation existingCtrl) ? existingCtrl.Comment : null);
         if (IsRPCSync && !withoutRPCSet && Sync == SyncStatus.Connected) {
-          if (!RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Channel_Username, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, relationType, name, relation, comment)) {
+          if (!RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Channel_Username, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, relationType, name, relation, effectiveComment)) {
             return;
           }
         }
@@ -396,18 +397,20 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         if (controls?.Length == 1) {
           if (relation == RelationValue.NotAssigned) {
             if (InvokeRequired) {
-              Invoke(() => RemoveControl(controls[0] as UserControlRelation));
+              Invoke(() => { if (controls[0] is UserControlRelation uc) RemoveControl(uc); });
             } else {
-              RemoveControl(controls[0] as UserControlRelation);
+              if (controls[0] is UserControlRelation uc) RemoveControl(uc);
             }
           } else if (controls[0] is UserControlRelation control) {
             if (InvokeRequired) {
-              Invoke(() => control.UpdateRelation(relation));
-              Invoke(() => control.UpdateComment(comment));
-              Invoke(() => control.Visible = RelationIsVisible(relation));
+              Invoke(() => {
+                control.UpdateRelation(relation);
+                if (effectiveComment != null) control.UpdateComment(effectiveComment);
+                control.Visible = RelationIsVisible(relation);
+              });
             } else {
               control.UpdateRelation(relation);
-              control.UpdateComment(comment);
+              if (effectiveComment != null) control.UpdateComment(effectiveComment);
               control.Visible = RelationIsVisible(relation);
             }
           }
@@ -417,9 +420,9 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           //  RemoveControl(PanelRelations.Controls[0] as UserControlRelation);
           //}
           if (InvokeRequired) {
-            Invoke(() => AddControl(name, relationType, relation, comment));
+            Invoke(() => AddControl(name, relationType, relation, effectiveComment));
           } else {
-            AddControl(name, relationType, relation, comment);
+            AddControl(name, relationType, relation, effectiveComment);
           }
         }
         if (InvokeRequired) {
@@ -441,19 +444,19 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     }
 
     public void SetComment(string name, string comment, RelationType relationType = RelationType.Handle) {
-      if (IsRPCSync && Sync == SyncStatus.Connected && !string.IsNullOrWhiteSpace(name) && comment != null) {
-        RelationValue relation = GetHandleRelation(name);
-        if (RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Channel_Username, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, relationType, name, relation, comment)) {
-          UserControlRelation control = UserControlRelations.Select(x => x.Value).FirstOrDefault(x => x.Type == relationType && x.RelationName == name);
+      if (!string.IsNullOrWhiteSpace(name) && comment != null) {
+        bool update = true;
+        if (IsRPCSync && Sync == SyncStatus.Connected) {
+          RelationValue relation = relationType == RelationType.Organization ? GetOrganizationRelation(name) : GetHandleRelation(name);
+          update = RPC_Wrapper.SetRelation(ProgramSettings.Relations.RPC_Channel, ProgramSettings.Relations.RPC_Channel_Username, ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted, relationType, name, relation, comment);
+        }
+        if (update) {
+          UserControlRelation control = UserControlRelations.Values.FirstOrDefault(x => x.Type == relationType && x.RelationName == name);
           if (control != null) {
-            control.UpdateComment(comment);
-            Control[] controls = PanelRelations.Controls.Find($"UserControlRelation_{relationType}_{name}", false);
-            if (controls?.Length == 1) {
-              if (InvokeRequired) {
-                Invoke(() => (controls[0] as UserControlRelation).UpdateComment(comment));
-              } else {
-                (controls[0] as UserControlRelation).UpdateComment(comment);
-              }
+            if (InvokeRequired) {
+              Invoke(() => control.UpdateComment(comment));
+            } else {
+              control.UpdateComment(comment);
             }
           }
         }
@@ -476,6 +479,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         rtnVal = control.Relation;
       }
       return rtnVal;
+    }
+
+    public string GetHandleComment(string handle) {
+      return UserControlRelations.Values.FirstOrDefault(x => x.Type == RelationType.Handle && x.RelationName == handle)?.Comment;
     }
 
     private void CheckBoxFilterChanged(object sender, EventArgs e) {

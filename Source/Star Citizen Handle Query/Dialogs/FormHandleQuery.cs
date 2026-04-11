@@ -465,16 +465,17 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       if (PanelInfo.Controls.Count > 0) {
         switch (relationType) {
           case RelationType.Handle:
-            UserControlHandle handleControl = PanelInfo.Controls[0] as UserControlHandle;
-            handleControl.ChangeRelation(key);
-            RelationsForm?.UpdateRelation(handleControl.HandleName, RelationType.Handle, handleControl.HandleRelation);
+            if (PanelInfo.Controls[0] is UserControlHandle handleControl) {
+              handleControl.ChangeRelation(key);
+              RelationsForm?.UpdateRelation(handleControl.HandleName, RelationType.Handle, handleControl.HandleRelation);
+            }
             break;
           case RelationType.Organization:
             UserControlOrganization orgControl = null;
-            if (!ProgramSettings.Relations.ShowWindow && PanelInfo.Controls.Count > 1 && PanelInfo.Controls[1] is UserControlOrganization) {
-              orgControl = PanelInfo.Controls[1] as UserControlOrganization;
-            } else if (ProgramSettings.Relations.ShowWindow && PanelInfo.Controls.Count > 2) {
-              orgControl = PanelInfo.Controls[2] as UserControlOrganization;
+            if (!ProgramSettings.Relations.ShowWindow && PanelInfo.Controls.Count > 1 && PanelInfo.Controls[1] is UserControlOrganization orgCtrl1) {
+              orgControl = orgCtrl1;
+            } else if (ProgramSettings.Relations.ShowWindow && PanelInfo.Controls.Count > 2 && PanelInfo.Controls[2] is UserControlOrganization orgCtrl2) {
+              orgControl = orgCtrl2;
             }
             if (orgControl != null) {
               orgControl.ChangeRelation(key);
@@ -504,6 +505,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         rtnVal = RelationsForm.GetHandleRelation(handle);
       }
       return rtnVal;
+    }
+
+    public string GetHandleComment(string handle) {
+      return RelationsForm?.GetHandleComment(handle);
     }
 
     private void TextBoxHandle_KeyDown(object sender, KeyEventArgs e) {
@@ -622,6 +627,13 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         HandleInfo handleInfo = await GetHandleInfo(forceLive, TextBoxHandle.Text, ProgramSettings, CacheDirectoryType.Handle);
         // Ggf. Beziehung aktualisieren
         handleInfo.Relation = GetHandleRelation(handleInfo.Profile.Handle);
+        // Ggf. Kommentar von Beziehungen (gRPC-Server) aktualisieren
+        string relationComment = GetHandleComment(handleInfo.Profile.Handle);
+        if (!string.IsNullOrEmpty(relationComment)) {
+          handleInfo.Comment = relationComment;
+        } else if (!string.IsNullOrEmpty(handleInfo.Comment) && handleInfo.Relation > RelationValue.NotAssigned) {
+          RelationsForm?.SetComment(handleInfo.Profile.Handle, handleInfo.Comment);
+        }
 
         // Ggf. Cache-Verzeichnisse erstellen
         CreateDirectory(CacheDirectoryType.Handle);
