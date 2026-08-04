@@ -12,12 +12,6 @@
 
     public Translation_Notification Notification { get; set; } = new();
 
-    public Translation_LogMonitor Log_Monitor { get; set; } = new();
-
-    public Translation_Relations Relations { get; set; } = new();
-
-    public Translation_Locations Locations { get; set; } = new();
-
     /// <summary>Vergleich in Liste ermöglichen</summary>
     /// <param name="other">Anderes Translation-Objekt</param>
     /// <returns>true, wenn das Feld "Language" übereinstimmt, andernfalls false</returns>
@@ -104,12 +98,6 @@
 
     public Translation_Settings_Window Window { get; set; } = new();
 
-    public Translation_Settings_Locations Locations { get; set; } = new();
-
-    public Translation_Settings_Relations Relations { get; set; } = new();
-
-    public Translation_Settings_Log_Monitor Log_Monitor { get; set; } = new();
-
     public Translation_Settings_Local_Cache Local_Cache { get; set; } = new();
 
     public Translation_Settings_Buttons Buttons { get; set; } = new();
@@ -153,14 +141,6 @@
 
     public string Splitter_Color { get; set; } = "Trenner-Farbe";
 
-    public string Advanced { get; set; } = "Fortgeschritten";
-
-    public string Status_Inactive { get; set; } = "Status inaktiv";
-
-    public string Status_Initializing { get; set; } = "Status Initialisierung";
-
-    public string Status_Active { get; set; } = "Status aktiv";
-
     public Dictionary<string, string> Theme_Translations { get; set; } = [];
 
     public string Default_Colors { get; set; } = "Standardfarben";
@@ -193,108 +173,6 @@
     public string RememberWindowLocation { get; set; } = "Position merken";
 
     public string HideWindowOnEscPress { get; set; } = "ESC blendet das Fenster aus";
-
-  }
-
-  [Serializable()]
-  public class Translation_Settings_Locations {
-
-    public string Group_Title { get; set; } = "Orte (Alt + Eingabe)";
-
-    public string Show_Locations { get; set; } = "Orte anzeigen";
-
-    public string Locations_Entries_Max { get; set; } = "Einträge Maximum:";
-
-    public string LMB_URL { get; set; } = "Linke Maustaste:";
-
-    public string MMB_URL { get; set; } = "Mittlere Maustaste:";
-
-    public string RMB_URL { get; set; } = "Rechte Maustaste:";
-
-  }
-
-  [Serializable()]
-  public class Translation_Settings_Relations {
-
-    public string Group_Title { get; set; } = "Beziehungen";
-
-    public string Show_Relations { get; set; } = "Beziehungen anzeigen";
-
-    public string Sort_Relations_Alphabetically { get; set; } = "Alphabetisch sortieren";
-
-    public string Relations_Entries_Max { get; set; } = "Einträge Maximum:";
-
-    public string RPC_Server_URL { get; set; } = "gRPC Server-URL:";
-
-    public string RPC_Server_Channel { get; set; } = "gRPC Kanal:";
-
-    public string RPC_Channel_Password { get; set; } = "gRPC Kanal-Passwort:";
-
-    public string RPC_Sync_On_Startup { get; set; } = "gRPC-Synchronisierung bei Programmstart";
-
-    public Translation_Settings_Relations_RPC_Channels RPC_Channels { get; set; } = new();
-
-  }
-
-  [Serializable()]
-  public class Translation_Settings_Relations_RPC_Channels {
-
-    public string Title { get; set; } = "gRPC-Kanalauswahl";
-
-    public string Button_Load_Channels { get; set; } = "Kanäle laden";
-
-    public string Channel_Name { get; set; } = "Kanalname";
-
-    public string Button_OK { get; set; } = "OK";
-
-    public string No_Channels_Found { get; set; } = "Es konnten keine Kanäle ermittelt werden.";
-
-    public string Permissions { get; set; } = "Berechtigungen";
-
-    public string Permission_None { get; set; } = "Keine";
-
-    public string Permission_Read { get; set; } = "Lesen";
-
-    public string Permission_Write { get; set; } = "Schreiben";
-
-  }
-
-  [Serializable()]
-  public class Translation_Settings_Log_Monitor {
-
-    public string Group_Title { get; set; } = "Log-Monitor";
-
-    public string Show_Log_Monitor { get; set; } = "Log-Monitor anzeigen";
-
-    public string Log_Entries_Max { get; set; } = "Einträge Maximum:";
-
-    public string Log_Entry_Display_Duration { get; set; } = "Eintrag Anzeigedauer:";
-
-    public string Log_Show_Corpse { get; set; } = "Spielertode anzeigen";
-
-    public string Log_Show_Loading_Screen_Duration { get; set; } = "Ladebildschirm-Dauer anzeigen";
-
-    public string Log_Entry_Display_Duration_Minutes { get; set; } = "Minute(n)";
-
-    public string Check_Complete_File { get; set; } = "Komplette Datei";
-
-    public string Handle_Filter { get; set; } = "Handle-Filter:";
-
-    public string Webhook_URL { get; set; } = "Webhook-URL:";
-
-    public string Show_NPC_Deaths { get; set; } = "NPC-Tode anzeigen";
-
-    public string NPC_Filter { get; set; } = "NPC-Namen:";
-
-    public string Global_NPC_Names { get; set; } = "Globale NPC-Namen";
-
-    public string Test_Webhook_URL { get; set; } = "Test";
-
-    public string Log_Show_Hostility_Events { get; set; } = "Feindseligkeitsereignisse anzeigen";
-
-    public string Log_Show_Own_Handle { get; set; } = "Eigener Handle";
-
-    public string Log_Show_Vehicle_Destructions { get; set; } = "Fahrzeugzerstörungen anzeigen";
 
   }
 
@@ -361,8 +239,6 @@
 
     public string Relation { get; set; } = "Beziehung";
 
-    public string Comment { get; set; } = "Kommentar";
-
   }
 
   [Serializable()]
@@ -399,80 +275,6 @@
     public string Update_Up_To_Date { get; set; } = "Programm ist aktuell";
 
     public string Update_Error { get; set; } = "Update-Informationen konnten nicht ausgelesen werden";
-
-  }
-
-  [Serializable]
-  public class Translation_LogMonitor {
-
-    public string Title { get; set; } = "Log-Monitor";
-
-    public string Webhook_Actor_Death { get; set; } = "Spielertod";
-
-    public string Webhook_Killer { get; set; } = "Killer";
-
-    public string Webhook_Using { get; set; } = "Mit";
-
-    public string Webhook_Damage_Type { get; set; } = "Schadensart";
-
-    public string Webhook_Zone { get; set; } = "Zone";
-
-    public string Loading_Screen { get; set; } = "Ladebildschirm";
-
-    public string Own_Handle_Is { get; set; } = "Eigener Handle lautet";
-
-    public string Actor_Death { get; set; } = "Spielertod";
-
-    public string Corpse { get; set; } = "Leiche";
-
-    public string No_Corpse { get; set; } = "Keine Leiche";
-
-    public string Hostility_Event { get; set; } = "Feindseligkeitsereignis";
-
-    public string Loading_Screen_Duration { get; set; } = "Ladebildschirm-Dauer";
-
-    public string Own_Handle { get; set; } = "Eigener Handle";
-
-    public string Vehicle_Destruction { get; set; } = "Fahrzeugzerstörung";
-
-    public string SELF_DESTRUCT { get; set; } = "SELBSTZERSTÖRUNG";
-
-    public string UNKNOWN { get; set; } = "UNBEKANNT";
-
-    public string NPC { get; set; } = "NPC";
-
-    public string TURRET { get; set; } = "TURM";
-
-    public string ITEM { get; set; } = "GEGENSTAND";
-
-    public string HANGAR { get; set; } = "HANGAR";
-
-  }
-
-  [Serializable]
-  public class Translation_Relations {
-
-    public string Title { get; set; } = "Beziehungen";
-
-    public string RPC_Status_Disconnected { get; set; } = "Getrennt - klicken, um zu verbinden";
-
-    public string RPC_Status_Connecting { get; set; } = "Verbindung wird hergestellt...";
-
-    public string RPC_Status_Connected { get; set; } = "Verbunden - klicken, um die Verbidung zu trennen";
-
-    public string Clear { get; set; } = "Sollen wirklich alle Beziehungen gelöscht werden?";
-
-  }
-
-  public class Translation_Locations {
-
-    public string Title { get; set; } = "Orte";
-
-    public string Filter_Placeholder { get; set; } = "Orte filtern...";
-
-    public string More_Location { get; set; } = "weiterer Ort...";
-
-    public string More_Locations { get; set; } = "weitere Orte...";
 
   }
 

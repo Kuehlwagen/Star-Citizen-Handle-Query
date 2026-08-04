@@ -19,7 +19,7 @@ namespace Star_Citizen_Handle_Query.Properties {
     // -Klasse über ein Tool wie ResGen oder Visual Studio automatisch generiert.
     // Um einen Member hinzuzufügen oder zu entfernen, bearbeiten Sie die .ResX-Datei und führen dann ResGen
     // mit der /str-Option erneut aus, oder Sie erstellen Ihr VS-Projekt neu.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -83,33 +83,10 @@ namespace Star_Citizen_Handle_Query.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
         /// </summary>
-        internal static byte[] de_DE_Brevity {
-            get {
-                object obj = ResourceManager.GetObject("de-DE_Brevity", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
-        /// </summary>
         internal static byte[] en_US {
             get {
                 object obj = ResourceManager.GetObject("en-US", resourceCulture);
                 return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die name,type,parentBody,parentStar,coordinateX,coordinateY,coordinateZ,wikiLink,private,quantum
-        ///Abandoned Outpost (Cellin),Ruins,Cellin,Stanton,130.062,184.915,130.356,https://starcitizen.tools/Unnamed_abandoned_outpost_(Cellin),0,0
-        ///Abandoned Outpost (Daymar),Ruins,Daymar,Stanton,73.139,285.904,1.906,https://starcitizen.tools/Unnamed_abandoned_outpost_(Daymar),0,0
-        ///Abandoned Outpost (Yela),Ruins,Yela,Stanton,-45.303,308.850,28.948,https://starcitizen.tools/Unnamed_abandoned_outpost_(Yela),0,0
-        ///Afterlife,Unde [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
-        /// </summary>
-        internal static string Locations {
-            get {
-                return ResourceManager.GetString("Locations", resourceCulture);
             }
         }
         

@@ -1,5 +1,4 @@
-﻿using SCHQ_Protos;
-using System.Net;
+﻿using System.Net;
 using System.Text.Json.Serialization;
 
 namespace Star_Citizen_Handle_Query.Serialization {
@@ -10,8 +9,6 @@ namespace Star_Citizen_Handle_Query.Serialization {
     public HttpInfo HttpResponse { get; set; }
     public HandleProfileInfo Profile { get; set; }
     public OrganizationsInfo Organizations { get; set; }
-    public string Comment { get; set; }
-    public RelationValue Relation { get; set; }
 
   }
 

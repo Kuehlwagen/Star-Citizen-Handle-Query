@@ -1,5 +1,4 @@
-﻿using SCHQ_Protos;
-using Star_Citizen_Handle_Query.Dialogs;
+﻿using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
 using System.Drawing.Drawing2D;
@@ -22,7 +21,6 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private bool IsCompact = false;
 
     public string HandleName { get { return Info.Profile.Handle; } }
-    public RelationValue HandleRelation { get { return Info.Relation; } }
 
     public UserControlHandle(HandleInfo handleInfo, Settings programSettings, Translation programTranslation, bool forceLive, bool displayOnly = false) {
       InitializeComponent();
@@ -31,9 +29,6 @@ namespace Star_Citizen_Handle_Query.UserControls {
       if (programSettings.Colors != null) {
         BackColor = programSettings.Colors.AppBackColor;
         ForeColor = programSettings.Colors.AppForeColor;
-        LabelAdditionalInformation.ForeColor = programSettings.Colors.AppForeColor;
-        TextBoxAdditionalInformation.BackColor = programSettings.Colors.AppBackColor;
-        TextBoxAdditionalInformation.ForeColor = programSettings.Colors.AppForeColor;
       }
 
       Info = handleInfo;
@@ -107,17 +102,7 @@ namespace Star_Citizen_Handle_Query.UserControls {
         }
         LabelUEECitizenRecord.Text = GetString(Info?.Profile?.UeeCitizenRecord);
         LabelEnlistedDate.Text = Info?.Profile?.Enlisted.ToString("MMM d, yyyy", System.Globalization.CultureInfo.InvariantCulture);
-        LabelAdditionalInformation.Text = GetString(Info?.Comment);
-        SetToolTip(LabelAdditionalInformation);
-        TextBoxAdditionalInformation.Text = Info?.Comment ?? string.Empty;
-        TextBoxAdditionalInformation.Tag = TextBoxAdditionalInformation.Text;
-        if (Info?.Relation > RelationValue.NotAssigned) {
-          LabelRelation.BackColor = GetRelationColor(ProgramSettings, Info.Relation);
-          SetToolTip(LabelRelation, FormLocalCache.GetTranslatedRelationText(ProgramTranslation, Info.Relation));
-          LabelRelation.Visible = true;
-        }
         if (DisplayOnly) {
-          LabelAdditionalInformation.Cursor = Cursors.Default;
           LabelRelation.Cursor = Cursors.Default;
           LabelRelation.MouseClick -= LabelRelation_MouseClick;
           PictureBoxLive.Visible = false;
@@ -184,29 +169,6 @@ namespace Star_Citizen_Handle_Query.UserControls {
       }
     }
 
-    private void TextBoxAdditionalInformation_KeyDown(object sender, KeyEventArgs e) {
-      TextBox textBox = sender as TextBox;
-      switch (e.KeyCode) {
-        case Keys.Enter:
-          e.SuppressKeyPress = true;
-          Info.Comment = TextBoxAdditionalInformation.Text;
-          textBox.Tag = Info.Comment;
-          LabelAdditionalInformation.Text = Info.Comment;
-          SetToolTip(LabelAdditionalInformation);
-          CreateHandleJSON(Info, ProgramSettings, forceExport: true);
-          textBox.Visible = false;
-          GetMainForm().ChangeComment(HandleName, Info.Comment);
-          ActivateTextBoxHandle();
-          break;
-        case Keys.Escape:
-          e.SuppressKeyPress = true;
-          textBox.Text = textBox.Tag as string;
-          textBox.Visible = false;
-          ActivateTextBoxHandle();
-          break;
-      }
-    }
-
     private void TextBoxAdditionalInformation_Leave(object sender, EventArgs e) {
       TextBox textBox = sender as TextBox;
       textBox.Text = textBox.Tag as string;
@@ -218,46 +180,6 @@ namespace Star_Citizen_Handle_Query.UserControls {
       TextBox textBoxHandle = GetMainForm().Controls[1].Controls[0] as TextBox;
       textBoxHandle.SelectAll();
       textBoxHandle.Focus();
-    }
-
-    private void LabelAdditionalInformation_Click(object sender, EventArgs e) {
-      ActivateComment();
-    }
-
-    public void ActivateComment() {
-      if (!DisplayOnly) {
-        TextBoxAdditionalInformation.Visible = true;
-        TextBoxAdditionalInformation.SelectAll();
-        TextBoxAdditionalInformation.Focus();
-      }
-    }
-
-    public void ChangeRelation(Keys keyCode) {
-      RelationValue relation = RelationValue.NotAssigned;
-      switch (keyCode) {
-        case Keys.D1:
-        case Keys.NumPad1:
-          relation = RelationValue.Friendly;
-          break;
-        case Keys.D2:
-        case Keys.NumPad2:
-          relation = RelationValue.Neutral;
-          break;
-        case Keys.D3:
-        case Keys.NumPad3:
-          relation = RelationValue.Bogey;
-          break;
-        case Keys.D4:
-        case Keys.NumPad4:
-          relation = RelationValue.Bandit;
-          break;
-      }
-      Info.Relation = relation;
-      CreateHandleJSON(Info, ProgramSettings, forceExport: true);
-      LabelRelation.Visible = relation > RelationValue.NotAssigned;
-      LabelRelation.BackColor = GetRelationColor(ProgramSettings, Info.Relation);
-      SetToolTip(LabelRelation, FormLocalCache.GetTranslatedRelationText(ProgramTranslation, Info.Relation));
-      ActivateTextBoxHandle();
     }
 
     private void PictureBoxLive_MouseClick(object sender, MouseEventArgs e) {

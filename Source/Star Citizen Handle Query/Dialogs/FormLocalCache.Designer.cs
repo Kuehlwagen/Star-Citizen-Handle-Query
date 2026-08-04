@@ -23,248 +23,215 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-      System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+      DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+      DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
       System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLocalCache));
-      this.DataGridViewLokalerCache = new System.Windows.Forms.DataGridView();
-      this.ColumnCacheDatum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnHandle = new System.Windows.Forms.DataGridViewLinkColumn();
-      this.ColumnCommunityMoniker = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnEnlisted = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnUEECitizenRecord = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnOrganisation = new System.Windows.Forms.DataGridViewLinkColumn();
-      this.ColumnOrganisationRang = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnAnzahlAffiliationen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnRelation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ColumnKommentar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-      this.ButtonCacheLeeren = new System.Windows.Forms.Button();
-      this.ButtonSchliessen = new System.Windows.Forms.Button();
-      this.ButtonOrdnerOeffnen = new System.Windows.Forms.Button();
-      this.PanelInfo = new System.Windows.Forms.FlowLayoutPanel();
-      ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLokalerCache)).BeginInit();
-      this.SuspendLayout();
+      DataGridViewLokalerCache = new DataGridView();
+      ButtonCacheLeeren = new Button();
+      ButtonSchliessen = new Button();
+      ButtonOrdnerOeffnen = new Button();
+      PanelInfo = new FlowLayoutPanel();
+      ColumnCacheDatum = new DataGridViewTextBoxColumn();
+      ColumnHandle = new DataGridViewLinkColumn();
+      ColumnCommunityMoniker = new DataGridViewTextBoxColumn();
+      ColumnEnlisted = new DataGridViewTextBoxColumn();
+      ColumnUEECitizenRecord = new DataGridViewTextBoxColumn();
+      ColumnOrganisation = new DataGridViewLinkColumn();
+      ColumnOrganisationRang = new DataGridViewTextBoxColumn();
+      ColumnAnzahlAffiliationen = new DataGridViewTextBoxColumn();
+      ((System.ComponentModel.ISupportInitialize)DataGridViewLokalerCache).BeginInit();
+      SuspendLayout();
       // 
       // DataGridViewLokalerCache
       // 
-      this.DataGridViewLokalerCache.AllowUserToAddRows = false;
-      this.DataGridViewLokalerCache.AllowUserToDeleteRows = false;
-      this.DataGridViewLokalerCache.AllowUserToResizeColumns = false;
-      this.DataGridViewLokalerCache.AllowUserToResizeRows = false;
-      this.DataGridViewLokalerCache.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.DataGridViewLokalerCache.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-      this.DataGridViewLokalerCache.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-      this.DataGridViewLokalerCache.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.DataGridViewLokalerCache.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-      this.DataGridViewLokalerCache.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-      dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-      dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.DataGridViewLokalerCache.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-      this.DataGridViewLokalerCache.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-      this.DataGridViewLokalerCache.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnCacheDatum,
-            this.ColumnHandle,
-            this.ColumnCommunityMoniker,
-            this.ColumnEnlisted,
-            this.ColumnUEECitizenRecord,
-            this.ColumnOrganisation,
-            this.ColumnOrganisationRang,
-            this.ColumnAnzahlAffiliationen,
-            this.ColumnRelation,
-            this.ColumnKommentar});
-      dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-      dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-      dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-      this.DataGridViewLokalerCache.DefaultCellStyle = dataGridViewCellStyle2;
-      this.DataGridViewLokalerCache.EnableHeadersVisualStyles = false;
-      this.DataGridViewLokalerCache.Location = new System.Drawing.Point(12, 12);
-      this.DataGridViewLokalerCache.Name = "DataGridViewLokalerCache";
-      this.DataGridViewLokalerCache.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-      this.DataGridViewLokalerCache.RowHeadersVisible = false;
-      this.DataGridViewLokalerCache.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-      this.DataGridViewLokalerCache.RowTemplate.Height = 25;
-      this.DataGridViewLokalerCache.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-      this.DataGridViewLokalerCache.ShowEditingIcon = false;
-      this.DataGridViewLokalerCache.Size = new System.Drawing.Size(905, 293);
-      this.DataGridViewLokalerCache.TabIndex = 0;
-      this.DataGridViewLokalerCache.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewExport_CellContentClick);
-      this.DataGridViewLokalerCache.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DataGridViewLokalerCache_CellFormatting);
-      this.DataGridViewLokalerCache.SelectionChanged += new System.EventHandler(this.DataGridViewExport_SelectionChanged);
-      // 
-      // ColumnCacheDatum
-      // 
-      this.ColumnCacheDatum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnCacheDatum.Frozen = true;
-      this.ColumnCacheDatum.HeaderText = "Cache Datum";
-      this.ColumnCacheDatum.MinimumWidth = 74;
-      this.ColumnCacheDatum.Name = "ColumnCacheDatum";
-      this.ColumnCacheDatum.ReadOnly = true;
-      this.ColumnCacheDatum.Width = 105;
-      // 
-      // ColumnHandle
-      // 
-      this.ColumnHandle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnHandle.Frozen = true;
-      this.ColumnHandle.HeaderText = "Handle";
-      this.ColumnHandle.LinkColor = System.Drawing.Color.SteelBlue;
-      this.ColumnHandle.MinimumWidth = 74;
-      this.ColumnHandle.Name = "ColumnHandle";
-      this.ColumnHandle.ReadOnly = true;
-      this.ColumnHandle.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-      this.ColumnHandle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-      this.ColumnHandle.TrackVisitedState = false;
-      this.ColumnHandle.Width = 74;
-      // 
-      // ColumnCommunityMoniker
-      // 
-      this.ColumnCommunityMoniker.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnCommunityMoniker.HeaderText = "CM";
-      this.ColumnCommunityMoniker.Name = "ColumnCommunityMoniker";
-      this.ColumnCommunityMoniker.ReadOnly = true;
-      this.ColumnCommunityMoniker.Width = 49;
-      // 
-      // ColumnEnlisted
-      // 
-      this.ColumnEnlisted.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnEnlisted.HeaderText = "Angeworben";
-      this.ColumnEnlisted.Name = "ColumnEnlisted";
-      this.ColumnEnlisted.ReadOnly = true;
-      this.ColumnEnlisted.Width = 103;
-      // 
-      // ColumnUEECitizenRecord
-      // 
-      this.ColumnUEECitizenRecord.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnUEECitizenRecord.HeaderText = "UEE CR";
-      this.ColumnUEECitizenRecord.Name = "ColumnUEECitizenRecord";
-      this.ColumnUEECitizenRecord.ReadOnly = true;
-      this.ColumnUEECitizenRecord.Width = 70;
-      // 
-      // ColumnOrganisation
-      // 
-      this.ColumnOrganisation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnOrganisation.HeaderText = "Organisation";
-      this.ColumnOrganisation.LinkColor = System.Drawing.Color.SteelBlue;
-      this.ColumnOrganisation.MinimumWidth = 99;
-      this.ColumnOrganisation.Name = "ColumnOrganisation";
-      this.ColumnOrganisation.ReadOnly = true;
-      this.ColumnOrganisation.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-      this.ColumnOrganisation.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-      this.ColumnOrganisation.TrackVisitedState = false;
-      this.ColumnOrganisation.Width = 101;
-      // 
-      // ColumnOrganisationRang
-      // 
-      this.ColumnOrganisationRang.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnOrganisationRang.HeaderText = "Org. Rang";
-      this.ColumnOrganisationRang.Name = "ColumnOrganisationRang";
-      this.ColumnOrganisationRang.ReadOnly = true;
-      this.ColumnOrganisationRang.Width = 86;
-      // 
-      // ColumnAnzahlAffiliationen
-      // 
-      this.ColumnAnzahlAffiliationen.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnAnzahlAffiliationen.HeaderText = "Anz. Aff.";
-      this.ColumnAnzahlAffiliationen.Name = "ColumnAnzahlAffiliationen";
-      this.ColumnAnzahlAffiliationen.ReadOnly = true;
-      this.ColumnAnzahlAffiliationen.Width = 78;
-      // 
-      // ColumnRelation
-      // 
-      this.ColumnRelation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-      this.ColumnRelation.HeaderText = "Beziehung";
-      this.ColumnRelation.Name = "ColumnRelation";
-      this.ColumnRelation.ReadOnly = true;
-      this.ColumnRelation.Width = 90;
-      // 
-      // ColumnKommentar
-      // 
-      this.ColumnKommentar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-      this.ColumnKommentar.HeaderText = "Kommentar";
-      this.ColumnKommentar.MaxInputLength = 0;
-      this.ColumnKommentar.Name = "ColumnKommentar";
+      DataGridViewLokalerCache.AllowUserToAddRows = false;
+      DataGridViewLokalerCache.AllowUserToDeleteRows = false;
+      DataGridViewLokalerCache.AllowUserToResizeColumns = false;
+      DataGridViewLokalerCache.AllowUserToResizeRows = false;
+      DataGridViewLokalerCache.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      DataGridViewLokalerCache.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+      DataGridViewLokalerCache.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+      DataGridViewLokalerCache.BackgroundColor = Color.FromArgb(19, 26, 33);
+      DataGridViewLokalerCache.ClipboardCopyMode = DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
+      DataGridViewLokalerCache.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+      dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle1.BackColor = Color.FromArgb(19, 26, 33);
+      dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+      dataGridViewCellStyle1.ForeColor = Color.FromArgb(57, 206, 216);
+      dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(19, 26, 33);
+      dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(57, 206, 216);
+      dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+      DataGridViewLokalerCache.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+      DataGridViewLokalerCache.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+      DataGridViewLokalerCache.Columns.AddRange(new DataGridViewColumn[] { ColumnCacheDatum, ColumnHandle, ColumnCommunityMoniker, ColumnEnlisted, ColumnUEECitizenRecord, ColumnOrganisation, ColumnOrganisationRang, ColumnAnzahlAffiliationen });
+      dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+      dataGridViewCellStyle2.BackColor = Color.FromArgb(19, 26, 33);
+      dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
+      dataGridViewCellStyle2.ForeColor = Color.FromArgb(57, 206, 216);
+      dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(57, 206, 216);
+      dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(19, 26, 33);
+      dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+      DataGridViewLokalerCache.DefaultCellStyle = dataGridViewCellStyle2;
+      DataGridViewLokalerCache.EnableHeadersVisualStyles = false;
+      DataGridViewLokalerCache.Location = new Point(12, 12);
+      DataGridViewLokalerCache.Name = "DataGridViewLokalerCache";
+      DataGridViewLokalerCache.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+      DataGridViewLokalerCache.RowHeadersVisible = false;
+      DataGridViewLokalerCache.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+      DataGridViewLokalerCache.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+      DataGridViewLokalerCache.ShowEditingIcon = false;
+      DataGridViewLokalerCache.Size = new Size(905, 293);
+      DataGridViewLokalerCache.TabIndex = 0;
+      DataGridViewLokalerCache.CellContentClick += DataGridViewExport_CellContentClick;
+      DataGridViewLokalerCache.SelectionChanged += DataGridViewExport_SelectionChanged;
       // 
       // ButtonCacheLeeren
       // 
-      this.ButtonCacheLeeren.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.ButtonCacheLeeren.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.ButtonCacheLeeren.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonCacheLeeren.Location = new System.Drawing.Point(12, 397);
-      this.ButtonCacheLeeren.Name = "ButtonCacheLeeren";
-      this.ButtonCacheLeeren.Size = new System.Drawing.Size(91, 28);
-      this.ButtonCacheLeeren.TabIndex = 1;
-      this.ButtonCacheLeeren.Text = "Cache leeren";
-      this.ButtonCacheLeeren.UseVisualStyleBackColor = false;
-      this.ButtonCacheLeeren.Click += new System.EventHandler(this.ButtonCacheLeeren_Click);
+      ButtonCacheLeeren.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+      ButtonCacheLeeren.BackColor = Color.FromArgb(19, 26, 33);
+      ButtonCacheLeeren.FlatStyle = FlatStyle.Flat;
+      ButtonCacheLeeren.Location = new Point(12, 397);
+      ButtonCacheLeeren.Name = "ButtonCacheLeeren";
+      ButtonCacheLeeren.Size = new Size(91, 28);
+      ButtonCacheLeeren.TabIndex = 1;
+      ButtonCacheLeeren.Text = "Cache leeren";
+      ButtonCacheLeeren.UseVisualStyleBackColor = false;
+      ButtonCacheLeeren.Click += ButtonCacheLeeren_Click;
       // 
       // ButtonSchliessen
       // 
-      this.ButtonSchliessen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.ButtonSchliessen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.ButtonSchliessen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonSchliessen.Location = new System.Drawing.Point(216, 397);
-      this.ButtonSchliessen.Name = "ButtonSchliessen";
-      this.ButtonSchliessen.Size = new System.Drawing.Size(74, 28);
-      this.ButtonSchliessen.TabIndex = 3;
-      this.ButtonSchliessen.Text = "Schließen";
-      this.ButtonSchliessen.UseVisualStyleBackColor = false;
-      this.ButtonSchliessen.Click += new System.EventHandler(this.ButtonSchliessen_Click);
+      ButtonSchliessen.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+      ButtonSchliessen.BackColor = Color.FromArgb(19, 26, 33);
+      ButtonSchliessen.FlatStyle = FlatStyle.Flat;
+      ButtonSchliessen.Location = new Point(216, 397);
+      ButtonSchliessen.Name = "ButtonSchliessen";
+      ButtonSchliessen.Size = new Size(74, 28);
+      ButtonSchliessen.TabIndex = 3;
+      ButtonSchliessen.Text = "Schließen";
+      ButtonSchliessen.UseVisualStyleBackColor = false;
+      ButtonSchliessen.Click += ButtonSchliessen_Click;
       // 
       // ButtonOrdnerOeffnen
       // 
-      this.ButtonOrdnerOeffnen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-      this.ButtonOrdnerOeffnen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.ButtonOrdnerOeffnen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-      this.ButtonOrdnerOeffnen.Location = new System.Drawing.Point(109, 397);
-      this.ButtonOrdnerOeffnen.Name = "ButtonOrdnerOeffnen";
-      this.ButtonOrdnerOeffnen.Size = new System.Drawing.Size(101, 28);
-      this.ButtonOrdnerOeffnen.TabIndex = 2;
-      this.ButtonOrdnerOeffnen.Text = "Ordner öffnen";
-      this.ButtonOrdnerOeffnen.UseVisualStyleBackColor = false;
-      this.ButtonOrdnerOeffnen.Click += new System.EventHandler(this.ButtonOrdnerOeffnen_Click);
+      ButtonOrdnerOeffnen.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+      ButtonOrdnerOeffnen.BackColor = Color.FromArgb(19, 26, 33);
+      ButtonOrdnerOeffnen.FlatStyle = FlatStyle.Flat;
+      ButtonOrdnerOeffnen.Location = new Point(109, 397);
+      ButtonOrdnerOeffnen.Name = "ButtonOrdnerOeffnen";
+      ButtonOrdnerOeffnen.Size = new Size(101, 28);
+      ButtonOrdnerOeffnen.TabIndex = 2;
+      ButtonOrdnerOeffnen.Text = "Ordner öffnen";
+      ButtonOrdnerOeffnen.UseVisualStyleBackColor = false;
+      ButtonOrdnerOeffnen.Click += ButtonOrdnerOeffnen_Click;
       // 
       // PanelInfo
       // 
-      this.PanelInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-      this.PanelInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.PanelInfo.Location = new System.Drawing.Point(12, 308);
-      this.PanelInfo.Margin = new System.Windows.Forms.Padding(0);
-      this.PanelInfo.Name = "PanelInfo";
-      this.PanelInfo.Size = new System.Drawing.Size(905, 85);
-      this.PanelInfo.TabIndex = 4;
+      PanelInfo.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+      PanelInfo.BackColor = Color.FromArgb(19, 26, 33);
+      PanelInfo.Location = new Point(12, 308);
+      PanelInfo.Margin = new Padding(0);
+      PanelInfo.Name = "PanelInfo";
+      PanelInfo.Size = new Size(905, 85);
+      PanelInfo.TabIndex = 4;
+      // 
+      // ColumnCacheDatum
+      // 
+      ColumnCacheDatum.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+      ColumnCacheDatum.Frozen = true;
+      ColumnCacheDatum.HeaderText = "Cache Datum";
+      ColumnCacheDatum.MinimumWidth = 74;
+      ColumnCacheDatum.Name = "ColumnCacheDatum";
+      ColumnCacheDatum.ReadOnly = true;
+      ColumnCacheDatum.Width = 105;
+      // 
+      // ColumnHandle
+      // 
+      ColumnHandle.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+      ColumnHandle.Frozen = true;
+      ColumnHandle.HeaderText = "Handle";
+      ColumnHandle.LinkColor = Color.SteelBlue;
+      ColumnHandle.MinimumWidth = 74;
+      ColumnHandle.Name = "ColumnHandle";
+      ColumnHandle.ReadOnly = true;
+      ColumnHandle.Resizable = DataGridViewTriState.True;
+      ColumnHandle.SortMode = DataGridViewColumnSortMode.Automatic;
+      ColumnHandle.TrackVisitedState = false;
+      ColumnHandle.Width = 74;
+      // 
+      // ColumnCommunityMoniker
+      // 
+      ColumnCommunityMoniker.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+      ColumnCommunityMoniker.HeaderText = "CM";
+      ColumnCommunityMoniker.Name = "ColumnCommunityMoniker";
+      ColumnCommunityMoniker.ReadOnly = true;
+      ColumnCommunityMoniker.Width = 49;
+      // 
+      // ColumnEnlisted
+      // 
+      ColumnEnlisted.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+      ColumnEnlisted.HeaderText = "Angeworben";
+      ColumnEnlisted.Name = "ColumnEnlisted";
+      ColumnEnlisted.ReadOnly = true;
+      ColumnEnlisted.Width = 103;
+      // 
+      // ColumnUEECitizenRecord
+      // 
+      ColumnUEECitizenRecord.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+      ColumnUEECitizenRecord.HeaderText = "UEE CR";
+      ColumnUEECitizenRecord.Name = "ColumnUEECitizenRecord";
+      ColumnUEECitizenRecord.ReadOnly = true;
+      ColumnUEECitizenRecord.Width = 70;
+      // 
+      // ColumnOrganisation
+      // 
+      ColumnOrganisation.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+      ColumnOrganisation.HeaderText = "Organisation";
+      ColumnOrganisation.LinkColor = Color.SteelBlue;
+      ColumnOrganisation.MinimumWidth = 99;
+      ColumnOrganisation.Name = "ColumnOrganisation";
+      ColumnOrganisation.ReadOnly = true;
+      ColumnOrganisation.Resizable = DataGridViewTriState.True;
+      ColumnOrganisation.SortMode = DataGridViewColumnSortMode.Automatic;
+      ColumnOrganisation.TrackVisitedState = false;
+      ColumnOrganisation.Width = 101;
+      // 
+      // ColumnOrganisationRang
+      // 
+      ColumnOrganisationRang.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+      ColumnOrganisationRang.HeaderText = "Org. Rang";
+      ColumnOrganisationRang.Name = "ColumnOrganisationRang";
+      ColumnOrganisationRang.ReadOnly = true;
+      ColumnOrganisationRang.Width = 86;
+      // 
+      // ColumnAnzahlAffiliationen
+      // 
+      ColumnAnzahlAffiliationen.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+      ColumnAnzahlAffiliationen.HeaderText = "Anz. Aff.";
+      ColumnAnzahlAffiliationen.Name = "ColumnAnzahlAffiliationen";
+      ColumnAnzahlAffiliationen.ReadOnly = true;
       // 
       // FormLocalCache
       // 
-      this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-      this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(26)))), ((int)(((byte)(33)))));
-      this.CancelButton = this.ButtonSchliessen;
-      this.ClientSize = new System.Drawing.Size(929, 436);
-      this.Controls.Add(this.PanelInfo);
-      this.Controls.Add(this.ButtonOrdnerOeffnen);
-      this.Controls.Add(this.ButtonSchliessen);
-      this.Controls.Add(this.ButtonCacheLeeren);
-      this.Controls.Add(this.DataGridViewLokalerCache);
-      this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(206)))), ((int)(((byte)(216)))));
-      this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-      this.MinimumSize = new System.Drawing.Size(945, 475);
-      this.Name = "FormLocalCache";
-      this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-      this.Text = "Star Citizen Handle Query - Lokaler Cache";
-      this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormLocalCache_FormClosing);
-      this.Load += new System.EventHandler(this.FormExport_Load);
-      ((System.ComponentModel.ISupportInitialize)(this.DataGridViewLokalerCache)).EndInit();
-      this.ResumeLayout(false);
+      AutoScaleDimensions = new SizeF(7F, 15F);
+      AutoScaleMode = AutoScaleMode.Font;
+      BackColor = Color.FromArgb(19, 26, 33);
+      CancelButton = ButtonSchliessen;
+      ClientSize = new Size(929, 436);
+      Controls.Add(PanelInfo);
+      Controls.Add(ButtonOrdnerOeffnen);
+      Controls.Add(ButtonSchliessen);
+      Controls.Add(ButtonCacheLeeren);
+      Controls.Add(DataGridViewLokalerCache);
+      ForeColor = Color.FromArgb(57, 206, 216);
+      Icon = (Icon)resources.GetObject("$this.Icon");
+      MinimumSize = new Size(945, 475);
+      Name = "FormLocalCache";
+      StartPosition = FormStartPosition.CenterScreen;
+      Text = "Star Citizen Handle Query - Lokaler Cache";
+      FormClosing += FormLocalCache_FormClosing;
+      Load += FormExport_Load;
+      ((System.ComponentModel.ISupportInitialize)DataGridViewLokalerCache).EndInit();
+      ResumeLayout(false);
 
     }
 
@@ -283,7 +250,5 @@
     private DataGridViewLinkColumn ColumnOrganisation;
     private DataGridViewTextBoxColumn ColumnOrganisationRang;
     private DataGridViewTextBoxColumn ColumnAnzahlAffiliationen;
-    private DataGridViewTextBoxColumn ColumnRelation;
-    private DataGridViewTextBoxColumn ColumnKommentar;
   }
 }

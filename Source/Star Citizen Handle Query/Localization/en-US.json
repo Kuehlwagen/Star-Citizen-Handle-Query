@@ -15,9 +15,7 @@
       "Local_Cache": "Local cache",
       "Close": "Close",
       "About": "About",
-      "Check_For_Update": "Check for update",
-      "Export_Relations": "Export relations",
-      "Import_Relations": "Import relations"
+      "Check_For_Update": "Check for update"
     },
     "MessageBoxes": {
       "Clear_Local_Cache_Question": "Complete local cache will be cleared. Continue?",
@@ -43,10 +41,6 @@
       "Fore_Color_Inactive": "Foreground color inactive",
       "Back_Color": "Background color",
       "Splitter_Color": "Splitter color",
-      "Advanced": "Advanced",
-      "Status_Inactive": "Status inactive",
-      "Status_Initializing": "Status initializing",
-      "Status_Active": "Status active",
       "Theme_Translations": {
         "Nachmittag": "Afternoon",
         "Nacht": "Night",
@@ -69,54 +63,6 @@
       "Enable_Alt_Tab": "Enable Alt + Tab",
       "RememberWindowLocation": "Remember location",
       "HideWindowOnEscPress": "Hide window on ESC press"
-    },
-    "Locations": {
-      "Group_Title": "Locations (Alt + Enter)",
-      "Show_Locations": "Show Locations",
-      "Locations_Entries_Max": "Maximum entries:",
-      "LMB_URL": "Left Mouse Button:",
-      "MMB_URL": "Middle Mouse Button:",
-      "RMB_URL": "Right Mouse Button:"
-    },
-    "Relations": {
-      "Group_Title": "Relations",
-      "Show_Relations": "Show relations",
-      "Sort_Relations_Alphabetically": "Sort alphabetically",
-      "Relations_Entries_Max": "Maximum entries:",
-      "RPC_Server_URL": "gRPC Server URL:",
-      "RPC_Server_Channel": "gRPC Channel:",
-      "RPC_Channel_Password": "gRPC User/Password:",
-      "RPC_Sync_On_Startup": "gRPC Sync on Startup",
-      "RPC_Channels": {
-        "Title": "gRPC Channel Selection",
-        "Button_Load_Channels": "Load Channels",
-        "Channel_Name": "Channel Name",
-        "Button_OK": "OK",
-        "No_Channels_Found": "No channels found",
-        "Permissions": "Permissions",
-        "Permission_None": "None",
-        "Permission_Read": "Read",
-        "Permission_Write": "Write"
-      }
-    },
-    "Log_Monitor": {
-      "Group_Title": "Log Monitor",
-      "Show_Log_Monitor": "Show log monitor",
-      "Log_Entries_Max": "Maximum entries:",
-      "Log_Entry_Display_Duration": "Entry display duration:",
-      "Log_Entry_Display_Duration_Minutes": "Minute(s)",
-      "Log_Show_Corpse": "Show player deaths",
-      "Log_Show_Loading_Screen_Duration": "Show loading screen duration",
-      "Check_Complete_File": "Check complete file",
-      "Handle_Filter": "Handle filter:",
-      "Webhook_URL": "Webhook URL:",
-      "Show_NPC_Deaths": "Show NPC deaths",
-      "NPC_Filter": "NPC names:",
-      "Global_NPC_Names": "Global NPC names",
-      "Test_Webhook_URL": "Test",
-      "Log_Show_Hostility_Events": "Show hostility events",
-      "Log_Show_Own_Handle": "Own Handle",
-      "Log_Show_Vehicle_Destructions": "Show vehicle destructions"
     },
     "Local_Cache": {
       "Group_Title": "Local cache",
@@ -142,21 +88,12 @@
       "UEE_Citizen_Record": "UEE CR",
       "Organization": "Organization",
       "Organization_Rank": "Org. rank",
-      "Affiliation_Count": "Aff. count",
-      "Relation": "Relation",
-      "Comment": "Comment"
+      "Affiliation_Count": "Aff. count"
     },
     "Buttons": {
       "Clear_Cache": "Clear cache",
       "Open_Folder": "Open folder",
       "Close": "Close"
-    },
-    "Relation": {
-      "Not_Assigned": "",
-      "Friendly": "FRIENDLY",
-      "Neutral": "NEUTRAL",
-      "Bogey": "BOGEY",
-      "Bandit": "BANDIT"
     }
   },
   "Notification": {
@@ -165,41 +102,5 @@
     "Update_Info_Show_Release_Notes": "Click to show release notes",
     "Update_Up_To_Date": "Program is up to date",
     "Update_Error": "Error requesting update information"
-  },
-  "Log_Monitor": {
-    "Title": "Log Monitor",
-    "Webhook_Actor_Death": "Actor Death",
-    "Webhook_Killer": "Killer",
-    "Webhook_Using": "Using",
-    "Webhook_Damage_Type": "Damage Type",
-    "Webhook_Zone": "Zone",
-    "Loading_Screen": "Loading screen",
-    "Own_Handle_Is": "Own handle is",
-    "Actor_Death": "Actor death",
-    "Corpse": "Corpse",
-    "No_Corpse": "No Corpse",
-    "Hostility_Event": "Hostility event",
-    "Loading_Screen_Duration": "Loading screen duration",
-    "Own_Handle": "Own handle",
-    "Vehicle_Destruction": "Vehicle destruction",
-    "SELF_DESTRUCT": "SELF DESTRUCT",
-    "UNKNOWN": "UNKNOWN",
-    "NPC": "NPC",
-    "TURRET": "TURRET",
-    "HANGAR": "HANGAR",
-    "ITEM": "ITEM"
-  },
-  "Relations": {
-    "Title": "Relations",
-    "RPC_Status_Disconnected": "Disconnected - click to connect",
-    "RPC_Status_Connecting": "Connecting...",
-    "RPC_Status_Connected": "Connected - LMB to disconnect; MMB to load all relations",
-    "Clear": "Do you really want to clear all relations?"
-  },
-  "Locations": {
-    "Title": "Locations",
-    "Filter_Placeholder": "Filter Locations...",
-    "More_Location": "more location",
-    "More_Locations": "more locations..."
   }
 }

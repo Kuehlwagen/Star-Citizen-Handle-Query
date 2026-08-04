@@ -31,8 +31,6 @@
       LabelLocationFluency = new Label();
       LabelUEECitizenRecord = new Label();
       LabelEnlistedDate = new Label();
-      TextBoxAdditionalInformation = new TextBox();
-      LabelAdditionalInformation = new Label();
       PictureBoxLive = new PictureBox();
       LabelRelation = new Label();
       ((System.ComponentModel.ISupportInitialize)PictureBoxHandleAvatar).BeginInit();
@@ -81,10 +79,10 @@
       // 
       // LabelDisplayTitle
       // 
-      LabelDisplayTitle.AutoSize = true;
+      LabelDisplayTitle.AutoEllipsis = true;
       LabelDisplayTitle.Location = new Point(97, 40);
       LabelDisplayTitle.Name = "LabelDisplayTitle";
-      LabelDisplayTitle.Size = new Size(0, 15);
+      LabelDisplayTitle.Size = new Size(271, 16);
       LabelDisplayTitle.TabIndex = 4;
       // 
       // LabelLocationFluency
@@ -114,34 +112,6 @@
       LabelEnlistedDate.Size = new Size(91, 19);
       LabelEnlistedDate.TabIndex = 1;
       LabelEnlistedDate.TextAlign = ContentAlignment.TopRight;
-      // 
-      // TextBoxAdditionalInformation
-      // 
-      TextBoxAdditionalInformation.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      TextBoxAdditionalInformation.BackColor = Color.FromArgb(19, 26, 33);
-      TextBoxAdditionalInformation.BorderStyle = BorderStyle.None;
-      TextBoxAdditionalInformation.ForeColor = Color.Khaki;
-      TextBoxAdditionalInformation.Location = new Point(230, 40);
-      TextBoxAdditionalInformation.MaxLength = 0;
-      TextBoxAdditionalInformation.Name = "TextBoxAdditionalInformation";
-      TextBoxAdditionalInformation.Size = new Size(138, 16);
-      TextBoxAdditionalInformation.TabIndex = 12;
-      TextBoxAdditionalInformation.TextAlign = HorizontalAlignment.Right;
-      TextBoxAdditionalInformation.Visible = false;
-      TextBoxAdditionalInformation.KeyDown += TextBoxAdditionalInformation_KeyDown;
-      TextBoxAdditionalInformation.Leave += TextBoxAdditionalInformation_Leave;
-      // 
-      // LabelAdditionalInformation
-      // 
-      LabelAdditionalInformation.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      LabelAdditionalInformation.Cursor = Cursors.IBeam;
-      LabelAdditionalInformation.ForeColor = Color.Khaki;
-      LabelAdditionalInformation.Location = new Point(230, 40);
-      LabelAdditionalInformation.Name = "LabelAdditionalInformation";
-      LabelAdditionalInformation.Size = new Size(142, 19);
-      LabelAdditionalInformation.TabIndex = 1;
-      LabelAdditionalInformation.TextAlign = ContentAlignment.TopRight;
-      LabelAdditionalInformation.Click += LabelAdditionalInformation_Click;
       // 
       // PictureBoxLive
       // 
@@ -177,8 +147,6 @@
       BackColor = Color.FromArgb(19, 26, 33);
       Controls.Add(LabelRelation);
       Controls.Add(PictureBoxLive);
-      Controls.Add(TextBoxAdditionalInformation);
-      Controls.Add(LabelAdditionalInformation);
       Controls.Add(LabelUEECitizenRecord);
       Controls.Add(LabelLocationFluency);
       Controls.Add(LabelDisplayTitle);
@@ -209,8 +177,6 @@
     internal PictureBox PictureBoxDisplayTitle;
     private Label LabelUEECitizenRecord;
     private Label LabelEnlistedDate;
-    private TextBox TextBoxAdditionalInformation;
-    private Label LabelAdditionalInformation;
         private PictureBox PictureBoxLive;
     private Label LabelRelation;
   }

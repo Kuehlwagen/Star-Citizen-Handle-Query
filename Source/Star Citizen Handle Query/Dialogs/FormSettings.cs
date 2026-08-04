@@ -21,9 +21,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
     private readonly bool LoadingFinished = false;
     private const string ThemesResourcePrefix = "Star_Citizen_Handle_Query.Themes.";
     private readonly SortedDictionary<string, AppColors> AppColorThemes = [];
-    private static readonly Regex RgxDiscordWebhookUrl = RegexDiscordWebhookUrl();
-    [GeneratedRegex(@"^https:\/\/discord.com\/api\/webhooks\/\d+\/[a-zA-Z0-9_-]+$", RegexOptions.Compiled)]
-    private static partial Regex RegexDiscordWebhookUrl();
 
     public FormSettings(Settings settings = null) {
       InitializeComponent();
@@ -39,12 +36,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
       // Kopie der Einstellungen erstellen
       ProgramSettings = settings != null ? (Settings)settings.Clone() : null;
-      if (ProgramSettings != null) {
-        ProgramSettings.LogMonitor = settings?.LogMonitor != null ? (LogMonitorSettings)settings.LogMonitor.Clone() : null;
-        ProgramSettings.Locations = settings?.Locations != null ? (LocationsSettings)settings.Locations.Clone() : null;
-        ProgramSettings.Relations = settings?.Locations != null ? (RelationsSettings)settings.Relations.Clone() : null;
-        ProgramSettings.Colors = settings?.Colors != null ? (AppColors)settings.Colors.Clone() : null;
-      }
+      ProgramSettings?.Colors = settings?.Colors != null ? (AppColors)settings.Colors.Clone() : null;
 
       if (ProgramSettings == null) {
         // Versuchen die Einstellungen aus der Einstellungen-Datei zu laden
@@ -66,9 +58,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         ToolTipSettings.ForeColor = ProgramSettings.Colors.AppForeColor;
         GroupBoxAnzeige.ForeColor = ProgramSettings.Colors.AppForeColor;
         GroupBoxFenster.ForeColor = ProgramSettings.Colors.AppForeColor;
-        GroupBoxBeziehungen.ForeColor = ProgramSettings.Colors.AppForeColor;
-        GroupBoxLocation.ForeColor = ProgramSettings.Colors.AppForeColor;
-        GroupBoxLogMonitor.ForeColor = ProgramSettings.Colors.AppForeColor;
         GroupBoxLokalerCache.ForeColor = ProgramSettings.Colors.AppForeColor;
         ComboBoxSprache.BackColor = ProgramSettings.Colors.AppBackColor;
         ComboBoxSprache.ForeColor = ProgramSettings.Colors.AppForeColor;
@@ -80,58 +69,14 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         ComboBoxTaste.ForeColor = ProgramSettings.Colors.AppForeColor;
         NumericUpDownLokalerCacheAlter.BackColor = ProgramSettings.Colors.AppBackColor;
         NumericUpDownLokalerCacheAlter.ForeColor = ProgramSettings.Colors.AppForeColor;
-        NumericUpDownOrteEintraegeMaximum.BackColor = ProgramSettings.Colors.AppBackColor;
-        NumericUpDownOrteEintraegeMaximum.ForeColor = ProgramSettings.Colors.AppForeColor;
-        TextBoxLMB_URL.BackColor = ProgramSettings.Colors.AppForeColor;
-        TextBoxLMB_URL.ForeColor = ProgramSettings.Colors.AppBackColor;
-        TextBoxMMB_URL.BackColor = ProgramSettings.Colors.AppForeColor;
-        TextBoxMMB_URL.ForeColor = ProgramSettings.Colors.AppBackColor;
-        TextBoxRMB_URL.BackColor = ProgramSettings.Colors.AppForeColor;
-        TextBoxRMB_URL.ForeColor = ProgramSettings.Colors.AppBackColor;
-        NumericUpDownRelationsEntriesMaximum.BackColor = ProgramSettings.Colors.AppBackColor;
-        NumericUpDownRelationsEntriesMaximum.ForeColor = ProgramSettings.Colors.AppForeColor;
-        TextBoxGRPCURL.BackColor = ProgramSettings.Colors.AppForeColor;
-        TextBoxGRPCURL.ForeColor = ProgramSettings.Colors.AppBackColor;
-        TextBoxGRPCChannel.BackColor = ProgramSettings.Colors.AppForeColor;
-        TextBoxGRPCChannel.ForeColor = ProgramSettings.Colors.AppBackColor;
-        TextBoxGRPCChannelUser.BackColor = ProgramSettings.Colors.AppForeColor;
-        TextBoxGRPCChannelUser.ForeColor = ProgramSettings.Colors.AppBackColor;
-        TextBoxGRPCChannelPassword.BackColor = ProgramSettings.Colors.AppForeColor;
-        TextBoxGRPCChannelPassword.ForeColor = ProgramSettings.Colors.AppBackColor;
-        NumericUpDownLogEintraegeMaximum.BackColor = ProgramSettings.Colors.AppBackColor;
-        NumericUpDownLogEintraegeMaximum.ForeColor = ProgramSettings.Colors.AppForeColor;
-        NumericUpDownLogEintragAnzeigedauer.BackColor = ProgramSettings.Colors.AppBackColor;
-        NumericUpDownLogEintragAnzeigedauer.ForeColor = ProgramSettings.Colors.AppForeColor;
         NumericUpDownErgebnisAutomatischLeeren.BackColor = ProgramSettings.Colors.AppBackColor;
         NumericUpDownErgebnisAutomatischLeeren.ForeColor = ProgramSettings.Colors.AppForeColor;
         ButtonForeColor.BackColor = ProgramSettings.Colors.AppForeColor;
         ButtonForeColorInactive.BackColor = ProgramSettings.Colors.AppForeColorInactive;
         ButtonBackColor.BackColor = ProgramSettings.Colors.AppBackColor;
         ButtonSplitterColor.BackColor = ProgramSettings.Colors.AppSplitterColor;
-        ButtonStatusInactiveForeColor.BackColor = ProgramSettings.Colors.AppStatusInactiveForeColor;
-        ButtonStatusInactiveBackColor.BackColor = ProgramSettings.Colors.AppStatusInactiveBackColor;
-        ButtonStatusInitializingForeColor.BackColor = ProgramSettings.Colors.AppStatusInitializingForeColor;
-        ButtonStatusInitializingBackColor.BackColor = ProgramSettings.Colors.AppStatusInitializingBackColor;
-        ButtonStatusActiveForeColor.BackColor = ProgramSettings.Colors.AppStatusActiveForeColor;
-        ButtonStatusActiveBackColor.BackColor = ProgramSettings.Colors.AppStatusActiveBackColor;
-        ButtonRelationFriendlyForeColor.BackColor = ProgramSettings.Colors.AppRelationFriendlyForeColor;
-        ButtonRelationFriendlyBackColor.BackColor = ProgramSettings.Colors.AppRelationFriendlyBackColor;
-        ButtonRelationNeutralForeColor.BackColor = ProgramSettings.Colors.AppRelationNeutralForeColor;
-        ButtonRelationNeutralBackColor.BackColor = ProgramSettings.Colors.AppRelationNeutralBackColor;
-        ButtonRelationBogeyForeColor.BackColor = ProgramSettings.Colors.AppRelationBogeyForeColor;
-        ButtonRelationBogeyBackColor.BackColor = ProgramSettings.Colors.AppRelationBogeyBackColor;
-        ButtonRelationBanditForeColor.BackColor = ProgramSettings.Colors.AppRelationBanditForeColor;
-        ButtonRelationBanditBackColor.BackColor = ProgramSettings.Colors.AppRelationBanditBackColor;
-        ButtonRelationOrganizationForeColor.BackColor = ProgramSettings.Colors.AppRelationOrganizationForeColor;
-        ButtonRelationOrganizationBackColor.BackColor = ProgramSettings.Colors.AppRelationOrganizationBackColor;
-        TextBoxLogMonitorHandleFilter.BackColor = ProgramSettings.Colors.AppForeColor;
-        TextBoxLogMonitorHandleFilter.ForeColor = ProgramSettings.Colors.AppBackColor;
         ComboBoxColorThemes.BackColor = ProgramSettings.Colors.AppBackColor;
         ComboBoxColorThemes.ForeColor = ProgramSettings.Colors.AppForeColor;
-        TextBoxWebhookURL.BackColor = ProgramSettings.Colors.AppForeColor;
-        TextBoxWebhookURL.ForeColor = ProgramSettings.Colors.AppBackColor;
-        TextBoxNPCNamen.BackColor = ProgramSettings.Colors.AppForeColor;
-        TextBoxNPCNamen.ForeColor = ProgramSettings.Colors.AppBackColor;
       }
 
       // Einstellungen auf den Dialog übernehmen
@@ -204,53 +149,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       NumericUpDownErgebnisAutomatischLeeren.Value = ProgramSettings.AutoCloseDuration;
       CheckBoxFensterAusblenden.Checked = ProgramSettings.AutoCloseHideWindows;
       CheckBoxHideStreamLiveStatus.Checked = ProgramSettings.HideStreamLiveStatus;
-      CheckBoxShowLog.Checked = ProgramSettings.LogMonitor.ShowWindow;
-      NumericUpDownLogEintraegeMaximum.Value = ProgramSettings.LogMonitor.EntriesMax;
-      NumericUpDownLogEintragAnzeigedauer.Value = ProgramSettings.LogMonitor.EntryDisplayDurationInMinutes;
-      CheckBoxLogMonitorFilterCorpse.Checked = ProgramSettings.LogMonitor.Filter.Corpse;
-      CheckBoxLogMonitorFilterLoadingScreenDuration.Checked = ProgramSettings.LogMonitor.Filter.LoadingScreenDuration;
-      CheckBoxCheckCompleteFile.Checked = ProgramSettings.LogMonitor.LoadCompleteFile;
-      CheckBoxShowRelations.Checked = ProgramSettings.Relations.ShowWindow;
-      CheckBoxSortRelationsAlphabetically.Checked = ProgramSettings.Relations.SortAlphabetically;
-      NumericUpDownRelationsEntriesMaximum.Value = ProgramSettings.Relations.EntriesMax;
-      CheckBoxShowLocations.Checked = ProgramSettings.Locations.ShowWindow;
-      NumericUpDownOrteEintraegeMaximum.Value = ProgramSettings.Locations.EntriesMax;
-      TextBoxLMB_URL.Text = ProgramSettings.Locations.LMB_URL;
-      TextBoxMMB_URL.Text = ProgramSettings.Locations.MMB_URL;
-      TextBoxRMB_URL.Text = ProgramSettings.Locations.RMB_URL;
-      TextBoxGRPCURL.Text = ProgramSettings.Relations.RPC_URL;
-      TextBoxGRPCChannel.Text = ProgramSettings.Relations.RPC_Channel;
-      CheckBoxRPCSyncOnStartup.Checked = ProgramSettings.Relations.RPC_Sync_On_Startup;
-      TextBoxGRPCChannelUser.Text = ProgramSettings.Relations.RPC_Channel_Username;
-      TextBoxGRPCChannelPassword.Text = ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted;
       ButtonForeColor.BackColor = ProgramSettings.Colors.AppForeColor;
       ButtonForeColorInactive.BackColor = ProgramSettings.Colors.AppForeColorInactive;
       ButtonBackColor.BackColor = ProgramSettings.Colors.AppBackColor;
       ButtonSplitterColor.BackColor = ProgramSettings.Colors.AppSplitterColor;
-      ButtonStatusInactiveForeColor.BackColor = ProgramSettings.Colors.AppStatusInactiveForeColor;
-      ButtonStatusInactiveBackColor.BackColor = ProgramSettings.Colors.AppStatusInactiveBackColor;
-      ButtonStatusInitializingForeColor.BackColor = ProgramSettings.Colors.AppStatusInitializingForeColor;
-      ButtonStatusInitializingBackColor.BackColor = ProgramSettings.Colors.AppStatusInitializingBackColor;
-      ButtonStatusActiveForeColor.BackColor = ProgramSettings.Colors.AppStatusActiveForeColor;
-      ButtonStatusActiveBackColor.BackColor = ProgramSettings.Colors.AppStatusActiveBackColor;
-      ButtonRelationFriendlyForeColor.BackColor = ProgramSettings.Colors.AppRelationFriendlyForeColor;
-      ButtonRelationFriendlyBackColor.BackColor = ProgramSettings.Colors.AppRelationFriendlyBackColor;
-      ButtonRelationNeutralForeColor.BackColor = ProgramSettings.Colors.AppRelationNeutralForeColor;
-      ButtonRelationNeutralBackColor.BackColor = ProgramSettings.Colors.AppRelationNeutralBackColor;
-      ButtonRelationBogeyForeColor.BackColor = ProgramSettings.Colors.AppRelationBogeyForeColor;
-      ButtonRelationBogeyBackColor.BackColor = ProgramSettings.Colors.AppRelationBogeyBackColor;
-      ButtonRelationBanditForeColor.BackColor = ProgramSettings.Colors.AppRelationBanditForeColor;
-      ButtonRelationBanditBackColor.BackColor = ProgramSettings.Colors.AppRelationBanditBackColor;
-      ButtonRelationOrganizationForeColor.BackColor = ProgramSettings.Colors.AppRelationOrganizationForeColor;
-      ButtonRelationOrganizationBackColor.BackColor = ProgramSettings.Colors.AppRelationOrganizationBackColor;
-      TextBoxLogMonitorHandleFilter.Text = string.Join(',', ProgramSettings.LogMonitor.HandleFilter);
-      TextBoxWebhookURL.Text = ProgramSettings.LogMonitor.WebhookURL;
-      CheckBoxNPCTodeAnzeigen.Checked = ProgramSettings.LogMonitor.Show_NPC_Deaths;
-      TextBoxNPCNamen.Text = string.Join(',', ProgramSettings.LogMonitor.NPC_Filter);
-      CheckBoxLogMonitorShowHostilityEvents.Checked = ProgramSettings.LogMonitor.Filter.Hostility_Events;
-      CheckBoxOwnHandle.Checked = ProgramSettings.LogMonitor.Filter.Own_Handle;
       CheckBoxCompactMode.Checked = ProgramSettings.CompactMode;
-      CheckBoxVehicleDestruction.Checked = ProgramSettings.LogMonitor.Filter.Vehicle_Destruction;
     }
 
     private void GetLocalizations() {
@@ -315,10 +218,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.GlobalHotkeyModifierShift = (sender as CheckBox).Checked;
     }
 
-    private void CheckBoxRPCSyncOnStartup_CheckedChanged(object sender, EventArgs e) {
-      ProgramSettings.Relations.RPC_Sync_On_Startup = (sender as CheckBox).Checked;
-    }
-
     private void ComboBoxTaste_SelectedIndexChanged(object sender, EventArgs e) {
       ProgramSettings.GlobalHotkey = Enum.Parse<Keys>($"{(sender as ComboBox).SelectedItem}");
       CheckBoxStrg.Enabled = ProgramSettings.GlobalHotkey != Keys.None;
@@ -357,57 +256,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.AutoCheckForUpdate = (sender as CheckBox).Checked;
     }
 
-    private void CheckBoxShowLog_CheckedChanged(object sender, EventArgs e) {
-      ProgramSettings.LogMonitor.ShowWindow = CheckBoxShowLog.Checked;
-      NumericUpDownLogEintraegeMaximum.Enabled = CheckBoxShowLog.Checked;
-      NumericUpDownLogEintragAnzeigedauer.Enabled = CheckBoxShowLog.Checked;
-      CheckBoxLogMonitorFilterCorpse.Enabled = CheckBoxShowLog.Checked;
-      CheckBoxLogMonitorFilterLoadingScreenDuration.Enabled = CheckBoxShowLog.Checked;
-      CheckBoxCheckCompleteFile.Enabled = CheckBoxShowLog.Checked;
-      TextBoxLogMonitorHandleFilter.Enabled = CheckBoxShowLog.Checked;
-      TextBoxWebhookURL.Enabled = CheckBoxShowLog.Checked;
-      CheckBoxNPCTodeAnzeigen.Enabled = CheckBoxShowLog.Checked;
-      TextBoxNPCNamen.Enabled = CheckBoxShowLog.Checked;
-      ButtonWebhookTest.Enabled = CheckBoxShowLog.Checked && IsValidDiscordWebhookUrl(ProgramSettings.LogMonitor.WebhookURL);
-      CheckBoxLogMonitorShowHostilityEvents.Enabled = CheckBoxShowLog.Checked;
-      CheckBoxOwnHandle.Enabled = CheckBoxShowLog.Checked;
-    }
-
-    private void NumericUpDownLogEintraegeMaximum_ValueChanged(object sender, EventArgs e) {
-      ProgramSettings.LogMonitor.EntriesMax = Convert.ToInt32(NumericUpDownLogEintraegeMaximum.Value);
-    }
-
-    private void NumericUpDownLogEintragAnzeigedauer_ValueChanged(object sender, EventArgs e) {
-      ProgramSettings.LogMonitor.EntryDisplayDurationInMinutes = Convert.ToInt32(NumericUpDownLogEintragAnzeigedauer.Value);
-    }
-
-    private void CheckBoxLogMonitorFilterCorpse_CheckedChanged(object sender, EventArgs e) {
-      ProgramSettings.LogMonitor.Filter.Corpse = CheckBoxLogMonitorFilterCorpse.Checked;
-    }
-
-    private void CheckBoxLogMonitorFilterLoadingScreenDuration_CheckedChanged(object sender, EventArgs e) {
-      ProgramSettings.LogMonitor.Filter.LoadingScreenDuration = CheckBoxLogMonitorFilterLoadingScreenDuration.Checked;
-    }
-
-    private void CheckBoxCheckCompleteFile_CheckedChanged(object sender, EventArgs e) {
-      ProgramSettings.LogMonitor.LoadCompleteFile = CheckBoxCheckCompleteFile.Checked;
-    }
-
-    private void CheckBoxShowRelations_CheckedChanged(object sender, EventArgs e) {
-      ProgramSettings.Relations.ShowWindow = CheckBoxShowRelations.Checked;
-      CheckBoxSortRelationsAlphabetically.Enabled = CheckBoxShowRelations.Checked;
-      NumericUpDownRelationsEntriesMaximum.Enabled = CheckBoxShowRelations.Checked;
-      TextBoxGRPCURL.Enabled = CheckBoxShowRelations.Checked;
-      TextBoxGRPCChannel.Enabled = CheckBoxShowRelations.Checked;
-      ButtonEditPrcChannels.Enabled = CheckBoxShowRelations.Checked;
-      TextBoxGRPCChannelPassword.Enabled = CheckBoxShowRelations.Checked;
-      CheckBoxRPCSyncOnStartup.Enabled = CheckBoxShowRelations.Checked;
-    }
-
-    private void CheckBoxSortRelationsAlphabetically_CheckedChanged(object sender, EventArgs e) {
-      ProgramSettings.Relations.SortAlphabetically = CheckBoxSortRelationsAlphabetically.Checked;
-    }
-
     private void CheckBoxDpiUnaware_CheckedChanged(object sender, EventArgs e) {
       ProgramSettings.DpiUnaware = CheckBoxDpiUnaware.Checked;
     }
@@ -416,56 +264,8 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ProgramSettings.AutoCloseHideWindows = CheckBoxFensterAusblenden.Checked;
     }
 
-    private void CheckBoxNPCTodeAnzeigen_CheckedChanged(object sender, EventArgs e) {
-      ProgramSettings.LogMonitor.Show_NPC_Deaths = CheckBoxNPCTodeAnzeigen.Checked;
-    }
-
-    private void CheckBoxLogMonitorShowHostilityEvents_CheckedChanged(object sender, EventArgs e) {
-      ProgramSettings.LogMonitor.Filter.Hostility_Events = CheckBoxLogMonitorShowHostilityEvents.Checked;
-    }
-
-    private void CheckBoxOwnHandle_CheckedChanged(object sender, EventArgs e) {
-      ProgramSettings.LogMonitor.Filter.Own_Handle = CheckBoxOwnHandle.Checked;
-    }
-
     private void CheckBoxCompactMode_CheckedChanged(object sender, EventArgs e) {
       ProgramSettings.CompactMode = CheckBoxCompactMode.Checked;
-    }
-
-    private void CheckBoxVehicleDestruction_CheckedChanged(object sender, EventArgs e) {
-      ProgramSettings.LogMonitor.Filter.Vehicle_Destruction = CheckBoxVehicleDestruction.Checked;
-    }
-
-    private void NumericUpDownRelationsEntriesMaximum_ValueChanged(object sender, EventArgs e) {
-      ProgramSettings.Relations.EntriesMax = Convert.ToInt32(NumericUpDownRelationsEntriesMaximum.Value);
-    }
-
-    private void TextBoxLMB_URL_TextChanged(object sender, EventArgs e) {
-      ProgramSettings.Locations.LMB_URL = TextBoxLMB_URL.Text;
-    }
-
-    private void TextBoxMMB_URL_TextChanged(object sender, EventArgs e) {
-      ProgramSettings.Locations.MMB_URL = TextBoxMMB_URL.Text;
-    }
-
-    private void TextBoxRMB_URL_TextChanged(object sender, EventArgs e) {
-      ProgramSettings.Locations.RMB_URL = TextBoxRMB_URL.Text;
-    }
-
-    private void TextBoxGRPCURL_TextChanged(object sender, EventArgs e) {
-      ProgramSettings.Relations.RPC_URL = TextBoxGRPCURL.Text;
-    }
-
-    private void TextBoxGRPCChannel_TextChanged(object sender, EventArgs e) {
-      ProgramSettings.Relations.RPC_Channel = TextBoxGRPCChannel.Text;
-    }
-
-    private void MaskedTextBoxGRPCKanalBenutzer_TextChanged(object sender, EventArgs e) {
-      ProgramSettings.Relations.RPC_Channel_Username = TextBoxGRPCChannelUser.Text;
-    }
-
-    private void MaskedTextBoxGRPCKanalPasswort_TextChanged(object sender, EventArgs e) {
-      ProgramSettings.Relations.RPC_Sync_Channel_Password_Decrypted = TextBoxGRPCChannelPassword.Text;
     }
 
     private void ButtonStandard_Click(object sender, EventArgs e) {
@@ -491,28 +291,11 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckBoxCompactMode.Text = CurrentLocalization.Settings.Display.Compact_Mode;
       LabelFarben.Text = CurrentLocalization.Settings.Display.Colors;
       ButtonFarbenStandard.Text = CurrentLocalization.Settings.Buttons.Standard;
-      CheckBoxErweitert.Text = CurrentLocalization.Settings.Display.Advanced;
       ButtonFarbenStandard.Text = CurrentLocalization.Settings.Display.Default_Colors;
       SetToolTip(ButtonForeColor, CurrentLocalization.Settings.Display.Fore_Color);
       SetToolTip(ButtonForeColorInactive, CurrentLocalization.Settings.Display.Fore_Color_Inactive);
       SetToolTip(ButtonBackColor, CurrentLocalization.Settings.Display.Back_Color);
       SetToolTip(ButtonSplitterColor, CurrentLocalization.Settings.Display.Splitter_Color);
-      SetToolTip(ButtonStatusInactiveForeColor, $"{CurrentLocalization.Settings.Display.Status_Inactive} ({CurrentLocalization.Settings.Display.Fore_Color})");
-      SetToolTip(ButtonStatusInactiveBackColor, $"{CurrentLocalization.Settings.Display.Status_Inactive} ({CurrentLocalization.Settings.Display.Back_Color})");
-      SetToolTip(ButtonStatusInitializingForeColor, $"{CurrentLocalization.Settings.Display.Status_Initializing} ({CurrentLocalization.Settings.Display.Fore_Color})");
-      SetToolTip(ButtonStatusInitializingBackColor, $"{CurrentLocalization.Settings.Display.Status_Initializing} ({CurrentLocalization.Settings.Display.Back_Color})");
-      SetToolTip(ButtonStatusActiveForeColor, $"{CurrentLocalization.Settings.Display.Status_Active} ({CurrentLocalization.Settings.Display.Fore_Color})");
-      SetToolTip(ButtonStatusActiveBackColor, $"{CurrentLocalization.Settings.Display.Status_Active} ({CurrentLocalization.Settings.Display.Back_Color})");
-      SetToolTip(ButtonRelationFriendlyForeColor, $"{CurrentLocalization.Local_Cache.Relation.Friendly} ({CurrentLocalization.Settings.Display.Fore_Color})");
-      SetToolTip(ButtonRelationFriendlyBackColor, $"{CurrentLocalization.Local_Cache.Relation.Friendly} ({CurrentLocalization.Settings.Display.Back_Color})");
-      SetToolTip(ButtonRelationNeutralForeColor, $"{CurrentLocalization.Local_Cache.Relation.Neutral} ({CurrentLocalization.Settings.Display.Fore_Color})");
-      SetToolTip(ButtonRelationNeutralBackColor, $"{CurrentLocalization.Local_Cache.Relation.Neutral} ({CurrentLocalization.Settings.Display.Back_Color})");
-      SetToolTip(ButtonRelationBogeyForeColor, $"{CurrentLocalization.Local_Cache.Relation.Bogey} ({CurrentLocalization.Settings.Display.Fore_Color})");
-      SetToolTip(ButtonRelationBogeyBackColor, $"{CurrentLocalization.Local_Cache.Relation.Bogey} ({CurrentLocalization.Settings.Display.Back_Color})");
-      SetToolTip(ButtonRelationBanditForeColor, $"{CurrentLocalization.Local_Cache.Relation.Bandit} ({CurrentLocalization.Settings.Display.Fore_Color})");
-      SetToolTip(ButtonRelationBanditBackColor, $"{CurrentLocalization.Local_Cache.Relation.Bandit} ({CurrentLocalization.Settings.Display.Back_Color})");
-      SetToolTip(ButtonRelationOrganizationForeColor, $"{CurrentLocalization.Local_Cache.Columns.Organization.ToUpper()} ({CurrentLocalization.Settings.Display.Fore_Color})");
-      SetToolTip(ButtonRelationOrganizationBackColor, $"{CurrentLocalization.Local_Cache.Columns.Organization.ToUpper()} ({CurrentLocalization.Settings.Display.Back_Color})");
 
       GroupBoxFenster.Text = CurrentLocalization.Settings.Window.Group_Title;
       LabelFensterDeckkraft.Text = CurrentLocalization.Settings.Window.Opacity;
@@ -534,63 +317,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ButtonSchliessen.Text = CurrentLocalization.Settings.Buttons.Close;
       ButtonStandard.Text = CurrentLocalization.Settings.Buttons.Standard;
 
-      GroupBoxLocation.Text = CurrentLocalization.Settings.Locations.Group_Title;
-      CheckBoxShowLocations.Text = CurrentLocalization.Settings.Locations.Show_Locations;
-      LabelOrteEintraegeMaximum.Text = CurrentLocalization.Settings.Locations.Locations_Entries_Max;
-      LabelLMB_URL.Text = CurrentLocalization.Settings.Locations.LMB_URL;
-      LabelMMB_URL.Text = CurrentLocalization.Settings.Locations.MMB_URL;
-      LabelRMB_URL.Text = CurrentLocalization.Settings.Locations.RMB_URL;
-
-      GroupBoxBeziehungen.Text = CurrentLocalization.Settings.Relations.Group_Title;
-      CheckBoxShowRelations.Text = CurrentLocalization.Settings.Relations.Show_Relations;
-      CheckBoxSortRelationsAlphabetically.Text = CurrentLocalization.Settings.Relations.Sort_Relations_Alphabetically;
-      LabelRelationsEntriesMaximum.Text = CurrentLocalization.Settings.Relations.Relations_Entries_Max;
-      LabelGRPCURL.Text = CurrentLocalization.Settings.Relations.RPC_Server_URL;
-      LabelGRPCChannel.Text = CurrentLocalization.Settings.Relations.RPC_Server_Channel;
-      LabelGRPCKanalPasswort.Text = CurrentLocalization.Settings.Relations.RPC_Channel_Password;
-      CheckBoxRPCSyncOnStartup.Text = CurrentLocalization.Settings.Relations.RPC_Sync_On_Startup;
-
-      GroupBoxLogMonitor.Text = CurrentLocalization.Settings.Log_Monitor.Group_Title;
-      CheckBoxShowLog.Text = CurrentLocalization.Settings.Log_Monitor.Show_Log_Monitor;
-      LabelLogEintraegeMaximum.Text = CurrentLocalization.Settings.Log_Monitor.Log_Entries_Max;
-      LabelLogEintragAnzeigeDauer.Text = CurrentLocalization.Settings.Log_Monitor.Log_Entry_Display_Duration;
-      LabelLogEintragAnzeigedauerMinuten.Text = CurrentLocalization.Settings.Log_Monitor.Log_Entry_Display_Duration_Minutes;
-      CheckBoxLogMonitorFilterCorpse.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Corpse;
-      CheckBoxLogMonitorFilterLoadingScreenDuration.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Loading_Screen_Duration;
-      CheckBoxCheckCompleteFile.Text = CurrentLocalization.Settings.Log_Monitor.Check_Complete_File;
-      LabelLogMonitorHandleFilter.Text = CurrentLocalization.Settings.Log_Monitor.Handle_Filter;
-      LabelWebhookURL.Text = CurrentLocalization.Settings.Log_Monitor.Webhook_URL;
-      CheckBoxNPCTodeAnzeigen.Text = CurrentLocalization.Settings.Log_Monitor.Show_NPC_Deaths;
-      LabelNPCNamen.Text = CurrentLocalization.Settings.Log_Monitor.NPC_Filter;
-      ButtonWebhookTest.Text = CurrentLocalization.Settings.Log_Monitor.Test_Webhook_URL;
-      CheckBoxLogMonitorShowHostilityEvents.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Hostility_Events;
-      CheckBoxOwnHandle.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Own_Handle;
-      CheckBoxVehicleDestruction.Text = CurrentLocalization.Settings.Log_Monitor.Log_Show_Vehicle_Destructions;
-      SetToolTip(TextBoxNPCNamen, $"{CurrentLocalization.Settings.Log_Monitor.Global_NPC_Names}:{Environment.NewLine}{string.Join(Environment.NewLine, ProgramSettings.LogMonitor.Global_NPC_Filter)}");
-
       ResumeLayout();
-    }
-
-    private void CheckBoxShowLocations_CheckedChanged(object sender, EventArgs e) {
-      ProgramSettings.Locations.ShowWindow = CheckBoxShowLocations.Checked;
-      NumericUpDownOrteEintraegeMaximum.Enabled = CheckBoxShowLocations.Checked;
-      TextBoxLMB_URL.Enabled = CheckBoxShowLocations.Checked;
-      TextBoxMMB_URL.Enabled = CheckBoxShowLocations.Checked;
-      TextBoxRMB_URL.Enabled = CheckBoxShowLocations.Checked;
-    }
-
-    private void NumericUpDownOrteEintraegeMaximum_ValueChanged(object sender, EventArgs e) {
-      ProgramSettings.Locations.EntriesMax = Convert.ToInt32((sender as NumericUpDown).Value);
-    }
-
-    private void ButtonEditPrcChannels_Click(object sender, EventArgs e) {
-      using FormEditRpcChannels frm = new(ProgramSettings, CurrentLocalization);
-      frm.ShowDialog();
-      if (frm.DialogResult == DialogResult.OK && !string.IsNullOrWhiteSpace(frm.SelectedChannel)) {
-        TextBoxGRPCChannel.Text = frm.SelectedChannel;
-        TextBoxGRPCChannel.Focus();
-        TextBoxGRPCChannel.SelectAll();
-      }
     }
 
     private void ButtonForeColor_Click(object sender, EventArgs e) {
@@ -623,70 +350,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    private void ButtonStatusInactiveForeColor_Click(object sender, EventArgs e) {
-      SetSelectedColor(ButtonStatusInactiveForeColor);
-    }
-
-    private void ButtonStatusInactiveBackColor_Click(object sender, EventArgs e) {
-      SetSelectedColor(ButtonStatusInactiveBackColor);
-    }
-
-    private void ButtonStatusInitializingForeColor_Click(object sender, EventArgs e) {
-      SetSelectedColor(ButtonStatusInitializingForeColor);
-    }
-
-    private void ButtonStatusInitializingBackColor_Click(object sender, EventArgs e) {
-      SetSelectedColor(ButtonStatusInitializingBackColor);
-    }
-
-    private void ButtonStatusActiveForeColor_Click(object sender, EventArgs e) {
-      SetSelectedColor(ButtonStatusActiveForeColor);
-    }
-
-    private void ButtonStatusActiveBackColor_Click(object sender, EventArgs e) {
-      SetSelectedColor(ButtonStatusActiveBackColor);
-    }
-
-    private void ButtonRelationFriendlyForeColor_Click(object sender, EventArgs e) {
-      SetSelectedColor(ButtonRelationFriendlyForeColor);
-    }
-
-    private void ButtonRelationFriendlyBackColor_Click(object sender, EventArgs e) {
-      SetSelectedColor(ButtonRelationFriendlyBackColor);
-    }
-
-    private void ButtonRelationNeutralForeColor_Click(object sender, EventArgs e) {
-      SetSelectedColor(ButtonRelationNeutralForeColor);
-    }
-
-    private void ButtonRelationNeutralBackColor_Click(object sender, EventArgs e) {
-      SetSelectedColor(ButtonRelationNeutralBackColor);
-    }
-
-    private void ButtonRelationBogeyForeColor_Click(object sender, EventArgs e) {
-      SetSelectedColor(ButtonRelationBogeyForeColor);
-    }
-
-    private void ButtonRelationBogeyBackColor_Click(object sender, EventArgs e) {
-      SetSelectedColor(ButtonRelationBogeyBackColor);
-    }
-
-    private void ButtonRelationBanditForeColor_Click(object sender, EventArgs e) {
-      SetSelectedColor(ButtonRelationBanditForeColor);
-    }
-
-    private void ButtonRelationBanditBackColor_Click(object sender, EventArgs e) {
-      SetSelectedColor(ButtonRelationBanditBackColor);
-    }
-
-    private void ButtonRelationOrganizationForeColor_Click(object sender, EventArgs e) {
-      SetSelectedColor(ButtonRelationOrganizationForeColor);
-    }
-
-    private void ButtonRelationOrganizationBackColor_Click(object sender, EventArgs e) {
-      SetSelectedColor(ButtonRelationOrganizationBackColor);
-    }
-
     private void ButtonSplitterColor_Click(object sender, EventArgs e) {
       SetSelectedColor(ButtonSplitterColor);
     }
@@ -715,24 +378,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ComboBoxColorThemes.SelectedIndex = 0;
     }
 
-    private void ButtonEditPrcChannels_Paint(object sender, PaintEventArgs e) {
-      base.OnPaint(e);
-      FormHandleQuery.PaintSettingsIcon(e.Graphics, ProgramSettings.Colors.AppForeColor, ProgramSettings.Colors.AppForeColorInactive);
-    }
-
-    private void TextBoxLogMonitorHandleFilter_TextChanged(object sender, EventArgs e) {
-      ProgramSettings.LogMonitor.HandleFilter = [.. TextBoxLogMonitorHandleFilter.Text.Split([',', ';', '|', ' '], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)];
-    }
-
-    private void TextBoxNPCNamen_TextChanged(object sender, EventArgs e) {
-      ProgramSettings.LogMonitor.NPC_Filter = [.. TextBoxNPCNamen.Text.Split([',', ';', '|', ' '], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)];
-    }
-
-    private void TextBoxWebhookURL_TextChanged(object sender, EventArgs e) {
-      ProgramSettings.LogMonitor.WebhookURL = TextBoxWebhookURL.Text;
-      ButtonWebhookTest.Enabled = IsValidDiscordWebhookUrl(TextBoxWebhookURL.Text);
-    }
-
     private void ButtonFarbenStandard_Click(object sender, EventArgs e) {
       ProgramSettings.Colors = new Settings().Colors;
       SetDialogValues();
@@ -746,102 +391,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       SetDialogValues();
     }
 
-    private void ButtonStatusInactiveForeColor_BackColorChanged(object sender, EventArgs e) {
-      if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.StatusInactiveForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
-      }
-    }
-
-    private void ButtonStatusInactiveBackColor_BackColorChanged(object sender, EventArgs e) {
-      if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.StatusInactiveBackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
-      }
-    }
-
-    private void ButtonStatusInitializingForeColor_BackColorChanged(object sender, EventArgs e) {
-      if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.StatusInitializingForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
-      }
-    }
-
-    private void ButtonStatusInitializingBackColor_BackColorChanged(object sender, EventArgs e) {
-      if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.StatusInitializingBackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
-      }
-    }
-
-    private void ButtonStatusActiveForeColor_BackColorChanged(object sender, EventArgs e) {
-      if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.StatusActiveForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
-      }
-    }
-
-    private void ButtonStatusActiveBackColor_BackColorChanged(object sender, EventArgs e) {
-      if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.StatusActiveBackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
-      }
-    }
-
-    private void ButtonRelationFriendlyForeColor_BackColorChanged(object sender, EventArgs e) {
-      if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.RelationFriendlyForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
-      }
-    }
-
-    private void ButtonRelationFriendlyBackColor_BackColorChanged(object sender, EventArgs e) {
-      if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.RelationFriendlyBackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
-      }
-    }
-
-    private void ButtonRelationNeutralForeColor_BackColorChanged(object sender, EventArgs e) {
-      if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.RelationNeutralForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
-      }
-    }
-
-    private void ButtonRelationNeutralBackColor_BackColorChanged(object sender, EventArgs e) {
-      if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.RelationNeutralBackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
-      }
-    }
-
-    private void ButtonRelationBogeyForeColor_BackColorChanged(object sender, EventArgs e) {
-      if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.RelationBogeyForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
-      }
-    }
-
-    private void ButtonRelationBogeyBackColor_BackColorChanged(object sender, EventArgs e) {
-      if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.RelationBogeyBackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
-      }
-    }
-
-    private void ButtonRelationBanditForeColor_BackColorChanged(object sender, EventArgs e) {
-      if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.RelationBanditForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
-      }
-    }
-
-    private void ButtonRelationBanditBackColor_BackColorChanged(object sender, EventArgs e) {
-      if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.RelationBanditBackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
-      }
-    }
-
-    private void ButtonRelationOrganizationForeColor_BackColorChanged(object sender, EventArgs e) {
-      if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.RelationOrganizationForeColor = ColorTranslator.ToHtml((sender as Button).BackColor);
-      }
-    }
-
-    private void ButtonRelationOrganizationBackColor_BackColorChanged(object sender, EventArgs e) {
-      if (LoadingFinished && ProgramSettings?.Colors != null) {
-        ProgramSettings.Colors.RelationOrganizationBackColor = ColorTranslator.ToHtml((sender as Button).BackColor);
-      }
-    }
-
     private void ToolTipHandleQuery_Draw(object sender, DrawToolTipEventArgs e) {
       e.DrawBackground();
       e.DrawBorder();
@@ -850,45 +399,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     public void SetToolTip(Control control, string text = null) {
       ToolTipSettings.SetToolTip(control, text ?? control.Text);
-    }
-
-    private void CheckBoxErweitert_CheckedChanged(object sender, EventArgs e) {
-      bool visible = !ButtonStatusInactiveForeColor.Visible;
-      int buttonHeight = visible ? 12 : 20;
-      ButtonForeColor.Height = buttonHeight;
-      ButtonForeColorInactive.Height = buttonHeight;
-      ButtonBackColor.Height = buttonHeight;
-      ButtonSplitterColor.Height = buttonHeight;
-      ButtonStatusInactiveForeColor.Visible = visible;
-      ButtonStatusInactiveBackColor.Visible = visible;
-      ButtonStatusInitializingForeColor.Visible = visible;
-      ButtonStatusInitializingBackColor.Visible = visible;
-      ButtonStatusActiveForeColor.Visible = visible;
-      ButtonStatusActiveBackColor.Visible = visible;
-      ButtonRelationFriendlyForeColor.Visible = visible;
-      ButtonRelationFriendlyBackColor.Visible = visible;
-      ButtonRelationNeutralForeColor.Visible = visible;
-      ButtonRelationNeutralBackColor.Visible = visible;
-      ButtonRelationBogeyForeColor.Visible = visible;
-      ButtonRelationBogeyBackColor.Visible = visible;
-      ButtonRelationBanditForeColor.Visible = visible;
-      ButtonRelationBanditBackColor.Visible = visible;
-      ButtonRelationOrganizationForeColor.Visible = visible;
-      ButtonRelationOrganizationBackColor.Visible = visible;
-    }
-
-    public static bool IsValidDiscordWebhookUrl(string url) => RgxDiscordWebhookUrl.IsMatch(url);
-
-    private void ButtonWebhookTest_Click(object sender, EventArgs e) {
-      if (IsValidDiscordWebhookUrl(ProgramSettings.LogMonitor.WebhookURL)) {
-        FormLogMonitor.PushDiscordWebhook(ProgramSettings, new(LogType.ActorDeath, DateTime.Now.ToUniversalTime().ToString("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'"),
-          "Kuehlwagen",
-          "Gentle81",
-          $"Killed by: Gentle81{Environment.NewLine}Using: unknown (Class unknown){Environment.NewLine}Zone: TransitCarriage_RSI_Polaris_Rear_Elevator_1604048788858{Environment.NewLine}Damage Type: Crash",
-          SCHQ_Protos.RelationValue.Friendly,
-          SCHQ_Protos.RelationValue.Bandit),
-          ProgramSettings.LogMonitor.WebhookURL, CurrentLocalization, true);
-      }
     }
 
   }

@@ -1,5 +1,4 @@
-﻿using SCHQ_Protos;
-using Star_Citizen_Handle_Query.Serialization;
+﻿using Star_Citizen_Handle_Query.Serialization;
 using Star_Citizen_Handle_Query.UserControls;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -72,9 +71,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             handleInfo.Profile.UeeCitizenRecord,
             org?.Name,
             org?.RankStars,
-            handleInfo.Organizations.Affiliations?.Count ?? 0,
-            $"{(int)handleInfo.Relation}-{handleInfo.Relation}",
-            handleInfo?.Comment ?? string.Empty
+            handleInfo.Organizations.Affiliations?.Count ?? 0
           ];
           row.Tag = handleInfo;
           row.CreateCells(DataGridViewLokalerCache, [.. info]);
@@ -95,22 +92,7 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         DataGridViewLokalerCache.ClearSelection();
         DataGridViewLokalerCache.Rows[0].Selected = true;
       }
-      DataGridViewLokalerCache.CellValueChanged += DataGridViewExport_CellValueChanged;
       DataGridViewLokalerCache.ResumeLayout();
-    }
-
-    private void DataGridViewExport_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
-      if (e.RowIndex > -1 && e.ColumnIndex > -1) {
-        switch (e.ColumnIndex) {
-          case 9: // Kommentar
-            DataGridViewRow dgvr = (sender as DataGridView).Rows[e.RowIndex];
-            HandleInfo handleInfo = (dgvr.Tag as HandleInfo);
-            string cellValue = $"{dgvr.Cells[e.ColumnIndex].Value}";
-            handleInfo.Comment = !string.IsNullOrWhiteSpace(cellValue) ? cellValue : null;
-            UserControlHandle.CreateHandleJSON(handleInfo, ProgramSettings, forceExport: true);
-            break;
-        }
-      }
     }
 
     private void DataGridViewExport_CellContentClick(object sender, DataGridViewCellEventArgs e) {
@@ -143,8 +125,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ColumnOrganisation.HeaderText = ProgramTranslation.Local_Cache.Columns.Organization;
       ColumnOrganisationRang.HeaderText = ProgramTranslation.Local_Cache.Columns.Organization_Rank;
       ColumnAnzahlAffiliationen.HeaderText = ProgramTranslation.Local_Cache.Columns.Affiliation_Count;
-      ColumnRelation.HeaderText = ProgramTranslation.Local_Cache.Columns.Relation;
-      ColumnKommentar.HeaderText = ProgramTranslation.Local_Cache.Columns.Comment;
 
       ButtonCacheLeeren.Text = ProgramTranslation.Local_Cache.Buttons.Clear_Cache;
       ButtonOrdnerOeffnen.Text = ProgramTranslation.Local_Cache.Buttons.Open_Folder;
@@ -203,42 +183,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     private void FormLocalCache_FormClosing(object sender, FormClosingEventArgs e) {
       DisposeUserControls();
-    }
-
-    private void DataGridViewLokalerCache_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
-      if (e.RowIndex > -1 && e.ColumnIndex == 8) {
-        string[] values = $"{e.Value}".Split("-");
-        if (values?.Length == 2 && Enum.TryParse(values[0], out RelationValue value)) {
-          e.CellStyle.BackColor = FormHandleQuery.GetRelationColor(ProgramSettings, value);
-          e.CellStyle.ForeColor = value > 0 ? Color.FromArgb(19, 26, 33) : ForeColor;
-          e.Value = GetTranslatedRelationText(ProgramTranslation, value);
-          e.FormattingApplied = true;
-        }
-      }
-    }
-
-    public static string GetTranslatedRelationText(Translation translation, RelationValue relation) {
-      string translationText = $"{relation}";
-
-      switch (relation) {
-        case RelationValue.NotAssigned:
-          translationText = translation.Local_Cache.Relation.Not_Assigned;
-          break;
-        case RelationValue.Friendly:
-          translationText = translation.Local_Cache.Relation.Friendly;
-          break;
-        case RelationValue.Neutral:
-          translationText = translation.Local_Cache.Relation.Neutral;
-          break;
-        case RelationValue.Bogey:
-          translationText = translation.Local_Cache.Relation.Bogey;
-          break;
-        case RelationValue.Bandit:
-          translationText = translation.Local_Cache.Relation.Bandit;
-          break;
-      }
-
-      return translationText;
     }
 
   }

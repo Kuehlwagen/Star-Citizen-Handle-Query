@@ -15,9 +15,7 @@
       "Local_Cache": "Lokaler Cache",
       "Close": "Beenden",
       "About": "\u00DCber",
-      "Check_For_Update": "Nach Update suchen",
-      "Export_Relations": "Beziehungen bereitstellen",
-      "Import_Relations": "Beziehungen \u00FCbernehmen"
+      "Check_For_Update": "Nach Update suchen"
     },
     "MessageBoxes": {
       "Clear_Local_Cache_Question": "Der lokale Cache wird komplett geleert. Fortfahren?",
@@ -43,10 +41,6 @@
       "Fore_Color_Inactive": "Vordergrundfarbe inaktiv",
       "Back_Color": "Hintergrundfarbe",
       "Splitter_Color": "Trenner-Farbe",
-      "Advanced": "Fortgeschritten",
-      "Status_Inactive": "Status inaktiv",
-      "Status_Initializing": "Status Initialisierung",
-      "Status_Active": "Status aktiv",
       "Default_Colors": "Standardfarben",
       "Compact_Mode": "Kompaktmodus"
     },
@@ -62,54 +56,6 @@
       "Enable_Alt_Tab": "Erreichbarkeit via Alt \u002B Tab",
       "RememberWindowLocation": "Position merken",
       "HideWindowOnEscPress": "ESC blendet das Fenster aus"
-    },
-    "Locations": {
-      "Group_Title": "Orte (Alt + Eingabe)",
-      "Show_Locations": "Orte anzeigen",
-      "Locations_Entries_Max": "Eintr\u00E4ge Maximum:",
-      "LMB_URL": "Linke Maustaste:",
-      "MMB_URL": "Mittlere Maustaste:",
-      "RMB_URL": "Rechte Maustaste:"
-    },
-    "Relations": {
-      "Group_Title": "Beziehungen",
-      "Show_Relations": "Beziehungen anzeigen",
-      "Sort_Relations_Alphabetically": "Alphabetisch sortieren",
-      "Relations_Entries_Max": "Eintr\u00E4ge Maximum:",
-      "RPC_Server_URL": "gRPC Server-URL:",
-      "RPC_Server_Channel": "gRPC Kanal:",
-      "RPC_Channel_Password": "gRPC Benutzer/Passwort:",
-      "RPC_Sync_On_Startup": "gRPC-Synchronisierung bei Programmstart",
-      "RPC_Channels": {
-        "Title": "gRPC-Kanalauswahl",
-        "Button_Load_Channels": "Kan\u00E4le laden",
-        "Channel_Name": "Kanalname",
-        "Button_OK": "OK",
-        "No_Channels_Found": "Es konnten keine Kan\u00E4le ermittelt werden.",
-        "Permissions": "Berechtigungen",
-        "Permission_None": "Keine",
-        "Permission_Read": "Lesen",
-        "Permission_Write": "Schreiben"
-      }
-    },
-    "Log_Monitor": {
-      "Group_Title": "Log-Monitor",
-      "Show_Log_Monitor": "Log-Monitor anzeigen",
-      "Log_Entries_Max": "Eintr\u00E4ge Maximum:",
-      "Log_Entry_Display_Duration": "Eintrag Anzeigedauer:",
-      "Log_Entry_Display_Duration_Minutes": "Minute(n)",
-      "Log_Show_Corpse": "Spielertode anzeigen",
-      "Log_Show_Loading_Screen_Duration": "Ladebildschirm-Dauer anzeigen",
-      "Check_Complete_File": "Komplette Datei",
-      "Handle_Filter": "Handle-Filter:",
-      "Webhook_URL": "Webhook-URL:",
-      "Show_NPC_Deaths": "NPC-Tode anzeigen",
-      "NPC_Filter": "NPC-Namen",
-      "Global_NPC_Names": "Globale NPC-Namen",
-      "Test_Webhook_URL": "Test",
-      "Log_Show_Hostility_Events": "Feindseligkeitsereignisse anzeigen",
-      "Log_Show_Own_Handle": "Eigener Handle",
-      "Log_Show_Vehicle_Destructions": "Fahrzeugzerst\u00F6rungen anzeigen"
     },
     "Local_Cache": {
       "Group_Title": "Lokaler Cache",
@@ -135,21 +81,12 @@
       "UEE_Citizen_Record": "UEE CR",
       "Organization": "Organisation",
       "Organization_Rank": "Org. Rang",
-      "Affiliation_Count": "Anz. Aff.",
-      "Relation": "Beziehung",
-      "Comment": "Kommentar"
+      "Affiliation_Count": "Anz. Aff."
     },
     "Buttons": {
       "Clear_Cache": "Cache leeren",
       "Open_Folder": "Ordner \u00F6ffnen",
       "Close": "Schlie\u00DFen"
-    },
-    "Relation": {
-      "Not_Assigned": "",
-      "Friendly": "FREUNDLICH",
-      "Neutral": "NEUTRAL",
-      "Bogey": "UNBEKANNT",
-      "Bandit": "FEINDLICH"
     }
   },
   "Notification": {
@@ -158,41 +95,5 @@
     "Update_Info_Show_Release_Notes": "Klicken, um Release-Notes zu \u00F6ffnen",
     "Update_Up_To_Date": "Programm ist aktuell",
     "Update_Error": "Update-Informationen konnten nicht ausgelesen werden"
-  },
-  "Log_Monitor": {
-    "Title": "Log-Monitor",
-    "Webhook_Actor_Death": "Spielertod",
-    "Webhook_Killer": "Killer",
-    "Webhook_Using": "Mit",
-    "Webhook_Damage_Type": "Schadensart",
-    "Webhook_Zone": "Zone",
-    "Loading_Screen": "Ladebildschirm",
-    "Own_Handle_Is": "Eigener Handle lautet",
-    "Actor_Death": "Spielertod",
-    "Corpse": "Leiche",
-    "No_Corpse": "Keine Leiche",
-    "Hostility_Event": "Feindseligkeitsereignis",
-    "Loading_Screen_Duration": "Ladebildschirm-Dauer",
-    "Own_Handle": "Eigener Handle",
-    "Vehicle_Destruction": "Fahrzeugzerst\u00F6rung",
-    "SELF_DESTRUCT": "SELBSTZERST\u00D6RUNG",
-    "UNKNOWN": "UNBEKANNT",
-    "NPC": "NPC",
-    "TURRET": "TURM",
-    "HANGAR": "HANGAR",
-    "ITEM": "GEGENSTAND"
-  },
-  "Relations": {
-    "Title": "Beziehungen",
-    "RPC_Status_Disconnected": "Getrennt - klicken, um zu verbinden",
-    "RPC_Status_Connecting": "Verbindung wird hergestellt...",
-    "RPC_Status_Connected": "Verbunden - Linksklick, um die Verbidung zu trennen; Mittlere Maustaste, um alle Beziehungen zu laden",
-    "Clear": "Sollen wirklich alle Beziehungen gel\u00F6scht werden?"
-  },
-  "Locations": {
-    "Title": "Orte",
-    "Filter_Placeholder": "Orte filtern...",
-    "More_Location": "weiterer Ort...",
-    "More_Locations": "weitere Orte..."
   }
 }

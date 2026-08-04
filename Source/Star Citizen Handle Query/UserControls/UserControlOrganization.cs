@@ -1,5 +1,4 @@
-﻿using SCHQ_Protos;
-using Star_Citizen_Handle_Query.Dialogs;
+﻿using Star_Citizen_Handle_Query.Dialogs;
 using Star_Citizen_Handle_Query.Serialization;
 using System.Diagnostics;
 using System.Drawing.Drawing2D;
@@ -14,7 +13,6 @@ namespace Star_Citizen_Handle_Query.UserControls {
     private readonly Settings ProgramSettings;
     private readonly bool IsMainOrg;
     internal string SID;
-    internal RelationValue Relation;
     private readonly bool ForceLive;
     private readonly bool DisplayOnly;
 
@@ -74,13 +72,6 @@ namespace Star_Citizen_Handle_Query.UserControls {
           }
         }
         PictureBoxOrganizationRank.Invalidate();
-        if (!DisplayOnly) {
-          Relation = GetMainForm().GetOrganizationRelation(Info.Sid);
-          if (Relation > RelationValue.NotAssigned) {
-            LabelRelation.BackColor = GetRelationColor(ProgramSettings, Relation);
-            LabelRelation.Visible = true;
-          }
-        }
       } else {
         PictureBoxOrganization.Size = new Size(PictureBoxOrganization.Width, LogicalToDeviceUnits(19));
         PictureBoxOrganization.Image = Properties.Resources.Redacted_Small;
@@ -108,31 +99,6 @@ namespace Star_Citizen_Handle_Query.UserControls {
 
     private void SetToolTip(Control control, string text = null) {
       GetMainForm()?.SetToolTip(control, text ?? control.Text);
-    }
-
-    public void ChangeRelation(Keys keyCode) {
-      RelationValue relation = RelationValue.NotAssigned;
-      switch (keyCode) {
-        case Keys.D1:
-        case Keys.NumPad1:
-          relation = RelationValue.Friendly;
-          break;
-        case Keys.D2:
-        case Keys.NumPad2:
-          relation = RelationValue.Neutral;
-          break;
-        case Keys.D3:
-        case Keys.NumPad3:
-          relation = RelationValue.Bogey;
-          break;
-        case Keys.D4:
-        case Keys.NumPad4:
-          relation = RelationValue.Bandit;
-          break;
-      }
-      Relation = relation;
-      LabelRelation.Visible = relation > RelationValue.NotAssigned;
-      LabelRelation.BackColor = GetRelationColor(ProgramSettings, Relation);
     }
 
     private void LabelRelation_Paint(object sender, PaintEventArgs e) {

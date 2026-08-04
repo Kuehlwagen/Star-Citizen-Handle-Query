@@ -39,9 +39,6 @@
       LokalerCacheToolStripMenuItem = new ToolStripMenuItem();
       AufUpdatePruefenToolStripMenuItem = new ToolStripMenuItem();
       UeberToolStripMenuItem = new ToolStripMenuItem();
-      ToolStripSeparator1 = new ToolStripSeparator();
-      BeziehungenBereitstellenToolStripMenuItem = new ToolStripMenuItem();
-      BeziehungenUebernehmenToolStripMenuItem = new ToolStripMenuItem();
       toolStripSeparator2 = new ToolStripSeparator();
       BeendenToolStripMenuItem = new ToolStripMenuItem();
       ToolTipHandleQuery = new ToolTip(components);
@@ -148,16 +145,16 @@
       // 
       // ContextMenuStripNotifyIcon
       // 
-      ContextMenuStripNotifyIcon.Items.AddRange(new ToolStripItem[] { AnzeigenToolStripMenuItem, EinstellungenToolStripMenuItem, LokalerCacheToolStripMenuItem, AufUpdatePruefenToolStripMenuItem, UeberToolStripMenuItem, ToolStripSeparator1, BeziehungenBereitstellenToolStripMenuItem, BeziehungenUebernehmenToolStripMenuItem, toolStripSeparator2, BeendenToolStripMenuItem });
+      ContextMenuStripNotifyIcon.Items.AddRange(new ToolStripItem[] { AnzeigenToolStripMenuItem, EinstellungenToolStripMenuItem, LokalerCacheToolStripMenuItem, AufUpdatePruefenToolStripMenuItem, UeberToolStripMenuItem, toolStripSeparator2, BeendenToolStripMenuItem });
       ContextMenuStripNotifyIcon.Name = "ContextMenuStripNotifyIcon";
-      ContextMenuStripNotifyIcon.Size = new Size(214, 192);
+      ContextMenuStripNotifyIcon.Size = new Size(181, 164);
       // 
       // AnzeigenToolStripMenuItem
       // 
       AnzeigenToolStripMenuItem.Enabled = false;
       AnzeigenToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
       AnzeigenToolStripMenuItem.Name = "AnzeigenToolStripMenuItem";
-      AnzeigenToolStripMenuItem.Size = new Size(213, 22);
+      AnzeigenToolStripMenuItem.Size = new Size(180, 22);
       AnzeigenToolStripMenuItem.Text = "&Anzeigen";
       AnzeigenToolStripMenuItem.Click += AnzeigenToolStripMenuItem_Click;
       // 
@@ -165,7 +162,7 @@
       // 
       EinstellungenToolStripMenuItem.Enabled = false;
       EinstellungenToolStripMenuItem.Name = "EinstellungenToolStripMenuItem";
-      EinstellungenToolStripMenuItem.Size = new Size(213, 22);
+      EinstellungenToolStripMenuItem.Size = new Size(180, 22);
       EinstellungenToolStripMenuItem.Text = "&Einstellungen";
       EinstellungenToolStripMenuItem.Click += EinstellungenToolStripMenuItem_Click;
       // 
@@ -173,7 +170,7 @@
       // 
       LokalerCacheToolStripMenuItem.Enabled = false;
       LokalerCacheToolStripMenuItem.Name = "LokalerCacheToolStripMenuItem";
-      LokalerCacheToolStripMenuItem.Size = new Size(213, 22);
+      LokalerCacheToolStripMenuItem.Size = new Size(180, 22);
       LokalerCacheToolStripMenuItem.Text = "&Lokaler Cache";
       LokalerCacheToolStripMenuItem.Click += LokalerCacheToolStripMenuItem_Click;
       // 
@@ -181,7 +178,7 @@
       // 
       AufUpdatePruefenToolStripMenuItem.Enabled = false;
       AufUpdatePruefenToolStripMenuItem.Name = "AufUpdatePruefenToolStripMenuItem";
-      AufUpdatePruefenToolStripMenuItem.Size = new Size(213, 22);
+      AufUpdatePruefenToolStripMenuItem.Size = new Size(180, 22);
       AufUpdatePruefenToolStripMenuItem.Text = "Auf Update prüfen";
       AufUpdatePruefenToolStripMenuItem.Click += AufUpdatePruefenToolStripMenuItem_Click;
       // 
@@ -189,41 +186,19 @@
       // 
       UeberToolStripMenuItem.Enabled = false;
       UeberToolStripMenuItem.Name = "UeberToolStripMenuItem";
-      UeberToolStripMenuItem.Size = new Size(213, 22);
+      UeberToolStripMenuItem.Size = new Size(180, 22);
       UeberToolStripMenuItem.Text = "&Über";
       UeberToolStripMenuItem.Click += UeberToolStripMenuItem_Click;
-      // 
-      // ToolStripSeparator1
-      // 
-      ToolStripSeparator1.Name = "ToolStripSeparator1";
-      ToolStripSeparator1.Size = new Size(210, 6);
-      ToolStripSeparator1.Visible = false;
-      // 
-      // BeziehungenBereitstellenToolStripMenuItem
-      // 
-      BeziehungenBereitstellenToolStripMenuItem.Name = "BeziehungenBereitstellenToolStripMenuItem";
-      BeziehungenBereitstellenToolStripMenuItem.Size = new Size(213, 22);
-      BeziehungenBereitstellenToolStripMenuItem.Text = "Beziehungen bereitstellen";
-      BeziehungenBereitstellenToolStripMenuItem.Visible = false;
-      BeziehungenBereitstellenToolStripMenuItem.Click += BeziehungenBereitstellenToolStripMenuItem_Click;
-      // 
-      // BeziehungenUebernehmenToolStripMenuItem
-      // 
-      BeziehungenUebernehmenToolStripMenuItem.Name = "BeziehungenUebernehmenToolStripMenuItem";
-      BeziehungenUebernehmenToolStripMenuItem.Size = new Size(213, 22);
-      BeziehungenUebernehmenToolStripMenuItem.Text = "Beziehungen übernehmen";
-      BeziehungenUebernehmenToolStripMenuItem.Visible = false;
-      BeziehungenUebernehmenToolStripMenuItem.Click += BeziehungenUebernehmenToolStripMenuItem_Click;
       // 
       // toolStripSeparator2
       // 
       toolStripSeparator2.Name = "toolStripSeparator2";
-      toolStripSeparator2.Size = new Size(210, 6);
+      toolStripSeparator2.Size = new Size(177, 6);
       // 
       // BeendenToolStripMenuItem
       // 
       BeendenToolStripMenuItem.Name = "BeendenToolStripMenuItem";
-      BeendenToolStripMenuItem.Size = new Size(213, 22);
+      BeendenToolStripMenuItem.Size = new Size(180, 22);
       BeendenToolStripMenuItem.Text = "&Beenden";
       BeendenToolStripMenuItem.Click += BeendenToolStripMenuItem_Click;
       // 
@@ -273,7 +248,6 @@
     private ContextMenuStrip ContextMenuStripNotifyIcon;
     private ToolStripMenuItem BeendenToolStripMenuItem;
     private ToolStripMenuItem AnzeigenToolStripMenuItem;
-    private ToolStripSeparator ToolStripSeparator1;
     private ToolStripMenuItem EinstellungenToolStripMenuItem;
     private ToolStripMenuItem LokalerCacheToolStripMenuItem;
     private ToolStripMenuItem UeberToolStripMenuItem;
@@ -282,8 +256,6 @@
     private Label LabelQuery;
     private Label LabelSettings;
     private ToolTip ToolTipHandleQuery;
-    private ToolStripMenuItem BeziehungenBereitstellenToolStripMenuItem;
-    private ToolStripMenuItem BeziehungenUebernehmenToolStripMenuItem;
     private ToolStripSeparator toolStripSeparator2;
   }
 }

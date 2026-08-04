@@ -1,4 +1,3 @@
-using SCHQ_Protos;
 using Star_Citizen_Handle_Query.Classes;
 using Star_Citizen_Handle_Query.Properties;
 using Star_Citizen_Handle_Query.Serialization;
@@ -22,9 +21,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
     internal const int SnapDistance = 10;
     private readonly int InitialWindowStyle = 0;
-    private FormLogMonitor LogMonitorForm = null;
-    private FormRelations RelationsForm = null;
-    private FormLocations LocationsForm = null;
     private readonly Translation ProgramTranslation;
     private Settings ProgramSettings;
     private GlobalHotKey HotKey;
@@ -124,13 +120,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
 
         // Veraltete Cache-Dateien löschen
         ClearCache(true);
-
-        // Ggf. Beziehungen bereitstellen/übernehmen anzeigen
-        if (ProgramSettings.Relations.ShowWindow) {
-          BeziehungenBereitstellenToolStripMenuItem.Visible = true;
-          BeziehungenUebernehmenToolStripMenuItem.Visible = true;
-          ToolStripSeparator1.Visible = true;
-        }
 
         // Kontextmenü aktivieren
         EnableContextMenu();
@@ -240,8 +229,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       BeendenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Close;
       UeberToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.About;
       AufUpdatePruefenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Check_For_Update;
-      BeziehungenBereitstellenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Export_Relations;
-      BeziehungenUebernehmenToolStripMenuItem.Text = ProgramTranslation.Window.Context_Menu.Import_Relations;
       SetToolTip(LabelLockUnlock, ProgramTranslation.Window.ToolTips.Lock_Unlock_Window);
       SetToolTip(LabelQuery, ProgramTranslation.Window.ToolTips.Query_Handle);
       SetToolTip(LabelSettings, ProgramTranslation.Window.ToolTips.Settings);
@@ -281,9 +268,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       User32Wrappers.ShowWindow(Handle, User32Wrappers.SW_RESTORE);
       User32Wrappers.SetForegroundWindow(Handle);
       Visible = true;
-      LogMonitorForm?.Visible = true;
-      RelationsForm?.Visible = true;
-      LocationsForm?.Visible = true;
       Activate();
       TextBoxHandle.SelectAll();
       TextBoxHandle.Focus();
@@ -316,49 +300,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         HotKey.KeyDown += HotKey_KeyDown;
         HotKey.HookedKeys.Add(ProgramSettings.GlobalHotkey);
         HotKey.Hook();
-      }
-
-      // Ggf. LogFileWatcher-Fenster anzeigen
-      if (ProgramSettings.LogMonitor.ShowWindow) {
-        LogMonitorForm = new(ProgramSettings, ProgramTranslation);
-        LogMonitorForm.Show(this);
-        if (ProgramSettings?.RememberWindowLocation == true && ProgramSettings?.LogMonitor?.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
-          LogMonitorForm.Location = ProgramSettings.LogMonitor.WindowLocation;
-          if (ProgramSettings.LogMonitor.WindowSize != Size.Empty) {
-            LogMonitorForm.Size = ProgramSettings.LogMonitor.WindowSize;
-          }
-        } else {
-          LogMonitorForm.MoveWindowToDefaultLocation();
-        }
-      }
-
-      // Ggf. Beziehungen-Fenster anzeigen
-      if (ProgramSettings.Relations.ShowWindow) {
-        RPC_Wrapper.SetURL(ProgramSettings.Relations.RPC_URL);
-        RelationsForm = new(ProgramSettings, ProgramTranslation);
-        RelationsForm.Show(this);
-        if (ProgramSettings?.RememberWindowLocation == true && ProgramSettings?.Relations.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
-          RelationsForm.Location = ProgramSettings.Relations.WindowLocation;
-          if (ProgramSettings.Relations.WindowSize != Size.Empty) {
-            RelationsForm.Size = ProgramSettings.Relations.WindowSize;
-          }
-        } else {
-          RelationsForm.MoveWindowToDefaultLocation();
-        }
-      }
-
-      // Ggf. Orte-Fenster anzeigen
-      if (ProgramSettings.Locations.ShowWindow) {
-        LocationsForm = new(ProgramSettings, ProgramTranslation);
-        LocationsForm.Show(this);
-        if (ProgramSettings?.RememberWindowLocation == true && ProgramSettings?.Locations?.WindowLocation != Point.Empty && ModifierKeys != Keys.Shift) {
-          LocationsForm.Location = ProgramSettings.Locations.WindowLocation;
-          if (ProgramSettings.Locations.WindowSize != Size.Empty) {
-            LocationsForm.Size = ProgramSettings.Locations.WindowSize;
-          }
-        } else {
-          LocationsForm.MoveWindowToDefaultLocation();
-        }
       }
 
       UcResize = new() {
@@ -461,157 +402,27 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       }
     }
 
-    public void ChangeRelation(RelationType relationType, Keys key) {
-      if (PanelInfo.Controls.Count > 0) {
-        switch (relationType) {
-          case RelationType.Handle:
-            if (PanelInfo.Controls[0] is UserControlHandle handleControl) {
-              handleControl.ChangeRelation(key);
-              RelationsForm?.UpdateRelation(handleControl.HandleName, RelationType.Handle, handleControl.HandleRelation);
-            }
-            break;
-          case RelationType.Organization:
-            UserControlOrganization orgControl = null;
-            if (!ProgramSettings.Relations.ShowWindow && PanelInfo.Controls.Count > 1 && PanelInfo.Controls[1] is UserControlOrganization orgCtrl1) {
-              orgControl = orgCtrl1;
-            } else if (ProgramSettings.Relations.ShowWindow && PanelInfo.Controls.Count > 2 && PanelInfo.Controls[2] is UserControlOrganization orgCtrl2) {
-              orgControl = orgCtrl2;
-            }
-            if (orgControl != null) {
-              orgControl.ChangeRelation(key);
-              RelationsForm?.UpdateRelation(orgControl.SID, RelationType.Organization, orgControl.Relation);
-            }
-            break;
-        }
-        TextChangedAssistant?.TextChanged();
-      }
-    }
-
-    public void ChangeComment(string handle, string comment) {
-      RelationsForm?.SetComment(handle, comment);
-    }
-
-    public RelationValue GetOrganizationRelation(string sid) {
-      RelationValue rtnVal = RelationValue.NotAssigned;
-      if (RelationsForm != null) {
-        rtnVal = RelationsForm.GetOrganizationRelation(sid);
-      }
-      return rtnVal;
-    }
-
-    public RelationValue GetHandleRelation(string handle) {
-      RelationValue rtnVal = RelationValue.NotAssigned;
-      if (RelationsForm != null) {
-        rtnVal = RelationsForm.GetHandleRelation(handle);
-      }
-      return rtnVal;
-    }
-
-    public string GetHandleComment(string handle) {
-      return RelationsForm?.GetHandleComment(handle);
-    }
-
     private void TextBoxHandle_KeyDown(object sender, KeyEventArgs e) {
       // Handle-Textbox Tastendrücke verarbeiten
-      if (e.Control) {
-        switch (e.KeyCode) {
-          case Keys.D0:
-          case Keys.D1:
-          case Keys.D2:
-          case Keys.D3:
-          case Keys.D4:
-          case Keys.NumPad0:
-          case Keys.NumPad1:
-          case Keys.NumPad2:
-          case Keys.NumPad3:
-          case Keys.NumPad4:
-            e.SuppressKeyPress = true;
-            e.Handled = true;
-            ChangeRelation(RelationType.Handle, e.KeyCode);
-            break;
-          case Keys.Enter:
-            e.SuppressKeyPress = true;
-            e.Handled = true;
-            QueryHandle(true);
-            break;
-        }
-      } else if (e.Shift) {
-        switch (e.KeyCode) {
-          case Keys.D0:
-          case Keys.D1:
-          case Keys.D2:
-          case Keys.D3:
-          case Keys.D4:
-          case Keys.NumPad0:
-          case Keys.NumPad1:
-          case Keys.NumPad2:
-          case Keys.NumPad3:
-          case Keys.NumPad4:
-            e.SuppressKeyPress = true;
-            e.Handled = true;
-            ChangeRelation(RelationType.Organization, e.KeyCode);
-            break;
-          case Keys.Enter:
-            e.SuppressKeyPress = true;
-            e.Handled = true;
-            QueryHandle(true);
-            break;
-        }
-      } else if (e.Alt) {
-        switch (e.KeyCode) {
-          case Keys.Enter:
-            LocationsForm?.ShowWindow();
-            break;
-          case Keys.D0:
-          case Keys.D1:
-          case Keys.D2:
-          case Keys.D3:
-          case Keys.D4:
-          case Keys.D5:
-          case Keys.NumPad0:
-          case Keys.NumPad1:
-          case Keys.NumPad2:
-          case Keys.NumPad3:
-          case Keys.NumPad4:
-          case Keys.NumPad5:
-            e.SuppressKeyPress = true;
-            e.Handled = true;
-            RelationsForm?.FilterRelations(e.KeyCode);
-            break;
-        }
-      } else {
-        switch (e.KeyCode) {
-          case Keys.Oemplus:
-          case Keys.Add:
-            // Ggf. Handle-Kommentar aktivieren
-            e.SuppressKeyPress = true;
-            if (PanelInfo.Controls.Count > 0) {
-              (PanelInfo.Controls[0] as UserControlHandle).ActivateComment();
-              TextChangedAssistant?.TextChanged();
-            }
-            break;
-          case Keys.Enter:
-            e.SuppressKeyPress = true;
-            e.Handled = true;
-            QueryHandle(false);
-            break;
-          case Keys.Escape:
-            e.Handled = true;
-            e.SuppressKeyPress = true;
-            // Fenster verstecken
-            if (ProgramSettings.HideWindowOnEscPress) {
-              HideWindows();
-            }
-            break;
-        }
+      switch (e.KeyCode) {
+        case Keys.Enter:
+          e.SuppressKeyPress = true;
+          e.Handled = true;
+          QueryHandle(false);
+          break;
+        case Keys.Escape:
+          e.Handled = true;
+          e.SuppressKeyPress = true;
+          // Fenster verstecken
+          if (ProgramSettings.HideWindowOnEscPress) {
+            HideWindows();
+          }
+          break;
       }
     }
 
     public void HideWindows() {
       Visible = false;
-      LogMonitorForm?.Visible = false;
-      RelationsForm?.Visible = false;
-      LocationsForm?.Visible = false;
     }
 
     private async void QueryHandle(bool forceLive) {
@@ -625,15 +436,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         LabelQuery.Enabled = false;
         // Handle-Informationen auslesen
         HandleInfo handleInfo = await GetHandleInfo(forceLive, TextBoxHandle.Text, ProgramSettings, CacheDirectoryType.Handle);
-        // Ggf. Beziehung aktualisieren
-        handleInfo.Relation = GetHandleRelation(handleInfo.Profile.Handle);
-        // Ggf. Kommentar von Beziehungen (gRPC-Server) aktualisieren
-        string relationComment = GetHandleComment(handleInfo.Profile.Handle);
-        if (!string.IsNullOrEmpty(relationComment)) {
-          handleInfo.Comment = relationComment;
-        } else if (!string.IsNullOrEmpty(handleInfo.Comment) && handleInfo.Relation > RelationValue.NotAssigned) {
-          RelationsForm?.SetComment(handleInfo.Profile.Handle, handleInfo.Comment);
-        }
 
         // Ggf. Cache-Verzeichnisse erstellen
         CreateDirectory(CacheDirectoryType.Handle);
@@ -647,12 +449,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
         Height += ucHandle.Height + LogicalToDeviceUnits(2);
 
         if (handleInfo?.HttpResponse?.StatusCode == HttpStatusCode.OK) {
-          // Ggf. Relations-Control hinzufügen
-          if (ProgramSettings.Relations.ShowWindow) {
-            var ucRelation = new UserControlHandleRelation(ProgramSettings, ProgramTranslation);
-            PanelInfo.Controls.Add(ucRelation);
-            Height += ucRelation.Height;
-          }
           Height += LogicalToDeviceUnits(2);
 
           // Ggf. UserControl mit Organisation-Informationen hinzufügen
@@ -719,8 +515,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
             ctrlOrganization.PictureBoxOrganizationRank.Image?.Dispose();
             ctrlOrganization.PictureBoxOrganizationRank.Image = null;
             ctrlOrganization.Dispose();
-          } else if (control is UserControlHandleRelation ctrlHandleRelation) {
-            ctrlHandleRelation.Dispose();
           }
         }
         PanelInfo.Controls.Clear();
@@ -1037,9 +831,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           AutoCompleteCollection = null;
           UpdateAutoComplete();
 
-          // Ggf. Beziehungen-UserControls entfernen
-          RelationsForm?.ClearRelations(true);
-
           MessageBox.Show(ProgramTranslation.Window.MessageBoxes.Local_Cache_Cleared, Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
           TextBoxHandle.Focus();
@@ -1165,20 +956,10 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       // Fensterposition und Fenstergröße merken
       ProgramSettings.WindowLocation = ProgramSettings.RememberWindowLocation ? Location : Point.Empty;
       ProgramSettings.WindowSize = ProgramSettings.RememberWindowLocation ? Size : Size.Empty;
-      ProgramSettings.LogMonitor.WindowLocation = LogMonitorForm != null && ProgramSettings.RememberWindowLocation ? LogMonitorForm.Location : Point.Empty;
-      ProgramSettings.LogMonitor.WindowSize = LogMonitorForm != null && ProgramSettings.RememberWindowLocation ? LogMonitorForm.Size : Size.Empty;
-      ProgramSettings.Relations.WindowLocation = RelationsForm != null && ProgramSettings.RememberWindowLocation ? RelationsForm.Location : Point.Empty;
-      ProgramSettings.Relations.WindowSize = RelationsForm != null && ProgramSettings.RememberWindowLocation ? RelationsForm.Size : Size.Empty;
-      ProgramSettings.Locations.WindowLocation = LocationsForm != null && ProgramSettings.RememberWindowLocation ? LocationsForm.Location : Point.Empty;
-      ProgramSettings.Locations.WindowSize = LocationsForm != null && ProgramSettings.RememberWindowLocation ? LocationsForm.Size : Size.Empty;
       string settingsFilePath = GetSettingsFilePath();
       try {
         File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(ProgramSettings, JsonSerOptions), Encoding.UTF8);
       } catch { }
-
-      LogMonitorForm?.Close();
-      RelationsForm?.Close();
-      LocationsForm?.Close();
     }
 
     public static string GetString(string value, string preValue = "") {
@@ -1260,10 +1041,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       UeberToolStripMenuItem.Enabled = enable;
       LokalerCacheToolStripMenuItem.Enabled = enable;
       AufUpdatePruefenToolStripMenuItem.Enabled = enable;
-      BeziehungenBereitstellenToolStripMenuItem.Enabled = enable;
-      BeziehungenUebernehmenToolStripMenuItem.Enabled = enable &&
-        string.IsNullOrWhiteSpace(ProgramSettings.Relations.RPC_URL) &&
-        string.IsNullOrWhiteSpace(ProgramSettings.Relations.RPC_Channel);
     }
 
     private void TextBoxHandle_TextChanged(object sender, EventArgs e) {
@@ -1307,9 +1084,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
           UcResize.BackColor = WindowLocked ? Color.Transparent : ProgramSettings.Colors.AppSplitterColor;
           UcResize.Cursor = WindowLocked ? Cursors.Default : Cursors.SizeWE;
         }
-        LogMonitorForm?.LockUnlockWindow(WindowLocked);
-        RelationsForm?.LockUnlockWindow(WindowLocked);
-        LocationsForm?.LockUnlockWindow(WindowLocked);
       }
     }
 
@@ -1341,28 +1115,6 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       ToolTipHandleQuery.SetToolTip(control, text ?? control.Text);
     }
 
-    public static Color GetRelationColor(Settings programSettings, RelationValue relation) {
-      var colorRelation = relation switch {
-        RelationValue.Friendly => programSettings.Colors.AppRelationFriendlyForeColor,
-        RelationValue.Neutral => programSettings.Colors.AppRelationNeutralForeColor,
-        RelationValue.Bogey => programSettings.Colors.AppRelationBogeyForeColor,
-        RelationValue.Bandit => programSettings.Colors.AppRelationBanditForeColor,
-        _ => programSettings.Colors.AppBackColor,
-      };
-      return colorRelation;
-    }
-
-    public static Color GetRelationInactiveColor(Settings programSettings, RelationValue relation) {
-      var colorRelation = relation switch {
-        RelationValue.Friendly => programSettings.Colors.AppRelationFriendlyBackColor,
-        RelationValue.Neutral => programSettings.Colors.AppRelationNeutralBackColor,
-        RelationValue.Bogey => programSettings.Colors.AppRelationBogeyBackColor,
-        RelationValue.Bandit => programSettings.Colors.AppRelationBanditBackColor,
-        _ => programSettings.Colors.AppBackColor,
-      };
-      return colorRelation;
-    }
-
     internal static bool ShouldSnap(int pos, int edge) {
       int delta = pos - edge;
       return (delta < 0) || (delta > 0 && delta <= SnapDistance);
@@ -1383,42 +1135,15 @@ namespace Star_Citizen_Handle_Query.Dialogs {
       CheckSnap(this, Location);
     }
 
-    private void BeziehungenBereitstellenToolStripMenuItem_Click(object sender, EventArgs e) {
-      using SaveFileDialog svd = new() {
-        DefaultExt = "json",
-        FileName = "Relations.json",
-        Filter = "JSON (*.json)|*.json",
-        OverwritePrompt = true
-      };
-      if (svd.ShowDialog() == DialogResult.OK) {
-        RelationsForm?.ExportRelationInfos(svd.FileName);
-      }
-    }
-
-    private void BeziehungenUebernehmenToolStripMenuItem_Click(object sender, EventArgs e) {
-      using OpenFileDialog ofd = new() {
-        Filter = "JSON (*.json)|*.json"
-      };
-      if (ofd.ShowDialog() == DialogResult.OK) {
-        RelationsForm?.ImportRelationInfos(ofd.FileName);
-      }
-    }
-
     private void FormHandleQuery_Activated(object sender, EventArgs e) {
       if (ProgramSettings.WindowIgnoreMouseInput) {
         _ = User32Wrappers.SetWindowLongA(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered);
-        LogMonitorForm?.SetIgnoreMouseInput(false);
-        LocationsForm?.SetIgnoreMouseInput(false);
-        RelationsForm?.SetIgnoreMouseInput(false);
       }
     }
 
     private void FormHandleQuery_Deactivate(object sender, EventArgs e) {
       if (ProgramSettings.WindowIgnoreMouseInput) {
         _ = User32Wrappers.SetWindowLongA(Handle, User32Wrappers.GWL.ExStyle, InitialWindowStyle | (int)User32Wrappers.WS_EX.Layered | (int)User32Wrappers.WS_EX.Transparent);
-        LogMonitorForm?.SetIgnoreMouseInput();
-        LocationsForm?.SetIgnoreMouseInput();
-        RelationsForm?.SetIgnoreMouseInput();
       }
     }
 

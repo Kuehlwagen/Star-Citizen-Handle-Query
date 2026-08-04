@@ -49,7 +49,6 @@
       ButtonStandard = new Button();
       GroupBoxAnzeige = new GroupBox();
       CheckBoxCompactMode = new CheckBox();
-      CheckBoxErweitert = new CheckBox();
       ComboBoxColorThemes = new ComboBox();
       ButtonFarbenStandard = new Button();
       LabelFarben = new Label();
@@ -64,70 +63,9 @@
       ButtonSplitterColor = new Button();
       ButtonBackColor = new Button();
       ButtonForeColorInactive = new Button();
-      ButtonRelationBogeyBackColor = new Button();
-      ButtonStatusActiveBackColor = new Button();
-      ButtonRelationBogeyForeColor = new Button();
-      ButtonStatusActiveForeColor = new Button();
-      ButtonRelationOrganizationBackColor = new Button();
-      ButtonRelationNeutralBackColor = new Button();
-      ButtonStatusInitializingBackColor = new Button();
-      ButtonRelationOrganizationForeColor = new Button();
-      ButtonRelationNeutralForeColor = new Button();
-      ButtonStatusInitializingForeColor = new Button();
-      ButtonRelationBanditBackColor = new Button();
-      ButtonRelationFriendlyBackColor = new Button();
-      ButtonStatusInactiveBackColor = new Button();
-      ButtonRelationBanditForeColor = new Button();
-      ButtonRelationFriendlyForeColor = new Button();
-      ButtonStatusInactiveForeColor = new Button();
       ButtonForeColor = new Button();
       LabelMaxAffiliationen = new Label();
       CheckBoxUnkenntlicheAffiliationenAusblenden = new CheckBox();
-      NumericUpDownRelationsEntriesMaximum = new NumericUpDown();
-      LabelRelationsEntriesMaximum = new Label();
-      CheckBoxSortRelationsAlphabetically = new CheckBox();
-      CheckBoxShowRelations = new CheckBox();
-      LabelLogEintragAnzeigedauerMinuten = new Label();
-      LabelLogEintragAnzeigeDauer = new Label();
-      NumericUpDownLogEintragAnzeigedauer = new NumericUpDown();
-      NumericUpDownLogEintraegeMaximum = new NumericUpDown();
-      LabelLogEintraegeMaximum = new Label();
-      CheckBoxLogMonitorFilterLoadingScreenDuration = new CheckBox();
-      CheckBoxLogMonitorFilterCorpse = new CheckBox();
-      CheckBoxShowLog = new CheckBox();
-      GroupBoxLocation = new GroupBox();
-      NumericUpDownOrteEintraegeMaximum = new NumericUpDown();
-      LabelOrteEintraegeMaximum = new Label();
-      CheckBoxShowLocations = new CheckBox();
-      TextBoxRMB_URL = new TextBox();
-      TextBoxMMB_URL = new TextBox();
-      TextBoxLMB_URL = new TextBox();
-      LabelRMB_URL = new Label();
-      LabelMMB_URL = new Label();
-      LabelLMB_URL = new Label();
-      GroupBoxLogMonitor = new GroupBox();
-      CheckBoxVehicleDestruction = new CheckBox();
-      CheckBoxOwnHandle = new CheckBox();
-      CheckBoxLogMonitorShowHostilityEvents = new CheckBox();
-      LabelNPCNamen = new Label();
-      CheckBoxNPCTodeAnzeigen = new CheckBox();
-      TextBoxWebhookURL = new TextBox();
-      LabelWebhookURL = new Label();
-      TextBoxNPCNamen = new TextBox();
-      TextBoxLogMonitorHandleFilter = new TextBox();
-      ButtonWebhookTest = new Button();
-      LabelLogMonitorHandleFilter = new Label();
-      CheckBoxCheckCompleteFile = new CheckBox();
-      GroupBoxBeziehungen = new GroupBox();
-      ButtonEditPrcChannels = new Button();
-      LabelGRPCKanalPasswort = new Label();
-      CheckBoxRPCSyncOnStartup = new CheckBox();
-      TextBoxGRPCChannelUser = new TextBox();
-      TextBoxGRPCChannelPassword = new TextBox();
-      TextBoxGRPCChannel = new TextBox();
-      TextBoxGRPCURL = new TextBox();
-      LabelGRPCURL = new Label();
-      LabelGRPCChannel = new Label();
       ToolTipSettings = new ToolTip(components);
       ((System.ComponentModel.ISupportInitialize)NumericUpDownLokalerCacheAlter).BeginInit();
       GroupBoxFenster.SuspendLayout();
@@ -136,13 +74,6 @@
       GroupBoxAnzeige.SuspendLayout();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownErgebnisAutomatischLeeren).BeginInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownAffiliationenMaximum).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)NumericUpDownRelationsEntriesMaximum).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)NumericUpDownLogEintragAnzeigedauer).BeginInit();
-      ((System.ComponentModel.ISupportInitialize)NumericUpDownLogEintraegeMaximum).BeginInit();
-      GroupBoxLocation.SuspendLayout();
-      ((System.ComponentModel.ISupportInitialize)NumericUpDownOrteEintraegeMaximum).BeginInit();
-      GroupBoxLogMonitor.SuspendLayout();
-      GroupBoxBeziehungen.SuspendLayout();
       SuspendLayout();
       // 
       // CheckBoxFensterMauseingabenIgnorieren
@@ -181,7 +112,7 @@
       // 
       ButtonSpeichern.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
       ButtonSpeichern.FlatStyle = FlatStyle.Flat;
-      ButtonSpeichern.Location = new Point(12, 727);
+      ButtonSpeichern.Location = new Point(12, 368);
       ButtonSpeichern.Name = "ButtonSpeichern";
       ButtonSpeichern.Size = new Size(75, 28);
       ButtonSpeichern.TabIndex = 6;
@@ -193,7 +124,7 @@
       // 
       ButtonSchliessen.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
       ButtonSchliessen.FlatStyle = FlatStyle.Flat;
-      ButtonSchliessen.Location = new Point(93, 727);
+      ButtonSchliessen.Location = new Point(93, 368);
       ButtonSchliessen.Name = "ButtonSchliessen";
       ButtonSchliessen.Size = new Size(75, 28);
       ButtonSchliessen.TabIndex = 7;
@@ -221,6 +152,7 @@
       // 
       // GroupBoxFenster
       // 
+      GroupBoxFenster.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
       GroupBoxFenster.Controls.Add(CheckBoxEscAusblenden);
       GroupBoxFenster.Controls.Add(CheckBoxPositionMerken);
       GroupBoxFenster.Controls.Add(CheckBoxAltTabEnabled);
@@ -235,9 +167,9 @@
       GroupBoxFenster.Controls.Add(LabelFensterDeckkraftProzent);
       GroupBoxFenster.FlatStyle = FlatStyle.Flat;
       GroupBoxFenster.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxFenster.Location = new Point(12, 365);
+      GroupBoxFenster.Location = new Point(370, 22);
       GroupBoxFenster.Name = "GroupBoxFenster";
-      GroupBoxFenster.Size = new Size(352, 207);
+      GroupBoxFenster.Size = new Size(379, 207);
       GroupBoxFenster.TabIndex = 1;
       GroupBoxFenster.TabStop = false;
       GroupBoxFenster.Text = "Fenster";
@@ -377,15 +309,15 @@
       // 
       // GroupBoxLokalerCache
       // 
-      GroupBoxLokalerCache.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+      GroupBoxLokalerCache.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
       GroupBoxLokalerCache.Controls.Add(LabelLokalerCacheAlterTage);
       GroupBoxLokalerCache.Controls.Add(NumericUpDownLokalerCacheAlter);
       GroupBoxLokalerCache.Controls.Add(LabelLokalerCacheAlter);
       GroupBoxLokalerCache.FlatStyle = FlatStyle.Flat;
       GroupBoxLokalerCache.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxLokalerCache.Location = new Point(12, 578);
+      GroupBoxLokalerCache.Location = new Point(370, 235);
       GroupBoxLokalerCache.Name = "GroupBoxLokalerCache";
-      GroupBoxLokalerCache.Size = new Size(352, 140);
+      GroupBoxLokalerCache.Size = new Size(379, 124);
       GroupBoxLokalerCache.TabIndex = 2;
       GroupBoxLokalerCache.TabStop = false;
       GroupBoxLokalerCache.Text = "Lokaler Cache";
@@ -394,7 +326,7 @@
       // 
       ButtonStandard.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
       ButtonStandard.FlatStyle = FlatStyle.Flat;
-      ButtonStandard.Location = new Point(711, 727);
+      ButtonStandard.Location = new Point(674, 368);
       ButtonStandard.Name = "ButtonStandard";
       ButtonStandard.Size = new Size(75, 28);
       ButtonStandard.TabIndex = 8;
@@ -405,7 +337,6 @@
       // GroupBoxAnzeige
       // 
       GroupBoxAnzeige.Controls.Add(CheckBoxCompactMode);
-      GroupBoxAnzeige.Controls.Add(CheckBoxErweitert);
       GroupBoxAnzeige.Controls.Add(ComboBoxColorThemes);
       GroupBoxAnzeige.Controls.Add(ButtonFarbenStandard);
       GroupBoxAnzeige.Controls.Add(LabelFarben);
@@ -421,22 +352,6 @@
       GroupBoxAnzeige.Controls.Add(ButtonSplitterColor);
       GroupBoxAnzeige.Controls.Add(ButtonBackColor);
       GroupBoxAnzeige.Controls.Add(ButtonForeColorInactive);
-      GroupBoxAnzeige.Controls.Add(ButtonRelationBogeyBackColor);
-      GroupBoxAnzeige.Controls.Add(ButtonStatusActiveBackColor);
-      GroupBoxAnzeige.Controls.Add(ButtonRelationBogeyForeColor);
-      GroupBoxAnzeige.Controls.Add(ButtonStatusActiveForeColor);
-      GroupBoxAnzeige.Controls.Add(ButtonRelationOrganizationBackColor);
-      GroupBoxAnzeige.Controls.Add(ButtonRelationNeutralBackColor);
-      GroupBoxAnzeige.Controls.Add(ButtonStatusInitializingBackColor);
-      GroupBoxAnzeige.Controls.Add(ButtonRelationOrganizationForeColor);
-      GroupBoxAnzeige.Controls.Add(ButtonRelationNeutralForeColor);
-      GroupBoxAnzeige.Controls.Add(ButtonStatusInitializingForeColor);
-      GroupBoxAnzeige.Controls.Add(ButtonRelationBanditBackColor);
-      GroupBoxAnzeige.Controls.Add(ButtonRelationFriendlyBackColor);
-      GroupBoxAnzeige.Controls.Add(ButtonStatusInactiveBackColor);
-      GroupBoxAnzeige.Controls.Add(ButtonRelationBanditForeColor);
-      GroupBoxAnzeige.Controls.Add(ButtonRelationFriendlyForeColor);
-      GroupBoxAnzeige.Controls.Add(ButtonStatusInactiveForeColor);
       GroupBoxAnzeige.Controls.Add(ButtonForeColor);
       GroupBoxAnzeige.Controls.Add(LabelMaxAffiliationen);
       GroupBoxAnzeige.Controls.Add(CheckBoxUnkenntlicheAffiliationenAusblenden);
@@ -460,17 +375,6 @@
       CheckBoxCompactMode.Text = "Kompaktmodus";
       CheckBoxCompactMode.UseVisualStyleBackColor = true;
       CheckBoxCompactMode.CheckedChanged += CheckBoxCompactMode_CheckedChanged;
-      // 
-      // CheckBoxErweitert
-      // 
-      CheckBoxErweitert.AutoSize = true;
-      CheckBoxErweitert.Location = new Point(62, 250);
-      CheckBoxErweitert.Name = "CheckBoxErweitert";
-      CheckBoxErweitert.Size = new Size(72, 19);
-      CheckBoxErweitert.TabIndex = 14;
-      CheckBoxErweitert.Text = "Erweitert";
-      CheckBoxErweitert.UseVisualStyleBackColor = true;
-      CheckBoxErweitert.CheckedChanged += CheckBoxErweitert_CheckedChanged;
       // 
       // ComboBoxColorThemes
       // 
@@ -628,214 +532,6 @@
       ButtonForeColorInactive.BackColorChanged += ButtonForeColorInactive_BackColorChanged;
       ButtonForeColorInactive.Click += ButtonForeColorInactive_Click;
       // 
-      // ButtonRelationBogeyBackColor
-      // 
-      ButtonRelationBogeyBackColor.Cursor = Cursors.Hand;
-      ButtonRelationBogeyBackColor.FlatStyle = FlatStyle.Flat;
-      ButtonRelationBogeyBackColor.Location = new Point(145, 305);
-      ButtonRelationBogeyBackColor.Name = "ButtonRelationBogeyBackColor";
-      ButtonRelationBogeyBackColor.Size = new Size(20, 12);
-      ButtonRelationBogeyBackColor.TabIndex = 30;
-      ButtonRelationBogeyBackColor.UseVisualStyleBackColor = true;
-      ButtonRelationBogeyBackColor.Visible = false;
-      ButtonRelationBogeyBackColor.BackColorChanged += ButtonRelationBogeyBackColor_BackColorChanged;
-      ButtonRelationBogeyBackColor.Click += ButtonRelationBogeyBackColor_Click;
-      // 
-      // ButtonStatusActiveBackColor
-      // 
-      ButtonStatusActiveBackColor.Cursor = Cursors.Hand;
-      ButtonStatusActiveBackColor.FlatStyle = FlatStyle.Flat;
-      ButtonStatusActiveBackColor.Location = new Point(145, 287);
-      ButtonStatusActiveBackColor.Name = "ButtonStatusActiveBackColor";
-      ButtonStatusActiveBackColor.Size = new Size(20, 12);
-      ButtonStatusActiveBackColor.TabIndex = 24;
-      ButtonStatusActiveBackColor.UseVisualStyleBackColor = true;
-      ButtonStatusActiveBackColor.Visible = false;
-      ButtonStatusActiveBackColor.BackColorChanged += ButtonStatusActiveBackColor_BackColorChanged;
-      ButtonStatusActiveBackColor.Click += ButtonStatusActiveBackColor_Click;
-      // 
-      // ButtonRelationBogeyForeColor
-      // 
-      ButtonRelationBogeyForeColor.Cursor = Cursors.Hand;
-      ButtonRelationBogeyForeColor.FlatStyle = FlatStyle.Flat;
-      ButtonRelationBogeyForeColor.Location = new Point(119, 305);
-      ButtonRelationBogeyForeColor.Name = "ButtonRelationBogeyForeColor";
-      ButtonRelationBogeyForeColor.Size = new Size(20, 12);
-      ButtonRelationBogeyForeColor.TabIndex = 29;
-      ButtonRelationBogeyForeColor.UseVisualStyleBackColor = true;
-      ButtonRelationBogeyForeColor.Visible = false;
-      ButtonRelationBogeyForeColor.BackColorChanged += ButtonRelationBogeyForeColor_BackColorChanged;
-      ButtonRelationBogeyForeColor.Click += ButtonRelationBogeyForeColor_Click;
-      // 
-      // ButtonStatusActiveForeColor
-      // 
-      ButtonStatusActiveForeColor.Cursor = Cursors.Hand;
-      ButtonStatusActiveForeColor.FlatStyle = FlatStyle.Flat;
-      ButtonStatusActiveForeColor.Location = new Point(119, 287);
-      ButtonStatusActiveForeColor.Name = "ButtonStatusActiveForeColor";
-      ButtonStatusActiveForeColor.Size = new Size(20, 12);
-      ButtonStatusActiveForeColor.TabIndex = 23;
-      ButtonStatusActiveForeColor.UseVisualStyleBackColor = true;
-      ButtonStatusActiveForeColor.Visible = false;
-      ButtonStatusActiveForeColor.BackColorChanged += ButtonStatusActiveForeColor_BackColorChanged;
-      ButtonStatusActiveForeColor.Click += ButtonStatusActiveForeColor_Click;
-      // 
-      // ButtonRelationOrganizationBackColor
-      // 
-      ButtonRelationOrganizationBackColor.Cursor = Cursors.Hand;
-      ButtonRelationOrganizationBackColor.FlatStyle = FlatStyle.Flat;
-      ButtonRelationOrganizationBackColor.Location = new Point(93, 323);
-      ButtonRelationOrganizationBackColor.Name = "ButtonRelationOrganizationBackColor";
-      ButtonRelationOrganizationBackColor.Size = new Size(20, 12);
-      ButtonRelationOrganizationBackColor.TabIndex = 34;
-      ButtonRelationOrganizationBackColor.UseVisualStyleBackColor = true;
-      ButtonRelationOrganizationBackColor.Visible = false;
-      ButtonRelationOrganizationBackColor.BackColorChanged += ButtonRelationOrganizationBackColor_BackColorChanged;
-      ButtonRelationOrganizationBackColor.Click += ButtonRelationOrganizationBackColor_Click;
-      // 
-      // ButtonRelationNeutralBackColor
-      // 
-      ButtonRelationNeutralBackColor.Cursor = Cursors.Hand;
-      ButtonRelationNeutralBackColor.FlatStyle = FlatStyle.Flat;
-      ButtonRelationNeutralBackColor.Location = new Point(93, 305);
-      ButtonRelationNeutralBackColor.Name = "ButtonRelationNeutralBackColor";
-      ButtonRelationNeutralBackColor.Size = new Size(20, 12);
-      ButtonRelationNeutralBackColor.TabIndex = 28;
-      ButtonRelationNeutralBackColor.UseVisualStyleBackColor = true;
-      ButtonRelationNeutralBackColor.Visible = false;
-      ButtonRelationNeutralBackColor.BackColorChanged += ButtonRelationNeutralBackColor_BackColorChanged;
-      ButtonRelationNeutralBackColor.Click += ButtonRelationNeutralBackColor_Click;
-      // 
-      // ButtonStatusInitializingBackColor
-      // 
-      ButtonStatusInitializingBackColor.Cursor = Cursors.Hand;
-      ButtonStatusInitializingBackColor.FlatStyle = FlatStyle.Flat;
-      ButtonStatusInitializingBackColor.Location = new Point(93, 287);
-      ButtonStatusInitializingBackColor.Name = "ButtonStatusInitializingBackColor";
-      ButtonStatusInitializingBackColor.Size = new Size(20, 12);
-      ButtonStatusInitializingBackColor.TabIndex = 22;
-      ButtonStatusInitializingBackColor.UseVisualStyleBackColor = true;
-      ButtonStatusInitializingBackColor.Visible = false;
-      ButtonStatusInitializingBackColor.BackColorChanged += ButtonStatusInitializingBackColor_BackColorChanged;
-      ButtonStatusInitializingBackColor.Click += ButtonStatusInitializingBackColor_Click;
-      // 
-      // ButtonRelationOrganizationForeColor
-      // 
-      ButtonRelationOrganizationForeColor.Cursor = Cursors.Hand;
-      ButtonRelationOrganizationForeColor.FlatStyle = FlatStyle.Flat;
-      ButtonRelationOrganizationForeColor.Location = new Point(67, 323);
-      ButtonRelationOrganizationForeColor.Name = "ButtonRelationOrganizationForeColor";
-      ButtonRelationOrganizationForeColor.Size = new Size(20, 12);
-      ButtonRelationOrganizationForeColor.TabIndex = 33;
-      ButtonRelationOrganizationForeColor.UseVisualStyleBackColor = true;
-      ButtonRelationOrganizationForeColor.Visible = false;
-      ButtonRelationOrganizationForeColor.BackColorChanged += ButtonRelationOrganizationForeColor_BackColorChanged;
-      ButtonRelationOrganizationForeColor.Click += ButtonRelationOrganizationForeColor_Click;
-      // 
-      // ButtonRelationNeutralForeColor
-      // 
-      ButtonRelationNeutralForeColor.Cursor = Cursors.Hand;
-      ButtonRelationNeutralForeColor.FlatStyle = FlatStyle.Flat;
-      ButtonRelationNeutralForeColor.Location = new Point(67, 305);
-      ButtonRelationNeutralForeColor.Name = "ButtonRelationNeutralForeColor";
-      ButtonRelationNeutralForeColor.Size = new Size(20, 12);
-      ButtonRelationNeutralForeColor.TabIndex = 27;
-      ButtonRelationNeutralForeColor.UseVisualStyleBackColor = true;
-      ButtonRelationNeutralForeColor.Visible = false;
-      ButtonRelationNeutralForeColor.BackColorChanged += ButtonRelationNeutralForeColor_BackColorChanged;
-      ButtonRelationNeutralForeColor.Click += ButtonRelationNeutralForeColor_Click;
-      // 
-      // ButtonStatusInitializingForeColor
-      // 
-      ButtonStatusInitializingForeColor.Cursor = Cursors.Hand;
-      ButtonStatusInitializingForeColor.FlatStyle = FlatStyle.Flat;
-      ButtonStatusInitializingForeColor.Location = new Point(67, 287);
-      ButtonStatusInitializingForeColor.Name = "ButtonStatusInitializingForeColor";
-      ButtonStatusInitializingForeColor.Size = new Size(20, 12);
-      ButtonStatusInitializingForeColor.TabIndex = 21;
-      ButtonStatusInitializingForeColor.UseVisualStyleBackColor = true;
-      ButtonStatusInitializingForeColor.Visible = false;
-      ButtonStatusInitializingForeColor.BackColorChanged += ButtonStatusInitializingForeColor_BackColorChanged;
-      ButtonStatusInitializingForeColor.Click += ButtonStatusInitializingForeColor_Click;
-      // 
-      // ButtonRelationBanditBackColor
-      // 
-      ButtonRelationBanditBackColor.Cursor = Cursors.Hand;
-      ButtonRelationBanditBackColor.FlatStyle = FlatStyle.Flat;
-      ButtonRelationBanditBackColor.Location = new Point(41, 323);
-      ButtonRelationBanditBackColor.Name = "ButtonRelationBanditBackColor";
-      ButtonRelationBanditBackColor.Size = new Size(20, 12);
-      ButtonRelationBanditBackColor.TabIndex = 32;
-      ButtonRelationBanditBackColor.UseVisualStyleBackColor = true;
-      ButtonRelationBanditBackColor.Visible = false;
-      ButtonRelationBanditBackColor.BackColorChanged += ButtonRelationBanditBackColor_BackColorChanged;
-      ButtonRelationBanditBackColor.Click += ButtonRelationBanditBackColor_Click;
-      // 
-      // ButtonRelationFriendlyBackColor
-      // 
-      ButtonRelationFriendlyBackColor.Cursor = Cursors.Hand;
-      ButtonRelationFriendlyBackColor.FlatStyle = FlatStyle.Flat;
-      ButtonRelationFriendlyBackColor.Location = new Point(41, 305);
-      ButtonRelationFriendlyBackColor.Name = "ButtonRelationFriendlyBackColor";
-      ButtonRelationFriendlyBackColor.Size = new Size(20, 12);
-      ButtonRelationFriendlyBackColor.TabIndex = 26;
-      ButtonRelationFriendlyBackColor.UseVisualStyleBackColor = true;
-      ButtonRelationFriendlyBackColor.Visible = false;
-      ButtonRelationFriendlyBackColor.BackColorChanged += ButtonRelationFriendlyBackColor_BackColorChanged;
-      ButtonRelationFriendlyBackColor.Click += ButtonRelationFriendlyBackColor_Click;
-      // 
-      // ButtonStatusInactiveBackColor
-      // 
-      ButtonStatusInactiveBackColor.Cursor = Cursors.Hand;
-      ButtonStatusInactiveBackColor.FlatStyle = FlatStyle.Flat;
-      ButtonStatusInactiveBackColor.Location = new Point(41, 287);
-      ButtonStatusInactiveBackColor.Name = "ButtonStatusInactiveBackColor";
-      ButtonStatusInactiveBackColor.Size = new Size(20, 12);
-      ButtonStatusInactiveBackColor.TabIndex = 20;
-      ButtonStatusInactiveBackColor.UseVisualStyleBackColor = true;
-      ButtonStatusInactiveBackColor.Visible = false;
-      ButtonStatusInactiveBackColor.BackColorChanged += ButtonStatusInactiveBackColor_BackColorChanged;
-      ButtonStatusInactiveBackColor.Click += ButtonStatusInactiveBackColor_Click;
-      // 
-      // ButtonRelationBanditForeColor
-      // 
-      ButtonRelationBanditForeColor.Cursor = Cursors.Hand;
-      ButtonRelationBanditForeColor.FlatStyle = FlatStyle.Flat;
-      ButtonRelationBanditForeColor.Location = new Point(15, 323);
-      ButtonRelationBanditForeColor.Name = "ButtonRelationBanditForeColor";
-      ButtonRelationBanditForeColor.Size = new Size(20, 12);
-      ButtonRelationBanditForeColor.TabIndex = 31;
-      ButtonRelationBanditForeColor.UseVisualStyleBackColor = true;
-      ButtonRelationBanditForeColor.Visible = false;
-      ButtonRelationBanditForeColor.BackColorChanged += ButtonRelationBanditForeColor_BackColorChanged;
-      ButtonRelationBanditForeColor.Click += ButtonRelationBanditForeColor_Click;
-      // 
-      // ButtonRelationFriendlyForeColor
-      // 
-      ButtonRelationFriendlyForeColor.Cursor = Cursors.Hand;
-      ButtonRelationFriendlyForeColor.FlatStyle = FlatStyle.Flat;
-      ButtonRelationFriendlyForeColor.Location = new Point(15, 305);
-      ButtonRelationFriendlyForeColor.Name = "ButtonRelationFriendlyForeColor";
-      ButtonRelationFriendlyForeColor.Size = new Size(20, 12);
-      ButtonRelationFriendlyForeColor.TabIndex = 25;
-      ButtonRelationFriendlyForeColor.UseVisualStyleBackColor = true;
-      ButtonRelationFriendlyForeColor.Visible = false;
-      ButtonRelationFriendlyForeColor.BackColorChanged += ButtonRelationFriendlyForeColor_BackColorChanged;
-      ButtonRelationFriendlyForeColor.Click += ButtonRelationFriendlyForeColor_Click;
-      // 
-      // ButtonStatusInactiveForeColor
-      // 
-      ButtonStatusInactiveForeColor.Cursor = Cursors.Hand;
-      ButtonStatusInactiveForeColor.FlatStyle = FlatStyle.Flat;
-      ButtonStatusInactiveForeColor.Location = new Point(15, 287);
-      ButtonStatusInactiveForeColor.Name = "ButtonStatusInactiveForeColor";
-      ButtonStatusInactiveForeColor.Size = new Size(20, 12);
-      ButtonStatusInactiveForeColor.TabIndex = 19;
-      ButtonStatusInactiveForeColor.UseVisualStyleBackColor = true;
-      ButtonStatusInactiveForeColor.Visible = false;
-      ButtonStatusInactiveForeColor.BackColorChanged += ButtonStatusInactiveForeColor_BackColorChanged;
-      ButtonStatusInactiveForeColor.Click += ButtonStatusInactiveForeColor_Click;
-      // 
       // ButtonForeColor
       // 
       ButtonForeColor.Cursor = Cursors.Hand;
@@ -868,543 +564,6 @@
       CheckBoxUnkenntlicheAffiliationenAusblenden.UseVisualStyleBackColor = true;
       CheckBoxUnkenntlicheAffiliationenAusblenden.CheckedChanged += CheckBoxUnkenntlicheAffiliationenAusblenden_CheckedChanged;
       // 
-      // NumericUpDownRelationsEntriesMaximum
-      // 
-      NumericUpDownRelationsEntriesMaximum.BackColor = Color.FromArgb(19, 26, 33);
-      NumericUpDownRelationsEntriesMaximum.Enabled = false;
-      NumericUpDownRelationsEntriesMaximum.ForeColor = Color.FromArgb(57, 206, 216);
-      NumericUpDownRelationsEntriesMaximum.Location = new Point(190, 76);
-      NumericUpDownRelationsEntriesMaximum.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
-      NumericUpDownRelationsEntriesMaximum.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-      NumericUpDownRelationsEntriesMaximum.Name = "NumericUpDownRelationsEntriesMaximum";
-      NumericUpDownRelationsEntriesMaximum.Size = new Size(44, 23);
-      NumericUpDownRelationsEntriesMaximum.TabIndex = 3;
-      NumericUpDownRelationsEntriesMaximum.Value = new decimal(new int[] { 10, 0, 0, 0 });
-      NumericUpDownRelationsEntriesMaximum.ValueChanged += NumericUpDownRelationsEntriesMaximum_ValueChanged;
-      // 
-      // LabelRelationsEntriesMaximum
-      // 
-      LabelRelationsEntriesMaximum.AutoSize = true;
-      LabelRelationsEntriesMaximum.Location = new Point(34, 78);
-      LabelRelationsEntriesMaximum.Name = "LabelRelationsEntriesMaximum";
-      LabelRelationsEntriesMaximum.Size = new Size(110, 15);
-      LabelRelationsEntriesMaximum.TabIndex = 2;
-      LabelRelationsEntriesMaximum.Text = "Einträge Maximum:";
-      // 
-      // CheckBoxSortRelationsAlphabetically
-      // 
-      CheckBoxSortRelationsAlphabetically.AutoSize = true;
-      CheckBoxSortRelationsAlphabetically.Enabled = false;
-      CheckBoxSortRelationsAlphabetically.Location = new Point(34, 54);
-      CheckBoxSortRelationsAlphabetically.Name = "CheckBoxSortRelationsAlphabetically";
-      CheckBoxSortRelationsAlphabetically.Size = new Size(144, 19);
-      CheckBoxSortRelationsAlphabetically.TabIndex = 1;
-      CheckBoxSortRelationsAlphabetically.Text = "Alphabetisch sortieren";
-      CheckBoxSortRelationsAlphabetically.UseVisualStyleBackColor = true;
-      CheckBoxSortRelationsAlphabetically.CheckedChanged += CheckBoxSortRelationsAlphabetically_CheckedChanged;
-      // 
-      // CheckBoxShowRelations
-      // 
-      CheckBoxShowRelations.AutoSize = true;
-      CheckBoxShowRelations.Location = new Point(15, 27);
-      CheckBoxShowRelations.Name = "CheckBoxShowRelations";
-      CheckBoxShowRelations.Size = new Size(144, 19);
-      CheckBoxShowRelations.TabIndex = 0;
-      CheckBoxShowRelations.Text = "Beziehungen anzeigen";
-      CheckBoxShowRelations.UseVisualStyleBackColor = true;
-      CheckBoxShowRelations.CheckedChanged += CheckBoxShowRelations_CheckedChanged;
-      // 
-      // LabelLogEintragAnzeigedauerMinuten
-      // 
-      LabelLogEintragAnzeigedauerMinuten.AutoSize = true;
-      LabelLogEintragAnzeigedauerMinuten.Location = new Point(240, 83);
-      LabelLogEintragAnzeigedauerMinuten.Name = "LabelLogEintragAnzeigedauerMinuten";
-      LabelLogEintragAnzeigedauerMinuten.Size = new Size(60, 15);
-      LabelLogEintragAnzeigedauerMinuten.TabIndex = 5;
-      LabelLogEintragAnzeigedauerMinuten.Text = "Minute(n)";
-      // 
-      // LabelLogEintragAnzeigeDauer
-      // 
-      LabelLogEintragAnzeigeDauer.AutoSize = true;
-      LabelLogEintragAnzeigeDauer.Location = new Point(32, 83);
-      LabelLogEintragAnzeigeDauer.Name = "LabelLogEintragAnzeigeDauer";
-      LabelLogEintragAnzeigeDauer.Size = new Size(122, 15);
-      LabelLogEintragAnzeigeDauer.TabIndex = 3;
-      LabelLogEintragAnzeigeDauer.Text = "Eintrag Anzeigedauer:";
-      // 
-      // NumericUpDownLogEintragAnzeigedauer
-      // 
-      NumericUpDownLogEintragAnzeigedauer.BackColor = Color.FromArgb(19, 26, 33);
-      NumericUpDownLogEintragAnzeigedauer.Enabled = false;
-      NumericUpDownLogEintragAnzeigedauer.ForeColor = Color.FromArgb(57, 206, 216);
-      NumericUpDownLogEintragAnzeigedauer.Location = new Point(190, 81);
-      NumericUpDownLogEintragAnzeigedauer.Maximum = new decimal(new int[] { 60, 0, 0, 0 });
-      NumericUpDownLogEintragAnzeigedauer.Name = "NumericUpDownLogEintragAnzeigedauer";
-      NumericUpDownLogEintragAnzeigedauer.Size = new Size(44, 23);
-      NumericUpDownLogEintragAnzeigedauer.TabIndex = 4;
-      NumericUpDownLogEintragAnzeigedauer.Value = new decimal(new int[] { 10, 0, 0, 0 });
-      NumericUpDownLogEintragAnzeigedauer.ValueChanged += NumericUpDownLogEintragAnzeigedauer_ValueChanged;
-      // 
-      // NumericUpDownLogEintraegeMaximum
-      // 
-      NumericUpDownLogEintraegeMaximum.BackColor = Color.FromArgb(19, 26, 33);
-      NumericUpDownLogEintraegeMaximum.Enabled = false;
-      NumericUpDownLogEintraegeMaximum.ForeColor = Color.FromArgb(57, 206, 216);
-      NumericUpDownLogEintraegeMaximum.Location = new Point(190, 52);
-      NumericUpDownLogEintraegeMaximum.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
-      NumericUpDownLogEintraegeMaximum.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-      NumericUpDownLogEintraegeMaximum.Name = "NumericUpDownLogEintraegeMaximum";
-      NumericUpDownLogEintraegeMaximum.Size = new Size(44, 23);
-      NumericUpDownLogEintraegeMaximum.TabIndex = 2;
-      NumericUpDownLogEintraegeMaximum.Value = new decimal(new int[] { 10, 0, 0, 0 });
-      NumericUpDownLogEintraegeMaximum.ValueChanged += NumericUpDownLogEintraegeMaximum_ValueChanged;
-      // 
-      // LabelLogEintraegeMaximum
-      // 
-      LabelLogEintraegeMaximum.AutoSize = true;
-      LabelLogEintraegeMaximum.Location = new Point(32, 54);
-      LabelLogEintraegeMaximum.Name = "LabelLogEintraegeMaximum";
-      LabelLogEintraegeMaximum.Size = new Size(110, 15);
-      LabelLogEintraegeMaximum.TabIndex = 1;
-      LabelLogEintraegeMaximum.Text = "Einträge Maximum:";
-      // 
-      // CheckBoxLogMonitorFilterLoadingScreenDuration
-      // 
-      CheckBoxLogMonitorFilterLoadingScreenDuration.AutoSize = true;
-      CheckBoxLogMonitorFilterLoadingScreenDuration.Enabled = false;
-      CheckBoxLogMonitorFilterLoadingScreenDuration.Location = new Point(190, 135);
-      CheckBoxLogMonitorFilterLoadingScreenDuration.Name = "CheckBoxLogMonitorFilterLoadingScreenDuration";
-      CheckBoxLogMonitorFilterLoadingScreenDuration.Size = new Size(193, 19);
-      CheckBoxLogMonitorFilterLoadingScreenDuration.TabIndex = 9;
-      CheckBoxLogMonitorFilterLoadingScreenDuration.Text = "Ladebildschirm-Dauer anzeigen";
-      CheckBoxLogMonitorFilterLoadingScreenDuration.UseVisualStyleBackColor = true;
-      CheckBoxLogMonitorFilterLoadingScreenDuration.CheckedChanged += CheckBoxLogMonitorFilterLoadingScreenDuration_CheckedChanged;
-      // 
-      // CheckBoxLogMonitorFilterCorpse
-      // 
-      CheckBoxLogMonitorFilterCorpse.AutoSize = true;
-      CheckBoxLogMonitorFilterCorpse.Enabled = false;
-      CheckBoxLogMonitorFilterCorpse.Location = new Point(34, 110);
-      CheckBoxLogMonitorFilterCorpse.Name = "CheckBoxLogMonitorFilterCorpse";
-      CheckBoxLogMonitorFilterCorpse.Size = new Size(135, 19);
-      CheckBoxLogMonitorFilterCorpse.TabIndex = 6;
-      CheckBoxLogMonitorFilterCorpse.Text = "Spielertode anzeigen";
-      CheckBoxLogMonitorFilterCorpse.UseVisualStyleBackColor = true;
-      CheckBoxLogMonitorFilterCorpse.CheckedChanged += CheckBoxLogMonitorFilterCorpse_CheckedChanged;
-      // 
-      // CheckBoxShowLog
-      // 
-      CheckBoxShowLog.AutoSize = true;
-      CheckBoxShowLog.Location = new Point(15, 27);
-      CheckBoxShowLog.Name = "CheckBoxShowLog";
-      CheckBoxShowLog.Size = new Size(144, 19);
-      CheckBoxShowLog.TabIndex = 0;
-      CheckBoxShowLog.Text = "Log-Monitor anzeigen";
-      CheckBoxShowLog.UseVisualStyleBackColor = true;
-      CheckBoxShowLog.CheckedChanged += CheckBoxShowLog_CheckedChanged;
-      // 
-      // GroupBoxLocation
-      // 
-      GroupBoxLocation.Controls.Add(NumericUpDownOrteEintraegeMaximum);
-      GroupBoxLocation.Controls.Add(LabelOrteEintraegeMaximum);
-      GroupBoxLocation.Controls.Add(CheckBoxShowLocations);
-      GroupBoxLocation.Controls.Add(TextBoxRMB_URL);
-      GroupBoxLocation.Controls.Add(TextBoxMMB_URL);
-      GroupBoxLocation.Controls.Add(TextBoxLMB_URL);
-      GroupBoxLocation.Controls.Add(LabelRMB_URL);
-      GroupBoxLocation.Controls.Add(LabelMMB_URL);
-      GroupBoxLocation.Controls.Add(LabelLMB_URL);
-      GroupBoxLocation.FlatStyle = FlatStyle.Flat;
-      GroupBoxLocation.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxLocation.Location = new Point(370, 12);
-      GroupBoxLocation.Name = "GroupBoxLocation";
-      GroupBoxLocation.Size = new Size(416, 170);
-      GroupBoxLocation.TabIndex = 3;
-      GroupBoxLocation.TabStop = false;
-      GroupBoxLocation.Text = "Orte (Alt + Eingabe)";
-      // 
-      // NumericUpDownOrteEintraegeMaximum
-      // 
-      NumericUpDownOrteEintraegeMaximum.BackColor = Color.FromArgb(19, 26, 33);
-      NumericUpDownOrteEintraegeMaximum.Enabled = false;
-      NumericUpDownOrteEintraegeMaximum.ForeColor = Color.FromArgb(57, 206, 216);
-      NumericUpDownOrteEintraegeMaximum.Location = new Point(190, 48);
-      NumericUpDownOrteEintraegeMaximum.Maximum = new decimal(new int[] { 50, 0, 0, 0 });
-      NumericUpDownOrteEintraegeMaximum.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-      NumericUpDownOrteEintraegeMaximum.Name = "NumericUpDownOrteEintraegeMaximum";
-      NumericUpDownOrteEintraegeMaximum.Size = new Size(44, 23);
-      NumericUpDownOrteEintraegeMaximum.TabIndex = 2;
-      NumericUpDownOrteEintraegeMaximum.Value = new decimal(new int[] { 10, 0, 0, 0 });
-      NumericUpDownOrteEintraegeMaximum.ValueChanged += NumericUpDownOrteEintraegeMaximum_ValueChanged;
-      // 
-      // LabelOrteEintraegeMaximum
-      // 
-      LabelOrteEintraegeMaximum.AutoSize = true;
-      LabelOrteEintraegeMaximum.Location = new Point(32, 50);
-      LabelOrteEintraegeMaximum.Name = "LabelOrteEintraegeMaximum";
-      LabelOrteEintraegeMaximum.Size = new Size(110, 15);
-      LabelOrteEintraegeMaximum.TabIndex = 1;
-      LabelOrteEintraegeMaximum.Text = "Einträge Maximum:";
-      // 
-      // CheckBoxShowLocations
-      // 
-      CheckBoxShowLocations.AutoSize = true;
-      CheckBoxShowLocations.Location = new Point(15, 26);
-      CheckBoxShowLocations.Name = "CheckBoxShowLocations";
-      CheckBoxShowLocations.Size = new Size(99, 19);
-      CheckBoxShowLocations.TabIndex = 0;
-      CheckBoxShowLocations.Text = "Orte anzeigen";
-      CheckBoxShowLocations.UseVisualStyleBackColor = true;
-      CheckBoxShowLocations.CheckedChanged += CheckBoxShowLocations_CheckedChanged;
-      // 
-      // TextBoxRMB_URL
-      // 
-      TextBoxRMB_URL.BackColor = Color.FromArgb(57, 206, 216);
-      TextBoxRMB_URL.BorderStyle = BorderStyle.FixedSingle;
-      TextBoxRMB_URL.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxRMB_URL.Location = new Point(190, 135);
-      TextBoxRMB_URL.Name = "TextBoxRMB_URL";
-      TextBoxRMB_URL.Size = new Size(213, 23);
-      TextBoxRMB_URL.TabIndex = 8;
-      TextBoxRMB_URL.TextChanged += TextBoxRMB_URL_TextChanged;
-      // 
-      // TextBoxMMB_URL
-      // 
-      TextBoxMMB_URL.BackColor = Color.FromArgb(57, 206, 216);
-      TextBoxMMB_URL.BorderStyle = BorderStyle.FixedSingle;
-      TextBoxMMB_URL.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxMMB_URL.Location = new Point(190, 106);
-      TextBoxMMB_URL.Name = "TextBoxMMB_URL";
-      TextBoxMMB_URL.Size = new Size(213, 23);
-      TextBoxMMB_URL.TabIndex = 6;
-      TextBoxMMB_URL.Text = "{WikiLink}|https://starcitizen.tools/{Name}";
-      TextBoxMMB_URL.TextChanged += TextBoxMMB_URL_TextChanged;
-      // 
-      // TextBoxLMB_URL
-      // 
-      TextBoxLMB_URL.BackColor = Color.FromArgb(57, 206, 216);
-      TextBoxLMB_URL.BorderStyle = BorderStyle.FixedSingle;
-      TextBoxLMB_URL.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxLMB_URL.Location = new Point(190, 77);
-      TextBoxLMB_URL.Name = "TextBoxLMB_URL";
-      TextBoxLMB_URL.Size = new Size(213, 23);
-      TextBoxLMB_URL.TabIndex = 4;
-      TextBoxLMB_URL.Text = "https://dydrmr.github.io/VerseTime/#{Name}";
-      TextBoxLMB_URL.TextChanged += TextBoxLMB_URL_TextChanged;
-      // 
-      // LabelRMB_URL
-      // 
-      LabelRMB_URL.AutoSize = true;
-      LabelRMB_URL.Location = new Point(32, 137);
-      LabelRMB_URL.Name = "LabelRMB_URL";
-      LabelRMB_URL.Size = new Size(103, 15);
-      LabelRMB_URL.TabIndex = 7;
-      LabelRMB_URL.Text = "Rechte Maustaste:";
-      // 
-      // LabelMMB_URL
-      // 
-      LabelMMB_URL.AutoSize = true;
-      LabelMMB_URL.Location = new Point(32, 108);
-      LabelMMB_URL.Name = "LabelMMB_URL";
-      LabelMMB_URL.Size = new Size(108, 15);
-      LabelMMB_URL.TabIndex = 5;
-      LabelMMB_URL.Text = "Mittlere Maustaste:";
-      // 
-      // LabelLMB_URL
-      // 
-      LabelLMB_URL.AutoSize = true;
-      LabelLMB_URL.Location = new Point(32, 79);
-      LabelLMB_URL.Name = "LabelLMB_URL";
-      LabelLMB_URL.Size = new Size(95, 15);
-      LabelLMB_URL.TabIndex = 3;
-      LabelLMB_URL.Text = "Linke Maustaste:";
-      // 
-      // GroupBoxLogMonitor
-      // 
-      GroupBoxLogMonitor.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-      GroupBoxLogMonitor.Controls.Add(CheckBoxVehicleDestruction);
-      GroupBoxLogMonitor.Controls.Add(CheckBoxOwnHandle);
-      GroupBoxLogMonitor.Controls.Add(CheckBoxLogMonitorShowHostilityEvents);
-      GroupBoxLogMonitor.Controls.Add(LabelNPCNamen);
-      GroupBoxLogMonitor.Controls.Add(CheckBoxNPCTodeAnzeigen);
-      GroupBoxLogMonitor.Controls.Add(TextBoxWebhookURL);
-      GroupBoxLogMonitor.Controls.Add(LabelWebhookURL);
-      GroupBoxLogMonitor.Controls.Add(TextBoxNPCNamen);
-      GroupBoxLogMonitor.Controls.Add(TextBoxLogMonitorHandleFilter);
-      GroupBoxLogMonitor.Controls.Add(ButtonWebhookTest);
-      GroupBoxLogMonitor.Controls.Add(LabelLogMonitorHandleFilter);
-      GroupBoxLogMonitor.Controls.Add(LabelLogEintragAnzeigedauerMinuten);
-      GroupBoxLogMonitor.Controls.Add(CheckBoxShowLog);
-      GroupBoxLogMonitor.Controls.Add(CheckBoxLogMonitorFilterCorpse);
-      GroupBoxLogMonitor.Controls.Add(CheckBoxCheckCompleteFile);
-      GroupBoxLogMonitor.Controls.Add(CheckBoxLogMonitorFilterLoadingScreenDuration);
-      GroupBoxLogMonitor.Controls.Add(LabelLogEintraegeMaximum);
-      GroupBoxLogMonitor.Controls.Add(NumericUpDownLogEintraegeMaximum);
-      GroupBoxLogMonitor.Controls.Add(LabelLogEintragAnzeigeDauer);
-      GroupBoxLogMonitor.Controls.Add(NumericUpDownLogEintragAnzeigedauer);
-      GroupBoxLogMonitor.FlatStyle = FlatStyle.Flat;
-      GroupBoxLogMonitor.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxLogMonitor.Location = new Point(370, 415);
-      GroupBoxLogMonitor.Name = "GroupBoxLogMonitor";
-      GroupBoxLogMonitor.Size = new Size(416, 303);
-      GroupBoxLogMonitor.TabIndex = 5;
-      GroupBoxLogMonitor.TabStop = false;
-      GroupBoxLogMonitor.Text = "Log-Monitor";
-      // 
-      // CheckBoxVehicleDestruction
-      // 
-      CheckBoxVehicleDestruction.AutoSize = true;
-      CheckBoxVehicleDestruction.Location = new Point(190, 185);
-      CheckBoxVehicleDestruction.Name = "CheckBoxVehicleDestruction";
-      CheckBoxVehicleDestruction.Size = new Size(193, 19);
-      CheckBoxVehicleDestruction.TabIndex = 12;
-      CheckBoxVehicleDestruction.Text = "Fahrzeugzerstörungen anzeigen";
-      CheckBoxVehicleDestruction.UseVisualStyleBackColor = true;
-      CheckBoxVehicleDestruction.CheckedChanged += CheckBoxVehicleDestruction_CheckedChanged;
-      // 
-      // CheckBoxOwnHandle
-      // 
-      CheckBoxOwnHandle.AutoSize = true;
-      CheckBoxOwnHandle.Enabled = false;
-      CheckBoxOwnHandle.Location = new Point(34, 160);
-      CheckBoxOwnHandle.Name = "CheckBoxOwnHandle";
-      CheckBoxOwnHandle.Size = new Size(106, 19);
-      CheckBoxOwnHandle.TabIndex = 10;
-      CheckBoxOwnHandle.Text = "Eigener Handle";
-      CheckBoxOwnHandle.UseVisualStyleBackColor = true;
-      CheckBoxOwnHandle.CheckedChanged += CheckBoxOwnHandle_CheckedChanged;
-      // 
-      // CheckBoxLogMonitorShowHostilityEvents
-      // 
-      CheckBoxLogMonitorShowHostilityEvents.AutoSize = true;
-      CheckBoxLogMonitorShowHostilityEvents.Enabled = false;
-      CheckBoxLogMonitorShowHostilityEvents.Location = new Point(190, 160);
-      CheckBoxLogMonitorShowHostilityEvents.Name = "CheckBoxLogMonitorShowHostilityEvents";
-      CheckBoxLogMonitorShowHostilityEvents.Size = new Size(205, 19);
-      CheckBoxLogMonitorShowHostilityEvents.TabIndex = 11;
-      CheckBoxLogMonitorShowHostilityEvents.Text = "Feindseligkeitsereignisse anzeigen";
-      CheckBoxLogMonitorShowHostilityEvents.UseVisualStyleBackColor = true;
-      CheckBoxLogMonitorShowHostilityEvents.CheckedChanged += CheckBoxLogMonitorShowHostilityEvents_CheckedChanged;
-      // 
-      // LabelNPCNamen
-      // 
-      LabelNPCNamen.AutoSize = true;
-      LabelNPCNamen.Location = new Point(32, 241);
-      LabelNPCNamen.Name = "LabelNPCNamen";
-      LabelNPCNamen.Size = new Size(78, 15);
-      LabelNPCNamen.TabIndex = 15;
-      LabelNPCNamen.Text = "NPC-Namen:";
-      // 
-      // CheckBoxNPCTodeAnzeigen
-      // 
-      CheckBoxNPCTodeAnzeigen.AutoSize = true;
-      CheckBoxNPCTodeAnzeigen.Location = new Point(190, 110);
-      CheckBoxNPCTodeAnzeigen.Name = "CheckBoxNPCTodeAnzeigen";
-      CheckBoxNPCTodeAnzeigen.Size = new Size(131, 19);
-      CheckBoxNPCTodeAnzeigen.TabIndex = 7;
-      CheckBoxNPCTodeAnzeigen.Text = "NPC-Tode anzeigen";
-      CheckBoxNPCTodeAnzeigen.UseVisualStyleBackColor = true;
-      CheckBoxNPCTodeAnzeigen.CheckedChanged += CheckBoxNPCTodeAnzeigen_CheckedChanged;
-      // 
-      // TextBoxWebhookURL
-      // 
-      TextBoxWebhookURL.BackColor = Color.FromArgb(57, 206, 216);
-      TextBoxWebhookURL.BorderStyle = BorderStyle.FixedSingle;
-      TextBoxWebhookURL.Enabled = false;
-      TextBoxWebhookURL.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxWebhookURL.Location = new Point(190, 268);
-      TextBoxWebhookURL.Name = "TextBoxWebhookURL";
-      TextBoxWebhookURL.Size = new Size(162, 23);
-      TextBoxWebhookURL.TabIndex = 18;
-      TextBoxWebhookURL.TextChanged += TextBoxWebhookURL_TextChanged;
-      // 
-      // LabelWebhookURL
-      // 
-      LabelWebhookURL.AutoSize = true;
-      LabelWebhookURL.Location = new Point(32, 270);
-      LabelWebhookURL.Name = "LabelWebhookURL";
-      LabelWebhookURL.Size = new Size(87, 15);
-      LabelWebhookURL.TabIndex = 17;
-      LabelWebhookURL.Text = "Webhook-URL:";
-      // 
-      // TextBoxNPCNamen
-      // 
-      TextBoxNPCNamen.BackColor = Color.FromArgb(57, 206, 216);
-      TextBoxNPCNamen.BorderStyle = BorderStyle.FixedSingle;
-      TextBoxNPCNamen.Enabled = false;
-      TextBoxNPCNamen.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxNPCNamen.Location = new Point(190, 239);
-      TextBoxNPCNamen.Name = "TextBoxNPCNamen";
-      TextBoxNPCNamen.Size = new Size(213, 23);
-      TextBoxNPCNamen.TabIndex = 16;
-      TextBoxNPCNamen.TextChanged += TextBoxNPCNamen_TextChanged;
-      // 
-      // TextBoxLogMonitorHandleFilter
-      // 
-      TextBoxLogMonitorHandleFilter.BackColor = Color.FromArgb(57, 206, 216);
-      TextBoxLogMonitorHandleFilter.BorderStyle = BorderStyle.FixedSingle;
-      TextBoxLogMonitorHandleFilter.Enabled = false;
-      TextBoxLogMonitorHandleFilter.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxLogMonitorHandleFilter.Location = new Point(190, 210);
-      TextBoxLogMonitorHandleFilter.Name = "TextBoxLogMonitorHandleFilter";
-      TextBoxLogMonitorHandleFilter.Size = new Size(213, 23);
-      TextBoxLogMonitorHandleFilter.TabIndex = 14;
-      TextBoxLogMonitorHandleFilter.TextChanged += TextBoxLogMonitorHandleFilter_TextChanged;
-      // 
-      // ButtonWebhookTest
-      // 
-      ButtonWebhookTest.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-      ButtonWebhookTest.Enabled = false;
-      ButtonWebhookTest.FlatStyle = FlatStyle.Flat;
-      ButtonWebhookTest.Location = new Point(354, 268);
-      ButtonWebhookTest.Name = "ButtonWebhookTest";
-      ButtonWebhookTest.Size = new Size(49, 23);
-      ButtonWebhookTest.TabIndex = 19;
-      ButtonWebhookTest.Text = "Test";
-      ButtonWebhookTest.TextAlign = ContentAlignment.TopCenter;
-      ButtonWebhookTest.UseVisualStyleBackColor = true;
-      ButtonWebhookTest.Click += ButtonWebhookTest_Click;
-      // 
-      // LabelLogMonitorHandleFilter
-      // 
-      LabelLogMonitorHandleFilter.AutoSize = true;
-      LabelLogMonitorHandleFilter.Location = new Point(32, 213);
-      LabelLogMonitorHandleFilter.Name = "LabelLogMonitorHandleFilter";
-      LabelLogMonitorHandleFilter.Size = new Size(79, 15);
-      LabelLogMonitorHandleFilter.TabIndex = 13;
-      LabelLogMonitorHandleFilter.Text = "Handle-Filter:";
-      // 
-      // CheckBoxCheckCompleteFile
-      // 
-      CheckBoxCheckCompleteFile.AutoSize = true;
-      CheckBoxCheckCompleteFile.Enabled = false;
-      CheckBoxCheckCompleteFile.Location = new Point(34, 135);
-      CheckBoxCheckCompleteFile.Name = "CheckBoxCheckCompleteFile";
-      CheckBoxCheckCompleteFile.Size = new Size(111, 19);
-      CheckBoxCheckCompleteFile.TabIndex = 8;
-      CheckBoxCheckCompleteFile.Text = "Komplette Datei";
-      CheckBoxCheckCompleteFile.UseVisualStyleBackColor = true;
-      CheckBoxCheckCompleteFile.CheckedChanged += CheckBoxCheckCompleteFile_CheckedChanged;
-      // 
-      // GroupBoxBeziehungen
-      // 
-      GroupBoxBeziehungen.Controls.Add(ButtonEditPrcChannels);
-      GroupBoxBeziehungen.Controls.Add(LabelGRPCKanalPasswort);
-      GroupBoxBeziehungen.Controls.Add(CheckBoxRPCSyncOnStartup);
-      GroupBoxBeziehungen.Controls.Add(NumericUpDownRelationsEntriesMaximum);
-      GroupBoxBeziehungen.Controls.Add(CheckBoxShowRelations);
-      GroupBoxBeziehungen.Controls.Add(LabelRelationsEntriesMaximum);
-      GroupBoxBeziehungen.Controls.Add(CheckBoxSortRelationsAlphabetically);
-      GroupBoxBeziehungen.Controls.Add(TextBoxGRPCChannelUser);
-      GroupBoxBeziehungen.Controls.Add(TextBoxGRPCChannelPassword);
-      GroupBoxBeziehungen.Controls.Add(TextBoxGRPCChannel);
-      GroupBoxBeziehungen.Controls.Add(TextBoxGRPCURL);
-      GroupBoxBeziehungen.Controls.Add(LabelGRPCURL);
-      GroupBoxBeziehungen.Controls.Add(LabelGRPCChannel);
-      GroupBoxBeziehungen.FlatStyle = FlatStyle.Flat;
-      GroupBoxBeziehungen.ForeColor = Color.FromArgb(57, 206, 216);
-      GroupBoxBeziehungen.Location = new Point(370, 188);
-      GroupBoxBeziehungen.Name = "GroupBoxBeziehungen";
-      GroupBoxBeziehungen.Size = new Size(416, 221);
-      GroupBoxBeziehungen.TabIndex = 4;
-      GroupBoxBeziehungen.TabStop = false;
-      GroupBoxBeziehungen.Text = "Beziehungen";
-      // 
-      // ButtonEditPrcChannels
-      // 
-      ButtonEditPrcChannels.BackgroundImageLayout = ImageLayout.Center;
-      ButtonEditPrcChannels.FlatStyle = FlatStyle.Flat;
-      ButtonEditPrcChannels.Location = new Point(380, 134);
-      ButtonEditPrcChannels.Name = "ButtonEditPrcChannels";
-      ButtonEditPrcChannels.Size = new Size(23, 23);
-      ButtonEditPrcChannels.TabIndex = 8;
-      ButtonEditPrcChannels.UseVisualStyleBackColor = true;
-      ButtonEditPrcChannels.Click += ButtonEditPrcChannels_Click;
-      ButtonEditPrcChannels.Paint += ButtonEditPrcChannels_Paint;
-      // 
-      // LabelGRPCKanalPasswort
-      // 
-      LabelGRPCKanalPasswort.AutoSize = true;
-      LabelGRPCKanalPasswort.Location = new Point(32, 165);
-      LabelGRPCKanalPasswort.Name = "LabelGRPCKanalPasswort";
-      LabelGRPCKanalPasswort.Size = new Size(140, 15);
-      LabelGRPCKanalPasswort.TabIndex = 9;
-      LabelGRPCKanalPasswort.Text = "gRPC Benutzer/Passwort:";
-      // 
-      // CheckBoxRPCSyncOnStartup
-      // 
-      CheckBoxRPCSyncOnStartup.AutoSize = true;
-      CheckBoxRPCSyncOnStartup.Location = new Point(34, 192);
-      CheckBoxRPCSyncOnStartup.Name = "CheckBoxRPCSyncOnStartup";
-      CheckBoxRPCSyncOnStartup.Size = new Size(254, 19);
-      CheckBoxRPCSyncOnStartup.TabIndex = 12;
-      CheckBoxRPCSyncOnStartup.Text = "gRPC-Synchronisierung bei Programmstart";
-      CheckBoxRPCSyncOnStartup.UseVisualStyleBackColor = true;
-      CheckBoxRPCSyncOnStartup.CheckedChanged += CheckBoxRPCSyncOnStartup_CheckedChanged;
-      // 
-      // TextBoxGRPCChannelUser
-      // 
-      TextBoxGRPCChannelUser.BackColor = Color.FromArgb(57, 206, 216);
-      TextBoxGRPCChannelUser.BorderStyle = BorderStyle.FixedSingle;
-      TextBoxGRPCChannelUser.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxGRPCChannelUser.Location = new Point(190, 163);
-      TextBoxGRPCChannelUser.Name = "TextBoxGRPCChannelUser";
-      TextBoxGRPCChannelUser.Size = new Size(104, 23);
-      TextBoxGRPCChannelUser.TabIndex = 10;
-      TextBoxGRPCChannelUser.TextChanged += MaskedTextBoxGRPCKanalBenutzer_TextChanged;
-      // 
-      // TextBoxGRPCChannelPassword
-      // 
-      TextBoxGRPCChannelPassword.BackColor = Color.FromArgb(57, 206, 216);
-      TextBoxGRPCChannelPassword.BorderStyle = BorderStyle.FixedSingle;
-      TextBoxGRPCChannelPassword.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxGRPCChannelPassword.Location = new Point(299, 163);
-      TextBoxGRPCChannelPassword.Name = "TextBoxGRPCChannelPassword";
-      TextBoxGRPCChannelPassword.PasswordChar = '*';
-      TextBoxGRPCChannelPassword.Size = new Size(104, 23);
-      TextBoxGRPCChannelPassword.TabIndex = 11;
-      TextBoxGRPCChannelPassword.TextChanged += MaskedTextBoxGRPCKanalPasswort_TextChanged;
-      // 
-      // TextBoxGRPCChannel
-      // 
-      TextBoxGRPCChannel.BackColor = Color.FromArgb(57, 206, 216);
-      TextBoxGRPCChannel.BorderStyle = BorderStyle.FixedSingle;
-      TextBoxGRPCChannel.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxGRPCChannel.Location = new Point(190, 134);
-      TextBoxGRPCChannel.Name = "TextBoxGRPCChannel";
-      TextBoxGRPCChannel.Size = new Size(188, 23);
-      TextBoxGRPCChannel.TabIndex = 7;
-      TextBoxGRPCChannel.TextChanged += TextBoxGRPCChannel_TextChanged;
-      // 
-      // TextBoxGRPCURL
-      // 
-      TextBoxGRPCURL.BackColor = Color.FromArgb(57, 206, 216);
-      TextBoxGRPCURL.BorderStyle = BorderStyle.FixedSingle;
-      TextBoxGRPCURL.ForeColor = Color.FromArgb(19, 26, 33);
-      TextBoxGRPCURL.Location = new Point(190, 105);
-      TextBoxGRPCURL.Name = "TextBoxGRPCURL";
-      TextBoxGRPCURL.Size = new Size(213, 23);
-      TextBoxGRPCURL.TabIndex = 5;
-      TextBoxGRPCURL.TextChanged += TextBoxGRPCURL_TextChanged;
-      // 
-      // LabelGRPCURL
-      // 
-      LabelGRPCURL.AutoSize = true;
-      LabelGRPCURL.Location = new Point(32, 107);
-      LabelGRPCURL.Name = "LabelGRPCURL";
-      LabelGRPCURL.Size = new Size(100, 15);
-      LabelGRPCURL.TabIndex = 4;
-      LabelGRPCURL.Text = "gRPC Server-URL:";
-      // 
-      // LabelGRPCChannel
-      // 
-      LabelGRPCChannel.AutoSize = true;
-      LabelGRPCChannel.Location = new Point(32, 136);
-      LabelGRPCChannel.Name = "LabelGRPCChannel";
-      LabelGRPCChannel.Size = new Size(71, 15);
-      LabelGRPCChannel.TabIndex = 6;
-      LabelGRPCChannel.Text = "gRPC Kanal:";
-      // 
       // ToolTipSettings
       // 
       ToolTipSettings.BackColor = Color.FromArgb(19, 26, 33);
@@ -1420,11 +579,8 @@
       AutoScaleMode = AutoScaleMode.Font;
       BackColor = Color.FromArgb(19, 26, 33);
       CancelButton = ButtonSchliessen;
-      ClientSize = new Size(798, 769);
+      ClientSize = new Size(761, 410);
       Controls.Add(GroupBoxAnzeige);
-      Controls.Add(GroupBoxLocation);
-      Controls.Add(GroupBoxLogMonitor);
-      Controls.Add(GroupBoxBeziehungen);
       Controls.Add(GroupBoxLokalerCache);
       Controls.Add(GroupBoxFenster);
       Controls.Add(ButtonStandard);
@@ -1432,7 +588,7 @@
       Controls.Add(ButtonSpeichern);
       ForeColor = Color.FromArgb(57, 206, 216);
       Icon = (Icon)resources.GetObject("$this.Icon");
-      MinimumSize = new Size(814, 808);
+      MinimumSize = new Size(777, 449);
       Name = "FormSettings";
       StartPosition = FormStartPosition.CenterScreen;
       Text = "Star Citizen Handle Query Einstellungen";
@@ -1446,16 +602,6 @@
       GroupBoxAnzeige.PerformLayout();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownErgebnisAutomatischLeeren).EndInit();
       ((System.ComponentModel.ISupportInitialize)NumericUpDownAffiliationenMaximum).EndInit();
-      ((System.ComponentModel.ISupportInitialize)NumericUpDownRelationsEntriesMaximum).EndInit();
-      ((System.ComponentModel.ISupportInitialize)NumericUpDownLogEintragAnzeigedauer).EndInit();
-      ((System.ComponentModel.ISupportInitialize)NumericUpDownLogEintraegeMaximum).EndInit();
-      GroupBoxLocation.ResumeLayout(false);
-      GroupBoxLocation.PerformLayout();
-      ((System.ComponentModel.ISupportInitialize)NumericUpDownOrteEintraegeMaximum).EndInit();
-      GroupBoxLogMonitor.ResumeLayout(false);
-      GroupBoxLogMonitor.PerformLayout();
-      GroupBoxBeziehungen.ResumeLayout(false);
-      GroupBoxBeziehungen.PerformLayout();
       ResumeLayout(false);
     }
 
@@ -1485,41 +631,8 @@
     private CheckBox CheckBoxPositionMerken;
     private CheckBox CheckBoxAutoCheckForUpdate;
     private CheckBox CheckBoxHideStreamLiveStatus;
-    private CheckBox CheckBoxShowLog;
     private NumericUpDown NumericUpDownFensterDeckkraft;
     private Label LabelFensterDeckkraft;
-    private NumericUpDown NumericUpDownLogEintraegeMaximum;
-    private Label LabelLogEintraegeMaximum;
-    private Label LabelLogEintragAnzeigeDauer;
-    private NumericUpDown NumericUpDownLogEintragAnzeigedauer;
-    private Label LabelLogEintragAnzeigedauerMinuten;
-    private NumericUpDown NumericUpDownRelationsEntriesMaximum;
-    private Label LabelRelationsEntriesMaximum;
-    private CheckBox CheckBoxShowRelations;
-    private CheckBox CheckBoxSortRelationsAlphabetically;
-    private CheckBox CheckBoxLogMonitorFilterLoadingScreenDuration;
-    private CheckBox CheckBoxLogMonitorFilterCorpse;
-    private GroupBox GroupBoxLocation;
-    private TextBox TextBoxLMB_URL;
-    private Label LabelRMB_URL;
-    private Label LabelMMB_URL;
-    private Label LabelLMB_URL;
-    private TextBox TextBoxRMB_URL;
-    private TextBox TextBoxMMB_URL;
-    private NumericUpDown NumericUpDownOrteEintraegeMaximum;
-    private Label LabelOrteEintraegeMaximum;
-    private CheckBox CheckBoxShowLocations;
-    private GroupBox GroupBoxLogMonitor;
-    private GroupBox GroupBoxBeziehungen;
-    private TextBox TextBoxGRPCChannel;
-    private TextBox TextBoxGRPCURL;
-    private Label LabelGRPCURL;
-    private Label LabelGRPCChannel;
-    private CheckBox CheckBoxRPCSyncOnStartup;
-    private Label LabelGRPCKanalPasswort;
-    private TextBox TextBoxGRPCChannelPassword;
-    private Button ButtonEditPrcChannels;
-    private CheckBox CheckBoxCheckCompleteFile;
     private CheckBox CheckBoxEscAusblenden;
     private CheckBox CheckBoxDpiUnaware;
     private Label LabelErgebnisAutomatischLeeren;
@@ -1531,38 +644,9 @@
     private Button ButtonSplitterColor;
     private Button ButtonBackColor;
     private CheckBox CheckBoxFensterAusblenden;
-    private TextBox TextBoxLogMonitorHandleFilter;
-    private Label LabelLogMonitorHandleFilter;
     private Button ButtonFarbenStandard;
     private ComboBox ComboBoxColorThemes;
-    private Button ButtonStatusInactiveForeColor;
-    private Button ButtonStatusActiveBackColor;
-    private Button ButtonStatusActiveForeColor;
-    private Button ButtonStatusInitializingBackColor;
-    private Button ButtonStatusInitializingForeColor;
-    private Button ButtonStatusInactiveBackColor;
-    private Button ButtonRelationBogeyBackColor;
-    private Button ButtonRelationBogeyForeColor;
-    private Button ButtonRelationOrganizationBackColor;
-    private Button ButtonRelationNeutralBackColor;
-    private Button ButtonRelationOrganizationForeColor;
-    private Button ButtonRelationNeutralForeColor;
-    private Button ButtonRelationBanditBackColor;
-    private Button ButtonRelationFriendlyBackColor;
-    private Button ButtonRelationBanditForeColor;
-    private Button ButtonRelationFriendlyForeColor;
     private ToolTip ToolTipSettings;
-    private CheckBox CheckBoxErweitert;
-    private TextBox TextBoxWebhookURL;
-    private Label LabelWebhookURL;
-    private CheckBox CheckBoxNPCTodeAnzeigen;
-    private Label LabelNPCNamen;
-    private TextBox TextBoxNPCNamen;
-    private Button ButtonWebhookTest;
-    private CheckBox CheckBoxLogMonitorShowHostilityEvents;
-    private CheckBox CheckBoxOwnHandle;
     private CheckBox CheckBoxCompactMode;
-    private CheckBox CheckBoxVehicleDestruction;
-    private TextBox TextBoxGRPCChannelUser;
   }
 }
