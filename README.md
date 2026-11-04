@@ -1,3 +1,8 @@
+# Projekt archiviert
+__Das Projekt wurde archiviert.__
+
+Die Funktionalität wird in das Tool [VerseKit](https://github.com/Xharig/VerseKit) von [Xharig](https://github.com/Xharig) übernommen.
+
 # Star Citizen Handle Query
 
 Overlay zur Abfrage von Star Citizen Spielern und ihrer Organisationszugehörigkeiten
